@@ -1,0 +1,21 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. Скидання для body, щоб прибрати білі відступи по краях */
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* 3. Додатково для списків, якщо вони використовуються в навігації */
+ul,
+ol {
+  list-style: none;
+}
