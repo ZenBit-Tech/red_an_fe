@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Container,
   Typography,
@@ -7,45 +6,34 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useTranslation } from "react-i18next";
 
 export const SectionFAQ = () => {
+  const { t } = useTranslation();
+
+  // Отримуємо масив питань із i18n
+  // returnObjects: true дозволяє витягнути масив об'єктів з JSON
+  const faqItems = t("faq.items", { returnObjects: true }) as Array<{
+    question: string;
+    answer: string;
+  }>;
+
   return (
     <Container maxWidth="md" sx={{ pb: 10 }}>
-      <Typography variant="h4" align="center" gutterBottom sx={{ mb: 6 }}>
-        Найпоширеніші запитання
+      <Typography variant="h4" align="center" sx={{ mb: 6 }}>
+        {t("faq.title")}
       </Typography>
 
-      {/* Акордеон 1 */}
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography sx={{ fontWeight: "bold" }}>
-            Як працює де-ідентифікація?
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Наш алгоритм автоматично розпізнає та приховує ПІБ, дати та адреси в
-            документах.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-
-      {/* Акордеон 2 */}
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography sx={{ fontWeight: "bold" }}>
-            Чи це відповідає стандартам безпеки?
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Так, ми використовуємо протоколи, що відповідають вимогам HIPAA для
-            медичних даних.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-
-      {/* Тут додайте ще 2 акордеони за таким же принципом */}
+      {faqItems.map((item, index) => (
+        <Accordion key={index} disableGutters>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography sx={{ fontWeight: "bold" }}>{item.question}</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>{item.answer}</Typography>
+          </AccordionDetails>
+        </Accordion>
+      ))}
     </Container>
   );
 };

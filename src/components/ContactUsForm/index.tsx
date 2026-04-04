@@ -16,20 +16,18 @@ import {
 } from "./styles";
 
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import { useTranslation } from "react-i18next";
 
 export const ContactUsForm = () => {
-  // Дістаємо register та errors
+  const { t } = useTranslation();
   const { register, handleSubmit, errors } = useContactForm();
 
   return (
     <SectionForm>
       <CustomContainer>
         <Stack spacing={4}>
-          <ContactTitle variant="h1">Contact Us</ContactTitle>
-          <ContactDescription>
-            Have questions? We're here to help. Reach out to our team and we'll
-            get back to you shortly.
-          </ContactDescription>
+          <ContactTitle variant="h1">{t("contactUs.title")}</ContactTitle>
+          <ContactDescription>{t("contactUs.description")}</ContactDescription>
 
           <FormWrapper>
             <ContactSidebar>
@@ -40,7 +38,7 @@ export const ContactUsForm = () => {
                   marginBottom: "26px",
                 }}
               />
-              <ContactLabel>Email</ContactLabel>
+              <ContactLabel>{t("contactUs.sidebar.emailLabel")}</ContactLabel>
               <EmailLink href="mailto:info@clinicaldatastudio.com">
                 info@clinicaldatastudio.com
               </EmailLink>
@@ -51,25 +49,28 @@ export const ContactUsForm = () => {
 
             <ContactFormBox>
               <ContactFormTitle variant="h2">
-                Send us a message
+                {t("contactUs.form.title")}
               </ContactFormTitle>
 
-              {/* noValidate вимикає стандартні браузерні підказки, щоб працювали MUI-помилки */}
               <ContactForm onSubmit={handleSubmit} noValidate>
                 <FormGrid>
                   <TextField
                     fullWidth
-                    label="First Name"
-                    placeholder="John"
-                    {...register("firstName", { required: "Вкажіть ім'я" })}
+                    label={t("contactUs.form.firstName")}
+                    placeholder={t("contactUs.form.placeholder.firstName")}
+                    {...register("firstName", {
+                      required: t("contactUs.form.validation.required"),
+                    })}
                     error={!!errors.firstName}
                     helperText={errors.firstName?.message}
                   />
                   <TextField
                     fullWidth
-                    label="Last Name"
-                    placeholder="Doe"
-                    {...register("lastName", { required: "Вкажіть прізвище" })}
+                    label={t("contactUs.form.lastName")}
+                    placeholder={t("contactUs.form.placeholder.lastName")}
+                    {...register("lastName", {
+                      required: t("contactUs.form.validation.required"),
+                    })}
                     error={!!errors.lastName}
                     helperText={errors.lastName?.message}
                   />
@@ -77,13 +78,13 @@ export const ContactUsForm = () => {
                   <Box className="full-width">
                     <TextField
                       fullWidth
-                      label="Email"
-                      placeholder="example@mail.com"
+                      label={t("contactUs.form.email")}
+                      placeholder={t("contactUs.form.placeholder.email")}
                       {...register("email", {
-                        required: "Email обов'язковий",
+                        required: t("contactUs.form.validation.required"),
                         pattern: {
                           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                          message: "Невірний формат email",
+                          message: t("contactUs.form.validation.emailInvalid"),
                         },
                       })}
                       error={!!errors.email}
@@ -94,8 +95,8 @@ export const ContactUsForm = () => {
                   <Box className="full-width">
                     <TextField
                       fullWidth
-                      label="Phone Number"
-                      placeholder="+380..."
+                      label={t("contactUs.form.phone")}
+                      placeholder={t("contactUs.form.placeholder.phone")}
                       {...register("phone")}
                     />
                   </Box>
@@ -103,12 +104,12 @@ export const ContactUsForm = () => {
                   <Box className="full-width">
                     <TextField
                       fullWidth
-                      label="Message"
-                      placeholder="How can we help?"
+                      label={t("contactUs.form.message")}
+                      placeholder={t("contactUs.form.placeholder.message")}
                       multiline
                       rows={4}
                       {...register("message", {
-                        required: "Напишіть нам щось",
+                        required: t("contactUs.form.validation.required"),
                       })}
                       error={!!errors.message}
                       helperText={errors.message?.message}
@@ -121,7 +122,7 @@ export const ContactUsForm = () => {
                       type="submit"
                       sx={{ width: "fit-content", px: 4, py: 1.5 }}
                     >
-                      Send Message
+                      {t("contactUs.form.submit")}
                     </Button>
                   </Box>
                 </FormGrid>
