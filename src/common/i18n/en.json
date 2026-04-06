@@ -47,5 +47,12 @@
         "answer": "We offer a choice between irreversible anonymization for external sharing and tokenization (pseudonymization) for internal cases where re-linking is necessary. By using Expert Determination and differential privacy, we provide documented residual risk assessments while preserving the complex clinical signatures needed for high-fidelity analysis."
       }
     ]
+  },
+
+  "errors": {
+    "network": "Network error. Please check your connection.",
+    "server": "Server is temporarily unavailable. Try again later.",
+    "unknown": "Something went wrong. Please try again.",
+    "apiContext": "API Error [{{context}}]: {{message}}"
   }
 }

@@ -8,7 +8,7 @@ export const SectionForm = styled(Box)(({ theme }) => ({
 }));
 
 export const CustomContainer = styled(Box)({
-  padding: "0 144px", // додаємо падінг з боків для мобільних пристроїв
+  padding: "0 144px",
 });
 
 export const ContactTitle = styled(Typography)({
@@ -33,7 +33,7 @@ export const FormWrapper = styled(Box)({
   flexDirection: "row",
   gap: "24px",
   width: "100%",
-  alignItems: "flex-start", // щоб ліва частина не розтягувалася по висоті форми
+  alignItems: "flex-start",
   margin: "0 auto",
   marginTop: "48px",
 });
@@ -47,15 +47,15 @@ export const ContactSidebar = styled(Box)({
 
 export const ContactFormBox = styled(Box)({
   padding: "40px",
-  flexGrow: 1, // дозволяємо займати весь доступний простір
+  flexGrow: 1,
 });
 
 export const ContactLabel = styled(Typography)({
   fontWeight: 700,
   fontSize: "18px",
-  lineHeight: "150%", // ~27px
+  lineHeight: "150%",
   color: "#101828",
-  marginBottom: "8px", // mb: 1 у MUI це зазвичай 8px
+  marginBottom: "8px",
 });
 
 export const EmailLink = styled("a")({
@@ -85,12 +85,11 @@ export const ContactFormTitle = styled(Typography)({
 
 export const FormGrid = styled(Box)({
   display: "grid",
-  gridTemplateColumns: "repeat(2, 1fr)", // Дві рівні колонки
+  gridTemplateColumns: "repeat(2, 1fr)",
   rowGap: "24px",
   columnGap: "20px",
   width: "100%",
 
-  // Правило для елементів, які мають бути на всю ширину
   "& .full-width": {
     gridColumn: "span 2",
   },
@@ -101,13 +100,13 @@ export const SubmitButton = styled(Button)({
   color: "#fff",
   lineHeight: "150%",
   width: "196px",
-  padding: "12px 32px", // Відповідає py: 1.5 та px: 4
+  padding: "12px 32px",
   boxShadow: "0 4px 14px 0 rgba(59, 130, 246, 0.3)",
   fontWeight: 600,
   fontSize: "16px",
   borderRadius: "14px",
-  backgroundColor: "#155DFC", // Синій колір як у іконки
+  backgroundColor: "#155DFC",
   "&:hover": {
-    backgroundColor: "#0046E5", // Трохи темніший при наведенні
+    backgroundColor: "#0046E5",
   },
 });
