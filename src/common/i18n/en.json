@@ -2,5 +2,20 @@
   "hello": "Hello world",
   "formTitle": "Example Form",
   "name": "Name",
-  "submit": "Submit"
+  "submit": "Submit",
+  "login": {
+    "title": "Sign in to De-ID Studio",
+    "subtitle": "Enter your email to receive a sign-in link",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@company.com",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Enter valid email",
+    "sendMagicLink": "Send Magic Link",
+    "back": "Back",
+    "checkInboxTitle": "Check your inbox",
+    "checkInboxDescription": "We sent a sign-in link to",
+    "didntReceive": "Didn't receive it? Check spam or",
+    "resendLink": "Resend link",
+    "backToSignIn": "Back to Sign in"
+  }
 }
