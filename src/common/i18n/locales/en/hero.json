@@ -1,0 +1,25 @@
+{
+  "badge": {
+    "title": "Clinical Data Studio",
+    "subtitle": "De-ID & Synthesis"
+  },
+  "mainTitle": "Clinical Data De-Identification & Synthetic Data Studio",
+  "description": "Enterprise-grade PII detection and anonymization for healthcare data",
+  "cta": {
+    "getStarted": "Get Started"
+  },
+  "stats": {
+    "hipaa": {
+      "value": "HIPAA",
+      "label": "Compliant"
+    },
+    "gdpr": {
+      "value": "GDPR",
+      "label": "Certified"
+    },
+    "accuracy": {
+      "value": "99.9%",
+      "label": "Accuracy"
+    }
+  }
+}

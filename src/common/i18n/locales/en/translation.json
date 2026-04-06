@@ -1,0 +1,15 @@
+{
+  "exampleHeader": {
+    "title": "Example header"
+  },
+  "exampleHomePage": {
+    "title": "Example home page",
+    "text": "Example home page"
+  },
+  "exampleWorkForm": {
+    "title": "Example work form",
+    "nameLabel": "Name",
+    "submitButton": "Submit",
+    "result": "Hello, {{name}}"
+  }
+}

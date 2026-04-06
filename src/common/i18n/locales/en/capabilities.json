@@ -1,0 +1,23 @@
+{
+  "subtitle": "CAPABILITIES",
+  "title": "Protect Patient Privacy Without Compromising Data Value",
+  "description": "Comprehensive tools for healthcare organizations to securely manage and utilize clinical data",
+  "cards": {
+    "pii": {
+      "title": "Advanced PII Detection",
+      "description": "Automatically identify and protect sensitive patient information across structured and unstructured clinical data."
+    },
+    "synthetic": {
+      "title": "Synthetic Data Generation",
+      "description": "Create realistic, privacy-preserving synthetic datasets for research, testing, and development purposes."
+    },
+    "framework": {
+      "title": "Multi-Framework Compliance",
+      "description": "Ensure compliance with HIPAA, GDPR, CCPA, and custom regulatory requirements simultaneously."
+    },
+    "anonymization": {
+      "title": "Intelligent Anonymization",
+      "description": "Apply sophisticated de-identification techniques while maintaining data utility for analysis."
+    }
+  }
+}

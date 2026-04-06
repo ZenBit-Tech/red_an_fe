@@ -1,0 +1,24 @@
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <symbol id="ai-anonymization" viewBox="0 0 32 32">
+      <path fill="none" stroke="currentColor" stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color1, currentColor)" d="M13.249 20.667c-0.119-0.461-0.36-0.883-0.697-1.22s-0.758-0.577-1.22-0.696l-8.18-2.109c-0.14-0.040-0.262-0.124-0.35-0.24s-0.135-0.257-0.135-0.402c0-0.145 0.047-0.286 0.135-0.402s0.21-0.2 0.35-0.239l8.18-2.111c0.461-0.119 0.882-0.359 1.219-0.696s0.578-0.758 0.697-1.219l2.109-8.18c0.039-0.14 0.123-0.264 0.239-0.351s0.257-0.136 0.403-0.136c0.146 0 0.287 0.048 0.403 0.136s0.2 0.211 0.239 0.351l2.108 8.18c0.119 0.461 0.36 0.883 0.696 1.22s0.758 0.577 1.22 0.697l8.18 2.108c0.141 0.039 0.265 0.123 0.353 0.239s0.136 0.258 0.136 0.404c0 0.146-0.048 0.288-0.136 0.404s-0.212 0.2-0.353 0.239l-8.18 2.108c-0.461 0.119-0.883 0.36-1.22 0.696s-0.577 0.758-0.696 1.22l-2.109 8.18c-0.039 0.14-0.123 0.264-0.239 0.352s-0.257 0.136-0.403 0.136c-0.146 0-0.287-0.048-0.403-0.136s-0.2-0.211-0.239-0.352l-2.108-8.18z"></path>
+      <path fill="none" stroke="currentColor" stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color1, currentColor)" d="M26.666 4v5.333"></path>
+      <path fill="none" stroke="currentColor" stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color1, currentColor)" d="M29.333 6.667h-5.333"></path>
+      <path fill="none" stroke="currentColor" stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color1, currentColor)" d="M5.334 22.667v2.667"></path>
+      <path fill="none" stroke="currentColor" stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color1, currentColor)" d="M6.667 24h-2.667"></path>
+    </symbol>
+    <symbol id="framework" viewBox="0 0 32 32">
+      <path fill="none" stroke="currentColor" stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color2, currentColor)" d="M20 2.667h-12c-0.707 0-1.386 0.281-1.886 0.781s-0.781 1.178-0.781 1.886v21.333c0 0.707 0.281 1.386 0.781 1.886s1.178 0.781 1.886 0.781h16c0.707 0 1.385-0.281 1.886-0.781s0.781-1.178 0.781-1.886v-17.333l-6.667-6.667z"></path>
+      <path fill="none" stroke="currentColor" stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color2, currentColor)" d="M18.666 2.667v5.333c0 0.707 0.281 1.386 0.781 1.886s1.178 0.781 1.886 0.781h5.333"></path>
+      <path fill="none" stroke="currentColor" stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color2, currentColor)" d="M12 20l2.667 2.667 5.333-5.333"></path>
+    </symbol>
+    <symbol id="pii" viewBox="0 0 32 32">
+      <path fill="none" stroke="currentColor" stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color3, currentColor)" d="M26.667 17.333c0 6.667-4.667 10-10.213 11.933-0.29 0.098-0.606 0.094-0.893-0.013-5.56-1.92-10.227-5.253-10.227-11.92v-9.333c0-0.354 0.14-0.693 0.391-0.943s0.589-0.391 0.943-0.391c2.667 0 6-1.6 8.32-3.627 0.282-0.241 0.642-0.374 1.013-0.374s0.731 0.133 1.013 0.374c2.333 2.040 5.653 3.627 8.32 3.627 0.354 0 0.693 0.14 0.943 0.391s0.39 0.589 0.39 0.943v9.333z"></path>
+    </symbol>
+    <symbol id="synthetic" viewBox="0 0 32 32">
+      <path fill="none" stroke="currentColor" stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color4, currentColor)" d="M16 10.667c6.627 0 12-1.791 12-4s-5.373-4-12-4c-6.627 0-12 1.791-12 4s5.373 4 12 4z"></path>
+      <path fill="none" stroke="currentColor" stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color4, currentColor)" d="M4 6.667v18.667c0 1.061 1.264 2.078 3.515 2.828s5.303 1.172 8.485 1.172c3.183 0 6.235-0.421 8.485-1.172s3.515-1.768 3.515-2.828v-18.667"></path>
+      <path fill="none" stroke="currentColor" stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color4, currentColor)" d="M4 16c0 1.061 1.264 2.078 3.515 2.828s5.303 1.172 8.485 1.172c3.183 0 6.235-0.421 8.485-1.172s3.515-1.768 3.515-2.828"></path>
+    </symbol>
+  </defs>
+</svg>

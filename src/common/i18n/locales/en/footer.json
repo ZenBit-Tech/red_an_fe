@@ -1,0 +1,26 @@
+{
+  "description": "Enterprise-grade clinical data de-identification and synthetic data generation platform. Protecting patient privacy while maintaining data utility.",
+  "copyright": "© 2026 Clinical Data Studio. All rights reserved.",
+  "columns": {
+    "product": "Product",
+    "resources": "Resources",
+    "company": "Company"
+  },
+  "links": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "api": "API",
+    "integrations": "Integrations",
+    "documentation": "Documentation",
+    "guides": "Guides",
+    "blog": "Blog",
+    "support": "Support",
+    "about": "About",
+    "careers": "Careers",
+    "contact": "Contact",
+    "legal": "Legal",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cookies": "Cookies"
+  }
+}

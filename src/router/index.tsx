@@ -1,10 +1,24 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ExamplePage from "../pages/exampleHomePage";
+import { createBrowserRouter } from "react-router-dom";
+import HomePage from "../pages/HomePage";
+import Layout from "../components/Layout";
 
-export const AppRouter = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<ExamplePage />} />
-    </Routes>
-  </BrowserRouter>
-);
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "*",
+        element: (
+          <div style={{ padding: "100px", textAlign: "center" }}>
+            Page not found (404)
+          </div>
+        ),
+      },
+    ],
+  },
+]);
