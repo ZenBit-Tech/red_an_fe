@@ -1,0 +1,112 @@
+{
+  "compliance": {
+    "selection": {
+      "title": "Select Compliance Framework",
+      "subtitle": "Choose which regulatory frameworks to comply with",
+      "listHeader": "Compliance Framework",
+      "listSubtitle": "Select one or more compliance frameworks to apply",
+      "entityTypes": "entity types"
+    },
+    "frameworks": {
+      "hipaa": {
+        "label": "HIPAA",
+        "desc": "Health Insurance Portability and Accountability Act (US)"
+      },
+      "gdpr": {
+        "label": "GDPR",
+        "desc": "General Data Protection Regulation (EU)"
+      },
+      "ccpa": {
+        "label": "CCPA",
+        "desc": "California Consumer Privacy Act"
+      },
+      "custom": {
+        "label": "Custom",
+        "desc": "Create your own compliance profile"
+      }
+    }
+  },
+  "deidentify": {
+    "settings": {
+      "title": "De-Identification Settings",
+      "subtitle": "Configure how to handle sensitive information",
+      "method": "De-Identification Method",
+      "analyze": "Analyze"
+    },
+    "clinicalInput": {
+      "title": "Input Clinical Text",
+      "subtitle": "Upload a document or paste your clinical text",
+      "tabs": {
+        "enterText": "Enter Text",
+        "uploadDocument": "Upload Document"
+      },
+      "textPlaceholder": "Paste or type clinical text here",
+      "browseButton": "Browse Files",
+      "uploadedFilePath": "Uploaded file: {{path}}",
+      "dropzone": {
+        "title": "Drop your file here, or browse",
+        "support": "Supports: .txt, .doc, .docx, .pdf"
+      },
+      "errors": {
+        "fileRead": "Failed to read the selected file. Please try another file.",
+        "fileTooLarge": "File is too large. Maximum allowed size is {{maxMb}} MB.",
+        "fileEmpty": "The file was loaded but contains no readable text.",
+        "fileUnsupported": "Unsupported file type. Allowed extensions: .txt, .doc, .docx, .pdf.",
+        "fileReadTxt": "Could not read the TXT file. Please verify the file encoding and try again.",
+        "fileReadWord": "Could not extract text from the Word document. For .doc files, please try saving as .docx and upload again.",
+        "fileReadPdf": "Could not extract text from the PDF file. Please check if the PDF contains selectable text."
+      }
+    },
+    "methods": {
+      "redact": "Redact - Remove entirely ([REDACTED])",
+      "replace": "Replace - Generic placeholder",
+      "mask": "Mask - Partial masking (XXX-XX-1234)",
+      "hash": "Hash - One-way encryption",
+      "synthetic": "Synthetic - Realistic fake data"
+    },
+    "methodDescriptions": {
+      "redact": "Permanently removes regulated identifiers from output data",
+      "replace": "Substitutes regulated fields with standardized compliance placeholders",
+      "mask": "Obscures regulated values while retaining limited format context",
+      "hash": "Applies irreversible hashing to support pseudonymization controls",
+      "synthetic": "Replaces regulated values with realistic synthetic equivalents for safe analysis"
+    },
+    "analysisResults": {
+      "title": "Analysis Results",
+      "subtitle": "Review detected entities and de-identified output",
+      "input": {
+        "label": "Input",
+        "description": "Original text with detected entities highlighted"
+      },
+      "output": {
+        "label": "Output",
+        "description": "De-identified text",
+        "actions": {
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download",
+          "formatTxt": "TXT",
+          "formatPdf": "PDF"
+        }
+      },
+      "table": {
+        "title": "Findings with decision factors",
+        "columns": {
+          "text": "Text",
+          "start": "Start",
+          "end": "End",
+          "score": "Score",
+          "recognizer": "Recognizer",
+          "patternName": "Pattern Name",
+          "decisionFactor": "Decision Factors",
+          "originalScore": "Original Score",
+          "action": "Action"
+        },
+        "actions": {
+          "selected": "Selected",
+          "deselected": "Deselected"
+        }
+      }
+    }
+  }
+}
