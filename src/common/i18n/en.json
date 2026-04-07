@@ -24,6 +24,10 @@
         "required": "This field is required",
         "emailInvalid": "Invalid email format"
       }
+    },
+    "messages": {
+      "success": "Your message has been sent successfully!",
+      "error": "There was an error sending your message. Please try again."
     }
   },
 

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { apiClient, ApiError } from "@/common/api";
 import { useTranslation } from "react-i18next";
+import type { AxiosResponse } from "axios";
 
 export interface IContactInput {
   firstName: string;
@@ -16,20 +17,23 @@ export const useContactForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    control,
     reset,
   } = useForm<IContactInput>();
 
   const onSubmit = async (data: IContactInput) => {
-    // DELETE LOG!!!!!!!!!!
-    console.log("Contact Form Data:", data);
-
     try {
-      await apiClient.post<void, IContactInput>("/contact-us", data);
+      const response: AxiosResponse<void> = await apiClient.post<
+        void,
+        IContactInput
+      >("/contact-us", data);
 
-      alert(t("contactUs.messages.success"));
-      reset();
+      if (response.status === 201 || response.status === 200) {
+        alert(t("contactUs.messages.success"));
+        reset();
+      }
     } catch (err) {
-      const message = err instanceof Error ? err.message : "";
+      const message = err instanceof Error ? err.message : "ERR_UNKNOWN";
 
       let translationKey = "errors.unknown";
 
@@ -44,5 +48,5 @@ export const useContactForm = () => {
     }
   };
 
-  return { register, handleSubmit: handleSubmit(onSubmit), errors };
+  return { register, handleSubmit: handleSubmit(onSubmit), errors, control };
 };

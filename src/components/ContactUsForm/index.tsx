@@ -1,3 +1,5 @@
+import { Controller } from "react-hook-form";
+import { MuiTelInput } from "mui-tel-input";
 import { TextField, Button, Stack, Box } from "@mui/material";
 import { useContactForm } from "./hooks/useContactForm";
 import {
@@ -20,7 +22,7 @@ import { useTranslation } from "react-i18next";
 
 export const ContactUsForm = () => {
   const { t } = useTranslation();
-  const { register, handleSubmit, errors } = useContactForm();
+  const { register, handleSubmit, errors, control } = useContactForm();
 
   return (
     <SectionForm>
@@ -93,14 +95,29 @@ export const ContactUsForm = () => {
                   </Box>
 
                   <Box className="full-width">
-                    <TextField
-                      fullWidth
-                      label={t("contactUs.form.phone")}
-                      placeholder={t("contactUs.form.placeholder.phone")}
-                      {...register("phone")}
+                    <Controller
+                      name="phone"
+                      control={control}
+                      render={({
+                        field: { ref, ...fieldProps },
+                        fieldState,
+                      }) => (
+                        <MuiTelInput
+                          {...fieldProps}
+                          inputRef={ref}
+                          label={t("contactUs.form.phone")}
+                          fullWidth
+                          variant="outlined"
+                          defaultCountry="UA"
+                          error={!!fieldState.error}
+                          helperText={fieldState.error?.message}
+                          sx={{
+                            "& .MuiInputBase-root": {},
+                          }}
+                        />
+                      )}
                     />
                   </Box>
-
                   <Box className="full-width">
                     <TextField
                       fullWidth

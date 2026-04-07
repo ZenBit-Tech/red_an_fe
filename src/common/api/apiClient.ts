@@ -1,3 +1,6 @@
+import axios from "axios";
+import type { AxiosError, AxiosResponse } from "axios";
+
 const BASE_URL = import.meta.env.VITE_API_URL || "";
 
 export const ApiError = {
@@ -8,69 +11,48 @@ export const ApiError = {
 
 export type ApiErrorType = (typeof ApiError)[keyof typeof ApiError];
 
+const instance = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
 export const apiClient = {
-  /**
-   * Універсальний POST запит
-   * @template T - Тип даних від сервера
-   * @template D - Тип даних, що відправляються
-   */
   async post<T, D = Record<string, unknown>>(
     endpoint: string,
     data: D,
-  ): Promise<T> {
+  ): Promise<AxiosResponse<T>> {
     try {
-      const response = await fetch(`${BASE_URL}${endpoint}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-
-        throw new Error(
-          errorData.message || `${ApiError.Server}_${response.status}`,
-        );
-      }
-
-      return response.json() as Promise<T>;
+      return await instance.post<T>(endpoint, data);
     } catch (error) {
-      // Обробка відсутності інтернету або "лежачого" сервера
-      if (error instanceof TypeError && error.message === "Failed to fetch") {
-        throw new Error(ApiError.Network);
-      }
-      throw error instanceof Error ? error : new Error(ApiError.Unknown);
+      throw this.handleError(error);
     }
   },
 
-  /**
-   * Універсальний GET запит
-   * @template T - Тип даних, які ми очікуємо отримати
-   */
-  async get<T>(endpoint: string): Promise<T> {
+  async get<T>(endpoint: string): Promise<AxiosResponse<T>> {
     try {
-      const response = await fetch(`${BASE_URL}${endpoint}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(
-          errorData.message || `${ApiError.Server}_${response.status}`,
-        );
-      }
-
-      return response.json() as Promise<T>;
+      return await instance.get<T>(endpoint);
     } catch (error) {
-      if (error instanceof TypeError && error.message === "Failed to fetch") {
-        throw new Error(ApiError.Network);
-      }
-      throw error instanceof Error ? error : new Error(ApiError.Unknown);
+      throw this.handleError(error);
     }
+  },
+
+  handleError(error: unknown): Error {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<{ message?: string }>;
+
+      if (axiosError.code === "ERR_NETWORK") {
+        return new Error(ApiError.Network);
+      }
+
+      if (axiosError.response) {
+        const serverMessage = axiosError.response.data?.message;
+        const status = axiosError.response.status;
+        return new Error(serverMessage || `${ApiError.Server}_${status}`);
+      }
+    }
+
+    return error instanceof Error ? error : new Error(ApiError.Unknown);
   },
 };
