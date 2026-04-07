@@ -1,5 +1,7 @@
-import { Container, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { Container, Typography } from "@mui/material";
+import { CARDS_DATA } from "@/constants";
+import { IconWrapper } from "@/common/IconWrapper";
 import {
   CapabilitiesSection,
   TitleSectionBlock,
@@ -7,11 +9,8 @@ import {
   CardItem,
 } from "./styles";
 
-import { CARDS_DATA } from "@/constants";
-import { IconWrapper } from "@/common/IconWrapper";
-
 export const Capabilities = () => {
-  const { t } = useTranslation("capabilities");
+  const { t } = useTranslation();
 
   return (
     <CapabilitiesSection id="solution">
@@ -21,10 +20,10 @@ export const Capabilities = () => {
             variant="h2"
             sx={{ mb: 2, fontSize: "2rem", fontWeight: 700 }}
           >
-            {t("title")}
+            {t("capabilities.title")}
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            {t("description")}
+            {t("capabilities.description")}
           </Typography>
         </TitleSectionBlock>
 
@@ -36,9 +35,11 @@ export const Capabilities = () => {
                   <use href={`/capabilities/icons.svg${card.iconId}`} />
                 </svg>
               </IconWrapper>
-              <Typography variant="h4">{t(card.titleKey)}</Typography>
+              <Typography variant="h4">
+                {t(`capabilities.${card.titleKey}`)}
+              </Typography>
               <Typography variant="body1" color="text.secondary">
-                {t(card.descKey)}
+                {t(`capabilities.${card.descKey}`)}
               </Typography>
             </CardItem>
           ))}

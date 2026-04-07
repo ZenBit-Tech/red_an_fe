@@ -1,6 +1,6 @@
+import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Typography } from "@mui/material";
-import { Link } from "react-router-dom";
 
 export const LogoWrapper = styled(Link)(({ theme }) => ({
   display: "flex",

@@ -1,6 +1,6 @@
+import { Link as RouterLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Box, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
 
 export const Footer = styled("footer")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,

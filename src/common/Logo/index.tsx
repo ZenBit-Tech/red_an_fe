@@ -1,9 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { IconWrapper } from "@/common/IconWrapper";
 import { LogoWrapper, LogoText } from "./styles";
-import { useTranslation } from "react-i18next";
 
 export const Logo = () => {
-  const { t } = useTranslation("hero");
+  const { t } = useTranslation();
 
   return (
     <LogoWrapper to="/">
@@ -12,7 +12,7 @@ export const Logo = () => {
           <use href="/capabilities/icons.svg#pii" />
         </svg>
       </IconWrapper>
-      <LogoText>{t("badge.title")}</LogoText>
+      <LogoText>{t("hero.badge.title")}</LogoText>
     </LogoWrapper>
   );
 };

@@ -1,13 +1,10 @@
 import { Provider } from "react-redux";
-import { store } from "./store";
-
-import { ThemeProvider } from "@mui/material/styles";
-
 import { RouterProvider } from "react-router-dom";
-
-import { theme } from "./common/theme/theme";
-import { router } from "./router";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "@/common/themes/theme";
 import { CssBaseline } from "@mui/material";
+import { store } from "./store";
+import { router } from "./router";
 
 function App() {
   return (

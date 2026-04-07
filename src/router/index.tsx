@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import HomePage from "../pages/HomePage";
-import Layout from "../components/Layout";
+import Layout from "@/components/Layout";
+import DeidentifyPage from "@/pages/deidentify";
+import HomePage from "@/pages/HomePage";
 
 export const router = createBrowserRouter([
   {
@@ -8,8 +9,12 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
+        index: true,
         element: <HomePage />,
+      },
+      {
+        path: "/deidentify",
+        element: <DeidentifyPage />,
       },
       {
         path: "*",
