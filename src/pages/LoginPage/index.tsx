@@ -13,9 +13,8 @@ import {
   CssBaseline,
 } from "@mui/material";
 import { ArrowBack, ErrorOutline, MailOutline } from "@mui/icons-material";
-
+import * as S from "./styles";
 type LoginStep = "form" | "checkInbox";
-
 interface LoginFormValues {
   email: string;
 }
@@ -24,6 +23,8 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<LoginStep>("form");
   const [submittedEmail, setSubmittedEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     control,
     handleSubmit,
@@ -32,87 +33,50 @@ const LoginPage = () => {
     mode: "onChange",
     defaultValues: { email: "" },
   });
-  const onSubmit = (data: LoginFormValues) => {
-    setSubmittedEmail(data.email);
-    setStep("checkInbox");
+  const onSubmit = async (data: LoginFormValues) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        "http://localhost:3000/auth/magic-link/request",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: data.email }),
+        },
+      );
+      if (response.ok) {
+        setSubmittedEmail(data.email);
+        setStep("checkInbox");
+      } else {
+        console.error("Помилка при відправці пошти");
+      }
+    } catch (error) {
+      console.error("Помилка з'єднання з сервером", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   const handleResend = () => {
-    console.log("Resending link to", submittedEmail);
+    onSubmit({ email: submittedEmail });
   };
-  const handleBackToSignIn = () => {
-    setStep("form");
-  };
-  const handleBack = () => {
-    navigate(-1);
-  };
+  const handleBackToSignIn = () => setStep("form");
+  const handleBack = () => navigate(-1);
   return (
     <>
       <CssBaseline />
-      <Box
-        sx={{
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          background:
-            "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(20,184,166,0.07) 0%, transparent 70%), #0a0f1e",
-          fontFamily: '"DM Sans", sans-serif',
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            inset: 0,
-            backgroundSize: "48px 48px",
-            pointerEvents: "none",
-            zIndex: 0,
-          }}
-        />
-        <Box
-          sx={{
-            position: "relative",
-            zIndex: 1,
-            flex: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            px: 2,
-            mt: { xs: 0, md: -6 },
-          }}
-        >
-          <Box
-            sx={{
-              width: "100%",
-              maxWidth: 420,
-              bgcolor: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderRadius: 3,
-              boxShadow: "0 24px 64px rgba(0,0,0,0.5)",
-              overflow: "hidden",
-            }}
-          >
+      <Box sx={S.container}>
+        <Box sx={S.backgroundOverlay} />
+        <Box sx={S.contentWrapper}>
+          <Box sx={S.card}>
             {step === "form" ? (
               <Box sx={{ px: 4, py: 4.5 }}>
-                <Typography
-                  variant="h5"
-                  sx={{
-                    fontWeight: 700,
-                    color: "white",
-                    mb: 0.75,
-                    fontFamily: '"DM Sans", sans-serif',
-                  }}
-                >
+                <Typography variant="h5" sx={S.title}>
                   {t("login.title")}
                 </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{
-                    color: "rgba(255,255,255,0.45)",
-                    mb: 3,
-                    fontFamily: '"DM Sans", sans-serif',
-                  }}
-                >
+                <Typography variant="body2" sx={S.subtitle}>
                   {t("login.subtitle")}
                 </Typography>
 
@@ -120,11 +84,10 @@ const LoginPage = () => {
                   <Typography
                     variant="caption"
                     sx={{
-                      fontWeight: 600,
+                      ...S.title,
+                      fontSize: "0.75rem",
                       color: "rgba(255,255,255,0.7)",
-                      mb: 0.5,
                       display: "block",
-                      fontFamily: '"DM Sans", sans-serif',
                     }}
                   >
                     {t("login.emailLabel")}
@@ -132,6 +95,7 @@ const LoginPage = () => {
                       *
                     </Box>
                   </Typography>
+
                   <Controller
                     name="email"
                     control={control}
@@ -157,38 +121,13 @@ const LoginPage = () => {
                               />
                             </InputAdornment>
                           ) : null,
-                          sx: {
-                            fontFamily: '"DM Sans", sans-serif',
-                            fontSize: "0.95rem",
-                            borderRadius: "8px",
-                            bgcolor: "rgba(255,255,255,0.05)",
-                            color: "white",
-                            "& input": {
-                              color: "white",
-                              "&::placeholder": {
-                                color: "rgba(255,255,255,0.2)",
-                                opacity: 1,
-                              },
-                            },
-                            "& fieldset": {
-                              borderColor: errors.email
-                                ? "#f87171"
-                                : "rgba(255,255,255,0.12)",
-                            },
-                            "&:hover fieldset": {
-                              borderColor: errors.email
-                                ? "#f87171"
-                                : "rgba(255,255,255,0.25)",
-                            },
-                            "&.Mui-focused fieldset": {
-                              borderColor: errors.email ? "#f87171" : "#14b8a6",
-                            },
-                          },
+                          sx: errors.email ? S.inputErrorStyles : S.inputStyles,
                         }}
                         sx={{ mb: errors.email ? 0.5 : 3 }}
                       />
                     )}
                   />
+
                   {errors.email && (
                     <Typography
                       variant="caption"
@@ -202,54 +141,27 @@ const LoginPage = () => {
                       {errors.email.message}
                     </Typography>
                   )}
+
                   <Button
                     type="submit"
                     fullWidth
                     variant="contained"
-                    disabled={!isValid}
+                    disabled={!isValid || isLoading}
                     sx={{
+                      ...S.submitButton(isValid && !isLoading),
                       mt: errors.email ? 1.5 : 0,
-                      py: 1.3,
-                      borderRadius: "8px",
-                      fontFamily: '"DM Sans", sans-serif',
-                      fontWeight: 600,
-                      fontSize: "0.95rem",
-                      textTransform: "none",
-                      bgcolor: isValid ? "#14b8a6" : "rgba(255,255,255,0.07)",
-                      color: isValid ? "white" : "rgba(255,255,255,0.2)",
-                      boxShadow: isValid
-                        ? "0 0 20px rgba(20,184,166,0.3)"
-                        : "none",
-                      "&:hover": {
-                        bgcolor: isValid ? "#0d9488" : "rgba(255,255,255,0.07)",
-                        boxShadow: isValid
-                          ? "0 0 28px rgba(20,184,166,0.45)"
-                          : "none",
-                      },
-                      "&.Mui-disabled": {
-                        bgcolor: "rgba(255,255,255,0.07)",
-                        color: "rgba(255,255,255,0.2)",
-                      },
                     }}
                   >
-                    {t("login.sendMagicLink")}
+                    {isLoading ? "Відправка..." : t("login.sendMagicLink")}
                   </Button>
                 </form>
+
                 <Box display="flex" justifyContent="center" mt={2.5}>
                   <Link
                     component="button"
                     onClick={handleBack}
                     underline="none"
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 0.75,
-                      color: "rgba(255,255,255,0.3)",
-                      fontFamily: '"DM Sans", sans-serif',
-                      fontSize: "0.9rem",
-                      cursor: "pointer",
-                      "&:hover": { color: "rgba(255,255,255,0.65)" },
-                    }}
+                    sx={S.linkButton}
                   >
                     <ArrowBack sx={{ fontSize: 16 }} />
                     {t("login.back")}
@@ -261,24 +173,10 @@ const LoginPage = () => {
                 <Box sx={{ mb: 2 }}>
                   <MailOutline sx={{ fontSize: 48, color: "#14b8a6" }} />
                 </Box>
-                <Typography
-                  variant="h5"
-                  sx={{
-                    fontWeight: 700,
-                    color: "white",
-                    mb: 1,
-                    fontFamily: '"DM Sans", sans-serif',
-                  }}
-                >
+                <Typography variant="h5" sx={S.title}>
                   {t("login.checkInboxTitle")}
                 </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{
-                    color: "rgba(255,255,255,0.45)",
-                    fontFamily: '"DM Sans", sans-serif',
-                  }}
-                >
+                <Typography variant="body2" sx={S.subtitle}>
                   {t("login.checkInboxDescription")}{" "}
                   <Box
                     component="span"
@@ -318,16 +216,7 @@ const LoginPage = () => {
                     component="button"
                     onClick={handleBackToSignIn}
                     underline="none"
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 0.75,
-                      color: "rgba(255,255,255,0.3)",
-                      fontFamily: '"DM Sans", sans-serif',
-                      fontSize: "0.9rem",
-                      cursor: "pointer",
-                      "&:hover": { color: "rgba(255,255,255,0.65)" },
-                    }}
+                    sx={S.linkButton}
                   >
                     <ArrowBack sx={{ fontSize: 16 }} />
                     {t("login.backToSignIn")}
@@ -341,4 +230,5 @@ const LoginPage = () => {
     </>
   );
 };
+
 export default LoginPage;
