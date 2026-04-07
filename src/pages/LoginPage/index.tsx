@@ -10,7 +10,6 @@ import {
   InputAdornment,
   Link,
   Divider,
-  CssBaseline,
 } from "@mui/material";
 import { ArrowBack, ErrorOutline, MailOutline } from "@mui/icons-material";
 import * as S from "./styles";
@@ -66,7 +65,6 @@ const LoginPage = () => {
   const handleBack = () => navigate(-1);
   return (
     <>
-      <CssBaseline />
       <Box sx={S.container}>
         <Box sx={S.backgroundOverlay} />
         <Box sx={S.contentWrapper}>
