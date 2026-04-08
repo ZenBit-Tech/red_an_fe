@@ -26,7 +26,7 @@ export const useContactForm = () => {
       const response: AxiosResponse<void> = await apiClient.post<
         void,
         IContactInput
-      >("/contact-us", data);
+      >("/contact-form", data);
 
       if (response.status === 201 || response.status === 200) {
         alert(t("contactUs.messages.success"));

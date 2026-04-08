@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout";
 import DeidentifyPage from "@/pages/deidentify";
+import { ContactUsPage } from "@/pages/ContactUsPage";
 
 export const router = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ export const router = createBrowserRouter([
       {
         path: "/deidentify",
         element: <DeidentifyPage />,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUsPage />,
       },
       {
         path: "*",
