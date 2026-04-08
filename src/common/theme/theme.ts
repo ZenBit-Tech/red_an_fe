@@ -1,151 +1,144 @@
 import { createTheme } from "@mui/material/styles";
+import type { CSSProperties } from "react";
+
+declare module "@mui/material/styles" {
+  interface TypographyVariants {
+    fontSize64?: CSSProperties;
+    fontSize56?: CSSProperties;
+    fontSize38?: CSSProperties;
+    fontSize18Bold?: CSSProperties;
+    fontSize16Semibold?: CSSProperties;
+    fontSize16?: CSSProperties;
+    fontSize14Bold?: CSSProperties;
+  }
+
+  interface TypographyVariantsOptions {
+    fontSize64?: CSSProperties;
+    fontSize56?: CSSProperties;
+    fontSize38?: CSSProperties;
+    fontSize18Bold?: CSSProperties;
+    fontSize16Semibold?: CSSProperties;
+    fontSize16?: CSSProperties;
+    fontSize14Bold?: CSSProperties;
+  }
+}
+
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    fontSize64: true;
+    fontSize56: true;
+    fontSize38: true;
+    fontSize18Bold: true;
+    fontSize16Semibold: true;
+    fontSize14Bold: true;
+    fontSize16: true;
+    h1: false;
+    h2: false;
+    h3: false;
+    h4: false;
+    h5: false;
+    h6: false;
+    body1: false;
+    body2: false;
+  }
+}
+
+const greyShades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+const greyColors = [
+  "#F8FAFC",
+  "#F1F5F9",
+  "#E2E8F0",
+  "#CBD5E1",
+  "#94A3B8",
+  "#64748B",
+  "#475569",
+  "#334155",
+  "#1E293B",
+  "#0F172A",
+];
+const grey = Object.fromEntries(greyShades.map((k, i) => [k, greyColors[i]]));
+
+const blueShades = [500];
+const blueColors = ["#155dfc"];
+const blue = Object.fromEntries(blueShades.map((k, i) => [k, blueColors[i]]));
+
+const whiteShades = [50, 500, 700];
+const whiteColors = ["#fff", "#eff6ff", "#d2d3d6"];
+const white = Object.fromEntries(
+  whiteShades.map((k, i) => [k, whiteColors[i]]),
+);
+
+const redShades = [500];
+const redColors = ["#d32f2f"];
+const red = Object.fromEntries(redShades.map((k, i) => [k, redColors[i]]));
 
 export const theme = createTheme({
   breakpoints: {
-    values: {
-      xs: 0,
-      sm: 375,
-      md: 787,
-      lg: 1440,
-      xl: 1920,
-    },
+    values: { xs: 0, sm: 375, md: 787, lg: 1440, xl: 1920 },
   },
   palette: {
-    primary: {
-      main: "#155dfc",
-    },
-    secondary: {
-      main: "#eff6ff",
-    },
-    background: {
-      default: "#fff",
-    },
-    text: {
-      primary: "#101828",
-      secondary: "#6a7282",
-    },
-    error: { main: "#d32f2f" },
-    success: { main: "#155dfc" },
-    grey: {
-      50: "#F8FAFC",
-      100: "#F1F5F9",
-      200: "#E2E8F0",
-      300: "#CBD5E1",
-      400: "#94A3B8",
-      500: "#64748B",
-      600: "#475569",
-      700: "#334155",
-      800: "#1E293B",
-      900: "#0F172A",
-    },
+    primary: { main: blue[500] },
+    secondary: { main: white[500] },
+    background: { default: white[50] },
+    text: { primary: grey[900], secondary: grey[600] },
+    error: { main: red[500] },
+    success: { main: blue[500] },
+    grey: grey,
   },
   typography: {
     fontFamily: `'Inter', sans-serif`,
-    h1: {
-      fontFamily: "'Inter', sans-serif",
+    fontSize64: {
       fontWeight: 400,
       fontSize: "64px",
       lineHeight: 1.08,
       letterSpacing: "-0.02em",
     },
-    h2: {
-      fontFamily: "'Inter', sans-serif",
+    fontSize56: {
       fontWeight: 400,
       fontSize: "56px",
       lineHeight: 1.09,
       letterSpacing: "-0.02em",
     },
-    h3: {
-      fontFamily: "'Inter', sans-serif",
-      fontWeight: 400,
-      fontSize: "38px",
-      lineHeight: 1.16,
-    },
-    h4: {
-      fontFamily: "'Inter', sans-serif",
-      fontWeight: 700,
-      fontSize: "18px",
-      lineHeight: 1.5,
-    },
-    h5: {
-      fontFamily: "'Inter', sans-serif",
-      fontWeight: 600,
-      fontSize: "16px",
-      lineHeight: 1.38,
-    },
-    h6: {
-      fontFamily: "'Inter', sans-serif",
-      fontWeight: 600,
-      fontSize: "14px",
-      lineHeight: 1.4,
-    },
-    body1: {
-      fontFamily: "'Inter', sans-serif",
-      fontWeight: 400,
-      fontSize: "16px",
-      lineHeight: 1.75,
-    },
-    button: {
-      fontWeight: 600,
-      fontSize: "16px",
-      lineHeight: 1.5,
-    },
+    fontSize38: { fontWeight: 400, fontSize: "38px", lineHeight: 1.16 },
+    fontSize18Bold: { fontWeight: 700, fontSize: "18px", lineHeight: 1.5 },
+    fontSize16Semibold: { fontWeight: 600, fontSize: "16px", lineHeight: 1.38 },
+    fontSize14Bold: { fontWeight: 600, fontSize: "14px", lineHeight: 1.4 },
+    fontSize16: { fontWeight: 400, fontSize: "16px", lineHeight: 1.75 },
+    button: { fontWeight: 600, fontSize: "16px", lineHeight: 1.5 },
   },
   spacing: 4,
-  shape: {
-    borderRadius: 16,
-  },
+  shape: { borderRadius: 16 },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
-        html: {
-          width: "100%",
-          height: "100%",
-        },
-        body: {
-          width: "100%",
-          minHeight: "100%",
-          margin: 0,
-        },
-        "#root": {
-          width: "100%",
-          minHeight: "100vh",
-        },
-        "*": {
-          boxSizing: "border-box",
-        },
+        html: { width: "100%", height: "100%" },
+        body: { width: "100%", minHeight: "100%", margin: 0 },
+        "#root": { width: "100%", minHeight: "100vh" },
+        "*": { boxSizing: "border-box" },
       },
     },
     MuiContainer: {
-      defaultProps: {
-        maxWidth: false,
-      },
+      defaultProps: { maxWidth: false },
       styleOverrides: {
         root: {
           width: "100%",
           maxWidth: "1440px",
           margin: "0 auto",
-          paddingLeft: "24px",
-          paddingRight: "24px",
-
-          "@media (min-width:1440px)": {
-            paddingLeft: "32px",
-            paddingRight: "32px",
-          },
+          padding: "0 24px",
+          "@media (min-width:1440px)": { padding: "0 32px" },
         },
       },
     },
     MuiTypography: {
       defaultProps: {
         variantMapping: {
-          h1: "h1",
-          h2: "h2",
-          h3: "h3",
-          h4: "h4",
-          h5: "h5",
-          h6: "h6",
-          body1: "p",
-          body2: "p",
+          fontSize64: "h1",
+          fontSize56: "h2",
+          fontSize38: "h3",
+          fontSize18Bold: "h4",
+          fontSize16Semibold: "h5",
+          fontSize14Bold: "h6",
+          fontSize16: "p",
         },
       },
     },
@@ -156,22 +149,13 @@ export const theme = createTheme({
           textTransform: "none",
           fontWeight: 600,
           boxShadow: "none",
-          "&:hover": {
-            boxShadow: "none",
-          },
+          "&:hover": { boxShadow: "none" },
         },
       },
     },
-    MuiTextField: {
-      defaultProps: {
-        fullWidth: true,
-      },
-    },
+    MuiTextField: { defaultProps: { fullWidth: true } },
     MuiAppBar: {
-      defaultProps: {
-        elevation: 0,
-        position: "static",
-      },
+      defaultProps: { elevation: 0, position: "static" },
       styleOverrides: {
         root: ({ theme }) => ({
           backgroundColor: theme.palette.grey[50],
@@ -183,14 +167,9 @@ export const theme = createTheme({
       },
     },
     MuiToolbar: {
-      defaultProps: {
-        disableGutters: true,
-      },
+      defaultProps: { disableGutters: true },
       styleOverrides: {
-        root: {
-          minHeight: "48px !important",
-          justifyContent: "space-between",
-        },
+        root: { minHeight: "48px !important", justifyContent: "space-between" },
       },
     },
   },

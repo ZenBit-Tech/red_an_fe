@@ -22,7 +22,7 @@ export const IconWrapper = styled("div")(({ theme }) => ({
   height: "44px",
   backgroundColor: theme.palette.primary.main,
   borderRadius: "50%",
-  color: "#fff",
+  color: theme.palette.background.default,
   "& svg": {
     width: "20px",
     height: "20px",

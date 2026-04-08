@@ -3,22 +3,22 @@ import { Box } from "@mui/material";
 
 export const CapabilitiesSection = styled("section")(({ theme }) => ({
   backgroundColor: theme.palette.grey[50],
-  padding: "80px 0",
+  padding: theme.spacing(20, 0),
   width: "100%",
 }));
 
-export const TitleSectionBlock = styled(Box)({
+export const TitleSectionBlock = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   textAlign: "center",
-  margin: "0 auto 64px auto",
-});
+  margin: theme.spacing(0, "auto", 16, "auto"),
+}));
 
 export const CardsList = styled(Box)(({ theme }) => ({
   display: "flex",
   flexWrap: "wrap",
-  gap: "20px",
+  gap: theme.spacing(5),
   "& > *": {
     flex: "1 1 calc(50% - 10px)",
     minWidth: 0,
@@ -31,11 +31,11 @@ export const CardsList = styled(Box)(({ theme }) => ({
 
 export const CardItem = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
-  borderRadius: theme.shape.borderRadius,
-  padding: "32px",
+  borderRadius: theme.spacing(6),
+  padding: theme.spacing(8),
   display: "flex",
   flexDirection: "column",
-  gap: "16px",
-  border: "1px solid #d2d3d6",
+  gap: theme.spacing(4),
+  border: `1px solid ${theme.palette.grey[200]}`,
   boxShadow: "none",
 }));

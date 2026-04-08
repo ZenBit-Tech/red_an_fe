@@ -17,12 +17,12 @@ export const Capabilities = () => {
       <Container>
         <TitleSectionBlock>
           <Typography
-            variant="h2"
+            variant="fontSize56"
             sx={{ mb: 2, fontSize: "2rem", fontWeight: 700 }}
           >
             {t("capabilities.title")}
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="fontSize16" color="text.secondary">
             {t("capabilities.description")}
           </Typography>
         </TitleSectionBlock>
@@ -35,10 +35,10 @@ export const Capabilities = () => {
                   <use href={`/capabilities/icons.svg${card.iconId}`} />
                 </svg>
               </IconWrapper>
-              <Typography variant="h4">
+              <Typography variant="fontSize18Bold" sx={{ fontWeight: 500 }}>
                 {t(`capabilities.${card.titleKey}`)}
               </Typography>
-              <Typography variant="body1" color="text.secondary">
+              <Typography variant="fontSize16" color="text.secondary">
                 {t(`capabilities.${card.descKey}`)}
               </Typography>
             </CardItem>

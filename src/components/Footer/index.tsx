@@ -30,7 +30,7 @@ export const FooterSection = () => {
         <FooterTop>
           <FooterHeader>
             <Logo />
-            <DescriptionText variant="body1" color="text.secondary">
+            <DescriptionText variant="fontSize16" color="text.secondary">
               {t("footer.description")}
             </DescriptionText>
             <SocialWrapper>
@@ -51,7 +51,7 @@ export const FooterSection = () => {
           </FooterHeader>
           <ColumnsWrapper>
             <ColumnList>
-              <ColumnTitle variant="h6">
+              <ColumnTitle variant="fontSize14Bold">
                 {t("footer.columns.product")}
               </ColumnTitle>
               {FOOTER_PRODUCT_LINKS.map((link) => (
@@ -61,7 +61,7 @@ export const FooterSection = () => {
               ))}
             </ColumnList>
             <ColumnList>
-              <ColumnTitle variant="h6">
+              <ColumnTitle variant="fontSize14Bold">
                 {t("footer.columns.resources")}
               </ColumnTitle>
               {FOOTER_RESOURCES_LINKS.map((link) => (
@@ -76,7 +76,7 @@ export const FooterSection = () => {
               ))}
             </ColumnList>
             <ColumnList>
-              <ColumnTitle variant="h6">
+              <ColumnTitle variant="fontSize14Bold">
                 {t("footer.columns.company")}
               </ColumnTitle>
               {FOOTER_COMPANY_LINKS.map((link) => (
@@ -88,7 +88,7 @@ export const FooterSection = () => {
           </ColumnsWrapper>
         </FooterTop>
 
-        <Typography variant="body2" color="text.secondary" align="center">
+        <Typography variant="fontSize16" color="text.secondary" align="center">
           © {new Date().getFullYear()} Clinical Data Studio. All rights
           reserved.
         </Typography>

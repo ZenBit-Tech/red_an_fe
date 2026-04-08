@@ -3,21 +3,21 @@ import { Box } from "@mui/material";
 
 export const ComplianceSection = styled("section")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
-  padding: "80px 0",
+  padding: theme.spacing(20, 0),
   width: "100%",
 }));
 
-export const HeaderBlock = styled(Box)({
+export const HeaderBlock = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  marginBottom: "48px",
-});
+  marginBottom: theme.spacing(12),
+}));
 
 export const CardsGrid = styled(Box)(({ theme }) => ({
   display: "grid",
   gridTemplateColumns: "repeat(4, 1fr)",
-  gap: "24px",
-  marginBottom: "48px",
+  gap: theme.spacing(6),
+  marginBottom: theme.spacing(12),
 
   [theme.breakpoints.down("lg")]: {
     gridTemplateColumns: "repeat(2, 1fr)",
@@ -29,8 +29,8 @@ export const CardsGrid = styled(Box)(({ theme }) => ({
 
 export const CardItem = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.grey[50],
-  borderRadius: theme.shape.borderRadius,
-  padding: "32px 24px",
+  borderRadius: theme.spacing(6),
+  padding: theme.spacing(8, 6),
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
@@ -40,35 +40,34 @@ export const CardItem = styled(Box)(({ theme }) => ({
 
   "&:hover": {
     borderColor: theme.palette.primary.main,
-    boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.05)",
+    boxShadow: `0px 4px 20px ${alpha(theme.palette.grey[900], 0.05)}`,
   },
 }));
 
 export const Badge = styled(Box, {
   shouldForwardProp: (prop) => prop !== "badgeColor",
-})<{ badgeColor: string }>(({ badgeColor }) => ({
+})<{ badgeColor: string }>(({ badgeColor, theme }) => ({
   backgroundColor: alpha(badgeColor, 0.1),
   color: badgeColor,
-  padding: "4px 12px",
-  borderRadius: "8px",
+  padding: theme.spacing(1, 3),
+  borderRadius: theme.spacing(2),
   fontWeight: 700,
   fontSize: "12px",
-  lineHeight: "1.33",
-  fontFamily: "'Inter', sans-serif",
-  marginBottom: "24px",
+  fontFamily: theme.typography.fontFamily,
+  marginBottom: theme.spacing(6),
 }));
 
 export const BannerWrapper = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
-  borderRadius: theme.shape.borderRadius,
-  padding: "32px",
+  borderRadius: theme.spacing(2),
+  padding: theme.spacing(8),
   display: "flex",
   alignItems: "flex-start",
-  gap: "24px",
+  gap: theme.spacing(6),
 
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
-    gap: "16px",
+    gap: theme.spacing(4),
   },
 }));
 
@@ -81,7 +80,7 @@ export const BannerIconWrapper = styled(Box)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   flexShrink: 0,
-  color: "#fff",
+  color: theme.palette.background.default,
 
   "& svg": {
     width: "24px",

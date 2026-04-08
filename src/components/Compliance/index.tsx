@@ -21,11 +21,11 @@ export const Compliance = () => {
     <ComplianceSection id="compliance">
       <Container>
         <HeaderBlock>
-          <Typography variant="h2" sx={{ mb: 2, fontWeight: 700 }}>
+          <Typography variant="fontSize56" sx={{ mb: 2, fontWeight: 700 }}>
             {t("compliance.title")}
           </Typography>
           <Typography
-            variant="body1"
+            variant="fontSize16"
             color="text.secondary"
             sx={{ fontSize: "20px" }}
           >
@@ -39,10 +39,13 @@ export const Compliance = () => {
               <Badge badgeColor={card.color}>
                 {t(`compliance.cards.${card.id}.badge`)}
               </Badge>
-              <Typography variant="h5" sx={{ mb: 1, flexGrow: 1 }}>
+              <Typography
+                variant="fontSize16Semibold"
+                sx={{ mb: 1, flexGrow: 1 }}
+              >
                 {t(`compliance.cards.${card.id}.title`)}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="fontSize16" color="text.secondary">
                 {t(`compliance.cards.${card.id}.entities`)}
               </Typography>
             </CardItem>
@@ -54,10 +57,10 @@ export const Compliance = () => {
             <Check strokeWidth={3} />
           </BannerIconWrapper>
           <BannerTextContent>
-            <Typography variant="h4" sx={{ mb: 1 }}>
+            <Typography variant="fontSize18Bold" sx={{ mb: 1 }}>
               {t("compliance.banner.title")}
             </Typography>
-            <Typography variant="body1" color="text.secondary">
+            <Typography variant="fontSize16" color="text.secondary">
               {t("compliance.banner.description")}
             </Typography>
           </BannerTextContent>

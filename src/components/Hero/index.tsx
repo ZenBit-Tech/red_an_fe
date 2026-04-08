@@ -30,17 +30,19 @@ const Hero = () => {
               </svg>
             </IconWrapper>
             <BadgeTextWrapper>
-              <Typography variant="h5" sx={{ fontWeight: 600 }}>
+              <Typography variant="fontSize16Semibold" sx={{ fontWeight: 600 }}>
                 {t("hero.badge.title")}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="fontSize16" color="text.secondary">
                 {t("hero.badge.subtitle")}
               </Typography>
             </BadgeTextWrapper>
           </BadgeWrapper>
 
-          <HeroTitle variant="h1">{t("hero.mainTitle")}</HeroTitle>
-          <Description variant="body1">{t("hero.description")}</Description>
+          <HeroTitle variant="fontSize64">{t("hero.mainTitle")}</HeroTitle>
+          <Description variant="fontSize16">
+            {t("hero.description")}
+          </Description>
 
           <GetStartedButton variant="contained" disableElevation>
             {t("hero.cta.getStarted")}
@@ -53,12 +55,12 @@ const Hero = () => {
             {HERO_STATS_KEYS.map((statKey) => (
               <StatItem key={statKey}>
                 <Typography
-                  variant="h3"
+                  variant="fontSize38"
                   sx={{ fontWeight: 500, fontSize: "32px" }}
                 >
                   {t(`hero.stats.${statKey}.value`)}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="fontSize16" color="text.secondary">
                   {t(`hero.stats.${statKey}.label`)}
                 </Typography>
               </StatItem>
