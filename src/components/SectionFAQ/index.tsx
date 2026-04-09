@@ -1,39 +1,32 @@
-import {
-  Container,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from "@mui/material";
+import { AccordionDetails } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTranslation } from "react-i18next";
+import * as S from "./styles";
 
 export const SectionFAQ = () => {
   const { t } = useTranslation();
 
-  // Отримуємо масив питань із i18n
-  // returnObjects: true дозволяє витягнути масив об'єктів з JSON
   const faqItems = t("faq.items", { returnObjects: true }) as Array<{
     question: string;
     answer: string;
   }>;
 
   return (
-    <Container maxWidth="md" sx={{ pb: 10 }}>
-      <Typography variant="h4" align="center" sx={{ mb: 6 }}>
-        {t("faq.title")}
-      </Typography>
+    <S.FAQWrapper>
+      <S.StyledContainer maxWidth="md">
+        <S.FAQTitle>{t("faq.title")}</S.FAQTitle>
 
-      {faqItems.map((item, index) => (
-        <Accordion key={index} disableGutters>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography sx={{ fontWeight: "bold" }}>{item.question}</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>{item.answer}</Typography>
-          </AccordionDetails>
-        </Accordion>
-      ))}
-    </Container>
+        {faqItems.map((item, index) => (
+          <S.StyledAccordion key={index} disableGutters elevation={0}>
+            <S.StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <S.QuestionText>{item.question}</S.QuestionText>
+            </S.StyledAccordionSummary>
+            <AccordionDetails sx={{ px: 0, pb: 4 }}>
+              <S.AnswerText>{item.answer}</S.AnswerText>
+            </AccordionDetails>
+          </S.StyledAccordion>
+        ))}
+      </S.StyledContainer>
+    </S.FAQWrapper>
   );
 };

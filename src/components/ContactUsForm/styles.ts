@@ -1,112 +1,100 @@
 import { styled } from "@mui/material/styles";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, Container } from "@mui/material";
 
 export const SectionForm = styled(Box)(({ theme }) => ({
-  paddingTop: "112px",
-  paddingBottom: "100px",
+  paddingTop: theme.spacing(28),
+  paddingBottom: theme.spacing(25),
   backgroundColor: theme.palette.background.default,
 }));
 
-export const CustomContainer = styled(Box)({
-  padding: "0 144px",
+export const CustomContainer = styled(Container)({
+  display: "block",
 });
 
-export const ContactTitle = styled(Typography)({
-  fontWeight: 400,
-  fontSize: "56px",
-  lineHeight: "109%",
-  color: "#101828",
-  textAlign: "left",
-});
+export const ContactTitle = styled(Typography)(({ theme }) => ({
+  fontSize: theme.typography.fontSize56,
+  fontWeight: theme.typography.fontWeight400,
+  color: theme.palette.text.primary,
+}));
 
-export const ContactDescription = styled(Typography)({
-  fontWeight: 400,
-  fontSize: "17px",
-  lineHeight: "171%",
-  color: "#6a7282",
-  textAlign: "left",
+export const ContactDescription = styled(Typography)(({ theme }) => ({
+  fontSize: theme.typography.fontSize16,
+  fontWeight: theme.typography.fontWeight400,
+  color: theme.palette.text.secondary,
   maxWidth: "480px",
-});
+}));
 
-export const FormWrapper = styled(Box)({
+export const FormWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
-  gap: "24px",
+  gap: theme.spacing(6),
   width: "100%",
   alignItems: "flex-start",
-  margin: "0 auto",
-  marginTop: "48px",
-});
+  marginTop: theme.spacing(12),
+}));
 
-export const ContactSidebar = styled(Box)({
-  flexDirection: "column",
-  padding: "25px",
+export const ContactSidebar = styled(Box)(({ theme }) => ({
   display: "flex",
+  flexDirection: "column",
+  padding: theme.spacing(6),
   width: "320px",
-});
+  backgroundColor: "#F9FAFB",
+  borderRadius: theme.shape.borderRadius,
+}));
 
-export const ContactFormBox = styled(Box)({
-  padding: "40px",
+export const ContactFormBox = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(10),
   flexGrow: 1,
-});
+}));
 
-export const ContactLabel = styled(Typography)({
-  fontWeight: 700,
-  fontSize: "18px",
-  lineHeight: "150%",
-  color: "#101828",
-  marginBottom: "8px",
-});
+export const ContactLabel = styled(Typography)(({ theme }) => ({
+  fontSize: theme.typography.fontSize18,
+  fontWeight: theme.typography.fontWeight700,
+  color: theme.palette.text.primary,
+  marginBottom: theme.spacing(2),
+}));
 
-export const EmailLink = styled("a")({
-  fontSize: "14px",
+export const EmailLink = styled("a")(({ theme }) => ({
+  fontSize: theme.typography.fontSize14,
   lineHeight: "164%",
-  fontWeight: 400,
-  color: "#6a7282",
+  color: theme.palette.text.secondary,
   textDecoration: "none",
+  fontFamily: theme.typography.fontFamily,
   "&:hover": {
     textDecoration: "underline",
+    color: theme.palette.primary.main,
   },
-});
+}));
 
-export const ContactForm = styled("form")({
+export const ContactForm = styled("form")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  gap: "24px",
-});
+  gap: theme.spacing(6),
+}));
 
-export const ContactFormTitle = styled(Typography)({
-  fontWeight: "400",
-  fontSize: "25px",
-  lineHeight: "152%",
-  color: "#101828",
-  marginBottom: "32px",
-});
+export const ContactFormTitle = styled(Typography)(({ theme }) => ({
+  fontSize: theme.typography.fontSize38,
+  fontWeight: theme.typography.fontWeight600,
+  color: theme.palette.text.primary,
+  marginBottom: theme.spacing(8),
+}));
 
-export const FormGrid = styled(Box)({
+export const FormGrid = styled(Box)(({ theme }) => ({
   display: "grid",
   gridTemplateColumns: "repeat(2, 1fr)",
-  rowGap: "24px",
-  columnGap: "20px",
+  rowGap: theme.spacing(6),
+  columnGap: theme.spacing(5),
   width: "100%",
 
   "& .full-width": {
     gridColumn: "span 2",
   },
-});
+}));
 
-export const SubmitButton = styled(Button)({
-  fontFamily: "var(--font-family)",
-  color: "#fff",
-  lineHeight: "150%",
-  width: "196px",
-  padding: "12px 32px",
-  boxShadow: "0 4px 14px 0 rgba(59, 130, 246, 0.3)",
-  fontWeight: 600,
-  fontSize: "16px",
-  borderRadius: "14px",
-  backgroundColor: "#155DFC",
-  "&:hover": {
-    backgroundColor: "#0046E5",
-  },
-});
+export const SubmitButton = styled(Button)(({ theme }) => ({
+  width: "fit-content",
+  padding: theme.spacing(3, 8),
+  borderRadius: theme.shape.borderRadius,
+  fontSize: theme.typography.fontSize16,
+  fontWeight: theme.typography.fontWeight600,
+}));

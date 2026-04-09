@@ -1,22 +1,8 @@
 import { Controller } from "react-hook-form";
 import { MuiTelInput } from "mui-tel-input";
-import { TextField, Button, Stack, Box } from "@mui/material";
+import { TextField, Stack, Box } from "@mui/material";
 import { useContactForm } from "./hooks/useContactForm";
-import {
-  SectionForm,
-  CustomContainer,
-  ContactTitle,
-  ContactDescription,
-  FormWrapper,
-  ContactSidebar,
-  ContactFormBox,
-  EmailLink,
-  ContactLabel,
-  ContactForm,
-  ContactFormTitle,
-  FormGrid,
-} from "./styles";
-
+import * as S from "./styles";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { useTranslation } from "react-i18next";
 
@@ -25,37 +11,41 @@ export const ContactUsForm = () => {
   const { register, handleSubmit, errors, control } = useContactForm();
 
   return (
-    <SectionForm>
-      <CustomContainer>
+    <S.SectionForm>
+      <S.CustomContainer>
         <Stack spacing={4}>
-          <ContactTitle variant="h1">{t("contactUs.title")}</ContactTitle>
-          <ContactDescription>{t("contactUs.description")}</ContactDescription>
+          <S.ContactTitle>{t("contactUs.title")}</S.ContactTitle>
+          <S.ContactDescription>
+            {t("contactUs.description")}
+          </S.ContactDescription>
 
-          <FormWrapper>
-            <ContactSidebar>
+          <S.FormWrapper>
+            <S.ContactSidebar>
               <MailOutlineIcon
                 sx={{
-                  color: "#155DFC",
-                  fontSize: "20px",
-                  marginBottom: "26px",
+                  color: "primary.main",
+                  fontSize: "24px",
+                  marginBottom: 6,
                 }}
               />
-              <ContactLabel>{t("contactUs.sidebar.emailLabel")}</ContactLabel>
-              <EmailLink href="mailto:info@clinicaldatastudio.com">
+              <S.ContactLabel>
+                {t("contactUs.sidebar.emailLabel")}
+              </S.ContactLabel>
+              <S.EmailLink href="mailto:info@clinicaldatastudio.com">
                 info@clinicaldatastudio.com
-              </EmailLink>
-              <EmailLink href="mailto:support@clinicaldatastudio.com">
+              </S.EmailLink>
+              <S.EmailLink href="mailto:support@clinicaldatastudio.com">
                 support@clinicaldatastudio.com
-              </EmailLink>
-            </ContactSidebar>
+              </S.EmailLink>
+            </S.ContactSidebar>
 
-            <ContactFormBox>
-              <ContactFormTitle variant="h2">
+            <S.ContactFormBox>
+              <S.ContactFormTitle>
                 {t("contactUs.form.title")}
-              </ContactFormTitle>
+              </S.ContactFormTitle>
 
-              <ContactForm onSubmit={handleSubmit} noValidate>
-                <FormGrid>
+              <S.ContactForm onSubmit={handleSubmit} noValidate>
+                <S.FormGrid>
                   <TextField
                     fullWidth
                     label={t("contactUs.form.firstName")}
@@ -111,13 +101,11 @@ export const ContactUsForm = () => {
                           defaultCountry="UA"
                           error={!!fieldState.error}
                           helperText={fieldState.error?.message}
-                          sx={{
-                            "& .MuiInputBase-root": {},
-                          }}
                         />
                       )}
                     />
                   </Box>
+
                   <Box className="full-width">
                     <TextField
                       fullWidth
@@ -134,20 +122,16 @@ export const ContactUsForm = () => {
                   </Box>
 
                   <Box className="full-width">
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      sx={{ width: "fit-content", px: 4, py: 1.5 }}
-                    >
+                    <S.SubmitButton variant="contained" type="submit">
                       {t("contactUs.form.submit")}
-                    </Button>
+                    </S.SubmitButton>
                   </Box>
-                </FormGrid>
-              </ContactForm>
-            </ContactFormBox>
-          </FormWrapper>
+                </S.FormGrid>
+              </S.ContactForm>
+            </S.ContactFormBox>
+          </S.FormWrapper>
         </Stack>
-      </CustomContainer>
-    </SectionForm>
+      </S.CustomContainer>
+    </S.SectionForm>
   );
 };
