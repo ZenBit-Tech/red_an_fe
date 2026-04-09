@@ -110,7 +110,7 @@
     }
   },
    "login": {
-    "title": "Sign in to De-ID Studio",
+    "title": "Sign in to Clinical Data Studio",
     "subtitle": "Enter your email to receive a sign-in link",
     "emailLabel": "Email address",
     "emailPlaceholder": "you@company.com",
@@ -118,10 +118,59 @@
     "emailInvalid": "Enter valid email",
     "sendMagicLink": "Send Magic Link",
     "back": "Back",
-    "checkInboxTitle": "Check your inbox",
-    "checkInboxDescription": "We sent a sign-in link to",
+    "checkInboxTitle": "Sign in to Clinical Data Studio",
+    "checkInboxDescription": "We sent a magic link to",
     "didntReceive": "Didn't receive it? Check spam or",
-    "resendLink": "Resend link",
-    "backToSignIn": "Back to Sign in"
+    "resendLink": "resend link",
+    "sending": "Sending..",
+    "backToSignIn": "Back"
+  },
+  "dashboard": {
+    "brand": {
+      "name": "Clinical Data Studio",
+      "tagline": "De-ID & Synthesis"
+    },
+    "topBar": {
+      "title": "Clinical Data De-Identification & Synthetic Data Studio",
+      "subtitle": "Enterprise-grade PII detection and anonymization"
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "deIdentify": "De-Identify",
+      "syntheticData": "Synthetic Data",
+      "subscription": "Subscription",
+      "support": "Support",
+      "logout": "Logout"
+    },
+    "trial": {
+      "badge": "Free Plan",
+      "message": "You're using the free plan version. Upgrade to a professional plan for full access to all features.",
+      "upgradeButton": "Upgrade to Professional Plan"
+    },
+    "page": {
+      "title": "Dashboard",
+      "subtitle": "Monitor your de-identification metrics",
+      "infoBanner": "2 documents available for de-identification",
+      "lastDays": "Last 7 days",
+      "startButton": "Start de-identification"
+    },
+    "stats": {
+      "totalDocuments": "Total Documents",
+      "successRate": "Success Rate",
+      "processingTime": "Processing Time",
+      "avgCompleteness": "Avg. Completeness"
+    },
+    "emptyState": {
+      "title": "No data yet",
+      "subtitle": "Start de-identifying your clinical data to see analytics, charts, and insights here",
+      "button": "Start De-Identifying"
+    },
+    "charts": {
+      "processingStatus": "Processing Status",
+      "dataDistribution": "Data Distribution",
+      "complianceFramework": "Compliance Framework Usage",
+      "deIdentificationMethod": "De-Identification Method Usage",
+      "placeholder": "Chart data will appear here"
+    }
   }
 }
