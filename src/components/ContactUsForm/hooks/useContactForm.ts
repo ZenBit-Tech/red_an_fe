@@ -42,8 +42,6 @@ export const useContactForm = () => {
       } else if (message.includes(ApiError.Server)) {
         translationKey = "errors.server";
       }
-
-      // алерт з перекладом
       alert(t(translationKey));
     }
   };
