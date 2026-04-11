@@ -1,19 +1,17 @@
-import { useTranslation } from "react-i18next";
-import { ArrowUpRight } from "lucide-react";
-import { Container, Typography } from "@mui/material";
-import { HERO_STATS_KEYS } from "@/constants";
-import { IconWrapper } from "@/common/IconWrapper";
+import { Trans, useTranslation } from "react-i18next";
+import { Container } from "@mui/material";
 import {
-  BadgeTextWrapper,
-  BadgeWrapper,
-  BoxArrowUpRight,
+  BadgeText,
+  ComplianceBadge,
+  BadgeIconWrapper,
   Description,
   GetStartedButton,
   HeroContent,
   HeroSection,
   HeroTitle,
-  StatItem,
-  StatsList,
+  HeroText,
+  BadgesList,
+  GradientText,
 } from "./styles";
 
 const Hero = () => {
@@ -23,49 +21,55 @@ const Hero = () => {
     <HeroSection>
       <Container>
         <HeroContent>
-          <BadgeWrapper>
-            <IconWrapper>
-              <svg>
-                <use href={`/capabilities/icons.svg#pii`} />
-              </svg>
-            </IconWrapper>
-            <BadgeTextWrapper>
-              <Typography variant="fontSize16Semibold" sx={{ fontWeight: 600 }}>
-                {t("hero.badge.title")}
-              </Typography>
-              <Typography variant="fontSize16" color="text.secondary">
-                {t("hero.badge.subtitle")}
-              </Typography>
-            </BadgeTextWrapper>
-          </BadgeWrapper>
+          <HeroText>
+            <BadgesList>
+              <ComplianceBadge>
+                <BadgeIconWrapper>
+                  <svg>
+                    <use href="/hero/icons.svg#hippa-compliant" />
+                  </svg>
+                </BadgeIconWrapper>
+                <BadgeText>
+                  {t("hero.stats.hipaa.value")} {t("hero.stats.hipaa.label")}
+                </BadgeText>
+              </ComplianceBadge>
+              <ComplianceBadge>
+                <BadgeIconWrapper>
+                  <svg>
+                    <use href="/hero/icons.svg#gdpr-certified" />
+                  </svg>
+                </BadgeIconWrapper>
+                <BadgeText>
+                  {t("hero.stats.gdpr.value")} {t("hero.stats.gdpr.label")}
+                </BadgeText>
+              </ComplianceBadge>
+              <ComplianceBadge>
+                <BadgeIconWrapper>
+                  <svg>
+                    <use href="/hero/icons.svg#accuracy" />
+                  </svg>
+                </BadgeIconWrapper>
+                <BadgeText>
+                  {t("hero.stats.accuracy.value")}{" "}
+                  {t("hero.stats.accuracy.label")}
+                </BadgeText>
+              </ComplianceBadge>
+            </BadgesList>
 
-          <HeroTitle variant="fontSize64">{t("hero.mainTitle")}</HeroTitle>
-          <Description variant="fontSize16">
-            {t("hero.description")}
-          </Description>
+            <HeroTitle>
+              <Trans
+                i18nKey="hero.mainTitle"
+                components={{
+                  br: <br />,
+                  gradient: <GradientText />,
+                }}
+              />
+            </HeroTitle>
 
-          <GetStartedButton variant="contained" disableElevation>
-            {t("hero.cta.getStarted")}
-            <BoxArrowUpRight>
-              <ArrowUpRight />
-            </BoxArrowUpRight>
-          </GetStartedButton>
+            <Description>{t("hero.description")}</Description>
 
-          <StatsList>
-            {HERO_STATS_KEYS.map((statKey) => (
-              <StatItem key={statKey}>
-                <Typography
-                  variant="fontSize38"
-                  sx={{ fontWeight: 500, fontSize: "32px" }}
-                >
-                  {t(`hero.stats.${statKey}.value`)}
-                </Typography>
-                <Typography variant="fontSize16" color="text.secondary">
-                  {t(`hero.stats.${statKey}.label`)}
-                </Typography>
-              </StatItem>
-            ))}
-          </StatsList>
+            <GetStartedButton>{t("hero.cta.getStarted")}</GetStartedButton>
+          </HeroText>
         </HeroContent>
       </Container>
     </HeroSection>

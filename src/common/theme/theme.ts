@@ -1,37 +1,31 @@
 import { createTheme } from "@mui/material/styles";
-import type { CSSProperties } from "react";
 
 declare module "@mui/material/styles" {
   interface TypographyVariants {
-    fontSize64?: CSSProperties;
-    fontSize56?: CSSProperties;
-    fontSize38?: CSSProperties;
-    fontSize18Bold?: CSSProperties;
-    fontSize16Semibold?: CSSProperties;
-    fontSize16?: CSSProperties;
-    fontSize14Bold?: CSSProperties;
+    fontSize14: number;
+    fontSize16: number;
+    fontSize38: number;
+    fontSize64: number;
+    fontWeight400: number;
+    fontWeight500: number;
+    fontWeight600: number;
+    fontWeight700: number;
   }
 
   interface TypographyVariantsOptions {
-    fontSize64?: CSSProperties;
-    fontSize56?: CSSProperties;
-    fontSize38?: CSSProperties;
-    fontSize18Bold?: CSSProperties;
-    fontSize16Semibold?: CSSProperties;
-    fontSize16?: CSSProperties;
-    fontSize14Bold?: CSSProperties;
+    fontSize14?: number;
+    fontSize16?: number;
+    fontSize38?: number;
+    fontSize64?: number;
+    fontWeight400?: number;
+    fontWeight500?: number;
+    fontWeight600?: number;
+    fontWeight700?: number;
   }
 }
 
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
-    fontSize64: true;
-    fontSize56: true;
-    fontSize38: true;
-    fontSize18Bold: true;
-    fontSize16Semibold: true;
-    fontSize14Bold: true;
-    fontSize16: true;
     h1: false;
     h2: false;
     h3: false;
@@ -90,14 +84,10 @@ export const theme = createTheme({
     fontSize64: {
       fontWeight: 400,
       fontSize: "64px",
-      lineHeight: 1.08,
-      letterSpacing: "-0.02em",
     },
     fontSize56: {
       fontWeight: 400,
       fontSize: "56px",
-      lineHeight: 1.09,
-      letterSpacing: "-0.02em",
     },
     fontSize38: { fontWeight: 400, fontSize: "38px", lineHeight: 1.16 },
     fontSize18Bold: { fontWeight: 700, fontSize: "18px", lineHeight: 1.5 },
@@ -111,10 +101,8 @@ export const theme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
-        html: { width: "100%", height: "100%" },
-        body: { width: "100%", minHeight: "100%", margin: 0 },
+        "html, body": { width: "100%", height: "100%" },
         "#root": { width: "100%", minHeight: "100vh" },
-        "*": { boxSizing: "border-box" },
       },
     },
     MuiContainer: {
@@ -143,13 +131,14 @@ export const theme = createTheme({
       },
     },
     MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+      },
       styleOverrides: {
         root: {
           borderRadius: 14,
           textTransform: "none",
           fontWeight: 600,
-          boxShadow: "none",
-          "&:hover": { boxShadow: "none" },
         },
       },
     },
@@ -170,6 +159,11 @@ export const theme = createTheme({
       defaultProps: { disableGutters: true },
       styleOverrides: {
         root: { minHeight: "48px !important", justifyContent: "space-between" },
+      },
+    },
+    MuiLink: {
+      defaultProps: {
+        underline: "none",
       },
     },
   },

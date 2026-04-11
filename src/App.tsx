@@ -5,7 +5,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import { store } from "./store";
 import { router } from "./router";
-import { theme } from "@/common/theme/theme";
+// import { theme } from "@/common/theme/theme";
+import { theme } from "@/common/theme/newTheme";
 
 function App() {
   return (

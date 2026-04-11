@@ -1,4 +1,9 @@
-export const NAV_LINKS = ["Solution", "About Us", "Contact Us"];
+export const NAV_LINKS = [
+  "Solution",
+  "About Us",
+  "Subscription plan",
+  "Contact Us",
+];
 
 // capabilities section
 export const CARDS_DATA = [
@@ -32,8 +37,7 @@ export const CARDS_DATA = [
   },
 ];
 
-// Hero section
-export const HERO_STATS_KEYS = ["hipaa", "gdpr", "accuracy"];
+export const GRADIENT_ANGLE = "167deg";
 
 // Compliance section
 export const COMPLIANCE_CARDS_DATA = [

@@ -4,7 +4,6 @@ import { Box } from "@mui/material";
 export const CapabilitiesSection = styled("section")(({ theme }) => ({
   backgroundColor: theme.palette.grey[50],
   padding: theme.spacing(20, 0),
-  width: "100%",
 }));
 
 export const TitleSectionBlock = styled(Box)(({ theme }) => ({
@@ -22,7 +21,6 @@ export const CardsList = styled(Box)(({ theme }) => ({
   "& > *": {
     flex: "1 1 calc(50% - 10px)",
     minWidth: 0,
-    boxSizing: "border-box",
     [theme.breakpoints.down("md")]: {
       flex: "1 1 100%",
     },
@@ -37,5 +35,4 @@ export const CardItem = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(4),
   border: `1px solid ${theme.palette.grey[200]}`,
-  boxShadow: "none",
 }));

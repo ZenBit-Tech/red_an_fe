@@ -4,7 +4,6 @@ import { Box } from "@mui/material";
 export const ComplianceSection = styled("section")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   padding: theme.spacing(20, 0),
-  width: "100%",
 }));
 
 export const HeaderBlock = styled(Box)(({ theme }) => ({
@@ -53,7 +52,6 @@ export const Badge = styled(Box, {
   borderRadius: theme.spacing(2),
   fontWeight: 700,
   fontSize: "12px",
-  fontFamily: theme.typography.fontFamily,
   marginBottom: theme.spacing(6),
 }));
 

@@ -83,8 +83,8 @@
       "title": "Clinical Data Studio",
       "subtitle": "De-ID & Synthesis"
     },
-    "mainTitle": "Clinical Data De-Identification & Synthetic Data Studio",
-    "description": "Enterprise-grade PII detection and anonymization for healthcare data",
+    "mainTitle": "Clinical Data <br/> <gradient>Anonymisation</gradient> <br/> Studio",
+    "description": "Enterprise-grade PII detection and synthetic data generation for high-precision healthcare research and compliance operations.",
     "cta": {
       "getStarted": "Get Started"
     },

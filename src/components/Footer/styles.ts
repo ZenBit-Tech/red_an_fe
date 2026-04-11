@@ -6,13 +6,7 @@ export const Footer = styled("footer")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   padding: theme.spacing(16, 0, 8, 0),
   borderTop: `1px solid ${theme.palette.grey[200]}`,
-  width: "100%",
   marginBottom: theme.spacing(16),
-  gap: theme.spacing(8),
-
-  [theme.breakpoints.down("md")]: {
-    flexDirection: "column",
-  },
 }));
 
 export const FooterTop = styled(Box)(({ theme }) => ({
