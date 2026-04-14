@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-import { Box, Container, IconButton, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
 export const FooterContainer = styled(Container)(({ theme }) => ({
   display: "flex",
@@ -15,7 +15,7 @@ export const FooterContainer = styled(Container)(({ theme }) => ({
     gap: theme.spacing(58),
     flexDirection: "row",
   },
-})) as typeof Container;
+}));
 
 export const FooterBrand = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -29,7 +29,8 @@ export const FooterBrand = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const FooterDescription = styled(Typography)(({ theme }) => ({
+export const FooterDescription = styled("p")(({ theme }) => ({
+  margin: 0,
   fontSize: theme.typography.fontSize12,
   fontWeight: theme.typography.fontWeight400,
   color: theme.palette.textColors[200],
@@ -44,11 +45,12 @@ export const FooterSection = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(2),
   [theme.breakpoints.up("md")]: {
-    minWidth: 140,
+    minWidth: "fit-content",
   },
 }));
 
-export const FooterSectionTitle = styled(Typography)(({ theme }) => ({
+export const FooterSectionTitle = styled("p")(({ theme }) => ({
+  margin: 0,
   fontSize: theme.typography.fontSize12,
   fontWeight: theme.typography.fontWeight600,
   color: theme.palette.textColors[50],
@@ -60,7 +62,7 @@ export const FooterSectionTitle = styled(Typography)(({ theme }) => ({
   },
 }));
 
-export const FooterLink = styled(NavLink)(({ theme }) => ({
+export const FooterLink = styled(Link)(({ theme }) => ({
   textDecoration: "none",
   fontSize: theme.typography.fontSize12,
   fontWeight: theme.typography.fontWeight400,
@@ -83,17 +85,23 @@ export const SocialLinks = styled(Box)(({ theme }) => ({
   gap: theme.spacing(2),
 }));
 
-export const SocialIconButton = styled(IconButton)(({ theme }) => ({
+export const SocialIconButton = styled("a")(({ theme }) => ({
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
   width: 36,
   height: 36,
   borderRadius: theme.spacing(2),
   backgroundColor: theme.palette.neutralColors[800],
   color: theme.palette.textColors[200],
   transition: "background-color 0.2s ease-in-out, color 0.2s ease-in-out",
+  cursor: "pointer",
+  textDecoration: "none",
+  flexShrink: 0,
+  fontSize: 16,
 
-  "& svg": {
-    width: 16,
-    height: 16,
+  "& .MuiSvgIcon-root": {
+    fontSize: 16,
   },
 
   "&:hover": {
@@ -102,12 +110,8 @@ export const SocialIconButton = styled(IconButton)(({ theme }) => ({
   },
 
   [theme.breakpoints.up("md")]: {
-    width: 36,
-    height: 36,
-
-    "& svg": {
-      width: 18,
-      height: 18,
+    "& .MuiSvgIcon-root": {
+      fontSize: 18,
     },
   },
-})) as typeof IconButton;
+}));

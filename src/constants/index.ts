@@ -71,7 +71,6 @@ export const BADGES = [
   { id: "accuracy", iconId: "accuracy" },
 ];
 
-// Compliance section
 export const COMPLIANCE_CARDS_DATA = [
   { id: "hipaa", color: "#3b82f6" },
   { id: "gdpr", color: "#10b981" },

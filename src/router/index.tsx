@@ -24,8 +24,6 @@ export const router = createBrowserRouter([
           </div>
         ),
       },
-      // { path: "/success", element: <YourPlan success /> },
-      // { path: "/reject", element: <YourPlan reject /> },
     ],
   },
 ]);

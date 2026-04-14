@@ -1,12 +1,10 @@
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
-// import { theme } from "@/common/themes/theme";
 import { CssBaseline } from "@mui/material";
 import { store } from "./store";
 import { router } from "./router";
-// import { theme } from "@/common/theme/theme";
-import { theme } from "@/common/theme/newTheme";
+import { theme } from "@/common/theme/theme";
 
 function App() {
   return (
