@@ -1,16 +1,35 @@
-import { GRADIENT_ANGLE } from "@/constants";
 import { createTheme } from "@mui/material/styles";
+import {
+  primaryColors,
+  secondaryColors,
+  neutralColors,
+  textColors,
+  tertiaryColors,
+  strokeColors,
+  backgroundColor,
+} from "@/constants/themeConstants";
+
+type PrimaryColorsType = typeof primaryColors;
+type SecondaryColorsType = typeof secondaryColors;
+type NeutralColorsType = typeof neutralColors;
+type TextColorsType = typeof textColors;
+type TertiaryColorsType = typeof tertiaryColors;
+type StrokeColorsType = typeof strokeColors;
 
 declare module "@mui/material/styles" {
   interface TypographyVariants {
+    secondFamily: string;
     fontSize10: number;
+    fontSize12: number;
     fontSize14: number;
     fontSize16: number;
     fontSize18: number;
     fontSize20: number;
+    fontSize26: number;
     fontSize32: number;
     fontSize36: number;
     fontSize38: number;
+    fontSize48: number;
     fontSize64: number;
     fontSize72: number;
     fontWeight300: number;
@@ -22,14 +41,18 @@ declare module "@mui/material/styles" {
   }
 
   interface TypographyVariantsOptions {
+    secondFamily?: string;
     fontSize10?: number;
+    fontSize12?: number;
     fontSize14?: number;
     fontSize16?: number;
     fontSize18?: number;
     fontSize20?: number;
+    fontSize26?: number;
     fontSize32?: number;
     fontSize36?: number;
     fontSize38?: number;
+    fontSize48?: number;
     fontSize64?: number;
     fontSize72?: number;
     fontWeight300?: number;
@@ -41,127 +64,22 @@ declare module "@mui/material/styles" {
   }
 
   interface Palette {
-    // dark: { 100: string; 200: string; 300: string; 600: string };
-    // gray: {
-    //   300: string;
-    //   400: string;
-    //   500: string;
-    //   600: string;
-    //   700: string;
-    //   800: string;
-    // };
-    // blue: { 50: string; 500: string; 600: string; 700: string; 900: string };
-    // white: { 50: string; 400: string; 500: string; 600: string; 700: string };
-    // red: { 500: string };
-
-    primaryColors: {
-      50: string;
-      100: string;
-      200: string;
-      300: string;
-      400: string;
-      500: string;
-      600: string;
-      700: string;
-      800: string;
-      900: string;
-    };
-    secondaryColors: {
-      50: string;
-      100: string;
-      200: string;
-      300: string;
-      400: string;
-      500: string;
-      600: string;
-      700: string;
-      800: string;
-      900: string;
-      950: string;
-    };
-    neutralColors: {
-      50: string;
-      100: string;
-      200: string;
-      300: string;
-      400: string;
-      500: string;
-      600: string;
-      700: string;
-      800: string;
-      900: string;
-    };
-    textColors: {
-      50: string;
-      100: string;
-      200: string;
-      300: string;
-      400: string;
-    };
-    tertiaryColors: { 500: string };
-    strokeColors: { 120: string; 150: string; 400: string; 500: string };
+    primaryColors: PrimaryColorsType;
+    secondaryColors: SecondaryColorsType;
+    neutralColors: NeutralColorsType;
+    textColors: TextColorsType;
+    tertiaryColors: TertiaryColorsType;
+    strokeColors: StrokeColorsType;
     backgroundColor: string;
   }
-  interface PaletteOptions {
-    // dark?: { 100: string; 200: string; 300: string; 600: string };
-    // gray?: {
-    //   300: string;
-    //   400: string;
-    //   500: string;
-    //   600: string;
-    //   700: string;
-    //   800: string;
-    // };
-    // blue?: { 50: string; 500: string; 600: string; 700: string; 900: string };
-    // white?: { 50: string; 400: string; 500: string; 600: string; 700: string };
-    // red?: { 500: string };
 
-    primaryColors?: {
-      50: string;
-      100: string;
-      200: string;
-      300: string;
-      400: string;
-      500: string;
-      600: string;
-      700: string;
-      800: string;
-      900: string;
-    };
-    secondaryColors?: {
-      50: string;
-      100: string;
-      200: string;
-      300: string;
-      400: string;
-      500: string;
-      600: string;
-      700: string;
-      800: string;
-      900: string;
-      950: string;
-    };
-    neutralColors?: {
-      50: string;
-      100: string;
-      200: string;
-      300: string;
-      400: string;
-      500: string;
-      600: string;
-      700: string;
-      800: string;
-      900: string;
-    };
-    textColors?: {
-      50: string;
-      100: string;
-      200: string;
-      300: string;
-      400: string;
-    };
-    tertiaryColors?: { 500: string };
-    strokeColors?: { 120: string; 150: string; 400: string; 500: string };
+  interface PaletteOptions {
+    primaryColors?: PrimaryColorsType;
+    secondaryColors?: SecondaryColorsType;
+    neutralColors?: NeutralColorsType;
+    textColors?: TextColorsType;
+    tertiaryColors?: TertiaryColorsType;
+    strokeColors?: StrokeColorsType;
     backgroundColor?: string;
   }
 }
@@ -179,94 +97,6 @@ declare module "@mui/material/Typography" {
   }
 }
 
-const gray = {
-  300: "#94A3B8",
-  400: "#64748B",
-  500: "#475569",
-  600: "#334155",
-  700: "#1E293B",
-  800: "#0F172A",
-};
-
-// const blue = {
-//   50: "#b0c6ff",
-
-//   500: "#3778dd",
-//   600: "#2563eb",
-//   700: "#0d47a1",
-//   900: "#002d6f",
-// };
-// const white = {
-//   50: "#fff",
-//   400: "#c3c6d4",
-//   500: "#dae2fd",
-//   600: "#dae2fd",
-//   700: "#d2d3d6",
-// };
-// const red = { 500: "#d32f2f" };
-// const dark = { 100: "#060e20", 200: "#0b1326", 300: "#131b2e", 600: "#2d3449" };
-
-const primaryColors = {
-  50: "#dae2fd",
-  100: "#c5d9fa",
-  200: "#b0c6ff", // Аналог старого blue[50]
-  300: "#a2c3f7",
-  400: "#3b82ef",
-  500: "#2563eb", // Аналог старого blue[500] и blue[600]
-  600: "#105bd0",
-  700: "#0d47a1", // Аналог старого blue[700]
-  800: "#0b3d8b",
-  900: "#051f46", // Аналог старого blue[900]
-};
-
-const secondaryColors = {
-  50: "#eff0ff",
-  100: "#d9e2ff",
-  200: "#9cabd3",
-  300: "#8290b7",
-  400: "#68769c",
-  500: "#4f5e82",
-  600: "#38466a",
-  700: "#213051",
-  800: "#091a3b",
-  900: "#060e20", // Аналог старого dark[100]
-  950: "#000818",
-};
-
-const neutralColors = {
-  50: "#eff0ff",
-  100: "#dbe2fd",
-  200: "#d9d9d9",
-  300: "#8a90a8",
-  400: "#70778e",
-  500: "#575e74",
-  600: "#40465c",
-  700: "#2d3449",
-  800: "#222a3d",
-  900: "#131b2e", // Аналог старого dark[300]
-};
-
-const textColors = {
-  50: "#ffffff", // Добавлен из старого white[50] для текста кнопок
-  100: "#c4c6d4",
-  200: "#c3c6d4",
-  300: "#bbc6c5",
-  400: "#b2c5ff",
-};
-
-const tertiaryColors = {
-  500: "#ef4444", // Замена старого red[500]
-};
-
-const strokeColors = {
-  120: "rgba(175, 198, 255, 0.12)",
-  150: "rgba(67, 70, 82, 0.15)",
-  400: "rgba(51, 63, 90, 0.4)",
-  500: "rgba(67, 70, 82, 0.5)",
-};
-
-const backgroundColor = "#0b1326"; // Аналог старого dark[200]
-
 export const theme = createTheme({
   breakpoints: {
     values: { xs: 0, sm: 375, md: 787, lg: 1440, xl: 1920 },
@@ -283,33 +113,28 @@ export const theme = createTheme({
     },
     error: { main: tertiaryColors[500] },
 
-    /* Закомментированы старые объекты в палитре
-    gray: gray,
-    dark: dark,
-    blue: blue,
-    white: white,
-    red: red,
-    */
-
-    // Новые объекты палитры
-    primaryColors: primaryColors,
-    secondaryColors: secondaryColors,
-    neutralColors: neutralColors,
-    textColors: textColors,
-    tertiaryColors: tertiaryColors,
-    strokeColors: strokeColors,
-    backgroundColor: backgroundColor,
+    primaryColors,
+    secondaryColors,
+    neutralColors,
+    textColors,
+    tertiaryColors,
+    strokeColors,
+    backgroundColor,
   },
   typography: {
     fontFamily: `"Manrope", sans-serif`,
+    secondFamily: `"Roboto", sans-serif`,
     fontSize10: 10,
+    fontSize12: 12,
     fontSize14: 14,
     fontSize16: 16,
     fontSize18: 18,
     fontSize20: 20,
+    fontSize26: 26,
     fontSize32: 32,
     fontSize36: 36,
     fontSize38: 38,
+    fontSize48: 48,
     fontSize64: 64,
     fontSize72: 72,
     fontWeight300: 300,
@@ -336,7 +161,9 @@ export const theme = createTheme({
           maxWidth: 1280,
           margin: "0 auto",
           padding: theme.spacing(0, 6),
-          "@media (min-width:1440px)": { padding: theme.spacing(0, 8) },
+          [theme.breakpoints.up("lg")]: {
+            padding: theme.spacing(0, 8),
+          },
         }),
       },
     },
@@ -348,40 +175,23 @@ export const theme = createTheme({
       styleOverrides: {
         root: ({ theme }) => ({
           borderRadius: theme.spacing(2),
-          padding: theme.spacing(4, 8),
-          height: 52,
+          padding: theme.spacing(2, 4),
           textTransform: "none",
-          fontWeight: theme.typography.fontWeight800,
-          fontSize: theme.typography.fontSize16,
-          color: theme.palette.white[50],
-          background: `linear-gradient(161deg, ${blue[50]} 0%, ${blue[700]} 100%)`,
-          whiteSpace: "nowrap",
+          fontWeight: theme.typography.fontWeight700,
+          fontSize: theme.typography.fontSize14,
+          color: theme.palette.textColors[50],
+          backgroundImage: `linear-gradient(161deg, ${primaryColors[200]} 0%, ${primaryColors[700]} 100%)`,
+          flexShrink: 0,
           "&:hover": {
-            background: `linear-gradient(167deg, ${blue[500]} 28.37%, ${blue[900]} 100%)`,
+            backgroundImage: `linear-gradient(167deg, ${primaryColors[500]} 28.37%, ${primaryColors[900]} 100%)`,
+          },
+          [theme.breakpoints.up("md")]: {
+            padding: theme.spacing(3, 5),
+            fontSize: theme.typography.fontSize16,
           },
         }),
       },
     },
     MuiTextField: { defaultProps: { fullWidth: true } },
-    MuiAppBar: {
-      defaultProps: { elevation: 0, position: "static" },
-      styleOverrides: {
-        root: {
-          backgroundColor: dark[200],
-          backgroundImage: `linear-gradient(180deg, ${dark[300]} 0%, rgba(19, 27, 46, 0) 100%)`,
-        },
-      },
-    },
-    MuiToolbar: {
-      defaultProps: { disableGutters: true },
-      styleOverrides: {
-        root: { minHeight: 48, justifyContent: "space-between" },
-      },
-    },
-    MuiLink: {
-      defaultProps: {
-        underline: "none",
-      },
-    },
   },
 });

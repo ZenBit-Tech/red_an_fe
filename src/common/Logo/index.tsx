@@ -4,9 +4,5 @@ import { LogoWrapper } from "./styles";
 export const Logo = () => {
   const { t } = useTranslation();
 
-  return (
-    <LogoWrapper to="/">
-      <span>{t("hero.badge.title")}</span>
-    </LogoWrapper>
-  );
+  return <LogoWrapper to="/">{t("hero.badge.title")}</LogoWrapper>;
 };

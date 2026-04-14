@@ -1,98 +1,68 @@
-import { useTranslation } from "react-i18next";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import TwitterIcon from "@mui/icons-material/Twitter";
 import { Logo } from "@/common/Logo";
-import { Container, Typography } from "@mui/material";
+import { COMPANY_LINKS, SOCIAL_LINKS } from "@/constants/index";
 import {
-  FOOTER_COMPANY_LINKS,
-  FOOTER_PRODUCT_LINKS,
-  FOOTER_RESOURCES_LINKS,
-  FOOTER_SOCIAL_LINKS,
-} from "@/constants";
-import {
-  Footer,
-  DescriptionText,
-  SocialWrapper,
-  SocialIcon,
-  FooterHeader,
-  ColumnsWrapper,
-  ColumnList,
-  ColumnTitle,
-  ExternalLink,
-  ApiButton,
-  InternalLink,
-  FooterTop,
+  FooterBrand,
+  FooterContainer,
+  FooterDescription,
+  FooterLink,
+  FooterSection,
+  FooterSectionTitle,
+  SocialIconButton,
+  SocialLinks,
 } from "./styles";
 
-export const FooterSection = () => {
-  const { t } = useTranslation();
-  return (
-    <Footer>
-      <Container>
-        <FooterTop>
-          <FooterHeader>
-            <Logo />
-            <DescriptionText variant="fontSize16" color="text.secondary">
-              {t("footer.description")}
-            </DescriptionText>
-            <SocialWrapper>
-              {FOOTER_SOCIAL_LINKS.map((social) => (
-                <SocialIcon
-                  key={social.id}
-                  href={`https://${social.id}.com`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.id}
-                >
-                  <svg>
-                    <use href={`/social/icons.svg${social.iconId}`} />
-                  </svg>
-                </SocialIcon>
-              ))}
-            </SocialWrapper>
-          </FooterHeader>
-          <ColumnsWrapper>
-            <ColumnList>
-              <ColumnTitle variant="fontSize14Bold">
-                {t("footer.columns.product")}
-              </ColumnTitle>
-              {FOOTER_PRODUCT_LINKS.map((link) => (
-                <ApiButton key={link.id} onClick={() => null}>
-                  {t(`footer.links.${link.key}`)}
-                </ApiButton>
-              ))}
-            </ColumnList>
-            <ColumnList>
-              <ColumnTitle variant="fontSize14Bold">
-                {t("footer.columns.resources")}
-              </ColumnTitle>
-              {FOOTER_RESOURCES_LINKS.map((link) => (
-                <ExternalLink
-                  key={link.id}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {t(`footer.links.${link.key}`)}
-                </ExternalLink>
-              ))}
-            </ColumnList>
-            <ColumnList>
-              <ColumnTitle variant="fontSize14Bold">
-                {t("footer.columns.company")}
-              </ColumnTitle>
-              {FOOTER_COMPANY_LINKS.map((link) => (
-                <InternalLink key={link.id} to={link.path}>
-                  {t(`footer.links.${link.key}`)}
-                </InternalLink>
-              ))}
-            </ColumnList>
-          </ColumnsWrapper>
-        </FooterTop>
+const ICONS: Record<string, typeof TwitterIcon> = {
+  twitter: TwitterIcon,
+  linkedin: LinkedInIcon,
+  github: GitHubIcon,
+  instagram: InstagramIcon,
+};
 
-        <Typography variant="fontSize16" color="text.secondary" align="center">
-          © {new Date().getFullYear()} Clinical Data Studio. All rights
-          reserved.
-        </Typography>
-      </Container>
-    </Footer>
+const Footer = () => {
+  return (
+    <FooterContainer>
+      <FooterBrand>
+        <Logo />
+        <FooterDescription>
+          Enterprise-grade clinical data anonymization and synthetic data
+          generation.
+        </FooterDescription>
+      </FooterBrand>
+
+      <FooterSection>
+        <FooterSectionTitle>Company</FooterSectionTitle>
+        {COMPANY_LINKS.map(({ label, to }) => (
+          <FooterLink key={to} to={to}>
+            {label}
+          </FooterLink>
+        ))}
+      </FooterSection>
+
+      <FooterSection>
+        <FooterSectionTitle>Follow Us</FooterSectionTitle>
+        <SocialLinks>
+          {SOCIAL_LINKS.map(({ id, href, label }) => {
+            const Icon = ICONS[id];
+            return (
+              <SocialIconButton
+                key={id}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+              >
+                <Icon />
+              </SocialIconButton>
+            );
+          })}
+        </SocialLinks>
+      </FooterSection>
+    </FooterContainer>
   );
 };
+
+export default Footer;

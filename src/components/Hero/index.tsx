@@ -12,48 +12,33 @@ import {
   HeroText,
   BadgesList,
   GradientText,
+  HeroGlow,
 } from "./styles";
+import { BADGES } from "@/constants";
 
 const Hero = () => {
   const { t } = useTranslation();
 
   return (
     <HeroSection>
+      <HeroGlow />
       <Container>
         <HeroContent>
           <HeroText>
             <BadgesList>
-              <ComplianceBadge>
-                <BadgeIconWrapper>
-                  <svg>
-                    <use href="/hero/icons.svg#hippa-compliant" />
-                  </svg>
-                </BadgeIconWrapper>
-                <BadgeText>
-                  {t("hero.stats.hipaa.value")} {t("hero.stats.hipaa.label")}
-                </BadgeText>
-              </ComplianceBadge>
-              <ComplianceBadge>
-                <BadgeIconWrapper>
-                  <svg>
-                    <use href="/hero/icons.svg#gdpr-certified" />
-                  </svg>
-                </BadgeIconWrapper>
-                <BadgeText>
-                  {t("hero.stats.gdpr.value")} {t("hero.stats.gdpr.label")}
-                </BadgeText>
-              </ComplianceBadge>
-              <ComplianceBadge>
-                <BadgeIconWrapper>
-                  <svg>
-                    <use href="/hero/icons.svg#accuracy" />
-                  </svg>
-                </BadgeIconWrapper>
-                <BadgeText>
-                  {t("hero.stats.accuracy.value")}{" "}
-                  {t("hero.stats.accuracy.label")}
-                </BadgeText>
-              </ComplianceBadge>
+              {BADGES.map((badge) => (
+                <ComplianceBadge key={badge.id}>
+                  <BadgeIconWrapper>
+                    <svg>
+                      <use href={`/hero/icons.svg#${badge.iconId}`} />
+                    </svg>
+                  </BadgeIconWrapper>
+                  <BadgeText>
+                    {t(`hero.stats.${badge.id}.value`)}{" "}
+                    {t(`hero.stats.${badge.id}.label`)}
+                  </BadgeText>
+                </ComplianceBadge>
+              ))}
             </BadgesList>
 
             <HeroTitle>
@@ -65,11 +50,11 @@ const Hero = () => {
                 }}
               />
             </HeroTitle>
-
-            <Description>{t("hero.description")}</Description>
-
-            <GetStartedButton>{t("hero.cta.getStarted")}</GetStartedButton>
           </HeroText>
+
+          <Description>{t("hero.description")}</Description>
+
+          <GetStartedButton>{t("hero.cta.getStarted")}</GetStartedButton>
         </HeroContent>
       </Container>
     </HeroSection>

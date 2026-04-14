@@ -1,110 +1,113 @@
-import { Link as RouterLink } from "react-router-dom";
-import { styled, type Theme } from "@mui/material/styles";
-import { Box, Typography } from "@mui/material";
+import { NavLink } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import { Box, Container, IconButton, Typography } from "@mui/material";
 
-export const Footer = styled("footer")(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
-  padding: theme.spacing(16, 0, 8, 0),
-  borderTop: `1px solid ${theme.palette.grey[200]}`,
-  marginBottom: theme.spacing(16),
-}));
-
-export const FooterTop = styled(Box)(({ theme }) => ({
+export const FooterContainer = styled(Container)(({ theme }) => ({
   display: "flex",
-  marginBottom: theme.spacing(16),
-  gap: theme.spacing(10),
+  gap: theme.spacing(8),
+  flexDirection: "column",
+  padding: theme.spacing(8, 4),
+  alignItems: "center",
+  backgroundColor: theme.palette.secondaryColors[900],
 
-  [theme.breakpoints.down("md")]: {
-    flexDirection: "column",
+  [theme.breakpoints.up("md")]: {
+    padding: theme.spacing(38, 16),
+    gap: theme.spacing(58),
+    flexDirection: "row",
   },
-}));
+})) as typeof Container;
 
-export const FooterHeader = styled(Box)({
+export const FooterBrand = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  maxWidth: "500px",
-});
-
-export const DescriptionText = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.secondary,
-  marginTop: theme.spacing(6),
-  marginBottom: theme.spacing(6),
-}));
-
-export const SocialWrapper = styled(Box)(({ theme }) => ({
-  display: "flex",
-  gap: theme.spacing(3),
-}));
-
-export const SocialIcon = styled("a")(({ theme }) => ({
-  display: "flex",
   alignItems: "center",
-  justifyContent: "center",
-  width: "40px",
-  height: "40px",
-  backgroundColor: theme.palette.grey[50],
-  borderRadius: theme.spacing(2),
-  color: theme.palette.text.secondary,
-  transition: "all 0.2s ease",
+  gap: theme.spacing(0),
+
+  [theme.breakpoints.up("md")]: {
+    maxWidth: 400,
+    alignItems: "flex-start",
+  },
+}));
+
+export const FooterDescription = styled(Typography)(({ theme }) => ({
+  fontSize: theme.typography.fontSize12,
+  fontWeight: theme.typography.fontWeight400,
+  color: theme.palette.textColors[200],
+
+  [theme.breakpoints.up("md")]: {
+    fontSize: theme.typography.fontSize14,
+  },
+}));
+
+export const FooterSection = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(2),
+  [theme.breakpoints.up("md")]: {
+    minWidth: 140,
+  },
+}));
+
+export const FooterSectionTitle = styled(Typography)(({ theme }) => ({
+  fontSize: theme.typography.fontSize12,
+  fontWeight: theme.typography.fontWeight600,
+  color: theme.palette.textColors[50],
+  marginBottom: theme.spacing(2),
+  textAlign: "center",
+  [theme.breakpoints.up("md")]: {
+    fontSize: theme.typography.fontSize14,
+    textAlign: "start",
+  },
+}));
+
+export const FooterLink = styled(NavLink)(({ theme }) => ({
+  textDecoration: "none",
+  fontSize: theme.typography.fontSize12,
+  fontWeight: theme.typography.fontWeight400,
+  color: theme.palette.textColors[200],
+  transition: "color 0.2s ease-in-out",
+  textAlign: "center",
 
   "&:hover": {
-    backgroundColor: theme.palette.grey[200],
-    color: theme.palette.text.primary,
+    color: theme.palette.textColors[50],
   },
+
+  [theme.breakpoints.up("md")]: {
+    fontSize: theme.typography.fontSize14,
+    textAlign: "start",
+  },
+}));
+
+export const SocialLinks = styled(Box)(({ theme }) => ({
+  display: "flex",
+  gap: theme.spacing(2),
+}));
+
+export const SocialIconButton = styled(IconButton)(({ theme }) => ({
+  width: 36,
+  height: 36,
+  borderRadius: theme.spacing(2),
+  backgroundColor: theme.palette.neutralColors[800],
+  color: theme.palette.textColors[200],
+  transition: "background-color 0.2s ease-in-out, color 0.2s ease-in-out",
 
   "& svg": {
-    width: "20px",
-    height: "20px",
-    fill: "currentColor",
+    width: 16,
+    height: 16,
   },
-}));
-
-export const ColumnsWrapper = styled(Box)(({ theme }) => ({
-  display: "flex",
-  gap: theme.spacing(30),
-
-  [theme.breakpoints.down("sm")]: {
-    flexDirection: "column",
-    gap: theme.spacing(10),
-  },
-}));
-
-export const ColumnList = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(4),
-}));
-
-export const ColumnTitle = styled(Typography)(({ theme }) => ({
-  fontWeight: 600,
-  color: theme.palette.text.primary,
-  marginBottom: theme.spacing(2),
-}));
-
-const getBaseLinkStyles = (theme: Theme) => ({
-  color: theme.palette.text.secondary,
-  textDecoration: "none",
-  ...theme.typography.fontSize16,
-  transition: "color 0.2s ease",
-  textAlign: "left" as const,
-  background: "none",
-  border: "none",
-  padding: 0,
-  cursor: "pointer",
 
   "&:hover": {
-    color: theme.palette.primary.main,
+    backgroundColor: theme.palette.primaryColors[500],
+    color: theme.palette.textColors[50],
   },
-});
 
-export const ApiButton = styled("button")(({ theme }) =>
-  getBaseLinkStyles(theme),
-);
+  [theme.breakpoints.up("md")]: {
+    width: 36,
+    height: 36,
 
-export const ExternalLink = styled("a")(({ theme }) =>
-  getBaseLinkStyles(theme),
-);
-
-export const InternalLink = styled(RouterLink)(({ theme }) =>
-  getBaseLinkStyles(theme),
-);
+    "& svg": {
+      width: 18,
+      height: 18,
+    },
+  },
+})) as typeof IconButton;

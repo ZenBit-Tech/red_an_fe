@@ -1,5 +1,6 @@
+import { NavLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-import { Box, Button, Container, Link } from "@mui/material";
+import { Box, Button, Container } from "@mui/material";
 
 export const HeaderContainer = styled(Container)(({ theme }) => ({
   display: "flex",
@@ -7,39 +8,75 @@ export const HeaderContainer = styled(Container)(({ theme }) => ({
   justifyContent: "space-between",
   height: 72,
   width: "100%",
-  padding: "16px 32px",
+  padding: theme.spacing(4),
   marginBottom: 11,
+  gap: theme.spacing(4),
+  flexWrap: "nowrap",
+
+  backgroundColor: theme.palette.backgroundColor,
+  backgroundImage: `linear-gradient(180deg, ${theme.palette.neutralColors[900]} 0%, rgba(19, 27, 46, 0) 100%)`,
+
   [theme.breakpoints.up("md")]: {
-    padding: "16px 16px",
+    padding: theme.spacing(4, 8),
   },
 }));
 
-export const LinkHeader = styled(Link)(({ theme }) => ({
-  fontSize: theme.typography.fontSize16,
+export const LinkHeader = styled(NavLink)(({ theme }) => ({
+  textDecoration: "none",
+  whiteSpace: "nowrap",
+  fontSize: theme.typography.fontSize14,
   fontWeight: 600,
   opacity: 0.75,
   transition: "opacity 0.2s ease-in-out, color 0.2s ease-in-out",
-  color: theme.palette.white[400],
-  padding: "8px 16px",
+  color: theme.palette.textColors[200],
+  padding: theme.spacing(1, 2),
+
+  [theme.breakpoints.up("lg")]: {
+    fontSize: theme.typography.fontSize16,
+    padding: theme.spacing(2, 4),
+  },
+
   "&:hover": {
     opacity: 1,
-    color: theme.palette.blue[600],
+    color: theme.palette.textColors[400],
+  },
+  '&[aria-current="page"]': {
+    opacity: 1,
+    color: theme.palette.primaryColors[500],
     textDecoration: "underline",
-    textUnderlineOffset: 8,
+    textUnderlineOffset: theme.spacing(2),
   },
 }));
 
-export const LogoWrapper = styled(Box)({
-  display: "flex",
-  alignItems: "center",
-});
-
 export const SignButton = styled(Button)(({ theme }) => ({
-  width: 144,
-  height: 40,
-  fontSize: theme.typography.fontSize14,
-  fontWeght: theme.typography.fontWeight700,
-  gap: 16,
+  "& .MuiButton-endIcon": {
+    marginLeft: theme.spacing(1),
+    marginRight: 0,
+    "& svg": {
+      width: 10,
+      height: 10,
+    },
+  },
+  [theme.breakpoints.up("md")]: {
+    "& .MuiButton-endIcon": {
+      marginLeft: theme.spacing(2),
+
+      "& svg": {
+        width: 13,
+        height: 13,
+      },
+    },
+  },
 }));
 
-export const NavWrapper = styled(Box)({ display: "flex", gap: 6 });
+export const NavWrapper = styled(Box)(({ theme }) => ({
+  display: "flex",
+  gap: theme.spacing(1.5),
+  minWidth: 0,
+  justifyContent: "center",
+  flex: 1,
+  overflow: "hidden",
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
+}));

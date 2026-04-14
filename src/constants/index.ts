@@ -1,43 +1,75 @@
 export const NAV_LINKS = [
-  "Solution",
-  "About Us",
-  "Subscription plan",
-  "Contact Us",
+  { to: "/solution", label: "Solution" },
+  { to: "/about-us", label: "About Us" },
+  { to: "/subscription-plan", label: "Subscription plan" },
+  { to: "/contact-us", label: "Contact Us" },
 ];
 
-// capabilities section
+export const FEATURES = [
+  {
+    id: "advanced-pii",
+    titleKey: "advancedPii.title",
+    defaultTitle: "Advanced PII Detection",
+    descKey: "advancedPii.description",
+    defaultDesc:
+      "Context-aware identification of names, dates, and medical identifiers in clinical text.",
+    iconId: "#icon-pii",
+  },
+  {
+    id: "synthetic-data",
+    titleKey: "syntheticData.title",
+    defaultTitle: "Synthetic Data Generation",
+    descKey: "syntheticData.description",
+    defaultDesc:
+      "Statistically accurate synthetic cohorts that preserve the clinical utility of original data.",
+    iconId: "#icon-synthetic",
+  },
+];
+
 export const CARDS_DATA = [
   {
-    id: "pii",
-    iconId: "#pii",
-    titleKey: "cards.pii.title",
-    descKey: "cards.pii.description",
-    color: "#155dfc",
+    id: "multi-framework",
+    titleKey: "multiFramework.title",
+    defaultTitle: "Multi-Framework Compliance",
+    descKey: "multiFramework.description",
+    defaultDesc:
+      "Unified control plane for HIPAA, GDPR, and localized health data laws.",
+    iconId: "#icon-shield",
   },
   {
-    id: "synthetic",
-    iconId: "#synthetic",
-    titleKey: "cards.synthetic.title",
-    descKey: "cards.synthetic.description",
-    color: "#7f22fe",
+    id: "intelligent-anonymization",
+    titleKey: "intelligentAnonymization.title",
+    defaultTitle: "Intelligent Anonymization",
+    descKey: "intelligentAnonymization.description",
+    defaultDesc:
+      "Dynamic masking and tokenization strategies based on data sensitivity.",
+    iconId: "#icon-fingerprint",
   },
   {
-    id: "framework",
-    iconId: "#framework",
-    titleKey: "cards.framework.title",
-    descKey: "cards.framework.description",
-    color: "#096",
+    id: "api-integration",
+    titleKey: "apiIntegration.title",
+    defaultTitle: "API Integration",
+    descKey: "apiIntegration.description",
+    defaultDesc:
+      "Seamlessly integrate with EHRs and data lakes via high-throughput REST APIs.",
+    iconId: "#icon-api",
   },
   {
-    id: "anonymization",
-    iconId: "#ai-anonymization",
-    titleKey: "cards.anonymization.title",
-    descKey: "cards.anonymization.description",
-    color: "#e17100",
+    id: "developer-sdk",
+    titleKey: "developerSdk.title",
+    defaultTitle: "Developer SDK",
+    descKey: "developerSdk.description",
+    defaultDesc:
+      "Python and JavaScript SDKs for custom clinical data pipelines.",
+    iconId: "#icon-sdk",
   },
 ];
 
-export const GRADIENT_ANGLE = "167deg";
+export const BADGES = [
+  { id: "hipaa", iconId: "hippa-compliant" },
+  { id: "gdpr", iconId: "gdpr-certified" },
+  { id: "accuracy", iconId: "accuracy" },
+];
 
 // Compliance section
 export const COMPLIANCE_CARDS_DATA = [
@@ -47,34 +79,14 @@ export const COMPLIANCE_CARDS_DATA = [
   { id: "swissfadp", color: "#ef4444" },
 ];
 
-// Footer
-export const FOOTER_PRODUCT_LINKS = [
-  { id: "features", key: "features" },
-  { id: "pricing", key: "pricing" },
-  { id: "api", key: "api" },
-  { id: "integrations", key: "integrations" },
+export const SOCIAL_LINKS = [
+  { id: "twitter", href: "https://twitter.com", label: "Twitter" },
+  { id: "linkedin", href: "https://linkedin.com", label: "LinkedIn" },
+  { id: "github", href: "https://github.com", label: "GitHub" },
+  { id: "instagram", href: "https://instagram.com", label: "Instagram" },
 ];
 
-export const FOOTER_RESOURCES_LINKS = [
-  {
-    id: "documentation",
-    key: "documentation",
-    url: "https://docs.example.com",
-  },
-  { id: "guides", key: "guides", url: "https://guides.example.com" },
-  { id: "blog", key: "blog", url: "https://blog.example.com" },
-  { id: "support", key: "support", url: "https://support.example.com" },
-];
-
-export const FOOTER_COMPANY_LINKS = [
-  { id: "about", key: "about", path: "/about" },
-  { id: "careers", key: "careers", path: "/careers" },
-  { id: "contact", key: "contact", path: "/contact" },
-  { id: "legal", key: "legal", path: "/legal" },
-];
-
-export const FOOTER_SOCIAL_LINKS = [
-  { id: "twitter", iconId: "#twitter" },
-  { id: "linkedin", iconId: "#linkedin" },
-  { id: "github", iconId: "#github" },
+export const COMPANY_LINKS = [
+  { label: "Contact Us", to: "/contact" },
+  { label: "Subscription plan", to: "/subscription" },
 ];

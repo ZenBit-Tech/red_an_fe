@@ -1,20 +1,17 @@
 import { Outlet } from "react-router-dom";
 import Header from "../Header";
-import { FooterSection } from "../Footer";
+import Footer from "../Footer";
+import { LayoutWrapper, MainContent } from "./styles";
 
 export const Layout = () => {
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
-    >
+    <LayoutWrapper>
       <Header />
-
-      <main style={{ flexGrow: 1 }}>
+      <MainContent>
         <Outlet />
-      </main>
-
-      <FooterSection />
-    </div>
+      </MainContent>
+      <Footer />
+    </LayoutWrapper>
   );
 };
 

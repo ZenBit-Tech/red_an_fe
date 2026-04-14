@@ -1,12 +1,22 @@
 import { useTranslation } from "react-i18next";
-import { Container, Typography } from "@mui/material";
-import { CARDS_DATA } from "@/constants";
-import { IconWrapper } from "@/common/IconWrapper";
+import { Box, Container } from "@mui/material";
+import { CARDS_DATA, FEATURES } from "@/constants";
 import {
   CapabilitiesSection,
-  TitleSectionBlock,
-  CardsList,
-  CardItem,
+  ContentWrapper,
+  LeftContent,
+  LeftTextBlock,
+  Title,
+  Description,
+  FeaturesList,
+  FeatureItemBox,
+  RightGrid,
+  GridCard,
+  IconWrapper,
+  FeatureTextWrapper,
+  FeatureTitle,
+  CardTitle,
+  DescriptionMain,
 } from "./styles";
 
 export const Capabilities = () => {
@@ -15,35 +25,70 @@ export const Capabilities = () => {
   return (
     <CapabilitiesSection id="solution">
       <Container>
-        <TitleSectionBlock>
-          <Typography
-            variant="fontSize56"
-            sx={{ mb: 2, fontSize: "2rem", fontWeight: 700 }}
-          >
-            {t("capabilities.title")}
-          </Typography>
-          <Typography variant="fontSize16" color="text.secondary">
-            {t("capabilities.description")}
-          </Typography>
-        </TitleSectionBlock>
+        <ContentWrapper>
+          {/* Left Column */}
+          <LeftContent>
+            <LeftTextBlock>
+              <Title>
+                Protect Privacy Without Compromising{" "}
+                <Box component="span" sx={{ color: "primaryColors.200" }}>
+                  Value.
+                </Box>
+              </Title>
 
-        <CardsList>
-          {CARDS_DATA.map((card) => (
-            <CardItem key={card.id}>
-              <IconWrapper iconColor={card.color}>
-                <svg>
-                  <use href={`/capabilities/icons.svg${card.iconId}`} />
-                </svg>
-              </IconWrapper>
-              <Typography variant="fontSize18Bold" sx={{ fontWeight: 500 }}>
-                {t(`capabilities.${card.titleKey}`)}
-              </Typography>
-              <Typography variant="fontSize16" color="text.secondary">
-                {t(`capabilities.${card.descKey}`)}
-              </Typography>
-            </CardItem>
-          ))}
-        </CardsList>
+              <DescriptionMain>
+                Our platform uses advanced NLP models specifically trained on
+                clinical corpora to detect 100+ types of PHI and PII across
+                unstructured medical notes and structured records.
+              </DescriptionMain>
+            </LeftTextBlock>
+
+            <FeaturesList>
+              {FEATURES.map((feature) => (
+                <FeatureItemBox key={feature.id}>
+                  <IconWrapper>
+                    <svg>
+                      <use href={`/capabilities/icons.svg${feature.iconId}`} />
+                    </svg>
+                  </IconWrapper>
+                  <FeatureTextWrapper>
+                    <FeatureTitle>
+                      {t(
+                        `capabilities.${feature.titleKey}`,
+                        feature.defaultTitle,
+                      )}
+                    </FeatureTitle>
+                    <Description>
+                      {t(
+                        `capabilities.${feature.descKey}`,
+                        feature.defaultDesc,
+                      )}
+                    </Description>
+                  </FeatureTextWrapper>
+                </FeatureItemBox>
+              ))}
+            </FeaturesList>
+          </LeftContent>
+
+          {/* Right Column */}
+          <RightGrid>
+            {CARDS_DATA.map((card) => (
+              <GridCard key={card.id}>
+                <IconWrapper>
+                  <svg>
+                    <use href={`/capabilities/icons.svg${card.iconId}`} />
+                  </svg>
+                </IconWrapper>
+                <CardTitle>
+                  {t(`capabilities.${card.titleKey}`, card.defaultTitle)}
+                </CardTitle>
+                <Description>
+                  {t(`capabilities.${card.descKey}`, card.defaultDesc)}
+                </Description>
+              </GridCard>
+            ))}
+          </RightGrid>
+        </ContentWrapper>
       </Container>
     </CapabilitiesSection>
   );
