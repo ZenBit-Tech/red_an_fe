@@ -1,5 +1,5 @@
 import { Controller } from "react-hook-form";
-import { MuiTelInput } from "mui-tel-input";
+
 import { Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -20,17 +20,16 @@ export const ContactUsForm = () => {
 
         <S.FormWrapper>
           <S.ContactSidebar>
-            <MailOutlineIcon
-              sx={{
-                color: "primary.main",
-                fontSize: "24px",
-                marginBottom: 6,
-              }}
-            />
+            <S.IconWrapper>
+              <MailOutlineIcon />
+            </S.IconWrapper>
+
             <S.ContactLabel>{t("contactUs.sidebar.emailLabel")}</S.ContactLabel>
+
             <S.EmailLink href="mailto:info@clinicaldatastudio.com">
               info@clinicaldatastudio.com
             </S.EmailLink>
+
             <S.EmailLink href="mailto:support@clinicaldatastudio.com">
               support@clinicaldatastudio.com
             </S.EmailLink>
@@ -84,7 +83,7 @@ export const ContactUsForm = () => {
                     name="phone"
                     control={control}
                     render={({ field: { ref, ...fieldProps }, fieldState }) => (
-                      <MuiTelInput
+                      <S.StyledPhoneInput
                         {...fieldProps}
                         inputRef={ref}
                         label={t("contactUs.form.phone")}
@@ -93,6 +92,9 @@ export const ContactUsForm = () => {
                         defaultCountry="UA"
                         error={!!fieldState.error}
                         helperText={fieldState.error?.message}
+                        slotProps={{
+                          inputLabel: { shrink: true },
+                        }}
                       />
                     )}
                   />
@@ -113,13 +115,12 @@ export const ContactUsForm = () => {
                     helperText={errors.message?.message}
                   />
                 </Box>
-
-                <Box className="full-width">
-                  <S.SubmitButton variant="contained" type="submit">
-                    {t("contactUs.form.submit")}
-                  </S.SubmitButton>
-                </Box>
               </S.FormGrid>
+              <Box className="full-width">
+                <S.SubmitButton variant="contained" type="submit">
+                  {t("contactUs.form.submit")}
+                </S.SubmitButton>
+              </Box>
             </S.ContactForm>
           </S.ContactFormBox>
         </S.FormWrapper>
