@@ -1,73 +1,47 @@
-# React + TypeScript + Vite
+## Describe your changes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- I did an awesome feature.
 
-Currently, two official plugins are available:
+## Issue ticket code (and/or) and link
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- [Link to JIRA ticket](#https://ticket-url)
 
-## React Compiler
+### **General**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [ ] Assigned myself to the PR
+- [ ] Assigned the appropriate labels to the PR
+- [ ] Assigned the appropriate reviewers to the PR
+- [ ] Updated the documentation
+- [ ] Performed a self-review of my code
+- [ ] Types for input and output parameters
+- [ ] Don't have "any" on my code
+- [ ] Used the try/catch pattern for error handling
+- [ ] Don't have magic numbers
+- [ ] Compare only with constants not with strings
+- [ ] No ternary operator inside the ternary operator
+- [ ] Don't have commented code
+- [ ] no links in the code, env links should be in env file (for example: server url), constant links (for example default avatar URL) should be in constant file.
+- [ ] Used camelCase for variables and functions
+- [ ] Date and time formats are on the constants
+- [ ] Functions are public only if it's used outside the class
+- [ ] No hardcoded values
+- [ ] covered by tests
+- [ ] Check your commit messages meet the [conventional commit format](https://www.conventionalcommits.org/en/v1.0.0/).
 
-## Expanding the ESLint configuration
+### Frontend
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [ ] Components and business logic are separated
+- [ ] Colors, Font Size, and Font Name is on the theme or in the constants
+- [ ] No text in the components, use i18n approach
+- [ ] No inline styles
+- [ ] Imports are absolute
+- [ ] Attach a screenshot if PR has visual changes.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Backend
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- [ ] Swagger documentation updated
+- [ ] Database requests are optimized and not redundant
+- [ ] Unit tests written
+- [ ] use ConfigService instead of process.env
+- [ ] use transactions if there is a call chain that mutates data in different tables
+- [ ] use @index decorator for frequently requested data
