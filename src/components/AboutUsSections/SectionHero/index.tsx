@@ -1,13 +1,16 @@
-import { Container } from "@mui/material";
-import { SectionWrapper } from "./styles";
+import { useTranslation } from "react-i18next";
 import * as S from "./styles";
 
 export const SectionHero = () => {
+  const { t } = useTranslation();
   return (
-    <SectionWrapper>
-      <Container maxWidth="lg">
-        <S.SectionTitle component="h2">Section Hero</S.SectionTitle>
-      </Container>
-    </SectionWrapper>
+    <S.SectionWrapper>
+      <S.CustomContainer>
+        <S.SectionTitle>{t("aboutUs.hero.title")}</S.SectionTitle>
+        <S.SectionContentText>
+          {t("aboutUs.hero.textContent")}
+        </S.SectionContentText>
+      </S.CustomContainer>
+    </S.SectionWrapper>
   );
 };

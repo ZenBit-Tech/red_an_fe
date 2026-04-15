@@ -29,11 +29,11 @@ const baseTheme = createTheme({
       main: "#155DFC",
     },
     text: {
-      primary: "#101828",
-      secondary: "#667085",
+      primary: "#c4c6d4",
+      secondary: "#bbc6c5",
     },
     background: {
-      default: "#FFFFFF",
+      default: "#0b1326",
     },
     divider: "#EAECF0",
   },
@@ -70,7 +70,7 @@ const theme = createTheme(baseTheme, {
         body: {
           width: "100%",
           height: "100%",
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "#0b1326",
         },
       },
     },

@@ -169,5 +169,21 @@
     "server": "Server is temporarily unavailable. Try again later.",
     "unknown": "Something went wrong. Please try again.",
     "apiContext": "API Error [{{context}}]: {{message}}"
+  },
+
+  "aboutUs": {
+    "hero": {
+      "title": "About Us",
+      "textContent": "We're on a mission to make healthcare data secure, compliant, and accessible for research and innovation."
+    },
+    "ourMission": {
+      "title": "Our Mission",
+      "firstContentParagraph": "Clinical Data Studio was founded with a clear purpose: to bridge the gap between healthcare data privacy requirements and the need for accessible data in medical research and development.",
+      "secondContentParagraph": "We believe that protecting patient privacy shouldn't mean sacrificing the ability to leverage data for advancing healthcare outcomes. Our platform empowers organizations to confidently use clinical data while maintaining the highest standards of compliance and security."
+    },
+    "ourTeam": {
+      "title": "Our Team",
+      "textContent": "Meet the passionate individuals behind our de-identification platform, dedicated to advancing healthcare data privacy and utility."
+    }
   }
 }
