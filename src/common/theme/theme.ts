@@ -158,9 +158,12 @@ export const theme = createTheme({
       styleOverrides: {
         root: ({ theme }) => ({
           width: "100%",
-          maxWidth: 1280,
+          maxWidth: 1360,
           margin: "0 auto",
-          padding: theme.spacing(0, 6),
+          padding: theme.spacing(0, 4),
+          [theme.breakpoints.up("md")]: {
+            padding: theme.spacing(0, 6),
+          },
           [theme.breakpoints.up("lg")]: {
             padding: theme.spacing(0, 8),
           },

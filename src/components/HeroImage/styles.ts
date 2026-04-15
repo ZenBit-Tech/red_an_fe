@@ -13,12 +13,7 @@ export const ImageSection = styled("section")(({ theme }) => ({
 }));
 
 export const ImageWrapper = styled("div")({
-  display: "flex",
-  justifyContent: "center",
-  width: "100%",
   "& img": {
     width: "100%",
-    maxWidth: 1250,
-    height: "auto",
   },
 });

@@ -4,7 +4,10 @@ import { Box } from "@mui/material";
 export const CapabilitiesSection = styled("section")(({ theme }) => ({
   padding: theme.spacing(10, 4),
   [theme.breakpoints.up("md")]: {
-    padding: theme.spacing(22.5, 0),
+    padding: theme.spacing(22.5, 6),
+  },
+  [theme.breakpoints.up("lg")]: {
+    padding: theme.spacing(22.5, 8),
   },
 }));
 

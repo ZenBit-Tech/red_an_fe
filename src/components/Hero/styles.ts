@@ -30,7 +30,7 @@ export const HeroGlow = styled("div")({
 });
 
 export const HeroContent = styled("div")(({ theme }) => ({
-  maxWidth: 1280,
+  maxWidth: 1360,
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -41,6 +41,9 @@ export const HeroContent = styled("div")(({ theme }) => ({
   zIndex: 1,
   [theme.breakpoints.up("md")]: {
     gap: theme.spacing(8),
+    padding: theme.spacing(0, 6),
+  },
+  [theme.breakpoints.up("lg")]: {
     padding: theme.spacing(0, 8),
   },
 }));

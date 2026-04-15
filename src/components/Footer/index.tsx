@@ -11,6 +11,7 @@ import {
   FooterLink,
   FooterSection,
   FooterSectionTitle,
+  FooterWrapper,
   SocialIconButton,
   SocialLinks,
 } from "./styles";
@@ -24,44 +25,44 @@ const ICONS: Record<string, typeof TwitterIcon> = {
 
 const Footer = () => {
   return (
-    <FooterContainer>
-      <FooterBrand>
-        <Logo />
-        <FooterDescription>
-          Enterprise-grade clinical data anonymization and synthetic data
-          generation.
-        </FooterDescription>
-      </FooterBrand>
-
-      <FooterSection>
-        <FooterSectionTitle>Company</FooterSectionTitle>
-        {COMPANY_LINKS.map(({ label, to }) => (
-          <FooterLink key={to} to={to}>
-            {label}
-          </FooterLink>
-        ))}
-      </FooterSection>
-
-      <FooterSection>
-        <FooterSectionTitle>Follow Us</FooterSectionTitle>
-        <SocialLinks>
-          {SOCIAL_LINKS.map(({ id, href, label }) => {
-            const Icon = ICONS[id];
-            return (
-              <SocialIconButton
-                key={id}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-              >
-                <Icon />
-              </SocialIconButton>
-            );
-          })}
-        </SocialLinks>
-      </FooterSection>
-    </FooterContainer>
+    <FooterWrapper>
+      <FooterContainer>
+        <FooterBrand>
+          <Logo />
+          <FooterDescription>
+            Enterprise-grade clinical data anonymization and synthetic data
+            generation.
+          </FooterDescription>
+        </FooterBrand>
+        <FooterSection>
+          <FooterSectionTitle>Company</FooterSectionTitle>
+          {COMPANY_LINKS.map(({ label, to }) => (
+            <FooterLink key={to} to={to}>
+              {label}
+            </FooterLink>
+          ))}
+        </FooterSection>
+        <FooterSection>
+          <FooterSectionTitle>Follow Us</FooterSectionTitle>
+          <SocialLinks>
+            {SOCIAL_LINKS.map(({ id, href, label }) => {
+              const Icon = ICONS[id];
+              return (
+                <SocialIconButton
+                  key={id}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                >
+                  <Icon />
+                </SocialIconButton>
+              );
+            })}
+          </SocialLinks>
+        </FooterSection>
+      </FooterContainer>
+    </FooterWrapper>
   );
 };
 

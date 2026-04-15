@@ -2,18 +2,26 @@ import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Box, Container } from "@mui/material";
 
+export const FooterWrapper = styled("section")(({ theme }) => ({
+  backgroundColor: theme.palette.secondaryColors[900],
+  padding: theme.spacing(8, 0),
+
+  [theme.breakpoints.up("md")]: {
+    padding: theme.spacing(38, 0),
+  },
+}));
+
 export const FooterContainer = styled(Container)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(8),
   flexDirection: "column",
-  padding: theme.spacing(8, 4),
   alignItems: "center",
-  backgroundColor: theme.palette.secondaryColors[900],
 
   [theme.breakpoints.up("md")]: {
-    padding: theme.spacing(38, 16),
-    gap: theme.spacing(58),
     flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    gap: theme.spacing(58),
   },
 }));
 
@@ -21,10 +29,10 @@ export const FooterBrand = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  gap: theme.spacing(0),
 
   [theme.breakpoints.up("md")]: {
     maxWidth: 400,
+    flex: 1,
     alignItems: "flex-start",
   },
 }));
@@ -44,9 +52,7 @@ export const FooterSection = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(2),
-  [theme.breakpoints.up("md")]: {
-    minWidth: "fit-content",
-  },
+  [theme.breakpoints.up("md")]: {},
 }));
 
 export const FooterSectionTitle = styled("p")(({ theme }) => ({

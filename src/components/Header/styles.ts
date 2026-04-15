@@ -2,19 +2,17 @@ import { NavLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Box, Button, Container } from "@mui/material";
 
+export const HeaderWrapper = styled("header")(({ theme }) => ({
+  backgroundColor: theme.palette.backgroundColor,
+  backgroundImage: `linear-gradient(180deg, ${theme.palette.neutralColors[900]} 0%, rgba(19, 27, 46, 0) 100%)`,
+}));
+
 export const HeaderContainer = styled(Container)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  height: 72,
-  width: "100%",
   padding: theme.spacing(4),
-  marginBottom: 11,
-  gap: theme.spacing(4),
   flexWrap: "nowrap",
-
-  backgroundColor: theme.palette.backgroundColor,
-  backgroundImage: `linear-gradient(180deg, ${theme.palette.neutralColors[900]} 0%, rgba(19, 27, 46, 0) 100%)`,
 
   [theme.breakpoints.up("md")]: {
     padding: theme.spacing(4, 8),
