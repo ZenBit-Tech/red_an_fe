@@ -44,7 +44,7 @@ export const card = {
 };
 
 export const cardInner = {
-  padding: "48px 40px 32px 40px", 
+  padding: "48px 40px 32px 40px",
   display: "flex",
   flexDirection: "column",
   height: "100%",
@@ -54,15 +54,15 @@ export const cardInner = {
 export const title = {
   fontWeight: 400,
   color: "#FFFFFF",
-  mb: "8px", 
+  mb: "8px",
   fontFamily: font,
   fontSize: "24px",
   lineHeight: 1.25,
 };
 
 export const subtitle = {
-  color: "rgba(255, 255, 255, 0.6);",
-  mb: "45px", 
+  color: "rgba(255, 255, 255, 0.6)",
+  mb: "45px",
   fontFamily: font,
   fontSize: "14px",
   lineHeight: 1.6,
@@ -90,23 +90,17 @@ export const inputStyles = {
     padding: "14px 16px",
     "&::placeholder": { color: "rgba(187, 198, 197, 0.4)", opacity: 1 },
   },
-  "& .MuiOutlinedInput-notchedOutline": { 
-    borderColor: "rgba(51, 63, 90, 0.4)", 
+  "& .MuiOutlinedInput-notchedOutline": {
+    borderColor: "rgba(51, 63, 90, 0.4)",
     borderRadius: "8px",
   },
-  "&:hover .MuiOutlinedInput-notchedOutline": { 
-    borderColor: "rgba(51, 63, 90, 0.4)" 
+  "&:hover .MuiOutlinedInput-notchedOutline": {
+    borderColor: "rgba(51, 63, 90, 0.4)",
   },
-  "&.Mui-focused .MuiOutlinedInput-notchedOutline": { 
-    borderColor: "#afc6ff !important", 
+  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: "#afc6ff !important",
     borderWidth: "1px !important",
   },
-};
-export const inputErrorStyles = {
-  ...inputStyles,
-  "& fieldset": { borderColor: "#EF4444", borderRadius: "8px" },
-  "&:hover fieldset": { borderColor: "#EF4444" },
-  "&.Mui-focused fieldset": { borderColor: "#EF4444", borderWidth: "1px", outline: "none", },
 };
 
 export const dividerStyles = {
@@ -116,15 +110,15 @@ export const dividerStyles = {
 
 export const submitButton = {
   py: "14px",
-  mt: "24px", 
-  mb:"32px",
+  mt: "24px",
+  mb: "32px",
   borderRadius: "10px",
   fontFamily: font,
   fontWeight: 700,
   fontSize: "16px",
   textTransform: "none",
-  bgcolor: "#afc6ff", 
-  color: "rgba(19, 27, 46, 0.8)", 
+  bgcolor: "#afc6ff",
+  color: "rgba(19, 27, 46, 0.8)",
   boxShadow: "none",
   "&:hover": {
     bgcolor: "#c2d5ff",

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -7,11 +7,10 @@ import {
   Typography,
   TextField,
   Button,
-  InputAdornment,
   Link,
   Divider,
 } from "@mui/material";
-import { ArrowBack, ErrorOutline, MailOutline } from "@mui/icons-material";
+import { ArrowBack, MailOutline } from "@mui/icons-material";
 import * as styles from "@/pages/LoginPage/styles";
 
 type LoginStep = "form" | "checkInbox";
@@ -19,20 +18,30 @@ type LoginStep = "form" | "checkInbox";
 interface LoginFormValues {
   email: string;
 }
+
 const LoginPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [step, setStep] = useState<LoginStep>("form");
   const [submittedEmail, setSubmittedEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { isValid },
   } = useForm<LoginFormValues>({
     mode: "onChange",
     defaultValues: { email: "" },
   });
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoading(true);
     try {
@@ -56,13 +65,14 @@ const LoginPage = () => {
       setIsLoading(false);
     }
   };
+
   const handleResend = () => onSubmit({ email: submittedEmail });
   const handleBackToSignIn = () => setStep("form");
   const handleBack = () => navigate(-1);
+
   return (
     <Box sx={styles.container}>
       <Box sx={styles.backgroundOverlay} />
-
       <Box sx={styles.contentWrapper}>
         <Box sx={styles.card}>
           {step === "form" ? (
@@ -84,55 +94,24 @@ const LoginPage = () => {
                     *
                   </Box>
                 </Typography>
-
                 <Controller
                   name="email"
                   control={control}
                   rules={{
-                    required: t("login.emailRequired"),
-                    pattern: {
-                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: t("login.emailInvalid"),
-                    },
+                    required: true,
+                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                   }}
                   render={({ field }) => (
                     <TextField
                       {...field}
                       fullWidth
                       placeholder={t("login.emailPlaceholder")}
-                      error={!!errors.email}
                       InputProps={{
-                        endAdornment: errors.email ? (
-                          <InputAdornment position="end">
-                            <ErrorOutline
-                              sx={{ color: "#EF4444", fontSize: 20 }}
-                            />
-                          </InputAdornment>
-                        ) : null,
-                        sx: errors.email
-                          ? styles.inputErrorStyles
-                          : styles.inputStyles,
+                        sx: styles.inputStyles,
                       }}
-                      sx={{ mb: errors.email ? "8px" : 0 }}
                     />
                   )}
                 />
-
-                {errors.email && (
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      color: "#f87171",
-                      display: "block",
-                      mt: "4px",
-                      mb: "8px",
-                      fontFamily: styles.font,
-                    }}
-                  >
-                    {errors.email.message}
-                  </Typography>
-                )}
-
                 <Button
                   type="submit"
                   fullWidth
@@ -143,7 +122,6 @@ const LoginPage = () => {
                   {isLoading ? t("login.sending") : t("login.sendMagicLink")}
                 </Button>
               </form>
-
               <Box sx={{ mt: "auto", pt: "24px" }}>
                 <Divider sx={styles.dividerStyles} />
                 <Link
@@ -178,11 +156,9 @@ const LoginPage = () => {
                 <Box sx={{ mb: "16px" }}>
                   <MailOutline sx={{ fontSize: 56, color: "#afc6ff" }} />
                 </Box>
-
                 <Typography variant="h3" sx={{ ...styles.title, mb: "8px" }}>
                   {t("login.checkInboxTitle")}
                 </Typography>
-
                 <Typography
                   variant="body2"
                   sx={{ ...styles.subtitle, mb: "32px", fontSize: "15px" }}
@@ -193,7 +169,6 @@ const LoginPage = () => {
                     {submittedEmail}
                   </Box>
                 </Typography>
-
                 <Typography
                   variant="body2"
                   sx={{

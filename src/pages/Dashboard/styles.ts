@@ -1,127 +1,28 @@
 import { theme } from "../../common/themes/theme";
 
 export const font =
-  (theme.typography.fontFamily as string) || "'Inter', sans-serif";
+  (theme.typography.fontFamily as string) || "'Manrope', sans-serif";
 
-// ── Палітра з дизайну ────────────────────────────────────────────────────────
-const colors = {
-  bgApp: "#060E20", // Найтемніший синій (фон додатку)
-  bgCard: "#131B2E", // Темно-синій (сайдбар, топбар, картки)
-  primary: "#B0C6FF", // Світло-синій (акценти, кнопки)
-  border: "#222A3D", // Лінії, бордери
-  textMain: "#FFFFFF", // Основний білий текст
-  textSec: "#DAE2FD", // Світлий синьо-сірий текст
-  textMuted: "#C3C6D4", // Сірий текст та іконки
+export const colors = {
+  pageBg: "#060E20",
+  surfaceLow: "#131B2E",
+  surfaceMid: "#222A3D",
+  surfaceHigh: "#2D3548",
+  borderSubtle: "rgba(67,70,82,0.15)",
+  borderMid: "rgba(67,70,82,0.4)",
+  accent: "#B0C6FF",
+  textPrimary: "#FFFFFF",
+  textSecondary: "#C3C6D4",
+  textLabel: "#DAE2FD",
 };
-
-// ── Layout ────────────────────────────────────────────────────────────────────
 
 export const pageWrapper = {
   display: "flex",
   flexDirection: "column",
   minHeight: "100vh",
-  bgcolor: colors.bgApp, // Оновлено
+  bgcolor: "#0B1326",
   fontFamily: font,
 };
-
-// ── Top bar ───────────────────────────────────────────────────────────────────
-
-export const topBar = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  px: { xs: 4, md: 6 },
-  py: 3,
-  bgcolor: colors.bgCard, // Оновлено
-  borderBottom: `1px solid ${colors.border}`, // Оновлено
-  flexShrink: 0,
-};
-
-export const topBarBrand = {
-  display: "flex",
-  alignItems: "center",
-  gap: 3,
-  minWidth: 0,
-};
-
-export const topBarTitle = {
-  fontWeight: 700,
-  color: colors.textMain,
-  fontSize: "0.95rem",
-  fontFamily: font,
-  lineHeight: 1.2,
-  whiteSpace: "nowrap",
-};
-
-export const topBarSubtitle = {
-  color: colors.textMuted,
-  fontSize: "0.72rem",
-  fontFamily: font,
-  whiteSpace: "nowrap",
-};
-
-export const topBarCenter = {
-  flex: 1,
-  mx: 4,
-  display: { xs: "none", md: "block" },
-};
-
-export const topBarCenterTitle = {
-  color: colors.textMain,
-  fontWeight: 600,
-  fontSize: "0.85rem",
-  fontFamily: font,
-  lineHeight: 1.2,
-};
-
-export const topBarCenterSubtitle = {
-  color: colors.textMuted,
-  fontSize: "0.72rem",
-  fontFamily: font,
-};
-
-export const topBarActions = {
-  display: "flex",
-  alignItems: "center",
-  gap: 3,
-  flexShrink: 0,
-};
-
-export const iconButton = {
-  color: colors.textMuted,
-  p: 1,
-  "&:hover": { color: colors.textMain, bgcolor: colors.border },
-  borderRadius: "8px",
-};
-
-// Аватарка з новим primary кольором
-export const avatarButton = {
-  width: 36,
-  height: 36,
-  borderRadius: "50%",
-  bgcolor: colors.primary, 
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  cursor: "pointer",
-  flexShrink: 0,
-};
-
-export const avatarInitial = {
-  color: colors.bgApp, // Темна буква на світлому фоні
-  fontSize: "0.85rem",
-  fontWeight: 700,
-  fontFamily: font,
-};
-
-export const avatarEmail = {
-  color: colors.textSec,
-  fontSize: "0.85rem",
-  fontFamily: font,
-  whiteSpace: "nowrap",
-};
-
-// ── Body ──────────────────────────────────────────────────────────────────────
 
 export const bodyWrapper = {
   display: "flex",
@@ -129,388 +30,357 @@ export const bodyWrapper = {
   overflow: "hidden",
 };
 
-// ── Sidebar ───────────────────────────────────────────────────────────────────
-
-export const sidebar = {
-  width: 250, // Трохи ширше для довгих назв
-  flexShrink: 0,
-  bgcolor: colors.bgCard,
-  borderRight: `1px solid ${colors.border}`,
-  display: { xs: "none", md: "flex" },
+export const rightContent = {
+  flex: 1,
+  display: "flex",
   flexDirection: "column",
+  minWidth: 0,
+  overflowX: "hidden",
+};
+
+export const topBar = {
+  display: "flex",
+  alignItems: "center",
   justifyContent: "space-between",
-  py: 4,
-};
-
-export const sidebarNav = {
-  display: "flex",
-  flexDirection: "column",
-  gap: 1,
-  px: 3,
-};
-
-export const navItem = (active: boolean) => ({
-  display: "flex",
-  alignItems: "center",
-  gap: 3,
-  px: 3,
-  py: 2.5,
-  borderRadius: "10px",
-  cursor: "pointer",
-  bgcolor: active ? "rgba(176, 198, 255, 0.15)" : "transparent", // Напівпрозорий B0C6FF
-  transition: "all 0.15s",
-  "&:hover": {
-    bgcolor: active ? "rgba(176, 198, 255, 0.2)" : colors.border,
-  },
-});
-
-export const navItemText = (active: boolean) => ({
-  color: active ? colors.primary : colors.textMuted,
-  fontSize: "0.85rem",
-  fontWeight: active ? 600 : 400,
-  fontFamily: font,
-  lineHeight: 1,
-});
-
-export const navItemIcon = (active: boolean) => ({
-  color: active ? colors.primary : colors.textMuted,
-  fontSize: 18,
-  display: "flex",
-  alignItems: "center",
-});
-
-export const sidebarBottom = {
-  display: "flex",
-  flexDirection: "column",
-  gap: 1,
-  px: 3,
-};
-
-// ── Trial banner ──────────────────────────────────────────────────────────────
-
-export const trialBanner = {
-  mx: { xs: 4, md: 6 },
-  mt: 4,
-  mb: 2,
-  p: 4,
-  bgcolor: colors.bgCard,
-  border: `1px solid ${colors.border}`,
-  borderRadius: "12px",
-  display: "flex",
-  alignItems: { xs: "flex-start", sm: "center" },
-  justifyContent: "space-between",
-  flexDirection: { xs: "column", sm: "row" },
-  gap: 4,
-};
-
-export const trialBannerLeft = {
-  display: "flex",
-  alignItems: "center",
-  gap: 3,
-};
-
-export const trialBadge = {
-  bgcolor: "rgba(176, 198, 255, 0.1)",
-  border: `1px solid ${colors.primary}`,
-  borderRadius: "6px",
-  px: 2,
-  py: 0.5,
+  px: { xs: 4, md: "93px" },
+  py: 3,
+  bgcolor: "#0b1326",
+  borderBottom: `1px solid rgba(67,70,82,0.25)`,
   flexShrink: 0,
 };
 
-export const trialBadgeText = {
-  color: colors.primary,
-  fontSize: "0.65rem",
-  fontWeight: 700,
-  fontFamily: font,
-  letterSpacing: "0.08em",
-  textTransform: "uppercase" as const,
-};
-
-export const trialBannerText = {
-  color: colors.textSec,
-  fontSize: "0.85rem",
-  fontFamily: font,
-  lineHeight: 1.5,
-};
-
-export const trialUpgradeButton = {
-  bgcolor: "transparent",
-  color: colors.primary,
-  border: `1px solid ${colors.primary}`,
-  fontFamily: font,
+export const topBarCenterTitle = {
   fontWeight: 600,
+  color: "#b0c6ff",
+  fontSize: "20px",
+};
+
+export const topBarCenterSubtitle = {
+  color: "#c3c6d4",
+  fontSize: "16px",
+};
+
+export const topBarActions = {
+  display: "flex",
+  alignItems: "center",
+  gap: 2,
+};
+
+export const avatarEmail = {
+  color: colors.textSecondary,
   fontSize: "0.78rem",
-  textTransform: "none",
-  borderRadius: "8px",
-  px: 4,
-  py: 1.5,
+  fontFamily: font,
   whiteSpace: "nowrap",
-  boxShadow: "none",
-  flexShrink: 0,
+};
+
+export const iconButton = {
+  color: colors.textSecondary,
+  p: 1.5,
+  borderRadius: "8px",
   "&:hover": {
-    bgcolor: "rgba(176, 198, 255, 0.1)",
-    boxShadow: "none",
+    color: colors.textPrimary,
+    bgcolor: "rgba(255,255,255,0.05)",
   },
 };
 
-// ── Main content ──────────────────────────────────────────────────────────────
+export const avatarButton = {
+  width: 36,
+  height: 36,
+  borderRadius: "10px",
+  bgcolor: "#0d47a1",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  cursor: "pointer",
+};
 
 export const mainContent = {
   flex: 1,
   overflow: "auto",
-  px: { xs: 4, md: 6 },
-  py: { xs: 4, md: 6 },
+  px: { xs: 4, md: "93px" },
+  py: "48px",
 };
 
-// ── Page header ───────────────────────────────────────────────────────────────
-
-export const pageHeaderWrapper = {
-  display: "flex",
-  alignItems: { xs: "flex-start", sm: "center" },
-  justifyContent: "space-between",
-  flexDirection: { xs: "column", sm: "row" },
-  gap: 3,
-  mb: 5,
-};
-
-export const pageHeaderLeft = {
+export const contentContainer = {
+  maxWidth: "1007px",
+  width: "100%",
+  margin: "0 auto",
   display: "flex",
   flexDirection: "column",
-  gap: 1,
+};
+
+export const pageHeaderWrapper = {
+  position: "relative",
+  mb: "150px",
+};
+
+export const backgroundGlow = {
+  position: "absolute",
+  top: "-100px",
+  left: "-50px",
+  width: "700px",
+  height: "300px",
+  background: "rgba(176, 198, 255, 0.12)",
+  filter: "blur(100px)",
+  borderRadius: "50%",
+  pointerEvents: "none",
+  zIndex: 0,
+};
+
+export const pageHeaderRow1 = {
+  position: "relative",
+  zIndex: 1,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  mb: 3,
+};
+
+export const pageHeaderRow2 = {
+  position: "relative",
+  zIndex: 1,
+  display: "flex",
+  justifyContent: "flex-end",
 };
 
 export const pageTitle = {
-  color: colors.textMain,
-  fontWeight: 500,
-  fontSize: { xs: "1.6rem", md: "2rem" },
-  fontFamily: font,
-  lineHeight: 1.15,
-  letterSpacing: "-0.01em",
+  color: "#b0c6ff",
+  fontWeight: 600,
+  fontSize: "32px",
 };
 
 export const pageSubtitle = {
-  color: colors.textMuted,
-  fontSize: "0.85rem",
-  fontFamily: font,
-};
-
-export const pageHeaderRight = {
-  display: "flex",
-  alignItems: "center",
-  gap: 3,
-  flexWrap: "wrap" as const,
-};
-
-export const infoBanner = {
-  display: "flex",
-  alignItems: "center",
-  gap: 2,
-  bgcolor: colors.bgCard,
-  border: `1px solid ${colors.border}`,
-  borderRadius: "10px",
-  px: 3,
-  py: 2,
-};
-
-export const infoBannerText = {
-  color: colors.textSec,
-  fontSize: "0.78rem",
-  fontFamily: font,
-  whiteSpace: "nowrap",
-};
-
-export const lastDaysPill = {
-  bgcolor: colors.bgCard,
-  border: `1px solid ${colors.border}`,
-  borderRadius: "8px",
-  px: 3,
-  py: 2,
-  cursor: "pointer",
-  "&:hover": { bgcolor: colors.border },
-};
-
-export const lastDaysText = {
-  color: colors.textMuted,
-  fontSize: "0.78rem",
-  fontFamily: font,
-  whiteSpace: "nowrap",
+  color: "#c3c6d4",
+  fontSize: "12px",
 };
 
 export const startButton = {
-  bgcolor: colors.primary,
-  color: colors.bgApp,
-  fontFamily: font,
-  fontWeight: 600,
-  fontSize: "0.82rem",
+  bgcolor: "#b0c6ff",
+  color: "#0b1326",
+  fontWeight: 700,
+  px: "16px",
+  py: "12px",
+  borderRadius: "8px",
   textTransform: "none",
-  borderRadius: "10px",
-  px: 4,
-  py: 2,
-  whiteSpace: "nowrap",
-  boxShadow: "none",
-  "&:hover": { bgcolor: "#C2D5FF", boxShadow: "none" },
+  "&:hover": {
+    bgcolor: "#FFF",
+  },
 };
 
-// ── Stat cards ────────────────────────────────────────────────────────────────
+export const timeFilterGroup = {
+  display: "flex",
+  gap: 2,
+};
 
-export const statsGrid = {
+export const timeFilterPill = (active: boolean) => ({
+  px: "13px",
+  py: "10px",
+  borderRadius: "8px",
+  cursor: "pointer",
+  bgcolor: "#222a3d",
+  border: active
+    ? `1px solid rgba(176,198,255,0.3)`
+    : `1px solid rgba(67,70,82,0.4)`,
+});
+
+export const timeFilterText = (active: boolean) => ({
+  color: active ? colors.textPrimary : colors.textSecondary,
+  fontSize: "14px",
+  fontWeight: active ? 500 : 400,
+});
+
+export const infoBanner = {
+  boxSizing: "border-box",
+  display: "flex",
+  alignItems: "center",
+  gap: 1,
+  background:
+    "linear-gradient(135deg, rgba(176, 198, 255, 0.2) 0%, rgba(164, 189, 248, 0.2) 7.14%, rgba(153, 180, 242, 0.2) 14.29%, rgba(141, 171, 235, 0.2) 21.43%, rgba(130, 161, 228, 0.2) 28.57%, rgba(119, 152, 222, 0.2) 35.71%, rgba(108, 143, 215, 0.2) 42.86%, rgba(96, 134, 208, 0.2) 50%, rgba(85, 125, 202, 0.2) 57.14%, rgba(74, 116, 195, 0.2) 64.29%, rgba(63, 107, 188, 0.2) 71.43%, rgba(52, 98, 181, 0.2) 78.57%, rgba(40, 89, 175, 0.2) 85.71%, rgba(28, 80, 168, 0.2) 92.86%, rgba(13, 71, 161, 0.2) 100%)",
+  borderRadius: "8px",
+  padding: "8px 12px",
+  width: "328px",
+  height: "42px",
+};
+
+export const infoBannerText = {
+  color: "#b0c6ff",
+  fontSize: "13px",
+  fontFamily: font,
+};
+
+export const topSectionGrid = {
+  display: "flex",
+  gap: "24px",
+  mb: "24px",
+};
+
+export const statCardsColumn = {
   display: "grid",
-  gridTemplateColumns: {
-    xs: "1fr 1fr",
-    md: "repeat(4, 1fr)",
-  },
-  gap: 3,
-  mb: 4,
+  gridTemplateColumns: "233px 233px",
+  gap: "24px",
 };
 
 export const statCard = {
-  bgcolor: colors.bgCard,
-  border: `1px solid ${colors.border}`,
-  borderRadius: "12px",
-  p: 4,
+  boxSizing: "border-box",
+  width: "233px",
+  height: "172px",
+  padding: "24px",
+  borderRadius: "8px",
+  bgcolor: colors.surfaceMid,
+  border: `1px solid rgba(67,70,82,0.35)`,
   display: "flex",
   flexDirection: "column",
-  gap: 3,
+  justifyContent: "center",
+  gap: "12px",
 };
 
 export const statCardHeader = {
   display: "flex",
-  alignItems: "flex-start",
+  alignItems: "center",
   justifyContent: "space-between",
 };
 
 export const statLabel = {
-  color: colors.textMuted,
-  fontSize: "0.7rem",
-  fontFamily: font,
-  fontWeight: 600,
-  letterSpacing: "0.05em",
-  textTransform: "uppercase" as const,
-  lineHeight: 1.4,
+  color: colors.textLabel,
+  fontSize: "12px",
+  fontWeight: 500,
+  textTransform: "uppercase",
 };
 
 export const statIconBox = {
-  width: 36,
-  height: 36,
-  borderRadius: "8px",
-  bgcolor: colors.border,
-  color: colors.primary,
+  boxSizing: "border-box",
+  width: "42px",
+  height: "48px",
+  padding: "0px 8px",
+  borderRadius: "14px",
+  background:
+    "linear-gradient(135deg, rgba(176, 198, 255, 0.2) 0%, rgba(164, 189, 248, 0.2) 7.14%, rgba(153, 180, 242, 0.2) 14.29%, rgba(141, 171, 235, 0.2) 21.43%, rgba(130, 161, 228, 0.2) 28.57%, rgba(119, 152, 222, 0.2) 35.71%, rgba(108, 143, 215, 0.2) 42.86%, rgba(96, 134, 208, 0.2) 50%, rgba(85, 125, 202, 0.2) 57.14%, rgba(74, 116, 195, 0.2) 64.29%, rgba(63, 107, 188, 0.2) 71.43%, rgba(52, 98, 181, 0.2) 78.57%, rgba(40, 89, 175, 0.2) 85.71%, rgba(28, 80, 168, 0.2) 92.86%, rgba(13, 71, 161, 0.2) 100%)",
+  border: "0.80px solid rgba(176, 198, 255, 0.3)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  flexShrink: 0,
+  color: "#b0c6ff",
 };
 
 export const statValue = {
-  color: colors.textMain,
+  color: "#FFF",
+  fontSize: "32px",
   fontWeight: 500,
-  fontSize: "2rem",
-  fontFamily: font,
-  lineHeight: 1,
 };
 
-// ── Empty state ───────────────────────────────────────────────────────────────
-
-export const emptyStateCard = {
-  bgcolor: colors.bgCard,
-  border: `1px solid ${colors.border}`,
-  borderRadius: "12px",
-  p: 8,
-  mb: 4,
+export const statFooter = {
   display: "flex",
-  flexDirection: "column",
   alignItems: "center",
-  justifyContent: "center",
-  minHeight: 220,
-  textAlign: "center",
+  gap: "6px",
+  color: colors.textSecondary,
 };
 
-export const emptyStateTitle = {
-  color: colors.textSec,
-  fontSize: "1rem",
-  fontWeight: 500,
+export const statFooterText = {
+  fontSize: "12px",
   fontFamily: font,
-  mt: 4,
-  mb: 2,
 };
 
-export const emptyStateSubtitle = {
-  color: colors.textMuted,
-  fontSize: "0.8rem",
-  fontFamily: font,
-  mb: 5,
-  maxWidth: 380,
-};
-
-export const emptyStateButton = {
-  bgcolor: "transparent",
-  color: colors.textMain,
-  fontFamily: font,
-  fontWeight: 500,
-  fontSize: "0.82rem",
-  textTransform: "none",
+export const chartCardBase = {
+  boxSizing: "border-box",
+  background: "#131b2e",
+  border: "1px solid rgba(176, 198, 255, 0.05)",
+  boxShadow: "0 18px 26px 0 rgba(0, 0, 0, 0.1)",
   borderRadius: "8px",
-  px: 5,
-  py: 2,
-  boxShadow: "none",
-  border: `1px solid ${colors.border}`,
-  "&:hover": { bgcolor: colors.border, boxShadow: "none" },
-};
-
-// ── Chart section ─────────────────────────────────────────────────────────────
-
-export const chartSection = {
-  mb: 4,
-};
-
-export const chartSectionHeader = {
-  display: "flex",
-  alignItems: "center",
-  gap: 3,
-  mb: 3,
-};
-
-export const chartIconBox = {
-  width: 36,
-  height: 36,
-  borderRadius: "10px",
-  bgcolor: colors.bgCard,
-  border: `1px solid ${colors.border}`,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flexShrink: 0,
-};
-
-export const chartSectionTitle = {
-  color: colors.textSec,
-  fontWeight: 500,
-  fontSize: "0.95rem",
-  fontFamily: font,
-};
-
-export const chartCard = {
-  bgcolor: colors.bgCard,
-  border: `1px solid ${colors.border}`,
-  borderRadius: "10px",
-  minHeight: 160,
+  padding: "24px",
   display: "flex",
   flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: 2,
-  p: 6,
 };
 
-export const chartPlaceholderText = {
-  color: colors.textMuted,
-  fontSize: "0.78rem",
-  fontFamily: font,
+export const complianceCard = {
+  ...chartCardBase,
+  width: "493px",
+  height: "368px",
+};
+
+export const fullWidthCard = {
+  ...chartCardBase,
+  width: "1007px",
+  height: "478px",
+  mb: "24px",
+};
+
+export const halfWidthCard = {
+  ...chartCardBase,
+  width: "488px",
+  height: "448px",
 };
 
 export const twoColGrid = {
-  display: "grid",
-  gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-  gap: 3,
+  display: "flex",
+  gap: "31px",
+  mb: "24px",
+};
+
+export const chartHeader = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "4px",
+};
+
+export const chartTitle = {
+  color: "#FFF",
+  fontSize: "18px",
+  fontWeight: 600,
+  fontFamily: font,
+};
+
+export const chartSubtitle = {
+  color: colors.textSecondary,
+  fontSize: "12px",
+  fontFamily: font,
+};
+
+export const skeletonCenter = {
+  flex: 1,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  mt: 2,
+};
+
+export const donutSkeleton = {
+  width: "180px",
+  height: "180px",
+  borderRadius: "50%",
+  border: "35px solid rgba(255, 255, 255, 0.03)",
+};
+
+export const barSkeletonContainer = {
+  flex: 1,
+  display: "flex",
+  alignItems: "flex-end",
+  justifyContent: "space-between",
+  mt: 4,
+  px: 2,
+};
+
+export const barSkeletonCol = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "12px",
+  width: "8%",
+  height: "100%",
+  justifyContent: "flex-end",
+};
+
+export const barSkeleton = {
+  width: "100%",
+  bgcolor: "rgba(255, 255, 255, 0.03)",
+  borderRadius: "4px",
+};
+
+export const barSkeletonLabel = {
+  color: "rgba(255, 255, 255, 0.2)",
+  fontSize: "10px",
+  fontFamily: font,
+};
+
+export const topBarCenter = {
+  flex: 1,
 };
