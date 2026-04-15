@@ -28,7 +28,6 @@ dist-ssr
 .env.development.local
 .env.test.local
 .env.production.local
-.env.local
-
-# Copilot local instructions
-.github/copilot-instructions.md
+.env.example
+.env.production
+.env.development
