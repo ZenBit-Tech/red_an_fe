@@ -1,4 +1,4 @@
-import { theme } from "../../common/themes/theme";
+import theme from "@/common/theme/index";
 
 export const font =
   (theme.typography.fontFamily as string) || "'Manrope', sans-serif";

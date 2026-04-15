@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { ArrowBack, MailOutline } from "@mui/icons-material";
 import * as styles from "@/pages/LoginPage/styles";
+import { apiClient } from "@/common/api/apiClient";
 
 type LoginStep = "form" | "checkInbox";
 
@@ -45,22 +46,11 @@ const LoginPage = () => {
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoading(true);
     try {
-      const response = await fetch(
-        "http://localhost:3000/auth/magic-link/request",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: data.email }),
-        },
-      );
-      if (response.ok) {
-        setSubmittedEmail(data.email);
-        setStep("checkInbox");
-      } else {
-        console.error("Error sending email");
-      }
+      await apiClient.post("/auth/magic-link", { email: data.email });
+      setSubmittedEmail(data.email);
+      setStep("checkInbox");
     } catch (error) {
-      console.error("Server connection error", error);
+      console.error("Error sending email:", error);
     } finally {
       setIsLoading(false);
     }

@@ -1,4 +1,4 @@
-import { theme } from "../../common/themes/theme";
+import theme from "@/common/theme/index";
 
 export const font =
   (theme.typography.fontFamily as string) || "'Manrope', sans-serif";
@@ -50,14 +50,14 @@ export const topBar = {
 };
 
 export const topBarCenterTitle = {
-  fontWeight: 600,
+  fontWeight: 500,
   color: "#b0c6ff",
   fontSize: "20px",
 };
 
 export const topBarCenterSubtitle = {
   color: "#c3c6d4",
-  fontSize: "16px",
+  fontSize: "14px",
 };
 
 export const topBarActions = {
@@ -144,8 +144,8 @@ export const pageHeaderRow2 = {
 };
 
 export const pageTitle = {
-  color: "#b0c6ff",
-  fontWeight: 600,
+  color: "#dae2fd",
+  fontWeight: 700,
   fontSize: "32px",
 };
 

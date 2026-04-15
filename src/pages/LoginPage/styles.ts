@@ -1,4 +1,4 @@
-import { theme } from "@/common/themes/theme";
+import theme from "@/common/theme/index";
 
 export const font =
   (theme.typography.fontFamily as string) || "'Inter', sans-serif";
@@ -7,8 +7,7 @@ export const container = {
   minHeight: "100vh",
   display: "flex",
   flexDirection: "column",
-  background:
-    "radial-gradient(ellipse 100% 60% at 50% -10%, rgba(30,60,100,0.55) 0%, transparent 65%), #0d1117",
+  background: "url('/login/login-bg.png') center/cover no-repeat, #0d1117",
   fontFamily: font,
   position: "relative",
   overflow: "hidden",
@@ -34,13 +33,21 @@ export const contentWrapper = {
 export const card = {
   width: "456px",
   height: "473px",
-  bgcolor: "rgba(22,28,45,0.92)",
-  border: "1px solid rgba(67, 70, 82, 0.5)",
+  bgcolor: "#131b2e",
+  border: "1px solid rgba(67, 70, 82, 0.)",
   borderRadius: "8px",
-  boxShadow: "0 32px 80px rgba(0,0,0,0.6)",
-  display: "flex",
-  flexDirection: "column",
-  boxSizing: "border-box",
+  position: "relative",
+  overflow: "hidden",
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: "1.5px",
+    background:
+      "linear-gradient(90deg, rgba(178, 197, 255, 0) 0%, rgba(178, 197, 255, 0.8) 50%, rgba(178, 197, 255, 0) 100%)",
+  },
 };
 
 export const cardInner = {

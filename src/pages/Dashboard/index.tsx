@@ -3,12 +3,12 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography, IconButton, Button } from "@mui/material";
 import {
-  TableChartOutlined,
+  FolderOpen,
   NotificationsOutlined,
   SettingsOutlined,
   DescriptionOutlined,
   CheckCircleOutlined,
-  TrendingUpOutlined,
+  Fingerprint,
   InfoOutlined,
   HourglassEmpty,
   AccountCircleOutlined,
@@ -63,12 +63,12 @@ const DashboardPage = () => {
     {
       label: t("dashboard.stats.avgCompleteness", "AVG. ENTITIES/DOC"),
       value: "0%",
-      icon: <TrendingUpOutlined sx={{ fontSize: 24 }} />,
+      icon: <Fingerprint sx={{ fontSize: 24 }} />,
     },
     {
       label: t("dashboard.stats.successRate", "SUCCESS RATE"),
       value: "0%",
-      icon: <TableChartOutlined sx={{ fontSize: 24 }} />,
+      icon: <FolderOpen sx={{ fontSize: 24 }} />,
     },
   ];
 
