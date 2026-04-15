@@ -177,6 +177,12 @@ export const TextContent = styled(Box)(({ theme }) => ({
   },
 }));
 
+export const OutputLoadingContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  padding: theme.spacing(2),
+}));
+
 export const PanelActions = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(1),

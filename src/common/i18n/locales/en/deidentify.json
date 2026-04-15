@@ -27,10 +27,29 @@
     }
   },
   "deidentify": {
+    "stepper": {
+      "steps": {
+        "framework": "Framework",
+        "transformation": "Transformation",
+        "inputData": "Input Data",
+        "result": "Result"
+      },
+      "actions": {
+        "next": "Next",
+        "back": "Back",
+        "continue": "Continue",
+        "analyzeAndContinue": "Analyze and Continue",
+        "restart": "Start Over"
+      }
+    },
     "settings": {
       "title": "De-Identification Settings",
       "subtitle": "Configure how to handle sensitive information",
       "method": "De-Identification Method",
+      "threshold": "Detection Threshold",
+      "thresholdHint": "Minimum confidence score to include a detection",
+      "preserveStructure": "Preserve Structure",
+      "preserveStructureHint": "Keep the original text formatting in the output",
       "analyze": "Analyze"
     },
     "clinicalInput": {

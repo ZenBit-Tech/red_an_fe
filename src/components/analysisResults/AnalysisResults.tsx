@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Box, MenuItem, TableBody } from "@mui/material";
+import { Box, CircularProgress, MenuItem, TableBody } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
@@ -23,6 +23,7 @@ import {
   PanelDescription,
   PanelSurface,
   TextContent,
+  OutputLoadingContainer,
   HighlightedEntity,
   PanelActions,
   PanelActionButton,
@@ -43,7 +44,6 @@ import {
   ActionToggleButton,
 } from "./styles";
 import {
-  MOCK_ENTITIES,
   DEFAULT_ENTITY_COLOR,
   ENTITY_TYPE_COLORS,
   DOWNLOAD_FORMAT,
@@ -57,12 +57,14 @@ import { useAnalysisResults } from "./useAnalysisResults";
 
 interface AnalysisResultsProps {
   inputText: string;
-  entities?: Entity[];
+  entities: Entity[];
+  jobId: string;
 }
 
 const AnalysisResults: React.FC<AnalysisResultsProps> = ({
   inputText,
-  entities = MOCK_ENTITIES,
+  entities,
+  jobId,
 }) => {
   const { t } = useTranslation();
   const [copiedOutput, setCopiedOutput] = useState<boolean>(false);
@@ -87,10 +89,13 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
     selectedEntityIds,
     inputWithHighlights,
     outputText,
+    isPreviewLoading,
     toggleEntitySelection,
   } = useAnalysisResults({
     entities: frameworkEntities,
     inputText,
+    jobId,
+    framework: selectedFramework,
   });
 
   const handleCopyOutput = async (): Promise<void> => {
@@ -256,7 +261,13 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
             </PanelHeaderCopy>
           </PanelHeader>
           <PanelSurface>
-            <TextContent>{outputText || inputText}</TextContent>
+            {isPreviewLoading ? (
+              <OutputLoadingContainer>
+                <CircularProgress size={24} />
+              </OutputLoadingContainer>
+            ) : (
+              <TextContent>{outputText || inputText}</TextContent>
+            )}
           </PanelSurface>
           <PanelActions>
             <PanelActionButton

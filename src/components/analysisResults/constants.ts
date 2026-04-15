@@ -1,4 +1,5 @@
 import { type DetectableEntityType } from "@/components/complianceSelect/constants";
+import type { AnalyzeFinding } from "@/common/api/deidentifyApiTypes";
 
 export type EntityType = DetectableEntityType;
 
@@ -229,6 +230,34 @@ export const MOCK_ENTITIES: Entity[] = [
     decisionFactor: "Medium",
   },
 ];
+
+const CONFIDENCE_HIGH_THRESHOLD = 85;
+const CONFIDENCE_MEDIUM_THRESHOLD = 60;
+const CONFIDENCE_PERCENT_DIVISOR = 100;
+
+const getDecisionFactor = (confidence: number): "Low" | "Medium" | "High" => {
+  if (confidence > CONFIDENCE_HIGH_THRESHOLD) return "High";
+  if (confidence > CONFIDENCE_MEDIUM_THRESHOLD) return "Medium";
+  return "Low";
+};
+
+export const mapFindingToEntity = (
+  finding: AnalyzeFinding,
+  sourceText: string,
+): Entity => ({
+  id: finding.id,
+  type: finding.category as EntityType,
+  value: sourceText.slice(finding.start, finding.end),
+  startIdx: finding.start,
+  endIdx: finding.end,
+  replacement: `[${finding.proxyType.toUpperCase()}]`,
+  isSelected: true,
+  score: finding.confidence / CONFIDENCE_PERCENT_DIVISOR,
+  recognizer: finding.proxyType,
+  patternName: finding.category,
+  originalScore: finding.confidence / CONFIDENCE_PERCENT_DIVISOR,
+  decisionFactor: getDecisionFactor(finding.confidence),
+});
 
 export const TABLE_COLUMNS = {
   TYPE: "type",
