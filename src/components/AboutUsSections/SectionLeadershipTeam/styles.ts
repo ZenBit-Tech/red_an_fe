@@ -40,7 +40,7 @@ export const SectionDescription = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize18,
 }));
 
-export const ValuesList = styled("ul")(({ theme }) => ({
+export const TeamList = styled("ul")(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
   listStyle: "none",
@@ -54,7 +54,7 @@ export const ValuesList = styled("ul")(({ theme }) => ({
   },
 }));
 
-export const ValuesListItem = styled("li")(() => ({
+export const TeamListItem = styled("li")(() => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "end",
@@ -91,4 +91,9 @@ export const ItemDescription = styled(Typography)(() => ({
   color: "rgba(255, 255, 255, 0.7)",
   fontSize: "14px",
   lineHeight: 1.5,
+}));
+
+export const TeamPromotionText = styled(Typography)(() => ({
+  backgroundColor:
+    "linear-gradient(90deg, #131b2e 0%, rgba(61, 87, 148, 0.05) 90.87%)",
 }));

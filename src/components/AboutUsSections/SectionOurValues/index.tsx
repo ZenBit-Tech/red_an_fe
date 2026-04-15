@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 import * as S from "./styles";
 
 export const SectionOurValues = () => {
+  const { t } = useTranslation("aboutUs");
   return (
     <S.SectionWrapper>
       <S.CustomContainer>
@@ -10,30 +12,27 @@ export const SectionOurValues = () => {
           {/* Ітем 1 */}
           <S.ValuesListItem>
             <S.IconWrapper>{/* <IconMission1 /> */}</S.IconWrapper>
-            <S.ItemTitle>Privacy First</S.ItemTitle>
+            <S.ItemTitle>{t("ourValues.itemOneTitle")}</S.ItemTitle>
             <S.ItemDescription>
-              Patient privacy and data protection are at the core of everything
-              we build and every decision we make.
+              {t("ourValues.itemOneDescription")}
             </S.ItemDescription>
           </S.ValuesListItem>
 
           {/* Ітем 2 */}
           <S.ValuesListItem>
             <S.IconWrapper>{/* <IconMission2 /> */}</S.IconWrapper>
-            <S.ItemTitle>Innovation</S.ItemTitle>
+            <S.ItemTitle>{t("ourValues.itemTwoTitle")}</S.ItemTitle>
             <S.ItemDescription>
-              We continuously push the boundaries of what's possible in data
-              de-identification and synthetic data generation.
+              {t("ourValues.itemTwoDescription")}
             </S.ItemDescription>
           </S.ValuesListItem>
 
           {/* Ітем 3 */}
           <S.ValuesListItem>
             <S.IconWrapper>{/* <IconMission3 /> */}</S.IconWrapper>
-            <S.ItemTitle>Excellence</S.ItemTitle>
+            <S.ItemTitle>{t("ourValues.itemThreeTitle")}</S.ItemTitle>
             <S.ItemDescription>
-              We maintain the highest standards of quality accuracy, and
-              reliability in our platform and services
+              {t("ourValues.itemThreeDescription")}
             </S.ItemDescription>
           </S.ValuesListItem>
         </S.ValuesList>
