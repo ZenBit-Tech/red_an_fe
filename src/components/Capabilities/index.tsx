@@ -26,7 +26,6 @@ export const Capabilities = () => {
     <CapabilitiesSection id="solution">
       <Container>
         <ContentWrapper>
-          {/* Left Column */}
           <LeftContent>
             <LeftTextBlock>
               <Title>
@@ -70,7 +69,6 @@ export const Capabilities = () => {
             </FeaturesList>
           </LeftContent>
 
-          {/* Right Column */}
           <RightGrid>
             {CARDS_DATA.map((card) => (
               <GridCard key={card.id}>
