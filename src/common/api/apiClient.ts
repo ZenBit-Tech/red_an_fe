@@ -1,8 +1,12 @@
 import axios from "axios";
 import type { AxiosError, AxiosResponse } from "axios";
 
+<<<<<<< deid-api-test
 const ENV_BASE_URL = import.meta.env.VITE_API_URL?.trim() || "";
 const BASE_URL = import.meta.env.DEV ? "" : ENV_BASE_URL.replace(/\/+$/, "");
+=======
+const BASE_URL = import.meta.env.VITE_API_URL || "";
+>>>>>>> develop
 
 export const ApiError = {
   Network: "ERR_NETWORK",
@@ -43,7 +47,11 @@ export const apiClient = {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError<{ message?: string }>;
 
+<<<<<<< deid-api-test
       if (axiosError.code === ApiError.Network) {
+=======
+      if (axiosError.code === "ERR_NETWORK") {
+>>>>>>> develop
         return new Error(ApiError.Network);
       }
 
