@@ -299,7 +299,6 @@ export const StyledTableHead = styled(TableHead)(({ theme }) => ({
     color: theme.palette.text.secondary,
     borderBottom: `2px solid ${theme.palette.divider}`,
     fontSize: "0.69rem",
-    letterSpacing: "0.01em",
     whiteSpace: "nowrap",
     lineHeight: 1.2,
   },
