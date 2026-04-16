@@ -1,0 +1,16 @@
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <symbol id="github" viewBox="0 0 32 32">
+            <path stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M20 29.334v-5.333c0.185-1.67-0.293-3.347-1.333-4.667 4 0 8-2.667 8-7.333 0.107-1.667-0.36-3.307-1.333-4.667 0.373-1.533 0.373-3.133 0-4.667 0 0-1.333 0-4 2-3.52-0.667-7.147-0.667-10.667 0-2.667-2-4-2-4-2-0.4 1.533-0.4 3.133 0 4.667-0.971 1.355-1.442 3.004-1.333 4.667 0 4.667 4 7.333 8 7.333-0.52 0.653-0.907 1.4-1.133 2.2s-0.293 1.64-0.2 2.467v5.333"></path>
+            <path stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M12 24c-6.013 2.667-6.667-2.667-9.333-2.667"></path>
+        </symbol>
+        <symbol id="linkedin" viewBox="0 0 32 32">
+            <path stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M21.333 10.667c2.122 0 4.157 0.843 5.657 2.343s2.343 3.535 2.343 5.657v9.333h-5.333v-9.333c0-0.707-0.281-1.386-0.781-1.886s-1.178-0.781-1.886-0.781-1.386 0.281-1.886 0.781c-0.5 0.5-0.781 1.178-0.781 1.886v9.333h-5.333v-9.333c0-2.122 0.843-4.157 2.343-5.657s3.535-2.343 5.657-2.343z"></path>
+            <path stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M8 12h-5.333v16h5.333v-16z"></path>
+            <path stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M5.334 8c1.473 0 2.667-1.194 2.667-2.667s-1.194-2.667-2.667-2.667c-1.473 0-2.667 1.194-2.667 2.667s1.194 2.667 2.667 2.667z"></path>
+        </symbol>
+        <symbol id="twitter" viewBox="0 0 32 32">
+            <path stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M29.334 5.334c0 0-0.933 2.8-2.667 4.533 2.133 13.333-12.533 23.067-24 15.467 2.933 0.133 5.867-0.8 8-2.667-6.667-2-10-9.867-6.667-16 2.933 3.467 7.467 5.467 12 5.333-1.2-5.6 5.333-8.8 9.333-5.067 1.467 0 4-1.6 4-1.6z"></path>
+        </symbol>
+    </defs>
+</svg>

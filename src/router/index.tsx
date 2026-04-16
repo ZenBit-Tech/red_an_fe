@@ -1,13 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "../components/Layout";
+import Layout from "@/components/Layout";
 import DeidentifyPage from "@/pages/deidentify";
 import { ContactUsPage } from "@/pages/ContactUsPage";
+import HomePage from "@/pages/HomePage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
       {
         path: "/deidentify",
         element: <DeidentifyPage />,
