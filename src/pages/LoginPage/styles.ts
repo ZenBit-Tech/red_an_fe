@@ -39,8 +39,8 @@ export const contentWrapper = {
 export const card = {
   width: "456px",
   height: "473px",
-  bgcolor: neutralColors[900], // "#131b2e"
-  border: `1px solid ${strokeColors[500]}`, // "rgba(67, 70, 82, 0.5)"
+  bgcolor: neutralColors[900],
+  border: `1px solid ${strokeColors[500]}`,
   borderRadius: "8px",
   position: "relative",
   overflow: "hidden",
@@ -66,7 +66,7 @@ export const cardInner = {
 
 export const title = {
   fontWeight: theme.typography.fontWeight400,
-  color: textColors[50], // "#FFFFFF"
+  color: textColors[50],
   mb: "8px",
   fontFamily: font,
   fontSize: "24px",
@@ -96,10 +96,10 @@ export const inputStyles = {
   fontFamily: font,
   fontSize: theme.typography.fontSize16,
   borderRadius: "10px",
-  bgcolor: strokeColors[400], // "rgba(51, 63, 90, 0.4)"
-  color: textColors[50], // "white"
+  bgcolor: strokeColors[400],
+  color: textColors[50],
   "& input": {
-    color: textColors[50], // "white"
+    color: textColors[50],
     padding: "14px 16px",
     "&::placeholder": { color: "rgba(187, 198, 197, 0.4)", opacity: 1 },
   },
@@ -111,7 +111,7 @@ export const inputStyles = {
     borderColor: strokeColors[400],
   },
   "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-    borderColor: `${primaryColors[200]} !important`, // "#afc6ff"
+    borderColor: `${primaryColors[200]} !important`,
     borderWidth: "1px !important",
   },
 };
@@ -130,14 +130,14 @@ export const submitButton = {
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize16,
   textTransform: "none",
-  bgcolor: primaryColors[200], // "#afc6ff"
+  bgcolor: primaryColors[200],
   color: "rgba(19, 27, 46, 0.8)",
   boxShadow: "none",
-  backgroundImage: "none", // Вимикаємо градієнт глобальної теми
+  backgroundImage: "none",
   "&:hover": {
     bgcolor: "#c2d5ff",
     boxShadow: "none",
-    backgroundImage: "none", // Вимикаємо градієнт глобальної теми при ховері
+    backgroundImage: "none",
   },
   "&.Mui-disabled": {
     bgcolor: "rgba(175, 198, 255, 0.3)",
@@ -151,11 +151,11 @@ export const linkButton = {
   display: "flex",
   alignItems: "center",
   gap: 1,
-  color: textColors[200], // "#C3C6D4"
+  color: textColors[200],
   fontFamily: font,
   fontSize: theme.typography.fontSize14,
   cursor: "pointer",
   transition: "color 0.2s",
   p: 0,
-  "&:hover": { color: textColors[50] }, // "#ffffff"
+  "&:hover": { color: textColors[50] },
 };
