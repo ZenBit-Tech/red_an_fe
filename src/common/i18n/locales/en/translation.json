@@ -161,5 +161,15 @@
     "resendLink": "Click to resend",
     "backToSignIn": "Back to sign in",
     "errorSending": "Failed to send magic link. Please try again."
+  },
+  "sidebar": {
+    "header": {
+      "title": "Clinical Data Studio",
+      "subtitle": "De-ID & Synthesis"
+    },
+    "bottom": {
+      "support": "Support",
+      "logout": "Logout"
+    }
   }
 }

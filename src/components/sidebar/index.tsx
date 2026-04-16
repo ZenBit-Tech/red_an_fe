@@ -19,10 +19,10 @@ const Sidebar = ({ activeNav, setActiveNav, handleLogout }: SidebarProps) => {
         <Box sx={styles.sidebarHeader}>
           <Box>
             <Typography sx={styles.topBarTitle}>
-              Clinical Data Studio
+              {t("sidebar.header.title")}
             </Typography>
             <Typography sx={styles.topBarSubtitle}>
-              De-ID & Synthesis
+              {t("sidebar.header.subtitle")}
             </Typography>
           </Box>
         </Box>
@@ -54,13 +54,17 @@ const Sidebar = ({ activeNav, setActiveNav, handleLogout }: SidebarProps) => {
           <HelpOutlineOutlined
             sx={{ fontSize: "18px", ...styles.navItemIcon(false) }}
           />
-          <Typography sx={styles.navItemText(false)}>Support</Typography>
+          <Typography sx={styles.navItemText(false)}>
+            {t("sidebar.bottom.support")}
+          </Typography>
         </Box>
         <Box sx={styles.navItem(false)} onClick={handleLogout}>
           <LogoutOutlined
             sx={{ fontSize: "18px", ...styles.navItemIcon(false) }}
           />
-          <Typography sx={styles.navItemText(false)}>Logout</Typography>
+          <Typography sx={styles.navItemText(false)}>
+            {t("sidebar.bottom.logout")}
+          </Typography>
         </Box>
       </Box>
     </Box>
