@@ -51,22 +51,22 @@ const DashboardPage = () => {
 
   const STAT_CARDS = [
     {
-      label: t("dashboard.stats.totalDocuments", "TOTAL DOCUMENTS"),
+      label: t("dashboard.stats.totalDocuments"),
       value: "0",
       icon: <DescriptionOutlined sx={{ fontSize: 24 }} />,
     },
     {
-      label: t("dashboard.stats.entitiesDetected", "ENTITIES DETECTED"),
+      label: t("dashboard.stats.entitiesDetected"),
       value: "0s",
       icon: <CheckCircleOutlined sx={{ fontSize: 24 }} />,
     },
     {
-      label: t("dashboard.stats.avgCompleteness", "AVG. ENTITIES/DOC"),
+      label: t("dashboard.stats.avgCompleteness"),
       value: "0%",
       icon: <Fingerprint sx={{ fontSize: 24 }} />,
     },
     {
-      label: t("dashboard.stats.successRate", "SUCCESS RATE"),
+      label: t("dashboard.stats.successRate"),
       value: "0%",
       icon: <FolderOpen sx={{ fontSize: 24 }} />,
     },
@@ -84,16 +84,10 @@ const DashboardPage = () => {
           <Box sx={styles.topBar}>
             <Box sx={styles.topBarCenter}>
               <Typography sx={styles.topBarCenterTitle}>
-                {t(
-                  "dashboard.topBar.title",
-                  "Clinical Data De-Identification & Synthetic Data Studio",
-                )}
+                {t("dashboard.topBar.title")}
               </Typography>
               <Typography sx={styles.topBarCenterSubtitle}>
-                {t(
-                  "dashboard.topBar.subtitle",
-                  "Enterprise-grade PII detection and anonymization",
-                )}
+                {t("dashboard.topBar.subtitle")}
               </Typography>
             </Box>
             <Box sx={styles.topBarActions}>
@@ -121,10 +115,7 @@ const DashboardPage = () => {
                       {t("dashboard.page.title", "Dashboard")}
                     </Typography>
                     <Typography sx={styles.pageSubtitle}>
-                      {t(
-                        "dashboard.page.subtitle",
-                        "Monitor your de-identification metrics",
-                      )}
+                      {t("dashboard.page.subtitle")}
                     </Typography>
                   </Box>
                   <Box
@@ -140,17 +131,11 @@ const DashboardPage = () => {
                         sx={{ fontSize: 20, color: styles.colors.accent }}
                       />
                       <Typography sx={styles.infoBannerText}>
-                        {t(
-                          "dashboard.page.infoBanner",
-                          "2 documents available for de-identification",
-                        )}
+                        {t("dashboard.page.infoBanner")}
                       </Typography>
                     </Box>
                     <Button variant="contained" sx={styles.startButton}>
-                      {t(
-                        "dashboard.page.startButton",
-                        "Start De-Identification",
-                      )}
+                      {t("dashboard.page.startButton")}
                     </Button>
                   </Box>
                 </Box>
@@ -188,10 +173,7 @@ const DashboardPage = () => {
                       <Box sx={styles.statFooter}>
                         <HourglassEmpty sx={{ fontSize: 14 }} />
                         <Typography sx={styles.statFooterText}>
-                          {t(
-                            "dashboard.stats.awaitingData",
-                            "Awaiting data stream...",
-                          )}
+                          {t("dashboard.stats.awaitingData")}
                         </Typography>
                       </Box>
                     </Box>
@@ -200,16 +182,10 @@ const DashboardPage = () => {
                 <Box sx={styles.complianceCard}>
                   <Box sx={styles.chartHeader}>
                     <Typography sx={styles.chartTitle}>
-                      {t(
-                        "dashboard.charts.complianceFramework",
-                        "Compliance Framework Usage",
-                      )}
+                      {t("dashboard.charts.complianceFramework")}
                     </Typography>
                     <Typography sx={styles.chartSubtitle}>
-                      {t(
-                        "dashboard.charts.complianceSubtitle",
-                        "Distribution of frameworks applied",
-                      )}
+                      {t("dashboard.charts.complianceSubtitle")}
                     </Typography>
                   </Box>
                   <Box sx={styles.skeletonCenter}>
@@ -220,16 +196,10 @@ const DashboardPage = () => {
               <Box sx={styles.fullWidthCard}>
                 <Box sx={styles.chartHeader}>
                   <Typography sx={styles.chartTitle}>
-                    {t(
-                      "dashboard.charts.entityTypesDetected",
-                      "Entity Types Detected",
-                    )}
+                    {t("dashboard.charts.entityTypesDetected")}
                   </Typography>
                   <Typography sx={styles.chartSubtitle}>
-                    {t(
-                      "dashboard.charts.entitySubtitle",
-                      "Distribution of frameworks applied",
-                    )}
+                    {t("dashboard.charts.entitySubtitle")}
                   </Typography>
                 </Box>
                 <Box sx={styles.barSkeletonContainer}>
@@ -237,7 +207,7 @@ const DashboardPage = () => {
                     <Box key={i} sx={styles.barSkeletonCol}>
                       <Box sx={{ ...styles.barSkeleton, height: `${h}%` }} />
                       <Typography sx={styles.barSkeletonLabel}>
-                        {t("dashboard.charts.noneLabel", "none")}
+                        {t("dashboard.charts.noneLabel")}
                       </Typography>
                     </Box>
                   ))}
@@ -247,16 +217,10 @@ const DashboardPage = () => {
                 <Box sx={styles.halfWidthCard}>
                   <Box sx={styles.chartHeader}>
                     <Typography sx={styles.chartTitle}>
-                      {t(
-                        "dashboard.charts.processingHistory",
-                        "Processing History (Last 7 Days)",
-                      )}
+                      {t("dashboard.charts.processingHistory")}
                     </Typography>
                     <Typography sx={styles.chartSubtitle}>
-                      {t(
-                        "dashboard.charts.historySubtitle",
-                        "Document and entity processing trends",
-                      )}
+                      {t("dashboard.charts.historySubtitle")}
                     </Typography>
                   </Box>
                   <Box sx={styles.barSkeletonContainer}>
@@ -264,7 +228,7 @@ const DashboardPage = () => {
                       <Box key={i} sx={styles.barSkeletonCol}>
                         <Box sx={{ ...styles.barSkeleton, height: `${h}%` }} />
                         <Typography sx={styles.barSkeletonLabel}>
-                          {t("dashboard.charts.noneLabel", "none")}
+                          {t("dashboard.charts.noneLabel")}
                         </Typography>
                       </Box>
                     ))}
@@ -273,16 +237,10 @@ const DashboardPage = () => {
                 <Box sx={styles.halfWidthCard}>
                   <Box sx={styles.chartHeader}>
                     <Typography sx={styles.chartTitle}>
-                      {t(
-                        "dashboard.charts.confidenceScore",
-                        "Confidence Score Distribution",
-                      )}
+                      {t("dashboard.charts.confidenceScore")}
                     </Typography>
                     <Typography sx={styles.chartSubtitle}>
-                      {t(
-                        "dashboard.charts.confidenceSubtitle",
-                        "Definition confidence level",
-                      )}
+                      {t("dashboard.charts.confidenceSubtitle")}
                     </Typography>
                   </Box>
                   <Box sx={styles.barSkeletonContainer}>
@@ -290,7 +248,7 @@ const DashboardPage = () => {
                       <Box key={i} sx={styles.barSkeletonCol}>
                         <Box sx={{ ...styles.barSkeleton, height: `${h}%` }} />
                         <Typography sx={styles.barSkeletonLabel}>
-                          {t("dashboard.charts.noneLabel", "none")}
+                          {t("dashboard.charts.noneLabel")}
                         </Typography>
                       </Box>
                     ))}
@@ -300,16 +258,10 @@ const DashboardPage = () => {
               <Box sx={styles.fullWidthCard}>
                 <Box sx={styles.chartHeader}>
                   <Typography sx={styles.chartTitle}>
-                    {t(
-                      "dashboard.charts.deIdentificationMethod",
-                      "De-Identification Method Usage",
-                    )}
+                    {t("dashboard.charts.deIdentificationMethod")}
                   </Typography>
                   <Typography sx={styles.chartSubtitle}>
-                    {t(
-                      "dashboard.charts.methodSubtitle",
-                      "Distribution of frameworks applied",
-                    )}
+                    {t("dashboard.charts.methodSubtitle")}
                   </Typography>
                 </Box>
                 <Box sx={styles.barSkeletonContainer}>
@@ -317,7 +269,7 @@ const DashboardPage = () => {
                     <Box key={i} sx={styles.barSkeletonCol}>
                       <Box sx={{ ...styles.barSkeleton, height: `${h}%` }} />
                       <Typography sx={styles.barSkeletonLabel}>
-                        {t("dashboard.charts.noneLabel", "none")}
+                        {t("dashboard.charts.noneLabel")}
                       </Typography>
                     </Box>
                   ))}

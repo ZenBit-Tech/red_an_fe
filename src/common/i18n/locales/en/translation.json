@@ -102,5 +102,64 @@
         "label": "Accuracy"
       }
     }
+  },
+  "dashboard": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "deIdentify": "De-Identify",
+      "syntheticData": "Synthetic Data",
+      "subscription": "My Subscription"
+    },
+    "timeFilter": {
+      "today": "Today",
+      "last7Days": "Last 7 days",
+      "twoWeeks": "2 Weeks",
+      "month": "Month"
+    },
+    "topBar": {
+      "title": "Clinical Data De-Identification & Synthetic Data Studio",
+      "subtitle": "Enterprise-grade PII detection and anonymization"
+    },
+    "page": {
+      "title": "Dashboard",
+      "subtitle": "Monitor your de-identification metrics",
+      "infoBanner": "2 documents available for de-identification",
+      "startButton": "Start De-Identification"
+    },
+    "stats": {
+      "totalDocuments": "TOTAL DOCUMENTS",
+      "entitiesDetected": "ENTITIES DETECTED",
+      "avgCompleteness": "AVG. ENTITIES/DOC",
+      "successRate": "SUCCESS RATE",
+      "awaitingData": "Awaiting data stream..."
+    },
+    "charts": {
+      "complianceFramework": "Compliance Framework Usage",
+      "complianceSubtitle": "Distribution of frameworks applied",
+      "entityTypesDetected": "Entity Types Detected",
+      "entitySubtitle": "Distribution of frameworks applied",
+      "processingHistory": "Processing History (Last 7 Days)",
+      "historySubtitle": "Document and entity processing trends",
+      "confidenceScore": "Confidence Score Distribution",
+      "confidenceSubtitle": "Definition confidence level",
+      "deIdentificationMethod": "De-Identification Method Usage",
+      "methodSubtitle": "Distribution of frameworks applied",
+      "noneLabel": "none"
+    }
+  },
+  "login": {
+    "title": "Sign in to Clinical Data Studio",
+    "subtitle": "Enter your email to receive a sign-in link",
+    "emailLabel": "EMAIL ADDRESS",
+    "emailPlaceholder": "you@company.com",
+    "sending": "Sending...",
+    "sendMagicLink": "Send Magic Link",
+    "back": "Back",
+    "checkInboxTitle": "Check your inbox",
+    "checkInboxDescription": "We sent a magic link to",
+    "didntReceive": "Didn't receive the email?",
+    "resendLink": "Click to resend",
+    "backToSignIn": "Back to sign in",
+    "errorSending": "Failed to send magic link. Please try again."
   }
 }

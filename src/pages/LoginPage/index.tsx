@@ -9,6 +9,8 @@ import {
   Button,
   Link,
   Divider,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { ArrowBack, MailOutline } from "@mui/icons-material";
 import * as styles from "@/pages/LoginPage/styles";
@@ -26,7 +28,7 @@ const LoginPage = () => {
   const [step, setStep] = useState<LoginStep>("form");
   const [submittedEmail, setSubmittedEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const [toastError, setToastError] = useState<string | null>(null);
   const {
     control,
     handleSubmit,
@@ -44,6 +46,7 @@ const LoginPage = () => {
   }, [navigate]);
 
   const onSubmit = async (data: LoginFormValues) => {
+    setToastError(null);
     setIsLoading(true);
     try {
       await apiClient.post("/auth/magic-link", { email: data.email });
@@ -51,6 +54,7 @@ const LoginPage = () => {
       setStep("checkInbox");
     } catch (error) {
       console.error("Error sending email:", error);
+      setToastError(t("login.errorSending"));
     } finally {
       setIsLoading(false);
     }
@@ -59,7 +63,7 @@ const LoginPage = () => {
   const handleResend = () => onSubmit({ email: submittedEmail });
   const handleBackToSignIn = () => setStep("form");
   const handleBack = () => navigate(-1);
-
+  const handleCloseToast = () => setToastError(null);
   return (
     <Box sx={styles.container}>
       <Box sx={styles.backgroundOverlay} />
@@ -67,10 +71,10 @@ const LoginPage = () => {
         <Box sx={styles.card}>
           {step === "form" ? (
             <Box sx={styles.cardInner}>
-              <Typography variant="h1" sx={styles.title}>
+              <Typography component="h1" sx={styles.title}>
                 {t("login.title")}
               </Typography>
-              <Typography variant="body1" sx={styles.subtitle}>
+              <Typography component="p" sx={styles.subtitle}>
                 {t("login.subtitle") ||
                   "Enter your email to receive a sign-in link"}
               </Typography>
@@ -146,11 +150,11 @@ const LoginPage = () => {
                 <Box sx={{ mb: "16px" }}>
                   <MailOutline sx={{ fontSize: 56, color: "#afc6ff" }} />
                 </Box>
-                <Typography variant="h3" sx={{ ...styles.title, mb: "8px" }}>
+                <Typography component="h3" sx={{ ...styles.title, mb: "8px" }}>
                   {t("login.checkInboxTitle")}
                 </Typography>
                 <Typography
-                  variant="body2"
+                  component="p"
                   sx={{ ...styles.subtitle, mb: "32px", fontSize: "15px" }}
                 >
                   {t("login.checkInboxDescription") ||
@@ -160,7 +164,7 @@ const LoginPage = () => {
                   </Box>
                 </Typography>
                 <Typography
-                  variant="body2"
+                  component="p"
                   sx={{
                     color: "rgba(255,255,255,0.4)",
                     fontFamily: styles.font,
@@ -200,6 +204,21 @@ const LoginPage = () => {
           )}
         </Box>
       </Box>
+      <Snackbar
+        open={!!toastError}
+        autoHideDuration={6000}
+        onClose={handleCloseToast}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleCloseToast}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%", fontFamily: styles.font }}
+        >
+          {toastError}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

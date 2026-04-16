@@ -1,26 +1,34 @@
-import theme from "@/common/theme/index";
+import { theme } from "@/common/theme/theme";
+import {
+  primaryColors,
+  secondaryColors,
+  neutralColors,
+  textColors,
+  strokeColors,
+  backgroundColor,
+} from "@/constants/themeConstants";
 
 export const font =
   (theme.typography.fontFamily as string) || "'Manrope', sans-serif";
 
 export const colors = {
-  pageBg: "#060E20",
-  surfaceLow: "#131B2E",
-  surfaceMid: "#222A3D",
-  surfaceHigh: "#2D3548",
-  borderSubtle: "rgba(67,70,82,0.15)",
+  pageBg: secondaryColors[900],
+  surfaceLow: neutralColors[900],
+  surfaceMid: neutralColors[800],
+  surfaceHigh: neutralColors[700],
+  borderSubtle: strokeColors[150],
   borderMid: "rgba(67,70,82,0.4)",
-  accent: "#B0C6FF",
-  textPrimary: "#FFFFFF",
-  textSecondary: "#C3C6D4",
-  textLabel: "#DAE2FD",
+  accent: primaryColors[200],
+  textPrimary: textColors[50],
+  textSecondary: textColors[200],
+  textLabel: primaryColors[50],
 };
 
 export const pageWrapper = {
   display: "flex",
   flexDirection: "column",
   minHeight: "100vh",
-  bgcolor: "#0B1326",
+  bgcolor: backgroundColor,
   fontFamily: font,
 };
 
@@ -44,20 +52,20 @@ export const topBar = {
   justifyContent: "space-between",
   px: { xs: 4, md: "93px" },
   py: 3,
-  bgcolor: "#0b1326",
+  bgcolor: backgroundColor,
   borderBottom: `1px solid rgba(67,70,82,0.25)`,
   flexShrink: 0,
 };
 
 export const topBarCenterTitle = {
-  fontWeight: 500,
-  color: "#b0c6ff",
-  fontSize: "20px",
+  fontWeight: theme.typography.fontWeight500,
+  color: primaryColors[200],
+  fontSize: theme.typography.fontSize20,
 };
 
 export const topBarCenterSubtitle = {
-  color: "#c3c6d4",
-  fontSize: "14px",
+  color: textColors[200],
+  fontSize: theme.typography.fontSize14,
 };
 
 export const topBarActions = {
@@ -87,7 +95,7 @@ export const avatarButton = {
   width: 36,
   height: 36,
   borderRadius: "10px",
-  bgcolor: "#0d47a1",
+  bgcolor: primaryColors[700],
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -144,26 +152,28 @@ export const pageHeaderRow2 = {
 };
 
 export const pageTitle = {
-  color: "#dae2fd",
-  fontWeight: 700,
-  fontSize: "32px",
+  color: primaryColors[50],
+  fontWeight: theme.typography.fontWeight700,
+  fontSize: theme.typography.fontSize32,
 };
 
 export const pageSubtitle = {
-  color: "#c3c6d4",
-  fontSize: "12px",
+  color: textColors[200],
+  fontSize: theme.typography.fontSize12,
 };
 
 export const startButton = {
-  bgcolor: "#b0c6ff",
-  color: "#0b1326",
-  fontWeight: 700,
+  backgroundImage: "none",
+  bgcolor: primaryColors[200],
+  color: backgroundColor,
+  fontWeight: theme.typography.fontWeight700,
   px: "16px",
   py: "12px",
   borderRadius: "8px",
   textTransform: "none",
   "&:hover": {
-    bgcolor: "#FFF",
+    bgcolor: textColors[50],
+    backgroundImage: "none",
   },
 };
 
@@ -177,7 +187,7 @@ export const timeFilterPill = (active: boolean) => ({
   py: "10px",
   borderRadius: "8px",
   cursor: "pointer",
-  bgcolor: "#222a3d",
+  bgcolor: neutralColors[800],
   border: active
     ? `1px solid rgba(176,198,255,0.3)`
     : `1px solid rgba(67,70,82,0.4)`,
@@ -185,8 +195,10 @@ export const timeFilterPill = (active: boolean) => ({
 
 export const timeFilterText = (active: boolean) => ({
   color: active ? colors.textPrimary : colors.textSecondary,
-  fontSize: "14px",
-  fontWeight: active ? 500 : 400,
+  fontSize: theme.typography.fontSize14,
+  fontWeight: active
+    ? theme.typography.fontWeight500
+    : theme.typography.fontWeight400,
 });
 
 export const infoBanner = {
@@ -203,7 +215,7 @@ export const infoBanner = {
 };
 
 export const infoBannerText = {
-  color: "#b0c6ff",
+  color: primaryColors[200],
   fontSize: "13px",
   fontFamily: font,
 };
@@ -242,8 +254,8 @@ export const statCardHeader = {
 
 export const statLabel = {
   color: colors.textLabel,
-  fontSize: "12px",
-  fontWeight: 500,
+  fontSize: theme.typography.fontSize12,
+  fontWeight: theme.typography.fontWeight500,
   textTransform: "uppercase",
 };
 
@@ -259,13 +271,13 @@ export const statIconBox = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  color: "#b0c6ff",
+  color: primaryColors[200],
 };
 
 export const statValue = {
-  color: "#FFF",
-  fontSize: "32px",
-  fontWeight: 500,
+  color: textColors[50],
+  fontSize: theme.typography.fontSize32,
+  fontWeight: theme.typography.fontWeight500,
 };
 
 export const statFooter = {
@@ -276,13 +288,13 @@ export const statFooter = {
 };
 
 export const statFooterText = {
-  fontSize: "12px",
+  fontSize: theme.typography.fontSize12,
   fontFamily: font,
 };
 
 export const chartCardBase = {
   boxSizing: "border-box",
-  background: "#131b2e",
+  background: neutralColors[900],
   border: "1px solid rgba(176, 198, 255, 0.05)",
   boxShadow: "0 18px 26px 0 rgba(0, 0, 0, 0.1)",
   borderRadius: "8px",
@@ -323,15 +335,15 @@ export const chartHeader = {
 };
 
 export const chartTitle = {
-  color: "#FFF",
-  fontSize: "18px",
-  fontWeight: 600,
+  color: textColors[50],
+  fontSize: theme.typography.fontSize18,
+  fontWeight: theme.typography.fontWeight600,
   fontFamily: font,
 };
 
 export const chartSubtitle = {
   color: colors.textSecondary,
-  fontSize: "12px",
+  fontSize: theme.typography.fontSize12,
   fontFamily: font,
 };
 
@@ -377,7 +389,7 @@ export const barSkeleton = {
 
 export const barSkeletonLabel = {
   color: "rgba(255, 255, 255, 0.2)",
-  fontSize: "10px",
+  fontSize: theme.typography.fontSize10,
   fontFamily: font,
 };
 

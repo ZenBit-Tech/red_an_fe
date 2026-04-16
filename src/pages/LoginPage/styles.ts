@@ -1,4 +1,10 @@
-import theme from "@/common/theme/index";
+import { theme } from "@/common/theme/theme";
+import {
+  primaryColors,
+  neutralColors,
+  textColors,
+  strokeColors,
+} from "@/constants/themeConstants";
 
 export const font =
   (theme.typography.fontFamily as string) || "'Inter', sans-serif";
@@ -33,8 +39,8 @@ export const contentWrapper = {
 export const card = {
   width: "456px",
   height: "473px",
-  bgcolor: "#131b2e",
-  border: "1px solid rgba(67, 70, 82, 0.)",
+  bgcolor: neutralColors[900], // "#131b2e"
+  border: `1px solid ${strokeColors[500]}`, // "rgba(67, 70, 82, 0.5)"
   borderRadius: "8px",
   position: "relative",
   overflow: "hidden",
@@ -59,8 +65,8 @@ export const cardInner = {
 };
 
 export const title = {
-  fontWeight: 400,
-  color: "#FFFFFF",
+  fontWeight: theme.typography.fontWeight400,
+  color: textColors[50], // "#FFFFFF"
   mb: "8px",
   fontFamily: font,
   fontSize: "24px",
@@ -71,41 +77,41 @@ export const subtitle = {
   color: "rgba(255, 255, 255, 0.6)",
   mb: "45px",
   fontFamily: font,
-  fontSize: "14px",
+  fontSize: theme.typography.fontSize14,
   lineHeight: 1.6,
 };
 
 export const labelStyles = {
-  fontWeight: 500,
+  fontWeight: theme.typography.fontWeight500,
   color: "rgba(187, 198, 197, 0.8)",
   display: "block",
   mb: "16px",
   fontFamily: font,
-  fontSize: "12px",
+  fontSize: theme.typography.fontSize12,
   letterSpacing: "0.05em",
   textTransform: "uppercase" as const,
 };
 
 export const inputStyles = {
   fontFamily: font,
-  fontSize: "16px",
+  fontSize: theme.typography.fontSize16,
   borderRadius: "10px",
-  bgcolor: "rgba(51, 63, 90, 0.4)",
-  color: "white",
+  bgcolor: strokeColors[400], // "rgba(51, 63, 90, 0.4)"
+  color: textColors[50], // "white"
   "& input": {
-    color: "white",
+    color: textColors[50], // "white"
     padding: "14px 16px",
     "&::placeholder": { color: "rgba(187, 198, 197, 0.4)", opacity: 1 },
   },
   "& .MuiOutlinedInput-notchedOutline": {
-    borderColor: "rgba(51, 63, 90, 0.4)",
+    borderColor: strokeColors[400],
     borderRadius: "8px",
   },
   "&:hover .MuiOutlinedInput-notchedOutline": {
-    borderColor: "rgba(51, 63, 90, 0.4)",
+    borderColor: strokeColors[400],
   },
   "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-    borderColor: "#afc6ff !important",
+    borderColor: `${primaryColors[200]} !important`, // "#afc6ff"
     borderWidth: "1px !important",
   },
 };
@@ -121,20 +127,23 @@ export const submitButton = {
   mb: "32px",
   borderRadius: "10px",
   fontFamily: font,
-  fontWeight: 700,
-  fontSize: "16px",
+  fontWeight: theme.typography.fontWeight700,
+  fontSize: theme.typography.fontSize16,
   textTransform: "none",
-  bgcolor: "#afc6ff",
+  bgcolor: primaryColors[200], // "#afc6ff"
   color: "rgba(19, 27, 46, 0.8)",
   boxShadow: "none",
+  backgroundImage: "none", // Вимикаємо градієнт глобальної теми
   "&:hover": {
     bgcolor: "#c2d5ff",
     boxShadow: "none",
+    backgroundImage: "none", // Вимикаємо градієнт глобальної теми при ховері
   },
   "&.Mui-disabled": {
     bgcolor: "rgba(175, 198, 255, 0.3)",
     color: "#949faf",
     boxShadow: "none",
+    backgroundImage: "none",
   },
 };
 
@@ -142,11 +151,11 @@ export const linkButton = {
   display: "flex",
   alignItems: "center",
   gap: 1,
-  color: "#C3C6D4",
+  color: textColors[200], // "#C3C6D4"
   fontFamily: font,
-  fontSize: "14px",
+  fontSize: theme.typography.fontSize14,
   cursor: "pointer",
   transition: "color 0.2s",
   p: 0,
-  "&:hover": { color: "#ffffff" },
+  "&:hover": { color: textColors[50] }, // "#ffffff"
 };
