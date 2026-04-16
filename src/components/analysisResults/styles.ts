@@ -155,8 +155,8 @@ export const PanelSurface = styled(Box)(({ theme }) => ({
   overflowY: "auto",
   padding: theme.spacing(2),
   borderRadius: theme.spacing(analysisResultsStyles.panelSurfaceRadius),
-  border: `1px solid ${theme.palette.grey[200]}`,
-  backgroundColor: theme.palette.grey[50],
+  border: `1px solid ${theme.palette.neutralColors[600]}`,
+  backgroundColor: theme.palette.neutralColors[800],
   [theme.breakpoints.down("sm")]: {
     minHeight: 220,
     padding: theme.spacing(1.5),
@@ -194,14 +194,14 @@ export const PanelActionButton = styled(Button)(({ theme }) => ({
   minWidth: 0,
   padding: theme.spacing(0.75, 1.25),
   borderRadius: theme.spacing(1),
-  borderColor: theme.palette.grey[300],
+  borderColor: theme.palette.neutralColors[500],
   color: theme.palette.text.primary,
   backgroundColor: theme.palette.background.paper,
   fontSize: "0.75rem",
   fontWeight: 500,
   "&:hover": {
-    borderColor: theme.palette.grey[400],
-    backgroundColor: theme.palette.grey[50],
+    borderColor: theme.palette.neutralColors[400],
+    backgroundColor: theme.palette.neutralColors[800],
   },
 }));
 
@@ -216,10 +216,10 @@ export const DownloadFormatSelect = styled(Select)(({ theme }) => ({
     color: theme.palette.text.primary,
   },
   "& .MuiOutlinedInput-notchedOutline": {
-    borderColor: theme.palette.grey[300],
+    borderColor: theme.palette.neutralColors[500],
   },
   "&:hover .MuiOutlinedInput-notchedOutline": {
-    borderColor: theme.palette.grey[400],
+    borderColor: theme.palette.neutralColors[400],
   },
 }));
 
@@ -298,7 +298,7 @@ export const StyledTable = styled(Table)(({ theme }) => ({
 }));
 
 export const StyledTableHead = styled(TableHead)(({ theme }) => ({
-  backgroundColor: theme.palette.grey[50],
+  backgroundColor: theme.palette.neutralColors[800],
   zIndex: 2,
   "& .MuiTableCell-head": {
     fontWeight: 700,
@@ -331,15 +331,17 @@ export const StyledTableRow = styled(TableRow, {
   shouldForwardProp: (prop) => prop !== "active",
 })<StyledTableRowProps>(({ active, theme }) => ({
   backgroundColor: active
-    ? "rgba(21, 101, 192, 0.03)"
-    : theme.palette.common.white,
+    ? "rgba(37, 99, 235, 0.06)"
+    : theme.palette.background.paper,
   "&:hover": {
     backgroundColor: active
-      ? "rgba(21, 101, 192, 0.05)"
-      : theme.palette.common.white,
+      ? "rgba(37, 99, 235, 0.10)"
+      : theme.palette.neutralColors[700],
   },
   "& .MuiTableCell-root": {
-    color: active ? theme.palette.text.primary : theme.palette.grey[400],
+    color: active
+      ? theme.palette.text.primary
+      : theme.palette.neutralColors[300],
   },
   "&:last-child td": {
     borderBottom: 0,
@@ -354,7 +356,9 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export const IndexText = styled(Box)<MutedStateProps>(
   ({ inactive, theme }) => ({
-    color: inactive ? theme.palette.grey[400] : theme.palette.text.secondary,
+    color: inactive
+      ? theme.palette.neutralColors[400]
+      : theme.palette.text.secondary,
     fontSize: "0.71rem",
     fontVariantNumeric: "tabular-nums",
   }),
@@ -362,7 +366,9 @@ export const IndexText = styled(Box)<MutedStateProps>(
 
 export const NumericText = styled(Box)<MutedStateProps>(
   ({ inactive, theme }) => ({
-    color: inactive ? theme.palette.grey[400] : theme.palette.text.secondary,
+    color: inactive
+      ? theme.palette.neutralColors[400]
+      : theme.palette.text.secondary,
     fontSize: "0.72rem",
     fontVariantNumeric: "tabular-nums",
     whiteSpace: "nowrap",
@@ -378,12 +384,14 @@ export const ScoreBadge = styled(Box)<MutedStateProps>(
     padding: theme.spacing(0.125, 0.5),
     borderRadius: theme.spacing(analysisResultsStyles.badgeRadius / 8),
     border: inactive
-      ? `1px solid ${theme.palette.grey[200]}`
+      ? `1px solid ${theme.palette.neutralColors[600]}`
       : `1px solid rgba(245, 127, 23, 0.28)`,
     backgroundColor: inactive
-      ? theme.palette.grey[50]
+      ? theme.palette.neutralColors[800]
       : "rgba(245, 127, 23, 0.08)",
-    color: inactive ? theme.palette.grey[500] : theme.palette.warning.main,
+    color: inactive
+      ? theme.palette.neutralColors[300]
+      : theme.palette.warning.main,
     fontSize: "0.67rem",
     fontWeight: 700,
     fontVariantNumeric: "tabular-nums",
@@ -450,18 +458,18 @@ export const DecisionFactorBadge = styled(Box, {
     whiteSpace: "nowrap",
     opacity: inactive ? 0.55 : 1,
     color: inactive
-      ? theme.palette.grey[500]
+      ? theme.palette.neutralColors[300]
       : level === "High"
         ? theme.palette.success.main
         : level === "Low"
           ? theme.palette.text.secondary
           : theme.palette.text.primary,
     backgroundColor: inactive
-      ? theme.palette.grey[100]
+      ? theme.palette.neutralColors[700]
       : level === "High"
         ? "rgba(46, 125, 50, 0.10)"
         : level === "Low"
-          ? theme.palette.grey[100]
+          ? theme.palette.neutralColors[700]
           : "rgba(148, 163, 184, 0.14)",
   }),
 );
@@ -479,11 +487,11 @@ export const ActionToggleButton = styled(Button, {
   borderRadius: theme.spacing(0.85),
   border: active
     ? "1px solid transparent"
-    : `1px solid ${theme.palette.grey[300]}`,
+    : `1px solid ${theme.palette.neutralColors[500]}`,
   backgroundColor: active
     ? "rgba(47, 128, 237, 0.14)"
-    : theme.palette.grey[100],
-  color: active ? theme.palette.primary.main : theme.palette.grey[500],
+    : theme.palette.neutralColors[700],
+  color: active ? theme.palette.primary.main : theme.palette.neutralColors[300],
   fontSize: "0.66rem",
   fontWeight: 700,
   lineHeight: 1,
@@ -492,13 +500,15 @@ export const ActionToggleButton = styled(Button, {
   justifyContent: "space-between",
   "& .MuiButton-endIcon": {
     marginLeft: theme.spacing(0.5),
-    color: active ? theme.palette.primary.main : theme.palette.grey[400],
+    color: active
+      ? theme.palette.primary.main
+      : theme.palette.neutralColors[400],
   },
   "&:hover": {
-    borderColor: active ? "transparent" : theme.palette.grey[300],
+    borderColor: active ? "transparent" : theme.palette.neutralColors[500],
     backgroundColor: active
       ? "rgba(47, 128, 237, 0.18)"
-      : theme.palette.grey[100],
+      : theme.palette.neutralColors[700],
     boxShadow: "none",
   },
 }));

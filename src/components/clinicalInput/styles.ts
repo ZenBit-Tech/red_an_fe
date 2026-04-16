@@ -126,7 +126,7 @@ export const ClinicalInputTabButton = styled(Tab)(({ theme }) => ({
   "&.Mui-selected": {
     color: theme.palette.text.primary,
     backgroundColor: theme.palette.background.paper,
-    borderColor: theme.palette.grey[400],
+    borderColor: theme.palette.neutralColors[500],
     boxShadow: "0 1px 2px rgba(15, 23, 42, 0.18)",
   },
   [theme.breakpoints.down("md")]: {

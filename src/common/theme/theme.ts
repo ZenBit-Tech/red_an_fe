@@ -63,6 +63,17 @@ declare module "@mui/material/styles" {
     fontWeight800?: number;
   }
 
+  interface ComplianceFrameworkChip {
+    HIPAA: string;
+    GDPR: string;
+    CCPA: string;
+    CUSTOM: string;
+  }
+
+  interface ComplianceColors {
+    frameworkChip: ComplianceFrameworkChip;
+  }
+
   interface Palette {
     primaryColors: PrimaryColorsType;
     secondaryColors: SecondaryColorsType;
@@ -71,6 +82,7 @@ declare module "@mui/material/styles" {
     tertiaryColors: TertiaryColorsType;
     strokeColors: StrokeColorsType;
     backgroundColor: string;
+    compliance: ComplianceColors;
   }
 
   interface PaletteOptions {
@@ -81,6 +93,7 @@ declare module "@mui/material/styles" {
     tertiaryColors?: TertiaryColorsType;
     strokeColors?: StrokeColorsType;
     backgroundColor?: string;
+    compliance?: ComplianceColors;
   }
 }
 
@@ -110,8 +123,20 @@ export const theme = createTheme({
     },
     text: {
       primary: primaryColors[50],
+      secondary: neutralColors[300],
+    },
+    action: {
+      hover: neutralColors[700],
     },
     error: { main: tertiaryColors[500] },
+    compliance: {
+      frameworkChip: {
+        HIPAA: primaryColors[600],
+        GDPR: "#7c3aed",
+        CCPA: "#065f46",
+        CUSTOM: neutralColors[500],
+      },
+    },
 
     primaryColors,
     secondaryColors,
