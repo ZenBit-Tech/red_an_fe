@@ -11,36 +11,53 @@ export const SectionLeadershipTeam = () => {
           {t("ourTeam.firstContentParagraph")}
         </S.SectionDescription>
         <S.TeamList>
-          {/* Ітем 1 */}
           <S.TeamListItem>
-            <S.IconWrapper>{/* <IconMission1 /> */}</S.IconWrapper>
-            <S.ItemTitle>{t("ourTeam.itemOneTitle")}</S.ItemTitle>
-            <S.ItemDescription>
-              {t("ourTeam.itemOneDescription")}
-            </S.ItemDescription>
+            <S.TeamImage
+              src="https://placeholder.apptor.studio/400/450/product1.png"
+              alt="Team Member"
+            />
+            <S.ContentOverlay>
+              <S.ItemTitle>{t("ourTeam.itemOneTitle")}</S.ItemTitle>
+              <S.ItemDescription>
+                {t("ourTeam.itemOneDescription")}
+              </S.ItemDescription>
+            </S.ContentOverlay>
           </S.TeamListItem>
 
-          {/* Ітем 2 */}
           <S.TeamListItem>
-            <S.IconWrapper>{/* <IconMission2 /> */}</S.IconWrapper>
-            <S.ItemTitle>{t("ourTeam.itemTwoTitle")}</S.ItemTitle>
-            <S.ItemDescription>
-              {t("ourTeam.itemTwoDescription")}
-            </S.ItemDescription>
+            <S.TeamImage
+              src="https://placeholder.apptor.studio/200/200/product2.png"
+              alt="Team Member"
+            />
+            <S.ContentOverlay>
+              <S.ItemTitle>{t("ourTeam.itemTwoTitle")}</S.ItemTitle>
+              <S.ItemDescription>
+                {t("ourTeam.itemTwoDescription")}
+              </S.ItemDescription>{" "}
+            </S.ContentOverlay>
           </S.TeamListItem>
 
-          {/* Ітем 3 */}
           <S.TeamListItem>
-            <S.IconWrapper>{/* <IconMission3 /> */}</S.IconWrapper>
-            <S.ItemTitle>{t("ourTeam.itemThreeTitle")}</S.ItemTitle>
-            <S.ItemDescription>
-              {t("ourTeam.itemThreeDescription")}
-            </S.ItemDescription>
+            <S.TeamImage
+              src="https://placeholder.apptor.studio/200/200/product3.png"
+              alt="Team Member"
+            />{" "}
+            <S.ContentOverlay>
+              <S.ItemTitle>{t("ourTeam.itemThreeTitle")}</S.ItemTitle>
+              <S.ItemDescription>
+                {t("ourTeam.itemThreeDescription")}
+              </S.ItemDescription>{" "}
+            </S.ContentOverlay>
           </S.TeamListItem>
         </S.TeamList>
-        <S.TeamPromotionText>
-          {t("ourTeam.secondContentParagraph")}
-        </S.TeamPromotionText>
+        <S.TeamPromotionTextBox>
+          <S.TeamPromotionText>
+            {t("ourTeam.secondContentParagraph")}
+          </S.TeamPromotionText>
+          <S.TeamPromotionText>
+            {t("ourTeam.theardContentParagraph")}
+          </S.TeamPromotionText>
+        </S.TeamPromotionTextBox>
       </S.CustomContainer>
     </S.SectionWrapper>
   );

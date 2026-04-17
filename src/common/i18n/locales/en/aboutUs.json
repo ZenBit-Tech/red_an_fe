@@ -31,8 +31,9 @@
     "itemOneDescription": "CEO & Founder",
     "itemTwoTitle": "Marcus Thorne",
     "itemTwoDescription": "Chief Security Officer",
-    "itemThreeTitle": "Sarah Jenkin",
+    "itemThreeTitle": "Sarah Jenkins",
     "itemThreeDescription": "Lead System & Architect",
-    "secondContentParagraph": "Clinical Data Studio is proud to be backed by leading healthcare and technology investors, our team is committed to transforming how healthcare organizations work with sensitive clinical data."
+    "secondContentParagraph": "Clinical Data Studio is proud to be backed by leading healthcare and technology investors, ",
+    "theardContentParagraph": "our team is committed to transforming how healthcare organizations work with sensitive clinical data."
   }
 }

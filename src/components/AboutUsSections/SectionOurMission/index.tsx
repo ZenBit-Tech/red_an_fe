@@ -18,9 +18,14 @@ export const SectionOurMission = () => {
         </Box>
 
         <S.ItemsList>
-          {/* Ітем 1 */}
           <S.MissionItem>
-            <S.IconWrapper>{/* <IconMission1 /> */}</S.IconWrapper>
+            <S.IconWrapper>
+              {
+                <svg>
+                  <use href={"/aboutUsPage/icons.svg#icon-Icon-1"} />
+                </svg>
+              }
+            </S.IconWrapper>
             <S.ItemTitle>100%</S.ItemTitle>
             <S.ItemDescription>
               {t("ourMission.itemOneDescription")}
@@ -28,7 +33,13 @@ export const SectionOurMission = () => {
           </S.MissionItem>
 
           <S.MissionItem>
-            <S.IconWrapper>{/* <IconMission2 /> */}</S.IconWrapper>
+            <S.IconWrapper>
+              {
+                <svg>
+                  <use href={"/aboutUsPage/icons.svg#icon-Icon-2"} />
+                </svg>
+              }
+            </S.IconWrapper>
             <S.ItemTitle>500+</S.ItemTitle>
             <S.ItemDescription>
               {t("ourMission.itemTwoDescription")}
@@ -36,7 +47,13 @@ export const SectionOurMission = () => {
           </S.MissionItem>
 
           <S.MissionItem>
-            <S.IconWrapper>{/* <IconMission3 /> */}</S.IconWrapper>
+            <S.IconWrapper>
+              {
+                <svg>
+                  <use href={"/aboutUsPage/icons.svg#icon-Icon-3"} />
+                </svg>
+              }
+            </S.IconWrapper>
             <S.ItemTitle>10M+</S.ItemTitle>
             <S.ItemDescription>
               {t("ourMission.itemThreeDescription")}
@@ -44,7 +61,13 @@ export const SectionOurMission = () => {
           </S.MissionItem>
 
           <S.MissionItem>
-            <S.IconWrapper>{/* <IconMission4 /> */}</S.IconWrapper>
+            <S.IconWrapper>
+              {
+                <svg>
+                  <use href={"/aboutUsPage/icons.svg#icon-Icon-4"} />
+                </svg>
+              }
+            </S.IconWrapper>
             <S.ItemTitle>99.9%</S.ItemTitle>
             <S.ItemDescription>
               {t("ourMission.itemFourDescription")}
