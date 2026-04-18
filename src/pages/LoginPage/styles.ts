@@ -80,7 +80,12 @@ export const subtitle = {
   fontSize: theme.typography.fontSize14,
   lineHeight: 1.6,
 };
-
+export const arrowBack = {
+  fontSize: theme.typography.fontSize18,
+};
+export const colorWhite = {
+  color: "#FFFFFF",
+};
 export const labelStyles = {
   fontWeight: theme.typography.fontWeight500,
   color: "rgba(187, 198, 197, 0.8)",
@@ -158,4 +163,74 @@ export const linkButton = {
   transition: "color 0.2s",
   p: 0,
   "&:hover": { color: textColors[50] },
+};
+export const requiredAsterisk = {
+  color: "rgba(255, 255, 255, 0.6)",
+  ml: 0.5,
+};
+
+export const checkInboxCardInner = {
+  ...cardInner,
+  textAlign: "center" as const,
+  display: "flex",
+  flexDirection: "column" as const,
+  height: "100%",
+};
+
+export const checkInboxContent = {
+  flexGrow: 1,
+  display: "flex",
+  flexDirection: "column" as const,
+  justifyContent: "center",
+};
+
+export const mailIconWrapper = { mb: "16px" };
+
+export const mailIcon = {
+  fontSize: 56,
+  color: primaryColors[200],
+};
+
+export const checkInboxTitle = {
+  ...title,
+  mb: "8px",
+};
+
+export const checkInboxSubtitle = {
+  ...subtitle,
+  mb: "32px",
+  fontSize: "15px",
+};
+
+export const submittedEmailText = {
+  color: textColors[50],
+};
+
+export const didntReceiveText = {
+  color: "rgba(255,255,255,0.4)",
+  fontFamily: font,
+  mb: "16px",
+};
+
+export const resendLinkAction = {
+  color: primaryColors[700],
+  fontSize: "0.875rem",
+  cursor: "pointer",
+  textDecoration: "underline",
+  "&:hover": { color: primaryColors[600] },
+};
+
+export const backToSignInWrapper = {
+  mt: "auto",
+  pt: "75px",
+  textAlign: "left" as const,
+};
+
+export const alertStyles = {
+  width: "100%",
+  fontFamily: font,
+};
+export const boxHandleBack = {
+  mt: "auto",
+  pt: "24px",
 };

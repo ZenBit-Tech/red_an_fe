@@ -396,3 +396,13 @@ export const barSkeletonLabel = {
 export const topBarCenter = {
   flex: 1,
 };
+export const infoBox = {
+  display: "flex",
+  alignItems: "center",
+  gap: 2,
+  flexWrap: "wrap",
+};
+export const circleOutline = {
+  fontSize: theme.typography.fontSize20,
+  color: "#b0c6ff",
+};

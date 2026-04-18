@@ -89,3 +89,17 @@ export const COMPANY_LINKS = [
   { label: "Contact Us", to: "/contact" },
   { label: "Subscription plan", to: "/subscription" },
 ];
+export const APP_ROUTES = {
+  DASHBOARD: "/dashboard",
+  SIGN_IN: "/signin",
+} as const;
+
+export const STORAGE_KEYS = {
+  ACCESS_TOKEN: "accessToken",
+  USER: "user",
+} as const;
+
+export const API_ENDPOINTS = {
+  MAGIC_LINK: "/auth/magic-link",
+  MAGIC_LINK_CALLBACK: "/auth/magic-link/callback",
+} as const;

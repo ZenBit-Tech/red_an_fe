@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { Box, Typography, IconButton, Button } from "@mui/material";
 import {
   FolderOpen,
@@ -15,39 +13,19 @@ import {
 } from "@mui/icons-material";
 import * as styles from "./styles";
 import Sidebar from "@/components/sidebar/index";
-import { TIME_FILTERS, type TimeFilter } from "./constants";
-import type { NavKey } from "@/components/sidebar/constant";
+import { TIME_FILTERS } from "./constants";
+import { useDashboard } from "./hooks/useDashboard";
 
 const DashboardPage = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [activeNav, setActiveNav] = useState<NavKey>("dashboard");
-  const [activeTime, setActiveTime] = useState<TimeFilter>("7days");
-
-  const [userEmail] = useState<string>(() => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) {
-      try {
-        const parsedUser = JSON.parse(savedUser);
-        return parsedUser.email || "";
-      } catch {
-        return savedUser;
-      }
-    }
-    return "";
-  });
-
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (!token) {
-      navigate("/signin");
-    }
-  }, [navigate]);
-
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate("/login");
-  };
+  const {
+    activeNav,
+    setActiveNav,
+    activeTime,
+    setActiveTime,
+    userEmail,
+    handleLogout,
+  } = useDashboard();
 
   const STAT_CARDS = [
     {
@@ -99,9 +77,7 @@ const DashboardPage = () => {
               </IconButton>
               <Typography sx={styles.avatarEmail}>{userEmail}</Typography>
               <Box sx={styles.avatarButton}>
-                <AccountCircleOutlined
-                  sx={{ fontSize: 20, color: "#b0c6ff" }}
-                />
+                <AccountCircleOutlined sx={styles.circleOutline} />
               </Box>
             </Box>
           </Box>
@@ -112,20 +88,13 @@ const DashboardPage = () => {
                 <Box sx={styles.pageHeaderRow1}>
                   <Box>
                     <Typography sx={styles.pageTitle}>
-                      {t("dashboard.page.title", "Dashboard")}
+                      {t("dashboard.page.title")}
                     </Typography>
                     <Typography sx={styles.pageSubtitle}>
                       {t("dashboard.page.subtitle")}
                     </Typography>
                   </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 2,
-                      flexWrap: "wrap",
-                    }}
-                  >
+                  <Box sx={styles.infoBox}>
                     <Box sx={styles.infoBanner}>
                       <InfoOutlined
                         sx={{ fontSize: 20, color: styles.colors.accent }}

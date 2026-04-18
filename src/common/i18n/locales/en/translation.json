@@ -162,6 +162,7 @@
     "backToSignIn": "Back to sign in",
     "errorSending": "Failed to send magic link. Please try again."
   },
+  "verify": { "verifying": " Verifying magic link..." },
   "sidebar": {
     "header": {
       "title": "Clinical Data Studio",
