@@ -98,7 +98,7 @@ export const AnalysisResultsContainer = styled(Box)(({ theme }) => ({
 }));
 
 export const AnalysisResultsTitle = styled(Box)(({ theme }) => ({
-  fontSize: `${analysisResultsStyles.fontSizeTitle}rem`,
+  fontSize: `${theme.typography.fontSize20}px`,
   fontWeight: theme.typography.fontWeight600,
   color: theme.palette.text.primary,
   [theme.breakpoints.down("md")]: {
@@ -444,7 +444,7 @@ export const HighlightedEntity = styled("span", {
   border: `1px solid ${theme.palette.background.paper}`,
   backgroundColor: highlightColor,
   color: theme.palette.text.primary,
-  fontWeight: 500,
+  fontWeight: theme.typography.fontWeight500,
   cursor: "default",
   boxShadow: "0 1px 2px rgba(15, 23, 42, 0.08)",
 }));
