@@ -1,95 +1,102 @@
 import { styled } from "@mui/material/styles";
 import { Box, Button } from "@mui/material";
-import {
-  primaryColors,
-  neutralColors,
-  strokeColors,
-} from "@/constants/themeConstants";
-
-// ─── Section wrapper ──────────────────────────────────────────────────────────
+import { neutralColors, strokeColors } from "@/constants/themeConstants";
 
 export const ReadyToProtectSection = styled("section")(({ theme }) => ({
   padding: theme.spacing(10, 0),
+  backgroundColor: theme.palette.strokeColors[700],
   [theme.breakpoints.up("md")]: {
     padding: theme.spacing(20, 0),
   },
 }));
-
-// ─── Inner content column ─────────────────────────────────────────────────────
 
 export const ContentWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   textAlign: "center",
+  justifyContent: "center",
   gap: theme.spacing(6),
-  marginInline: "auto",
+  margin: "0 auto",
   maxWidth: 896,
   paddingInline: theme.spacing(8),
   paddingBottom: theme.spacing(10),
 }));
 
-// ─── Heading ─────────────────────────────────────────────────────────────────
-
 export const Title = styled(Box)(({ theme }) => ({
   fontSize: theme.typography.fontSize32,
   fontWeight: theme.typography.fontWeight700,
-  color: theme.palette.textColors[50],
-  lineHeight: 1.2,
+  fontFamily: theme.typography.secondFamily,
+  color: theme.palette.primaryColors[50],
+  lineHeight: 1.25,
+  maxWidth: 606,
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize48,
   },
 }));
 
-// ─── Description ─────────────────────────────────────────────────────────────
-
 export const Description = styled(Box)(({ theme }) => ({
-  fontSize: theme.typography.fontSize14,
-  fontWeight: theme.typography.fontWeight400,
+  fontSize: theme.typography.fontSize16,
+  fontWeight: theme.typography.fontWeight500,
   color: theme.palette.textColors[200],
-  lineHeight: 1.6,
-  maxWidth: 620,
+  maxWidth: 780,
   [theme.breakpoints.up("md")]: {
-    fontSize: theme.typography.fontSize18,
+    fontSize: theme.typography.fontSize20,
   },
 }));
-
-// ─── Button row ───────────────────────────────────────────────────────────────
 
 export const ButtonsGroup = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   gap: theme.spacing(4),
+  minWidth: 180,
   [theme.breakpoints.up("sm")]: {
     flexDirection: "row",
     justifyContent: "center",
+    gap: theme.spacing(6),
   },
 }));
-
-// ─── Primary CTA ─────────────────────────────────────────────────────────────
 
 export const PrimaryButton = styled(Button)(({ theme }) => ({
-  minWidth: 160,
+  minWidth: 180,
+  fontSize: theme.typography.fontSize16,
+  fontWeight: theme.typography.fontWeight400,
+  color: theme.palette.primaryColors[50],
+
   [theme.breakpoints.up("md")]: {
-    minWidth: 180,
+    minWidth: 206,
+    fontSize: theme.typography.fontSize18,
   },
 }));
 
-// ─── Secondary / ghost CTA ────────────────────────────────────────────────────
-
 export const SecondaryButton = styled(Button)(({ theme }) => ({
-  minWidth: 160,
+  minWidth: 180,
   backgroundImage: "none",
-  backgroundColor: "transparent",
-  color: theme.palette.textColors[50],
+  fontSize: theme.typography.fontSize16,
+  fontWeight: theme.typography.fontWeight400,
+  backgroundColor: neutralColors[700],
+  color: theme.palette.primaryColors[50],
   border: `1px solid ${strokeColors[150]}`,
   "&:hover": {
     backgroundImage: "none",
-    backgroundColor: neutralColors[800],
-    border: `1px solid ${primaryColors[200]}`,
+    backgroundColor: theme.palette.neutralColors[600],
+    border: `1px solid ${strokeColors[150]}`,
+  },
+  "&:active": {
+    backgroundImage: "none",
+    backgroundColor: theme.palette.neutralColors[900],
+    border: `1px solid ${strokeColors[150]}`,
+  },
+
+  "&.Mui-disabled": {
+    backgroundColor: theme.palette.secondaryColors[200],
+    border: `1px solid ${strokeColors[150]}`,
+    color: theme.palette.neutralColors[100],
+    opacity: 0.6,
   },
   [theme.breakpoints.up("md")]: {
-    minWidth: 180,
+    minWidth: 206,
+    fontSize: theme.typography.fontSize18,
   },
 }));

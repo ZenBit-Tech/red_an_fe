@@ -14,19 +14,12 @@ export const ReadyToProtect = () => {
   const { t } = useTranslation();
 
   return (
-    <ReadyToProtectSection id="ready-to-protect">
+    <ReadyToProtectSection id="solution">
       <Container>
         <ContentWrapper>
-          <Title>
-            {t("readyToProtect.title", "Ready to Protect Your Clinical Data?")}
-          </Title>
+          <Title>{t("readyToProtect.title")}</Title>
 
-          <Description>
-            {t(
-              "readyToProtect.description",
-              "Start de-identifying and synthesizing healthcare data in minutes with our enterprise-grade platform. Join leading medical institutions.",
-            )}
-          </Description>
+          <Description>{t("readyToProtect.description")}</Description>
 
           <ButtonsGroup>
             <PrimaryButton>

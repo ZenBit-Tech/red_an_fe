@@ -26,6 +26,7 @@ declare module "@mui/material/styles" {
     fontSize18: number;
     fontSize20: number;
     fontSize26: number;
+    fontSize30: number;
     fontSize32: number;
     fontSize36: number;
     fontSize38: number;
@@ -49,6 +50,7 @@ declare module "@mui/material/styles" {
     fontSize18?: number;
     fontSize20?: number;
     fontSize26?: number;
+    fontSize30?: number;
     fontSize32?: number;
     fontSize36?: number;
     fontSize38?: number;
@@ -105,7 +107,7 @@ export const theme = createTheme({
     primary: { main: primaryColors[500] },
     secondary: { main: primaryColors[50] },
     background: {
-      default: secondaryColors[900],
+      default: backgroundColor,
       paper: neutralColors[900],
     },
     text: {
@@ -151,6 +153,7 @@ export const theme = createTheme({
       styleOverrides: {
         "html, body": { width: "100%", height: "100%" },
         "#root": { width: "100%", minHeight: "100vh" },
+        backgroundColor: backgroundColor,
       },
     },
     MuiContainer: {
@@ -158,14 +161,14 @@ export const theme = createTheme({
       styleOverrides: {
         root: ({ theme }) => ({
           width: "100%",
-          maxWidth: 1360,
           margin: "0 auto",
           padding: theme.spacing(0, 4),
           [theme.breakpoints.up("md")]: {
-            padding: theme.spacing(0, 6),
+            padding: theme.spacing(0, 10),
           },
           [theme.breakpoints.up("lg")]: {
-            padding: theme.spacing(0, 8),
+            maxWidth: 1440,
+            padding: theme.spacing(0, 20),
           },
         }),
       },
@@ -187,6 +190,15 @@ export const theme = createTheme({
           flexShrink: 0,
           "&:hover": {
             backgroundImage: `linear-gradient(167deg, ${primaryColors[500]} 28.37%, ${primaryColors[900]} 100%)`,
+          },
+          "&:active": {
+            backgroundImage: "none",
+            backgroundColor: theme.palette.primaryColors[700],
+          },
+
+          "&.Mui-disabled": {
+            backgroundColor: theme.palette.secondaryColors[300],
+            color: theme.palette.neutralColors[100],
           },
           [theme.breakpoints.up("md")]: {
             padding: theme.spacing(3, 5),

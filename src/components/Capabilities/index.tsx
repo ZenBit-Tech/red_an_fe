@@ -29,17 +29,13 @@ export const Capabilities = () => {
           <LeftContent>
             <LeftTextBlock>
               <Title>
-                Protect Privacy Without Compromising{" "}
+                {t("capabilities.title")}{" "}
                 <Box component="span" sx={{ color: "primaryColors.200" }}>
-                  Value.
+                  {t("capabilities.titleValue")}.
                 </Box>
               </Title>
 
-              <DescriptionMain>
-                Our platform uses advanced NLP models specifically trained on
-                clinical corpora to detect 100+ types of PHI and PII across
-                unstructured medical notes and structured records.
-              </DescriptionMain>
+              <DescriptionMain>{t("capabilities.description")}</DescriptionMain>
             </LeftTextBlock>
 
             <FeaturesList>

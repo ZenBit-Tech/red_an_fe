@@ -1,8 +1,6 @@
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/material";
 
-// ─── Section wrapper ──────────────────────────────────────────────────────────
-
 export const ComplianceSection = styled("section")(({ theme }) => ({
   padding: theme.spacing(10, 4),
   [theme.breakpoints.up("md")]: {
@@ -13,16 +11,12 @@ export const ComplianceSection = styled("section")(({ theme }) => ({
   },
 }));
 
-// ─── Outer layout: title + grid stacked vertically, centred ──────────────────
-
 export const ContentWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   gap: theme.spacing(10),
 }));
-
-// ─── Title block ─────────────────────────────────────────────────────────────
 
 export const TitleBlock = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -41,7 +35,6 @@ export const SectionTitle = styled(Box)(({ theme }) => ({
   },
 }));
 
-// Short decorative accent line below the heading
 export const TitleDivider = styled(Box)(({ theme }) => ({
   width: 80,
   height: 3,
@@ -49,23 +42,18 @@ export const TitleDivider = styled(Box)(({ theme }) => ({
   backgroundImage: `linear-gradient(90deg, ${theme.palette.primaryColors[200]}, ${theme.palette.primaryColors[700]})`,
 }));
 
-// ─── Cards grid ──────────────────────────────────────────────────────────────
-
 export const CardsGrid = styled(Box)(({ theme }) => ({
   display: "grid",
   width: "100%",
   gridTemplateColumns: "1fr",
   gap: theme.spacing(6),
-  // Two columns on tablet, three on desktop
-  [theme.breakpoints.up("sm")]: {
-    gridTemplateColumns: "repeat(2, 1fr)",
-  },
+  // [theme.breakpoints.up("md")]: {
+  //   gridTemplateColumns: "repeat(2, 1fr)",
+  // },
   [theme.breakpoints.up("lg")]: {
     gridTemplateColumns: "repeat(3, 1fr)",
   },
 }));
-
-// ─── Individual card ──────────────────────────────────────────────────────────
 
 export const ComplianceCard = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.neutralColors[800],
@@ -75,9 +63,16 @@ export const ComplianceCard = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(5),
-}));
+  textAlign: "center",
 
-// ─── Card header (standard name + jurisdiction) ───────────────────────────────
+  [theme.breakpoints.up("md")]: {
+    padding: theme.spacing(8, 40),
+  },
+
+  [theme.breakpoints.up("lg")]: {
+    padding: theme.spacing(8),
+  },
+}));
 
 export const CardHeader = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -100,15 +95,11 @@ export const CardRegion = styled(Box)(({ theme }) => ({
   color: theme.palette.textColors[200],
 }));
 
-// ─── Dashed separator between card sections ───────────────────────────────────
-
 export const CardDivider = styled(Box)(({ theme }) => ({
   width: "100%",
   height: 0,
   borderTop: `1px dashed ${theme.palette.strokeColors[150]}`,
 }));
-
-// ─── Key / value rows ────────────────────────────────────────────────────────
 
 export const CardRows = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -135,8 +126,6 @@ export const RowValue = styled(Box)(({ theme }) => ({
   color: theme.palette.textColors[50],
 }));
 
-// ─── Card footer (checkmark + tracked entity count) ───────────────────────────
-
 export const CardFooter = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
@@ -162,11 +151,6 @@ export const FooterText = styled(Box)(({ theme }) => ({
   color: theme.palette.textColors[200],
 }));
 
-// ─── "Create Custom Compliance Profiles" banner ───────────────────────────────
-
-// Full-width horizontal banner: text left, decorative texture right.
-// Uses overflow:hidden so the texture pseudo-element is clipped to the
-// rounded corners without needing an extra wrapper.
 export const CustomProfilesBanner = styled(Box)(({ theme }) => ({
   position: "relative",
   overflow: "hidden",
@@ -177,32 +161,26 @@ export const CustomProfilesBanner = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.neutralColors[800],
   borderRadius: theme.shape.borderRadius,
   border: `1px solid ${theme.palette.strokeColors[150]}`,
-  padding: theme.spacing(8),
 
-  // On md+ the text stays left and the texture fills the right half
   [theme.breakpoints.up("md")]: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    minHeight: 152, // ≈ Figma height 304 / 2 (at md scale)
-    padding: theme.spacing(10, 12),
+    minHeight: 152,
   },
 }));
 
-// Left column — title + description
 export const BannerTextBlock = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  gap: theme.spacing(3),
+  gap: theme.spacing(6),
   position: "relative",
-  zIndex: 1, // keeps text above the absolute texture on mobile
+  zIndex: 1,
+  flexDiraction: "column",
+  padding: theme.spacing(20),
   width: "100%",
   [theme.breakpoints.up("md")]: {
-    // Явно ограничиваем левую половину.
-    // flex: 1 здесь не подходит, потому что BannerTexture абсолютно
-    // позиционирована и не создаёт "противовеса" в flex-потоке —
-    // flex: 1 просто захватывает всё доступное пространство.
-    width: "50%",
+    flex: "0 0 60%",
     flexShrink: 0,
   },
 }));
@@ -226,29 +204,20 @@ export const BannerDescription = styled(Box)(({ theme }) => ({
   },
 }));
 
-// Right decorative texture block — diagonal-lines graphic.
-// Absolutely positioned on mobile so it doesn't push the text down;
-// becomes a flex child (static) on md+ where the banner is tall enough.
-// Replace the backgroundImage value with the actual texture asset path.
 export const BannerTexture = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: 0,
   right: 0,
   bottom: 0,
-  left: "50%",
+  width: "40%",
   backgroundImage: `url("/compliance/banner-texture.png")`,
   backgroundSize: "cover",
   backgroundPosition: "center left",
   pointerEvents: "none",
-  opacity: 0.25,
+  opacity: 0.6,
 
-  [theme.breakpoints.up("md")]: {
-    opacity: 1,
-    // position: "relative", // back in flow so it fills its flex slot
-    // width: "40%",
-    // minHeight: 120,
-    // opacity: 1,
-    // flexShrink: 0,
-    // borderRadius: theme.spacing(2),
+  display: "none",
+  [theme.breakpoints.up("lg")]: {
+    display: "block",
   },
 }));

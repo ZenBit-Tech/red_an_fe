@@ -2,6 +2,8 @@ import { styled } from "@mui/material/styles";
 import { Box } from "@mui/material";
 
 export const CapabilitiesSection = styled("section")(({ theme }) => ({
+  backgroundColor: theme.palette.secondaryColors[900],
+
   padding: theme.spacing(10, 4),
   [theme.breakpoints.up("md")]: {
     padding: theme.spacing(22.5, 6),
@@ -14,7 +16,7 @@ export const CapabilitiesSection = styled("section")(({ theme }) => ({
 export const ContentWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  alignItems: "center",
+  alignItems: "flex-start",
   justifyContent: "space-between",
   gap: theme.spacing(6),
   [theme.breakpoints.up("lg")]: {
@@ -40,6 +42,7 @@ export const Title = styled(Box)(({ theme }) => ({
   fontSize: theme.typography.fontSize26,
   fontWeight: theme.typography.fontWeight700,
   color: theme.palette.textColors[50],
+  lineHeight: 1.25,
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize48,
   },
@@ -92,9 +95,10 @@ export const FeatureItemBox = styled(Box)(({ theme }) => ({
   gap: theme.spacing(4),
 }));
 
-export const FeatureTextWrapper = styled(Box)(() => ({
+export const FeatureTextWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
+  paddingRight: theme.spacing(25),
 }));
 
 export const FeatureTitle = styled(Box)(({ theme }) => ({

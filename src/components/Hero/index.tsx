@@ -1,5 +1,6 @@
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Container } from "@mui/material";
+import { HeroTitlePlain } from "./styles";
 import {
   BadgeText,
   ComplianceBadge,
@@ -42,13 +43,9 @@ const Hero = () => {
             </BadgesList>
 
             <HeroTitle>
-              <Trans
-                i18nKey="hero.mainTitle"
-                components={{
-                  br: <br />,
-                  gradient: <GradientText />,
-                }}
-              />
+              <HeroTitlePlain>{t("hero.mainTitleFirst")}</HeroTitlePlain>
+              <GradientText>{t("hero.mainTitleSecond")}</GradientText>
+              <HeroTitlePlain>{t("hero.mainTitleThird")}</HeroTitlePlain>
             </HeroTitle>
           </HeroText>
 

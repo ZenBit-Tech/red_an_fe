@@ -1,9 +1,10 @@
 export const NAV_LINKS = [
-  { to: "/solution", label: "Solution" },
   { to: "/about-us", label: "About Us" },
   { to: "/subscription-plan", label: "Subscription plan" },
   { to: "/contact-us", label: "Contact Us" },
 ];
+
+export const ANCHOR_LINKS = [{ to: "#solution", label: "Solution" }];
 
 export const FEATURES = [
   {
@@ -81,7 +82,6 @@ export const COMPLIANCE_CARDS_DATA = [
 export const SOCIAL_LINKS = [
   { id: "twitter", href: "https://twitter.com", label: "Twitter" },
   { id: "linkedin", href: "https://linkedin.com", label: "LinkedIn" },
-  { id: "github", href: "https://github.com", label: "GitHub" },
   { id: "instagram", href: "https://instagram.com", label: "Instagram" },
 ];
 

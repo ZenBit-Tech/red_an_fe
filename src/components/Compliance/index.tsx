@@ -34,7 +34,6 @@ export const Compliance = () => {
     <ComplianceSection id="compliance">
       <Container>
         <ContentWrapper>
-          {/* Section heading */}
           <TitleBlock>
             <SectionTitle>
               {t("compliance.titlePrefix", "Built for")}{" "}
@@ -45,11 +44,9 @@ export const Compliance = () => {
             <TitleDivider />
           </TitleBlock>
 
-          {/* Cards grid */}
           <CardsGrid>
             {COMPLIANCE_CARDS.map((card) => (
               <ComplianceCard key={card.id}>
-                {/* Header: standard name + jurisdiction */}
                 <CardHeader>
                   <CardTitle>
                     {t(`compliance.${card.titleKey}`, card.defaultTitle)}
@@ -61,7 +58,6 @@ export const Compliance = () => {
 
                 <CardDivider />
 
-                {/* Key / value rows */}
                 <CardRows>
                   {card.rows.map((row) => (
                     <CardRow key={row.id}>
@@ -77,7 +73,6 @@ export const Compliance = () => {
 
                 <CardDivider />
 
-                {/* Footer: tracked entity count */}
                 <CardFooter>
                   <FooterIconWrapper>
                     <svg>
@@ -91,25 +86,13 @@ export const Compliance = () => {
               </ComplianceCard>
             ))}
           </CardsGrid>
-          {/* Custom Compliance Profiles banner */}
           <CustomProfilesBanner>
             <BannerTextBlock>
-              <BannerTitle>
-                {t(
-                  "compliance.customProfilesTitle",
-                  "Create Custom Compliance Profiles",
-                )}
-              </BannerTitle>
+              <BannerTitle>{t("compliance.banner.title")}</BannerTitle>
               <BannerDescription>
-                {t(
-                  "compliance.customProfilesDesc",
-                  "Tailor your anonymisation logic for specific research studies or regional health mandates. Define custom entities and regular expressions to catch niche medical identifiers.",
-                )}
+                {t("compliance.banner.description")}
               </BannerDescription>
             </BannerTextBlock>
-
-            {/* Decorative texture — rendered as a pseudo-element overlay
-                via styled component; no extra DOM node needed on mobile */}
             <BannerTexture aria-hidden />
           </CustomProfilesBanner>
         </ContentWrapper>

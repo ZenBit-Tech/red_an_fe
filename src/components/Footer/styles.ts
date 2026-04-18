@@ -5,9 +5,11 @@ import { Box, Container } from "@mui/material";
 export const FooterWrapper = styled("section")(({ theme }) => ({
   backgroundColor: theme.palette.secondaryColors[900],
   padding: theme.spacing(8, 0),
+  marginBottom: theme.spacing(16),
 
   [theme.breakpoints.up("md")]: {
-    padding: theme.spacing(38, 0),
+    padding: theme.spacing(10, 0),
+    marginBottom: theme.spacing(18),
   },
 }));
 
@@ -20,7 +22,6 @@ export const FooterContainer = styled(Container)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     flexDirection: "row",
     alignItems: "flex-start",
-    justifyContent: "space-between",
     gap: theme.spacing(58),
   },
 }));
@@ -48,22 +49,34 @@ export const FooterDescription = styled("p")(({ theme }) => ({
   },
 }));
 
+export const FooterSections = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(8),
+
+  [theme.breakpoints.up("md")]: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingRight: theme.spacing(43),
+  },
+}));
+
 export const FooterSection = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(2),
-  [theme.breakpoints.up("md")]: {},
 }));
 
 export const FooterSectionTitle = styled("p")(({ theme }) => ({
   margin: 0,
   fontSize: theme.typography.fontSize12,
   fontWeight: theme.typography.fontWeight600,
-  color: theme.palette.textColors[50],
-  marginBottom: theme.spacing(2),
+  color: theme.palette.text.primary,
   textAlign: "center",
+
   [theme.breakpoints.up("md")]: {
-    fontSize: theme.typography.fontSize14,
+    fontSize: theme.typography.fontSize16,
     textAlign: "start",
   },
 }));
@@ -77,7 +90,8 @@ export const FooterLink = styled(Link)(({ theme }) => ({
   textAlign: "center",
 
   "&:hover": {
-    color: theme.palette.textColors[50],
+    opacity: 1,
+    color: theme.palette.textColors[400],
   },
 
   [theme.breakpoints.up("md")]: {
@@ -88,36 +102,52 @@ export const FooterLink = styled(Link)(({ theme }) => ({
 
 export const SocialLinks = styled(Box)(({ theme }) => ({
   display: "flex",
-  gap: theme.spacing(2),
+  gap: theme.spacing(4),
 }));
 
-export const SocialIconButton = styled("a")(({ theme }) => ({
-  display: "inline-flex",
+export const SocialIconButton = styled("a")(({ theme }) => {
+  return {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 40,
+    height: 40,
+    borderRadius: theme.spacing(5),
+    backgroundColor: theme.palette.strokeColors[600],
+
+    color: theme.palette.textColors[200],
+    transition: "background-color 0.2s ease-in-out, color 0.2s ease-in-out",
+    textDecoration: "none",
+    flexShrink: 0,
+
+    "& .MuiSvgIcon-root": {
+      fontSize: theme.typography.fontSize14,
+    },
+
+    "&:hover": {
+      backgroundColor: theme.palette.primaryColors[500],
+      color: theme.palette.textColors[50],
+    },
+
+    [theme.breakpoints.up("md")]: {
+      "& .MuiSvgIcon-root": {
+        fontSize: theme.typography.fontSize16,
+      },
+    },
+  };
+});
+
+export const FooterLogo = styled(Link)(({ theme }) => ({
+  display: "flex",
   alignItems: "center",
-  justifyContent: "center",
-  width: 36,
-  height: 36,
-  borderRadius: theme.spacing(2),
-  backgroundColor: theme.palette.neutralColors[800],
-  color: theme.palette.textColors[200],
-  transition: "background-color 0.2s ease-in-out, color 0.2s ease-in-out",
-  cursor: "pointer",
-  textDecoration: "none",
   flexShrink: 0,
-  fontSize: 16,
-
-  "& .MuiSvgIcon-root": {
-    fontSize: 16,
-  },
-
-  "&:hover": {
-    backgroundColor: theme.palette.primaryColors[500],
-    color: theme.palette.textColors[50],
-  },
+  textDecoration: "none",
+  fontWeight: theme.typography.fontWeight700,
+  fontSize: theme.typography.fontSize18,
+  fontFamily: theme.typography.secondFamily,
+  color: theme.palette.secondary.main,
 
   [theme.breakpoints.up("md")]: {
-    "& .MuiSvgIcon-root": {
-      fontSize: 18,
-    },
+    fontSize: theme.typography.fontSize30,
   },
 }));

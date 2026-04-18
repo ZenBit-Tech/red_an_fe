@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Box, Button, Container } from "@mui/material";
 
@@ -19,7 +18,7 @@ export const HeaderContainer = styled(Container)(({ theme }) => ({
   },
 }));
 
-export const LinkHeader = styled(NavLink)(({ theme }) => ({
+export const LinkHeader = styled("a")(({ theme }) => ({
   textDecoration: "none",
   whiteSpace: "nowrap",
   fontSize: theme.typography.fontSize14,
@@ -38,7 +37,7 @@ export const LinkHeader = styled(NavLink)(({ theme }) => ({
     opacity: 1,
     color: theme.palette.textColors[400],
   },
-  '&[aria-current="page"]': {
+  "&.active": {
     opacity: 1,
     color: theme.palette.primaryColors[500],
     textDecoration: "underline",

@@ -30,7 +30,6 @@ export const HeroGlow = styled("div")({
 });
 
 export const HeroContent = styled("div")(({ theme }) => ({
-  maxWidth: 1360,
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -95,19 +94,25 @@ export const BadgeText = styled(Typography)(({ theme }) => ({
   textTransform: "uppercase",
 }));
 
-export const HeroTitle = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.primary,
+export const HeroTitle = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  paddingTop: theme.spacing(2),
+  color: theme.palette.secondary.main,
   fontSize: theme.typography.fontSize36,
   fontWeight: theme.typography.fontWeight700,
   fontFamily: theme.typography.secondFamily,
-  paddingTop: theme.spacing(2),
-  width: "100%",
-  maxWidth: 1024,
-  lineHeight: "106%",
+  lineHeight: 1.06,
+
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize72,
   },
 }));
+
+export const HeroTitlePlain = styled("div")({
+  color: "inherit",
+});
 
 export const GradientText = styled("span")(({ theme }) => ({
   background: `linear-gradient(161deg, ${theme.palette.primaryColors[200]} 0%, ${theme.palette.primaryColors[700]} 100%)`,
@@ -130,10 +135,12 @@ export const Description = styled(Typography)(({ theme }) => ({
 export const GetStartedButton = styled(Button)(({ theme }) => ({
   margin: `${theme.spacing(4)} auto 0`,
   padding: theme.spacing(3, 8),
+  backgroundImage: "none",
   fontSize: theme.typography.fontSize16,
+  backgroundColor: theme.palette.primaryColors[700],
 
   [theme.breakpoints.up("md")]: {
     padding: theme.spacing(4, 10),
-    fontSize: theme.typography.fontSize18,
+    fontSize: theme.typography.fontSize20,
   },
 }));

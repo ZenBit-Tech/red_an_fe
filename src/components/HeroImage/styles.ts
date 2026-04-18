@@ -1,19 +1,16 @@
 import { styled } from "@mui/material/styles";
 
 export const ImageSection = styled("section")(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
   position: "relative",
   zIndex: 1,
-  marginTop: theme.spacing(16),
-  marginBottom: theme.spacing(16),
-  border: `1px solid ${theme.palette.strokeColors[150]}`,
-  backgroundColor: theme.palette.secondaryColors[950],
+  marginBottom: theme.spacing(17.2),
 }));
 
 export const ImageWrapper = styled("div")({
+  maxWidth: 635,
+  margin: "0 auto",
   "& img": {
     width: "100%",
+    borderRadius: "50%",
   },
 });
