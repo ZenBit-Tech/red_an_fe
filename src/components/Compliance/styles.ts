@@ -47,9 +47,7 @@ export const CardsGrid = styled(Box)(({ theme }) => ({
   width: "100%",
   gridTemplateColumns: "1fr",
   gap: theme.spacing(6),
-  // [theme.breakpoints.up("md")]: {
-  //   gridTemplateColumns: "repeat(2, 1fr)",
-  // },
+
   [theme.breakpoints.up("lg")]: {
     gridTemplateColumns: "repeat(3, 1fr)",
   },

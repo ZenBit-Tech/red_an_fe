@@ -86,6 +86,6 @@ export const SOCIAL_LINKS = [
 ];
 
 export const COMPANY_LINKS = [
-  { label: "Contact Us", to: "/contact" },
-  { label: "Subscription plan", to: "/subscription" },
+  { label: "Contact Us", to: "/contact-us" },
+  { label: "Subscription plan", to: "/subscription-plan" },
 ];

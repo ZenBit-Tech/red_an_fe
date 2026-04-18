@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, type Theme } from "@mui/material/styles";
 import {
   primaryColors,
   secondaryColors,
@@ -99,6 +99,32 @@ declare module "@mui/material/Typography" {
   }
 }
 
+const buttonLinkStyles = (theme: Theme) => ({
+  borderRadius: theme.spacing(2),
+  padding: theme.spacing(2, 4),
+  textTransform: "none" as const,
+  fontWeight: theme.typography.fontWeight700,
+  fontSize: theme.typography.fontSize14,
+  color: theme.palette.textColors[50],
+  backgroundImage: `linear-gradient(161deg, ${primaryColors[200]} 0%, ${primaryColors[700]} 100%)`,
+  flexShrink: 0,
+  "&:hover": {
+    backgroundImage: `linear-gradient(167deg, ${primaryColors[500]} 28.37%, ${primaryColors[900]} 100%)`,
+  },
+  "&:active": {
+    backgroundImage: "none",
+    backgroundColor: theme.palette.primaryColors[700],
+  },
+  "&.Mui-disabled": {
+    backgroundColor: theme.palette.secondaryColors[300],
+    color: theme.palette.neutralColors[100],
+  },
+  [theme.breakpoints.up("md")]: {
+    padding: theme.spacing(3, 5),
+    fontSize: theme.typography.fontSize16,
+  },
+});
+
 export const theme = createTheme({
   breakpoints: {
     values: { xs: 0, sm: 375, md: 787, lg: 1440, xl: 1920 },
@@ -179,32 +205,16 @@ export const theme = createTheme({
         variant: "contained",
       },
       styleOverrides: {
-        root: ({ theme }) => ({
-          borderRadius: theme.spacing(2),
-          padding: theme.spacing(2, 4),
-          textTransform: "none",
-          fontWeight: theme.typography.fontWeight700,
-          fontSize: theme.typography.fontSize14,
-          color: theme.palette.textColors[50],
-          backgroundImage: `linear-gradient(161deg, ${primaryColors[200]} 0%, ${primaryColors[700]} 100%)`,
-          flexShrink: 0,
-          "&:hover": {
-            backgroundImage: `linear-gradient(167deg, ${primaryColors[500]} 28.37%, ${primaryColors[900]} 100%)`,
-          },
-          "&:active": {
-            backgroundImage: "none",
-            backgroundColor: theme.palette.primaryColors[700],
-          },
+        root: ({ theme }) => buttonLinkStyles(theme),
+      },
+    },
 
-          "&.Mui-disabled": {
-            backgroundColor: theme.palette.secondaryColors[300],
-            color: theme.palette.neutralColors[100],
-          },
-          [theme.breakpoints.up("md")]: {
-            padding: theme.spacing(3, 5),
-            fontSize: theme.typography.fontSize16,
-          },
-        }),
+    MuiLink: {
+      defaultProps: {
+        underline: "none",
+      },
+      styleOverrides: {
+        root: ({ theme }) => buttonLinkStyles(theme),
       },
     },
     MuiTextField: { defaultProps: { fullWidth: true } },

@@ -1,89 +1,75 @@
 import { useTranslation } from "react-i18next";
 import { Box, Container } from "@mui/material";
 import { CARDS_DATA, FEATURES } from "@/constants";
-import {
-  CapabilitiesSection,
-  ContentWrapper,
-  LeftContent,
-  LeftTextBlock,
-  Title,
-  Description,
-  FeaturesList,
-  FeatureItemBox,
-  RightGrid,
-  GridCard,
-  IconWrapper,
-  FeatureTextWrapper,
-  FeatureTitle,
-  CardTitle,
-  DescriptionMain,
-} from "./styles";
+import * as S from "./styles";
 
 export const Capabilities = () => {
   const { t } = useTranslation();
 
   return (
-    <CapabilitiesSection id="solution">
+    <S.CapabilitiesSection id="solution">
       <Container>
-        <ContentWrapper>
-          <LeftContent>
-            <LeftTextBlock>
-              <Title>
+        <S.ContentWrapper>
+          <S.LeftContent>
+            <S.LeftTextBlock>
+              <S.Title>
                 {t("capabilities.title")}{" "}
                 <Box component="span" sx={{ color: "primaryColors.200" }}>
                   {t("capabilities.titleValue")}.
                 </Box>
-              </Title>
+              </S.Title>
 
-              <DescriptionMain>{t("capabilities.description")}</DescriptionMain>
-            </LeftTextBlock>
+              <S.DescriptionMain>
+                {t("capabilities.description")}
+              </S.DescriptionMain>
+            </S.LeftTextBlock>
 
-            <FeaturesList>
+            <S.FeaturesList>
               {FEATURES.map((feature) => (
-                <FeatureItemBox key={feature.id}>
-                  <IconWrapper>
+                <S.FeatureItemBox key={feature.id}>
+                  <S.IconWrapper>
                     <svg>
                       <use href={`/capabilities/icons.svg${feature.iconId}`} />
                     </svg>
-                  </IconWrapper>
-                  <FeatureTextWrapper>
-                    <FeatureTitle>
+                  </S.IconWrapper>
+                  <S.FeatureTextWrapper>
+                    <S.FeatureTitle>
                       {t(
                         `capabilities.${feature.titleKey}`,
                         feature.defaultTitle,
                       )}
-                    </FeatureTitle>
-                    <Description>
+                    </S.FeatureTitle>
+                    <S.Description>
                       {t(
                         `capabilities.${feature.descKey}`,
                         feature.defaultDesc,
                       )}
-                    </Description>
-                  </FeatureTextWrapper>
-                </FeatureItemBox>
+                    </S.Description>
+                  </S.FeatureTextWrapper>
+                </S.FeatureItemBox>
               ))}
-            </FeaturesList>
-          </LeftContent>
+            </S.FeaturesList>
+          </S.LeftContent>
 
-          <RightGrid>
+          <S.RightGrid>
             {CARDS_DATA.map((card) => (
-              <GridCard key={card.id}>
-                <IconWrapper>
+              <S.GridCard key={card.id}>
+                <S.IconWrapper>
                   <svg>
                     <use href={`/capabilities/icons.svg${card.iconId}`} />
                   </svg>
-                </IconWrapper>
-                <CardTitle>
+                </S.IconWrapper>
+                <S.CardTitle>
                   {t(`capabilities.${card.titleKey}`, card.defaultTitle)}
-                </CardTitle>
-                <Description>
+                </S.CardTitle>
+                <S.Description>
                   {t(`capabilities.${card.descKey}`, card.defaultDesc)}
-                </Description>
-              </GridCard>
+                </S.Description>
+              </S.GridCard>
             ))}
-          </RightGrid>
-        </ContentWrapper>
+          </S.RightGrid>
+        </S.ContentWrapper>
       </Container>
-    </CapabilitiesSection>
+    </S.CapabilitiesSection>
   );
 };
