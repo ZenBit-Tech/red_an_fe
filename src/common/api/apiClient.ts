@@ -1,8 +1,11 @@
 import axios from "axios";
 import type { AxiosError, AxiosResponse } from "axios";
 
-const ENV_BASE_URL = import.meta.env.VITE_API_URL?.trim() || "";
-const BASE_URL = import.meta.env.DEV ? "" : ENV_BASE_URL.replace(/\/+$/, "");
+const ENV_BASE_URL = import.meta.env?.VITE_API_URL?.trim();
+
+const BASE_URL = import.meta.env.DEV
+  ? ""
+  : (ENV_BASE_URL ?? "").replace(/\/+$/, "");
 
 export const ApiError = {
   Network: "ERR_NETWORK",

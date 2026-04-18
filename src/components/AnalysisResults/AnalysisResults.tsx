@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import {
   COMPLIANCE_FRAMEWORK_ENTITY_TYPES,
   COMPLIANCE_FRAMEWORK,
-} from "@/components/complianceSelect/constants";
+} from "@/components/ComplianceSelect/constants";
 import { useAppSelector } from "@/common/hooks/hooks";
 import {
   AnalysisResultsContainer,

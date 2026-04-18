@@ -1,4 +1,4 @@
-import { type DetectableEntityType } from "@/components/complianceSelect/constants";
+import { type DetectableEntityType } from "@/components/ComplianceSelect/constants";
 import type { AnalyzeFinding } from "@/common/api/deidentifyApiTypes";
 
 export type EntityType = DetectableEntityType;

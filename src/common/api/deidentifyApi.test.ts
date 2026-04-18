@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { COMPLIANCE_FRAMEWORK } from "@/components/complianceSelect/constants";
+import { COMPLIANCE_FRAMEWORK } from "@/components/ComplianceSelect/constants";
 import type {
   AnalyzeRequest,
   AnalyzeResponse,

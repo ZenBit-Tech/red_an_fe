@@ -1,22 +1,10 @@
-import { useEffect, useRef, useState } from "react";
 import { Box } from "@mui/material";
-import CheckIcon from "@mui/icons-material/Check";
 import { useTranslation } from "react-i18next";
 
-import { ComplianceFrameworkSelection } from "@/components/complianceSelect/ComplianceFrameworkSelection";
-import { ClinicalTextInput } from "@/components/clinicalInput";
-import { DeidentifySettings } from "@/components/deidentify";
-import { AnalysisResults } from "@/components/analysisResults";
-import { analyzeText } from "@/common/api/deidentifyApi";
-import {
-  mapFindingToEntity,
-  type Entity,
-} from "@/components/analysisResults/constants";
-import {
-  DEFAULT_DEIDENTIFY_SETTINGS,
-  type DeidentifySettingsFormData,
-} from "@/components/deidentify/constants";
-import { useAppSelector } from "@/common/hooks/hooks";
+import { ComplianceFrameworkSelection } from "@/components/ComplianceSelect/ComplianceFrameworkSelection";
+import { ClinicalTextInput } from "@/components/ClinicalInput";
+import { DeidentifySettings } from "@/components/Deidentify";
+import { AnalysisResults } from "@/components/AnalysisResults";
 import {
   DeidentifyPageSections,
   DeidentifyPageContent,
@@ -28,16 +16,14 @@ import {
   DeidentifyStepperProgress,
   DeidentifyStepperProgressTrack,
   DeidentifyStepperSteps,
+  StepperCompletedIcon,
   StepperActionButton,
   StepperActionsContainer,
-} from "@/pages/deidentify/styles";
-
-const DEIDENTIFY_STEP = {
-  FRAMEWORK: 0,
-  INPUT_DATA: 1,
-  SETTINGS: 2,
-  RESULT: 3,
-} as const;
+} from "@/pages/Deidentify/styles";
+import {
+  DEIDENTIFY_STEP,
+  useDeidentify,
+} from "@/pages/Deidentify/useDeidentify";
 
 const DEIDENTIFY_STEP_LABEL_KEYS = [
   "deidentify.stepper.steps.framework",
@@ -48,113 +34,23 @@ const DEIDENTIFY_STEP_LABEL_KEYS = [
 
 const DeidentifyPage = () => {
   const { t } = useTranslation();
-  const [activeStep, setActiveStep] = useState<number>(
-    DEIDENTIFY_STEP.FRAMEWORK,
-  );
-  const [confirmedSettings, setConfirmedSettings] =
-    useState<DeidentifySettingsFormData>(DEFAULT_DEIDENTIFY_SETTINGS);
-  const [analysisRunId, setAnalysisRunId] = useState(0);
-  const [analyzedInputText, setAnalyzedInputText] = useState("");
-  const [jobId, setJobId] = useState<string>("");
-  const [entities, setEntities] = useState<Entity[]>([]);
-  const analysisResultsRef = useRef<HTMLDivElement | null>(null);
-  const clinicalText = useAppSelector(
-    (state) => state.clinicalInput.clinicalText,
-  );
-  const selectedFramework = useAppSelector(
-    (state) => state.complianceFramework.selectedFramework,
-  );
-  const isClinicalTextProvided = clinicalText.trim().length > 0;
-  const isResultReady = analysisRunId > 0;
-
-  const isStepCompleted = (stepIndex: number): boolean => {
-    if (stepIndex === DEIDENTIFY_STEP.FRAMEWORK) {
-      return activeStep > DEIDENTIFY_STEP.FRAMEWORK;
-    }
-
-    if (stepIndex === DEIDENTIFY_STEP.INPUT_DATA) {
-      return activeStep > DEIDENTIFY_STEP.INPUT_DATA;
-    }
-
-    if (stepIndex === DEIDENTIFY_STEP.SETTINGS) {
-      return isResultReady;
-    }
-
-    return false;
-  };
-
-  useEffect(() => {
-    if (activeStep !== DEIDENTIFY_STEP.RESULT || !isResultReady) {
-      return;
-    }
-
-    requestAnimationFrame(() => {
-      analysisResultsRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    });
-  }, [activeStep, isResultReady]);
-
-  const handleAnalyzeWithSettings = async (
-    settings: DeidentifySettingsFormData,
-  ): Promise<void> => {
-    try {
-      setConfirmedSettings(settings);
-      if (!isClinicalTextProvided) {
-        return;
-      }
-
-      const response = await analyzeText({
-        text: clinicalText,
-        framework: selectedFramework,
-        threshold: settings.threshold,
-        preserveStructure: settings.preserveStructure,
-      });
-
-      const mappedEntities = response.findings.map((finding) =>
-        mapFindingToEntity(finding, clinicalText),
-      );
-
-      setJobId(response.jobId);
-      setEntities(mappedEntities);
-      setAnalyzedInputText(clinicalText);
-      setAnalysisRunId((prevRunId) => prevRunId + 1);
-      setActiveStep(DEIDENTIFY_STEP.RESULT);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        throw error;
-      }
-
-      throw new Error("Failed to analyze de-identification data with settings");
-    }
-  };
-
-  const handleStepBack = (): void => {
-    setActiveStep((prevStep) =>
-      Math.max(prevStep - 1, DEIDENTIFY_STEP.FRAMEWORK),
-    );
-  };
-
-  const handleFrameworkNext = (): void => {
-    setActiveStep(DEIDENTIFY_STEP.INPUT_DATA);
-  };
-
-  const handleInputNext = (): void => {
-    if (!isClinicalTextProvided) {
-      return;
-    }
-
-    setActiveStep(DEIDENTIFY_STEP.SETTINGS);
-  };
-
-  const handleRestart = (): void => {
-    setActiveStep(DEIDENTIFY_STEP.FRAMEWORK);
-    setAnalysisRunId(0);
-    setAnalyzedInputText("");
-    setJobId("");
-    setEntities([]);
-  };
+  const {
+    activeStep,
+    analysisRunId,
+    analyzedInputText,
+    jobId,
+    entities,
+    confirmedSettings,
+    analysisResultsRef,
+    isClinicalTextProvided,
+    isResultReady,
+    isStepCompleted,
+    handleAnalyzeWithSettings,
+    handleStepBack,
+    handleFrameworkNext,
+    handleInputNext,
+    handleRestart,
+  } = useDeidentify();
 
   const renderCurrentStep = (): React.ReactNode => {
     if (activeStep === DEIDENTIFY_STEP.FRAMEWORK) {
@@ -264,7 +160,7 @@ const DeidentifyPage = () => {
           return (
             <DeidentifyStepItem key={labelKey}>
               <DeidentifyStepIcon isActive={isActive} isCompleted={isCompleted}>
-                {isCompleted ? <CheckIcon sx={{ fontSize: 14 }} /> : index + 1}
+                {isCompleted ? <StepperCompletedIcon /> : index + 1}
               </DeidentifyStepIcon>
               <DeidentifyStepLabel
                 isActive={isActive}

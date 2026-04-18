@@ -8,8 +8,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  styled,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 const analysisResultsStyles = {
   containerGapDesktop: 3,
@@ -59,25 +59,23 @@ export const AnalysisResultsContainer = styled(Box)(({ theme }) => ({
 
 export const AnalysisResultsTitle = styled(Box)(({ theme }) => ({
   fontSize: `${analysisResultsStyles.fontSizeTitle}rem`,
-  fontWeight: 600,
+  fontWeight: theme.typography.fontWeight600,
   color: theme.palette.text.primary,
   [theme.breakpoints.down("md")]: {
-    fontSize: "1.05rem",
+    fontSize: `${theme.typography.fontSize16}px`,
   },
   [theme.breakpoints.down("sm")]: {
-    fontSize: "0.95rem",
+    fontSize: `${theme.typography.fontSize14}px`,
   },
 }));
 
 export const AnalysisResultsSubtitle = styled(Box)(({ theme }) => ({
-  fontSize: `${analysisResultsStyles.fontSizeSubtitle}rem`,
+  fontSize: `${theme.typography.fontSize14}px`,
+  fontWeight: theme.typography.fontWeight400,
   color: theme.palette.text.secondary,
   marginBottom: theme.spacing(2),
   [theme.breakpoints.down("md")]: {
-    fontSize: "0.82rem",
-  },
-  [theme.breakpoints.down("sm")]: {
-    fontSize: "0.75rem",
+    fontSize: `${theme.typography.fontSize12}px`,
     marginBottom: theme.spacing(1.5),
   },
 }));
@@ -130,23 +128,18 @@ export const PanelHeaderCopy = styled(Box)(({ theme }) => ({
 }));
 
 export const PanelLabel = styled(Box)(({ theme }) => ({
-  fontSize: `${analysisResultsStyles.fontSizeLabel}rem`,
-  fontWeight: 600,
+  fontSize: `${theme.typography.fontSize16}px`,
+  fontWeight: theme.typography.fontWeight600,
   color: theme.palette.text.primary,
   [theme.breakpoints.down("md")]: {
-    fontSize: "0.9rem",
-  },
-  [theme.breakpoints.down("sm")]: {
-    fontSize: "0.82rem",
+    fontSize: `${theme.typography.fontSize14}px`,
   },
 }));
 
 export const PanelDescription = styled(Box)(({ theme }) => ({
-  fontSize: "0.8rem",
+  fontSize: `${theme.typography.fontSize12}px`,
+  fontWeight: theme.typography.fontWeight400,
   color: theme.palette.text.secondary,
-  [theme.breakpoints.down("sm")]: {
-    fontSize: "0.74rem",
-  },
 }));
 
 export const PanelSurface = styled(Box)(({ theme }) => ({
@@ -164,16 +157,16 @@ export const PanelSurface = styled(Box)(({ theme }) => ({
 }));
 
 export const TextContent = styled(Box)(({ theme }) => ({
-  fontSize: `${analysisResultsStyles.fontSizeContent}rem`,
+  fontSize: `${theme.typography.fontSize14}px`,
+  fontWeight: theme.typography.fontWeight400,
   color: theme.palette.text.primary,
   lineHeight: 1.7,
   wordBreak: "break-word",
   whiteSpace: "pre-wrap",
   overflowWrap: "break-word",
-  fontFamily:
-    '"IBM Plex Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  fontFamily: theme.typography.fontFamily,
   [theme.breakpoints.down("sm")]: {
-    fontSize: "0.8rem",
+    fontSize: `${theme.typography.fontSize12}px`,
   },
 }));
 
@@ -197,8 +190,8 @@ export const PanelActionButton = styled(Button)(({ theme }) => ({
   borderColor: theme.palette.neutralColors[500],
   color: theme.palette.text.primary,
   backgroundColor: theme.palette.background.paper,
-  fontSize: "0.75rem",
-  fontWeight: 500,
+  fontSize: `${theme.typography.fontSize12}px`,
+  fontWeight: theme.typography.fontWeight500,
   "&:hover": {
     borderColor: theme.palette.neutralColors[400],
     backgroundColor: theme.palette.neutralColors[800],
@@ -211,8 +204,8 @@ export const DownloadFormatSelect = styled(Select)(({ theme }) => ({
     paddingTop: theme.spacing(0.55),
     paddingBottom: theme.spacing(0.55),
     paddingLeft: theme.spacing(1),
-    fontSize: "0.72rem",
-    fontWeight: 600,
+    fontSize: `${theme.typography.fontSize12}px`,
+    fontWeight: theme.typography.fontWeight600,
     color: theme.palette.text.primary,
   },
   "& .MuiOutlinedInput-notchedOutline": {
@@ -252,14 +245,11 @@ export const TableContainerHeader = styled(Box)(({ theme }) => ({
 }));
 
 export const TableContainerTitle = styled(Box)(({ theme }) => ({
-  fontSize: `${analysisResultsStyles.fontSizeLabel}rem`,
-  fontWeight: 600,
+  fontSize: `${theme.typography.fontSize16}px`,
+  fontWeight: theme.typography.fontWeight600,
   color: theme.palette.text.primary,
   [theme.breakpoints.down("md")]: {
-    fontSize: "0.9rem",
-  },
-  [theme.breakpoints.down("sm")]: {
-    fontSize: "0.82rem",
+    fontSize: `${theme.typography.fontSize14}px`,
   },
 }));
 
@@ -301,10 +291,10 @@ export const StyledTableHead = styled(TableHead)(({ theme }) => ({
   backgroundColor: theme.palette.neutralColors[800],
   zIndex: 2,
   "& .MuiTableCell-head": {
-    fontWeight: 700,
+    fontWeight: theme.typography.fontWeight700,
     color: theme.palette.text.secondary,
     borderBottom: `2px solid ${theme.palette.divider}`,
-    fontSize: "0.69rem",
+    fontSize: `${theme.typography.fontSize12}px`,
     whiteSpace: "nowrap",
     lineHeight: 1.2,
   },
@@ -392,8 +382,8 @@ export const ScoreBadge = styled(Box)<MutedStateProps>(
     color: inactive
       ? theme.palette.neutralColors[300]
       : theme.palette.warning.main,
-    fontSize: "0.67rem",
-    fontWeight: 700,
+    fontSize: `${theme.typography.fontSize12}px`,
+    fontWeight: theme.typography.fontWeight700,
     fontVariantNumeric: "tabular-nums",
   }),
 );
@@ -433,7 +423,7 @@ export const EntityBadge = styled(Box, {
   borderRadius: 999,
   backgroundColor: badgeColor,
   color: inactive ? "rgba(122, 40, 72, 0.58)" : "#7A2848",
-  fontSize: "0.64rem",
+  fontSize: "0.7rem",
   fontWeight: 700,
   lineHeight: 1,
   whiteSpace: "nowrap",
@@ -453,8 +443,8 @@ export const DecisionFactorBadge = styled(Box, {
     justifyContent: "center",
     padding: "3px 7px",
     borderRadius: 999,
-    fontSize: "0.65rem",
-    fontWeight: 600,
+    fontSize: "0.7rem",
+    fontWeight: theme.typography.fontWeight600,
     whiteSpace: "nowrap",
     opacity: inactive ? 0.55 : 1,
     color: inactive
@@ -492,8 +482,8 @@ export const ActionToggleButton = styled(Button, {
     ? "rgba(47, 128, 237, 0.14)"
     : theme.palette.neutralColors[700],
   color: active ? theme.palette.primary.main : theme.palette.neutralColors[300],
-  fontSize: "0.66rem",
-  fontWeight: 700,
+  fontSize: "0.7rem",
+  fontWeight: theme.typography.fontWeight700,
   lineHeight: 1,
   textTransform: "none",
   boxShadow: "none",

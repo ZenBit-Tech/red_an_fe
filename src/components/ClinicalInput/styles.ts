@@ -1,12 +1,5 @@
-import {
-  Box,
-  Button,
-  Tab,
-  Tabs,
-  TextField,
-  Typography,
-  styled,
-} from "@mui/material";
+import { Box, Button, Tab, Tabs, TextField, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 const clinicalTextInputStyles = {
   containerGap: 2,
@@ -62,30 +55,27 @@ export const ClinicalTextInputContainer = styled(Box)(({ theme }) => ({
 }));
 
 export const ClinicalTextInputTitle = styled(Typography)(({ theme }) => ({
-  ...theme.typography.h5,
-  fontWeight: 600,
+  fontSize: `${theme.typography.fontSize20}px`,
+  fontWeight: theme.typography.fontWeight600,
   color: theme.palette.text.primary,
   [theme.breakpoints.down("md")]: {
-    fontSize: "0.98rem",
-    fontWeight: 600,
+    fontSize: `${theme.typography.fontSize18}px`,
   },
   [theme.breakpoints.down("sm")]: {
-    fontSize: "0.92rem",
-    fontWeight: 600,
+    fontSize: `${theme.typography.fontSize16}px`,
   },
 }));
 
 export const ClinicalTextInputSubtitle = styled(Typography)(({ theme }) => ({
-  ...theme.typography.h6,
-  fontWeight: 500,
+  fontSize: `${theme.typography.fontSize16}px`,
+  fontWeight: theme.typography.fontWeight500,
   color: theme.palette.text.secondary,
   marginBottom: theme.spacing(clinicalTextInputStyles.subtitleMarginBottom),
   [theme.breakpoints.down("md")]: {
-    fontSize: "0.9rem",
-    fontWeight: 500,
+    fontSize: `${theme.typography.fontSize14}px`,
   },
   [theme.breakpoints.down("sm")]: {
-    fontSize: "0.78rem",
+    fontSize: `${theme.typography.fontSize12}px`,
     marginBottom: theme.spacing(1.5),
   },
 }));
@@ -117,7 +107,8 @@ export const ClinicalInputTabButton = styled(Tab)(({ theme }) => ({
   maxWidth: "none",
   flex: 1,
   textTransform: "none",
-  fontWeight: 600,
+  fontWeight: theme.typography.fontWeight600,
+  fontSize: `${theme.typography.fontSize14}px`,
   minHeight: theme.spacing(5),
   paddingInline: theme.spacing(2),
   border: `${clinicalTextInputStyles.tabBorderWidth}px solid transparent`,
@@ -132,11 +123,10 @@ export const ClinicalInputTabButton = styled(Tab)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     minHeight: theme.spacing(4.75),
     paddingInline: theme.spacing(1.5),
-    fontSize: "0.83rem",
   },
   [theme.breakpoints.down("sm")]: {
     minHeight: theme.spacing(4.5),
-    fontSize: "0.78rem",
+    fontSize: `${theme.typography.fontSize12}px`,
     paddingInline: theme.spacing(1),
   },
 }));
@@ -184,13 +174,10 @@ export const ClinicalInputOverlayPanel = styled(Box, {
 export const ClinicalTextArea = styled(TextField)(({ theme }) => ({
   flex: 1,
   "& .MuiInputBase-input": {
-    fontSize: "0.92rem",
+    fontSize: `${theme.typography.fontSize14}px`,
     lineHeight: 1.5,
     [theme.breakpoints.down("md")]: {
-      fontSize: "0.85rem",
-    },
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "0.8rem",
+      fontSize: `${theme.typography.fontSize12}px`,
     },
   },
   "& .MuiOutlinedInput-root": {
@@ -241,10 +228,7 @@ export const UploadedFilePath = styled(Typography, {
   wordBreak: "break-all",
   visibility: visible ? "visible" : "hidden",
   [theme.breakpoints.down("md")]: {
-    fontSize: "0.8rem",
-  },
-  [theme.breakpoints.down("sm")]: {
-    fontSize: "0.75rem",
+    fontSize: `${theme.typography.fontSize12}px`,
   },
 }));
 
@@ -275,54 +259,46 @@ export const HiddenFileInput = styled("input")({
 
 export const BrowseButton = styled(Button)(({ theme }) => ({
   textTransform: "none",
-  fontWeight: 600,
-  fontSize: "0.9rem",
+  fontWeight: theme.typography.fontWeight600,
+  fontSize: `${theme.typography.fontSize14}px`,
   padding: theme.spacing(
     clinicalTextInputStyles.uploadButtonPaddingY,
     clinicalTextInputStyles.uploadButtonPaddingX,
   ),
-  [theme.breakpoints.down("md")]: {
-    fontSize: "0.84rem",
-  },
   [theme.breakpoints.down("sm")]: {
     width: "100%",
-    fontSize: "0.78rem",
+    fontSize: `${theme.typography.fontSize12}px`,
   },
 }));
 
 export const DropZoneTitle = styled(Typography)(({ theme }) => ({
-  ...theme.typography.h6,
-  fontWeight: 600,
+  fontSize: `${theme.typography.fontSize18}px`,
+  fontWeight: theme.typography.fontWeight600,
   color: theme.palette.text.primary,
   [theme.breakpoints.down("md")]: {
-    fontSize: "0.95rem",
+    fontSize: `${theme.typography.fontSize16}px`,
   },
   [theme.breakpoints.down("sm")]: {
-    fontSize: "0.85rem",
-    fontWeight: 600,
+    fontSize: `${theme.typography.fontSize14}px`,
   },
 }));
 
 export const DropZoneSubtitle = styled(Typography)(({ theme }) => ({
-  ...theme.typography.body2,
+  fontSize: `${theme.typography.fontSize14}px`,
+  fontWeight: theme.typography.fontWeight400,
   color: theme.palette.text.secondary,
   [theme.breakpoints.down("md")]: {
-    fontSize: "0.78rem",
-  },
-  [theme.breakpoints.down("sm")]: {
-    fontSize: "0.72rem",
+    fontSize: `${theme.typography.fontSize12}px`,
   },
 }));
 
 export const HelperErrorText = styled(Typography)(({ theme }) => ({
-  ...theme.typography.body2,
+  fontSize: `${theme.typography.fontSize14}px`,
+  fontWeight: theme.typography.fontWeight400,
   color: theme.palette.error.main,
   marginTop: theme.spacing(1),
   [theme.breakpoints.down("md")]: {
-    fontSize: "0.78rem",
-  },
-  [theme.breakpoints.down("sm")]: {
-    fontSize: "0.72rem",
+    fontSize: `${theme.typography.fontSize12}px`,
   },
 }));
 

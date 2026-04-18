@@ -56,7 +56,6 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
 
   return (
     <DeidentifySettingsContainer onSubmit={handleSubmit(onSubmit)}>
-      {/* Header */}
       <Box>
         <DeidentifySettingsTitle>
           {t("deidentify.settings.title")}
@@ -66,7 +65,6 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
         </DeidentifySettingsSubtitle>
       </Box>
 
-      {/* De-Identification Method */}
       <DeidentifySettingsSection>
         <DeidentifyLabel>{t("deidentify.settings.method")}</DeidentifyLabel>
         <Controller
@@ -104,7 +102,6 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
         </DeidentifyMethodDescription>
       </DeidentifySettingsSection>
 
-      {/* Detection Threshold */}
       <DeidentifySettingsSection>
         <DeidentifyLabel>
           {t("deidentify.settings.threshold")} —{" "}
@@ -130,7 +127,6 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
         </DeidentifyMethodDescription>
       </DeidentifySettingsSection>
 
-      {/* Preserve Structure */}
       <DeidentifySettingsSection>
         <Controller
           name="preserveStructure"
@@ -152,7 +148,6 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
         </DeidentifyMethodDescription>
       </DeidentifySettingsSection>
 
-      {/* Analyze Button */}
       <ControlsContainer>
         <AnalyzeButton
           type="submit"

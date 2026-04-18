@@ -1,5 +1,6 @@
+import CheckIcon from "@mui/icons-material/Check";
 import { Box, Button } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { styled, type Theme } from "@mui/material/styles";
 
 const deidentifyPageStyles = {
   minHeight: "100vh",
@@ -37,20 +38,20 @@ interface DeidentifyStepperProgressProps {
   stepCount: number;
 }
 
-const DEIDENTIFY_STEPPER_COLOR = {
-  PANEL_BACKGROUND: "#0b1326",
-  PANEL_BORDER: "#1c2742",
-  TRACK: "#222a3d",
-  TRACK_FILL: "#0d47a1",
-  STEP_BORDER: "#0b1326",
-  COMPLETED_BACKGROUND: "#0d47a1",
-  ACTIVE_BACKGROUND: "#b0c6ff",
-  ACTIVE_TEXT: "#002d6f",
-  INACTIVE_BACKGROUND: "#222a3d",
-  INACTIVE_LABEL: "#c3c6d4",
-  FIRST_COMPLETED_LABEL: "#dae2fd",
-  ACTIVE_LABEL: "#b0c6ff",
-} as const;
+const getStepperColors = (theme: Theme) => ({
+  panelBackground: theme.palette.backgroundColor,
+  panelBorder: theme.palette.strokeColors[400],
+  track: theme.palette.neutralColors[800],
+  trackFill: theme.palette.primaryColors[700],
+  stepBorder: theme.palette.backgroundColor,
+  completedBackground: theme.palette.primaryColors[700],
+  activeBackground: theme.palette.primaryColors[200],
+  activeText: theme.palette.primaryColors[900],
+  inactiveBackground: theme.palette.neutralColors[800],
+  inactiveLabel: theme.palette.textColors[200],
+  firstCompletedLabel: theme.palette.primaryColors[50],
+  activeLabel: theme.palette.primaryColors[200],
+});
 
 const DEIDENTIFY_STEPPER_SHADOW = {
   COMPLETED:
@@ -102,51 +103,65 @@ export const DeidentifyPageSections = styled(Box)(({ theme }) => ({
   gap: theme.spacing(deidentifyPageStyles.sectionsGap),
 }));
 
-export const DeidentifyStepperContainer = styled(Box)(({ theme }) => ({
-  width: "100%",
-  position: "relative",
-  padding: theme.spacing(deidentifyPageStyles.stepperContainerPaddingDesktop),
-  border: `1px solid ${DEIDENTIFY_STEPPER_COLOR.PANEL_BORDER}`,
-  borderRadius: theme.spacing(deidentifyPageStyles.stepperPanelBorderRadius),
-  backgroundColor: DEIDENTIFY_STEPPER_COLOR.PANEL_BACKGROUND,
-  [theme.breakpoints.down("sm")]: {
-    padding: theme.spacing(deidentifyPageStyles.stepperContainerPaddingMobile),
-  },
-}));
+export const DeidentifyStepperContainer = styled(Box)(({ theme }) => {
+  const stepperColors = getStepperColors(theme);
 
-export const DeidentifyStepperProgressTrack = styled(Box)(({ theme }) => ({
-  position: "absolute",
-  top: getStepperTrackTop(
-    deidentifyPageStyles.stepperContainerPaddingDesktop,
-    deidentifyPageStyles.stepperIconSizeDesktop,
-    deidentifyPageStyles.stepperTrackHeight,
-  ),
-  left: `calc(${theme.spacing(deidentifyPageStyles.stepperContainerPaddingDesktop)} + ${deidentifyPageStyles.stepperIconSizeDesktop / 2}px)`,
-  right: `calc(${theme.spacing(deidentifyPageStyles.stepperContainerPaddingDesktop)} + ${deidentifyPageStyles.stepperIconSizeDesktop / 2}px)`,
-  height: `${deidentifyPageStyles.stepperTrackHeight}px`,
-  backgroundColor: DEIDENTIFY_STEPPER_COLOR.TRACK,
-  [theme.breakpoints.down("sm")]: {
+  return {
+    width: "100%",
+    position: "relative",
+    padding: theme.spacing(deidentifyPageStyles.stepperContainerPaddingDesktop),
+    border: `1px solid ${stepperColors.panelBorder}`,
+    borderRadius: theme.spacing(deidentifyPageStyles.stepperPanelBorderRadius),
+    backgroundColor: stepperColors.panelBackground,
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(
+        deidentifyPageStyles.stepperContainerPaddingMobile,
+      ),
+    },
+  };
+});
+
+export const DeidentifyStepperProgressTrack = styled(Box)(({ theme }) => {
+  const stepperColors = getStepperColors(theme);
+
+  return {
+    position: "absolute",
     top: getStepperTrackTop(
-      deidentifyPageStyles.stepperContainerPaddingMobile,
-      deidentifyPageStyles.stepperIconSizeMobile,
+      deidentifyPageStyles.stepperContainerPaddingDesktop,
+      deidentifyPageStyles.stepperIconSizeDesktop,
       deidentifyPageStyles.stepperTrackHeight,
     ),
-    left: `calc(${theme.spacing(deidentifyPageStyles.stepperContainerPaddingMobile)} + ${deidentifyPageStyles.stepperIconSizeMobile / 2}px)`,
-    right: `calc(${theme.spacing(deidentifyPageStyles.stepperContainerPaddingMobile)} + ${deidentifyPageStyles.stepperIconSizeMobile / 2}px)`,
-  },
-}));
+    left: `calc(${theme.spacing(deidentifyPageStyles.stepperContainerPaddingDesktop)} + ${deidentifyPageStyles.stepperIconSizeDesktop / 2}px)`,
+    right: `calc(${theme.spacing(deidentifyPageStyles.stepperContainerPaddingDesktop)} + ${deidentifyPageStyles.stepperIconSizeDesktop / 2}px)`,
+    height: `${deidentifyPageStyles.stepperTrackHeight}px`,
+    backgroundColor: stepperColors.track,
+    [theme.breakpoints.down("sm")]: {
+      top: getStepperTrackTop(
+        deidentifyPageStyles.stepperContainerPaddingMobile,
+        deidentifyPageStyles.stepperIconSizeMobile,
+        deidentifyPageStyles.stepperTrackHeight,
+      ),
+      left: `calc(${theme.spacing(deidentifyPageStyles.stepperContainerPaddingMobile)} + ${deidentifyPageStyles.stepperIconSizeMobile / 2}px)`,
+      right: `calc(${theme.spacing(deidentifyPageStyles.stepperContainerPaddingMobile)} + ${deidentifyPageStyles.stepperIconSizeMobile / 2}px)`,
+    },
+  };
+});
 
 export const DeidentifyStepperProgress = styled(Box, {
   shouldForwardProp: (prop) => prop !== "activeStep" && prop !== "stepCount",
-})<DeidentifyStepperProgressProps>(({ theme, activeStep, stepCount }) => ({
-  height: "100%",
-  backgroundColor: DEIDENTIFY_STEPPER_COLOR.TRACK_FILL,
-  width: getProgressWidth(activeStep, stepCount),
-  transition: "width 220ms ease",
-  [theme.breakpoints.down("sm")]: {
+})<DeidentifyStepperProgressProps>(({ theme, activeStep, stepCount }) => {
+  const stepperColors = getStepperColors(theme);
+
+  return {
+    height: "100%",
+    backgroundColor: stepperColors.trackFill,
     width: getProgressWidth(activeStep, stepCount),
-  },
-}));
+    transition: "width 220ms ease",
+    [theme.breakpoints.down("sm")]: {
+      width: getProgressWidth(activeStep, stepCount),
+    },
+  };
+});
 
 export const DeidentifyStepperSteps = styled(Box)({
   position: "relative",
@@ -166,6 +181,8 @@ export const DeidentifyStepItem = styled(Box)({
 export const DeidentifyStepIcon = styled(Box, {
   shouldForwardProp: (prop) => prop !== "isActive" && prop !== "isCompleted",
 })<DeidentifyStepIconProps>(({ theme, isActive, isCompleted }) => {
+  const stepperColors = getStepperColors(theme);
+
   const baseStyle = {
     width: `${deidentifyPageStyles.stepperIconSizeDesktop}px`,
     height: `${deidentifyPageStyles.stepperIconSizeDesktop}px`,
@@ -173,16 +190,16 @@ export const DeidentifyStepIcon = styled(Box, {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontWeight: 700,
-    fontFamily: "Manrope, Inter, sans-serif",
-    fontSize: "16px",
-    lineHeight: "24px",
-    border: `4px solid ${DEIDENTIFY_STEPPER_COLOR.STEP_BORDER}`,
+    fontWeight: theme.typography.fontWeight700,
+    fontFamily: theme.typography.fontFamily,
+    fontSize: `${theme.typography.fontSize16}px`,
+    lineHeight: "1.5",
+    border: `4px solid ${stepperColors.stepBorder}`,
     transition: "all 220ms ease",
     [theme.breakpoints.down("sm")]: {
       width: `${deidentifyPageStyles.stepperIconSizeMobile}px`,
       height: `${deidentifyPageStyles.stepperIconSizeMobile}px`,
-      fontSize: "0.88rem",
+      fontSize: `${theme.typography.fontSize14}px`,
       lineHeight: "1",
     },
   } as const;
@@ -190,7 +207,7 @@ export const DeidentifyStepIcon = styled(Box, {
   if (isCompleted) {
     return {
       ...baseStyle,
-      backgroundColor: DEIDENTIFY_STEPPER_COLOR.COMPLETED_BACKGROUND,
+      backgroundColor: stepperColors.completedBackground,
       color: theme.palette.common.white,
       boxShadow: DEIDENTIFY_STEPPER_SHADOW.COMPLETED,
     };
@@ -199,18 +216,22 @@ export const DeidentifyStepIcon = styled(Box, {
   if (isActive) {
     return {
       ...baseStyle,
-      backgroundColor: DEIDENTIFY_STEPPER_COLOR.ACTIVE_BACKGROUND,
-      color: DEIDENTIFY_STEPPER_COLOR.ACTIVE_TEXT,
+      backgroundColor: stepperColors.activeBackground,
+      color: stepperColors.activeText,
       boxShadow: DEIDENTIFY_STEPPER_SHADOW.ACTIVE,
     };
   }
 
   return {
     ...baseStyle,
-    backgroundColor: DEIDENTIFY_STEPPER_COLOR.INACTIVE_BACKGROUND,
-    color: DEIDENTIFY_STEPPER_COLOR.INACTIVE_LABEL,
+    backgroundColor: stepperColors.inactiveBackground,
+    color: stepperColors.inactiveLabel,
   };
 });
+
+export const StepperCompletedIcon = styled(CheckIcon)(({ theme }) => ({
+  fontSize: `${theme.typography.fontSize14}px`,
+}));
 
 export const DeidentifyStepLabel = styled(Box, {
   shouldForwardProp: (prop) =>
@@ -221,22 +242,23 @@ export const DeidentifyStepLabel = styled(Box, {
   isCompleted,
   isFirstStep,
 }) => {
-  let color: string = DEIDENTIFY_STEPPER_COLOR.INACTIVE_LABEL;
-  let fontWeight = 500;
+  const stepperColors = getStepperColors(theme);
+  let color: string = stepperColors.inactiveLabel;
+  let fontWeight = theme.typography.fontWeight500;
 
   if (isCompleted && isFirstStep) {
-    color = DEIDENTIFY_STEPPER_COLOR.FIRST_COMPLETED_LABEL;
-    fontWeight = 400;
+    color = stepperColors.firstCompletedLabel;
+    fontWeight = theme.typography.fontWeight400;
   } else if (isActive) {
-    color = DEIDENTIFY_STEPPER_COLOR.ACTIVE_LABEL;
-    fontWeight = 700;
+    color = stepperColors.activeLabel;
+    fontWeight = theme.typography.fontWeight700;
   }
 
   return {
     marginTop: theme.spacing(deidentifyPageStyles.stepperLabelOffsetDesktop),
-    fontFamily: "Manrope, Inter, sans-serif",
-    fontSize: "12px",
-    lineHeight: "16px",
+    fontFamily: theme.typography.fontFamily,
+    fontSize: `${theme.typography.fontSize12}px`,
+    lineHeight: "1.333",
     textTransform: "uppercase",
     whiteSpace: "nowrap",
     textAlign: "center",
@@ -244,8 +266,8 @@ export const DeidentifyStepLabel = styled(Box, {
     fontWeight,
     [theme.breakpoints.down("sm")]: {
       marginTop: theme.spacing(deidentifyPageStyles.stepperLabelOffsetMobile),
-      fontSize: "10px",
-      lineHeight: "14px",
+      fontSize: `${theme.typography.fontSize10}px`,
+      lineHeight: "1.4",
     },
   };
 });

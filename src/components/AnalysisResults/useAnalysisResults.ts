@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import type { ComplianceFramework } from "@/components/complianceSelect/constants";
+import type { ComplianceFramework } from "@/components/ComplianceSelect/constants";
 import { previewAnonymization } from "@/common/api/deidentifyApi";
 import type { Entity } from "./constants";
 
