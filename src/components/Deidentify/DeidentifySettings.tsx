@@ -77,15 +77,15 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
               size="medium"
               MenuProps={{
                 PaperProps: {
-                  sx: {
+                  sx: (theme) => ({
                     "& .MuiMenuItem-root": {
                       fontSize: {
-                        xs: "0.8rem",
-                        sm: "0.85rem",
-                        md: "0.92rem",
+                        xs: `${theme.typography.fontSize12}px`,
+                        sm: `${theme.typography.fontSize14}px`,
+                        md: `${theme.typography.fontSize14}px`,
                       },
                     },
-                  },
+                  }),
                 },
               }}
             >

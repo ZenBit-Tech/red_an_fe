@@ -9,7 +9,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { alpha, styled, type Theme } from "@mui/material/styles";
 
 const analysisResultsStyles = {
   containerGapDesktop: 3,
@@ -35,6 +35,46 @@ const analysisResultsStyles = {
   tableHeaderBarHeightDesktop: 48,
   tableHeaderBarHeightMobile: 40,
 } as const;
+
+const getDecisionTextColor = (
+  theme: Theme,
+  level: "Low" | "Medium" | "High",
+  inactive: boolean | undefined,
+): string => {
+  if (inactive) {
+    return theme.palette.neutralColors[300];
+  }
+
+  if (level === "High") {
+    return theme.palette.success.main;
+  }
+
+  if (level === "Low") {
+    return theme.palette.text.secondary;
+  }
+
+  return theme.palette.text.primary;
+};
+
+const getDecisionBackgroundColor = (
+  theme: Theme,
+  level: "Low" | "Medium" | "High",
+  inactive: boolean | undefined,
+): string => {
+  if (inactive) {
+    return theme.palette.neutralColors[700];
+  }
+
+  if (level === "High") {
+    return alpha(theme.palette.success.main, 0.1);
+  }
+
+  if (level === "Low") {
+    return theme.palette.neutralColors[700];
+  }
+
+  return alpha(theme.palette.neutralColors[300], 0.14);
+};
 
 export const AnalysisResultsContainer = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -269,7 +309,7 @@ export const StyledTable = styled(Table)(({ theme }) => ({
   minWidth: 1060,
   "& .MuiTableCell-root": {
     padding: theme.spacing(analysisResultsStyles.tablePaddingDesktop),
-    fontSize: "0.75rem",
+    fontSize: `${theme.typography.fontSize12}px`,
     verticalAlign: "middle",
     lineHeight: 1.25,
   },
@@ -279,7 +319,7 @@ export const StyledTable = styled(Table)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     "& .MuiTableCell-root": {
       padding: theme.spacing(analysisResultsStyles.tablePaddingMobile),
-      fontSize: "0.72rem",
+      fontSize: `${theme.typography.fontSize10}px`,
     },
     "& .MuiTableCell-root:first-of-type": {
       paddingLeft: theme.spacing(1.25),
@@ -321,11 +361,11 @@ export const StyledTableRow = styled(TableRow, {
   shouldForwardProp: (prop) => prop !== "active",
 })<StyledTableRowProps>(({ active, theme }) => ({
   backgroundColor: active
-    ? "rgba(37, 99, 235, 0.06)"
+    ? alpha(theme.palette.primary.main, 0.06)
     : theme.palette.background.paper,
   "&:hover": {
     backgroundColor: active
-      ? "rgba(37, 99, 235, 0.10)"
+      ? alpha(theme.palette.primary.main, 0.1)
       : theme.palette.neutralColors[700],
   },
   "& .MuiTableCell-root": {
@@ -349,7 +389,7 @@ export const IndexText = styled(Box)<MutedStateProps>(
     color: inactive
       ? theme.palette.neutralColors[400]
       : theme.palette.text.secondary,
-    fontSize: "0.71rem",
+    fontSize: `${theme.typography.fontSize12}px`,
     fontVariantNumeric: "tabular-nums",
   }),
 );
@@ -359,7 +399,7 @@ export const NumericText = styled(Box)<MutedStateProps>(
     color: inactive
       ? theme.palette.neutralColors[400]
       : theme.palette.text.secondary,
-    fontSize: "0.72rem",
+    fontSize: `${theme.typography.fontSize12}px`,
     fontVariantNumeric: "tabular-nums",
     whiteSpace: "nowrap",
   }),
@@ -375,10 +415,10 @@ export const ScoreBadge = styled(Box)<MutedStateProps>(
     borderRadius: theme.spacing(analysisResultsStyles.badgeRadius / 8),
     border: inactive
       ? `1px solid ${theme.palette.neutralColors[600]}`
-      : `1px solid rgba(245, 127, 23, 0.28)`,
+      : `1px solid ${alpha(theme.palette.warning.main, 0.28)}`,
     backgroundColor: inactive
       ? theme.palette.neutralColors[800]
-      : "rgba(245, 127, 23, 0.08)",
+      : alpha(theme.palette.warning.main, 0.08),
     color: inactive
       ? theme.palette.neutralColors[300]
       : theme.palette.warning.main,
@@ -415,16 +455,16 @@ interface EntityBadgeProps {
 
 export const EntityBadge = styled(Box, {
   shouldForwardProp: (prop) => prop !== "badgeColor",
-})<EntityBadgeProps & MutedStateProps>(({ badgeColor, inactive }) => ({
+})<EntityBadgeProps & MutedStateProps>(({ badgeColor, inactive, theme }) => ({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
   padding: "3px 7px",
   borderRadius: 999,
   backgroundColor: badgeColor,
-  color: inactive ? "rgba(122, 40, 72, 0.58)" : "#7A2848",
-  fontSize: "0.7rem",
-  fontWeight: 700,
+  color: inactive ? alpha("#7A2848", 0.58) : "#7A2848",
+  fontSize: `${theme.typography.fontSize12}px`,
+  fontWeight: theme.typography.fontWeight700,
   lineHeight: 1,
   whiteSpace: "nowrap",
   opacity: inactive ? 0.52 : 1,
@@ -443,24 +483,12 @@ export const DecisionFactorBadge = styled(Box, {
     justifyContent: "center",
     padding: "3px 7px",
     borderRadius: 999,
-    fontSize: "0.7rem",
+    fontSize: `${theme.typography.fontSize12}px`,
     fontWeight: theme.typography.fontWeight600,
     whiteSpace: "nowrap",
     opacity: inactive ? 0.55 : 1,
-    color: inactive
-      ? theme.palette.neutralColors[300]
-      : level === "High"
-        ? theme.palette.success.main
-        : level === "Low"
-          ? theme.palette.text.secondary
-          : theme.palette.text.primary,
-    backgroundColor: inactive
-      ? theme.palette.neutralColors[700]
-      : level === "High"
-        ? "rgba(46, 125, 50, 0.10)"
-        : level === "Low"
-          ? theme.palette.neutralColors[700]
-          : "rgba(148, 163, 184, 0.14)",
+    color: getDecisionTextColor(theme, level, inactive),
+    backgroundColor: getDecisionBackgroundColor(theme, level, inactive),
   }),
 );
 
@@ -479,10 +507,10 @@ export const ActionToggleButton = styled(Button, {
     ? "1px solid transparent"
     : `1px solid ${theme.palette.neutralColors[500]}`,
   backgroundColor: active
-    ? "rgba(47, 128, 237, 0.14)"
+    ? alpha(theme.palette.primary.main, 0.14)
     : theme.palette.neutralColors[700],
   color: active ? theme.palette.primary.main : theme.palette.neutralColors[300],
-  fontSize: "0.7rem",
+  fontSize: `${theme.typography.fontSize12}px`,
   fontWeight: theme.typography.fontWeight700,
   lineHeight: 1,
   textTransform: "none",
@@ -497,7 +525,7 @@ export const ActionToggleButton = styled(Button, {
   "&:hover": {
     borderColor: active ? "transparent" : theme.palette.neutralColors[500],
     backgroundColor: active
-      ? "rgba(47, 128, 237, 0.18)"
+      ? alpha(theme.palette.primary.main, 0.18)
       : theme.palette.neutralColors[700],
     boxShadow: "none",
   },
