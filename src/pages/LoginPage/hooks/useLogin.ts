@@ -21,8 +21,8 @@ const loginSchema = yup
   .object({
     email: yup
       .string()
-      .email("Invalid email format")
-      .required("Email is required"),
+      .email("login.validation.invalidEmail")
+      .required("login.validation.requiredEmail"),
   })
   .required();
 

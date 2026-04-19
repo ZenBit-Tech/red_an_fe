@@ -13,51 +13,41 @@ import {
 } from "@mui/icons-material";
 import * as styles from "./styles";
 import Sidebar from "@/components/sidebar/index";
-import { TIME_FILTERS } from "./constants";
+import { DEFAULT_STATS, MOCK_CHART_SKELETONS, TIME_FILTERS } from "./constants";
 import { useDashboard } from "./hooks/useDashboard";
 
 const DashboardPage = () => {
   const { t } = useTranslation();
-  const {
-    activeNav,
-    setActiveNav,
-    activeTime,
-    setActiveTime,
-    userEmail,
-    handleLogout,
-  } = useDashboard();
+  const { activeNav, setActiveNav, activeTime, setActiveTime, userEmail } =
+    useDashboard();
 
   const STAT_CARDS = [
     {
       label: t("dashboard.stats.totalDocuments"),
-      value: "0",
-      icon: <DescriptionOutlined sx={{ fontSize: 24 }} />,
+      value: DEFAULT_STATS.TOTAL_DOCUMENTS,
+      icon: <DescriptionOutlined sx={styles.statIcon} />,
     },
     {
       label: t("dashboard.stats.entitiesDetected"),
-      value: "0s",
-      icon: <CheckCircleOutlined sx={{ fontSize: 24 }} />,
+      value: DEFAULT_STATS.ENTITIES_DETECTED,
+      icon: <CheckCircleOutlined sx={styles.statIcon} />,
     },
     {
       label: t("dashboard.stats.avgCompleteness"),
-      value: "0%",
-      icon: <Fingerprint sx={{ fontSize: 24 }} />,
+      value: DEFAULT_STATS.AVG_COMPLETENESS,
+      icon: <Fingerprint sx={styles.statIcon} />,
     },
     {
       label: t("dashboard.stats.successRate"),
-      value: "0%",
-      icon: <FolderOpen sx={{ fontSize: 24 }} />,
+      value: DEFAULT_STATS.SUCCESS_RATE,
+      icon: <FolderOpen sx={styles.statIcon} />,
     },
   ];
 
   return (
     <Box sx={styles.pageWrapper}>
       <Box sx={styles.bodyWrapper}>
-        <Sidebar
-          activeNav={activeNav}
-          setActiveNav={setActiveNav}
-          handleLogout={handleLogout}
-        />
+        <Sidebar activeNav={activeNav} setActiveNav={setActiveNav} />
         <Box sx={styles.rightContent}>
           <Box sx={styles.topBar}>
             <Box sx={styles.topBarCenter}>
@@ -96,9 +86,7 @@ const DashboardPage = () => {
                   </Box>
                   <Box sx={styles.infoBox}>
                     <Box sx={styles.infoBanner}>
-                      <InfoOutlined
-                        sx={{ fontSize: 20, color: styles.colors.accent }}
-                      />
+                      <InfoOutlined sx={styles.infoIcon} />
                       <Typography sx={styles.infoBannerText}>
                         {t("dashboard.page.infoBanner")}
                       </Typography>
@@ -140,7 +128,7 @@ const DashboardPage = () => {
                         {card.value}
                       </Typography>
                       <Box sx={styles.statFooter}>
-                        <HourglassEmpty sx={{ fontSize: 14 }} />
+                        <HourglassEmpty sx={styles.statFooterIcon} />
                         <Typography sx={styles.statFooterText}>
                           {t("dashboard.stats.awaitingData")}
                         </Typography>
@@ -172,9 +160,9 @@ const DashboardPage = () => {
                   </Typography>
                 </Box>
                 <Box sx={styles.barSkeletonContainer}>
-                  {[15, 25, 10, 30, 20, 45, 25, 30, 50, 40].map((h, i) => (
+                  {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
                     <Box key={i} sx={styles.barSkeletonCol}>
-                      <Box sx={{ ...styles.barSkeleton, height: `${h}%` }} />
+                      <Box sx={styles.barSkeletonDynamic(h)} />
                       <Typography sx={styles.barSkeletonLabel}>
                         {t("dashboard.charts.noneLabel")}
                       </Typography>
@@ -193,9 +181,9 @@ const DashboardPage = () => {
                     </Typography>
                   </Box>
                   <Box sx={styles.barSkeletonContainer}>
-                    {[10, 20, 30, 20, 25, 15, 35, 40, 20, 30].map((h, i) => (
+                    {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
                       <Box key={i} sx={styles.barSkeletonCol}>
-                        <Box sx={{ ...styles.barSkeleton, height: `${h}%` }} />
+                        <Box sx={styles.barSkeletonDynamic(h)} />
                         <Typography sx={styles.barSkeletonLabel}>
                           {t("dashboard.charts.noneLabel")}
                         </Typography>
@@ -213,9 +201,9 @@ const DashboardPage = () => {
                     </Typography>
                   </Box>
                   <Box sx={styles.barSkeletonContainer}>
-                    {[15, 10, 25, 20, 20, 30, 10, 25, 40, 30].map((h, i) => (
+                    {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
                       <Box key={i} sx={styles.barSkeletonCol}>
-                        <Box sx={{ ...styles.barSkeleton, height: `${h}%` }} />
+                        <Box sx={styles.barSkeletonDynamic(h)} />
                         <Typography sx={styles.barSkeletonLabel}>
                           {t("dashboard.charts.noneLabel")}
                         </Typography>
@@ -234,9 +222,9 @@ const DashboardPage = () => {
                   </Typography>
                 </Box>
                 <Box sx={styles.barSkeletonContainer}>
-                  {[30, 40, 20, 50, 35, 45, 25, 30, 40, 60].map((h, i) => (
+                  {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
                     <Box key={i} sx={styles.barSkeletonCol}>
-                      <Box sx={{ ...styles.barSkeleton, height: `${h}%` }} />
+                      <Box sx={styles.barSkeletonDynamic(h)} />
                       <Typography sx={styles.barSkeletonLabel}>
                         {t("dashboard.charts.noneLabel")}
                       </Typography>

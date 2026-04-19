@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+import { Controller } from "react-hook-form";
 import {
   Box,
   Typography,
@@ -11,8 +13,6 @@ import {
 import { ArrowBack, MailOutline } from "@mui/icons-material";
 import * as styles from "@/pages/LoginPage/styles";
 import { LOGIN_STEPS, useLogin } from "./hooks/useLogin";
-import { Controller } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
   const {
@@ -53,13 +53,18 @@ const LoginPage = () => {
                 <Controller
                   name="email"
                   control={control}
-                  render={({ field }) => (
+                  render={({ field, fieldState: { error } }) => (
                     <TextField
                       {...field}
                       fullWidth
                       placeholder={t("login.emailPlaceholder")}
+                      error={!!error}
+                      helperText={error?.message ? t(error.message) : ""}
                       InputProps={{
                         sx: styles.inputStyles,
+                      }}
+                      FormHelperTextProps={{
+                        sx: { marginLeft: 0 },
                       }}
                     />
                   )}
@@ -123,7 +128,7 @@ const LoginPage = () => {
                   sx={styles.linkButton}
                 >
                   <ArrowBack sx={styles.arrowBack} />
-                  {t("login.backToSignIn")}
+                  {t("login.back")}
                 </Link>
               </Box>
             </Box>

@@ -35,3 +35,12 @@ export const NAV_ITEMS: NavItem[] = [
     icon: PaymentsOutlined,
   },
 ];
+export const handleActionKeyDown = (
+  event: React.KeyboardEvent<HTMLDivElement>,
+  action: () => void,
+) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    action();
+  }
+};

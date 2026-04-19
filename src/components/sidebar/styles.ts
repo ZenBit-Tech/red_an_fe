@@ -7,7 +7,8 @@ export const sidebar = {
   boxSizing: "border-box",
   width: "256px",
   height: "794px",
-  padding: "16px 24px",
+  padding: "24px",
+  paddingLeft: "40px",
   flexShrink: 0,
   bgcolor: "#060e20",
   borderRight: `1px solid rgba(67,70,82,0.25)`,
@@ -69,4 +70,13 @@ export const sidebarBottom = {
   display: "flex",
   flexDirection: "column",
   gap: "16px",
+};
+export const mainNavIcon = (isActive: boolean) => ({
+  fontSize: "24px",
+  ...navItemIcon(isActive),
+});
+
+export const bottomNavIcon = {
+  fontSize: "18px",
+  ...navItemIcon(false),
 };

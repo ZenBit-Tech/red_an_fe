@@ -31,17 +31,11 @@ export const useDashboard = () => {
     }
   }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate(APP_ROUTES.SIGN_IN);
-  };
-
   return {
     activeNav,
     setActiveNav,
     activeTime,
     setActiveTime,
     userEmail,
-    handleLogout,
   };
 };

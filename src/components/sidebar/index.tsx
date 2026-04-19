@@ -1,17 +1,26 @@
+import { useTranslation } from "react-i18next";
 import { Box, Typography } from "@mui/material";
 import { HelpOutlineOutlined, LogoutOutlined } from "@mui/icons-material";
-import { useTranslation } from "react-i18next";
 import { NAV_ITEMS, type NavKey } from "@/components/sidebar/constant";
 import * as styles from "@/components/sidebar/styles";
-
+import { useLogout } from "./hooks/useLogout";
+const handleActionKeyDown = (
+  event: React.KeyboardEvent<HTMLDivElement>,
+  action: () => void,
+) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    action();
+  }
+};
 interface SidebarProps {
   activeNav: NavKey;
   setActiveNav: (key: NavKey) => void;
-  handleLogout: () => void;
 }
 
-const Sidebar = ({ activeNav, setActiveNav, handleLogout }: SidebarProps) => {
+const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
   const { t } = useTranslation();
+  const { handleLogout } = useLogout();
 
   return (
     <Box sx={styles.sidebar}>
@@ -29,19 +38,21 @@ const Sidebar = ({ activeNav, setActiveNav, handleLogout }: SidebarProps) => {
         <Box sx={styles.sidebarNav}>
           {NAV_ITEMS.map((item) => {
             const IconComponent = item.icon;
+            const isActive = activeNav === item.key;
+            const handleNavSelect = () => setActiveNav(item.key);
+
             return (
               <Box
                 key={item.key}
-                sx={styles.navItem(activeNav === item.key)}
-                onClick={() => setActiveNav(item.key)}
+                sx={styles.navItem(isActive)}
+                onClick={handleNavSelect}
+                onKeyDown={(e) => handleActionKeyDown(e, handleNavSelect)}
+                role="button"
+                tabIndex={0}
+                aria-current={isActive ? "page" : undefined}
               >
-                <IconComponent
-                  sx={{
-                    fontSize: "24px",
-                    ...styles.navItemIcon(activeNav === item.key),
-                  }}
-                />
-                <Typography sx={styles.navItemText(activeNav === item.key)}>
+                <IconComponent sx={styles.mainNavIcon(isActive)} />
+                <Typography sx={styles.navItemText(isActive)}>
                   {t(item.labelKey)}
                 </Typography>
               </Box>
@@ -50,18 +61,20 @@ const Sidebar = ({ activeNav, setActiveNav, handleLogout }: SidebarProps) => {
         </Box>
       </Box>
       <Box sx={styles.sidebarBottom}>
-        <Box sx={styles.navItem(false)}>
-          <HelpOutlineOutlined
-            sx={{ fontSize: "18px", ...styles.navItemIcon(false) }}
-          />
+        <Box sx={styles.navItem(false)} role="button" tabIndex={0}>
+          <HelpOutlineOutlined sx={styles.bottomNavIcon} />
           <Typography sx={styles.navItemText(false)}>
             {t("sidebar.bottom.support")}
           </Typography>
         </Box>
-        <Box sx={styles.navItem(false)} onClick={handleLogout}>
-          <LogoutOutlined
-            sx={{ fontSize: "18px", ...styles.navItemIcon(false) }}
-          />
+        <Box
+          sx={styles.navItem(false)}
+          onClick={handleLogout}
+          onKeyDown={(e) => handleActionKeyDown(e, handleLogout)}
+          role="button"
+          tabIndex={0}
+        >
+          <LogoutOutlined sx={styles.bottomNavIcon} />
           <Typography sx={styles.navItemText(false)}>
             {t("sidebar.bottom.logout")}
           </Typography>

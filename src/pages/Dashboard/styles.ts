@@ -105,8 +105,8 @@ export const avatarButton = {
 export const mainContent = {
   flex: 1,
   overflow: "auto",
-  px: { xs: 4, md: "93px" },
-  py: "48px",
+  px: { xs: 4, md: "40px" },
+  py: "44px",
 };
 
 export const contentContainer = {
@@ -154,12 +154,13 @@ export const pageHeaderRow2 = {
 export const pageTitle = {
   color: primaryColors[50],
   fontWeight: theme.typography.fontWeight700,
-  fontSize: theme.typography.fontSize32,
+  fontSize: theme.typography.fontSize48,
 };
 
 export const pageSubtitle = {
   color: textColors[200],
-  fontSize: theme.typography.fontSize12,
+  fontSize: theme.typography.fontSize20,
+  fontWeight: theme.typography.fontWeight500,
 };
 
 export const startButton = {
@@ -402,7 +403,19 @@ export const infoBox = {
   gap: 2,
   flexWrap: "wrap",
 };
+
+export const statIcon = { fontSize: 24 };
+export const statFooterIcon = { fontSize: theme.typography.fontSize14 };
+export const infoIcon = {
+  fontSize: theme.typography.fontSize20,
+  color: colors.accent,
+};
 export const circleOutline = {
   fontSize: theme.typography.fontSize20,
   color: "#b0c6ff",
 };
+
+export const barSkeletonDynamic = (heightPercent: number) => ({
+  ...barSkeleton,
+  height: `${heightPercent}%`,
+});
