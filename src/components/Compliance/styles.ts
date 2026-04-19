@@ -1,17 +1,7 @@
 import { styled } from "@mui/material/styles";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
-export const ComplianceSection = styled("section")(({ theme }) => ({
-  padding: theme.spacing(10, 4),
-  [theme.breakpoints.up("md")]: {
-    padding: theme.spacing(22.5, 6),
-  },
-  [theme.breakpoints.up("lg")]: {
-    padding: theme.spacing(22.5, 8),
-  },
-}));
-
-export const ContentWrapper = styled(Box)(({ theme }) => ({
+export const ContentWrapper = styled(Container)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -28,7 +18,7 @@ export const TitleBlock = styled(Box)(({ theme }) => ({
 export const SectionTitle = styled(Box)(({ theme }) => ({
   fontSize: theme.typography.fontSize32,
   fontWeight: theme.typography.fontWeight700,
-  color: theme.palette.textColors[50],
+  color: theme.palette.secondary.main,
   textAlign: "center",
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize48,
@@ -36,9 +26,9 @@ export const SectionTitle = styled(Box)(({ theme }) => ({
 }));
 
 export const TitleDivider = styled(Box)(({ theme }) => ({
-  width: 80,
-  height: 3,
-  borderRadius: 2,
+  width: 172,
+  height: 4,
+  borderRadius: theme.spacing(3),
   backgroundImage: `linear-gradient(90deg, ${theme.palette.primaryColors[200]}, ${theme.palette.primaryColors[700]})`,
 }));
 

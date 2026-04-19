@@ -188,13 +188,13 @@ export const theme = createTheme({
         root: ({ theme }) => ({
           width: "100%",
           margin: "0 auto",
-          padding: theme.spacing(0, 4),
+          padding: theme.spacing(3, 4),
           [theme.breakpoints.up("md")]: {
-            padding: theme.spacing(0, 10),
+            padding: theme.spacing(10, 10),
           },
           [theme.breakpoints.up("lg")]: {
             maxWidth: 1440,
-            padding: theme.spacing(0, 20),
+            padding: theme.spacing(20, 20),
           },
         }),
       },

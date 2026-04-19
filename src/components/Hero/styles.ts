@@ -6,12 +6,6 @@ export const HeroSection = styled("section")(({ theme }) => ({
   overflow: "hidden",
   boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.25)",
   backgroundColor: theme.palette.backgroundColor,
-  paddingTop: theme.spacing(15),
-  paddingBottom: theme.spacing(4.2),
-
-  [theme.breakpoints.up("md")]: {
-    paddingTop: theme.spacing(30),
-  },
 }));
 
 export const HeroGlow = styled("div")({
@@ -34,16 +28,14 @@ export const HeroContent = styled("div")(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   gap: theme.spacing(4),
-  padding: theme.spacing(0, 4),
   margin: "0 auto",
   position: "relative",
   zIndex: 1,
   [theme.breakpoints.up("md")]: {
-    gap: theme.spacing(8),
-    padding: theme.spacing(0, 6),
+    gap: theme.spacing(6),
   },
   [theme.breakpoints.up("lg")]: {
-    padding: theme.spacing(0, 8),
+    paddingBottom: theme.spacing(0),
   },
 }));
 
@@ -142,5 +134,6 @@ export const GetStartedButton = styled(Button)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     padding: theme.spacing(4, 10),
     fontSize: theme.typography.fontSize20,
+    marginTop: "24px",
   },
 }));

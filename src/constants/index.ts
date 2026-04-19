@@ -1,3 +1,8 @@
+import GitHubIcon from "@mui/icons-material/GitHub";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import TwitterIcon from "@mui/icons-material/Twitter";
+
 export const NAV_LINKS = [
   { to: "/about-us", label: "About Us" },
   { to: "/subscription-plan", label: "Subscription plan" },
@@ -89,3 +94,10 @@ export const COMPANY_LINKS = [
   { label: "Contact Us", to: "/contact-us" },
   { label: "Subscription plan", to: "/subscription-plan" },
 ];
+
+export const ICONS: Record<string, typeof TwitterIcon> = {
+  twitter: TwitterIcon,
+  linkedin: LinkedInIcon,
+  github: GitHubIcon,
+  instagram: InstagramIcon,
+};

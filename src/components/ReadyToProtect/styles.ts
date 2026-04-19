@@ -1,16 +1,11 @@
 import { styled } from "@mui/material/styles";
-import { Box, Button } from "@mui/material";
-import { neutralColors, strokeColors } from "@/constants/themeConstants";
+import { Box, Button, Container } from "@mui/material";
 
 export const ReadyToProtectSection = styled("section")(({ theme }) => ({
-  padding: theme.spacing(10, 0),
   backgroundColor: theme.palette.strokeColors[700],
-  [theme.breakpoints.up("md")]: {
-    padding: theme.spacing(20, 0),
-  },
 }));
 
-export const ContentWrapper = styled(Box)(({ theme }) => ({
+export const ContentWrapper = styled(Container)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -75,23 +70,23 @@ export const SecondaryButton = styled(Button)(({ theme }) => ({
   backgroundImage: "none",
   fontSize: theme.typography.fontSize16,
   fontWeight: theme.typography.fontWeight400,
-  backgroundColor: neutralColors[700],
+  backgroundColor: theme.palette.neutralColors[700],
   color: theme.palette.primaryColors[50],
-  border: `1px solid ${strokeColors[150]}`,
+  border: `1px solid ${theme.palette.strokeColors[150]}`,
   "&:hover": {
     backgroundImage: "none",
     backgroundColor: theme.palette.neutralColors[600],
-    border: `1px solid ${strokeColors[150]}`,
+    border: `1px solid ${theme.palette.strokeColors[150]}`,
   },
   "&:active": {
     backgroundImage: "none",
     backgroundColor: theme.palette.neutralColors[900],
-    border: `1px solid ${strokeColors[150]}`,
+    border: `1px solid ${theme.palette.strokeColors[150]}`,
   },
 
   "&.Mui-disabled": {
     backgroundColor: theme.palette.secondaryColors[200],
-    border: `1px solid ${strokeColors[150]}`,
+    border: `1px solid ${theme.palette.strokeColors[150]}`,
     color: theme.palette.neutralColors[100],
     opacity: 0.6,
   },

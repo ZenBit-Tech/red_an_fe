@@ -2,27 +2,20 @@ import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Box, Container } from "@mui/material";
 
-export const FooterWrapper = styled("section")(({ theme }) => ({
-  backgroundColor: theme.palette.secondaryColors[900],
-  padding: theme.spacing(8, 0),
-  marginBottom: theme.spacing(16),
-
-  [theme.breakpoints.up("md")]: {
-    padding: theme.spacing(10, 0),
-    marginBottom: theme.spacing(18),
-  },
-}));
-
 export const FooterContainer = styled(Container)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(8),
   flexDirection: "column",
   alignItems: "center",
+  padding: theme.spacing(10, 10),
+  marginBottom: theme.spacing(16),
 
   [theme.breakpoints.up("md")]: {
     flexDirection: "row",
     alignItems: "flex-start",
     gap: theme.spacing(58),
+    padding: theme.spacing(10, 20),
+    marginBottom: theme.spacing(26),
   },
 }));
 

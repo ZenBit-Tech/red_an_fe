@@ -1,10 +1,9 @@
 import { styled } from "@mui/material/styles";
 
-export const ImageSection = styled("section")(({ theme }) => ({
+export const ImageSection = styled("section")({
   position: "relative",
   zIndex: 1,
-  marginBottom: theme.spacing(17.2),
-}));
+});
 
 export const ImageWrapper = styled("div")({
   maxWidth: 635,

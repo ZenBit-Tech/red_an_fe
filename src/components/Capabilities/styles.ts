@@ -1,19 +1,11 @@
 import { styled } from "@mui/material/styles";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
 export const CapabilitiesSection = styled("section")(({ theme }) => ({
   backgroundColor: theme.palette.secondaryColors[900],
-
-  padding: theme.spacing(10, 4),
-  [theme.breakpoints.up("md")]: {
-    padding: theme.spacing(22.5, 6),
-  },
-  [theme.breakpoints.up("lg")]: {
-    padding: theme.spacing(22.5, 8),
-  },
 }));
 
-export const ContentWrapper = styled(Box)(({ theme }) => ({
+export const ContentWrapper = styled(Container)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
@@ -46,6 +38,10 @@ export const Title = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize48,
   },
+}));
+
+export const TitleHighlight = styled("span")(({ theme }) => ({
+  color: theme.palette.primaryColors[200],
 }));
 
 export const DescriptionMain = styled(Box)(({ theme }) => ({
@@ -132,7 +128,6 @@ export const RightGrid = styled(Box)(({ theme }) => ({
 
 export const GridCard = styled(Box)(({ theme }) => ({
   width: "100%",
-  height: "auto",
   backgroundColor: theme.palette.neutralColors[800],
   borderRadius: theme.shape.borderRadius,
   padding: theme.spacing(8),

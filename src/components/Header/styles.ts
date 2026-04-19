@@ -10,11 +10,14 @@ export const HeaderContainer = styled(Container)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: theme.spacing(4),
   flexWrap: "nowrap",
+  padding: theme.spacing(3, 4),
 
   [theme.breakpoints.up("md")]: {
-    padding: theme.spacing(4, 8),
+    padding: theme.spacing(3, 8),
+  },
+  [theme.breakpoints.up("lg")]: {
+    padding: theme.spacing(3, 20),
   },
 }));
 
