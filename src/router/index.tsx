@@ -3,6 +3,7 @@ import Layout from "@/components/Layout";
 import DeidentifyPage from "@/pages/deidentify";
 import { ContactUsPage } from "@/pages/ContactUsPage";
 import HomePage from "@/pages/HomePage";
+import { AboutUsPage } from "@/pages/AboutUSPage";
 import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/Dashboard";
 import VerifyPage from "@/pages/VerifyPage/VerifyPage";
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
       {
         path: "/contact-us",
         element: <ContactUsPage />,
+      },
+      {
+        path: "/about-us",
+        element: <AboutUsPage />,
       },
       {
         path: "/auth/verify",

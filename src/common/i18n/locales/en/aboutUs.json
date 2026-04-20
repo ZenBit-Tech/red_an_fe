@@ -1,0 +1,39 @@
+{
+  "hero": {
+    "title": "About Us",
+    "textContent": "We're on a mission to make healthcare data secure, compliant, and accessible for research and innovation."
+  },
+  "ourMission": {
+    "title": "Our Mission",
+    "firstContentParagraph": "Clinical Data Studio was founded with a clear purpose: to bridge the gap between healthcare data privacy requirements and the need for accessible data in medical research and development.",
+    "secondContentParagraph": "We believe that protecting patient privacy shouldn't mean sacrificing the ability to leverage data for advancing healthcare outcomes. Our platform empowers organizations to confidently use clinical data while maintaining the highest standards of compliance and security.",
+    "itemOneDescription": "COMPLIANCE RATE",
+    "itemTwoDescription": "HEALTHCARE CLIENTS",
+    "itemThreeDescription": "RECORDS PROCESSED",
+    "itemFourDescription": "ACCURACY"
+  },
+
+  "ourValues": {
+    "itemOneTitle": "Privacy First",
+    "itemOneDescription": "Patient privacy and data protection are at the core of everything we build and every decision we make.",
+
+    "itemTwoTitle": "Innovation",
+    "itemTwoDescription": "We continuously push the boundaries of what's possible in data de-identification and synthetic data generation.",
+
+    "itemThreeTitle": "Excellence",
+    "itemThreeDescription": "We maintain the highest standards of quality accuracy, and reliability in our platform and services."
+  },
+
+  "ourTeam": {
+    "title": "Leadership Team",
+    "firstContentParagraph": "Our team brings together decades of expertise in clinical trials, healthcare cybersecurity, and large-scale data engineering.",
+    "itemOneTitle": "Dr. Sarah Chen",
+    "itemOneDescription": "CEO & Founder",
+    "itemTwoTitle": "Marcus Thorne",
+    "itemTwoDescription": "Chief Security Officer",
+    "itemThreeTitle": "Sarah Jenkins",
+    "itemThreeDescription": "Lead System & Architect",
+    "secondContentParagraph": "Clinical Data Studio is proud to be backed by leading healthcare and technology investors, ",
+    "theardContentParagraph": "our team is committed to transforming how healthcare organizations work with sensitive clinical data."
+  }
+}
