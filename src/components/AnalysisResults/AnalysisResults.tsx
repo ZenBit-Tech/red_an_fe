@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Box, MenuItem, TableBody } from "@mui/material";
+import { Box, CircularProgress, MenuItem, TableBody } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import {
   COMPLIANCE_FRAMEWORK_ENTITY_TYPES,
   COMPLIANCE_FRAMEWORK,
-} from "@/components/complianceSelect/constants";
+} from "@/components/ComplianceSelect/constants";
 import { useAppSelector } from "@/common/hooks/hooks";
 import {
   AnalysisResultsContainer,
@@ -23,7 +23,9 @@ import {
   PanelDescription,
   PanelSurface,
   TextContent,
+  OutputLoadingContainer,
   HighlightedEntity,
+  OutputHighlightedToken,
   PanelActions,
   PanelActionButton,
   DownloadFormatSelect,
@@ -43,7 +45,6 @@ import {
   ActionToggleButton,
 } from "./styles";
 import {
-  MOCK_ENTITIES,
   DEFAULT_ENTITY_COLOR,
   ENTITY_TYPE_COLORS,
   DOWNLOAD_FORMAT,
@@ -57,12 +58,14 @@ import { useAnalysisResults } from "./useAnalysisResults";
 
 interface AnalysisResultsProps {
   inputText: string;
-  entities?: Entity[];
+  entities: Entity[];
+  jobId: string;
 }
 
 const AnalysisResults: React.FC<AnalysisResultsProps> = ({
   inputText,
-  entities = MOCK_ENTITIES,
+  entities,
+  jobId,
 }) => {
   const { t } = useTranslation();
   const [copiedOutput, setCopiedOutput] = useState<boolean>(false);
@@ -87,10 +90,13 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
     selectedEntityIds,
     inputWithHighlights,
     outputText,
+    isPreviewLoading,
     toggleEntitySelection,
   } = useAnalysisResults({
     entities: frameworkEntities,
     inputText,
+    jobId,
+    framework: selectedFramework,
   });
 
   const handleCopyOutput = async (): Promise<void> => {
@@ -164,6 +170,40 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
     }
   };
 
+  const REPLACEMENT_TOKEN_PATTERN = /\[[^\]]+\]/g;
+
+  const renderOutputWithHighlights = (): React.ReactNode => {
+    if (!outputText) {
+      return inputText;
+    }
+
+    const segments: React.ReactNode[] = [];
+    let lastIdx = 0;
+    let match: RegExpExecArray | null;
+
+    REPLACEMENT_TOKEN_PATTERN.lastIndex = 0;
+
+    while ((match = REPLACEMENT_TOKEN_PATTERN.exec(outputText)) !== null) {
+      if (lastIdx < match.index) {
+        segments.push(outputText.substring(lastIdx, match.index));
+      }
+
+      segments.push(
+        <OutputHighlightedToken key={`token-${match.index}`}>
+          {match[0]}
+        </OutputHighlightedToken>,
+      );
+
+      lastIdx = match.index + match[0].length;
+    }
+
+    if (lastIdx < outputText.length) {
+      segments.push(outputText.substring(lastIdx));
+    }
+
+    return segments;
+  };
+
   const renderInputWithHighlights = (): React.ReactNode => {
     if (!inputText) {
       return inputText;
@@ -181,12 +221,9 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
         segments.push(inputText.substring(lastIdx, entity.startIdx));
       }
 
-      const bgColor =
-        ENTITY_TYPE_COLORS[entity.type as EntityType] ?? DEFAULT_ENTITY_COLOR;
       segments.push(
         <HighlightedEntity
           key={`${entity.id}-${entity.startIdx}`}
-          highlightColor={bgColor}
           title={`${entity.type} (Score: ${entity.score})`}
         >
           {inputText.substring(entity.startIdx, entity.endIdx)}
@@ -256,7 +293,13 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
             </PanelHeaderCopy>
           </PanelHeader>
           <PanelSurface>
-            <TextContent>{outputText || inputText}</TextContent>
+            {isPreviewLoading ? (
+              <OutputLoadingContainer>
+                <CircularProgress size={24} />
+              </OutputLoadingContainer>
+            ) : (
+              <TextContent>{renderOutputWithHighlights()}</TextContent>
+            )}
           </PanelSurface>
           <PanelActions>
             <PanelActionButton

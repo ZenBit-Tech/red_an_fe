@@ -9,7 +9,7 @@ import {
   PDF_TEXT_JOIN_SEPARATOR,
   SUPPORTED_FILE_EXTENSIONS,
   type ClinicalInputTab,
-} from "@/components/clinicalInput/constants";
+} from "@/components/ClinicalInput/constants";
 import {
   clearFileError,
   setActiveTab,

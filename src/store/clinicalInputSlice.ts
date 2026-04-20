@@ -6,7 +6,7 @@ import {
   DEFAULT_FILE_ERROR,
   DEFAULT_UPLOADED_FILE_PATH,
   type ClinicalInputTab,
-} from "@/components/clinicalInput/constants";
+} from "@/components/ClinicalInput/constants";
 
 interface ClinicalInputState {
   activeTab: ClinicalInputTab;

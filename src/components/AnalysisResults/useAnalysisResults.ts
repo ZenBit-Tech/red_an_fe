@@ -1,9 +1,13 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import type { ComplianceFramework } from "@/components/ComplianceSelect/constants";
+import { previewAnonymization } from "@/common/api/deidentifyApi";
 import type { Entity } from "./constants";
 
 interface UseAnalysisResultsProps {
   entities: Entity[];
   inputText: string;
+  jobId: string;
+  framework: ComplianceFramework;
 }
 
 interface UseAnalysisResultsReturn {
@@ -11,6 +15,7 @@ interface UseAnalysisResultsReturn {
   selectedEntityIds: Set<string>;
   inputWithHighlights: Entity[];
   outputText: string;
+  isPreviewLoading: boolean;
   toggleEntitySelection: (entityId: string) => void;
   selectAllEntities: () => void;
   deselectAllEntities: () => void;
@@ -19,10 +24,14 @@ interface UseAnalysisResultsReturn {
 export const useAnalysisResults = ({
   entities,
   inputText,
+  jobId,
+  framework,
 }: UseAnalysisResultsProps): UseAnalysisResultsReturn => {
   const [selectedEntityIds, setSelectedEntityIds] = useState<Set<string>>(
     new Set(entities.filter((e) => e.isSelected).map((e) => e.id)),
   );
+  const [outputText, setOutputText] = useState<string>(inputText);
+  const [isPreviewLoading, setIsPreviewLoading] = useState<boolean>(false);
 
   const visibleEntities = useMemo(
     () => entities.filter((entity) => selectedEntityIds.has(entity.id)),
@@ -33,24 +42,31 @@ export const useAnalysisResults = ({
     return visibleEntities.sort((a, b) => a.startIdx - b.startIdx);
   }, [visibleEntities]);
 
-  const outputText = useMemo(() => {
-    if (!inputText || selectedEntityIds.size === 0) {
-      return inputText;
+  useEffect(() => {
+    if (selectedEntityIds.size === 0) {
+      setOutputText(inputText);
+      return;
     }
 
-    let result = inputText;
-    const sortedEntities = [...inputWithHighlights].sort(
-      (a, b) => b.startIdx - a.startIdx,
-    );
+    const fetchPreview = async (): Promise<void> => {
+      try {
+        setIsPreviewLoading(true);
+        const response = await previewAnonymization({
+          jobId,
+          text: inputText,
+          framework,
+          activeIds: Array.from(selectedEntityIds),
+        });
+        setOutputText(response.anonymizedText);
+      } catch {
+        setOutputText(inputText);
+      } finally {
+        setIsPreviewLoading(false);
+      }
+    };
 
-    for (const entity of sortedEntities) {
-      const before = result.substring(0, entity.startIdx);
-      const after = result.substring(entity.endIdx);
-      result = before + entity.replacement + after;
-    }
-
-    return result;
-  }, [inputText, inputWithHighlights, selectedEntityIds]);
+    void fetchPreview();
+  }, [selectedEntityIds, jobId, inputText, framework]);
 
   const toggleEntitySelection = (entityId: string): void => {
     setSelectedEntityIds((prev) => {
@@ -77,6 +93,7 @@ export const useAnalysisResults = ({
     selectedEntityIds,
     inputWithHighlights,
     outputText,
+    isPreviewLoading,
     toggleEntitySelection,
     selectAllEntities,
     deselectAllEntities,
