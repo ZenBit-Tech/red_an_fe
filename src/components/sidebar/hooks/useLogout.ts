@@ -6,6 +6,15 @@ export const useLogout = () => {
     localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
     navigate(APP_ROUTES.SIGN_IN);
   };
+  const handleActionKeyDown = (
+    event: React.KeyboardEvent<HTMLDivElement>,
+    action: () => void,
+  ) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      action();
+    }
+  };
 
-  return { handleLogout };
+  return { handleLogout, handleActionKeyDown };
 };

@@ -4,15 +4,7 @@ import { HelpOutlineOutlined, LogoutOutlined } from "@mui/icons-material";
 import { NAV_ITEMS, type NavKey } from "@/components/sidebar/constant";
 import * as styles from "@/components/sidebar/styles";
 import { useLogout } from "./hooks/useLogout";
-const handleActionKeyDown = (
-  event: React.KeyboardEvent<HTMLDivElement>,
-  action: () => void,
-) => {
-  if (event.key === "Enter" || event.key === " ") {
-    event.preventDefault();
-    action();
-  }
-};
+
 interface SidebarProps {
   activeNav: NavKey;
   setActiveNav: (key: NavKey) => void;
@@ -20,7 +12,7 @@ interface SidebarProps {
 
 const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
   const { t } = useTranslation();
-  const { handleLogout } = useLogout();
+  const { handleLogout, handleActionKeyDown } = useLogout();
 
   return (
     <Box sx={styles.sidebar}>
