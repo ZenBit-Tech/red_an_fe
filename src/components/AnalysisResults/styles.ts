@@ -428,25 +428,36 @@ export const ScoreBadge = styled(Box)<MutedStateProps>(
   }),
 );
 
-interface HighlightedEntityProps {
-  highlightColor: string;
-}
-
-export const HighlightedEntity = styled("span", {
-  shouldForwardProp: (prop) => prop !== "highlightColor",
-})<HighlightedEntityProps>(({ highlightColor, theme }) => ({
+export const HighlightedEntity = styled("span")(({ theme }) => ({
   display: "inline-flex",
   alignItems: "center",
-  minHeight: 22,
-  padding: "1px 6px",
-  marginRight: 2,
-  borderRadius: 6,
-  border: `1px solid ${theme.palette.background.paper}`,
-  backgroundColor: highlightColor,
-  color: theme.palette.text.primary,
+  minHeight: 24,
+  padding: theme.spacing(0.25, 1),
+  marginRight: theme.spacing(0.5),
+  borderRadius: theme.spacing(1),
+  border: "none",
+  backgroundColor: alpha(theme.palette.warning.main, 0.14),
+  color: theme.palette.warning.main,
   fontWeight: theme.typography.fontWeight500,
   cursor: "default",
-  boxShadow: "0 1px 2px rgba(15, 23, 42, 0.08)",
+  lineHeight: 1.2,
+  boxShadow: "none",
+}));
+
+export const OutputHighlightedToken = styled("span")(({ theme }) => ({
+  display: "inline-flex",
+  alignItems: "center",
+  minHeight: 24,
+  padding: theme.spacing(0.25, 1),
+  marginRight: theme.spacing(0.5),
+  borderRadius: theme.spacing(1),
+  border: "none",
+  backgroundColor: alpha(theme.palette.primary.main, 0.18),
+  color: theme.palette.primary.light ?? theme.palette.primary.main,
+  fontWeight: theme.typography.fontWeight500,
+  cursor: "default",
+  lineHeight: 1.2,
+  boxShadow: "none",
 }));
 
 interface EntityBadgeProps {

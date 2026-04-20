@@ -25,6 +25,7 @@ import {
   TextContent,
   OutputLoadingContainer,
   HighlightedEntity,
+  OutputHighlightedToken,
   PanelActions,
   PanelActionButton,
   DownloadFormatSelect,
@@ -169,6 +170,40 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
     }
   };
 
+  const REPLACEMENT_TOKEN_PATTERN = /\[[^\]]+\]/g;
+
+  const renderOutputWithHighlights = (): React.ReactNode => {
+    if (!outputText) {
+      return inputText;
+    }
+
+    const segments: React.ReactNode[] = [];
+    let lastIdx = 0;
+    let match: RegExpExecArray | null;
+
+    REPLACEMENT_TOKEN_PATTERN.lastIndex = 0;
+
+    while ((match = REPLACEMENT_TOKEN_PATTERN.exec(outputText)) !== null) {
+      if (lastIdx < match.index) {
+        segments.push(outputText.substring(lastIdx, match.index));
+      }
+
+      segments.push(
+        <OutputHighlightedToken key={`token-${match.index}`}>
+          {match[0]}
+        </OutputHighlightedToken>,
+      );
+
+      lastIdx = match.index + match[0].length;
+    }
+
+    if (lastIdx < outputText.length) {
+      segments.push(outputText.substring(lastIdx));
+    }
+
+    return segments;
+  };
+
   const renderInputWithHighlights = (): React.ReactNode => {
     if (!inputText) {
       return inputText;
@@ -186,12 +221,9 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
         segments.push(inputText.substring(lastIdx, entity.startIdx));
       }
 
-      const bgColor =
-        ENTITY_TYPE_COLORS[entity.type as EntityType] ?? DEFAULT_ENTITY_COLOR;
       segments.push(
         <HighlightedEntity
           key={`${entity.id}-${entity.startIdx}`}
-          highlightColor={bgColor}
           title={`${entity.type} (Score: ${entity.score})`}
         >
           {inputText.substring(entity.startIdx, entity.endIdx)}
@@ -266,7 +298,7 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
                 <CircularProgress size={24} />
               </OutputLoadingContainer>
             ) : (
-              <TextContent>{outputText || inputText}</TextContent>
+              <TextContent>{renderOutputWithHighlights()}</TextContent>
             )}
           </PanelSurface>
           <PanelActions>
