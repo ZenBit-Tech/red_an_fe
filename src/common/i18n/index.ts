@@ -2,6 +2,8 @@ import { initReactI18next } from "react-i18next";
 import i18n from "i18next";
 import enTranslation from "./locales/en/translation.json";
 import enDeidentify from "./locales/en/deidentify.json";
+import aboutUsEn from "./locales/en/aboutUs.json";
+import contactUsEn from "./locales/en/contactUs.json";
 
 void i18n.use(initReactI18next).init({
   resources: {
@@ -14,6 +16,8 @@ void i18n.use(initReactI18next).init({
           ...enDeidentify.compliance,
         },
       },
+      aboutUs: aboutUsEn,
+      contactUs: contactUsEn,
     },
   },
   lng: "en",

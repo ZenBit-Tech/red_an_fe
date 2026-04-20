@@ -3,6 +3,7 @@ import Layout from "@/components/Layout";
 import DeidentifyPage from "@/pages/Deidentify";
 import { ContactUsPage } from "@/pages/ContactUsPage";
 import HomePage from "@/pages/HomePage";
+import { AboutUsPage } from "@/pages/AboutUSPage";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
       {
         path: "/contact-us",
         element: <ContactUsPage />,
+      },
+      {
+        path: "/about-us",
+        element: <AboutUsPage />,
       },
       {
         path: "*",

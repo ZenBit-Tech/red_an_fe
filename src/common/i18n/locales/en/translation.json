@@ -1,8 +1,9 @@
 {
   "capabilities": {
     "subtitle": "CAPABILITIES",
-    "title": "Protect Patient Privacy Without Compromising Data Value",
-    "description": "Comprehensive tools for healthcare organizations to securely manage and utilize clinical data",
+    "title": "Protect Privacy Without Compromising",
+    "titleValue": "Value",
+    "description": "Our platform uses advanced NLP models specifically trained on clinical corpora to detect 100+ types of PHI and PII across unstructured medical notes and structured records.",
     "cards": {
       "pii": {
         "title": "Advanced PII Detection",
@@ -49,15 +50,14 @@
     },
     "banner": {
       "title": "Custom Compliance Profiles",
-      "description": "Need specific requirements? Create custom compliance profiles tailored to your organization's unique regulatory needs and data protection policies."
+      "description": "Tailor your anonymisation logic for specific research studies or regional health mandates. Define custom entities and regular expressions to catch niche medical identifiers."
     }
   },
   "footer": {
-    "description": "Enterprise-grade clinical data de-identification and synthetic data generation platform. Protecting patient privacy while maintaining data utility.",
+    "description": "Enterprise-grade clinical data anonymization and synthetic data generation.",
     "copyright": "© 2026 Clinical Data Studio. All rights reserved.",
     "columns": {
-      "product": "Product",
-      "resources": "Resources",
+      "social": "Follow Us",
       "company": "Company"
     },
     "links": {
@@ -83,10 +83,12 @@
       "title": "Clinical Data Studio",
       "subtitle": "De-ID & Synthesis"
     },
-    "mainTitle": "Clinical Data <br/> <gradient>Anonymisation</gradient> <br/> Studio",
+    "mainTitleFirst": "Clinical Data",
+    "mainTitleSecond": "Anonymisation",
+    "mainTitleThird": "Studio",
     "description": "Enterprise-grade PII detection and synthetic data generation for high-precision healthcare research and compliance operations.",
     "cta": {
-      "getStarted": "Get Started"
+      "getStarted": "Get Started Now "
     },
     "stats": {
       "hipaa": {
@@ -102,5 +104,33 @@
         "label": "Accuracy"
       }
     }
+  },
+  "readyToProtect": {
+    "title": "Ready to Protect Your Clinical Data?",
+    "description": "Start de-identifying and synthesizing healthcare data in minutes with our enterprise-grade platform. Join leading medical institutions.",
+    "primaryCta": "Start Free Trial",
+    "secondaryCta": "Contact Us"
+  },
+
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How does the platform handle the different requirements of GDPR versus HIPAA?",
+        "answer": "The platform features dedicated Compliance Frameworks that apply risk-based anonymization for GDPR/FADP or prescriptive de-identification for HIPAA. Users can toggle between GDPR’s pseudonymization with strict key controls or HIPAA’s Safe Harbor route, which automatically redacts all 18 specified identifiers."
+      },
+      {
+        "question": "What transformation methods are applied to sensitive geographic and date entities?",
+        "answer": "For GDPR, we use generalization techniques like converting exact coordinates to country centroids or binning dates into quarterly windows to reduce re-identification risk. Under HIPAA Safe Harbor, the platform strictly truncates geographic subdivisions to the state level and strips dates down to the year to ensure full compliance."
+      },
+      {
+        "question": "Will the synthetic data remain useful for clinical research?",
+        "answer": "Yes, our engine preserves the complex correlations and clinical signatures of the source data to ensure high utility for AI training and statistical analysis."
+      },
+      {
+        "question": "How is the trade-off between data privacy and research utility managed?",
+        "answer": "We offer a choice between irreversible anonymization for external sharing and tokenization (pseudonymization) for internal cases where re-linking is necessary. By using Expert Determination and differential privacy, we provide documented residual risk assessments while preserving the complex clinical signatures needed for high-fidelity analysis."
+      }
+    ]
   }
 }
