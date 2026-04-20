@@ -44,7 +44,7 @@ export const CardsGrid = styled(Box)(({ theme }) => ({
 }));
 
 export const ComplianceCard = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.neutralColors[800],
+  backgroundColor: theme.palette.neutralColors[900],
   borderRadius: theme.shape.borderRadius,
   border: `1px solid ${theme.palette.strokeColors[150]}`,
   padding: theme.spacing(8),
@@ -71,7 +71,7 @@ export const CardHeader = styled(Box)(({ theme }) => ({
 export const CardTitle = styled(Box)(({ theme }) => ({
   fontSize: theme.typography.fontSize26,
   fontWeight: theme.typography.fontWeight700,
-  color: theme.palette.textColors[50],
+  color: theme.palette.secondary.main,
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize32,
   },
@@ -80,7 +80,7 @@ export const CardTitle = styled(Box)(({ theme }) => ({
 export const CardRegion = styled(Box)(({ theme }) => ({
   fontSize: theme.typography.fontSize14,
   fontWeight: theme.typography.fontWeight400,
-  color: theme.palette.textColors[200],
+  color: theme.palette.primaryColors[200],
 }));
 
 export const CardDivider = styled(Box)(({ theme }) => ({
@@ -111,7 +111,7 @@ export const RowLabel = styled(Box)(({ theme }) => ({
 export const RowValue = styled(Box)(({ theme }) => ({
   fontSize: theme.typography.fontSize14,
   fontWeight: theme.typography.fontWeight600,
-  color: theme.palette.textColors[50],
+  color: theme.palette.secondary.main,
 }));
 
 export const CardFooter = styled(Box)(({ theme }) => ({
@@ -136,7 +136,7 @@ export const FooterIconWrapper = styled(Box)(({ theme }) => ({
 export const FooterText = styled(Box)(({ theme }) => ({
   fontSize: theme.typography.fontSize14,
   fontWeight: theme.typography.fontWeight400,
-  color: theme.palette.textColors[200],
+  color: theme.palette.secondary.main,
 }));
 
 export const CustomProfilesBanner = styled(Box)(({ theme }) => ({

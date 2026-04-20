@@ -4,7 +4,7 @@ export const HeroImage = () => {
   return (
     <ImageSection>
       <ImageWrapper>
-        <img src="/hero/hero-graphic.png" alt="Clinical Data Studio Graphic" />
+        <img src="/hero/hero-graphic.webp" alt="Clinical Data Studio Graphic" />
       </ImageWrapper>
     </ImageSection>
   );
