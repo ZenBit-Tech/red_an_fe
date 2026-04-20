@@ -1,9 +1,15 @@
+import GitHubIcon from "@mui/icons-material/GitHub";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import TwitterIcon from "@mui/icons-material/Twitter";
+
 export const NAV_LINKS = [
-  { to: "/solution", label: "Solution" },
   { to: "/about-us", label: "About Us" },
   { to: "/subscription-plan", label: "Subscription plan" },
   { to: "/contact-us", label: "Contact Us" },
 ];
+
+export const ANCHOR_LINKS = [{ to: "#solution", label: "Solution" }];
 
 export const FEATURES = [
   {
@@ -81,11 +87,17 @@ export const COMPLIANCE_CARDS_DATA = [
 export const SOCIAL_LINKS = [
   { id: "twitter", href: "https://twitter.com", label: "Twitter" },
   { id: "linkedin", href: "https://linkedin.com", label: "LinkedIn" },
-  { id: "github", href: "https://github.com", label: "GitHub" },
   { id: "instagram", href: "https://instagram.com", label: "Instagram" },
 ];
 
 export const COMPANY_LINKS = [
-  { label: "Contact Us", to: "/contact" },
-  { label: "Subscription plan", to: "/subscription" },
+  { label: "Contact Us", to: "/contact-us" },
+  { label: "Subscription plan", to: "/subscription-plan" },
 ];
+
+export const ICONS: Record<string, typeof TwitterIcon> = {
+  twitter: TwitterIcon,
+  linkedin: LinkedInIcon,
+  github: GitHubIcon,
+  instagram: InstagramIcon,
+};

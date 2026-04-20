@@ -9,6 +9,7 @@ export const primaryColors = {
   700: "#0d47a1",
   800: "#0b3d8b",
   900: "#051f46",
+  950: "#0b1326 ",
 };
 
 export const secondaryColors = {
@@ -26,7 +27,6 @@ export const secondaryColors = {
 };
 
 export const neutralColors = {
-  50: "#eff0ff",
   100: "#dbe2fd",
   200: "#d9d9d9",
   300: "#8a90a8",
@@ -47,6 +47,7 @@ export const textColors = {
 };
 
 export const tertiaryColors = {
+  400: "#10ac60",
   500: "#ef4444",
 };
 
@@ -55,6 +56,8 @@ export const strokeColors = {
   150: "rgba(67, 70, 82, 0.15)",
   400: "rgba(51, 63, 90, 0.4)",
   500: "rgba(67, 70, 82, 0.5)",
+  600: "rgba(30, 58, 95, 0.3)",
+  700: "rgba(13, 71, 161, 0.1)",
 };
 
-export const backgroundColor = "#0b1326";
+export const backgroundColor = "#00091A";
