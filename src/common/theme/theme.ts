@@ -25,6 +25,7 @@ declare module "@mui/material/styles" {
     fontSize16: number;
     fontSize18: number;
     fontSize20: number;
+    fontSize24: number;
     fontSize26: number;
     fontSize30: number;
     fontSize32: number;
@@ -49,6 +50,7 @@ declare module "@mui/material/styles" {
     fontSize16?: number;
     fontSize18?: number;
     fontSize20?: number;
+    fontSize24?: number;
     fontSize26?: number;
     fontSize30?: number;
     fontSize32?: number;
@@ -158,6 +160,7 @@ export const theme = createTheme({
     fontSize16: 16,
     fontSize18: 18,
     fontSize20: 20,
+    fontSize24: 24,
     fontSize26: 26,
     fontSize32: 32,
     fontSize36: 36,
