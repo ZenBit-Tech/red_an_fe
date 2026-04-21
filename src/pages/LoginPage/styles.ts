@@ -1,20 +1,11 @@
 import { theme } from "@/common/theme/theme";
-import {
-  primaryColors,
-  neutralColors,
-  textColors,
-  strokeColors,
-} from "@/constants/themeConstants";
-
-export const font =
-  (theme.typography.fontFamily as string) || "'Inter', sans-serif";
 
 export const container = {
   minHeight: "100vh",
   display: "flex",
   flexDirection: "column",
-  background: "url('/login/login-bg.png') center/cover no-repeat, #0d1117",
-  fontFamily: font,
+  background: `url('/login/login-bg.png') center/cover no-repeat, ${theme.palette.secondaryColors[950]}`,
+  fontFamily: theme.typography.fontFamily,
   position: "relative",
   overflow: "hidden",
 };
@@ -37,11 +28,11 @@ export const contentWrapper = {
 };
 
 export const card = {
-  width: "456px",
-  height: "473px",
-  bgcolor: neutralColors[900],
-  border: `1px solid ${strokeColors[500]}`,
-  borderRadius: "8px",
+  width: theme.spacing(114),
+  minHeight: theme.spacing(118),
+  bgcolor: theme.palette.neutralColors[900],
+  border: `1px solid ${theme.palette.strokeColors[500]}`,
+  borderRadius: theme.spacing(2),
   position: "relative",
   overflow: "hidden",
   "&::before": {
@@ -51,13 +42,12 @@ export const card = {
     left: 0,
     right: 0,
     height: "1.5px",
-    background:
-      "linear-gradient(90deg, rgba(178, 197, 255, 0) 0%, rgba(178, 197, 255, 0.8) 50%, rgba(178, 197, 255, 0) 100%)",
+    background: `linear-gradient(90deg, transparent 0%, ${theme.palette.primaryColors[200]} 50%, transparent 100%)`,
   },
 };
 
 export const cardInner = {
-  padding: "48px 40px 32px 40px",
+  padding: theme.spacing(12, 10, 8, 10),
   display: "flex",
   flexDirection: "column",
   height: "100%",
@@ -66,87 +56,94 @@ export const cardInner = {
 
 export const title = {
   fontWeight: theme.typography.fontWeight400,
-  color: textColors[50],
-  mb: "8px",
-  fontFamily: font,
-  fontSize: "24px",
+  color: theme.palette.textColors[400],
+  mb: theme.spacing(2),
+  fontFamily: theme.typography.fontFamily,
+  fontSize: theme.typography.fontSize24,
   lineHeight: 1.25,
 };
 
 export const subtitle = {
-  color: "rgba(255, 255, 255, 0.6)",
-  mb: "45px",
-  fontFamily: font,
+  color: theme.palette.textColors[50],
+  opacity: 0.6,
+  mb: theme.spacing(11),
+  fontFamily: theme.typography.fontFamily,
   fontSize: theme.typography.fontSize14,
   lineHeight: 1.6,
 };
+
 export const arrowBack = {
   fontSize: theme.typography.fontSize18,
 };
+
 export const colorWhite = {
-  color: "#FFFFFF",
+  color: theme.palette.textColors[50],
 };
+
 export const labelStyles = {
   fontWeight: theme.typography.fontWeight500,
-  color: "rgba(187, 198, 197, 0.8)",
+  color: theme.palette.textColors[300],
   display: "block",
-  mb: "16px",
-  fontFamily: font,
+  mb: theme.spacing(4),
+  fontFamily: theme.typography.fontFamily,
   fontSize: theme.typography.fontSize12,
   letterSpacing: "0.05em",
   textTransform: "uppercase" as const,
 };
 
 export const inputStyles = {
-  fontFamily: font,
+  fontFamily: theme.typography.fontFamily,
   fontSize: theme.typography.fontSize16,
-  borderRadius: "10px",
-  bgcolor: strokeColors[400],
-  color: textColors[50],
+  borderRadius: theme.spacing(2.5),
+  bgcolor: theme.palette.strokeColors[400],
+  color: theme.palette.textColors[50],
   "& input": {
-    color: textColors[50],
-    padding: "14px 16px",
-    "&::placeholder": { color: "rgba(187, 198, 197, 0.4)", opacity: 1 },
+    color: theme.palette.textColors[50],
+    padding: theme.spacing(3.5, 4),
+    "&::placeholder": {
+      color: theme.palette.textColors[300],
+      opacity: 0.4,
+    },
   },
   "& .MuiOutlinedInput-notchedOutline": {
-    borderColor: strokeColors[400],
-    borderRadius: "8px",
+    borderColor: theme.palette.strokeColors[400],
+    borderRadius: theme.spacing(2),
   },
   "&:hover .MuiOutlinedInput-notchedOutline": {
-    borderColor: strokeColors[400],
+    borderColor: theme.palette.strokeColors[400],
   },
   "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-    borderColor: `${primaryColors[200]} !important`,
+    borderColor: `${theme.palette.primaryColors[200]} !important`,
     borderWidth: "1px !important",
   },
 };
 
 export const dividerStyles = {
-  borderColor: "rgba(255,255,255,0.05)",
-  mb: "24px",
+  borderColor: theme.palette.strokeColors[120],
+  mb: theme.spacing(6),
 };
 
 export const submitButton = {
-  py: "14px",
-  mt: "24px",
-  mb: "32px",
-  borderRadius: "10px",
-  fontFamily: font,
+  py: theme.spacing(3.5),
+  mt: theme.spacing(6),
+  mb: theme.spacing(8),
+  borderRadius: theme.spacing(2.5),
+  fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize16,
   textTransform: "none",
-  bgcolor: primaryColors[200],
-  color: "rgba(19, 27, 46, 0.8)",
+  bgcolor: theme.palette.primaryColors[200],
+  color: theme.palette.secondaryColors[900],
   boxShadow: "none",
   backgroundImage: "none",
   "&:hover": {
-    bgcolor: "#c2d5ff",
+    bgcolor: theme.palette.primaryColors[100],
     boxShadow: "none",
     backgroundImage: "none",
   },
   "&.Mui-disabled": {
-    bgcolor: "rgba(175, 198, 255, 0.3)",
-    color: "#949faf",
+    bgcolor: theme.palette.strokeColors[120],
+    color: theme.palette.neutralColors[300],
     boxShadow: "none",
     backgroundImage: "none",
   },
@@ -156,16 +153,18 @@ export const linkButton = {
   display: "flex",
   alignItems: "center",
   gap: 1,
-  color: textColors[200],
-  fontFamily: font,
+  color: theme.palette.textColors[200],
+  fontFamily: theme.typography.fontFamily,
   fontSize: theme.typography.fontSize14,
   cursor: "pointer",
   transition: "color 0.2s",
   p: 0,
-  "&:hover": { color: textColors[50] },
+  "&:hover": { color: theme.palette.textColors[50] },
 };
+
 export const requiredAsterisk = {
-  color: "rgba(255, 255, 255, 0.6)",
+  color: theme.palette.textColors[50],
+  opacity: 0.6,
   ml: 0.5,
 };
 
@@ -184,53 +183,55 @@ export const checkInboxContent = {
   justifyContent: "center",
 };
 
-export const mailIconWrapper = { mb: "16px" };
+export const mailIconWrapper = { mb: theme.spacing(4) };
 
 export const mailIcon = {
-  fontSize: 56,
-  color: primaryColors[200],
+  fontSize: theme.typography.fontSize64,
+  color: theme.palette.primaryColors[200],
 };
 
 export const checkInboxTitle = {
   ...title,
-  mb: "8px",
+  mb: theme.spacing(2),
 };
 
 export const checkInboxSubtitle = {
   ...subtitle,
-  mb: "32px",
-  fontSize: "15px",
+  mb: theme.spacing(8),
+  fontSize: theme.typography.fontSize16,
 };
 
 export const submittedEmailText = {
-  color: textColors[50],
+  color: theme.palette.textColors[50],
 };
 
 export const didntReceiveText = {
-  color: "rgba(255,255,255,0.4)",
-  fontFamily: font,
-  mb: "16px",
+  color: theme.palette.textColors[50],
+  opacity: 0.4,
+  fontFamily: theme.typography.fontFamily,
+  mb: theme.spacing(4),
 };
 
 export const resendLinkAction = {
-  color: primaryColors[700],
-  fontSize: "0.875rem",
+  color: theme.palette.primaryColors[700],
+  fontSize: theme.typography.fontSize14,
   cursor: "pointer",
   textDecoration: "underline",
-  "&:hover": { color: primaryColors[600] },
+  "&:hover": { color: theme.palette.primaryColors[600] },
 };
 
 export const backToSignInWrapper = {
   mt: "auto",
-  pt: "75px",
+  pt: theme.spacing(18.5),
   textAlign: "left" as const,
 };
 
 export const alertStyles = {
   width: "100%",
-  fontFamily: font,
+  fontFamily: theme.typography.fontFamily,
 };
+
 export const boxHandleBack = {
   mt: "auto",
-  pt: "24px",
+  pt: theme.spacing(6),
 };

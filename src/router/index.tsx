@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "@/components/Layout";
+import DashboardLayout from "@/components/DashboardLayout";
 import DeidentifyPage from "@/pages/deidentify";
 import { ContactUsPage } from "@/pages/ContactUsPage";
 import HomePage from "@/pages/HomePage";
@@ -7,6 +8,7 @@ import { AboutUsPage } from "@/pages/AboutUSPage";
 import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/Dashboard";
 import VerifyPage from "@/pages/VerifyPage/VerifyPage";
+import { APP_ROUTES } from "@/constants/index";
 
 export const router = createBrowserRouter([
   {
@@ -16,10 +18,6 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
-      },
-      {
-        path: "/deidentify",
-        element: <DeidentifyPage />,
       },
       {
         path: "/contact-us",
@@ -34,8 +32,8 @@ export const router = createBrowserRouter([
         element: <VerifyPage />,
       },
       {
-        path: "/dashboard",
-        element: <DashboardPage />,
+        path: "/signin",
+        element: <LoginPage />,
       },
       {
         path: "*",
@@ -45,9 +43,18 @@ export const router = createBrowserRouter([
           </div>
         ),
       },
+    ],
+  },
+  {
+    element: <DashboardLayout />,
+    children: [
       {
-        path: "/signin",
-        element: <LoginPage />,
+        path: APP_ROUTES.DASHBOARD,
+        element: <DashboardPage />,
+      },
+      {
+        path: APP_ROUTES.DEIDENTIFY,
+        element: <DeidentifyPage />,
       },
     ],
   },

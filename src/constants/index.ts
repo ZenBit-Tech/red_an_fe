@@ -91,6 +91,7 @@ export const COMPANY_LINKS = [
 ];
 export const APP_ROUTES = {
   DASHBOARD: "/dashboard",
+  DEIDENTIFY: "/deidentify",
   SIGN_IN: "/signin",
 } as const;
 

@@ -16,22 +16,22 @@ export interface NavItem {
 export const NAV_ITEMS: NavItem[] = [
   {
     key: "dashboard",
-    labelKey: "dashboard.nav.dashboard",
+    labelKey: "appShell.nav.dashboard",
     icon: GridViewOutlined,
   },
   {
     key: "deidentify",
-    labelKey: "dashboard.nav.deIdentify",
+    labelKey: "appShell.nav.deIdentify",
     icon: ArticleOutlined,
   },
   {
     key: "synthetic",
-    labelKey: "dashboard.nav.syntheticData",
+    labelKey: "appShell.nav.syntheticData",
     icon: InsertChartOutlined,
   },
   {
     key: "subscription",
-    labelKey: "dashboard.nav.subscription",
+    labelKey: "appShell.nav.subscription",
     icon: PaymentsOutlined,
   },
 ];

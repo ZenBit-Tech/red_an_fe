@@ -59,7 +59,6 @@ const LoginPage = () => {
                       fullWidth
                       placeholder={t("login.emailPlaceholder")}
                       error={!!error}
-                      helperText={error?.message ? t(error.message) : ""}
                       InputProps={{
                         sx: styles.inputStyles,
                       }}

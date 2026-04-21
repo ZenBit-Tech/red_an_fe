@@ -103,22 +103,24 @@
       }
     }
   },
-  "dashboard": {
+  "appShell": {
     "nav": {
       "dashboard": "Dashboard",
       "deIdentify": "De-Identify",
       "syntheticData": "Synthetic Data",
       "subscription": "My Subscription"
     },
+    "topBar": {
+      "title": "Clinical Data De-Identification & Synthetic Data Studio",
+      "subtitle": "Enterprise-grade PII detection and anonymization"
+    }
+  },
+  "dashboard": {
     "timeFilter": {
       "today": "Today",
       "last7Days": "Last 7 days",
       "twoWeeks": "2 Weeks",
       "month": "Month"
-    },
-    "topBar": {
-      "title": "Clinical Data De-Identification & Synthetic Data Studio",
-      "subtitle": "Enterprise-grade PII detection and anonymization"
     },
     "page": {
       "title": "Dashboard",

@@ -43,7 +43,7 @@ const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
                 tabIndex={0}
                 aria-current={isActive ? "page" : undefined}
               >
-                <IconComponent sx={styles.mainNavIcon(isActive)} />
+                <IconComponent sx={styles.navItemIcon(isActive)} />
                 <Typography sx={styles.navItemText(isActive)}>
                   {t(item.labelKey)}
                 </Typography>
@@ -54,7 +54,7 @@ const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
       </Box>
       <Box sx={styles.sidebarBottom}>
         <Box sx={styles.navItem(false)} role="button" tabIndex={0}>
-          <HelpOutlineOutlined sx={styles.bottomNavIcon} />
+          <HelpOutlineOutlined sx={styles.navItemIcon(false, "18px")} />
           <Typography sx={styles.navItemText(false)}>
             {t("sidebar.bottom.support")}
           </Typography>
@@ -66,8 +66,8 @@ const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
           role="button"
           tabIndex={0}
         >
-          <LogoutOutlined sx={styles.bottomNavIcon} />
-          <Typography sx={styles.navItemText(false)}>
+          <LogoutOutlined sx={styles.navItemIcon(false, "18px")} />
+          <Typography sx={styles.logoutButton(false)}>
             {t("sidebar.bottom.logout")}
           </Typography>
         </Box>

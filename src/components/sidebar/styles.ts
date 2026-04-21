@@ -1,82 +1,80 @@
-import theme from "@/common/theme/index";
-
-export const font =
-  (theme.typography.fontFamily as string) || "'Manrope', sans-serif";
+import { theme } from "@/common/theme/theme";
 
 export const sidebar = {
   boxSizing: "border-box",
-  width: "256px",
-  height: "794px",
-  padding: "24px",
-  paddingLeft: "40px",
+  width: theme.spacing(77.5),
+  height: "928px",
+  padding: theme.spacing(6),
+  paddingLeft: theme.spacing(10),
   flexShrink: 0,
-  bgcolor: "#060e20",
-  borderRight: `1px solid rgba(67,70,82,0.25)`,
+  bgcolor: theme.palette.secondaryColors[900],
+  borderRight: `1px solid ${theme.palette.strokeColors[150]}`,
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
 };
 
 export const sidebarHeader = {
-  pb: "24px",
-  mb: "24px",
-  borderBottom: `1px solid rgba(67,70,82,0.25)`,
+  pb: theme.spacing(6),
+  mb: theme.spacing(6),
+  borderBottom: `1px solid ${theme.palette.strokeColors[150]}`,
 };
 
 export const topBarTitle = {
-  fontWeight: 800,
-  color: "#dae2fd",
-  fontSize: "18px",
-  fontFamily: font,
-  lineHeight: "28px",
+  color: theme.palette.primaryColors[50],
+  fontSize: theme.typography.fontSize18,
+  fontFamily: theme.typography.fontFamily,
 };
 
 export const topBarSubtitle = {
-  color: "rgba(195, 198, 212, 0.6)",
-  fontSize: "12px",
-  fontFamily: font,
+  color: theme.palette.textColors[200],
+  fontSize: theme.typography.fontSize12,
+  fontFamily: theme.typography.fontFamily,
+  opacity: 0.6,
 };
 
 export const sidebarNav = {
   display: "flex",
   flexDirection: "column",
-  gap: "16px",
+  gap: theme.spacing(4),
 };
 
 export const navItem = (active: boolean) => ({
   display: "flex",
   alignItems: "center",
-  gap: 3,
-  padding: "12px 16px",
+  gap: theme.spacing(3),
+  padding: theme.spacing(3, 4),
   borderRadius: "10px",
   cursor: "pointer",
-  bgcolor: active ? "#0d47a1" : "transparent",
-  "&:hover": { bgcolor: active ? "#0d47a1" : "rgba(255,255,255,0.04)" },
+  bgcolor: active ? theme.palette.primaryColors[700] : "transparent",
+  "&:hover": {
+    bgcolor: active
+      ? theme.palette.primaryColors[700]
+      : theme.palette.strokeColors[120],
+  },
 });
 
-export const navItemIcon = (active: boolean) => ({
-  color: active ? "#b2c5ff" : "#c3c6d4",
+export const navItemIcon = (isActive: boolean, fontSize?: number | string) => ({
+  fontSize: fontSize || theme.typography.fontSize24,
+  color: isActive
+    ? theme.palette.primaryColors[200]
+    : theme.palette.neutralColors[300],
 });
 
 export const navItemText = (active: boolean) => ({
-  color: active ? "#b2c5ff" : "#C3C6D4",
-  fontFamily: font,
-  fontWeight: 500,
-  fontSize: "16px",
+  color: active ? theme.palette.textColors[400] : theme.palette.textColors[200],
+  fontFamily: theme.typography.fontFamily,
+  fontWeight: theme.typography.fontWeight500,
+  fontSize: theme.typography.fontSize16,
   lineHeight: "150%",
 });
 
 export const sidebarBottom = {
   display: "flex",
   flexDirection: "column",
-  gap: "16px",
+  gap: theme.spacing(4),
 };
-export const mainNavIcon = (isActive: boolean) => ({
-  fontSize: "24px",
-  ...navItemIcon(isActive),
+export const logoutButton = (active: boolean) => ({
+  ...navItemText(active),
+  color: theme.palette.textColors[400],
 });
-
-export const bottomNavIcon = {
-  fontSize: "18px",
-  ...navItemIcon(false),
-};
