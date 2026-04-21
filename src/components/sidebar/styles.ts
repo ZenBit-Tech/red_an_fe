@@ -3,7 +3,7 @@ import { theme } from "@/common/theme/theme";
 export const sidebar = {
   boxSizing: "border-box",
   width: theme.spacing(77.5),
-  height: "928px",
+  height: theme.spacing(232),
   padding: theme.spacing(6),
   paddingLeft: theme.spacing(10),
   flexShrink: 0,
