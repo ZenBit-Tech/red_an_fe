@@ -15,7 +15,6 @@ export const SectionLeadershipTeam = () => {
         <S.TeamList>
           {TEAM_CONFIG.map((member) => (
             <S.TeamListItem key={member.prefix}>
-              {/* Замість старого S.TeamImage вставляємо наш адаптивний компонент */}
               <TeamMemberImage
                 name={t(`ourTeam.${member.titleKey}`)}
                 prefix={member.prefix}
