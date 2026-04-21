@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { COMPLIANCE_FRAMEWORK_OPTIONS } from "@/components/complianceSelect/constants";
-import type { ComplianceFramework } from "@/components/complianceSelect/constants";
+import { COMPLIANCE_FRAMEWORK_OPTIONS } from "@/components/ComplianceSelect/constants";
+import type { ComplianceFramework } from "@/components/ComplianceSelect/constants";
 import { useAppDispatch, useAppSelector } from "@/common/hooks/hooks";
 import { setSelectedFramework } from "@/store/complianceFrameworkSlice";
 

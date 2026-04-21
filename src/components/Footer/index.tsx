@@ -1,54 +1,36 @@
-import GitHubIcon from "@mui/icons-material/GitHub";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import { Logo } from "@/common/Logo";
+import { useTranslation } from "react-i18next";
+import { ICONS } from "@/constants/index";
 import { COMPANY_LINKS, SOCIAL_LINKS } from "@/constants/index";
-import {
-  FooterBrand,
-  FooterContainer,
-  FooterDescription,
-  FooterLink,
-  FooterSection,
-  FooterSectionTitle,
-  FooterWrapper,
-  SocialIconButton,
-  SocialLinks,
-} from "./styles";
-
-const ICONS: Record<string, typeof TwitterIcon> = {
-  twitter: TwitterIcon,
-  linkedin: LinkedInIcon,
-  github: GitHubIcon,
-  instagram: InstagramIcon,
-};
+import * as S from "./styles";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
-    <FooterWrapper>
-      <FooterContainer>
-        <FooterBrand>
-          <Logo />
-          <FooterDescription>
-            Enterprise-grade clinical data anonymization and synthetic data
-            generation.
-          </FooterDescription>
-        </FooterBrand>
-        <FooterSection>
-          <FooterSectionTitle>Company</FooterSectionTitle>
+    <S.FooterContainer>
+      <S.FooterBrand>
+        <S.FooterLogo to="/">{t("hero.badge.title")}</S.FooterLogo>
+        <S.FooterDescription>{t("footer.description")}</S.FooterDescription>
+      </S.FooterBrand>
+      <S.FooterSections>
+        <S.FooterSection>
+          <S.FooterSectionTitle>
+            {t("footer.columns.company")}
+          </S.FooterSectionTitle>
           {COMPANY_LINKS.map(({ label, to }) => (
-            <FooterLink key={to} to={to}>
+            <S.FooterLink key={to} to={to}>
               {label}
-            </FooterLink>
+            </S.FooterLink>
           ))}
-        </FooterSection>
-        <FooterSection>
-          <FooterSectionTitle>Follow Us</FooterSectionTitle>
-          <SocialLinks>
+        </S.FooterSection>
+        <S.FooterSection>
+          <S.FooterSectionTitle>
+            {t("footer.columns.social")}
+          </S.FooterSectionTitle>
+          <S.SocialLinks>
             {SOCIAL_LINKS.map(({ id, href, label }) => {
               const Icon = ICONS[id];
               return (
-                <SocialIconButton
+                <S.SocialIconButton
                   key={id}
                   href={href}
                   target="_blank"
@@ -56,13 +38,13 @@ const Footer = () => {
                   aria-label={label}
                 >
                   <Icon />
-                </SocialIconButton>
+                </S.SocialIconButton>
               );
             })}
-          </SocialLinks>
-        </FooterSection>
-      </FooterContainer>
-    </FooterWrapper>
+          </S.SocialLinks>
+        </S.FooterSection>
+      </S.FooterSections>
+    </S.FooterContainer>
   );
 };
 

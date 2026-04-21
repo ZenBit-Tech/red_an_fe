@@ -1,7 +1,12 @@
 import axios from "axios";
 import type { AxiosError, AxiosResponse } from "axios";
+import { cleanEnv, str } from "envalid";
 
-const BASE_URL = import.meta.env.VITE_API_URL || "";
+const env = cleanEnv(import.meta.env, {
+  VITE_API_URL: str({ desc: "Base API URL" }),
+});
+
+const BASE_URL = env.VITE_API_URL.trim().replace(/\/+$/, "");
 
 export const ApiError = {
   Network: "ERR_NETWORK",
@@ -41,8 +46,7 @@ export const apiClient = {
   handleError(error: unknown): Error {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError<{ message?: string }>;
-
-      if (axiosError.code === "ERR_NETWORK") {
+      if (axiosError.code === ApiError.Network) {
         return new Error(ApiError.Network);
       }
 

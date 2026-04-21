@@ -6,12 +6,6 @@ export const HeroSection = styled("section")(({ theme }) => ({
   overflow: "hidden",
   boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.25)",
   backgroundColor: theme.palette.backgroundColor,
-  paddingTop: theme.spacing(15),
-  paddingBottom: theme.spacing(4.2),
-
-  [theme.breakpoints.up("md")]: {
-    paddingTop: theme.spacing(30),
-  },
 }));
 
 export const HeroGlow = styled("div")({
@@ -30,21 +24,18 @@ export const HeroGlow = styled("div")({
 });
 
 export const HeroContent = styled("div")(({ theme }) => ({
-  maxWidth: 1360,
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   gap: theme.spacing(4),
-  padding: theme.spacing(0, 4),
   margin: "0 auto",
   position: "relative",
   zIndex: 1,
   [theme.breakpoints.up("md")]: {
-    gap: theme.spacing(8),
-    padding: theme.spacing(0, 6),
+    gap: theme.spacing(6),
   },
   [theme.breakpoints.up("lg")]: {
-    padding: theme.spacing(0, 8),
+    paddingBottom: theme.spacing(0),
   },
 }));
 
@@ -95,19 +86,25 @@ export const BadgeText = styled(Typography)(({ theme }) => ({
   textTransform: "uppercase",
 }));
 
-export const HeroTitle = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.primary,
+export const HeroTitle = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  paddingTop: theme.spacing(2),
+  color: theme.palette.secondary.main,
   fontSize: theme.typography.fontSize36,
   fontWeight: theme.typography.fontWeight700,
   fontFamily: theme.typography.secondFamily,
-  paddingTop: theme.spacing(2),
-  width: "100%",
-  maxWidth: 1024,
-  lineHeight: "106%",
+  lineHeight: 1.06,
+
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize72,
   },
 }));
+
+export const HeroTitlePlain = styled("div")({
+  color: "inherit",
+});
 
 export const GradientText = styled("span")(({ theme }) => ({
   background: `linear-gradient(161deg, ${theme.palette.primaryColors[200]} 0%, ${theme.palette.primaryColors[700]} 100%)`,
@@ -130,10 +127,13 @@ export const Description = styled(Typography)(({ theme }) => ({
 export const GetStartedButton = styled(Button)(({ theme }) => ({
   margin: `${theme.spacing(4)} auto 0`,
   padding: theme.spacing(3, 8),
+  backgroundImage: "none",
   fontSize: theme.typography.fontSize16,
+  backgroundColor: theme.palette.primaryColors[700],
 
   [theme.breakpoints.up("md")]: {
     padding: theme.spacing(4, 10),
-    fontSize: theme.typography.fontSize18,
+    fontSize: theme.typography.fontSize20,
+    marginTop: "24px",
   },
 }));

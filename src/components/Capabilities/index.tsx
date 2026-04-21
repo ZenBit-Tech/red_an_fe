@@ -1,93 +1,69 @@
 import { useTranslation } from "react-i18next";
-import { Box, Container } from "@mui/material";
 import { CARDS_DATA, FEATURES } from "@/constants";
-import {
-  CapabilitiesSection,
-  ContentWrapper,
-  LeftContent,
-  LeftTextBlock,
-  Title,
-  Description,
-  FeaturesList,
-  FeatureItemBox,
-  RightGrid,
-  GridCard,
-  IconWrapper,
-  FeatureTextWrapper,
-  FeatureTitle,
-  CardTitle,
-  DescriptionMain,
-} from "./styles";
+import * as S from "./styles";
 
 export const Capabilities = () => {
   const { t } = useTranslation();
 
   return (
-    <CapabilitiesSection id="solution">
-      <Container>
-        <ContentWrapper>
-          <LeftContent>
-            <LeftTextBlock>
-              <Title>
-                Protect Privacy Without Compromising{" "}
-                <Box component="span" sx={{ color: "primaryColors.200" }}>
-                  Value.
-                </Box>
-              </Title>
+    <S.CapabilitiesSection id="solution">
+      <S.ContentWrapper>
+        <S.LeftContent>
+          <S.LeftTextBlock>
+            <S.Title>
+              {t("capabilities.title")}{" "}
+              <S.TitleHighlight>
+                {t("capabilities.titleValue")}.
+              </S.TitleHighlight>
+            </S.Title>
 
-              <DescriptionMain>
-                Our platform uses advanced NLP models specifically trained on
-                clinical corpora to detect 100+ types of PHI and PII across
-                unstructured medical notes and structured records.
-              </DescriptionMain>
-            </LeftTextBlock>
+            <S.DescriptionMain>
+              {t("capabilities.description")}
+            </S.DescriptionMain>
+          </S.LeftTextBlock>
 
-            <FeaturesList>
-              {FEATURES.map((feature) => (
-                <FeatureItemBox key={feature.id}>
-                  <IconWrapper>
-                    <svg>
-                      <use href={`/capabilities/icons.svg${feature.iconId}`} />
-                    </svg>
-                  </IconWrapper>
-                  <FeatureTextWrapper>
-                    <FeatureTitle>
-                      {t(
-                        `capabilities.${feature.titleKey}`,
-                        feature.defaultTitle,
-                      )}
-                    </FeatureTitle>
-                    <Description>
-                      {t(
-                        `capabilities.${feature.descKey}`,
-                        feature.defaultDesc,
-                      )}
-                    </Description>
-                  </FeatureTextWrapper>
-                </FeatureItemBox>
-              ))}
-            </FeaturesList>
-          </LeftContent>
-
-          <RightGrid>
-            {CARDS_DATA.map((card) => (
-              <GridCard key={card.id}>
-                <IconWrapper>
+          <S.FeaturesList>
+            {FEATURES.map((feature) => (
+              <S.FeatureItemBox key={feature.id}>
+                <S.IconWrapper>
                   <svg>
-                    <use href={`/capabilities/icons.svg${card.iconId}`} />
+                    <use href={`/capabilities/icons.svg${feature.iconId}`} />
                   </svg>
-                </IconWrapper>
-                <CardTitle>
-                  {t(`capabilities.${card.titleKey}`, card.defaultTitle)}
-                </CardTitle>
-                <Description>
-                  {t(`capabilities.${card.descKey}`, card.defaultDesc)}
-                </Description>
-              </GridCard>
+                </S.IconWrapper>
+                <S.FeatureTextWrapper>
+                  <S.FeatureTitle>
+                    {t(
+                      `capabilities.${feature.titleKey}`,
+                      feature.defaultTitle,
+                    )}
+                  </S.FeatureTitle>
+                  <S.Description>
+                    {t(`capabilities.${feature.descKey}`, feature.defaultDesc)}
+                  </S.Description>
+                </S.FeatureTextWrapper>
+              </S.FeatureItemBox>
             ))}
-          </RightGrid>
-        </ContentWrapper>
-      </Container>
-    </CapabilitiesSection>
+          </S.FeaturesList>
+        </S.LeftContent>
+
+        <S.RightGrid>
+          {CARDS_DATA.map((card) => (
+            <S.GridCard key={card.id}>
+              <S.IconWrapper>
+                <svg>
+                  <use href={`/capabilities/icons.svg${card.iconId}`} />
+                </svg>
+              </S.IconWrapper>
+              <S.CardTitle>
+                {t(`capabilities.${card.titleKey}`, card.defaultTitle)}
+              </S.CardTitle>
+              <S.Description>
+                {t(`capabilities.${card.descKey}`, card.defaultDesc)}
+              </S.Description>
+            </S.GridCard>
+          ))}
+        </S.RightGrid>
+      </S.ContentWrapper>
+    </S.CapabilitiesSection>
   );
 };

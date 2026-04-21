@@ -3,7 +3,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import {
   COMPLIANCE_FRAMEWORK,
   type ComplianceFramework,
-} from "@/components/complianceSelect/constants";
+} from "@/components/ComplianceSelect/constants";
 
 interface ComplianceFrameworkState {
   selectedFramework: ComplianceFramework;

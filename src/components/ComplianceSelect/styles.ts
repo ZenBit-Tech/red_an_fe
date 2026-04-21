@@ -1,7 +1,7 @@
 import { Box, Chip, Paper, Typography } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
 
-import type { ComplianceFramework } from "@/components/complianceSelect/constants";
+import type { ComplianceFramework } from "@/components/ComplianceSelect/constants";
 
 const complianceSelectionStyles = {
   containerPadding: 5,
@@ -48,49 +48,44 @@ export const SelectionContainer = styled(Box)(({ theme }) => ({
 }));
 
 export const SelectionTitle = styled(Typography)(({ theme }) => ({
-  ...theme.typography.h5,
-  fontWeight: 700,
+  fontSize: `${theme.typography.fontSize20}px`,
+  fontWeight: theme.typography.fontWeight700,
   color: theme.palette.text.primary,
   [theme.breakpoints.down("sm")]: {
-    ...theme.typography.h6,
-    fontWeight: 700,
+    fontSize: `${theme.typography.fontSize18}px`,
   },
 }));
 
 export const SelectionSubtitle = styled(Typography)(({ theme }) => ({
-  ...theme.typography.h6,
-  fontWeight: 500,
+  fontSize: `${theme.typography.fontSize16}px`,
+  fontWeight: theme.typography.fontWeight500,
   color: theme.palette.text.secondary,
   marginBottom: theme.spacing(complianceSelectionStyles.titleSpacing),
   [theme.breakpoints.down("sm")]: {
-    ...theme.typography.body1,
-    fontWeight: 500,
+    fontSize: `${theme.typography.fontSize14}px`,
   },
 }));
 
 export const SelectionListHeader = styled(Typography)(({ theme }) => ({
-  ...theme.typography.h4,
-  fontWeight: 700,
+  fontSize: `${theme.typography.fontSize32}px`,
+  fontWeight: theme.typography.fontWeight700,
   color: theme.palette.text.primary,
   marginBottom: theme.spacing(complianceSelectionStyles.listHeaderSpacing),
   [theme.breakpoints.down("md")]: {
-    ...theme.typography.h5,
-    fontWeight: 700,
+    fontSize: `${theme.typography.fontSize26}px`,
   },
   [theme.breakpoints.down("sm")]: {
-    ...theme.typography.h6,
-    fontWeight: 700,
+    fontSize: `${theme.typography.fontSize18}px`,
   },
 }));
 
 export const SelectionListSubtitle = styled(Typography)(({ theme }) => ({
-  ...theme.typography.h6,
-  fontWeight: 500,
+  fontSize: `${theme.typography.fontSize16}px`,
+  fontWeight: theme.typography.fontWeight500,
   color: theme.palette.text.secondary,
   marginBottom: theme.spacing(complianceSelectionStyles.sectionGap),
   [theme.breakpoints.down("sm")]: {
-    ...theme.typography.body1,
-    fontWeight: 500,
+    fontSize: `${theme.typography.fontSize14}px`,
     marginBottom: theme.spacing(complianceSelectionStyles.sectionGapMobile),
   },
 }));
@@ -106,22 +101,18 @@ export const CardHeader = styled(Box)(({ theme }) => ({
 }));
 
 export const FrameworkDescription = styled(Typography)(({ theme }) => ({
-  fontSize: complianceSelectionStyles.frameworkTitleFontSize,
-  fontWeight: 700,
+  fontSize: `${theme.typography.fontSize14}px`,
+  fontWeight: theme.typography.fontWeight700,
   lineHeight: complianceSelectionStyles.frameworkTitleLineHeight,
   color: theme.palette.text.secondary,
   marginBottom: theme.spacing(complianceSelectionStyles.descriptionSpacing),
 }));
 
 export const FrameworkEntityCount = styled(Typography)(({ theme }) => ({
-  fontSize: complianceSelectionStyles.entityCountFontSize,
-  fontWeight: 500,
+  fontSize: `${theme.typography.fontSize12}px`,
+  fontWeight: theme.typography.fontWeight500,
   lineHeight: 1.5,
   color: theme.palette.text.disabled,
-  [theme.breakpoints.down("sm")]: {
-    fontSize: complianceSelectionStyles.entityCountFontSize,
-    fontWeight: 500,
-  },
 }));
 
 export const FrameworkChip = styled(Chip, {
@@ -129,8 +120,8 @@ export const FrameworkChip = styled(Chip, {
 })<{ frameworkId: ComplianceFramework }>(({ theme, frameworkId }) => ({
   backgroundColor: theme.palette.compliance.frameworkChip[frameworkId],
   color: theme.palette.common.white,
-  fontWeight: 500,
-  fontSize: complianceSelectionStyles.frameworkTitleFontSize,
+  fontWeight: theme.typography.fontWeight500,
+  fontSize: `${theme.typography.fontSize14}px`,
   borderRadius: theme.spacing(complianceSelectionStyles.chipBorderRadius),
 }));
 

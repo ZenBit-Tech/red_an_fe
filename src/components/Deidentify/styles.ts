@@ -1,4 +1,5 @@
-import { Box, Button, Select, styled } from "@mui/material";
+import { Box, Button, Select, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 const deidentifySettingsStyles = {
   containerGapDesktop: 3,
@@ -47,54 +48,51 @@ export const DeidentifySettingsSection = styled(Box)(({ theme }) => ({
   gap: theme.spacing(deidentifySettingsStyles.sectionGap),
 }));
 
-export const DeidentifySettingsTitle = styled(Box)(({ theme }) => ({
-  fontSize: "1.25rem",
-  fontWeight: 600,
+export const DeidentifySettingsTitle = styled(Typography)(({ theme }) => ({
+  fontSize: `${theme.typography.fontSize20}px`,
+  fontWeight: theme.typography.fontWeight600,
   color: theme.palette.text.primary,
   [theme.breakpoints.down("md")]: {
-    fontSize: "1.05rem",
+    fontSize: `${theme.typography.fontSize18}px`,
   },
   [theme.breakpoints.down("sm")]: {
-    fontSize: "0.95rem",
+    fontSize: `${theme.typography.fontSize16}px`,
   },
 }));
 
-export const DeidentifySettingsSubtitle = styled(Box)(({ theme }) => ({
-  fontSize: "0.875rem",
+export const DeidentifySettingsSubtitle = styled(Typography)(({ theme }) => ({
+  fontSize: `${theme.typography.fontSize14}px`,
   color: theme.palette.text.secondary,
   marginBottom: theme.spacing(
     deidentifySettingsStyles.subtitleMarginBottomDesktop,
   ),
   [theme.breakpoints.down("sm")]: {
-    fontSize: "0.75rem",
+    fontSize: `${theme.typography.fontSize12}px`,
     marginBottom: theme.spacing(
       deidentifySettingsStyles.subtitleMarginBottomMobile,
     ),
   },
 }));
 
-export const DeidentifyLabel = styled(Box)(({ theme }) => ({
-  fontSize: "0.95rem",
-  fontWeight: 500,
+export const DeidentifyLabel = styled(Typography)(({ theme }) => ({
+  fontSize: `${theme.typography.fontSize16}px`,
+  fontWeight: theme.typography.fontWeight500,
   color: theme.palette.text.primary,
   marginBottom: theme.spacing(1),
   [theme.breakpoints.down("md")]: {
-    fontSize: "0.9rem",
+    fontSize: `${theme.typography.fontSize14}px`,
   },
   [theme.breakpoints.down("sm")]: {
-    fontSize: "0.82rem",
+    fontSize: `${theme.typography.fontSize12}px`,
   },
 }));
 
-export const DeidentifyMethodDescription = styled(Box)(({ theme }) => ({
-  fontSize: "0.8rem",
+export const DeidentifyMethodDescription = styled(Typography)(({ theme }) => ({
+  fontSize: `${theme.typography.fontSize12}px`,
   color: theme.palette.text.secondary,
   marginTop: theme.spacing(1),
   [theme.breakpoints.down("md")]: {
-    fontSize: "0.76rem",
-  },
-  [theme.breakpoints.down("sm")]: {
-    fontSize: "0.72rem",
+    fontSize: `${theme.typography.fontSize12}px`,
   },
 }));
 
@@ -112,16 +110,16 @@ export const ControlsContainer = styled(Box)(({ theme }) => ({
 export const MethodSelect = styled(Select)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   "& .MuiSelect-select": {
-    fontSize: "0.92rem",
+    fontSize: `${theme.typography.fontSize14}px`,
   },
   [theme.breakpoints.down("md")]: {
     "& .MuiSelect-select, & .MuiOutlinedInput-input": {
-      fontSize: "0.85rem",
+      fontSize: `${theme.typography.fontSize14}px`,
     },
   },
   [theme.breakpoints.down("sm")]: {
     "& .MuiSelect-select, & .MuiOutlinedInput-input": {
-      fontSize: "0.8rem",
+      fontSize: `${theme.typography.fontSize12}px`,
     },
   },
 }));
@@ -133,10 +131,10 @@ export const AnalyzeButton = styled(Button)(({ theme }) => ({
     deidentifySettingsStyles.buttonPaddingInlineDesktop,
   ),
   borderRadius: theme.spacing(1.5),
-  fontWeight: 600,
+  fontWeight: theme.typography.fontWeight600,
   letterSpacing: 0,
   justifyContent: "space-between",
-  fontSize: "0.92rem",
+  fontSize: `${theme.typography.fontSize14}px`,
   gap: theme.spacing(1),
   [theme.breakpoints.down("sm")]: {
     width: "100%",
@@ -144,7 +142,7 @@ export const AnalyzeButton = styled(Button)(({ theme }) => ({
     paddingInline: theme.spacing(
       deidentifySettingsStyles.buttonPaddingInlineMobile,
     ),
-    fontSize: "0.85rem",
+    fontSize: `${theme.typography.fontSize12}px`,
     justifyContent: "center",
   },
   "& .MuiButton-startIcon": {
@@ -152,6 +150,6 @@ export const AnalyzeButton = styled(Button)(({ theme }) => ({
     marginRight: theme.spacing(1),
   },
   "& .MuiButton-startIcon > *:nth-of-type(1)": {
-    fontSize: "1.15rem",
+    fontSize: `${theme.typography.fontSize18}px`,
   },
 }));

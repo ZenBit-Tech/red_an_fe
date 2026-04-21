@@ -1,63 +1,48 @@
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Container } from "@mui/material";
-import {
-  BadgeText,
-  ComplianceBadge,
-  BadgeIconWrapper,
-  Description,
-  GetStartedButton,
-  HeroContent,
-  HeroSection,
-  HeroTitle,
-  HeroText,
-  BadgesList,
-  GradientText,
-  HeroGlow,
-} from "./styles";
+import { HeroTitlePlain } from "./styles";
+import * as S from "./styles";
+
 import { BADGES } from "@/constants";
 
 const Hero = () => {
   const { t } = useTranslation();
 
   return (
-    <HeroSection>
-      <HeroGlow />
-      <Container>
-        <HeroContent>
-          <HeroText>
-            <BadgesList>
+    <S.HeroSection>
+      <S.HeroGlow />
+      <Container sx={{ paddingBottom: 0 }}>
+        <S.HeroContent>
+          <S.HeroText>
+            <S.BadgesList>
               {BADGES.map((badge) => (
-                <ComplianceBadge key={badge.id}>
-                  <BadgeIconWrapper>
+                <S.ComplianceBadge key={badge.id}>
+                  <S.BadgeIconWrapper>
                     <svg>
                       <use href={`/hero/icons.svg#${badge.iconId}`} />
                     </svg>
-                  </BadgeIconWrapper>
-                  <BadgeText>
+                  </S.BadgeIconWrapper>
+                  <S.BadgeText>
                     {t(`hero.stats.${badge.id}.value`)}{" "}
                     {t(`hero.stats.${badge.id}.label`)}
-                  </BadgeText>
-                </ComplianceBadge>
+                  </S.BadgeText>
+                </S.ComplianceBadge>
               ))}
-            </BadgesList>
+            </S.BadgesList>
 
-            <HeroTitle>
-              <Trans
-                i18nKey="hero.mainTitle"
-                components={{
-                  br: <br />,
-                  gradient: <GradientText />,
-                }}
-              />
-            </HeroTitle>
-          </HeroText>
+            <S.HeroTitle>
+              <HeroTitlePlain>{t("hero.mainTitleFirst")}</HeroTitlePlain>
+              <S.GradientText>{t("hero.mainTitleSecond")}</S.GradientText>
+              <HeroTitlePlain>{t("hero.mainTitleThird")}</HeroTitlePlain>
+            </S.HeroTitle>
+          </S.HeroText>
 
-          <Description>{t("hero.description")}</Description>
+          <S.Description>{t("hero.description")}</S.Description>
 
-          <GetStartedButton>{t("hero.cta.getStarted")}</GetStartedButton>
-        </HeroContent>
+          <S.GetStartedButton>{t("hero.cta.getStarted")}</S.GetStartedButton>
+        </S.HeroContent>
       </Container>
-    </HeroSection>
+    </S.HeroSection>
   );
 };
 

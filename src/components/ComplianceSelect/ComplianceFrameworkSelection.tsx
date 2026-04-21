@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
-import { useComplianceSelection } from "@/components/complianceSelect/useComplianceSelection";
+import { useComplianceSelection } from "@/components/ComplianceSelect/useComplianceSelection";
 import {
   CardHeader,
   FrameworkChip,
@@ -13,7 +13,7 @@ import {
   SelectedIconWrapper,
   SelectionSubtitle,
   SelectionTitle,
-} from "@/components/complianceSelect/styles";
+} from "@/components/ComplianceSelect/styles";
 
 const handleSelectionCardKeyDown = (
   event: React.KeyboardEvent<HTMLDivElement>,
