@@ -64,7 +64,17 @@
       "uploadedFilePath": "Uploaded file: {{path}}",
       "dropzone": {
         "title": "Drop your file here, or browse",
-        "support": "Supports: .txt, .doc, .docx, .pdf"
+        "support": "Supports: .txt, .doc, .docx, .pdf",
+        "fileTypes": {
+          "pdf": "PDF",
+          "txt": "TXT",
+          "dicom": "DICOM"
+        }
+      },
+      "footer": {
+        "autoSaving": "Auto-saving enabled",
+        "filesCount": "Files count: {{count}}",
+        "wordCount": "Word count: {{count}}"
       },
       "errors": {
         "fileRead": "Failed to read the selected file. Please try another file.",

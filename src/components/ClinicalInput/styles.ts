@@ -2,49 +2,40 @@ import { Box, Button, Tab, Tabs, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 const clinicalTextInputStyles = {
+  panelMaxWidth: 846,
+  panelMinHeight: 448,
+  contentMaxWidth: 814,
+  contentHeight: 303,
   containerGap: 2,
   containerPadding: 3,
   containerPaddingTablet: 2.5,
   containerPaddingMobile: 2,
   borderRadius: 3,
-  tabsHeight: 52,
-  tabsHeightTablet: 48,
-  tabsHeightMobile: 44,
   tabsInnerPadding: 0.5,
-  tabsInnerPaddingMobile: 0.35,
-  tabBorderRadius: 2,
-  tabBorderWidth: 1,
-  tabPanelPaddingTop: 2,
-  tabPanelPaddingTopMobile: 1.5,
-  tabPanelGap: 2,
-  tabPanelGapMobile: 1.5,
-  contentHeight: 870,
-  contentHeightTablet: 520,
-  contentHeightMobile: 480,
-  textareaMinRows: 16,
+  tabBorderRadiusPx: 6,
+  tabSelectedHeight: 40,
+  textareaMinRows: 10,
   dropzoneBorderRadius: 2,
-  dropzonePadding: 4,
-  dropzonePaddingTablet: 3,
-  dropzonePaddingMobile: 2,
-  dropzoneGap: 1,
-  uploadButtonPaddingX: 3,
-  uploadButtonPaddingY: 1,
-  filePathMarginBottom: 1.5,
-  filePathPadding: 1,
-  filePathMinHeight: 40,
+  dropzoneIconBoxSize: 52,
+  dropzoneGap: 1.5,
+  chipGap: 1,
+  browseButtonPaddingX: 3,
+  browseButtonPaddingY: 1,
   subtitleMarginBottom: 2,
-  panelTransitionDuration: "0.2s",
+  footerPaddingY: 1.5,
 } as const;
 
 export const ClinicalTextInputContainer = styled(Box)(({ theme }) => ({
   width: "100%",
+  maxWidth: clinicalTextInputStyles.panelMaxWidth,
+  marginInline: "auto",
   boxSizing: "border-box",
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(clinicalTextInputStyles.containerGap),
-  border: `1px solid ${theme.palette.divider}`,
+  border: `1px solid ${theme.palette.neutralColors[800]}`,
   borderRadius: theme.spacing(clinicalTextInputStyles.borderRadius),
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: theme.palette.secondaryColors[900],
   padding: theme.spacing(clinicalTextInputStyles.containerPadding),
   [theme.breakpoints.down("md")]: {
     padding: theme.spacing(clinicalTextInputStyles.containerPaddingTablet),
@@ -55,47 +46,33 @@ export const ClinicalTextInputContainer = styled(Box)(({ theme }) => ({
 }));
 
 export const ClinicalTextInputTitle = styled(Typography)(({ theme }) => ({
-  fontSize: `${theme.typography.fontSize20}px`,
-  fontWeight: theme.typography.fontWeight600,
-  color: theme.palette.text.primary,
+  fontSize: theme.typography.fontSize20,
+  fontWeight: theme.typography.fontWeight700,
+  color: theme.palette.textColors[50],
   [theme.breakpoints.down("md")]: {
-    fontSize: `${theme.typography.fontSize18}px`,
-  },
-  [theme.breakpoints.down("sm")]: {
-    fontSize: `${theme.typography.fontSize16}px`,
+    fontSize: theme.typography.fontSize18,
   },
 }));
 
 export const ClinicalTextInputSubtitle = styled(Typography)(({ theme }) => ({
-  fontSize: `${theme.typography.fontSize16}px`,
+  fontSize: theme.typography.fontSize14,
   fontWeight: theme.typography.fontWeight500,
-  color: theme.palette.text.secondary,
+  color: theme.palette.neutralColors[300],
   marginBottom: theme.spacing(clinicalTextInputStyles.subtitleMarginBottom),
-  [theme.breakpoints.down("md")]: {
-    fontSize: `${theme.typography.fontSize14}px`,
-  },
   [theme.breakpoints.down("sm")]: {
-    fontSize: `${theme.typography.fontSize12}px`,
-    marginBottom: theme.spacing(1.5),
+    fontSize: theme.typography.fontSize12,
   },
 }));
 
 export const ClinicalInputTabs = styled(Tabs)(({ theme }) => ({
-  minHeight: theme.spacing(clinicalTextInputStyles.tabsHeight / 8),
-  borderRadius: theme.spacing(clinicalTextInputStyles.tabBorderRadius),
-  backgroundColor: theme.palette.action.hover,
+  minHeight: 44,
+  borderRadius: `${clinicalTextInputStyles.tabBorderRadiusPx}px`,
+  backgroundColor: theme.palette.neutralColors[900],
   padding: theme.spacing(clinicalTextInputStyles.tabsInnerPadding),
-  [theme.breakpoints.down("md")]: {
-    minHeight: theme.spacing(clinicalTextInputStyles.tabsHeightTablet / 8),
-  },
-  [theme.breakpoints.down("sm")]: {
-    minHeight: theme.spacing(clinicalTextInputStyles.tabsHeightMobile / 8),
-    padding: theme.spacing(clinicalTextInputStyles.tabsInnerPaddingMobile),
-  },
   "& .MuiTabs-indicator": {
     display: "none",
   },
-  "& .MuiTabs-list": {
+  "& .MuiTabs-list, & .MuiTabs-flexContainer": {
     display: "grid",
     gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
     gap: theme.spacing(0.5),
@@ -108,44 +85,25 @@ export const ClinicalInputTabButton = styled(Tab)(({ theme }) => ({
   flex: 1,
   textTransform: "none",
   fontWeight: theme.typography.fontWeight600,
-  fontSize: `${theme.typography.fontSize14}px`,
-  minHeight: theme.spacing(5),
+  fontSize: theme.typography.fontSize14,
+  minHeight: clinicalTextInputStyles.tabSelectedHeight,
   paddingInline: theme.spacing(2),
-  border: `${clinicalTextInputStyles.tabBorderWidth}px solid transparent`,
-  borderRadius: theme.spacing(clinicalTextInputStyles.tabBorderRadius - 0.25),
-  color: theme.palette.text.secondary,
+  borderRadius: `${clinicalTextInputStyles.tabBorderRadiusPx}px`,
+  color: theme.palette.neutralColors[300],
   "&.Mui-selected": {
-    color: theme.palette.text.primary,
-    backgroundColor: theme.palette.background.paper,
-    borderColor: theme.palette.neutralColors[500],
-    boxShadow: "0 1px 2px rgba(15, 23, 42, 0.18)",
+    color: theme.palette.textColors[50],
+    backgroundImage: `linear-gradient(90deg, ${theme.palette.primaryColors[500]} 0%, ${theme.palette.primaryColors[700]} 100%)`,
   },
-  [theme.breakpoints.down("md")]: {
-    minHeight: theme.spacing(4.75),
-    paddingInline: theme.spacing(1.5),
-  },
-  [theme.breakpoints.down("sm")]: {
-    minHeight: theme.spacing(4.5),
-    fontSize: `${theme.typography.fontSize12}px`,
-    paddingInline: theme.spacing(1),
-  },
-}));
-
-export const ClinicalInputTabPanel = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(clinicalTextInputStyles.tabPanelGap),
-  paddingTop: theme.spacing(clinicalTextInputStyles.tabPanelPaddingTop),
 }));
 
 export const ClinicalInputPanelsContainer = styled(Box)(({ theme }) => ({
   position: "relative",
-  height: theme.spacing(clinicalTextInputStyles.contentHeight / 8),
-  [theme.breakpoints.down("md")]: {
-    height: theme.spacing(clinicalTextInputStyles.contentHeightTablet / 8),
-  },
+  width: "100%",
+  maxWidth: clinicalTextInputStyles.contentMaxWidth,
+  marginInline: "auto",
+  minHeight: clinicalTextInputStyles.contentHeight,
   [theme.breakpoints.down("sm")]: {
-    height: theme.spacing(clinicalTextInputStyles.contentHeightMobile / 8),
+    minHeight: 240,
   },
 }));
 
@@ -156,47 +114,49 @@ export const ClinicalInputOverlayPanel = styled(Box, {
   inset: 0,
   display: "flex",
   flexDirection: "column",
-  height: "100%",
+  minHeight: "100%",
   boxSizing: "border-box",
-  overflow: "hidden",
-  gap: theme.spacing(clinicalTextInputStyles.tabPanelGap),
-  paddingTop: theme.spacing(clinicalTextInputStyles.tabPanelPaddingTop),
-  [theme.breakpoints.down("sm")]: {
-    gap: theme.spacing(clinicalTextInputStyles.tabPanelGapMobile),
-    paddingTop: theme.spacing(clinicalTextInputStyles.tabPanelPaddingTopMobile),
-  },
+  gap: theme.spacing(1.5),
   opacity: active ? 1 : 0,
   visibility: active ? "visible" : "hidden",
   pointerEvents: active ? "auto" : "none",
-  transition: `opacity ${clinicalTextInputStyles.panelTransitionDuration} ease, visibility ${clinicalTextInputStyles.panelTransitionDuration} ease`,
+  transition: "opacity 0.2s ease, visibility 0.2s ease",
 }));
 
 export const ClinicalTextArea = styled(TextField)(({ theme }) => ({
   flex: 1,
+  "& .MuiInputBase-root": {
+    height: "100%",
+    padding: 0,
+    backgroundColor: "transparent",
+    alignItems: "flex-start",
+    borderRadius: theme.spacing(2),
+  },
   "& .MuiInputBase-input": {
-    fontSize: `${theme.typography.fontSize14}px`,
-    lineHeight: 1.5,
-    [theme.breakpoints.down("md")]: {
-      fontSize: `${theme.typography.fontSize12}px`,
+    fontSize: theme.typography.fontSize14,
+    lineHeight: 1.55,
+    color: theme.palette.textColors[50],
+    "&::placeholder": {
+      color: theme.palette.neutralColors[400],
+      opacity: 1,
     },
   },
   "& .MuiOutlinedInput-root": {
     height: "100%",
     overflow: "hidden",
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: theme.palette.neutralColors[900],
     alignItems: "flex-start",
     borderRadius: theme.spacing(2),
+    padding: theme.spacing(2),
+    minHeight: clinicalTextInputStyles.contentHeight,
     "& fieldset": {
-      border: "none",
+      border: `1px solid ${theme.palette.neutralColors[800]}`,
     },
     "&:hover fieldset": {
-      border: "none",
+      border: `1px solid ${theme.palette.primaryColors[400]}`,
     },
     "&.Mui-focused fieldset": {
-      border: "none",
-    },
-    [theme.breakpoints.down("sm")]: {
-      height: "100%",
+      border: `1px solid ${theme.palette.primaryColors[400]}`,
     },
   },
   "& .MuiOutlinedInput-inputMultiline": {
@@ -208,49 +168,69 @@ export const ClinicalTextArea = styled(TextField)(({ theme }) => ({
     overflowY: "auto",
     overflowX: "hidden",
   },
-  "& .MuiOutlinedInput-input": {
-    position: "relative",
-    zIndex: 1,
-  },
 }));
 
 export const UploadedFilePath = styled(Typography, {
   shouldForwardProp: (prop) => prop !== "visible",
 })<{ visible: boolean }>(({ theme, visible }) => ({
-  ...theme.typography.body2,
-  minHeight: theme.spacing(clinicalTextInputStyles.filePathMinHeight / 8),
-  color: theme.palette.text.secondary,
-  border: `1px solid ${theme.palette.divider}`,
+  fontSize: theme.typography.fontSize12,
+  minHeight: 36,
+  color: theme.palette.neutralColors[300],
+  border: `1px solid ${theme.palette.neutralColors[800]}`,
   borderRadius: theme.spacing(1),
-  backgroundColor: theme.palette.background.paper,
-  padding: theme.spacing(clinicalTextInputStyles.filePathPadding),
-  marginBottom: theme.spacing(clinicalTextInputStyles.filePathMarginBottom),
+  backgroundColor: theme.palette.neutralColors[900],
+  padding: theme.spacing(1, 1.5),
   wordBreak: "break-all",
   visibility: visible ? "visible" : "hidden",
-  [theme.breakpoints.down("md")]: {
-    fontSize: `${theme.typography.fontSize12}px`,
-  },
 }));
 
 export const DropZone = styled(Box)(({ theme }) => ({
   flex: 1,
-  minHeight: 0,
+  minHeight: clinicalTextInputStyles.contentHeight,
   borderRadius: theme.spacing(clinicalTextInputStyles.dropzoneBorderRadius),
-  border: `1px dashed ${theme.palette.divider}`,
-  backgroundColor: theme.palette.action.hover,
+  border: `1px dashed ${theme.palette.neutralColors[700]}`,
+  backgroundColor: theme.palette.neutralColors[900],
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
   textAlign: "center",
   gap: theme.spacing(clinicalTextInputStyles.dropzoneGap),
-  padding: theme.spacing(clinicalTextInputStyles.dropzonePadding),
-  [theme.breakpoints.down("md")]: {
-    padding: theme.spacing(clinicalTextInputStyles.dropzonePaddingTablet),
+  padding: theme.spacing(4),
+  transition: "border-color 0.2s ease, background-color 0.2s ease",
+  "&:hover": {
+    borderColor: theme.palette.primaryColors[400],
+    backgroundColor: theme.palette.neutralColors[800],
   },
-  [theme.breakpoints.down("sm")]: {
-    padding: theme.spacing(clinicalTextInputStyles.dropzonePaddingMobile),
-  },
+}));
+
+export const DropZoneIconBox = styled(Box)(({ theme }) => ({
+  width: clinicalTextInputStyles.dropzoneIconBoxSize,
+  height: clinicalTextInputStyles.dropzoneIconBoxSize,
+  borderRadius: theme.spacing(1.5),
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: theme.palette.textColors[50],
+  backgroundImage: `linear-gradient(135deg, ${theme.palette.primaryColors[400]} 0%, ${theme.palette.primaryColors[700]} 100%)`,
+}));
+
+export const DropZoneChips = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: theme.spacing(clinicalTextInputStyles.chipGap),
+  flexWrap: "wrap",
+  justifyContent: "center",
+}));
+
+export const DropZoneChip = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(0.5, 1.25),
+  borderRadius: theme.spacing(1),
+  backgroundColor: theme.palette.neutralColors[800],
+  color: theme.palette.neutralColors[100],
+  fontSize: theme.typography.fontSize12,
+  fontWeight: theme.typography.fontWeight600,
+  lineHeight: 1.4,
 }));
 
 export const HiddenFileInput = styled("input")({
@@ -260,46 +240,59 @@ export const HiddenFileInput = styled("input")({
 export const BrowseButton = styled(Button)(({ theme }) => ({
   textTransform: "none",
   fontWeight: theme.typography.fontWeight600,
-  fontSize: `${theme.typography.fontSize14}px`,
+  fontSize: theme.typography.fontSize14,
   padding: theme.spacing(
-    clinicalTextInputStyles.uploadButtonPaddingY,
-    clinicalTextInputStyles.uploadButtonPaddingX,
+    clinicalTextInputStyles.browseButtonPaddingY,
+    clinicalTextInputStyles.browseButtonPaddingX,
   ),
+  borderRadius: theme.spacing(1.5),
   [theme.breakpoints.down("sm")]: {
     width: "100%",
-    fontSize: `${theme.typography.fontSize12}px`,
+    fontSize: theme.typography.fontSize12,
   },
 }));
 
 export const DropZoneTitle = styled(Typography)(({ theme }) => ({
-  fontSize: `${theme.typography.fontSize18}px`,
+  fontSize: theme.typography.fontSize16,
   fontWeight: theme.typography.fontWeight600,
-  color: theme.palette.text.primary,
-  [theme.breakpoints.down("md")]: {
-    fontSize: `${theme.typography.fontSize16}px`,
-  },
-  [theme.breakpoints.down("sm")]: {
-    fontSize: `${theme.typography.fontSize14}px`,
-  },
+  color: theme.palette.textColors[50],
 }));
 
 export const DropZoneSubtitle = styled(Typography)(({ theme }) => ({
-  fontSize: `${theme.typography.fontSize14}px`,
+  fontSize: theme.typography.fontSize12,
   fontWeight: theme.typography.fontWeight400,
-  color: theme.palette.text.secondary,
-  [theme.breakpoints.down("md")]: {
-    fontSize: `${theme.typography.fontSize12}px`,
-  },
+  color: theme.palette.neutralColors[300],
 }));
 
 export const HelperErrorText = styled(Typography)(({ theme }) => ({
-  fontSize: `${theme.typography.fontSize14}px`,
-  fontWeight: theme.typography.fontWeight400,
+  fontSize: theme.typography.fontSize12,
+  fontWeight: theme.typography.fontWeight500,
   color: theme.palette.error.main,
-  marginTop: theme.spacing(1),
-  [theme.breakpoints.down("md")]: {
-    fontSize: `${theme.typography.fontSize12}px`,
-  },
+  marginTop: theme.spacing(0.5),
+}));
+
+export const PanelFooter = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  paddingTop: theme.spacing(clinicalTextInputStyles.footerPaddingY),
+  borderTop: `1px solid ${theme.palette.neutralColors[800]}`,
+  color: theme.palette.neutralColors[300],
+  fontSize: theme.typography.fontSize12,
+}));
+
+export const PanelFooterItem = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: theme.spacing(0.75),
+  fontWeight: theme.typography.fontWeight500,
+}));
+
+export const PanelFooterDot = styled(Box)(({ theme }) => ({
+  width: 8,
+  height: 8,
+  borderRadius: "50%",
+  backgroundColor: theme.palette.tertiaryColors[400],
 }));
 
 export const textAreaProps = {

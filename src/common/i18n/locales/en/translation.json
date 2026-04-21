@@ -1,4 +1,25 @@
 {
+  "appShell": {
+    "logo": {
+      "title": "Clinical Data",
+      "subtitle": "Studio"
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "deIdentify": "De-Identify",
+      "syntheticData": "Synthetic Data",
+      "subscription": "Subscription"
+    },
+    "topBar": {
+      "title": "De-Identification",
+      "subtitle": "Process clinical text and protect patient privacy",
+      "notifications": "Notifications",
+      "settings": "Settings"
+    },
+    "actions": {
+      "logout": "Logout"
+    }
+  },
   "capabilities": {
     "subtitle": "CAPABILITIES",
     "title": "Protect Privacy Without Compromising",
@@ -132,5 +153,27 @@
         "answer": "We offer a choice between irreversible anonymization for external sharing and tokenization (pseudonymization) for internal cases where re-linking is necessary. By using Expert Determination and differential privacy, we provide documented residual risk assessments while preserving the complex clinical signatures needed for high-fidelity analysis."
       }
     ]
+  },
+  "sidebar": {
+    "header": {
+      "title": "Clinical Data Studio",
+      "subtitle": "De-ID & Synthesis"
+    },
+    "bottom": {
+      "support": "Support",
+      "logout": "Logout"
+    }
+  },
+  "appShell": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "deIdentify": "De-Identify",
+      "syntheticData": "Synthetic Data",
+      "subscription": "My Subscription"
+    },
+    "topBar": {
+      "title": "Clinical Data De-Identification & Synthetic Data Studio",
+      "subtitle": "Enterprise-grade PII detection and anonymization"
+    }
   }
 }

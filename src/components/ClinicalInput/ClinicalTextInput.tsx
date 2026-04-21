@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
 import { Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
@@ -19,14 +19,22 @@ import {
   ClinicalTextInputSubtitle,
   ClinicalTextInputTitle,
   DropZone,
+  DropZoneChip,
+  DropZoneChips,
+  DropZoneIconBox,
   DropZoneSubtitle,
   DropZoneTitle,
   HelperErrorText,
   HiddenFileInput,
+  PanelFooter,
+  PanelFooterDot,
+  PanelFooterItem,
   UploadedFilePath,
   textAreaProps,
 } from "@/components/ClinicalInput/styles";
 import { useClinicalTextInput } from "@/components/ClinicalInput/useClinicalTextInput";
+
+const DROPZONE_FILE_TYPES = ["pdf", "txt", "dicom"] as const;
 
 const ClinicalTextInput: React.FC = () => {
   const { t } = useTranslation();
@@ -40,6 +48,14 @@ const ClinicalTextInput: React.FC = () => {
     handleClinicalTextChange,
     handleFileSelected,
   } = useClinicalTextInput();
+
+  const wordCount = useMemo(() => {
+    const trimmed = clinicalText.trim();
+    return trimmed ? trimmed.split(/\s+/).length : 0;
+  }, [clinicalText]);
+
+  const isUploadTab = activeTab === CLINICAL_INPUT_TAB.UPLOAD_DOCUMENT;
+  const filesCount = isUploadTab && filePathLabel ? 1 : 0;
 
   const handleTabChange = (
     _: React.SyntheticEvent,
@@ -127,17 +143,26 @@ const ClinicalTextInput: React.FC = () => {
           active={activeTab === CLINICAL_INPUT_TAB.UPLOAD_DOCUMENT}
         >
           <UploadedFilePath visible={Boolean(filePathLabel)}>
-            {filePathLabel || "\u00A0"}
+            {filePathLabel || " "}
           </UploadedFilePath>
 
           <DropZone onDrop={handleDrop} onDragOver={handleDragOver}>
-            <FileUploadOutlinedIcon fontSize="large" color="action" />
+            <DropZoneIconBox>
+              <FileUploadOutlinedIcon fontSize="medium" />
+            </DropZoneIconBox>
             <DropZoneTitle>
               {t("deidentify.clinicalInput.dropzone.title")}
             </DropZoneTitle>
             <DropZoneSubtitle>
               {t("deidentify.clinicalInput.dropzone.support")}
             </DropZoneSubtitle>
+            <DropZoneChips>
+              {DROPZONE_FILE_TYPES.map((type) => (
+                <DropZoneChip key={type}>
+                  {t(`deidentify.clinicalInput.dropzone.fileTypes.${type}`)}
+                </DropZoneChip>
+              ))}
+            </DropZoneChips>
             <BrowseButton variant="contained" onClick={openFilePicker}>
               {t("deidentify.clinicalInput.browseButton")}
             </BrowseButton>
@@ -152,6 +177,22 @@ const ClinicalTextInput: React.FC = () => {
           {fileError && <HelperErrorText>{fileError}</HelperErrorText>}
         </ClinicalInputOverlayPanel>
       </ClinicalInputPanelsContainer>
+
+      <PanelFooter>
+        <PanelFooterItem>
+          <PanelFooterDot />
+          {t("deidentify.clinicalInput.footer.autoSaving")}
+        </PanelFooterItem>
+        <PanelFooterItem>
+          {isUploadTab
+            ? t("deidentify.clinicalInput.footer.filesCount", {
+                count: filesCount,
+              })
+            : t("deidentify.clinicalInput.footer.wordCount", {
+                count: wordCount,
+              })}
+        </PanelFooterItem>
+      </PanelFooter>
     </ClinicalTextInputContainer>
   );
 };
