@@ -1,7 +1,7 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import * as styles from "./styles";
-import { useVerify } from "./hooks/useVerify";
+import * as styles from "@/pages/VerifyPage/styles";
+import { useVerify } from "@/pages/VerifyPage/hooks/useVerify";
 const VerifyPage = () => {
   useVerify();
   const { t } = useTranslation();
