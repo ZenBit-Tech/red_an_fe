@@ -13,9 +13,9 @@ export const ContactUsForm = () => {
   return (
     <S.SectionForm>
       <S.CustomContainer>
-        <S.ContactTitle>{t("contactUs.title")}</S.ContactTitle>
+        <S.ContactTitle>{t("contactUs:contactUs.title")}</S.ContactTitle>
         <S.ContactDescription>
-          {t("contactUs.description")}
+          {t("contactUs:contactUs.description")}
         </S.ContactDescription>
 
         <S.FormWrapper>
@@ -24,7 +24,9 @@ export const ContactUsForm = () => {
               <MailOutlineIcon />
             </S.IconWrapper>
 
-            <S.ContactLabel>{t("contactUs.sidebar.emailLabel")}</S.ContactLabel>
+            <S.ContactLabel>
+              {t("contactUs:contactUs.sidebar.emailLabel")}
+            </S.ContactLabel>
 
             <S.EmailLink href="mailto:info@clinicaldatastudio.com">
               info@clinicaldatastudio.com
@@ -36,26 +38,34 @@ export const ContactUsForm = () => {
           </S.ContactSidebar>
 
           <S.ContactFormBox>
-            <S.ContactFormTitle>{t("contactUs.form.title")}</S.ContactFormTitle>
+            <S.ContactFormTitle>
+              {t("contactUs:contactUs.form.title")}
+            </S.ContactFormTitle>
 
             <S.ContactForm onSubmit={handleSubmit} noValidate>
               <S.FormGrid>
                 <S.StyledTextField
                   fullWidth
-                  label={t("contactUs.form.firstName")}
-                  placeholder={t("contactUs.form.placeholder.firstName")}
+                  label={t("contactUs:contactUs.form.firstName")}
+                  placeholder={t(
+                    "contactUs:contactUs.form.placeholder.firstName",
+                  )}
                   {...register("firstName", {
-                    required: t("contactUs.form.validation.required"),
+                    required: t("contactUs:contactUs.form.validation.required"),
                   })}
                   error={!!errors.firstName}
                   helperText={errors.firstName?.message}
                 />
                 <S.StyledTextField
                   fullWidth
-                  label={t("contactUs.form.lastName")}
-                  placeholder={t("contactUs.form.placeholder.lastName")}
+                  label={t("contactUs:contactUs.form.lastName")}
+                  placeholder={t(
+                    "contactUs:contactUs.form.placeholder.lastName",
+                  )}
                   {...register("lastName", {
-                    required: t("contactUs.form.validation.required"),
+                    required: t(
+                      "ccontactUs:contactUs.form.validation.required",
+                    ),
                   })}
                   error={!!errors.lastName}
                   helperText={errors.lastName?.message}
@@ -64,13 +74,19 @@ export const ContactUsForm = () => {
                 <Box className="full-width">
                   <S.StyledTextField
                     fullWidth
-                    label={t("contactUs.form.email")}
-                    placeholder={t("contactUs.form.placeholder.email")}
+                    label={t("contactUs:contactUs.form.email")}
+                    placeholder={t(
+                      "contactUs:contactUs.form.placeholder.email",
+                    )}
                     {...register("email", {
-                      required: t("contactUs.form.validation.required"),
+                      required: t(
+                        "contactUs:contactUs.form.validation.required",
+                      ),
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: t("contactUs.form.validation.emailInvalid"),
+                        message: t(
+                          "contactUs:contactUs.form.validation.emailInvalid",
+                        ),
                       },
                     })}
                     error={!!errors.email}
@@ -86,7 +102,7 @@ export const ContactUsForm = () => {
                       <S.StyledPhoneInput
                         {...fieldProps}
                         inputRef={ref}
-                        label={t("contactUs.form.phone")}
+                        label={t("contactUs:contactUs.form.phone")}
                         fullWidth
                         variant="outlined"
                         defaultCountry="UA"
@@ -104,12 +120,16 @@ export const ContactUsForm = () => {
                   <S.StyledTextField
                     fullWidth
                     maxLength="1000"
-                    label={t("contactUs.form.message")}
-                    placeholder={t("contactUs.form.placeholder.message")}
+                    label={t("contactUs:contactUs.form.message")}
+                    placeholder={t(
+                      "contactUs:contactUs.form.placeholder.message",
+                    )}
                     multiline
                     rows={4}
                     {...register("message", {
-                      required: t("contactUs.form.validation.required"),
+                      required: t(
+                        "contactUs:contactUs.form.validation.required",
+                      ),
                     })}
                     error={!!errors.message}
                     helperText={errors.message?.message}
@@ -118,7 +138,7 @@ export const ContactUsForm = () => {
               </S.FormGrid>
               <Box className="full-width">
                 <S.SubmitButton variant="contained" type="submit">
-                  {t("contactUs.form.submit")}
+                  {t("contactUs:contactUs.form.submit")}
                 </S.SubmitButton>
               </Box>
             </S.ContactForm>

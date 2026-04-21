@@ -1,26 +1,31 @@
 import { styled } from "@mui/material/styles";
-import { Box, Typography, Button, Link, TextField } from "@mui/material";
+import { Box, Typography, Button, TextField } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
 
 export const SectionForm = styled(Box)(({ theme }) => ({
+  width: "100%",
   paddingTop: theme.spacing(27),
   paddingBottom: theme.spacing(29),
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: theme.palette.backgroundColor,
 }));
 
 export const CustomContainer = styled(Box)(({ theme }) => ({
   width: "100%",
   maxWidth: "1440px",
   margin: "0 auto",
-  padding: theme.spacing(0, 43),
+  padding: theme.spacing(0, 20),
+  [theme.breakpoints.down("lg")]: {
+    padding: theme.spacing(0, 4),
+  },
 }));
 
 export const ContactTitle = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize64,
   fontWeight: theme.typography.fontWeight600,
+  fontFamily: theme.typography.secondFamily,
   color: theme.palette.text.primary,
   lineHeight: "100%",
-  letterSpacing: "-0.05em",
+
   [theme.breakpoints.down("md")]: {
     fontSize: theme.typography.fontSize38,
   },
@@ -29,8 +34,9 @@ export const ContactTitle = styled(Typography)(({ theme }) => ({
 export const ContactDescription = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize16,
   fontWeight: theme.typography.fontWeight400,
-  color: theme.palette.gray[300],
-  lineHeight: "156%",
+  color: theme.palette.textColors[200],
+  fontFamily: theme.typography.fontFamily,
+
   maxWidth: "480px",
   marginTop: theme.spacing(4),
   [theme.breakpoints.down("sm")]: {
@@ -46,6 +52,9 @@ export const FormWrapper = styled(Box)(({ theme }) => ({
   width: "100%",
   alignItems: "flex-start",
   marginTop: theme.spacing(8),
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+  },
 }));
 
 export const ContactSidebar = styled(Box)(({ theme }) => ({
@@ -54,9 +63,9 @@ export const ContactSidebar = styled(Box)(({ theme }) => ({
   padding: theme.spacing(6),
   width: "324px",
   height: "184px",
-  backgroundColor: theme.palette.dark[200],
+  backgroundColor: theme.palette.neutralColors[900],
   borderRadius: "8px",
-  border: `1px solid ${theme.palette.gray[700]}`,
+  border: `1px solid ${theme.palette.strokeColors[500]}`,
 }));
 
 export const IconWrapper = styled(Box)(({ theme }) => ({
@@ -68,31 +77,28 @@ export const IconWrapper = styled(Box)(({ theme }) => ({
   height: "48px",
   padding: "8px",
   borderRadius: "14px",
-  border: "0.80px solid rgba(176, 198, 255, 0.3)",
+  border: `0.80px solid ${theme.palette.primaryColors[200]}4D`,
   marginBottom: theme.spacing(2),
-  background:
-    "linear-gradient(135deg, rgba(176, 198, 255, 0.2) 0%, rgba(164, 189, 248, 0.2) 7.14%, rgba(153, 180, 242, 0.2) 14.29%, rgba(141, 171, 235, 0.2) 21.43%, rgba(130, 161, 228, 0.2) 28.57%, rgba(119, 152, 222, 0.2) 35.71%, rgba(108, 143, 215, 0.2) 42.86%, rgba(96, 134, 208, 0.2) 50%, rgba(85, 125, 202, 0.2) 57.14%, rgba(74, 116, 195, 0.2) 64.29%, rgba(63, 107, 188, 0.2) 71.43%, rgba(52, 98, 181, 0.2) 78.57%, rgba(40, 89, 175, 0.2) 85.71%, rgba(28, 80, 168, 0.2) 92.86%, rgba(13, 71, 161, 0.2) 100%)",
-
+  background: `linear-gradient(135deg, ${theme.palette.primaryColors[200]}33 0%, ${theme.palette.primaryColors[700]}33 100%)`,
   "& svg": {
     fontSize: "24px",
-    fill: "#b2c5ff",
-    color: "#b2c5ff",
+    fill: theme.palette.primaryColors[200],
+    color: theme.palette.primaryColors[200],
   },
 }));
 
 export const ContactLabel = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize16,
   fontWeight: theme.typography.fontWeight400,
-  lineHeight: "150%",
-  color: theme.palette.white[500],
+  fontFamily: theme.typography.secondFamily,
+  color: theme.palette.textColors[50],
   marginBottom: theme.spacing(1),
 }));
 
-export const EmailLink = styled(Link)(({ theme }) => ({
+export const EmailLink = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize14,
   fontWeight: theme.typography.fontWeight400,
-  lineHeight: "143%",
-  color: theme.palette.gray[300], // максимально близько до #c6c6cd
+  color: theme.palette.textColors[100],
   textDecoration: "none",
   marginBottom: theme.spacing(0.5),
   transition: "color 0.2s ease-in-out",
@@ -104,7 +110,7 @@ export const EmailLink = styled(Link)(({ theme }) => ({
 export const ContactFormBox = styled(Box)(({ theme }) => ({
   padding: theme.spacing(9, 8, 22),
   textAlign: "center",
-  backgroundColor: theme.palette.dark[200],
+  backgroundColor: theme.palette.neutralColors[900],
   borderRadius: "8px",
   flexGrow: 1,
 }));
@@ -112,8 +118,8 @@ export const ContactFormBox = styled(Box)(({ theme }) => ({
 export const ContactFormTitle = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize32,
   fontWeight: theme.typography.fontWeight600,
-  lineHeight: "150%",
-  color: theme.palette.white[500],
+  fontFamily: theme.typography.secondFamily,
+  color: theme.palette.textColors[50],
   marginBottom: theme.spacing(8),
   textAlign: "left",
 }));
@@ -139,99 +145,110 @@ export const FormGrid = styled(Box)(({ theme }) => ({
 export const StyledTextField = styled(TextField)(({ theme }) => ({
   marginTop: theme.spacing(6),
 
-  // === 1. ЛЕЙБЛ (Завжди зверху) ===
+  // === 1. ЛЕЙБЛ (Назва поля зверху) ===
   "& .MuiInputLabel-root": {
     position: "absolute",
     top: 0,
     left: 0,
+    // Виносимо лейбл вгору над інпутом
     transform: "translate(0, -24px) scale(1)",
-    fontFamily: "var(--font-family)",
-    fontWeight: 500,
-    fontSize: "12px",
-    lineHeight: "133%",
-    letterSpacing: "0.05em",
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeight500,
+    fontSize: theme.typography.fontSize12,
     textTransform: "uppercase",
-    color: "rgba(187, 198, 197, 0.8)",
+    letterSpacing: "0.05em",
+    color: theme.palette.textColors[200],
 
-    "&.Mui-focused": { color: "rgba(187, 198, 197, 0.8)" },
-    "&.Mui-inputLabel-shrink": { transform: "translate(0, -24px) scale(1)" },
-    "&.Mui-error": { color: "rgba(187, 198, 197, 0.8)" },
+    "&.Mui-focused": {
+      color: theme.palette.primaryColors[200],
+    },
+    "&.Mui-inputLabel-shrink": {
+      transform: "translate(0, -24px) scale(1)",
+    },
+    "&.Mui-error": {
+      color: theme.palette.tertiaryColors[500],
+    },
   },
 
-  // === 2. КОНТЕЙНЕР (ЛОГІКА ВИСОТИ ТУТ) ===
+  // === 2. ОБОРУДКА ТА ФОН (OutlinedInput) ===
   "& .MuiOutlinedInput-root": {
-    backgroundColor: "rgba(51, 63, 90, 0.4)",
-    borderRadius: "8px",
-    transition: "all 0.2s ease-in-out",
+    backgroundColor: theme.palette.strokeColors[400],
+    borderRadius: theme.spacing(2), // 8px
+    transition: theme.transitions.create([
+      "border-color",
+      "box-shadow",
+      "background-color",
+    ]),
 
-    // ВИСОТА: Якщо звичайний - 60px, якщо multiline - 126px
     height: "60px",
     "&.MuiInputBase-multiline": {
       height: "auto",
       minHeight: "126px",
-      padding: "16px 14px",
+      padding: theme.spacing(4, 3.5),
     },
 
+    // Сама рамка (Outline)
     "& .MuiOutlinedInput-notchedOutline": {
-      border: "1px solid rgba(175, 198, 255, 0.12)",
+      border: `1px solid ${theme.palette.strokeColors[120]}`,
       top: 0,
-      "& legend": { display: "none" },
+      "& legend": { display: "none" }, // Прибираємо виріз під лейбл
     },
 
     "&:hover .MuiOutlinedInput-notchedOutline": {
-      borderColor: "rgba(175, 198, 255, 0.2)",
+      borderColor: theme.palette.primaryColors[200],
+      opacity: 0.8,
     },
 
     "&.Mui-focused": {
-      boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.25)",
+      boxShadow: `0 4px 4px 0 ${theme.palette.strokeColors[500]}`, // Тінь через палітру
       "& .MuiOutlinedInput-notchedOutline": {
-        borderColor: "#b0c6ff",
+        borderColor: theme.palette.primaryColors[200],
         borderWidth: "1px",
       },
     },
 
     "&.Mui-error .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#ef4444",
+      borderColor: theme.palette.tertiaryColors[500],
     },
   },
 
-  // === 3. САМ ТЕКСТ (ЛОГІКА ТЕКСТУ ТУТ) ===
+  // === 3. ТЕКСТ ВСЕРЕДИНІ ІНПУТА ===
   "& .MuiInputBase-input": {
-    fontFamily: "var(--font-family)",
-    fontWeight: 400,
-    fontSize: "16px",
-    color: "rgba(187, 198, 197, 0.8)",
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeight400,
+    fontSize: theme.typography.fontSize16,
+    color: theme.palette.textColors[100],
 
-    // Тільки для звичайних інпутів
+    // Для звичайних полів центруємо текст по висоті 60px
     "&:not(textarea)": {
       height: "60px",
-      padding: "0 16px",
+      padding: theme.spacing(0, 4),
       boxSizing: "border-box",
     },
 
-    // Тільки для Текстареа
+    // Для багаторядкових (Message)
     "&.MuiInputBase-inputMultiline": {
       padding: 0,
-      height: "auto !important",
     },
 
-    "&:focus": { color: "#fff" },
+    "&:focus": {
+      color: theme.palette.textColors[50],
+    },
+
     "&::placeholder": {
-      color: "rgba(187, 198, 197, 0.4)",
-      opacity: 1,
+      color: theme.palette.textColors[200],
+      opacity: 0.6,
     },
   },
 
-  // === 4. ПОМИЛКА ===
   "& .MuiFormHelperText-root": {
-    fontFamily: "var(--font-family)",
-    fontSize: "12px",
-    color: "#ef4444",
+    fontFamily: theme.typography.fontFamily,
+    fontSize: theme.typography.fontSize12,
+    color: theme.palette.tertiaryColors[500],
     position: "absolute",
-    bottom: "-16px", // Виносимо його ПІД рамку інпута
+    bottom: "-18px",
     left: 0,
     margin: 0,
-    padding: 0,
     lineHeight: "1",
   },
 }));
@@ -244,101 +261,111 @@ export const StyledPhoneInput = styled(MuiTelInput)(({ theme }) => ({
     top: 0,
     left: 0,
     transform: "translate(0, -24px) scale(1)",
-    fontFamily: "var(--font-family)",
-    fontWeight: 500,
-    fontSize: "12px",
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeight500,
+    fontSize: theme.typography.fontSize12,
     textTransform: "uppercase",
-    color: "rgba(187, 198, 197, 0.8)",
+    letterSpacing: "0.05em",
+    color: theme.palette.textColors[200],
 
-    "&.Mui-inputLabel-shrink": { transform: "translate(0, -24px) scale(1)" },
+    "&.Mui-inputLabel-shrink": {
+      transform: "translate(0, -24px) scale(1)",
+    },
+    "&.Mui-focused": {
+      color: theme.palette.primaryColors[200],
+    },
   },
 
+  // === 2. КОНТЕЙНЕР (OutlinedInput) ===
   "& .MuiOutlinedInput-root": {
-    backgroundColor: "rgba(51, 63, 90, 0.4)",
-    borderRadius: "8px",
+    backgroundColor: theme.palette.strokeColors[400],
+    borderRadius: theme.spacing(2),
     height: "60px",
-    color: "#b0c6ff",
+    color: theme.palette.primaryColors[200],
+    transition: theme.transitions.create(["border-color", "box-shadow"]),
 
     "& .MuiOutlinedInput-notchedOutline": {
-      border: "1px solid rgba(175, 198, 255, 0.12)",
+      border: `1px solid ${theme.palette.strokeColors[120]}`,
       top: 0,
       "& legend": { display: "none" },
     },
 
     "&:hover .MuiOutlinedInput-notchedOutline": {
-      borderColor: "rgba(175, 198, 255, 0.2)",
+      borderColor: theme.palette.primaryColors[200],
+      opacity: 0.8,
     },
 
     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#b0c6ff",
-      color: "rgba(187, 198, 197, 0.8)",
+      borderColor: theme.palette.primaryColors[200],
     },
 
     "&.Mui-error .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#ef4444",
+      borderColor: theme.palette.tertiaryColors[500],
     },
 
+    // === 3. ВИБІР ПРАПОРА (IconButton) ===
     "& .MuiMuiTelInput-IconButton": {
       borderRadius: "0px",
-      paddingLeft: "16px",
-      paddingRight: "8px",
-      color: "rgba(187, 198, 197, 0.8)",
+      paddingLeft: theme.spacing(4),
+      paddingRight: theme.spacing(2),
+      color: theme.palette.textColors[200],
       "&:hover": {
         backgroundColor: "transparent",
       },
     },
 
+    // === 4. КОД КРАЇНИ (+380) ===
     "& .MuiMuiTelInput-Adornment": {
-      marginRight: "4px",
+      marginRight: theme.spacing(1),
       "& .MuiTypography-root": {
-        color: "rgba(187, 198, 197, 0.8)",
-        fontFamily: "var(--font-family)",
-        fontSize: "16px",
+        color: theme.palette.textColors[200],
+        fontFamily: theme.typography.fontFamily,
+        fontSize: theme.typography.fontSize16,
       },
     },
 
+    // === 5. САМ ВВІД НОМЕРА ===
     "& input": {
-      padding: "0 16px 0 0",
+      padding: theme.spacing(0, 4, 0, 0),
       height: "60px",
-      fontFamily: "var(--font-family)",
-      fontSize: "16px",
-      color: "rgba(187, 198, 197, 0.8)",
-      "&:focus": { color: "#fff" },
+      fontFamily: theme.typography.fontFamily,
+      fontSize: theme.typography.fontSize16,
+      color: theme.palette.textColors[100],
+      "&:focus": {
+        color: theme.palette.textColors[50],
+      },
     },
   },
 
+  // === 6. ПОМИЛКА ===
   "& .MuiFormHelperText-root": {
-    fontFamily: "var(--font-family)",
-    fontSize: "12px",
-    color: "#ef4444",
-    margin: "4px 0 0 0",
+    fontFamily: theme.typography.fontFamily,
+    fontSize: theme.typography.fontSize12,
+    color: theme.palette.tertiaryColors[500],
+    margin: theme.spacing(1, 0, 0, 0),
   },
 }));
 
 export const SubmitButton = styled(Button)(({ theme }) => ({
-  background: "#B0C6FF",
-  backgroundColor: theme.palette.blue[50],
-
   width: "368px",
   height: "60px",
-  padding: "20px 40px",
+  padding: theme.spacing(5, 10),
   borderRadius: "8px",
-  border: "1px solid rgba(67, 70, 82, 0.15)",
-  marginTop: theme.spacing(12),
+  backgroundImage: `linear-gradient(161deg, ${theme.palette.primaryColors[200]} 0%, ${theme.palette.primaryColors[700]} 100%)`,
 
   fontFamily: theme.typography.fontFamily,
-  fontWeight: 700,
-  fontSize: "14px",
-  lineHeight: "143%",
-  letterSpacing: "-0.03em",
+  fontWeight: theme.typography.fontWeight700,
+  fontSize: theme.typography.fontSize14,
+  color: theme.palette.textColors[50],
+  marginTop: theme.spacing(12),
+
   textAlign: "center",
-  color: "#2d3449",
+
   textTransform: "none",
 
   "&:hover": {
-    backgroundColor: "#A2C3F7",
-    background: "#A2C3F7",
-    boxShadow: "0px 4px 12px rgba(176, 198, 255, 0.3)",
+    backgroundImage: `linear-gradient(167deg, ${theme.palette.primaryColors[500]} 28.37%, ${theme.palette.primaryColors[900]} 100%)`,
+    boxShadow: `0px 4px 12px ${theme.palette.primaryColors[700]}4D`,
   },
 
   [theme.breakpoints.down("sm")]: {

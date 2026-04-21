@@ -18,6 +18,9 @@ type StrokeColorsType = typeof strokeColors;
 
 declare module "@mui/material/styles" {
   interface TypographyVariants {
+    secondFamily: string;
+    fontSize10: number;
+    fontSize12: number;
     fontSize14: number;
     fontSize16: number;
     fontSize18: number;
@@ -28,8 +31,10 @@ declare module "@mui/material/styles" {
     fontSize32: number;
     fontSize36: number;
     fontSize38: number;
+    fontSize48: number;
     fontSize64: number;
     fontSize72: number;
+    fontWeight300: number;
     fontWeight400: number;
     fontWeight500: number;
     fontWeight600: number;
@@ -38,6 +43,9 @@ declare module "@mui/material/styles" {
   }
 
   interface TypographyVariantsOptions {
+    secondFamily?: string;
+    fontSize10?: number;
+    fontSize12?: number;
     fontSize14?: number;
     fontSize16?: number;
     fontSize18?: number;
@@ -48,8 +56,10 @@ declare module "@mui/material/styles" {
     fontSize32?: number;
     fontSize36?: number;
     fontSize38?: number;
+    fontSize48?: number;
     fontSize64?: number;
     fontSize72?: number;
+    fontWeight300?: number;
     fontWeight400?: number;
     fontWeight500?: number;
     fontWeight600?: number;
@@ -78,6 +88,7 @@ declare module "@mui/material/styles" {
     backgroundColor: string;
     compliance: ComplianceColors;
   }
+
   interface PaletteOptions {
     primaryColors?: PrimaryColorsType;
     secondaryColors?: SecondaryColorsType;
@@ -134,8 +145,8 @@ export const theme = createTheme({
     values: { xs: 0, sm: 375, md: 787, lg: 1440, xl: 1920 },
   },
   palette: {
-    primary: { main: blue[500] },
-    secondary: { main: white[500] },
+    primary: { main: primaryColors[500] },
+    secondary: { main: primaryColors[50] },
     background: {
       default: backgroundColor,
       paper: neutralColors[900],
@@ -167,6 +178,9 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: `"Manrope", sans-serif`,
+    secondFamily: `"Roboto", sans-serif`,
+    fontSize10: 10,
+    fontSize12: 12,
     fontSize14: 14,
     fontSize16: 16,
     fontSize18: 18,
@@ -175,8 +189,11 @@ export const theme = createTheme({
     fontSize26: 26,
     fontSize32: 32,
     fontSize36: 36,
+    fontSize38: 38,
+    fontSize48: 48,
     fontSize64: 64,
     fontSize72: 72,
+    fontWeight300: 300,
     fontWeight400: 400,
     fontWeight500: 500,
     fontWeight600: 600,
@@ -213,6 +230,7 @@ export const theme = createTheme({
     MuiButton: {
       defaultProps: {
         disableElevation: true,
+        variant: "contained",
       },
       styleOverrides: {
         root: ({ theme }) => buttonLinkStyles(theme),
@@ -247,6 +265,10 @@ export const theme = createTheme({
       defaultProps: {
         underline: "none",
       },
+      styleOverrides: {
+        root: ({ theme }) => buttonLinkStyles(theme),
+      },
     },
+    MuiTextField: { defaultProps: { fullWidth: true } },
   },
 });

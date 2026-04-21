@@ -3,19 +3,19 @@ import { Box, Accordion, AccordionSummary, Typography } from "@mui/material";
 
 export const FAQWrapper = styled(Box)(({ theme }) => ({
   padding: theme.spacing(9, 0, 75, 0),
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: theme.palette.backgroundColor,
 }));
 
 export const StyledContainer = styled(Box)(({ theme }) => ({
   width: "100%",
   maxWidth: "1440px",
   margin: "0 auto",
-  padding: theme.spacing(0, 2), // Базовий падінг для мобільних (16px)
+  padding: theme.spacing(0, 2),
   [theme.breakpoints.up("md")]: {
-    padding: theme.spacing(0, 15), // Для планшетів
+    padding: theme.spacing(0, 15),
   },
   [theme.breakpoints.up("lg")]: {
-    padding: theme.spacing(0, 43), // Твоє велике значення для десктопа
+    padding: theme.spacing(0, 20),
   },
   display: "flex",
   flexDirection: "column",
@@ -25,13 +25,15 @@ export const StyledContainer = styled(Box)(({ theme }) => ({
 export const FAQTitle = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize36,
   fontWeight: theme.typography.fontWeight700,
+  fontFamily: theme.typography.secondFamily,
   textAlign: "center",
   marginBottom: theme.spacing(12),
   color: theme.palette.text.primary,
 }));
 
-export const StyledAccordion = styled(Accordion)(() => ({
+export const StyledAccordion = styled(Accordion)(({ theme }) => ({
   borderRadius: "8px",
+  backgroundColor: theme.palette.neutralColors[900],
   "&:before": {
     display: "none",
   },
@@ -42,6 +44,7 @@ export const StyledAccordion = styled(Accordion)(() => ({
 
   "&.Mui-expanded": {
     margin: 0,
+    backgroundColor: theme.palette.neutralColors[900],
   },
 
   "&.MuiAccordion-root": {
@@ -49,12 +52,12 @@ export const StyledAccordion = styled(Accordion)(() => ({
     margin: 0,
     "&:before": { display: "none" },
     "&:first-of-type, &:last-of-type": {
-      borderRadius: "8px", // Форсуємо радіус для всіх
+      borderRadius: "8px",
     },
   },
 
   "& .MuiAccordionSummary-expandIconWrapper": {
-    color: "#fff",
+    color: theme.palette.primaryColors[200],
     "& .MuiSvgIcon-root": {
       fontSize: "24px",
     },
