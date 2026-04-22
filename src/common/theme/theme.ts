@@ -246,29 +246,5 @@ export const theme = createTheme({
       },
     },
     MuiTextField: { defaultProps: { fullWidth: true } },
-    MuiAppBar: {
-      defaultProps: { elevation: 0, position: "static" },
-      styleOverrides: {
-        root: {
-          backgroundColor: dark[200],
-          backgroundImage: `linear-gradient(180deg, ${dark[300]} 0%, rgba(19, 27, 46, 0) 100%)`,
-        },
-      },
-    },
-    MuiToolbar: {
-      defaultProps: { disableGutters: true },
-      styleOverrides: {
-        root: { minHeight: 48, justifyContent: "space-between" },
-      },
-    },
-    MuiLink: {
-      defaultProps: {
-        underline: "none",
-      },
-      styleOverrides: {
-        root: ({ theme }) => buttonLinkStyles(theme),
-      },
-    },
-    MuiTextField: { defaultProps: { fullWidth: true } },
   },
 });

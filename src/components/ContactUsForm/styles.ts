@@ -24,7 +24,6 @@ export const ContactTitle = styled(Typography)(({ theme }) => ({
   fontWeight: theme.typography.fontWeight600,
   fontFamily: theme.typography.secondFamily,
   color: theme.palette.text.primary,
-  lineHeight: "100%",
 
   [theme.breakpoints.down("md")]: {
     fontSize: theme.typography.fontSize38,
@@ -145,12 +144,10 @@ export const FormGrid = styled(Box)(({ theme }) => ({
 export const StyledTextField = styled(TextField)(({ theme }) => ({
   marginTop: theme.spacing(6),
 
-  // === 1. ЛЕЙБЛ (Назва поля зверху) ===
   "& .MuiInputLabel-root": {
     position: "absolute",
     top: 0,
     left: 0,
-    // Виносимо лейбл вгору над інпутом
     transform: "translate(0, -24px) scale(1)",
     fontFamily: theme.typography.fontFamily,
     fontWeight: theme.typography.fontWeight500,
@@ -170,10 +167,9 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
     },
   },
 
-  // === 2. ОБОРУДКА ТА ФОН (OutlinedInput) ===
   "& .MuiOutlinedInput-root": {
     backgroundColor: theme.palette.strokeColors[400],
-    borderRadius: theme.spacing(2), // 8px
+    borderRadius: theme.spacing(2),
     transition: theme.transitions.create([
       "border-color",
       "box-shadow",
@@ -187,11 +183,10 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
       padding: theme.spacing(4, 3.5),
     },
 
-    // Сама рамка (Outline)
     "& .MuiOutlinedInput-notchedOutline": {
       border: `1px solid ${theme.palette.strokeColors[120]}`,
       top: 0,
-      "& legend": { display: "none" }, // Прибираємо виріз під лейбл
+      "& legend": { display: "none" },
     },
 
     "&:hover .MuiOutlinedInput-notchedOutline": {
@@ -200,7 +195,7 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
     },
 
     "&.Mui-focused": {
-      boxShadow: `0 4px 4px 0 ${theme.palette.strokeColors[500]}`, // Тінь через палітру
+      boxShadow: `0 4px 4px 0 ${theme.palette.strokeColors[500]}`,
       "& .MuiOutlinedInput-notchedOutline": {
         borderColor: theme.palette.primaryColors[200],
         borderWidth: "1px",
@@ -212,21 +207,18 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
     },
   },
 
-  // === 3. ТЕКСТ ВСЕРЕДИНІ ІНПУТА ===
   "& .MuiInputBase-input": {
     fontFamily: theme.typography.fontFamily,
     fontWeight: theme.typography.fontWeight400,
     fontSize: theme.typography.fontSize16,
     color: theme.palette.textColors[100],
 
-    // Для звичайних полів центруємо текст по висоті 60px
     "&:not(textarea)": {
       height: "60px",
       padding: theme.spacing(0, 4),
       boxSizing: "border-box",
     },
 
-    // Для багаторядкових (Message)
     "&.MuiInputBase-inputMultiline": {
       padding: 0,
     },
@@ -249,7 +241,6 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
     bottom: "-18px",
     left: 0,
     margin: 0,
-    lineHeight: "1",
   },
 }));
 
@@ -276,7 +267,6 @@ export const StyledPhoneInput = styled(MuiTelInput)(({ theme }) => ({
     },
   },
 
-  // === 2. КОНТЕЙНЕР (OutlinedInput) ===
   "& .MuiOutlinedInput-root": {
     backgroundColor: theme.palette.strokeColors[400],
     borderRadius: theme.spacing(2),
@@ -303,7 +293,6 @@ export const StyledPhoneInput = styled(MuiTelInput)(({ theme }) => ({
       borderColor: theme.palette.tertiaryColors[500],
     },
 
-    // === 3. ВИБІР ПРАПОРА (IconButton) ===
     "& .MuiMuiTelInput-IconButton": {
       borderRadius: "0px",
       paddingLeft: theme.spacing(4),
@@ -314,7 +303,6 @@ export const StyledPhoneInput = styled(MuiTelInput)(({ theme }) => ({
       },
     },
 
-    // === 4. КОД КРАЇНИ (+380) ===
     "& .MuiMuiTelInput-Adornment": {
       marginRight: theme.spacing(1),
       "& .MuiTypography-root": {
@@ -324,7 +312,6 @@ export const StyledPhoneInput = styled(MuiTelInput)(({ theme }) => ({
       },
     },
 
-    // === 5. САМ ВВІД НОМЕРА ===
     "& input": {
       padding: theme.spacing(0, 4, 0, 0),
       height: "60px",
@@ -337,7 +324,6 @@ export const StyledPhoneInput = styled(MuiTelInput)(({ theme }) => ({
     },
   },
 
-  // === 6. ПОМИЛКА ===
   "& .MuiFormHelperText-root": {
     fontFamily: theme.typography.fontFamily,
     fontSize: theme.typography.fontSize12,
