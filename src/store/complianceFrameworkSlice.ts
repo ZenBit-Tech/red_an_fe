@@ -5,7 +5,7 @@ import {
   type ComplianceFramework,
 } from "@/components/ComplianceSelect/constants";
 
-interface ComplianceFrameworkState {
+export interface ComplianceFrameworkState {
   selectedFramework: ComplianceFramework;
 }
 
