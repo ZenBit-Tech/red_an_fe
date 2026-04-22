@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "@/components/Layout";
-import DeidentifyPage from "@/pages/deidentify";
+import DeidentifyPage from "@/pages/Deidentify";
 import { ContactUsPage } from "@/pages/ContactUsPage";
 import HomePage from "@/pages/HomePage";
 import { AboutUsPage } from "@/pages/AboutUSPage";

@@ -7,7 +7,7 @@ import {
   CLINICAL_INPUT_TAB,
   FILE_INPUT_ACCEPT,
   type ClinicalInputTab,
-} from "@/components/clinicalInput/constants";
+} from "@/components/ClinicalInput/constants";
 import {
   BrowseButton,
   ClinicalInputOverlayPanel,
@@ -25,8 +25,8 @@ import {
   HiddenFileInput,
   UploadedFilePath,
   textAreaProps,
-} from "@/components/clinicalInput/styles";
-import { useClinicalTextInput } from "@/components/clinicalInput/useClinicalTextInput";
+} from "@/components/ClinicalInput/styles";
+import { useClinicalTextInput } from "@/components/ClinicalInput/useClinicalTextInput";
 
 const ClinicalTextInput: React.FC = () => {
   const { t } = useTranslation();
