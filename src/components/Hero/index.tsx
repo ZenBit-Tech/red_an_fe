@@ -9,7 +9,7 @@ const Hero = () => {
   const { t } = useTranslation();
 
   return (
-    <S.HeroSection>
+    <S.HeroSection id="hero">
       <S.HeroGlow />
       <Container sx={{ paddingBottom: 0 }}>
         <S.HeroContent>

@@ -5,7 +5,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 
 export const NAV_LINKS = [
   { to: "/about-us", label: "About Us" },
-  { to: "/subscription-plan", label: "Subscription plan" },
+  { to: "/subscription-plan", label: "Subscription Plan" },
   { to: "/contact-us", label: "Contact Us" },
 ];
 
