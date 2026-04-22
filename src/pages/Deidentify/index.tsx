@@ -1,6 +1,9 @@
 import { Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
-
+import { Fragment } from "react";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import CheckIcon from "@mui/icons-material/Check";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { ComplianceFrameworkSelection } from "@/components/ComplianceSelect/ComplianceFrameworkSelection";
 import { ClinicalTextInput } from "@/components/ClinicalInput";
 import { DeidentifySettings } from "@/components/Deidentify";
@@ -13,12 +16,11 @@ import {
   DeidentifyStepIcon,
   DeidentifyStepItem,
   DeidentifyStepLabel,
-  DeidentifyStepperProgress,
-  DeidentifyStepperProgressTrack,
   DeidentifyStepperSteps,
-  StepperCompletedIcon,
   StepperActionButton,
+  StepperBackButton,
   StepperActionsContainer,
+  DeidentifyStepConnector,
 } from "@/pages/Deidentify/styles";
 import {
   DEIDENTIFY_STEP,
@@ -94,6 +96,7 @@ const DeidentifyPage = () => {
           <StepperActionButton
             variant="contained"
             onClick={handleFrameworkNext}
+            endIcon={<ArrowForwardIcon />}
           >
             {t("deidentify.stepper.actions.next")}
           </StepperActionButton>
@@ -104,9 +107,12 @@ const DeidentifyPage = () => {
     if (activeStep === DEIDENTIFY_STEP.SETTINGS) {
       return (
         <StepperActionsContainer>
-          <StepperActionButton variant="outlined" onClick={handleStepBack}>
+          <StepperBackButton
+            onClick={handleStepBack}
+            startIcon={<ArrowBackIcon />}
+          >
             {t("deidentify.stepper.actions.back")}
-          </StepperActionButton>
+          </StepperBackButton>
         </StepperActionsContainer>
       );
     }
@@ -114,13 +120,17 @@ const DeidentifyPage = () => {
     if (activeStep === DEIDENTIFY_STEP.INPUT_DATA) {
       return (
         <StepperActionsContainer>
-          <StepperActionButton variant="outlined" onClick={handleStepBack}>
+          <StepperBackButton
+            onClick={handleStepBack}
+            startIcon={<ArrowBackIcon />}
+          >
             {t("deidentify.stepper.actions.back")}
-          </StepperActionButton>
+          </StepperBackButton>
           <StepperActionButton
             variant="contained"
             onClick={handleInputNext}
             disabled={!isClinicalTextProvided}
+            endIcon={<ArrowForwardIcon />}
           >
             {t("deidentify.stepper.actions.next")}
           </StepperActionButton>
@@ -131,9 +141,12 @@ const DeidentifyPage = () => {
     if (activeStep === DEIDENTIFY_STEP.RESULT) {
       return (
         <StepperActionsContainer>
-          <StepperActionButton variant="outlined" onClick={handleStepBack}>
+          <StepperBackButton
+            onClick={handleStepBack}
+            startIcon={<ArrowBackIcon />}
+          >
             {t("deidentify.stepper.actions.back")}
-          </StepperActionButton>
+          </StepperBackButton>
           <StepperActionButton variant="contained" onClick={handleRestart}>
             {t("deidentify.stepper.actions.restart")}
           </StepperActionButton>
@@ -146,36 +159,42 @@ const DeidentifyPage = () => {
 
   const renderStepper = (): React.ReactNode => (
     <DeidentifyStepperContainer>
-      <DeidentifyStepperProgressTrack>
-        <DeidentifyStepperProgress
-          activeStep={activeStep}
-          stepCount={DEIDENTIFY_STEP_LABEL_KEYS.length}
-        />
-      </DeidentifyStepperProgressTrack>
       <DeidentifyStepperSteps>
         {DEIDENTIFY_STEP_LABEL_KEYS.map((labelKey, index) => {
           const isActive = index === activeStep;
           const isCompleted = isStepCompleted(index);
 
+          const isPreviousCompleted = index > 0 && isStepCompleted(index - 1);
+
           return (
-            <DeidentifyStepItem key={labelKey}>
-              <DeidentifyStepIcon isActive={isActive} isCompleted={isCompleted}>
-                {isCompleted ? <StepperCompletedIcon /> : index + 1}
-              </DeidentifyStepIcon>
-              <DeidentifyStepLabel
-                isActive={isActive}
-                isCompleted={isCompleted}
-                isFirstStep={index === DEIDENTIFY_STEP.FRAMEWORK}
-              >
-                {t(labelKey)}
-              </DeidentifyStepLabel>
-            </DeidentifyStepItem>
+            <Fragment key={labelKey}>
+              {index > 0 && (
+                <DeidentifyStepConnector isCompleted={isPreviousCompleted} />
+              )}
+              <DeidentifyStepItem>
+                <DeidentifyStepIcon
+                  isActive={isActive}
+                  isCompleted={isCompleted}
+                >
+                  {isCompleted ? (
+                    <CheckIcon sx={{ fontSize: 20 }} />
+                  ) : (
+                    index + 1
+                  )}
+                </DeidentifyStepIcon>
+                <DeidentifyStepLabel
+                  isActive={isActive}
+                  isCompleted={isCompleted}
+                >
+                  {t(labelKey)}
+                </DeidentifyStepLabel>
+              </DeidentifyStepItem>
+            </Fragment>
           );
         })}
       </DeidentifyStepperSteps>
     </DeidentifyStepperContainer>
   );
-
   return (
     <DeidentifyPageWrapper>
       <DeidentifyPageContent>

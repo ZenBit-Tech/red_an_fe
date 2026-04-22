@@ -30,3 +30,5 @@ export const PDF_TEXT_JOIN_SEPARATOR = "\n";
 export const EMPTY_TEXT_SEGMENT = "";
 export const FILE_PATH_REDACTED_PREFIX = "C:\\fakepath\\";
 export const MAX_UPLOAD_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+export const MAX_UPLOAD_FILE_SIZE_MB = 5;
+export const MAX_CLINICAL_TEXT_CHARACTERS = 250_000;
