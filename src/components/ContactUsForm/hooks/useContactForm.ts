@@ -2,6 +2,21 @@ import { useForm } from "react-hook-form";
 import { apiClient, ApiError } from "@/common/api";
 import { useTranslation } from "react-i18next";
 import type { AxiosResponse } from "axios";
+import "izitoast/dist/css/iziToast.min.css";
+import iziToast from "izitoast";
+
+iziToast.settings({
+  timeout: 6000,
+  resetOnHover: true,
+  transitionIn: "flipInX",
+  transitionOut: "fadeOut",
+  position: "topRight",
+  theme: "dark",
+  backgroundColor: "#131b2e",
+  messageColor: "#c3c6d4",
+  titleColor: "#fff",
+  progressBarColor: "#b0c6ff",
+});
 
 export interface IContactInput {
   firstName: string;
@@ -29,7 +44,9 @@ export const useContactForm = () => {
       >("/contact-form", data);
 
       if (response.status === 201 || response.status === 200) {
-        alert(t("contactUs.messages.success"));
+        iziToast.success({
+          message: t("contactUs.messages.success"),
+        });
         reset();
       }
     } catch (err) {
@@ -42,9 +59,10 @@ export const useContactForm = () => {
       } else if (message.includes(ApiError.Server)) {
         translationKey = "errors.server";
       }
-
-      // алерт з перекладом
-      alert(t(translationKey));
+      iziToast.error({
+        message: t(translationKey),
+        backgroundColor: "#5e1b1b",
+      });
     }
   };
 
