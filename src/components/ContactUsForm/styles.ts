@@ -12,7 +12,7 @@ export const CustomContainer = styled(Container)({
 });
 
 export const ContactTitle = styled(Typography)(({ theme }) => ({
-  fontSize: theme.typography.fontSize56,
+  fontSize: theme.typography.fontSize64,
   fontWeight: theme.typography.fontWeight400,
   color: theme.palette.text.primary,
 }));
