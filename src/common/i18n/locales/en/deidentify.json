@@ -127,5 +127,70 @@
         }
       }
     }
+  },
+  "login": {
+    "title": "Sign in to Clinical Data Studio",
+    "subtitle": "Enter your email to receive a sign-in link",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@company.com",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Enter valid email",
+    "sendMagicLink": "Send Magic Link",
+    "back": "Back",
+    "checkInboxTitle": "Sign in to Clinical Data Studio",
+    "checkInboxDescription": "We sent a magic link to",
+    "didntReceive": "Didn't receive it? Check spam or",
+    "resendLink": "resend link",
+    "sending": "Sending..",
+    "backToSignIn": "Back"
+  },
+  "dashboard": {
+    "brand": {
+      "name": "Clinical Data Studio",
+      "tagline": "De-ID & Synthesis"
+    },
+    "topBar": {
+      "title": "Clinical Data De-Identification & Synthetic Data Studio",
+      "subtitle": "Enterprise-grade PII detection and anonymization"
+    },
+    "trial": {
+      "badge": "FREE PLAN",
+      "message": "You're using the free plan version. Upgrade to a professional plan for full access to all features.",
+      "upgradeButton": "Upgrade to Professional Plan"
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "deIdentify": "De-Identify",
+      "syntheticData": "Synthetic Data",
+      "subscription": "My Subscription",
+      "support": "Support",
+      "logout": "Logout"
+    },
+    "timeFilter": {
+      "today": "Today",
+      "last7Days": "Last 7 days",
+      "twoWeeks": "2 Weeks",
+      "month": "Month"
+    },
+    "page": {
+      "title": "Dashboard",
+      "subtitle": "Monitor your de-identification metrics",
+      "infoBanner": "2 documents available for de-identification",
+      "startButton": "Start De-Identification"
+    },
+    "stats": {
+      "totalDocuments": "Total Documents",
+      "entitiesDetected": "Entities Detected",
+      "avgCompleteness": "Avg.Entities/Doc",
+      "successRate": "Success Rate"
+    },
+    "charts": {
+      "complianceFramework": "Compliance Framework Usage",
+      "entityTypesDetected": "Entity Types Detected",
+      "processingHistory": "Processing History",
+      "confidenceScore": "Confidence Score Distribution",
+      "deIdentificationMethod": "De-Identification Method Usage",
+      "placeholder": "Chart data will appear here"
+    }
   }
 }

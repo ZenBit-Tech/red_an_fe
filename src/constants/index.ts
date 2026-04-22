@@ -101,3 +101,18 @@ export const ICONS: Record<string, typeof TwitterIcon> = {
   github: GitHubIcon,
   instagram: InstagramIcon,
 };
+export const APP_ROUTES = {
+  DASHBOARD: "/dashboard",
+  DEIDENTIFY: "/deidentify",
+  SIGN_IN: "/signin",
+} as const;
+
+export const STORAGE_KEYS = {
+  ACCESS_TOKEN: "accessToken",
+  USER: "user",
+} as const;
+
+export const API_ENDPOINTS = {
+  MAGIC_LINK: "/auth/magic-link",
+  MAGIC_LINK_CALLBACK: "/auth/magic-link/callback",
+} as const;
