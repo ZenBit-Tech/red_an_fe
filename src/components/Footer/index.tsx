@@ -1,14 +1,23 @@
 import { useTranslation } from "react-i18next";
 import { ICONS } from "@/constants/index";
 import { COMPANY_LINKS, SOCIAL_LINKS } from "@/constants/index";
+import { useNav } from "@/common/hooks/useNav";
 import * as S from "./styles";
 
 const Footer = () => {
   const { t } = useTranslation();
+  const { handleClick } = useNav();
+  const handleLogoClick = (e: React.MouseEvent) => {
+    handleClick(e, "/");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <S.FooterContainer>
       <S.FooterBrand>
-        <S.FooterLogo to="/">{t("hero.badge.title")}</S.FooterLogo>
+        <S.FooterLogo to="/" onClick={handleLogoClick}>
+          {t("hero.badge.title")}
+        </S.FooterLogo>
         <S.FooterDescription>{t("footer.description")}</S.FooterDescription>
       </S.FooterBrand>
       <S.FooterSections>
