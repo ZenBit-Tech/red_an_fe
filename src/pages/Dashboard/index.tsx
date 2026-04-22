@@ -1,24 +1,31 @@
 import { useTranslation } from "react-i18next";
-import { Box, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import {
-  FolderOpen,
-  DescriptionOutlined,
   CheckCircleOutlined,
+  DescriptionOutlined,
   Fingerprint,
-  InfoOutlined,
+  FolderOpen,
   HourglassEmpty,
+  InfoOutlined,
 } from "@mui/icons-material";
-import * as styles from "@/pages/Dashboard/styles";
+import { Box, Button, Typography } from "@mui/material";
+import { APP_ROUTES } from "@/constants";
 import {
   DEFAULT_STATS,
   MOCK_CHART_SKELETONS,
   TIME_FILTERS,
 } from "@/pages/Dashboard/constants";
 import { useDashboard } from "@/pages/Dashboard/hooks/useDashboard";
+import * as styles from "@/pages/Dashboard/styles";
 
 const DashboardPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { activeTime, setActiveTime } = useDashboard();
+
+  const handleStartDeidentify = (): void => {
+    navigate(APP_ROUTES.DEIDENTIFY);
+  };
 
   const STAT_CARDS = [
     {
@@ -65,7 +72,11 @@ const DashboardPage = () => {
                     {t("dashboard.page.infoBanner")}
                   </Typography>
                 </Box>
-                <Button variant="contained" sx={styles.startButton}>
+                <Button
+                  variant="contained"
+                  sx={styles.startButton}
+                  onClick={handleStartDeidentify}
+                >
                   {t("dashboard.page.startButton")}
                 </Button>
               </Box>

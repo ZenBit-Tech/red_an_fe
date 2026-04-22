@@ -1,0 +1,42 @@
+{
+  "dashboard": {
+    "timeFilter": {
+      "today": "Today",
+      "last7Days": "Last 7 days",
+      "twoWeeks": "2 Weeks",
+      "month": "Month"
+    },
+    "page": {
+      "title": "Dashboard",
+      "subtitle": "Monitor your de-identification metrics",
+      "infoBanner": "2 documents available for de-identification",
+      "startButton": "Start De-Identification"
+    },
+    "stats": {
+      "totalDocuments": "TOTAL DOCUMENTS",
+      "entitiesDetected": "ENTITIES DETECTED",
+      "avgCompleteness": "AVG. ENTITIES/DOC",
+      "successRate": "SUCCESS RATE",
+      "awaitingData": "Awaiting data stream..."
+    },
+    "charts": {
+      "complianceFramework": "Compliance Framework Usage",
+      "complianceSubtitle": "Distribution of frameworks applied",
+      "entityTypesDetected": "Entity Types Detected",
+      "entitySubtitle": "Distribution of frameworks applied",
+      "processingHistory": "Processing History (Last 7 Days)",
+      "historySubtitle": "Document and entity processing trends",
+      "confidenceScore": "Confidence Score Distribution",
+      "confidenceSubtitle": "Definition confidence level",
+      "deIdentificationMethod": "De-Identification Method Usage",
+      "methodSubtitle": "Distribution of frameworks applied",
+      "noneLabel": "none"
+    },
+    "deidentifySubmenu": {
+      "framework": "Select Compliance Framework",
+      "inputData": "Input Clinical Data ",
+      "settings": "De-Identification Settings",
+      "findings": "Findings"
+    }
+  }
+}

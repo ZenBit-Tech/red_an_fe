@@ -155,3 +155,12 @@ export const COMPLIANCE_FRAMEWORK_OPTIONS: ReadonlyArray<ComplianceFrameworkOpti
       entityCount: FRAMEWORK_ENTITY_COUNT[COMPLIANCE_FRAMEWORK.CCPA],
     },
   ];
+export const handleSelectionCardKeyDown = (
+  event: React.KeyboardEvent<HTMLDivElement>,
+  onToggle: () => void,
+) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    onToggle();
+  }
+};

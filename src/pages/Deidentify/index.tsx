@@ -1,39 +1,34 @@
-import { Box } from "@mui/material";
+import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { Fragment } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import CheckIcon from "@mui/icons-material/Check";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { ComplianceFrameworkSelection } from "@/components/ComplianceSelect/ComplianceFrameworkSelection";
-import { ClinicalTextInput } from "@/components/ClinicalInput";
-import { DeidentifySettings } from "@/components/Deidentify";
+import { Box } from "@mui/material";
 import { AnalysisResults } from "@/components/AnalysisResults";
-import {
-  DeidentifyPageSections,
-  DeidentifyPageContent,
-  DeidentifyStepperContainer,
-  DeidentifyPageWrapper,
-  DeidentifyStepIcon,
-  DeidentifyStepItem,
-  DeidentifyStepLabel,
-  DeidentifyStepperSteps,
-  StepperActionButton,
-  StepperBackButton,
-  StepperActionsContainer,
-  DeidentifyStepConnector,
-} from "@/pages/Deidentify/styles";
+import { ClinicalTextInput } from "@/components/ClinicalInput";
+import { ComplianceFrameworkSelection } from "@/components/ComplianceSelect/ComplianceFrameworkSelection";
+import { DeidentifySettings } from "@/components/Deidentify";
 import {
   DEIDENTIFY_STEP,
   useDeidentify,
 } from "@/pages/Deidentify/useDeidentify";
 
-const DEIDENTIFY_STEP_LABEL_KEYS = [
-  "deidentify.stepper.steps.framework",
-  "deidentify.stepper.steps.inputData",
-  "deidentify.stepper.steps.transformation",
-  "deidentify.stepper.steps.result",
-] as const;
-
+import { DEIDENTIFY_STEP_LABEL_KEYS } from "@/pages/Deidentify/constants";
+import {
+  DeidentifyPageContent,
+  DeidentifyPageSections,
+  DeidentifyPageWrapper,
+  DeidentifyStepConnector,
+  DeidentifyStepIcon,
+  DeidentifyStepItem,
+  DeidentifyStepLabel,
+  DeidentifyStepperContainer,
+  DeidentifyStepperSteps,
+  StepperActionButton,
+  StepperActionsContainer,
+  StepperBackButton,
+  StepperCompletedIcon,
+  backgroundGlow,
+} from "@/pages/Deidentify/styles";
 const DeidentifyPage = () => {
   const { t } = useTranslation();
   const {
@@ -176,11 +171,7 @@ const DeidentifyPage = () => {
                   isActive={isActive}
                   isCompleted={isCompleted}
                 >
-                  {isCompleted ? (
-                    <CheckIcon sx={{ fontSize: 20 }} />
-                  ) : (
-                    index + 1
-                  )}
+                  {isCompleted ? <StepperCompletedIcon /> : index + 1}
                 </DeidentifyStepIcon>
                 <DeidentifyStepLabel
                   isActive={isActive}
@@ -199,6 +190,7 @@ const DeidentifyPage = () => {
     <DeidentifyPageWrapper>
       <DeidentifyPageContent>
         <DeidentifyPageSections>
+          <Box sx={backgroundGlow} />
           {renderStepper()}
           {renderCurrentStep()}
           {renderStepActions()}

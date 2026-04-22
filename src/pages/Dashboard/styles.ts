@@ -1,5 +1,5 @@
 import { theme } from "@/common/theme/theme";
-
+import { alpha } from "@mui/material/styles";
 export const colors = {
   pageBg: theme.palette.secondaryColors[900],
   surfaceLow: theme.palette.neutralColors[900],
@@ -14,7 +14,7 @@ export const colors = {
 };
 
 export const pageScroll = {
-  px: { xs: 4, md: theme.spacing(10) },
+  px: { xs: theme.spacing(4), md: theme.spacing(10) },
   py: theme.spacing(11),
 };
 
@@ -71,7 +71,6 @@ export const pageTitle = {
   color: theme.palette.primaryColors[50],
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize48,
-  lineHeight: 1.1,
   margin: 0,
 };
 
@@ -79,7 +78,6 @@ export const pageSubtitle = {
   color: theme.palette.textColors[200],
   fontSize: theme.typography.fontSize20,
   fontWeight: theme.typography.fontWeight500,
-  lineHeight: 1.2,
   margin: 0,
 };
 
@@ -141,14 +139,14 @@ export const infoBanner = {
   gap: theme.spacing(1),
   background: theme.palette.strokeColors[120],
   borderRadius: theme.spacing(2),
-  padding: theme.spacing(2, 3),
+  padding: theme.spacing(3, 3),
   width: theme.spacing(82),
   height: theme.spacing(10.5),
 };
 
 export const infoBannerText = {
   color: theme.palette.primaryColors[200],
-  fontSize: theme.typography.fontSize12,
+  fontSize: theme.typography.fontSize14,
   fontFamily: theme.typography.fontFamily,
 };
 
@@ -319,8 +317,7 @@ export const barSkeleton = {
 };
 
 export const barSkeletonLabel = {
-  color: theme.palette.textColors[200],
-  opacity: 0.2,
+  color: alpha(theme.palette.textColors[200], 0.2),
   fontSize: theme.typography.fontSize10,
   fontFamily: theme.typography.fontFamily,
 };

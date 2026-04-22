@@ -1,122 +1,79 @@
 import { Box, Paper, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { alpha, styled } from "@mui/material/styles";
 
-const complianceStyles = {
-  headerGap: 1.5,
-  headerSectionGap: 5,
-  headerMinHeight: 172,
-  titleFontSizeDesktop: "48px",
-  titleFontSizeTablet: "1.75rem",
-  titleFontSizeMobile: "1.5rem",
-  titleLineHeight: 1.15,
-  subtitleFontSize: "20px",
-  subtitleLineHeight: 1.6,
-  subtitleMaxWidth: 720,
-  cardCategoryFontSize: "0.7rem",
-  cardTitleFontSizeDesktop: "24px",
-  cardTitleFontSizeMobile: "1.2rem",
-  cardDescriptionFontSize: "16px",
-  cardDescriptionLineHeight: 1.6,
-  cardFooterFontSize: "0.72rem",
-  cardContentGap: 1.25,
-  cardFooterGap: 2.5,
-  dividerOpacity: 0.18,
-} as const;
+import { theme } from "@/common/theme/theme";
 
-const COLOR = {
-  CARD_BG: "#060e20", // Неактивний фон за новим дизайном
-  CARD_BG_ACTIVE: "#131b2e", // Активний фон за новим дизайном
-  CARD_BG_HOVER: "#131b2e",
-  CARD_BORDER: "#2d3449",
-  CARD_BORDER_HOVER: "#3a4766",
-  CARD_BORDER_ACTIVE: "#b0c6ff",
-  CATEGORY_BG: "rgba(176, 198, 255, 0.08)",
-  CATEGORY_BG_ACTIVE: "rgba(176, 198, 255, 0.18)",
-  CATEGORY_TEXT: "#b0c6ff",
-  TITLE: "#dae2fd",
-  TITLE_HIGHLIGHT: "linear-gradient(161deg, #b0c6ff 0%, #0d47a1 100%)",
-  DESCRIPTION: "#c4c6d4",
-  SUBTITLE: "#c3c6d4",
-  DIVIDER: "rgba(67, 70, 82, 0.5)",
-  FOOTER_ACTIVE: "#b0c6ff",
-  FOOTER_INACTIVE: "#70778e",
-  ACTIVE_SHADOW: "linear-gradient(90deg, #0D47A1 0%, #002D6F 100%)",
-  TOP_GRADIENT:
-    "linear-gradient(90deg, rgba(178, 197, 255, 0) 0%, rgba(178, 197, 255, 0.8) 50%, rgba(178, 197, 255, 0) 100%)",
-  CHECK_BG: "rgba(176, 198, 255, 0.18)",
-  ACTIVE_LINE: "#0D47A1",
-  DEV_CATEGORY_BG: "rgba(239, 68, 68, 0.1)", // Новий
-  DEV_CATEGORY_TEXT: "#ef4444", // Новий
-} as const;
-
-export const SelectionContainer = styled(Box)(({ theme }) => ({
+export const SelectionContainer = styled(Box)({
   width: "100%",
   display: "flex",
   flexDirection: "column",
-  gap: theme.spacing(complianceStyles.headerSectionGap),
-}));
+  gap: theme.spacing(5),
+});
 
-export const SelectionHeader = styled(Box)(({ theme }) => ({
+export const SelectionHeader = styled(Box)({
   display: "flex",
   flexDirection: "column",
-  gap: theme.spacing(complianceStyles.headerGap),
-  minHeight: complianceStyles.headerMinHeight,
+  gap: theme.spacing(1.5),
+  minHeight: theme.spacing(43),
   [theme.breakpoints.down("md")]: {
     minHeight: "auto",
   },
-}));
+});
 
-export const SelectionTitle = styled(Typography)(({ theme }) => ({
-  fontFamily: `"Manrope", sans-serif`,
-  fontWeight: 700,
-  fontSize: complianceStyles.titleFontSizeDesktop,
-  lineHeight: complianceStyles.titleLineHeight,
-  color: COLOR.TITLE,
+export const SelectionTitle = styled(Typography)({
+  fontFamily: theme.typography.fontFamily,
+  fontWeight: theme.typography.fontWeight700,
+  fontSize: theme.typography.fontSize48,
+  lineHeight: 1.15,
+  color: theme.palette.textColors[50],
   margin: 0,
   [theme.breakpoints.down("md")]: {
-    fontSize: complianceStyles.titleFontSizeTablet,
+    fontSize: theme.typography.fontSize26,
   },
   [theme.breakpoints.down("sm")]: {
-    fontSize: complianceStyles.titleFontSizeMobile,
+    fontSize: theme.typography.fontSize24,
   },
-})) as typeof Typography;
+}) as typeof Typography;
 
 export const SelectionTitleHighlight = styled("span")({
-  backgroundImage: COLOR.TITLE_HIGHLIGHT,
+  backgroundImage: `linear-gradient(161deg, ${theme.palette.primaryColors[200]} 0%, ${theme.palette.primaryColors[700]} 100%)`,
   WebkitBackgroundClip: "text",
   backgroundClip: "text",
   color: "transparent",
 });
 
 export const SelectionSubtitle = styled(Typography)({
-  fontFamily: `"Manrope", sans-serif`,
-  fontSize: complianceStyles.subtitleFontSize,
-  lineHeight: complianceStyles.subtitleLineHeight,
-  fontWeight: 500,
-  color: COLOR.SUBTITLE,
-  maxWidth: complianceStyles.subtitleMaxWidth,
+  fontFamily: theme.typography.fontFamily,
+  fontSize: theme.typography.fontSize20,
+  fontWeight: theme.typography.fontWeight500,
+  color: theme.palette.textColors[200],
+  maxWidth: theme.spacing(180),
 });
 
 export const CardsWrapper = styled(Box)({
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "center",
-  gap: "24px",
+  gap: theme.spacing(6),
 });
 
 export const SelectionCard = styled(Paper, {
   shouldForwardProp: (prop) => prop !== "selected",
-})<{ selected: boolean }>(({ theme, selected }) => ({
+})<{ selected: boolean }>(({ selected }) => ({
   boxSizing: "border-box",
-  width: "334px",
-  height: "337px",
-  padding: "32px 24px",
-  borderRadius: "8px",
+  width: theme.spacing(83.5),
+  height: theme.spacing(84.25),
+  padding: theme.spacing(8, 6),
+  borderRadius: theme.spacing(2),
   cursor: "pointer",
-  border: selected ? "2px solid transparent" : `1px solid ${COLOR.CARD_BORDER}`,
-  backgroundColor: selected ? COLOR.CARD_BG_ACTIVE : COLOR.CARD_BG,
+  border: selected
+    ? "2px solid transparent"
+    : `1px solid ${theme.palette.strokeColors[400]}`,
+  backgroundColor: selected
+    ? theme.palette.secondaryColors[900]
+    : theme.palette.neutralColors[900],
   backgroundImage: selected
-    ? `linear-gradient(${COLOR.CARD_BG_ACTIVE}, ${COLOR.CARD_BG_ACTIVE}), ${COLOR.ACTIVE_SHADOW}`
+    ? `linear-gradient(${theme.palette.secondaryColors[900]}, ${theme.palette.secondaryColors[900]}), linear-gradient(90deg, ${theme.palette.primaryColors[700]} 0%, ${theme.palette.primaryColors[900]} 100%)`
     : "none",
   backgroundOrigin: "border-box",
   backgroundClip: selected ? "padding-box, border-box" : "border-box",
@@ -124,7 +81,7 @@ export const SelectionCard = styled(Paper, {
   transition: "border-color 220ms ease, background-color 220ms ease",
   display: "flex",
   flexDirection: "column",
-  gap: theme.spacing(complianceStyles.cardContentGap),
+  gap: theme.spacing(1.25),
   outline: "none",
   position: "relative",
   "&::before": {
@@ -134,32 +91,32 @@ export const SelectionCard = styled(Paper, {
     left: 0,
     right: 0,
     height: "2px",
-    background: COLOR.TOP_GRADIENT,
+    background: `linear-gradient(90deg, ${alpha(theme.palette.primaryColors[200], 0)} 0%, ${alpha(theme.palette.primaryColors[200], 0.8)} 50%, ${alpha(theme.palette.primaryColors[200], 0)} 100%)`,
     zIndex: 1,
     opacity: selected ? 1 : 0,
     transition: "opacity 220ms ease",
   },
   "&:hover": {
-    borderColor: selected ? "transparent" : COLOR.CARD_BG_ACTIVE,
-    backgroundColor: COLOR.CARD_BG_ACTIVE,
+    borderColor: selected ? "transparent" : theme.palette.secondaryColors[900],
+    backgroundColor: theme.palette.secondaryColors[900],
   },
   "&:hover::before": {
     opacity: 1,
   },
   "&:focus-visible": {
-    borderColor: selected ? "transparent" : COLOR.CARD_BORDER_ACTIVE,
+    borderColor: selected ? "transparent" : theme.palette.primaryColors[200],
   },
   [theme.breakpoints.down("sm")]: {
     width: "100%",
     height: "auto",
-    minHeight: "337px",
+    minHeight: theme.spacing(84.25),
   },
 }));
 
 export const FrameworkCategory = styled(Box, {
   shouldForwardProp: (prop) => prop !== "selected" && prop !== "isDeveloper",
 })<{ selected: boolean; isDeveloper?: boolean }>(
-  ({ theme, selected, isDeveloper }) => ({
+  ({ selected, isDeveloper }) => ({
     alignSelf: "flex-start",
     display: "inline-flex",
     alignItems: "center",
@@ -167,55 +124,55 @@ export const FrameworkCategory = styled(Box, {
     paddingInline: theme.spacing(2),
     borderRadius: 999,
     backgroundColor: isDeveloper
-      ? COLOR.DEV_CATEGORY_BG
+      ? alpha(theme.palette.error.main, 0.1)
       : selected
-        ? COLOR.CATEGORY_BG_ACTIVE
-        : COLOR.CATEGORY_BG,
-    color: isDeveloper ? COLOR.DEV_CATEGORY_TEXT : COLOR.CATEGORY_TEXT,
-    fontFamily: `"Manrope", sans-serif`,
-    fontSize: complianceStyles.cardCategoryFontSize,
-    fontWeight: 700,
-    letterSpacing: "0.08em",
+        ? alpha(theme.palette.primaryColors[200], 0.18)
+        : alpha(theme.palette.primaryColors[200], 0.08),
+    color: isDeveloper
+      ? theme.palette.error.main
+      : theme.palette.primaryColors[200],
+    fontFamily: theme.typography.fontFamily,
+    fontSize: theme.typography.fontSize10,
+    fontWeight: theme.typography.fontWeight700,
     textTransform: "uppercase",
-    lineHeight: 1,
   }),
 );
 
-export const FrameworkTitle = styled(Typography)(({ theme }) => ({
-  fontFamily: `"Manrope", sans-serif`,
-  fontWeight: 700,
-  fontSize: complianceStyles.cardTitleFontSizeDesktop,
-  color: COLOR.TITLE,
+export const FrameworkTitle = styled(Typography)({
+  fontFamily: theme.typography.fontFamily,
+  fontWeight: theme.typography.fontWeight700,
+  fontSize: theme.typography.fontSize24,
+  color: theme.palette.textColors[50],
   margin: 0,
   marginTop: theme.spacing(0.5),
   [theme.breakpoints.down("sm")]: {
-    fontSize: complianceStyles.cardTitleFontSizeMobile,
+    fontSize: theme.typography.fontSize18,
   },
-}));
+});
 
 export const FrameworkDescription = styled(Typography)({
-  fontFamily: `"Manrope", sans-serif`,
-  fontSize: complianceStyles.cardDescriptionFontSize,
-  lineHeight: complianceStyles.cardDescriptionLineHeight,
-  fontWeight: 500,
-  color: COLOR.DESCRIPTION,
+  fontFamily: theme.typography.fontFamily,
+  fontSize: theme.typography.fontSize16,
+  lineHeight: 1.6,
+  fontWeight: theme.typography.fontWeight500,
+  color: theme.palette.textColors[200],
   margin: 0,
   flexGrow: 1,
 });
 
 export const CardDivider = styled(Box)({
-  height: 1,
+  height: "1px",
   width: "100%",
-  backgroundColor: COLOR.DIVIDER,
+  backgroundColor: alpha(theme.palette.strokeColors[400], 0.5),
 });
 
-export const CardFooter = styled(Box)(({ theme }) => ({
+export const CardFooter = styled(Box)({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
   gap: theme.spacing(1),
   marginTop: theme.spacing(0.5),
-}));
+});
 
 export const CardFooterLabel = styled(Box, {
   shouldForwardProp: (prop) => prop !== "selected",
@@ -224,30 +181,40 @@ export const CardFooterLabel = styled(Box, {
   alignItems: "center",
   width: "100%",
   justifyContent: selected ? "flex-start" : "space-between",
-  gap: 8,
-  fontFamily: `"Manrope", sans-serif`,
-  fontSize: complianceStyles.cardFooterFontSize,
-  fontWeight: 700,
-  letterSpacing: "0.1em",
+  gap: theme.spacing(2),
+  fontFamily: theme.typography.fontFamily,
+  fontSize: theme.typography.fontSize12,
+  fontWeight: theme.typography.fontWeight700,
   textTransform: "uppercase",
-  color: selected ? COLOR.FOOTER_ACTIVE : COLOR.FOOTER_INACTIVE,
+  color: selected
+    ? theme.palette.primaryColors[200]
+    : theme.palette.textColors[200],
 }));
 
 export const ActiveCheckBadge = styled(Box)({
-  width: 22,
-  height: 22,
+  width: theme.spacing(5.5),
+  height: theme.spacing(5.5),
   borderRadius: "50%",
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: COLOR.CHECK_BG,
-  color: COLOR.FOOTER_ACTIVE,
+  backgroundColor: alpha(theme.palette.primaryColors[200], 0.18),
+  color: theme.palette.primaryColors[200],
   flexShrink: 0,
 });
+
 export const SelectedLine = styled(Box)({
   flex: 1,
   height: "3px",
   borderRadius: "2px",
-  backgroundColor: COLOR.ACTIVE_LINE,
-  marginLeft: "8px",
+  backgroundColor: theme.palette.primaryColors[700],
+  marginLeft: theme.spacing(2),
 });
+
+export const activeIcon = {
+  fontSize: theme.typography.fontSize18,
+};
+
+export const inactiveIcon = {
+  fontSize: theme.typography.fontSize16,
+};

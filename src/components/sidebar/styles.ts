@@ -1,3 +1,4 @@
+import { alpha } from "@mui/material/styles";
 import { theme } from "@/common/theme/theme";
 
 export const sidebar = {
@@ -7,7 +8,7 @@ export const sidebar = {
   padding: theme.spacing(6),
   paddingLeft: theme.spacing(10),
   flexShrink: 0,
-  bgcolor: "#060e20",
+  bgcolor: theme.palette.secondaryColors[900],
   borderRight: `1px solid ${theme.palette.strokeColors[150]}`,
   display: "flex",
   flexDirection: "column",
@@ -44,7 +45,7 @@ export const navItem = (active: boolean) => ({
   alignItems: "center",
   gap: theme.spacing(3),
   padding: theme.spacing(3, 4),
-  borderRadius: "10px",
+  borderRadius: theme.spacing(2.5),
   cursor: "pointer",
   bgcolor: active ? theme.palette.primaryColors[700] : "transparent",
   "&:hover": {
@@ -66,7 +67,7 @@ export const navItemText = (active: boolean) => ({
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight500,
   fontSize: theme.typography.fontSize16,
-  lineHeight: "150%",
+  lineHeight: 1.5,
 });
 
 export const sidebarBottom = {
@@ -74,29 +75,31 @@ export const sidebarBottom = {
   flexDirection: "column",
   gap: theme.spacing(4),
 };
+
 export const logoutButton = (active: boolean) => ({
   ...navItemText(active),
   color: theme.palette.textColors[400],
 });
+
 export const deidentifySubmenu = {
   display: "flex",
   flexDirection: "column",
-  marginTop: "8px",
-  marginLeft: "16px",
-  paddingLeft: "0px",
+  mt: theme.spacing(2),
+  ml: theme.spacing(4),
+  pl: 0,
 };
 
 export const deidentifySubmenuItem = {
   display: "flex",
   alignItems: "center",
-  gap: "12px",
+  gap: theme.spacing(3),
   position: "relative",
-  paddingBlock: "10px",
+  py: theme.spacing(2.5),
 };
 
 export const deidentifySubmenuIconWrap = {
   position: "relative",
-  width: "24px",
+  width: theme.spacing(6),
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -106,11 +109,11 @@ export const deidentifySubmenuIconWrap = {
 export const deidentifySubmenuConnector = (isVisible: boolean) => ({
   position: "absolute",
   left: "50%",
-  top: "calc(50% + 12px)",
+  top: `calc(50% + ${theme.spacing(3)})`,
   transform: "translateX(-50%)",
   width: "2px",
-  height: "32px",
-  backgroundColor: "rgba(67, 70, 82, 0.6)",
+  height: theme.spacing(8),
+  backgroundColor: alpha(theme.palette.strokeColors[400], 0.6),
   display: isVisible ? "block" : "none",
 });
 
@@ -118,40 +121,51 @@ export const deidentifySubmenuStepDot = (
   isActive: boolean,
   isCompleted: boolean,
 ) => ({
-  width: "22px",
-  height: "22px",
+  width: theme.spacing(5.5),
+  height: theme.spacing(5.5),
   borderRadius: "50%",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   boxSizing: "border-box",
-  backgroundColor: isCompleted ? "#b0c6ff" : "#0c1224",
+  backgroundColor: isCompleted
+    ? theme.palette.primaryColors[700]
+    : theme.palette.secondaryColors[900],
   border: isCompleted
-    ? "2px solid #b0c6ff"
+    ? `2px solid ${theme.palette.primaryColors[700]}`
     : isActive
-      ? "2px solid #b0c6ff"
-      : "2px solid rgba(67, 70, 82, 0.7)",
+      ? `2px solid ${theme.palette.primaryColors[200]}`
+      : `2px solid ${alpha(theme.palette.strokeColors[400], 0.7)}`,
   transition: "background-color 200ms ease, border-color 200ms ease",
-  color: "#0c1224",
+  color: theme.palette.primaryColors[50],
   "&::after": {
     content: '""',
-    width: isActive && !isCompleted ? "8px" : "0px",
-    height: isActive && !isCompleted ? "8px" : "0px",
+    width: isActive && !isCompleted ? theme.spacing(2) : 0,
+    height: isActive && !isCompleted ? theme.spacing(2) : 0,
     borderRadius: "50%",
-    backgroundColor: "#b0c6ff",
+    backgroundColor: theme.palette.primaryColors[200],
     transition: "width 200ms ease, height 200ms ease",
   },
 });
 
 export const deidentifySubmenuLabel = (isActive: boolean) => ({
   fontFamily: theme.typography.fontFamily,
-  fontWeight: isActive ? 700 : 500,
-  fontSize: "14px",
-  lineHeight: "20px",
-  color: isActive ? "#b0c6ff" : "rgba(195, 198, 212, 0.6)",
+  fontWeight: isActive
+    ? theme.typography.fontWeight700
+    : theme.typography.fontWeight500,
+  fontSize: theme.typography.fontSize14,
+  lineHeight: 1.4,
+  color: isActive
+    ? theme.palette.primaryColors[200]
+    : alpha(theme.palette.textColors[200], 0.6),
   transition: "color 200ms ease",
 });
+
 export const mainNavIcon = (isActive: boolean) => ({
   ...navItemIcon(isActive),
-  fontSize: "24px",
+  fontSize: theme.typography.fontSize24,
 });
+export const CheckIcon = {
+  fontSize: theme.typography.fontSize14,
+  color: theme.palette.primaryColors[50],
+};

@@ -97,7 +97,7 @@ const LoginPage = () => {
                 <Box sx={styles.mailIconWrapper}>
                   <MailOutline sx={styles.mailIcon} />
                 </Box>
-                <Typography component="h3" sx={styles.checkInboxTitle}>
+                <Typography component="h3" sx={styles.title}>
                   {t("login.checkInboxTitle")}
                 </Typography>
                 <Typography component="p" sx={styles.checkInboxSubtitle}>
@@ -106,8 +106,10 @@ const LoginPage = () => {
                     {submittedEmail}
                   </Box>
                 </Typography>
-                <Typography component="p" sx={styles.didntReceiveText}>
-                  {t("login.didntReceive")}{" "}
+                <Box sx={styles.resendBlock}>
+                  <Typography component="p" sx={styles.didntReceiveText}>
+                    {t("login.didntReceive")}
+                  </Typography>
                   <Link
                     component="button"
                     onClick={handleResend}
@@ -116,7 +118,7 @@ const LoginPage = () => {
                   >
                     {t("login.resendLink")}
                   </Link>
-                </Typography>
+                </Box>
               </Box>
               <Box sx={styles.backToSignInWrapper}>
                 <Divider sx={styles.dividerStyles} />

@@ -159,7 +159,13 @@ export const linkButton = {
   cursor: "pointer",
   transition: "color 0.2s",
   p: 0,
-  "&:hover": { color: theme.palette.textColors[50] },
+  textDecoration: "none", // Прибираємо стандартне підкреслення посилання
+  background: "transparent", // Скидаємо фон (на випадок, якщо це <button>)
+  border: "none",
+  "&:hover": {
+    color: theme.palette.textColors[50],
+    textDecoration: "none",
+  },
 };
 
 export const requiredAsterisk = {
@@ -190,34 +196,40 @@ export const mailIcon = {
   color: theme.palette.primaryColors[200],
 };
 
-export const checkInboxTitle = {
-  ...title,
-  mb: theme.spacing(2),
-};
-
 export const checkInboxSubtitle = {
   ...subtitle,
-  mb: theme.spacing(8),
-  fontSize: theme.typography.fontSize16,
+  mb: theme.spacing(6),
+  fontSize: theme.typography.fontSize14,
 };
 
 export const submittedEmailText = {
   color: theme.palette.textColors[50],
 };
 
+export const resendBlock = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: 0,
+};
+
 export const didntReceiveText = {
   color: theme.palette.textColors[50],
   opacity: 0.4,
   fontFamily: theme.typography.fontFamily,
-  mb: theme.spacing(4),
 };
 
 export const resendLinkAction = {
-  color: theme.palette.primaryColors[700],
-  fontSize: theme.typography.fontSize14,
+  background: "transparent",
+  border: "none",
+  color: "#2563eb",
+  fontSize: theme.typography.fontSize16,
   cursor: "pointer",
   textDecoration: "underline",
-  "&:hover": { color: theme.palette.primaryColors[600] },
+  "&:hover": {
+    color: theme.palette.primaryColors[600],
+    background: "transparent",
+  },
 };
 
 export const backToSignInWrapper = {

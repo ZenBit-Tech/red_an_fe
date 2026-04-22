@@ -4,7 +4,7 @@ export const topBar = {
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  px: { xs: 4, md: theme.spacing(23.25) },
+  px: { xs: theme.spacing(4), md: theme.spacing(23.25) },
   py: theme.spacing(3),
   bgcolor: theme.palette.backgroundColor,
   borderBottom: `0.80px solid ${theme.palette.neutralColors[900]}`,

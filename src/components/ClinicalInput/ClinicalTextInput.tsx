@@ -1,22 +1,24 @@
 import React, { useMemo, useRef } from "react";
-import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
-import CloseIcon from "@mui/icons-material/Close";
+import { useTranslation } from "react-i18next";
+
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
-import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutlined";
-import PictureAsPdfOutlinedIcon from "@mui/icons-material/PictureAsPdfOutlined";
-import UploadFileOutlinedIcon from "@mui/icons-material/UploadFileOutlined";
-import { useTranslation } from "react-i18next";
 
 import {
   CLINICAL_INPUT_TAB,
   FILE_INPUT_ACCEPT,
   MAX_CLINICAL_TEXT_CHARACTERS,
   MAX_UPLOAD_FILE_SIZE_MB,
-  SUPPORTED_FILE_EXTENSIONS,
+  PROGRESS_COMPLETE,
+  PROGRESS_ZERO,
+  formatFileSize,
+  formatFileSizeMb,
+  getFileBadgeKind,
   type ClinicalInputTab,
+  type FileUploadCardState,
 } from "@/components/ClinicalInput/constants";
 import {
+  BannerErrorIcon,
   ClinicalInputHeader,
   ClinicalInputOverlayPanel,
   ClinicalInputPanel,
@@ -34,61 +36,40 @@ import {
   DataLimitAlertMessage,
   DataLimitAlertOverlay,
   DataLimitAlertTitle,
+  DeleteFileButton,
   DropZone,
   DropZoneIconBox,
   DropZonePrompt,
-  FileTypeChip,
-  FileTypeChipIcon,
-  FileTypeChipLabel,
-  FileTypeChipsRow,
-  FileUploadCard,
   FileCardHeader,
+  FileErrorBanner,
   FileIconBox,
+  FileLimitHighlight,
   FileMetaColumn,
   FileMetaText,
-  FileNameRow,
   FileName,
-  FileLimitHighlight,
-  FileTypeBadge,
-  FileProgressTrack,
+  FileNameRow,
   FileProgressFill,
   FileProgressPercent,
+  FileProgressTrack,
+  FileProgressWrapper,
   FileStatusRow,
-  DeleteFileButton,
+  FileTypeBadge,
+  FileTypeChipsRow,
+  FileTypeSquare,
+  FileTypeSquareBadge,
+  FileUploadCard,
   HiddenFileInput,
+  LimitErrorIcon,
+  StatusCheckIcon,
   UploadFooter,
   UploadFooterCount,
   UploadFooterLabel,
+  UploadIcon,
   UploadPanelBody,
+  UploadStatusMessage,
   textAreaProps,
-  type FileBadgeKind,
 } from "@/components/ClinicalInput/styles";
 import { useClinicalTextInput } from "@/components/ClinicalInput/useClinicalTextInput";
-
-const BYTES_PER_MB = 1024 * 1024;
-const PROGRESS_ZERO = 0;
-
-const formatFileSizeMb = (bytes: number): string => {
-  const mb = bytes / BYTES_PER_MB;
-  return mb.toFixed(1);
-};
-
-const getFileBadgeKind = (fileName: string): FileBadgeKind => {
-  const lower = fileName.toLowerCase();
-
-  if (lower.endsWith(SUPPORTED_FILE_EXTENSIONS.PDF)) {
-    return "PDF";
-  }
-
-  if (
-    lower.endsWith(SUPPORTED_FILE_EXTENSIONS.DOC) ||
-    lower.endsWith(SUPPORTED_FILE_EXTENSIONS.DOCX)
-  ) {
-    return "DOC";
-  }
-
-  return "TXT";
-};
 
 const ClinicalTextInput: React.FC = () => {
   const { t } = useTranslation();
@@ -97,9 +78,13 @@ const ClinicalTextInput: React.FC = () => {
     activeTab,
     clinicalText,
     filePathLabel,
+    uploadedFileName,
+    uploadedFileSizeBytes,
     fileError,
     rejectedFile,
     isCharLimitExceeded,
+    isProcessing,
+    uploadProgress,
     switchToTab,
     handleClinicalTextChange,
     handleFileSelected,
@@ -112,7 +97,7 @@ const ClinicalTextInput: React.FC = () => {
   }, [clinicalText]);
 
   const isUploadTab = activeTab === CLINICAL_INPUT_TAB.UPLOAD_DOCUMENT;
-  const filesCount = isUploadTab && filePathLabel ? 1 : 0;
+  const filesCount = isUploadTab && (filePathLabel || isProcessing) ? 1 : 0;
 
   const handleTabChange = (
     _: React.SyntheticEvent,
@@ -134,7 +119,7 @@ const ClinicalTextInput: React.FC = () => {
       return;
     }
 
-    await handleFileSelected(selectedFile, event.target.value);
+    await handleFileSelected(selectedFile, selectedFile.name);
     event.target.value = "";
   };
 
@@ -169,8 +154,8 @@ const ClinicalTextInput: React.FC = () => {
       return renderRejectedFileCard();
     }
 
-    if (filePathLabel) {
-      return renderUploadedFileCard();
+    if (isProcessing || filePathLabel) {
+      return renderActiveFileCard();
     }
 
     return null;
@@ -199,52 +184,96 @@ const ClinicalTextInput: React.FC = () => {
                   value: formatFileSizeMb(rejectedFile.sizeBytes),
                 })}
                 <FileLimitHighlight>
+                  <LimitErrorIcon />
                   {t("deidentify.clinicalInput.uploadCardDetails.limitLabel", {
                     maxMb: MAX_UPLOAD_FILE_SIZE_MB,
                   })}
                 </FileLimitHighlight>
               </FileMetaText>
             </FileMetaColumn>
-            <FileTypeBadge kind={badgeKind}>{badgeKind}</FileTypeBadge>
+            <FileTypeBadge state="error">{badgeKind}</FileTypeBadge>
             <DeleteFileButton onClick={handleResetUpload}>
               <DeleteOutlineIcon fontSize="small" />
             </DeleteFileButton>
           </FileCardHeader>
-          <FileStatusRow>
-            <UploadFooterLabel>
-              {t("deidentify.clinicalInput.uploadCardDetails.processingStatus")}
-            </UploadFooterLabel>
-            <FileProgressPercent>{PROGRESS_ZERO}%</FileProgressPercent>
-          </FileStatusRow>
-          <FileProgressTrack>
-            <FileProgressFill state="error" progress={PROGRESS_ZERO} />
-          </FileProgressTrack>
+
+          <FileProgressWrapper>
+            <FileStatusRow>
+              <UploadFooterLabel>
+                {t(
+                  "deidentify.clinicalInput.uploadCardDetails.processingStatus",
+                )}
+              </UploadFooterLabel>
+              <FileProgressPercent>{PROGRESS_ZERO}%</FileProgressPercent>
+            </FileStatusRow>
+            <FileProgressTrack>
+              <FileProgressFill state="error" progress={PROGRESS_ZERO} />
+            </FileProgressTrack>
+          </FileProgressWrapper>
+
+          <FileErrorBanner>
+            <BannerErrorIcon />
+            {fileError}
+          </FileErrorBanner>
         </FileUploadCard>
       </UploadPanelBody>
     );
   };
 
-  const renderUploadedFileCard = (): React.ReactNode => {
-    if (!filePathLabel || fileError) {
-      return null;
-    }
+  const renderActiveFileCard = (): React.ReactNode => {
+    const cardState: FileUploadCardState = isProcessing
+      ? "processing"
+      : "success";
+    const progressValue = isProcessing
+      ? (uploadProgress ?? PROGRESS_ZERO)
+      : PROGRESS_COMPLETE;
+    const displayFileName = uploadedFileName || filePathLabel || "";
+    const sizeBytes = uploadedFileSizeBytes ?? 0;
+    const badgeKind = getFileBadgeKind(displayFileName);
 
     return (
       <UploadPanelBody>
-        <FileUploadCard state="success">
+        <FileUploadCard state={cardState}>
           <FileCardHeader>
-            <FileIconBox state="success">
+            <FileIconBox state={cardState}>
               <DescriptionOutlinedIcon fontSize="medium" />
             </FileIconBox>
             <FileMetaColumn>
               <FileNameRow>
-                <FileName>{filePathLabel}</FileName>
+                <FileName>{displayFileName}</FileName>
               </FileNameRow>
+              <FileMetaText>
+                {formatFileSize(sizeBytes)}
+                {" • "}
+                <UploadStatusMessage state={cardState}>
+                  {!isProcessing && <StatusCheckIcon />}
+                  {isProcessing
+                    ? t("deidentify.clinicalInput.uploadCard.processing")
+                    : t(
+                        "deidentify.clinicalInput.uploadCard.uploadedSuccessfully",
+                      )}
+                </UploadStatusMessage>
+              </FileMetaText>
             </FileMetaColumn>
+            <FileTypeBadge state={cardState}>{badgeKind}</FileTypeBadge>
             <DeleteFileButton onClick={handleResetUpload}>
-              <CloseIcon fontSize="small" />
+              <DeleteOutlineIcon fontSize="small" />
             </DeleteFileButton>
           </FileCardHeader>
+
+          <FileProgressWrapper>
+            <FileStatusRow>
+              <UploadFooterLabel>
+                {t(
+                  "deidentify.clinicalInput.uploadCardDetails.processingStatus",
+                )}
+              </UploadFooterLabel>
+              <FileProgressPercent>{progressValue}%</FileProgressPercent>
+            </FileStatusRow>
+            <FileProgressTrack>
+              <FileProgressFill state={cardState} progress={progressValue} />
+            </FileProgressTrack>
+          </FileProgressWrapper>
         </FileUploadCard>
       </UploadPanelBody>
     );
@@ -324,37 +353,25 @@ const ClinicalTextInput: React.FC = () => {
                 tabIndex={0}
               >
                 <DropZoneIconBox>
-                  <UploadFileOutlinedIcon sx={{ fontSize: 32 }} />
+                  <UploadIcon />
                 </DropZoneIconBox>
                 <DropZonePrompt>
                   {t("deidentify.clinicalInput.dropzone.prompt")}
                 </DropZonePrompt>
+
                 <FileTypeChipsRow>
-                  <FileTypeChip>
-                    <FileTypeChipIcon tone="#f43f5e">
-                      <PictureAsPdfOutlinedIcon sx={{ fontSize: 28 }} />
-                    </FileTypeChipIcon>
-                    <FileTypeChipLabel>
+                  <FileTypeSquare>
+                    <FileTypeSquareBadge>
                       {t("deidentify.clinicalInput.dropzone.fileTypes.pdf")}
-                    </FileTypeChipLabel>
-                  </FileTypeChip>
-                  <FileTypeChip>
-                    <FileTypeChipIcon tone="#60a5fa">
-                      <ArticleOutlinedIcon sx={{ fontSize: 28 }} />
-                    </FileTypeChipIcon>
-                    <FileTypeChipLabel>
-                      {t("deidentify.clinicalInput.dropzone.fileTypes.txt")}
-                    </FileTypeChipLabel>
-                  </FileTypeChip>
-                  <FileTypeChip>
-                    <FileTypeChipIcon tone="#fb923c">
-                      <MedicalServicesOutlinedIcon sx={{ fontSize: 28 }} />
-                    </FileTypeChipIcon>
-                    <FileTypeChipLabel>
-                      {t("deidentify.clinicalInput.dropzone.fileTypes.dicom")}
-                    </FileTypeChipLabel>
-                  </FileTypeChip>
+                    </FileTypeSquareBadge>
+                  </FileTypeSquare>
+                  <FileTypeSquare>
+                    <FileTypeSquareBadge>
+                      {t("deidentify.clinicalInput.dropzone.fileTypes.text")}
+                    </FileTypeSquareBadge>
+                  </FileTypeSquare>
                 </FileTypeChipsRow>
+
                 <HiddenFileInput
                   ref={fileInputRef}
                   type="file"

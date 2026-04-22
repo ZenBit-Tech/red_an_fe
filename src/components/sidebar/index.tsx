@@ -1,25 +1,18 @@
 import { useTranslation } from "react-i18next";
-import { Box, Typography } from "@mui/material";
 import {
+  Check as CheckIcon,
   HelpOutlineOutlined,
   LogoutOutlined,
-  Check as CheckIcon,
 } from "@mui/icons-material";
-import { NAV_ITEMS, type NavKey } from "@/components/sidebar/constant";
-import * as styles from "@/components/sidebar/styles";
-import { useLogout } from "@/components/sidebar/hooks/useLogout";
+import { Box, Typography } from "@mui/material";
 import { useAppSelector } from "@/common/hooks/hooks";
-
-interface SidebarProps {
-  activeNav: NavKey;
-  setActiveNav: (key: NavKey) => void;
-}
-const DEIDENTIFY_SUBMENU_STEPS = [
-  { stepIndex: 0, labelKey: "dashboard.deidentifySubmenu.framework" },
-  { stepIndex: 1, labelKey: "dashboard.deidentifySubmenu.inputData" },
-  { stepIndex: 2, labelKey: "dashboard.deidentifySubmenu.settings" },
-  { stepIndex: 3, labelKey: "dashboard.deidentifySubmenu.findings" },
-] as const;
+import {
+  DEIDENTIFY_SUBMENU_STEPS,
+  NAV_ITEMS,
+  type SidebarProps,
+} from "@/components/sidebar/constant";
+import { useLogout } from "@/components/sidebar/hooks/useLogout";
+import * as styles from "@/components/sidebar/styles";
 const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
   const { t } = useTranslation();
   const { handleLogout, handleActionKeyDown } = useLogout();
@@ -44,9 +37,7 @@ const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
             const IconComponent = item.icon;
             const isActive = activeNav === item.key;
             const handleNavSelect = () => setActiveNav(item.key);
-
             const showDeidentifySubmenu = item.key === "deidentify" && isActive;
-
             return (
               <Box key={item.key}>
                 <Box
@@ -71,7 +62,6 @@ const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
                         step.stepIndex < activeDeidentifyStep;
                       const isLast =
                         index === DEIDENTIFY_SUBMENU_STEPS.length - 1;
-
                       return (
                         <Box
                           key={step.labelKey}
@@ -85,9 +75,7 @@ const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
                               )}
                             >
                               {isStepCompleted && (
-                                <CheckIcon
-                                  sx={{ fontSize: 14, color: "#0c1224" }}
-                                />
+                                <CheckIcon sx={styles.CheckIcon} />
                               )}
                             </Box>
                             <Box

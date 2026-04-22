@@ -1,19 +1,15 @@
 import { useTranslation } from "react-i18next";
-import { Box, IconButton, Typography } from "@mui/material";
 import {
   AccountCircleOutlined,
   NotificationsOutlined,
   SettingsOutlined,
 } from "@mui/icons-material";
+import { Box, IconButton, Typography } from "@mui/material";
 import * as styles from "@/components/TopBar/styles";
-
-interface TopBarProps {
-  userEmail: string;
-}
+import type { TopBarProps } from "./constants";
 
 export const TopBar = ({ userEmail }: TopBarProps) => {
   const { t } = useTranslation();
-
   return (
     <Box sx={styles.topBar}>
       <Box sx={styles.topBarCenter}>

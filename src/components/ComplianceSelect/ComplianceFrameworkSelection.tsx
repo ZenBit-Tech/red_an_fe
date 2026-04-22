@@ -1,59 +1,36 @@
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import React from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useComplianceSelection } from "@/components/ComplianceSelect/useComplianceSelection";
-import {
-  CardFooter,
-  CardFooterLabel,
-  FrameworkCategory,
-  FrameworkDescription,
-  FrameworkTitle,
-  SelectionCard,
-  SelectionContainer,
-  SelectionHeader,
-  SelectionSubtitle,
-  SelectionTitle,
-  SelectionTitleHighlight,
-  CardsWrapper,
-  SelectedLine,
-} from "@/components/ComplianceSelect/styles";
-
-const handleSelectionCardKeyDown = (
-  event: React.KeyboardEvent<HTMLDivElement>,
-  onToggle: () => void,
-) => {
-  if (event.key === "Enter" || event.key === " ") {
-    event.preventDefault();
-    onToggle();
-  }
-};
-
+import * as styles from "./styles";
+import { handleSelectionCardKeyDown } from "@/components/ComplianceSelect/constants";
 export const ComplianceFrameworkSelection: React.FC = () => {
   const { t, frameworks, selectedFramework, handleSelect } =
     useComplianceSelection();
-
   return (
-    <SelectionContainer>
-      <SelectionHeader>
-        <SelectionTitle component="h1">
+    <styles.SelectionContainer>
+      <styles.SelectionHeader>
+        <styles.SelectionTitle component="h1">
           {t("compliance.selection.title")}{" "}
-          <SelectionTitleHighlight>
+          <styles.SelectionTitleHighlight>
             {t("compliance.selection.titleHighlight")}
-          </SelectionTitleHighlight>
-        </SelectionTitle>
-        <SelectionSubtitle>
+          </styles.SelectionTitleHighlight>
+        </styles.SelectionTitle>
+        <styles.SelectionSubtitle>
           {t("compliance.selection.subtitle")}
-        </SelectionSubtitle>
-      </SelectionHeader>
+        </styles.SelectionSubtitle>
+      </styles.SelectionHeader>
 
-      <CardsWrapper role="radiogroup">
+      <styles.CardsWrapper role="radiogroup">
         {frameworks.map((framework) => {
           const isSelected = selectedFramework === framework.id;
           const selectFramework = () => handleSelect(framework.id);
           const isDeveloper = framework.category
             ?.toLowerCase()
             .includes("developer");
+
           return (
-            <SelectionCard
+            <styles.SelectionCard
               key={framework.id}
               selected={isSelected}
               elevation={0}
@@ -65,37 +42,37 @@ export const ComplianceFrameworkSelection: React.FC = () => {
               aria-checked={isSelected}
               tabIndex={0}
             >
-              <FrameworkCategory
+              <styles.FrameworkCategory
                 selected={isSelected}
                 isDeveloper={isDeveloper}
               >
                 {framework.category}
-              </FrameworkCategory>
+              </styles.FrameworkCategory>
 
-              <FrameworkTitle>{framework.label}</FrameworkTitle>
+              <styles.FrameworkTitle>{framework.label}</styles.FrameworkTitle>
 
-              <FrameworkDescription>
+              <styles.FrameworkDescription>
                 {framework.description}
-              </FrameworkDescription>
+              </styles.FrameworkDescription>
 
-              <CardFooter>
+              <styles.CardFooter>
                 {isSelected ? (
-                  <CardFooterLabel selected>
+                  <styles.CardFooterLabel selected>
                     {t("compliance.selection.activeSelection")}
-                    <CheckCircleOutlineIcon sx={{ fontSize: 18 }} />
-                    <SelectedLine />
-                  </CardFooterLabel>
+                    <CheckCircleOutlineIcon sx={styles.activeIcon} />
+                    <styles.SelectedLine />
+                  </styles.CardFooterLabel>
                 ) : (
-                  <CardFooterLabel selected={false}>
+                  <styles.CardFooterLabel selected={false}>
                     {t("compliance.selection.selectProtocol")}
-                    <ArrowForwardIcon sx={{ fontSize: 16 }} />
-                  </CardFooterLabel>
+                    <ArrowForwardIcon sx={styles.inactiveIcon} />
+                  </styles.CardFooterLabel>
                 )}
-              </CardFooter>
-            </SelectionCard>
+              </styles.CardFooter>
+            </styles.SelectionCard>
           );
         })}
-      </CardsWrapper>
-    </SelectionContainer>
+      </styles.CardsWrapper>
+    </styles.SelectionContainer>
   );
 };

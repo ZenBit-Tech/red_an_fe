@@ -1,7 +1,8 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import mammoth from "mammoth";
 import { useTranslation } from "react-i18next";
 
+import { useAppDispatch, useAppSelector } from "@/common/hooks/hooks";
 import {
   EMPTY_TEXT_SEGMENT,
   FILE_PATH_REDACTED_PREFIX,
@@ -21,7 +22,6 @@ import {
   setFileTooLarge,
   type RejectedFileMeta,
 } from "@/store/clinicalInputSlice";
-import { useAppDispatch, useAppSelector } from "@/common/hooks/hooks";
 
 interface PdfJsModule {
   getDocument: (params: { data: Uint8Array }) => {
@@ -47,9 +47,13 @@ interface UseClinicalTextInputReturn {
   activeTab: ClinicalInputTab;
   clinicalText: string;
   filePathLabel: string;
+  uploadedFileName: string;
+  uploadedFileSizeBytes: number;
   fileError: string;
   rejectedFile: RejectedFileMeta | null;
   isCharLimitExceeded: boolean;
+  isProcessing: boolean;
+  uploadProgress: number;
   switchToTab: (tab: ClinicalInputTab) => void;
   handleClinicalTextChange: (nextValue: string) => void;
   handleFileSelected: (file: File, providedPath?: string) => Promise<void>;
@@ -184,6 +188,12 @@ export const useClinicalTextInput = (): UseClinicalTextInputReturn => {
   const rejectedFile = useAppSelector(
     (state) => state.clinicalInput.rejectedFile,
   );
+  const uploadedFileSizeBytes = useAppSelector(
+    (state) => state.clinicalInput.uploadedFileSizeBytes,
+  );
+
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const filePathLabel = useMemo(() => {
     if (!uploadedFilePath) {
@@ -194,6 +204,14 @@ export const useClinicalTextInput = (): UseClinicalTextInputReturn => {
       path: uploadedFilePath,
     });
   }, [t, uploadedFilePath]);
+
+  const uploadedFileName = useMemo(() => {
+    if (!uploadedFilePath) {
+      return EMPTY_TEXT_SEGMENT;
+    }
+    const parts = uploadedFilePath.split(/[/\\]/);
+    return parts[parts.length - 1] || EMPTY_TEXT_SEGMENT;
+  }, [uploadedFilePath]);
 
   const isCharLimitExceeded =
     clinicalText.length > MAX_CLINICAL_TEXT_CHARACTERS;
@@ -212,8 +230,12 @@ export const useClinicalTextInput = (): UseClinicalTextInputReturn => {
     providedPath?: string,
   ): Promise<void> => {
     dispatch(clearUploadedFile());
+    setIsProcessing(true);
+    setUploadProgress(15); // Початковий прогрес
 
     if (file.size > MAX_UPLOAD_FILE_SIZE_BYTES) {
+      setIsProcessing(false);
+      setUploadProgress(0);
       dispatch(
         setFileTooLarge({
           error: t(FILE_TOO_LARGE_KEY, { maxMb: MAX_UPLOAD_FILE_SIZE_MB }),
@@ -222,6 +244,11 @@ export const useClinicalTextInput = (): UseClinicalTextInputReturn => {
       );
       return;
     }
+
+    // Симуляція прогресу під час парсингу
+    const progressInterval = setInterval(() => {
+      setUploadProgress((prev) => (prev < 90 ? prev + 15 : prev));
+    }, 150);
 
     try {
       const parsedText = (await extractClinicalText(file)).trim();
@@ -232,18 +259,28 @@ export const useClinicalTextInput = (): UseClinicalTextInputReturn => {
 
       const resolvedPath = resolveBestAvailablePath(file, providedPath);
 
+      setUploadProgress(100); // 100% перед завершенням
       dispatch(
         setFileResult({
           text: parsedText,
           path: resolvedPath,
+          sizeBytes: file.size,
         }),
       );
     } catch {
-      // Silently ignore read failures — per design, only size and char-limit errors surface.
+      // Silently ignore read failures
+    } finally {
+      clearInterval(progressInterval);
+      // Невелика затримка, щоб юзер побачив 100%
+      setTimeout(() => {
+        setIsProcessing(false);
+      }, 400);
     }
   };
 
   const clearUploadedFileState = (): void => {
+    setIsProcessing(false);
+    setUploadProgress(0);
     dispatch(clearUploadedFile());
   };
 
@@ -251,9 +288,13 @@ export const useClinicalTextInput = (): UseClinicalTextInputReturn => {
     activeTab,
     clinicalText,
     filePathLabel,
+    uploadedFileName,
+    uploadedFileSizeBytes,
     fileError,
     rejectedFile,
     isCharLimitExceeded,
+    isProcessing,
+    uploadProgress,
     switchToTab,
     handleClinicalTextChange,
     handleFileSelected,

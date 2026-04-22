@@ -17,6 +17,7 @@ interface ClinicalInputState {
   activeTab: ClinicalInputTab;
   clinicalText: string;
   uploadedFilePath: string;
+  uploadedFileSizeBytes: number;
   fileError: string;
   rejectedFile: RejectedFileMeta | null;
 }
@@ -24,6 +25,7 @@ interface ClinicalInputState {
 interface SetFileResultPayload {
   text: string;
   path: string;
+  sizeBytes: number;
 }
 
 interface SetFileTooLargePayload {
@@ -35,6 +37,7 @@ const initialState: ClinicalInputState = {
   activeTab: CLINICAL_INPUT_TAB.ENTER_TEXT,
   clinicalText: DEFAULT_CLINICAL_TEXT,
   uploadedFilePath: DEFAULT_UPLOADED_FILE_PATH,
+  uploadedFileSizeBytes: 0,
   fileError: DEFAULT_FILE_ERROR,
   rejectedFile: null,
 };
@@ -60,12 +63,13 @@ const clinicalInputSlice = createSlice({
     setFileResult(state, action: PayloadAction<SetFileResultPayload>) {
       state.clinicalText = action.payload.text;
       state.uploadedFilePath = action.payload.path;
+      state.uploadedFileSizeBytes = action.payload.sizeBytes;
       state.fileError = DEFAULT_FILE_ERROR;
       state.rejectedFile = null;
-      state.activeTab = CLINICAL_INPUT_TAB.ENTER_TEXT;
     },
     clearUploadedFile(state) {
       state.uploadedFilePath = DEFAULT_UPLOADED_FILE_PATH;
+      state.uploadedFileSizeBytes = 0;
       state.clinicalText = DEFAULT_CLINICAL_TEXT;
       state.fileError = DEFAULT_FILE_ERROR;
       state.rejectedFile = null;
