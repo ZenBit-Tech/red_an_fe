@@ -5,6 +5,10 @@ import DeidentifyPage from "@/pages/Deidentify";
 import { ContactUsPage } from "@/pages/ContactUsPage";
 import HomePage from "@/pages/HomePage";
 import { AboutUsPage } from "@/pages/AboutUSPage";
+import LoginPage from "@/pages/LoginPage";
+import DashboardPage from "@/pages/Dashboard";
+import VerifyPage from "@/pages/VerifyPage/VerifyPage";
+import { APP_ROUTES } from "@/constants/index";
 
 export const router = createBrowserRouter([
   {
@@ -23,23 +27,35 @@ export const router = createBrowserRouter([
         path: "/about-us",
         element: <AboutUsPage />,
       },
+      {
+        path: "/auth/verify",
+        element: <VerifyPage />,
+      },
+      {
+        path: "/signin",
+        element: <LoginPage />,
+      },
+      {
+        path: "*",
+        element: (
+          <div style={{ padding: "100px", textAlign: "center" }}>
+            Page not found (404)
+          </div>
+        ),
+      },
     ],
   },
   {
     element: <DashboardLayout />,
     children: [
       {
-        path: "/deidentify",
+        path: APP_ROUTES.DASHBOARD,
+        element: <DashboardPage />,
+      },
+      {
+        path: APP_ROUTES.DEIDENTIFY,
         element: <DeidentifyPage />,
       },
     ],
-  },
-  {
-    path: "*",
-    element: (
-      <div style={{ padding: "100px", textAlign: "center" }}>
-        Page not found (404)
-      </div>
-    ),
   },
 ]);

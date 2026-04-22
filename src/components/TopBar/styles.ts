@@ -6,7 +6,7 @@ export const topBar = {
   justifyContent: "space-between",
   px: { xs: 4, md: theme.spacing(23.25) },
   py: theme.spacing(3),
-  bgcolor: "#0b1326",
+  bgcolor: theme.palette.backgroundColor,
   borderBottom: `0.80px solid ${theme.palette.neutralColors[900]}`,
   flexShrink: 0,
 };

@@ -59,6 +59,7 @@ export const ComplianceCard = styled(Box)(({ theme }) => ({
 
   [theme.breakpoints.up("lg")]: {
     padding: theme.spacing(8),
+    textAlign: "start",
   },
 }));
 
