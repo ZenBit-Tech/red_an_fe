@@ -1,5 +1,9 @@
 import { styled } from "@mui/material/styles";
-import { Box, Button, Container } from "@mui/material";
+import { Box, Button, Container, type ButtonProps } from "@mui/material";
+type ButtonLinkProps = ButtonProps & {
+  to?: string;
+  component?: React.ElementType;
+};
 
 export const ReadyToProtectSection = styled("section")(({ theme }) => ({
   backgroundColor: theme.palette.strokeColors[700],
@@ -65,7 +69,7 @@ export const PrimaryButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-export const SecondaryButton = styled(Button)(({ theme }) => ({
+export const SecondaryButton = styled(Button)<ButtonLinkProps>(({ theme }) => ({
   minWidth: 180,
   backgroundImage: "none",
   fontSize: theme.typography.fontSize16,

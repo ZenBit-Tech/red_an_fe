@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Link as RouterLink } from "react-router-dom";
 import * as S from "./styles";
 
 export const ReadyToProtect = () => {
@@ -16,7 +17,11 @@ export const ReadyToProtect = () => {
             {t("readyToProtect.primaryCta", "Start Free Trial")}
           </S.PrimaryButton>
 
-          <S.SecondaryButton>
+          <S.SecondaryButton
+            component={RouterLink}
+            to="/contact-us"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
             {t("readyToProtect.secondaryCta", "Contact Us")}
           </S.SecondaryButton>
         </S.ButtonsGroup>

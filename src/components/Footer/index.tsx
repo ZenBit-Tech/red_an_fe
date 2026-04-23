@@ -26,7 +26,11 @@ const Footer = () => {
             {t("footer.columns.company")}
           </S.FooterSectionTitle>
           {COMPANY_LINKS.map(({ label, to }) => (
-            <S.FooterLink key={to} to={to}>
+            <S.FooterLink
+              key={to}
+              to={to}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
               {label}
             </S.FooterLink>
           ))}
