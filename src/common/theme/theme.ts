@@ -230,6 +230,7 @@ export const theme = createTheme({
     MuiButton: {
       defaultProps: {
         disableElevation: true,
+        disableRipple: true,
         variant: "contained",
       },
       styleOverrides: {

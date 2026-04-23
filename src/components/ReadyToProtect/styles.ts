@@ -82,7 +82,7 @@ export const SecondaryButton = styled(Button)<ButtonLinkProps>(({ theme }) => ({
     backgroundColor: theme.palette.neutralColors[600],
     border: `1px solid ${theme.palette.strokeColors[150]}`,
   },
-  "&:active": {
+  "&.MuiButtonBase-root:active": {
     backgroundImage: "none",
     backgroundColor: theme.palette.neutralColors[900],
     border: `1px solid ${theme.palette.strokeColors[150]}`,
