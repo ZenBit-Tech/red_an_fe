@@ -6,7 +6,7 @@ export const Container = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   background: `url('/login/login-bg.png') center/cover no-repeat, ${theme.palette.secondaryColors[950]}`,
-  fontFamily: theme.typography.fontFamily,
+  fontFamily: theme.typography.fontFamily || "sans-serif",
   position: "relative",
   overflow: "hidden",
 }));

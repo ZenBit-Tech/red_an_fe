@@ -28,11 +28,17 @@ export const ContactUsForm = () => {
               {t("contactUs:contactUs.sidebar.emailLabel")}
             </S.ContactLabel>
 
-            <S.EmailLink href="mailto:info@clinicaldatastudio.com">
+            <S.EmailLink
+              component="a"
+              href="mailto:info@clinicaldatastudio.com"
+            >
               info@clinicaldatastudio.com
             </S.EmailLink>
 
-            <S.EmailLink href="mailto:support@clinicaldatastudio.com">
+            <S.EmailLink
+              component="a"
+              href="mailto:support@clinicaldatastudio.com"
+            >
               support@clinicaldatastudio.com
             </S.EmailLink>
           </S.ContactSidebar>
