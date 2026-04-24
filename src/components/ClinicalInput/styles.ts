@@ -375,8 +375,6 @@ export const FileTypeChipsRow = styled(Box)({
   gap: theme.spacing(4),
   marginTop: theme.spacing(4),
 });
-
-// НОВІ СТИЛІ КВАДРАТІВ
 export const FileTypeSquare = styled(Box)({
   boxSizing: "border-box",
   width: theme.spacing(20),
@@ -409,7 +407,7 @@ export const UploadFooter = styled(Box)({
   width: "100%",
   marginTop: theme.spacing(5.75),
   display: "flex",
-  justifyContent: "space-between",
+  justifyContent: "flex-end",
   alignItems: "center",
 });
 
@@ -419,12 +417,6 @@ export const UploadFooterLabel = styled(Typography)({
   fontSize: theme.typography.fontSize12,
   textTransform: "uppercase",
   color: theme.palette.textColors[200],
-});
-
-export const UploadFooterCount = styled("span")({
-  color: theme.palette.textColors[50],
-  fontWeight: theme.typography.fontWeight700,
-  marginLeft: theme.spacing(1),
 });
 
 export const HiddenFileInput = styled("input")({

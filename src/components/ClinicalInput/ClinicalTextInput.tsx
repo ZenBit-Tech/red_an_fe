@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -62,7 +62,6 @@ import {
   LimitErrorIcon,
   StatusCheckIcon,
   UploadFooter,
-  UploadFooterCount,
   UploadFooterLabel,
   UploadIcon,
   UploadPanelBody,
@@ -90,15 +89,6 @@ const ClinicalTextInput: React.FC = () => {
     handleFileSelected,
     clearUploadedFileState,
   } = useClinicalTextInput();
-
-  const wordCount = useMemo(() => {
-    const trimmed = clinicalText.trim();
-    return trimmed ? trimmed.split(/\s+/).length : 0;
-  }, [clinicalText]);
-
-  const isUploadTab = activeTab === CLINICAL_INPUT_TAB.UPLOAD_DOCUMENT;
-  const filesCount = isUploadTab && (filePathLabel || isProcessing) ? 1 : 0;
-
   const handleTabChange = (
     _: React.SyntheticEvent,
     nextTab: ClinicalInputTab,
@@ -385,18 +375,10 @@ const ClinicalTextInput: React.FC = () => {
 
         <UploadFooter>
           <UploadFooterLabel>
-            {t("deidentify.clinicalInput.dropzone.autoSaving")}
-          </UploadFooterLabel>
-          <UploadFooterLabel>
-            {t(
-              isUploadTab
-                ? "deidentify.clinicalInput.dropzone.filesCount"
-                : "deidentify.clinicalInput.dropzone.wordCount",
-              { count: "" },
-            )}
-            <UploadFooterCount>
-              {isUploadTab ? filesCount : wordCount}
-            </UploadFooterCount>
+            {t("deidentify.clinicalInput.characterCount", {
+              current: clinicalText.length.toLocaleString(),
+              max: MAX_CLINICAL_TEXT_CHARACTERS.toLocaleString(),
+            })}
           </UploadFooterLabel>
         </UploadFooter>
       </ClinicalInputPanel>
