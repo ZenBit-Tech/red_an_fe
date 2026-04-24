@@ -30,16 +30,16 @@ export const ContactUsForm = () => {
 
             <S.EmailLink
               component="a"
-              href="mailto:info@clinicaldatastudio.com"
+              href={`mailto:${import.meta.env.VITE_INFO_EMAIL}`}
             >
-              info@clinicaldatastudio.com
+              {import.meta.env.VITE_INFO_EMAIL}
             </S.EmailLink>
 
             <S.EmailLink
               component="a"
-              href="mailto:support@clinicaldatastudio.com"
+              href={`mailto:${import.meta.env.VITE_SUPPORT_EMAIL}`}
             >
-              support@clinicaldatastudio.com
+              {import.meta.env.VITE_SUPPORT_EMAIL}
             </S.EmailLink>
           </S.ContactSidebar>
 
