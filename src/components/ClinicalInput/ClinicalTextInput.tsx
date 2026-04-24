@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
-
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 
@@ -89,6 +88,7 @@ const ClinicalTextInput: React.FC = () => {
     handleFileSelected,
     clearUploadedFileState,
   } = useClinicalTextInput();
+
   const handleTabChange = (
     _: React.SyntheticEvent,
     nextTab: ClinicalInputTab,
@@ -272,7 +272,7 @@ const ClinicalTextInput: React.FC = () => {
   return (
     <ClinicalTextInputContainer>
       <ClinicalInputHeader>
-        <ClinicalTextInputTitle component="h1">
+        <ClinicalTextInputTitle>
           {t("deidentify.clinicalInput.title")}{" "}
           <ClinicalTextInputTitleHighlight>
             {t("deidentify.clinicalInput.titleHighlight")}

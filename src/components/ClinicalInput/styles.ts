@@ -1,33 +1,24 @@
-import {
-  Box,
-  Button,
-  IconButton,
-  Tab,
-  Tabs,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, IconButton, Tab, Tabs, TextField } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import UploadFileOutlinedIcon from "@mui/icons-material/UploadFileOutlined";
 
-import { theme } from "@/common/theme/theme";
 import {
   FILE_CARD_STATE_TO_ICON_COLOR,
   FILE_CARD_STATE_TO_PROGRESS_COLOR,
   FILE_CARD_STATE_TO_STATUS_COLOR,
 } from "@/components/ClinicalInput/constants";
 import type { FileUploadCardState } from "@/components/ClinicalInput/constants";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import UploadFileOutlinedIcon from "@mui/icons-material/UploadFileOutlined";
 
-export const ClinicalTextInputContainer = styled(Box)({
+export const ClinicalTextInputContainer = styled(Box)(({ theme }) => ({
   width: "100%",
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(5),
-});
+}));
 
-export const ClinicalInputHeader = styled(Box)({
+export const ClinicalInputHeader = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(1.5),
@@ -35,9 +26,9 @@ export const ClinicalInputHeader = styled(Box)({
   [theme.breakpoints.down("md")]: {
     minHeight: "auto",
   },
-});
+}));
 
-export const ClinicalTextInputTitle = styled(Typography)({
+export const ClinicalTextInputTitle = styled("h1")(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize48,
@@ -49,33 +40,36 @@ export const ClinicalTextInputTitle = styled(Typography)({
   [theme.breakpoints.down("sm")]: {
     fontSize: theme.typography.fontSize24,
   },
-}) as typeof Typography;
+}));
 
-export const ClinicalTextInputTitleHighlight = styled("span")({
+export const ClinicalTextInputTitleHighlight = styled("span")(({ theme }) => ({
   backgroundImage: `linear-gradient(161deg, ${theme.palette.primaryColors[200]} 0%, ${theme.palette.primaryColors[700]} 100%)`,
   WebkitBackgroundClip: "text",
   backgroundClip: "text",
   color: "transparent",
-});
+}));
 
-export const ClinicalTextInputSubtitle = styled(Typography)({
+export const ClinicalTextInputSubtitle = styled("p")(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontSize: theme.typography.fontSize20,
   fontWeight: theme.typography.fontWeight500,
   color: theme.palette.textColors[200],
   maxWidth: theme.spacing(180),
   margin: 0,
-});
+}));
 
-export const ClinicalInputPanel = styled(Box)({
+export const ClinicalInputPanel = styled(Box)(({ theme }) => ({
   boxSizing: "border-box",
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(4),
   backgroundColor: theme.palette.neutralColors[900],
-  border: `1px solid ${alpha(theme.palette.strokeColors[400], 0.5)}`,
+  border: `${theme.spacing(0.25)} solid ${alpha(theme.palette.strokeColors[400], 0.5)}`,
   borderRadius: theme.spacing(3),
-  padding: `${theme.spacing(2.25)} ${theme.spacing(4)} ${theme.spacing(5)} ${theme.spacing(4)}`,
+  paddingTop: theme.spacing(2.25),
+  paddingRight: theme.spacing(4),
+  paddingBottom: theme.spacing(5),
+  paddingLeft: theme.spacing(4),
   width: "100%",
   maxWidth: theme.spacing(211.5),
   minHeight: theme.spacing(112),
@@ -87,9 +81,9 @@ export const ClinicalInputPanel = styled(Box)({
   [theme.breakpoints.down("sm")]: {
     padding: theme.spacing(2),
   },
-});
+}));
 
-export const ClinicalInputTabs = styled(Tabs)({
+export const ClinicalInputTabs = styled(Tabs)(({ theme }) => ({
   minHeight: 0,
   borderRadius: theme.spacing(1.5),
   backgroundColor: theme.palette.secondaryColors[900],
@@ -103,9 +97,9 @@ export const ClinicalInputTabs = styled(Tabs)({
     gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
     gap: theme.spacing(0.5),
   },
-});
+}));
 
-export const ClinicalInputTabButton = styled(Tab)({
+export const ClinicalInputTabButton = styled(Tab)(({ theme }) => ({
   width: "100%",
   maxWidth: theme.spacing(99.75),
   height: theme.spacing(12),
@@ -116,19 +110,22 @@ export const ClinicalInputTabButton = styled(Tab)({
   fontWeight: theme.typography.fontWeight400,
   fontSize: theme.typography.fontSize14,
   textAlign: "center",
-  padding: `${theme.spacing(2.5)} ${theme.spacing(8)}`,
+  paddingTop: theme.spacing(2.5),
+  paddingBottom: theme.spacing(2.5),
+  paddingLeft: theme.spacing(8),
+  paddingRight: theme.spacing(8),
   borderRadius: theme.spacing(1.5),
-  border: "1px solid transparent",
+  border: `${theme.spacing(0.25)} solid transparent`,
   color: theme.palette.textColors[200],
   transition: "all 200ms ease",
   "&.Mui-selected": {
     color: theme.palette.primaryColors[200],
-    border: `1px solid ${alpha(theme.palette.primaryColors[200], 0.24)}`,
+    border: `${theme.spacing(0.25)} solid ${alpha(theme.palette.primaryColors[200], 0.24)}`,
     background: `linear-gradient(135deg, ${alpha(theme.palette.primaryColors[200], 0.2)} 0%, ${alpha(theme.palette.primaryColors[700], 0.2)} 100%)`,
   },
-});
+}));
 
-export const ClinicalInputPanelsContainer = styled(Box)({
+export const ClinicalInputPanelsContainer = styled(Box)(({ theme }) => ({
   position: "relative",
   flex: 1,
   minHeight: 0,
@@ -138,11 +135,11 @@ export const ClinicalInputPanelsContainer = styled(Box)({
   [theme.breakpoints.down("sm")]: {
     minHeight: theme.spacing(95),
   },
-});
+}));
 
 export const ClinicalInputOverlayPanel = styled(Box, {
   shouldForwardProp: (prop) => prop !== "active",
-})<{ active: boolean }>(({ active }) => ({
+})<{ active: boolean }>(({ theme, active }) => ({
   position: active ? "relative" : "absolute",
   inset: 0,
   display: "flex",
@@ -157,14 +154,17 @@ export const ClinicalInputOverlayPanel = styled(Box, {
   transition: "opacity 0.2s ease, visibility 0.2s ease",
 }));
 
-export const ClinicalTextAreaWrapper = styled(Box)({
+export const ClinicalTextAreaWrapper = styled(Box)(({ theme }) => ({
   position: "relative",
   width: "100%",
   maxWidth: theme.spacing(203.5),
   height: theme.spacing(75.75),
   boxSizing: "border-box",
   borderRadius: theme.spacing(1),
-  padding: `${theme.spacing(2)} ${theme.spacing(2)} ${theme.spacing(2)} ${theme.spacing(3)}`,
+  paddingTop: theme.spacing(2),
+  paddingRight: theme.spacing(2),
+  paddingBottom: theme.spacing(2),
+  paddingLeft: theme.spacing(3),
   backgroundColor: theme.palette.secondaryColors[900],
   display: "flex",
   flexDirection: "column",
@@ -175,14 +175,14 @@ export const ClinicalTextAreaWrapper = styled(Box)({
     left: 0,
     right: 0,
     bottom: 0,
-    height: "3px",
+    height: theme.spacing(0.75),
     background: `linear-gradient(90deg, ${alpha(theme.palette.primaryColors[200], 0)} 0%, ${theme.palette.primaryColors[200]} 50%, ${alpha(theme.palette.primaryColors[200], 0)} 100%)`,
     opacity: 0.5,
     pointerEvents: "none",
   },
-});
+}));
 
-export const ClinicalTextArea = styled(TextField)({
+export const ClinicalTextArea = styled(TextField)(({ theme }) => ({
   flex: 1,
   height: "100%",
   "& .MuiOutlinedInput-root": {
@@ -191,21 +191,24 @@ export const ClinicalTextArea = styled(TextField)({
     overflowX: "hidden",
     backgroundColor: "transparent",
     alignItems: "flex-start",
-    padding: `${theme.spacing(10)} ${theme.spacing(6)}`,
+    paddingTop: theme.spacing(10),
+    paddingBottom: theme.spacing(10),
+    paddingLeft: theme.spacing(6),
+    paddingRight: theme.spacing(6),
     scrollbarWidth: "thin",
     scrollbarColor: `${theme.palette.strokeColors[400]} transparent`,
     "&::-webkit-scrollbar": {
-      width: "8px",
-      height: "8px",
+      width: theme.spacing(2),
+      height: theme.spacing(2),
     },
     "&::-webkit-scrollbar-track": {
       backgroundColor: "transparent",
-      margin: "4px 0",
+      margin: `${theme.spacing(1)} 0`,
     },
     "&::-webkit-scrollbar-thumb": {
       backgroundColor: theme.palette.strokeColors[400],
-      borderRadius: "8px",
-      border: `2px solid ${theme.palette.secondaryColors[900]}`,
+      borderRadius: theme.spacing(2),
+      border: `${theme.spacing(0.5)} solid ${theme.palette.secondaryColors[900]}`,
     },
     "&::-webkit-scrollbar-thumb:hover": {
       backgroundColor: alpha(theme.palette.primaryColors[200], 0.35),
@@ -218,7 +221,7 @@ export const ClinicalTextArea = styled(TextField)({
     "&.Mui-focused fieldset": { border: "none" },
   },
   "& .MuiInputBase-input": {
-    padding: "0px !important",
+    padding: "0 !important",
     fontFamily: theme.typography.fontFamily,
     fontSize: theme.typography.fontSize16,
     color: theme.palette.textColors[50],
@@ -231,9 +234,10 @@ export const ClinicalTextArea = styled(TextField)({
     boxSizing: "border-box",
     resize: "none",
   },
-});
+}));
 
-export const CharacterCounter = styled(Typography)({
+export const CharacterCounter = styled("p")(({ theme }) => ({
+  margin: 0,
   marginTop: theme.spacing(5.75),
   textAlign: "right",
   fontFamily: theme.typography.fontFamily,
@@ -241,70 +245,75 @@ export const CharacterCounter = styled(Typography)({
   fontWeight: theme.typography.fontWeight600,
   textTransform: "uppercase",
   color: theme.palette.textColors[200],
-});
+}));
 
-export const DataLimitAlertOverlay = styled(Box)({
+export const DataLimitAlertOverlay = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "min(420px, 80%)",
+  width: `min(${theme.spacing(105)}, 80%)`,
   pointerEvents: "none",
   zIndex: 2,
-});
+}));
 
-export const DataLimitAlert = styled(Box)({
+export const DataLimitAlert = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(0.5),
-  padding: `${theme.spacing(2.5)} ${theme.spacing(3)}`,
+  paddingTop: theme.spacing(2.5),
+  paddingBottom: theme.spacing(2.5),
+  paddingLeft: theme.spacing(3),
+  paddingRight: theme.spacing(3),
   borderRadius: theme.spacing(2),
-  border: `1px solid ${theme.palette.error.main}`,
+  border: `${theme.spacing(0.25)} solid ${theme.palette.error.main}`,
   backgroundColor: alpha(theme.palette.secondaryColors[900], 0.85),
-});
+}));
 
-export const FileLimitHighlight = styled("span")({
+export const FileLimitHighlight = styled("span")(({ theme }) => ({
   color: theme.palette.error.main,
   fontWeight: theme.typography.fontWeight600,
   marginLeft: theme.spacing(2),
-});
+}));
 
-export const DataLimitAlertTitle = styled(Typography)({
+export const DataLimitAlertTitle = styled("h3")(({ theme }) => ({
+  margin: 0,
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize18,
   color: theme.palette.primaryColors[200],
-  margin: 0,
-});
+}));
 
-export const DataLimitAlertMessage = styled(Typography)({
+export const DataLimitAlertMessage = styled("p")(({ theme }) => ({
+  margin: 0,
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight500,
   fontSize: theme.typography.fontSize16,
   color: theme.palette.textColors[50],
-  margin: 0,
-});
+}));
 
-export const DataLimitAlertHighlight = styled("span")({
+export const DataLimitAlertHighlight = styled("span")(({ theme }) => ({
   color: theme.palette.error.main,
   fontWeight: theme.typography.fontWeight600,
-});
+}));
 
-export const HelperErrorText = styled(Typography)({
+export const HelperErrorText = styled("p")(({ theme }) => ({
+  margin: 0,
   fontFamily: theme.typography.fontFamily,
   fontSize: theme.typography.fontSize14,
   color: theme.palette.error.main,
   marginTop: theme.spacing(2),
-});
+}));
 
-export const UploadedFilePath = styled(Typography, {
+export const UploadedFilePath = styled("p", {
   shouldForwardProp: (prop) => prop !== "visible",
-})<{ visible: boolean }>(({ visible }) => ({
+})<{ visible: boolean }>(({ theme, visible }) => ({
+  margin: 0,
   fontFamily: theme.typography.fontFamily,
   fontSize: theme.typography.fontSize14,
   minHeight: theme.spacing(5),
   color: theme.palette.textColors[200],
-  border: `1px solid ${theme.palette.strokeColors[400]}`,
+  border: `${theme.spacing(0.25)} solid ${theme.palette.strokeColors[400]}`,
   borderRadius: theme.spacing(2),
   backgroundColor: theme.palette.secondaryColors[900],
   padding: theme.spacing(1),
@@ -313,7 +322,7 @@ export const UploadedFilePath = styled(Typography, {
   visibility: visible ? "visible" : "hidden",
 }));
 
-export const UploadPanelBody = styled(Box)({
+export const UploadPanelBody = styled(Box)(({ theme }) => ({
   width: "100%",
   minHeight: theme.spacing(75.75),
   display: "flex",
@@ -322,9 +331,9 @@ export const UploadPanelBody = styled(Box)({
   justifyContent: "center",
   gap: theme.spacing(4),
   backgroundColor: theme.palette.secondaryColors[900],
-});
+}));
 
-export const DropZone = styled(Box)({
+export const DropZone = styled(Box)(({ theme }) => ({
   position: "relative",
   boxSizing: "border-box",
   width: "100%",
@@ -347,35 +356,37 @@ export const DropZone = styled(Box)({
     left: 0,
     right: 0,
     bottom: 0,
-    height: "3px",
+    height: theme.spacing(0.75),
     background: `linear-gradient(90deg, ${alpha(theme.palette.primaryColors[200], 0)} 0%, ${theme.palette.primaryColors[200]} 50%, ${alpha(theme.palette.primaryColors[200], 0)} 100%)`,
     opacity: 0.5,
     pointerEvents: "none",
   },
-});
+}));
 
-export const DropZoneIconBox = styled(Box)({
+export const DropZoneIconBox = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   color: theme.palette.primaryColors[200],
   marginBottom: theme.spacing(2),
-});
+}));
 
-export const DropZonePrompt = styled(Typography)({
+export const DropZonePrompt = styled("p")(({ theme }) => ({
+  margin: 0,
   fontSize: theme.typography.fontSize14,
-  color: "rgba(195, 198, 212, 0.6)",
+  color: alpha(theme.palette.textColors[200], 0.6),
   whiteSpace: "pre-line",
-});
+}));
 
-export const FileTypeChipsRow = styled(Box)({
+export const FileTypeChipsRow = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   gap: theme.spacing(4),
   marginTop: theme.spacing(4),
-});
-export const FileTypeSquare = styled(Box)({
+}));
+
+export const FileTypeSquare = styled(Box)(({ theme }) => ({
   boxSizing: "border-box",
   width: theme.spacing(20),
   height: theme.spacing(15),
@@ -385,16 +396,19 @@ export const FileTypeSquare = styled(Box)({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-});
+}));
 
-export const FileTypeSquareBadge = styled(Box)({
+export const FileTypeSquareBadge = styled(Box)(({ theme }) => ({
   boxSizing: "border-box",
   width: theme.spacing(11),
   height: theme.spacing(6.5),
-  padding: `${theme.spacing(1)} ${theme.spacing(2.5)}`,
+  paddingTop: theme.spacing(1),
+  paddingBottom: theme.spacing(1),
+  paddingLeft: theme.spacing(2.5),
+  paddingRight: theme.spacing(2.5),
   borderRadius: theme.spacing(1.5),
   backgroundColor: alpha(theme.palette.primaryColors[500], 0.2),
-  border: `1px solid ${alpha(theme.palette.primaryColors[500], 0.1)}`,
+  border: `${theme.spacing(0.25)} solid ${alpha(theme.palette.primaryColors[500], 0.1)}`,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -402,51 +416,58 @@ export const FileTypeSquareBadge = styled(Box)({
   fontWeight: theme.typography.fontWeight600,
   fontSize: theme.typography.fontSize10,
   color: theme.palette.primaryColors[500],
-});
-export const UploadFooter = styled(Box)({
+}));
+
+export const UploadFooter = styled(Box)(({ theme }) => ({
   width: "100%",
   marginTop: theme.spacing(5.75),
   display: "flex",
   justifyContent: "flex-end",
   alignItems: "center",
-});
+}));
 
-export const UploadFooterLabel = styled(Typography)({
+export const UploadFooterLabel = styled("span")(({ theme }) => ({
+  margin: 0,
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight600,
   fontSize: theme.typography.fontSize12,
   textTransform: "uppercase",
   color: theme.palette.textColors[200],
-});
+}));
 
 export const HiddenFileInput = styled("input")({
   display: "none",
 });
 
-export const BrowseButton = styled(Button)({
+export const BrowseButton = styled(Button)(({ theme }) => ({
   textTransform: "none",
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize14,
-  padding: `${theme.spacing(1)} ${theme.spacing(3)}`,
-});
+  paddingTop: theme.spacing(1),
+  paddingBottom: theme.spacing(1),
+  paddingLeft: theme.spacing(3),
+  paddingRight: theme.spacing(3),
+}));
 
-export const DropZoneTitle = styled(Typography)({
+export const DropZoneTitle = styled("h3")(({ theme }) => ({
+  margin: 0,
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize16,
   color: theme.palette.textColors[50],
-});
+}));
 
-export const DropZoneSubtitle = styled(Typography)({
+export const DropZoneSubtitle = styled("p")(({ theme }) => ({
+  margin: 0,
   fontFamily: theme.typography.fontFamily,
   fontSize: theme.typography.fontSize14,
   color: theme.palette.textColors[200],
-});
+}));
 
 export const FileUploadCard = styled(Box, {
   shouldForwardProp: (prop) => prop !== "state",
-})<{ state: FileUploadCardState }>(({ state }) => {
+})<{ state: FileUploadCardState }>(({ theme, state }) => {
   const isError = state === "error";
   const borderColor = isError
     ? theme.palette.error.main
@@ -460,23 +481,26 @@ export const FileUploadCard = styled(Box, {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    padding: `${theme.spacing(4)} ${theme.spacing(4)} ${theme.spacing(6)} ${theme.spacing(4)}`,
+    paddingTop: theme.spacing(4),
+    paddingRight: theme.spacing(4),
+    paddingBottom: theme.spacing(6),
+    paddingLeft: theme.spacing(4),
     borderRadius: theme.spacing(2),
     backgroundColor: theme.palette.neutralColors[900],
-    border: `1px solid ${borderColor}`,
+    border: `${theme.spacing(0.25)} solid ${borderColor}`,
     transition: "border-color 200ms ease, background-color 200ms ease",
   };
 });
 
-export const FileCardHeader = styled(Box)({
+export const FileCardHeader = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(6),
-});
+}));
 
 export const FileIconBox = styled(Box, {
   shouldForwardProp: (prop) => prop !== "state",
-})<{ state: FileUploadCardState }>(({ state }) => ({
+})<{ state: FileUploadCardState }>(({ theme, state }) => ({
   width: theme.spacing(12),
   height: theme.spacing(12),
   flexShrink: 0,
@@ -489,21 +513,22 @@ export const FileIconBox = styled(Box, {
   transition: "color 200ms ease",
 }));
 
-export const FileMetaColumn = styled(Box)({
+export const FileMetaColumn = styled(Box)(({ theme }) => ({
   flex: 1,
   minWidth: 0,
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(0.5),
-});
+}));
 
-export const FileNameRow = styled(Box)({
+export const FileNameRow = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(1.5),
-});
+}));
 
-export const FileName = styled(Typography)({
+export const FileName = styled("span")(({ theme }) => ({
+  margin: 0,
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight600,
   fontSize: theme.typography.fontSize16,
@@ -513,18 +538,19 @@ export const FileName = styled(Typography)({
   whiteSpace: "nowrap",
   flex: 1,
   minWidth: 0,
-});
+}));
 
-export const FileMetaText = styled(Typography)({
+export const FileMetaText = styled("span")(({ theme }) => ({
+  margin: 0,
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight500,
   fontSize: theme.typography.fontSize14,
   color: theme.palette.textColors[200],
-});
+}));
 
 export const FileTypeBadge = styled(Box, {
   shouldForwardProp: (prop) => prop !== "state",
-})<{ state: FileUploadCardState }>(({ state }) => ({
+})<{ state: FileUploadCardState }>(({ theme, state }) => ({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
@@ -532,7 +558,7 @@ export const FileTypeBadge = styled(Box, {
   paddingBlock: theme.spacing(0.5),
   borderRadius: theme.spacing(1),
   backgroundColor: alpha(FILE_CARD_STATE_TO_STATUS_COLOR[state], 0.18),
-  border: `1px solid ${alpha(FILE_CARD_STATE_TO_STATUS_COLOR[state], 0.32)}`,
+  border: `${theme.spacing(0.25)} solid ${alpha(FILE_CARD_STATE_TO_STATUS_COLOR[state], 0.32)}`,
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize10,
@@ -541,7 +567,7 @@ export const FileTypeBadge = styled(Box, {
   flexShrink: 0,
 }));
 
-export const DeleteFileButton = styled(IconButton)({
+export const DeleteFileButton = styled(IconButton)(({ theme }) => ({
   width: theme.spacing(8),
   height: theme.spacing(8),
   color: theme.palette.textColors[200],
@@ -550,36 +576,39 @@ export const DeleteFileButton = styled(IconButton)({
     color: theme.palette.error.main,
     backgroundColor: alpha(theme.palette.error.main, 0.08),
   },
-});
+}));
 
-export const FileProgressTrack = styled(Box)({
+export const FileProgressTrack = styled(Box)(({ theme }) => ({
   width: "100%",
   height: theme.spacing(1.5),
   borderRadius: theme.spacing(250),
   backgroundColor: theme.palette.neutralColors[800],
   overflow: "hidden",
-});
+}));
 
 export const FileProgressFill = styled(Box, {
   shouldForwardProp: (prop) => prop !== "state" && prop !== "progress",
-})<{ state: FileUploadCardState; progress: number }>(({ state, progress }) => ({
-  height: "100%",
-  width: `${Math.max(0, Math.min(100, progress))}%`,
-  borderRadius: theme.spacing(250),
-  backgroundColor: FILE_CARD_STATE_TO_PROGRESS_COLOR[state],
-  transition: "width 240ms ease, background-color 200ms ease",
-}));
+})<{ state: FileUploadCardState; progress: number }>(
+  ({ theme, state, progress }) => ({
+    height: "100%",
+    width: `${Math.max(0, Math.min(100, progress))}%`,
+    borderRadius: theme.spacing(250),
+    backgroundColor: FILE_CARD_STATE_TO_PROGRESS_COLOR[state],
+    transition: "width 240ms ease, background-color 200ms ease",
+  }),
+);
 
-export const FileStatusRow = styled(Box)({
+export const FileStatusRow = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
   gap: theme.spacing(2),
-});
+}));
 
-export const FileStatusText = styled(Typography, {
+export const FileStatusText = styled("span", {
   shouldForwardProp: (prop) => prop !== "state",
-})<{ state: FileUploadCardState }>(({ state }) => ({
+})<{ state: FileUploadCardState }>(({ theme, state }) => ({
+  margin: 0,
   display: "inline-flex",
   alignItems: "center",
   gap: theme.spacing(1.5),
@@ -597,20 +626,21 @@ export const FileStatusText = styled(Typography, {
   },
 }));
 
-export const FileProgressPercent = styled(Typography)({
+export const FileProgressPercent = styled("span")(({ theme }) => ({
+  margin: 0,
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight600,
   fontSize: theme.typography.fontSize14,
   color: theme.palette.textColors[200],
-});
+}));
 
-export const FileErrorBanner = styled(Box)({
+export const FileErrorBanner = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(1.5),
   padding: theme.spacing(4),
   borderRadius: theme.spacing(2),
-  border: `1px solid ${alpha(theme.palette.error.main, 0.2)}`,
+  border: `${theme.spacing(0.25)} solid ${alpha(theme.palette.error.main, 0.2)}`,
   backgroundColor: alpha(theme.palette.error.main, 0.12),
   color: theme.palette.secondaryColors[50],
   fontFamily: theme.typography.fontFamily,
@@ -620,7 +650,7 @@ export const FileErrorBanner = styled(Box)({
   height: theme.spacing(13.5),
   maxWidth: "100%",
   boxSizing: "border-box",
-});
+}));
 
 export const textAreaProps = {
   minRows: 14,

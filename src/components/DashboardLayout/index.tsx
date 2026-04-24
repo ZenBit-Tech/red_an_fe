@@ -1,25 +1,30 @@
 import { Outlet } from "react-router-dom";
-import { Box } from "@mui/material";
+
 import Sidebar from "@/components/sidebar/index";
-import * as styles from "@/components/DashboardLayout/styles";
-import { useDashboardLayout } from "@/components/DashboardLayout/hooks/useDashboardLayout";
 import TopBar from "@/components/TopBar/index";
+import { useDashboardLayout } from "@/components/DashboardLayout/hooks/useDashboardLayout";
+import {
+  BodyWrapper,
+  LayoutWrapper,
+  MainContent,
+  RightContent,
+} from "@/components/DashboardLayout/styles";
 
 export const DashboardLayout = () => {
   const { activeNav, setActiveNav, userEmail } = useDashboardLayout();
 
   return (
-    <Box sx={styles.layoutWrapper}>
-      <Box sx={styles.bodyWrapper}>
+    <LayoutWrapper>
+      <BodyWrapper>
         <Sidebar activeNav={activeNav} setActiveNav={setActiveNav} />
-        <Box sx={styles.rightContent}>
+        <RightContent>
           <TopBar userEmail={userEmail} />
-          <Box sx={styles.mainContent}>
+          <MainContent>
             <Outlet />
-          </Box>
-        </Box>
-      </Box>
-    </Box>
+          </MainContent>
+        </RightContent>
+      </BodyWrapper>
+    </LayoutWrapper>
   );
 };
 

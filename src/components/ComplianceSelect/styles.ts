@@ -1,16 +1,14 @@
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
 
-import { theme } from "@/common/theme/theme";
-
-export const SelectionContainer = styled(Box)({
+export const SelectionContainer = styled(Box)(({ theme }) => ({
   width: "100%",
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(5),
-});
+}));
 
-export const SelectionHeader = styled(Box)({
+export const SelectionHeader = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(1.5),
@@ -18,9 +16,9 @@ export const SelectionHeader = styled(Box)({
   [theme.breakpoints.down("md")]: {
     minHeight: "auto",
   },
-});
+}));
 
-export const SelectionTitle = styled(Typography)({
+export const SelectionTitle = styled("h1")(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize48,
@@ -32,42 +30,46 @@ export const SelectionTitle = styled(Typography)({
   [theme.breakpoints.down("sm")]: {
     fontSize: theme.typography.fontSize24,
   },
-}) as typeof Typography;
+}));
 
-export const SelectionTitleHighlight = styled("span")({
+export const SelectionTitleHighlight = styled("span")(({ theme }) => ({
   backgroundImage: `linear-gradient(161deg, ${theme.palette.primaryColors[200]} 0%, ${theme.palette.primaryColors[700]} 100%)`,
   WebkitBackgroundClip: "text",
   backgroundClip: "text",
   color: "transparent",
-});
+}));
 
-export const SelectionSubtitle = styled(Typography)({
+export const SelectionSubtitle = styled("p")(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontSize: theme.typography.fontSize20,
   fontWeight: theme.typography.fontWeight500,
   color: theme.palette.textColors[200],
   maxWidth: theme.spacing(180),
-});
+  margin: 0,
+}));
 
-export const CardsWrapper = styled(Box)({
+export const CardsWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "center",
   gap: theme.spacing(6),
-});
+}));
 
 export const SelectionCard = styled(Paper, {
   shouldForwardProp: (prop) => prop !== "selected",
-})<{ selected: boolean }>(({ selected }) => ({
+})<{ selected: boolean }>(({ theme, selected }) => ({
   boxSizing: "border-box",
   width: theme.spacing(83.5),
   height: theme.spacing(84.25),
-  padding: theme.spacing(8, 6),
+  paddingTop: theme.spacing(8),
+  paddingBottom: theme.spacing(8),
+  paddingLeft: theme.spacing(6),
+  paddingRight: theme.spacing(6),
   borderRadius: theme.spacing(2),
   cursor: "pointer",
   border: selected
-    ? "2px solid transparent"
-    : `1px solid ${theme.palette.strokeColors[400]}`,
+    ? `${theme.spacing(0.5)} solid transparent`
+    : `${theme.spacing(0.25)} solid ${theme.palette.strokeColors[400]}`,
   backgroundColor: selected
     ? theme.palette.neutralColors[900]
     : theme.palette.secondaryColors[900],
@@ -89,7 +91,7 @@ export const SelectionCard = styled(Paper, {
     top: 0,
     left: 0,
     right: 0,
-    height: "2px",
+    height: theme.spacing(0.5),
     background: `linear-gradient(90deg, ${alpha(theme.palette.primaryColors[200], 0)} 0%, ${alpha(theme.palette.primaryColors[200], 0.8)} 50%, ${alpha(theme.palette.primaryColors[200], 0)} 100%)`,
     zIndex: 1,
     opacity: selected ? 1 : 0,
@@ -115,7 +117,7 @@ export const SelectionCard = styled(Paper, {
 export const FrameworkCategory = styled(Box, {
   shouldForwardProp: (prop) => prop !== "selected" && prop !== "isDeveloper",
 })<{ selected: boolean; isDeveloper?: boolean }>(
-  ({ selected, isDeveloper }) => ({
+  ({ theme, selected, isDeveloper }) => ({
     alignSelf: "flex-start",
     display: "inline-flex",
     alignItems: "center",
@@ -137,7 +139,7 @@ export const FrameworkCategory = styled(Box, {
   }),
 );
 
-export const FrameworkTitle = styled(Typography)({
+export const FrameworkTitle = styled("h2")(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize24,
@@ -147,34 +149,34 @@ export const FrameworkTitle = styled(Typography)({
   [theme.breakpoints.down("sm")]: {
     fontSize: theme.typography.fontSize18,
   },
-});
+}));
 
-export const FrameworkDescription = styled(Typography)({
+export const FrameworkDescription = styled("p")(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontSize: theme.typography.fontSize16,
   fontWeight: theme.typography.fontWeight500,
   color: theme.palette.textColors[200],
   margin: 0,
   flexGrow: 1,
-});
+}));
 
-export const CardDivider = styled(Box)({
-  height: "1px",
+export const CardDivider = styled(Box)(({ theme }) => ({
+  height: theme.spacing(0.25),
   width: "100%",
   backgroundColor: alpha(theme.palette.strokeColors[400], 0.5),
-});
+}));
 
-export const CardFooter = styled(Box)({
+export const CardFooter = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
   gap: theme.spacing(1),
   marginTop: theme.spacing(0.5),
-});
+}));
 
 export const CardFooterLabel = styled(Box, {
   shouldForwardProp: (prop) => prop !== "selected",
-})<{ selected: boolean }>(({ selected }) => ({
+})<{ selected: boolean }>(({ theme, selected }) => ({
   display: "flex",
   alignItems: "center",
   width: "100%",
@@ -187,9 +189,14 @@ export const CardFooterLabel = styled(Box, {
   color: selected
     ? theme.palette.primaryColors[200]
     : theme.palette.textColors[200],
+  "& svg": {
+    fontSize: selected
+      ? theme.typography.fontSize18
+      : theme.typography.fontSize16,
+  },
 }));
 
-export const ActiveCheckBadge = styled(Box)({
+export const ActiveCheckBadge = styled(Box)(({ theme }) => ({
   width: theme.spacing(5.5),
   height: theme.spacing(5.5),
   borderRadius: "50%",
@@ -199,20 +206,12 @@ export const ActiveCheckBadge = styled(Box)({
   backgroundColor: alpha(theme.palette.primaryColors[200], 0.18),
   color: theme.palette.primaryColors[200],
   flexShrink: 0,
-});
+}));
 
-export const SelectedLine = styled(Box)({
+export const SelectedLine = styled(Box)(({ theme }) => ({
   flex: 1,
-  height: "3px",
-  borderRadius: "2px",
+  height: theme.spacing(0.75),
+  borderRadius: theme.spacing(0.5),
   backgroundColor: theme.palette.primaryColors[700],
   marginLeft: theme.spacing(2),
-});
-
-export const activeIcon = {
-  fontSize: theme.typography.fontSize18,
-};
-
-export const inactiveIcon = {
-  fontSize: theme.typography.fontSize16,
-};
+}));

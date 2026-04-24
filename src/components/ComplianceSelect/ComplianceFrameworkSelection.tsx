@@ -1,27 +1,44 @@
 import React from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+
 import { useComplianceSelection } from "@/components/ComplianceSelect/useComplianceSelection";
-import * as styles from "./styles";
 import { handleSelectionCardKeyDown } from "@/components/ComplianceSelect/constants";
+import {
+  CardsWrapper,
+  CardFooter,
+  CardFooterLabel,
+  FrameworkCategory,
+  FrameworkDescription,
+  FrameworkTitle,
+  SelectedLine,
+  SelectionCard,
+  SelectionContainer,
+  SelectionHeader,
+  SelectionSubtitle,
+  SelectionTitle,
+  SelectionTitleHighlight,
+} from "@/components/ComplianceSelect/styles";
+
 export const ComplianceFrameworkSelection: React.FC = () => {
   const { t, frameworks, selectedFramework, handleSelect } =
     useComplianceSelection();
-  return (
-    <styles.SelectionContainer>
-      <styles.SelectionHeader>
-        <styles.SelectionTitle component="h1">
-          {t("compliance.selection.title")}{" "}
-          <styles.SelectionTitleHighlight>
-            {t("compliance.selection.titleHighlight")}
-          </styles.SelectionTitleHighlight>
-        </styles.SelectionTitle>
-        <styles.SelectionSubtitle>
-          {t("compliance.selection.subtitle")}
-        </styles.SelectionSubtitle>
-      </styles.SelectionHeader>
 
-      <styles.CardsWrapper role="radiogroup">
+  return (
+    <SelectionContainer>
+      <SelectionHeader>
+        <SelectionTitle>
+          {t("compliance.selection.title")}{" "}
+          <SelectionTitleHighlight>
+            {t("compliance.selection.titleHighlight")}
+          </SelectionTitleHighlight>
+        </SelectionTitle>
+        <SelectionSubtitle>
+          {t("compliance.selection.subtitle")}
+        </SelectionSubtitle>
+      </SelectionHeader>
+
+      <CardsWrapper role="radiogroup">
         {frameworks.map((framework) => {
           const isSelected = selectedFramework === framework.id;
           const selectFramework = () => handleSelect(framework.id);
@@ -30,7 +47,7 @@ export const ComplianceFrameworkSelection: React.FC = () => {
             .includes("developer");
 
           return (
-            <styles.SelectionCard
+            <SelectionCard
               key={framework.id}
               selected={isSelected}
               elevation={0}
@@ -42,37 +59,37 @@ export const ComplianceFrameworkSelection: React.FC = () => {
               aria-checked={isSelected}
               tabIndex={0}
             >
-              <styles.FrameworkCategory
+              <FrameworkCategory
                 selected={isSelected}
                 isDeveloper={isDeveloper}
               >
                 {framework.category}
-              </styles.FrameworkCategory>
+              </FrameworkCategory>
 
-              <styles.FrameworkTitle>{framework.label}</styles.FrameworkTitle>
+              <FrameworkTitle>{framework.label}</FrameworkTitle>
 
-              <styles.FrameworkDescription>
+              <FrameworkDescription>
                 {framework.description}
-              </styles.FrameworkDescription>
+              </FrameworkDescription>
 
-              <styles.CardFooter>
+              <CardFooter>
                 {isSelected ? (
-                  <styles.CardFooterLabel selected>
+                  <CardFooterLabel selected>
                     {t("compliance.selection.activeSelection")}
-                    <CheckCircleOutlineIcon sx={styles.activeIcon} />
-                    <styles.SelectedLine />
-                  </styles.CardFooterLabel>
+                    <CheckCircleOutlineIcon />
+                    <SelectedLine />
+                  </CardFooterLabel>
                 ) : (
-                  <styles.CardFooterLabel selected={false}>
+                  <CardFooterLabel selected={false}>
                     {t("compliance.selection.selectProtocol")}
-                    <ArrowForwardIcon sx={styles.inactiveIcon} />
-                  </styles.CardFooterLabel>
+                    <ArrowForwardIcon />
+                  </CardFooterLabel>
                 )}
-              </styles.CardFooter>
-            </styles.SelectionCard>
+              </CardFooter>
+            </SelectionCard>
           );
         })}
-      </styles.CardsWrapper>
-    </styles.SelectionContainer>
+      </CardsWrapper>
+    </SelectionContainer>
   );
 };

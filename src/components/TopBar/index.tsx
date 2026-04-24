@@ -4,35 +4,43 @@ import {
   NotificationsOutlined,
   SettingsOutlined,
 } from "@mui/icons-material";
-import { Box, IconButton, Typography } from "@mui/material";
-import * as styles from "@/components/TopBar/styles";
+
 import type { TopBarProps } from "./constants";
+import {
+  AvatarButton,
+  AvatarEmail,
+  StyledIconButton,
+  TopBarActions,
+  TopBarCenter,
+  TopBarCenterSubtitle,
+  TopBarCenterTitle,
+  TopBarContainer,
+} from "@/components/TopBar/styles";
 
 export const TopBar = ({ userEmail }: TopBarProps) => {
   const { t } = useTranslation();
+
   return (
-    <Box sx={styles.topBar}>
-      <Box sx={styles.topBarCenter}>
-        <Typography sx={styles.topBarCenterTitle}>
-          {t("appShell.topBar.title")}
-        </Typography>
-        <Typography sx={styles.topBarCenterSubtitle}>
+    <TopBarContainer>
+      <TopBarCenter>
+        <TopBarCenterTitle>{t("appShell.topBar.title")}</TopBarCenterTitle>
+        <TopBarCenterSubtitle>
           {t("appShell.topBar.subtitle")}
-        </Typography>
-      </Box>
-      <Box sx={styles.topBarActions}>
-        <IconButton sx={styles.iconButton}>
+        </TopBarCenterSubtitle>
+      </TopBarCenter>
+      <TopBarActions>
+        <StyledIconButton>
           <NotificationsOutlined />
-        </IconButton>
-        <IconButton sx={styles.iconButton}>
+        </StyledIconButton>
+        <StyledIconButton>
           <SettingsOutlined />
-        </IconButton>
-        <Typography sx={styles.avatarEmail}>{userEmail}</Typography>
-        <Box sx={styles.avatarButton}>
-          <AccountCircleOutlined sx={styles.circleOutline} />
-        </Box>
-      </Box>
-    </Box>
+        </StyledIconButton>
+        <AvatarEmail>{userEmail}</AvatarEmail>
+        <AvatarButton>
+          <AccountCircleOutlined />
+        </AvatarButton>
+      </TopBarActions>
+    </TopBarContainer>
   );
 };
 

@@ -1,66 +1,69 @@
-import { theme } from "@/common/theme/theme";
+import { Box, IconButton, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
-export const topBar = {
+export const TopBarContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  px: { xs: theme.spacing(4), md: theme.spacing(23.25) },
-  py: theme.spacing(3),
-  bgcolor: theme.palette.backgroundColor,
-  borderBottom: `0.80px solid ${theme.palette.neutralColors[900]}`,
+  paddingInline: theme.spacing(4),
+  paddingBlock: theme.spacing(3),
+  backgroundColor: theme.palette.backgroundColor,
+  borderBottom: `${theme.spacing(0.2)} solid ${theme.palette.neutralColors[900]}`,
   flexShrink: 0,
-};
+  [theme.breakpoints.up("md")]: {
+    paddingInline: theme.spacing(23.25),
+  },
+}));
 
-export const topBarCenter = {
+export const TopBarCenter = styled(Box)({
   flex: 1,
-};
+});
 
-export const topBarCenterTitle = {
+export const TopBarCenterTitle = styled(Typography)(({ theme }) => ({
   fontWeight: theme.typography.fontWeight500,
   color: theme.palette.primaryColors[200],
   fontSize: theme.typography.fontSize20,
-};
+}));
 
-export const topBarCenterSubtitle = {
+export const TopBarCenterSubtitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.textColors[200],
   fontSize: theme.typography.fontSize14,
-};
+}));
 
-export const topBarActions = {
+export const TopBarActions = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(2),
-};
+}));
 
-export const iconButton = {
+export const StyledIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.textColors[200],
-  p: theme.spacing(1.5),
+  padding: theme.spacing(1.5),
   borderRadius: theme.spacing(2),
   "&:hover": {
     color: theme.palette.textColors[50],
-    bgcolor: theme.palette.strokeColors[120],
+    backgroundColor: theme.palette.strokeColors[120],
   },
-};
+}));
 
-export const avatarEmail = {
+export const AvatarEmail = styled(Typography)(({ theme }) => ({
   color: theme.palette.textColors[200],
   fontSize: theme.typography.fontSize14,
   fontFamily: theme.typography.fontFamily,
   whiteSpace: "nowrap",
-};
+}));
 
-export const avatarButton = {
+export const AvatarButton = styled(Box)(({ theme }) => ({
   width: theme.spacing(9),
   height: theme.spacing(9),
   borderRadius: theme.spacing(2.5),
-  bgcolor: theme.palette.primaryColors[700],
+  backgroundColor: theme.palette.primaryColors[700],
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   cursor: "pointer",
-};
-
-export const circleOutline = {
-  fontSize: theme.typography.fontSize20,
-  color: theme.palette.primaryColors[200],
-};
+  "& svg": {
+    fontSize: theme.typography.fontSize20,
+    color: theme.palette.primaryColors[200],
+  },
+}));

@@ -1,18 +1,36 @@
 import { useTranslation } from "react-i18next";
 import { Controller } from "react-hook-form";
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Link,
-  Divider,
-  Snackbar,
-  Alert,
-} from "@mui/material";
+import { Snackbar } from "@mui/material";
 import { ArrowBack, MailOutline } from "@mui/icons-material";
-import * as styles from "@/pages/LoginPage/styles";
+
 import { LOGIN_STEPS, useLogin } from "./hooks/useLogin";
+import {
+  BackgroundOverlay,
+  BackToSignInWrapper,
+  BoxHandleBack,
+  CardContainer,
+  CardInner,
+  CheckInboxCardInner,
+  CheckInboxContent,
+  CheckInboxSubtitle,
+  CheckInboxTitle,
+  Container,
+  ContentWrapper,
+  DidntReceiveText,
+  LabelStyles,
+  LinkButton,
+  MailIconWrapper,
+  RequiredAsterisk,
+  ResendBlock,
+  ResendLinkAction,
+  StyledAlert,
+  StyledDivider,
+  StyledInput,
+  SubmitButton,
+  SubmittedEmailText,
+  Subtitle,
+  Title,
+} from "@/pages/LoginPage/styles";
 
 const LoginPage = () => {
   const {
@@ -30,128 +48,97 @@ const LoginPage = () => {
     handleCloseToast,
   } = useLogin();
   const { t } = useTranslation();
+
   return (
-    <Box sx={styles.container}>
-      <Box sx={styles.backgroundOverlay} />
-      <Box sx={styles.contentWrapper}>
-        <Box sx={styles.card}>
+    <Container>
+      <BackgroundOverlay />
+      <ContentWrapper>
+        <CardContainer>
           {step === LOGIN_STEPS.FORM ? (
-            <Box sx={styles.cardInner}>
-              <Typography component="h1" sx={styles.title}>
-                {t("login.title")}
-              </Typography>
-              <Typography component="p" sx={styles.subtitle}>
-                {t("login.subtitle")}
-              </Typography>
+            <CardInner>
+              <Title>{t("login.title")}</Title>
+              <Subtitle>{t("login.subtitle")}</Subtitle>
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                <Typography component="label" sx={styles.labelStyles}>
+                <LabelStyles>
                   {t("login.emailLabel")}
-                  <Box component="span" sx={styles.requiredAsterisk}>
-                    *
-                  </Box>
-                </Typography>
+                  <RequiredAsterisk>*</RequiredAsterisk>
+                </LabelStyles>
                 <Controller
                   name="email"
                   control={control}
                   render={({ field, fieldState: { error } }) => (
-                    <TextField
+                    <StyledInput
                       {...field}
                       fullWidth
                       placeholder={t("login.emailPlaceholder")}
                       error={!!error}
-                      InputProps={{
-                        sx: styles.inputStyles,
-                      }}
                       FormHelperTextProps={{
                         sx: { marginLeft: 0 },
                       }}
                     />
                   )}
                 />
-                <Button
+                <SubmitButton
                   type="submit"
                   fullWidth
                   variant="contained"
                   disabled={!isValid || isLoading}
-                  sx={styles.submitButton}
                 >
                   {isLoading ? t("login.sending") : t("login.sendMagicLink")}
-                </Button>
+                </SubmitButton>
               </form>
-              <Box sx={styles.boxHandleBack}>
-                <Divider sx={styles.dividerStyles} />
-                <Link
-                  component="button"
-                  onClick={handleBack}
-                  underline="none"
-                  sx={styles.linkButton}
-                >
-                  <ArrowBack sx={styles.arrowBack} />
+              <BoxHandleBack>
+                <StyledDivider />
+                <LinkButton onClick={handleBack}>
+                  <ArrowBack />
                   {t("login.back")}
-                </Link>
-              </Box>
-            </Box>
+                </LinkButton>
+              </BoxHandleBack>
+            </CardInner>
           ) : (
-            <Box sx={styles.checkInboxCardInner}>
-              <Box sx={styles.checkInboxContent}>
-                <Box sx={styles.mailIconWrapper}>
-                  <MailOutline sx={styles.mailIcon} />
-                </Box>
-                <Typography component="h3" sx={styles.title}>
-                  {t("login.checkInboxTitle")}
-                </Typography>
-                <Typography component="p" sx={styles.checkInboxSubtitle}>
+            <CheckInboxCardInner>
+              <CheckInboxContent>
+                <MailIconWrapper>
+                  <MailOutline />
+                </MailIconWrapper>
+                <CheckInboxTitle>{t("login.checkInboxTitle")}</CheckInboxTitle>
+                <CheckInboxSubtitle>
                   {t("login.checkInboxDescription")}{" "}
-                  <Box component="span" sx={styles.colorWhite}>
-                    {submittedEmail}
-                  </Box>
-                </Typography>
-                <Box sx={styles.resendBlock}>
-                  <Typography component="p" sx={styles.didntReceiveText}>
-                    {t("login.didntReceive")}
-                  </Typography>
-                  <Link
-                    component="button"
-                    onClick={handleResend}
-                    underline="hover"
-                    sx={styles.resendLinkAction}
-                  >
+                  <SubmittedEmailText>{submittedEmail}</SubmittedEmailText>
+                </CheckInboxSubtitle>
+                <ResendBlock>
+                  <DidntReceiveText>{t("login.didntReceive")}</DidntReceiveText>
+                  <ResendLinkAction onClick={handleResend}>
                     {t("login.resendLink")}
-                  </Link>
-                </Box>
-              </Box>
-              <Box sx={styles.backToSignInWrapper}>
-                <Divider sx={styles.dividerStyles} />
-                <Link
-                  component="button"
-                  onClick={handleBackToSignIn}
-                  underline="none"
-                  sx={styles.linkButton}
-                >
-                  <ArrowBack sx={styles.arrowBack} />
+                  </ResendLinkAction>
+                </ResendBlock>
+              </CheckInboxContent>
+              <BackToSignInWrapper>
+                <StyledDivider />
+                <LinkButton onClick={handleBackToSignIn}>
+                  <ArrowBack />
                   {t("login.back")}
-                </Link>
-              </Box>
-            </Box>
+                </LinkButton>
+              </BackToSignInWrapper>
+            </CheckInboxCardInner>
           )}
-        </Box>
-      </Box>
+        </CardContainer>
+      </ContentWrapper>
       <Snackbar
         open={!!toastErrorKey}
         autoHideDuration={6000}
         onClose={handleCloseToast}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <Alert
+        <StyledAlert
           onClose={handleCloseToast}
           severity="error"
           variant="filled"
-          sx={styles.alertStyles}
         >
           {toastErrorKey ? t(toastErrorKey) : ""}
-        </Alert>
+        </StyledAlert>
       </Snackbar>
-    </Box>
+    </Container>
   );
 };
 

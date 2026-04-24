@@ -1,15 +1,16 @@
-import { Box, CircularProgress, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import * as styles from "@/pages/VerifyPage/styles";
+
 import { useVerify } from "@/pages/VerifyPage/hooks/useVerify";
+import { Container, Spinner, Text } from "@/pages/VerifyPage/styles";
+
 const VerifyPage = () => {
   useVerify();
   const { t } = useTranslation();
   return (
-    <Box sx={styles.container}>
-      <CircularProgress sx={styles.spinner} />
-      <Typography sx={styles.text}>{t("verify.verifying")}</Typography>
-    </Box>
+    <Container>
+      <Spinner />
+      <Text>{t("verify.verifying")}</Text>
+    </Container>
   );
 };
 
