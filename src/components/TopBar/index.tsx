@@ -4,43 +4,33 @@ import {
   NotificationsOutlined,
   SettingsOutlined,
 } from "@mui/icons-material";
-
 import type { TopBarProps } from "./constants";
-import {
-  AvatarButton,
-  AvatarEmail,
-  StyledIconButton,
-  TopBarActions,
-  TopBarCenter,
-  TopBarCenterSubtitle,
-  TopBarCenterTitle,
-  TopBarContainer,
-} from "@/components/TopBar/styles";
+import * as S from "@/components/TopBar/styles";
 
 export const TopBar = ({ userEmail }: TopBarProps) => {
   const { t } = useTranslation();
 
   return (
-    <TopBarContainer>
-      <TopBarCenter>
-        <TopBarCenterTitle>{t("appShell.topBar.title")}</TopBarCenterTitle>
-        <TopBarCenterSubtitle>
+    <S.TopBarContainer>
+      <S.TopBarCenter>
+        <S.TopBarCenterTitle>{t("appShell.topBar.title")}</S.TopBarCenterTitle>
+        <S.TopBarCenterSubtitle>
           {t("appShell.topBar.subtitle")}
-        </TopBarCenterSubtitle>
-      </TopBarCenter>
-      <TopBarActions>
-        <StyledIconButton>
+        </S.TopBarCenterSubtitle>
+      </S.TopBarCenter>
+      <S.TopBarActions>
+        <S.StyledIconButton>
           <NotificationsOutlined />
-        </StyledIconButton>
-        <StyledIconButton>
+        </S.StyledIconButton>
+        <S.StyledIconButton>
           <SettingsOutlined />
-        </StyledIconButton>
-        <AvatarEmail>{userEmail}</AvatarEmail>
-        <AvatarButton>
+        </S.StyledIconButton>
+        <S.AvatarEmail>{userEmail}</S.AvatarEmail>
+        <S.AvatarButton>
           <AccountCircleOutlined />
-        </AvatarButton>
-      </TopBarActions>
-    </TopBarContainer>
+        </S.AvatarButton>
+      </S.TopBarActions>
+    </S.TopBarContainer>
   );
 };
 

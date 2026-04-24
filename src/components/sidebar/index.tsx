@@ -12,24 +12,7 @@ import {
   type SidebarProps,
 } from "@/components/sidebar/constant";
 import { useLogout } from "@/components/sidebar/hooks/useLogout";
-import {
-  DeidentifySubmenu,
-  DeidentifySubmenuConnector,
-  DeidentifySubmenuIconWrap,
-  DeidentifySubmenuItem,
-  DeidentifySubmenuLabel,
-  DeidentifySubmenuStepDot,
-  LogoutButtonText,
-  NavIconWrapper,
-  NavItem,
-  NavItemText,
-  SidebarBottom,
-  SidebarContainer,
-  SidebarHeader,
-  SidebarNav,
-  TopBarSubtitle,
-  TopBarTitle,
-} from "@/components/sidebar/styles";
+import * as S from "@/components/sidebar/styles";
 
 const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
   const { t } = useTranslation();
@@ -39,15 +22,15 @@ const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
   );
 
   return (
-    <SidebarContainer>
+    <S.SidebarContainer>
       <div>
-        <SidebarHeader>
+        <S.SidebarHeader>
           <div>
-            <TopBarTitle>{t("sidebar.header.title")}</TopBarTitle>
-            <TopBarSubtitle>{t("sidebar.header.subtitle")}</TopBarSubtitle>
+            <S.TopBarTitle>{t("sidebar.header.title")}</S.TopBarTitle>
+            <S.TopBarSubtitle>{t("sidebar.header.subtitle")}</S.TopBarSubtitle>
           </div>
-        </SidebarHeader>
-        <SidebarNav>
+        </S.SidebarHeader>
+        <S.SidebarNav>
           {NAV_ITEMS.map((item) => {
             const IconComponent = item.icon;
             const isActive = activeNav === item.key;
@@ -56,7 +39,7 @@ const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
 
             return (
               <div key={item.key}>
-                <NavItem
+                <S.NavItem
                   active={isActive}
                   onClick={handleNavSelect}
                   onKeyDown={(e) => handleActionKeyDown(e, handleNavSelect)}
@@ -64,15 +47,15 @@ const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
                   tabIndex={0}
                   aria-current={isActive ? "page" : undefined}
                 >
-                  <NavIconWrapper active={isActive}>
+                  <S.NavIconWrapper active={isActive}>
                     <IconComponent />
-                  </NavIconWrapper>
-                  <NavItemText active={isActive}>
+                  </S.NavIconWrapper>
+                  <S.NavItemText active={isActive}>
                     {t(item.labelKey)}
-                  </NavItemText>
-                </NavItem>
+                  </S.NavItemText>
+                </S.NavItem>
                 {showDeidentifySubmenu && (
-                  <DeidentifySubmenu>
+                  <S.DeidentifySubmenu>
                     {DEIDENTIFY_SUBMENU_STEPS.map((step, index) => {
                       const isStepActive =
                         step.stepIndex === activeDeidentifyStep;
@@ -82,54 +65,54 @@ const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
                         index === DEIDENTIFY_SUBMENU_STEPS.length - 1;
 
                       return (
-                        <DeidentifySubmenuItem key={step.labelKey}>
-                          <DeidentifySubmenuIconWrap>
-                            <DeidentifySubmenuStepDot
+                        <S.DeidentifySubmenuItem key={step.labelKey}>
+                          <S.DeidentifySubmenuIconWrap>
+                            <S.DeidentifySubmenuStepDot
                               active={isStepActive}
                               completed={isStepCompleted}
                             >
                               {isStepCompleted && <CheckIcon />}
-                            </DeidentifySubmenuStepDot>
-                            <DeidentifySubmenuConnector visible={!isLast} />
-                          </DeidentifySubmenuIconWrap>
-                          <DeidentifySubmenuLabel
+                            </S.DeidentifySubmenuStepDot>
+                            <S.DeidentifySubmenuConnector visible={!isLast} />
+                          </S.DeidentifySubmenuIconWrap>
+                          <S.DeidentifySubmenuLabel
                             active={isStepActive || isStepCompleted}
                           >
                             {t(step.labelKey)}
-                          </DeidentifySubmenuLabel>
-                        </DeidentifySubmenuItem>
+                          </S.DeidentifySubmenuLabel>
+                        </S.DeidentifySubmenuItem>
                       );
                     })}
-                  </DeidentifySubmenu>
+                  </S.DeidentifySubmenu>
                 )}
               </div>
             );
           })}
-        </SidebarNav>
+        </S.SidebarNav>
       </div>
-      <SidebarBottom>
-        <NavItem active={false} role="button" tabIndex={0}>
-          <NavIconWrapper active={false} small>
+      <S.SidebarBottom>
+        <S.NavItem active={false} role="button" tabIndex={0}>
+          <S.NavIconWrapper active={false} small>
             <HelpOutlineOutlined />
-          </NavIconWrapper>
-          <NavItemText active={false}>
+          </S.NavIconWrapper>
+          <S.NavItemText active={false}>
             {t("sidebar.bottom.support")}
-          </NavItemText>
-        </NavItem>
-        <NavItem
+          </S.NavItemText>
+        </S.NavItem>
+        <S.NavItem
           active={false}
           onClick={handleLogout}
           onKeyDown={(e) => handleActionKeyDown(e, handleLogout)}
           role="button"
           tabIndex={0}
         >
-          <NavIconWrapper active={false} small>
+          <S.NavIconWrapper active={false} small>
             <LogoutOutlined />
-          </NavIconWrapper>
-          <LogoutButtonText>{t("sidebar.bottom.logout")}</LogoutButtonText>
-        </NavItem>
-      </SidebarBottom>
-    </SidebarContainer>
+          </S.NavIconWrapper>
+          <S.LogoutButtonText>{t("sidebar.bottom.logout")}</S.LogoutButtonText>
+        </S.NavItem>
+      </S.SidebarBottom>
+    </S.SidebarContainer>
   );
 };
 

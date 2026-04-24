@@ -1,30 +1,24 @@
 import { Outlet } from "react-router-dom";
-
 import Sidebar from "@/components/sidebar/index";
 import TopBar from "@/components/TopBar/index";
 import { useDashboardLayout } from "@/components/DashboardLayout/hooks/useDashboardLayout";
-import {
-  BodyWrapper,
-  LayoutWrapper,
-  MainContent,
-  RightContent,
-} from "@/components/DashboardLayout/styles";
+import * as S from "@/components/DashboardLayout/styles";
 
 export const DashboardLayout = () => {
   const { activeNav, setActiveNav, userEmail } = useDashboardLayout();
 
   return (
-    <LayoutWrapper>
-      <BodyWrapper>
+    <S.LayoutWrapper>
+      <S.BodyWrapper>
         <Sidebar activeNav={activeNav} setActiveNav={setActiveNav} />
-        <RightContent>
+        <S.RightContent>
           <TopBar userEmail={userEmail} />
-          <MainContent>
+          <S.MainContent>
             <Outlet />
-          </MainContent>
-        </RightContent>
-      </BodyWrapper>
-    </LayoutWrapper>
+          </S.MainContent>
+        </S.RightContent>
+      </S.BodyWrapper>
+    </S.LayoutWrapper>
   );
 };
 

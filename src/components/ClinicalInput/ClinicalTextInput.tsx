@@ -16,58 +16,8 @@ import {
   type ClinicalInputTab,
   type FileUploadCardState,
 } from "@/components/ClinicalInput/constants";
-import {
-  BannerErrorIcon,
-  ClinicalInputHeader,
-  ClinicalInputOverlayPanel,
-  ClinicalInputPanel,
-  ClinicalInputPanelsContainer,
-  ClinicalInputTabButton,
-  ClinicalInputTabs,
-  ClinicalTextArea,
-  ClinicalTextAreaWrapper,
-  ClinicalTextInputContainer,
-  ClinicalTextInputSubtitle,
-  ClinicalTextInputTitle,
-  ClinicalTextInputTitleHighlight,
-  DataLimitAlert,
-  DataLimitAlertHighlight,
-  DataLimitAlertMessage,
-  DataLimitAlertOverlay,
-  DataLimitAlertTitle,
-  DeleteFileButton,
-  DropZone,
-  DropZoneIconBox,
-  DropZonePrompt,
-  FileCardHeader,
-  FileErrorBanner,
-  FileIconBox,
-  FileLimitHighlight,
-  FileMetaColumn,
-  FileMetaText,
-  FileName,
-  FileNameRow,
-  FileProgressFill,
-  FileProgressPercent,
-  FileProgressTrack,
-  FileProgressWrapper,
-  FileStatusRow,
-  FileTypeBadge,
-  FileTypeChipsRow,
-  FileTypeSquare,
-  FileTypeSquareBadge,
-  FileUploadCard,
-  HiddenFileInput,
-  LimitErrorIcon,
-  StatusCheckIcon,
-  UploadFooter,
-  UploadFooterLabel,
-  UploadIcon,
-  UploadPanelBody,
-  UploadStatusMessage,
-  textAreaProps,
-} from "@/components/ClinicalInput/styles";
 import { useClinicalTextInput } from "@/components/ClinicalInput/useClinicalTextInput";
+import * as S from "@/components/ClinicalInput/styles";
 
 const ClinicalTextInput: React.FC = () => {
   const { t } = useTranslation();
@@ -159,54 +109,54 @@ const ClinicalTextInput: React.FC = () => {
     const badgeKind = getFileBadgeKind(rejectedFile.name);
 
     return (
-      <UploadPanelBody>
-        <FileUploadCard state="error">
-          <FileCardHeader>
-            <FileIconBox state="error">
+      <S.UploadPanelBody>
+        <S.FileUploadCard state="error">
+          <S.FileCardHeader>
+            <S.FileIconBox state="error">
               <DescriptionOutlinedIcon fontSize="medium" />
-            </FileIconBox>
-            <FileMetaColumn>
-              <FileNameRow>
-                <FileName>{rejectedFile.name}</FileName>
-              </FileNameRow>
-              <FileMetaText>
+            </S.FileIconBox>
+            <S.FileMetaColumn>
+              <S.FileNameRow>
+                <S.FileName>{rejectedFile.name}</S.FileName>
+              </S.FileNameRow>
+              <S.FileMetaText>
                 {t("deidentify.clinicalInput.uploadCardDetails.sizeMegabytes", {
                   value: formatFileSizeMb(rejectedFile.sizeBytes),
                 })}
-                <FileLimitHighlight>
-                  <LimitErrorIcon />
+                <S.FileLimitHighlight>
+                  <S.LimitErrorIcon />
                   {t("deidentify.clinicalInput.uploadCardDetails.limitLabel", {
                     maxMb: MAX_UPLOAD_FILE_SIZE_MB,
                   })}
-                </FileLimitHighlight>
-              </FileMetaText>
-            </FileMetaColumn>
-            <FileTypeBadge state="error">{badgeKind}</FileTypeBadge>
-            <DeleteFileButton onClick={handleResetUpload}>
+                </S.FileLimitHighlight>
+              </S.FileMetaText>
+            </S.FileMetaColumn>
+            <S.FileTypeBadge state="error">{badgeKind}</S.FileTypeBadge>
+            <S.DeleteFileButton onClick={handleResetUpload}>
               <DeleteOutlineIcon fontSize="small" />
-            </DeleteFileButton>
-          </FileCardHeader>
+            </S.DeleteFileButton>
+          </S.FileCardHeader>
 
-          <FileProgressWrapper>
-            <FileStatusRow>
-              <UploadFooterLabel>
+          <S.FileProgressWrapper>
+            <S.FileStatusRow>
+              <S.UploadFooterLabel>
                 {t(
                   "deidentify.clinicalInput.uploadCardDetails.processingStatus",
                 )}
-              </UploadFooterLabel>
-              <FileProgressPercent>{PROGRESS_ZERO}%</FileProgressPercent>
-            </FileStatusRow>
-            <FileProgressTrack>
-              <FileProgressFill state="error" progress={PROGRESS_ZERO} />
-            </FileProgressTrack>
-          </FileProgressWrapper>
+              </S.UploadFooterLabel>
+              <S.FileProgressPercent>{PROGRESS_ZERO}%</S.FileProgressPercent>
+            </S.FileStatusRow>
+            <S.FileProgressTrack>
+              <S.FileProgressFill state="error" progress={PROGRESS_ZERO} />
+            </S.FileProgressTrack>
+          </S.FileProgressWrapper>
 
-          <FileErrorBanner>
-            <BannerErrorIcon />
+          <S.FileErrorBanner>
+            <S.BannerErrorIcon />
             {fileError}
-          </FileErrorBanner>
-        </FileUploadCard>
-      </UploadPanelBody>
+          </S.FileErrorBanner>
+        </S.FileUploadCard>
+      </S.UploadPanelBody>
     );
   };
 
@@ -222,85 +172,85 @@ const ClinicalTextInput: React.FC = () => {
     const badgeKind = getFileBadgeKind(displayFileName);
 
     return (
-      <UploadPanelBody>
-        <FileUploadCard state={cardState}>
-          <FileCardHeader>
-            <FileIconBox state={cardState}>
+      <S.UploadPanelBody>
+        <S.FileUploadCard state={cardState}>
+          <S.FileCardHeader>
+            <S.FileIconBox state={cardState}>
               <DescriptionOutlinedIcon fontSize="medium" />
-            </FileIconBox>
-            <FileMetaColumn>
-              <FileNameRow>
-                <FileName>{displayFileName}</FileName>
-              </FileNameRow>
-              <FileMetaText>
+            </S.FileIconBox>
+            <S.FileMetaColumn>
+              <S.FileNameRow>
+                <S.FileName>{displayFileName}</S.FileName>
+              </S.FileNameRow>
+              <S.FileMetaText>
                 {formatFileSize(sizeBytes)}
                 {" • "}
-                <UploadStatusMessage state={cardState}>
-                  {!isProcessing && <StatusCheckIcon />}
+                <S.UploadStatusMessage state={cardState}>
+                  {!isProcessing && <S.StatusCheckIcon />}
                   {isProcessing
                     ? t("deidentify.clinicalInput.uploadCard.processing")
                     : t(
                         "deidentify.clinicalInput.uploadCard.uploadedSuccessfully",
                       )}
-                </UploadStatusMessage>
-              </FileMetaText>
-            </FileMetaColumn>
-            <FileTypeBadge state={cardState}>{badgeKind}</FileTypeBadge>
-            <DeleteFileButton onClick={handleResetUpload}>
+                </S.UploadStatusMessage>
+              </S.FileMetaText>
+            </S.FileMetaColumn>
+            <S.FileTypeBadge state={cardState}>{badgeKind}</S.FileTypeBadge>
+            <S.DeleteFileButton onClick={handleResetUpload}>
               <DeleteOutlineIcon fontSize="small" />
-            </DeleteFileButton>
-          </FileCardHeader>
+            </S.DeleteFileButton>
+          </S.FileCardHeader>
 
-          <FileProgressWrapper>
-            <FileStatusRow>
-              <UploadFooterLabel>
+          <S.FileProgressWrapper>
+            <S.FileStatusRow>
+              <S.UploadFooterLabel>
                 {t(
                   "deidentify.clinicalInput.uploadCardDetails.processingStatus",
                 )}
-              </UploadFooterLabel>
-              <FileProgressPercent>{progressValue}%</FileProgressPercent>
-            </FileStatusRow>
-            <FileProgressTrack>
-              <FileProgressFill state={cardState} progress={progressValue} />
-            </FileProgressTrack>
-          </FileProgressWrapper>
-        </FileUploadCard>
-      </UploadPanelBody>
+              </S.UploadFooterLabel>
+              <S.FileProgressPercent>{progressValue}%</S.FileProgressPercent>
+            </S.FileStatusRow>
+            <S.FileProgressTrack>
+              <S.FileProgressFill state={cardState} progress={progressValue} />
+            </S.FileProgressTrack>
+          </S.FileProgressWrapper>
+        </S.FileUploadCard>
+      </S.UploadPanelBody>
     );
   };
 
   return (
-    <ClinicalTextInputContainer>
-      <ClinicalInputHeader>
-        <ClinicalTextInputTitle>
+    <S.ClinicalTextInputContainer>
+      <S.ClinicalInputHeader>
+        <S.ClinicalTextInputTitle>
           {t("deidentify.clinicalInput.title")}{" "}
-          <ClinicalTextInputTitleHighlight>
+          <S.ClinicalTextInputTitleHighlight>
             {t("deidentify.clinicalInput.titleHighlight")}
-          </ClinicalTextInputTitleHighlight>
-        </ClinicalTextInputTitle>
-        <ClinicalTextInputSubtitle>
+          </S.ClinicalTextInputTitleHighlight>
+        </S.ClinicalTextInputTitle>
+        <S.ClinicalTextInputSubtitle>
           {t("deidentify.clinicalInput.subtitle")}
-        </ClinicalTextInputSubtitle>
-      </ClinicalInputHeader>
+        </S.ClinicalTextInputSubtitle>
+      </S.ClinicalInputHeader>
 
-      <ClinicalInputPanel>
-        <ClinicalInputTabs value={activeTab} onChange={handleTabChange}>
-          <ClinicalInputTabButton
+      <S.ClinicalInputPanel>
+        <S.ClinicalInputTabs value={activeTab} onChange={handleTabChange}>
+          <S.ClinicalInputTabButton
             value={CLINICAL_INPUT_TAB.ENTER_TEXT}
             label={t("deidentify.clinicalInput.tabs.enterText")}
           />
-          <ClinicalInputTabButton
+          <S.ClinicalInputTabButton
             value={CLINICAL_INPUT_TAB.UPLOAD_DOCUMENT}
             label={t("deidentify.clinicalInput.tabs.uploadDocument")}
           />
-        </ClinicalInputTabs>
+        </S.ClinicalInputTabs>
 
-        <ClinicalInputPanelsContainer>
-          <ClinicalInputOverlayPanel
+        <S.ClinicalInputPanelsContainer>
+          <S.ClinicalInputOverlayPanel
             active={activeTab === CLINICAL_INPUT_TAB.ENTER_TEXT}
           >
-            <ClinicalTextAreaWrapper>
-              <ClinicalTextArea
+            <S.ClinicalTextAreaWrapper>
+              <S.ClinicalTextArea
                 fullWidth
                 multiline
                 value={clinicalText}
@@ -308,81 +258,81 @@ const ClinicalTextInput: React.FC = () => {
                 onChange={(event) =>
                   handleClinicalTextChange(event.target.value)
                 }
-                slotProps={{ input: textAreaProps }}
+                slotProps={{ input: S.textAreaProps }}
               />
               {isCharLimitExceeded && (
-                <DataLimitAlertOverlay>
-                  <DataLimitAlert>
-                    <DataLimitAlertTitle>
+                <S.DataLimitAlertOverlay>
+                  <S.DataLimitAlert>
+                    <S.DataLimitAlertTitle>
                       {t("deidentify.clinicalInput.dataLimitAlert.title")}
-                    </DataLimitAlertTitle>
-                    <DataLimitAlertMessage>
+                    </S.DataLimitAlertTitle>
+                    <S.DataLimitAlertMessage>
                       {t("deidentify.clinicalInput.dataLimitAlert.message")}{" "}
-                      <DataLimitAlertHighlight>
+                      <S.DataLimitAlertHighlight>
                         {t("deidentify.clinicalInput.dataLimitAlert.limit", {
                           max: MAX_CLINICAL_TEXT_CHARACTERS.toLocaleString(),
                         })}
-                      </DataLimitAlertHighlight>{" "}
+                      </S.DataLimitAlertHighlight>{" "}
                       {t("deidentify.clinicalInput.dataLimitAlert.instruction")}
-                    </DataLimitAlertMessage>
-                  </DataLimitAlert>
-                </DataLimitAlertOverlay>
+                    </S.DataLimitAlertMessage>
+                  </S.DataLimitAlert>
+                </S.DataLimitAlertOverlay>
               )}
-            </ClinicalTextAreaWrapper>
-          </ClinicalInputOverlayPanel>
+            </S.ClinicalTextAreaWrapper>
+          </S.ClinicalInputOverlayPanel>
 
-          <ClinicalInputOverlayPanel
+          <S.ClinicalInputOverlayPanel
             active={activeTab === CLINICAL_INPUT_TAB.UPLOAD_DOCUMENT}
           >
             {renderUploadCard() ?? (
-              <DropZone
+              <S.DropZone
                 onClick={openFilePicker}
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
                 role="button"
                 tabIndex={0}
               >
-                <DropZoneIconBox>
-                  <UploadIcon />
-                </DropZoneIconBox>
-                <DropZonePrompt>
+                <S.DropZoneIconBox>
+                  <S.UploadIcon />
+                </S.DropZoneIconBox>
+                <S.DropZonePrompt>
                   {t("deidentify.clinicalInput.dropzone.prompt")}
-                </DropZonePrompt>
+                </S.DropZonePrompt>
 
-                <FileTypeChipsRow>
-                  <FileTypeSquare>
-                    <FileTypeSquareBadge>
+                <S.FileTypeChipsRow>
+                  <S.FileTypeSquare>
+                    <S.FileTypeSquareBadge>
                       {t("deidentify.clinicalInput.dropzone.fileTypes.pdf")}
-                    </FileTypeSquareBadge>
-                  </FileTypeSquare>
-                  <FileTypeSquare>
-                    <FileTypeSquareBadge>
+                    </S.FileTypeSquareBadge>
+                  </S.FileTypeSquare>
+                  <S.FileTypeSquare>
+                    <S.FileTypeSquareBadge>
                       {t("deidentify.clinicalInput.dropzone.fileTypes.text")}
-                    </FileTypeSquareBadge>
-                  </FileTypeSquare>
-                </FileTypeChipsRow>
+                    </S.FileTypeSquareBadge>
+                  </S.FileTypeSquare>
+                </S.FileTypeChipsRow>
 
-                <HiddenFileInput
+                <S.HiddenFileInput
                   ref={fileInputRef}
                   type="file"
                   accept={FILE_INPUT_ACCEPT}
                   onChange={handleInputChange}
                 />
-              </DropZone>
+              </S.DropZone>
             )}
-          </ClinicalInputOverlayPanel>
-        </ClinicalInputPanelsContainer>
+          </S.ClinicalInputOverlayPanel>
+        </S.ClinicalInputPanelsContainer>
 
-        <UploadFooter>
-          <UploadFooterLabel>
+        <S.UploadFooter>
+          <S.UploadFooterLabel>
             {t("deidentify.clinicalInput.characterCount", {
               current: clinicalText.length.toLocaleString(),
               max: MAX_CLINICAL_TEXT_CHARACTERS.toLocaleString(),
             })}
-          </UploadFooterLabel>
-        </UploadFooter>
-      </ClinicalInputPanel>
-    </ClinicalTextInputContainer>
+          </S.UploadFooterLabel>
+        </S.UploadFooter>
+      </S.ClinicalInputPanel>
+    </S.ClinicalTextInputContainer>
   );
 };
 

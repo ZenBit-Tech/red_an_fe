@@ -1,44 +1,29 @@
 import React from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-
 import { useComplianceSelection } from "@/components/ComplianceSelect/useComplianceSelection";
 import { handleSelectionCardKeyDown } from "@/components/ComplianceSelect/constants";
-import {
-  CardsWrapper,
-  CardFooter,
-  CardFooterLabel,
-  FrameworkCategory,
-  FrameworkDescription,
-  FrameworkTitle,
-  SelectedLine,
-  SelectionCard,
-  SelectionContainer,
-  SelectionHeader,
-  SelectionSubtitle,
-  SelectionTitle,
-  SelectionTitleHighlight,
-} from "@/components/ComplianceSelect/styles";
+import * as S from "./styles";
 
 export const ComplianceFrameworkSelection: React.FC = () => {
   const { t, frameworks, selectedFramework, handleSelect } =
     useComplianceSelection();
 
   return (
-    <SelectionContainer>
-      <SelectionHeader>
-        <SelectionTitle>
+    <S.SelectionContainer>
+      <S.SelectionHeader>
+        <S.SelectionTitle>
           {t("compliance.selection.title")}{" "}
-          <SelectionTitleHighlight>
+          <S.SelectionTitleHighlight>
             {t("compliance.selection.titleHighlight")}
-          </SelectionTitleHighlight>
-        </SelectionTitle>
-        <SelectionSubtitle>
+          </S.SelectionTitleHighlight>
+        </S.SelectionTitle>
+        <S.SelectionSubtitle>
           {t("compliance.selection.subtitle")}
-        </SelectionSubtitle>
-      </SelectionHeader>
+        </S.SelectionSubtitle>
+      </S.SelectionHeader>
 
-      <CardsWrapper role="radiogroup">
+      <S.CardsWrapper role="radiogroup">
         {frameworks.map((framework) => {
           const isSelected = selectedFramework === framework.id;
           const selectFramework = () => handleSelect(framework.id);
@@ -47,7 +32,7 @@ export const ComplianceFrameworkSelection: React.FC = () => {
             .includes("developer");
 
           return (
-            <SelectionCard
+            <S.SelectionCard
               key={framework.id}
               selected={isSelected}
               elevation={0}
@@ -59,37 +44,37 @@ export const ComplianceFrameworkSelection: React.FC = () => {
               aria-checked={isSelected}
               tabIndex={0}
             >
-              <FrameworkCategory
+              <S.FrameworkCategory
                 selected={isSelected}
                 isDeveloper={isDeveloper}
               >
                 {framework.category}
-              </FrameworkCategory>
+              </S.FrameworkCategory>
 
-              <FrameworkTitle>{framework.label}</FrameworkTitle>
+              <S.FrameworkTitle>{framework.label}</S.FrameworkTitle>
 
-              <FrameworkDescription>
+              <S.FrameworkDescription>
                 {framework.description}
-              </FrameworkDescription>
+              </S.FrameworkDescription>
 
-              <CardFooter>
+              <S.CardFooter>
                 {isSelected ? (
-                  <CardFooterLabel selected>
+                  <S.CardFooterLabel selected>
                     {t("compliance.selection.activeSelection")}
                     <CheckCircleOutlineIcon />
-                    <SelectedLine />
-                  </CardFooterLabel>
+                    <S.SelectedLine />
+                  </S.CardFooterLabel>
                 ) : (
-                  <CardFooterLabel selected={false}>
+                  <S.CardFooterLabel selected={false}>
                     {t("compliance.selection.selectProtocol")}
                     <ArrowForwardIcon />
-                  </CardFooterLabel>
+                  </S.CardFooterLabel>
                 )}
-              </CardFooter>
-            </SelectionCard>
+              </S.CardFooter>
+            </S.SelectionCard>
           );
         })}
-      </CardsWrapper>
-    </SelectionContainer>
+      </S.CardsWrapper>
+    </S.SelectionContainer>
   );
 };

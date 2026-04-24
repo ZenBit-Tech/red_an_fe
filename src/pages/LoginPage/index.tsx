@@ -4,33 +4,7 @@ import { Snackbar } from "@mui/material";
 import { ArrowBack, MailOutline } from "@mui/icons-material";
 
 import { LOGIN_STEPS, useLogin } from "./hooks/useLogin";
-import {
-  BackgroundOverlay,
-  BackToSignInWrapper,
-  BoxHandleBack,
-  CardContainer,
-  CardInner,
-  CheckInboxCardInner,
-  CheckInboxContent,
-  CheckInboxSubtitle,
-  CheckInboxTitle,
-  Container,
-  ContentWrapper,
-  DidntReceiveText,
-  LabelStyles,
-  LinkButton,
-  MailIconWrapper,
-  RequiredAsterisk,
-  ResendBlock,
-  ResendLinkAction,
-  StyledAlert,
-  StyledDivider,
-  StyledInput,
-  SubmitButton,
-  SubmittedEmailText,
-  Subtitle,
-  Title,
-} from "@/pages/LoginPage/styles";
+import * as S from "@/pages/LoginPage/styles";
 
 const LoginPage = () => {
   const {
@@ -50,24 +24,24 @@ const LoginPage = () => {
   const { t } = useTranslation();
 
   return (
-    <Container>
-      <BackgroundOverlay />
-      <ContentWrapper>
-        <CardContainer>
+    <S.Container>
+      <S.BackgroundOverlay />
+      <S.ContentWrapper>
+        <S.CardContainer>
           {step === LOGIN_STEPS.FORM ? (
-            <CardInner>
-              <Title>{t("login.title")}</Title>
-              <Subtitle>{t("login.subtitle")}</Subtitle>
+            <S.CardInner>
+              <S.Title>{t("login.title")}</S.Title>
+              <S.Subtitle>{t("login.subtitle")}</S.Subtitle>
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                <LabelStyles>
+                <S.LabelStyles>
                   {t("login.emailLabel")}
-                  <RequiredAsterisk>*</RequiredAsterisk>
-                </LabelStyles>
+                  <S.RequiredAsterisk>*</S.RequiredAsterisk>
+                </S.LabelStyles>
                 <Controller
                   name="email"
                   control={control}
                   render={({ field, fieldState: { error } }) => (
-                    <StyledInput
+                    <S.StyledInput
                       {...field}
                       fullWidth
                       placeholder={t("login.emailPlaceholder")}
@@ -78,67 +52,71 @@ const LoginPage = () => {
                     />
                   )}
                 />
-                <SubmitButton
+                <S.SubmitButton
                   type="submit"
                   fullWidth
                   variant="contained"
                   disabled={!isValid || isLoading}
                 >
                   {isLoading ? t("login.sending") : t("login.sendMagicLink")}
-                </SubmitButton>
+                </S.SubmitButton>
               </form>
-              <BoxHandleBack>
-                <StyledDivider />
-                <LinkButton onClick={handleBack}>
+              <S.BoxHandleBack>
+                <S.StyledDivider />
+                <S.LinkButton onClick={handleBack}>
                   <ArrowBack />
                   {t("login.back")}
-                </LinkButton>
-              </BoxHandleBack>
-            </CardInner>
+                </S.LinkButton>
+              </S.BoxHandleBack>
+            </S.CardInner>
           ) : (
-            <CheckInboxCardInner>
-              <CheckInboxContent>
-                <MailIconWrapper>
+            <S.CheckInboxCardInner>
+              <S.CheckInboxContent>
+                <S.MailIconWrapper>
                   <MailOutline />
-                </MailIconWrapper>
-                <CheckInboxTitle>{t("login.checkInboxTitle")}</CheckInboxTitle>
-                <CheckInboxSubtitle>
+                </S.MailIconWrapper>
+                <S.CheckInboxTitle>
+                  {t("login.checkInboxTitle")}
+                </S.CheckInboxTitle>
+                <S.CheckInboxSubtitle>
                   {t("login.checkInboxDescription")}{" "}
-                  <SubmittedEmailText>{submittedEmail}</SubmittedEmailText>
-                </CheckInboxSubtitle>
-                <ResendBlock>
-                  <DidntReceiveText>{t("login.didntReceive")}</DidntReceiveText>
-                  <ResendLinkAction onClick={handleResend}>
+                  <S.SubmittedEmailText>{submittedEmail}</S.SubmittedEmailText>
+                </S.CheckInboxSubtitle>
+                <S.ResendBlock>
+                  <S.DidntReceiveText>
+                    {t("login.didntReceive")}
+                  </S.DidntReceiveText>
+                  <S.ResendLinkAction onClick={handleResend}>
                     {t("login.resendLink")}
-                  </ResendLinkAction>
-                </ResendBlock>
-              </CheckInboxContent>
-              <BackToSignInWrapper>
-                <StyledDivider />
-                <LinkButton onClick={handleBackToSignIn}>
+                  </S.ResendLinkAction>
+                </S.ResendBlock>
+              </S.CheckInboxContent>
+              <S.BackToSignInWrapper>
+                <S.StyledDivider />
+                <S.LinkButton onClick={handleBackToSignIn}>
                   <ArrowBack />
                   {t("login.back")}
-                </LinkButton>
-              </BackToSignInWrapper>
-            </CheckInboxCardInner>
+                </S.LinkButton>
+              </S.BackToSignInWrapper>
+            </S.CheckInboxCardInner>
           )}
-        </CardContainer>
-      </ContentWrapper>
+        </S.CardContainer>
+      </S.ContentWrapper>
       <Snackbar
         open={!!toastErrorKey}
         autoHideDuration={6000}
         onClose={handleCloseToast}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <StyledAlert
+        <S.StyledAlert
           onClose={handleCloseToast}
           severity="error"
           variant="filled"
         >
           {toastErrorKey ? t(toastErrorKey) : ""}
-        </StyledAlert>
+        </S.StyledAlert>
       </Snackbar>
-    </Container>
+    </S.Container>
   );
 };
 

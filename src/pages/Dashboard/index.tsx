@@ -8,7 +8,6 @@ import {
   HourglassEmpty,
   InfoOutlined,
 } from "@mui/icons-material";
-
 import { APP_ROUTES } from "@/constants";
 import {
   DEFAULT_STATS,
@@ -16,45 +15,7 @@ import {
   TIME_FILTERS,
 } from "@/pages/Dashboard/constants";
 import { useDashboard } from "@/pages/Dashboard/hooks/useDashboard";
-import {
-  BackgroundGlow,
-  BarSkeletonCol,
-  BarSkeletonContainer,
-  BarSkeletonDynamic,
-  BarSkeletonLabel,
-  ChartHeader,
-  ChartSubtitle,
-  ChartTitle,
-  ComplianceCard,
-  ContentContainer,
-  DonutSkeleton,
-  FullWidthCard,
-  HalfWidthCard,
-  HeaderActionsColumn,
-  InfoBanner,
-  InfoBannerText,
-  InfoBox,
-  PageHeaderRow1,
-  PageHeaderWrapper,
-  PageScrollContainer,
-  PageSubtitle,
-  PageTitle,
-  SkeletonCenter,
-  StartButton,
-  StatCard,
-  StatCardHeader,
-  StatCardsColumn,
-  StatFooter,
-  StatFooterText,
-  StatIconBox,
-  StatLabel,
-  StatValue,
-  TimeFilterGroup,
-  TimeFilterPill,
-  TimeFilterText,
-  TopSectionGrid,
-  TwoColGrid,
-} from "@/pages/Dashboard/styles";
+import * as S from "@/pages/Dashboard/styles";
 
 const DashboardPage = () => {
   const { t } = useTranslation();
@@ -87,163 +48,170 @@ const DashboardPage = () => {
       icon: <FolderOpen />,
     },
   ];
+
   return (
-    <PageScrollContainer>
-      <ContentContainer>
-        <PageHeaderWrapper>
-          <BackgroundGlow />
-          <PageHeaderRow1>
+    <S.PageScrollContainer>
+      <S.ContentContainer>
+        <S.PageHeaderWrapper>
+          <S.BackgroundGlow />
+          <S.PageHeaderRow1>
             <div>
-              <PageTitle>{t("dashboard.page.title")}</PageTitle>
-              <PageSubtitle>{t("dashboard.page.subtitle")}</PageSubtitle>
+              <S.PageTitle>{t("dashboard.page.title")}</S.PageTitle>
+              <S.PageSubtitle>{t("dashboard.page.subtitle")}</S.PageSubtitle>
             </div>
-            <HeaderActionsColumn>
-              <InfoBox>
-                <InfoBanner>
+            <S.HeaderActionsColumn>
+              <S.InfoBox>
+                <S.InfoBanner>
                   <InfoOutlined />
-                  <InfoBannerText>
+                  <S.InfoBannerText>
                     {t("dashboard.page.infoBanner")}
-                  </InfoBannerText>
-                </InfoBanner>
-                <StartButton
+                  </S.InfoBannerText>
+                </S.InfoBanner>
+                <S.StartButton
                   variant="contained"
                   disableRipple
                   disableElevation
                   onClick={handleStartDeidentify}
                 >
                   {t("dashboard.page.startButton")}
-                </StartButton>
-              </InfoBox>
-              <TimeFilterGroup>
+                </S.StartButton>
+              </S.InfoBox>
+              <S.TimeFilterGroup>
                 {TIME_FILTERS.map((tf) => (
-                  <TimeFilterPill
+                  <S.TimeFilterPill
                     key={tf.key}
                     active={activeTime === tf.key}
                     onClick={() => setActiveTime(tf.key)}
                   >
-                    <TimeFilterText active={activeTime === tf.key}>
+                    <S.TimeFilterText active={activeTime === tf.key}>
                       {t(tf.labelKey)}
-                    </TimeFilterText>
-                  </TimeFilterPill>
+                    </S.TimeFilterText>
+                  </S.TimeFilterPill>
                 ))}
-              </TimeFilterGroup>
-            </HeaderActionsColumn>
-          </PageHeaderRow1>
-        </PageHeaderWrapper>
+              </S.TimeFilterGroup>
+            </S.HeaderActionsColumn>
+          </S.PageHeaderRow1>
+        </S.PageHeaderWrapper>
 
-        <TopSectionGrid>
-          <StatCardsColumn>
+        <S.TopSectionGrid>
+          <S.StatCardsColumn>
             {STAT_CARDS.map((card) => (
-              <StatCard key={card.label}>
-                <StatCardHeader>
-                  <StatLabel>{card.label}</StatLabel>
-                  <StatIconBox>{card.icon}</StatIconBox>
-                </StatCardHeader>
-                <StatValue>{card.value}</StatValue>
-                <StatFooter>
+              <S.StatCard key={card.label}>
+                <S.StatCardHeader>
+                  <S.StatLabel>{card.label}</S.StatLabel>
+                  <S.StatIconBox>{card.icon}</S.StatIconBox>
+                </S.StatCardHeader>
+                <S.StatValue>{card.value}</S.StatValue>
+                <S.StatFooter>
                   <HourglassEmpty />
-                  <StatFooterText>
+                  <S.StatFooterText>
                     {t("dashboard.stats.awaitingData")}
-                  </StatFooterText>
-                </StatFooter>
-              </StatCard>
+                  </S.StatFooterText>
+                </S.StatFooter>
+              </S.StatCard>
             ))}
-          </StatCardsColumn>
-          <ComplianceCard>
-            <ChartHeader>
-              <ChartTitle>
+          </S.StatCardsColumn>
+          <S.ComplianceCard>
+            <S.ChartHeader>
+              <S.ChartTitle>
                 {t("dashboard.charts.complianceFramework")}
-              </ChartTitle>
-              <ChartSubtitle>
+              </S.ChartTitle>
+              <S.ChartSubtitle>
                 {t("dashboard.charts.complianceSubtitle")}
-              </ChartSubtitle>
-            </ChartHeader>
-            <SkeletonCenter>
-              <DonutSkeleton />
-            </SkeletonCenter>
-          </ComplianceCard>
-        </TopSectionGrid>
+              </S.ChartSubtitle>
+            </S.ChartHeader>
+            <S.SkeletonCenter>
+              <S.DonutSkeleton />
+            </S.SkeletonCenter>
+          </S.ComplianceCard>
+        </S.TopSectionGrid>
 
-        <FullWidthCard>
-          <ChartHeader>
-            <ChartTitle>{t("dashboard.charts.entityTypesDetected")}</ChartTitle>
-            <ChartSubtitle>
+        <S.FullWidthCard>
+          <S.ChartHeader>
+            <S.ChartTitle>
+              {t("dashboard.charts.entityTypesDetected")}
+            </S.ChartTitle>
+            <S.ChartSubtitle>
               {t("dashboard.charts.entitySubtitle")}
-            </ChartSubtitle>
-          </ChartHeader>
-          <BarSkeletonContainer>
+            </S.ChartSubtitle>
+          </S.ChartHeader>
+          <S.BarSkeletonContainer>
             {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
-              <BarSkeletonCol key={i}>
-                <BarSkeletonDynamic heightPercent={h} />
-                <BarSkeletonLabel>
+              <S.BarSkeletonCol key={i}>
+                <S.BarSkeletonDynamic heightPercent={h} />
+                <S.BarSkeletonLabel>
                   {t("dashboard.charts.noneLabel")}
-                </BarSkeletonLabel>
-              </BarSkeletonCol>
+                </S.BarSkeletonLabel>
+              </S.BarSkeletonCol>
             ))}
-          </BarSkeletonContainer>
-        </FullWidthCard>
+          </S.BarSkeletonContainer>
+        </S.FullWidthCard>
 
-        <TwoColGrid>
-          <HalfWidthCard>
-            <ChartHeader>
-              <ChartTitle>{t("dashboard.charts.processingHistory")}</ChartTitle>
-              <ChartSubtitle>
+        <S.TwoColGrid>
+          <S.HalfWidthCard>
+            <S.ChartHeader>
+              <S.ChartTitle>
+                {t("dashboard.charts.processingHistory")}
+              </S.ChartTitle>
+              <S.ChartSubtitle>
                 {t("dashboard.charts.historySubtitle")}
-              </ChartSubtitle>
-            </ChartHeader>
-            <BarSkeletonContainer>
+              </S.ChartSubtitle>
+            </S.ChartHeader>
+            <S.BarSkeletonContainer>
               {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
-                <BarSkeletonCol key={i}>
-                  <BarSkeletonDynamic heightPercent={h} />
-                  <BarSkeletonLabel>
+                <S.BarSkeletonCol key={i}>
+                  <S.BarSkeletonDynamic heightPercent={h} />
+                  <S.BarSkeletonLabel>
                     {t("dashboard.charts.noneLabel")}
-                  </BarSkeletonLabel>
-                </BarSkeletonCol>
+                  </S.BarSkeletonLabel>
+                </S.BarSkeletonCol>
               ))}
-            </BarSkeletonContainer>
-          </HalfWidthCard>
-          <HalfWidthCard>
-            <ChartHeader>
-              <ChartTitle>{t("dashboard.charts.confidenceScore")}</ChartTitle>
-              <ChartSubtitle>
+            </S.BarSkeletonContainer>
+          </S.HalfWidthCard>
+          <S.HalfWidthCard>
+            <S.ChartHeader>
+              <S.ChartTitle>
+                {t("dashboard.charts.confidenceScore")}
+              </S.ChartTitle>
+              <S.ChartSubtitle>
                 {t("dashboard.charts.confidenceSubtitle")}
-              </ChartSubtitle>
-            </ChartHeader>
-            <BarSkeletonContainer>
+              </S.ChartSubtitle>
+            </S.ChartHeader>
+            <S.BarSkeletonContainer>
               {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
-                <BarSkeletonCol key={i}>
-                  <BarSkeletonDynamic heightPercent={h} />
-                  <BarSkeletonLabel>
+                <S.BarSkeletonCol key={i}>
+                  <S.BarSkeletonDynamic heightPercent={h} />
+                  <S.BarSkeletonLabel>
                     {t("dashboard.charts.noneLabel")}
-                  </BarSkeletonLabel>
-                </BarSkeletonCol>
+                  </S.BarSkeletonLabel>
+                </S.BarSkeletonCol>
               ))}
-            </BarSkeletonContainer>
-          </HalfWidthCard>
-        </TwoColGrid>
+            </S.BarSkeletonContainer>
+          </S.HalfWidthCard>
+        </S.TwoColGrid>
 
-        <FullWidthCard>
-          <ChartHeader>
-            <ChartTitle>
+        <S.FullWidthCard>
+          <S.ChartHeader>
+            <S.ChartTitle>
               {t("dashboard.charts.deIdentificationMethod")}
-            </ChartTitle>
-            <ChartSubtitle>
+            </S.ChartTitle>
+            <S.ChartSubtitle>
               {t("dashboard.charts.methodSubtitle")}
-            </ChartSubtitle>
-          </ChartHeader>
-          <BarSkeletonContainer>
+            </S.ChartSubtitle>
+          </S.ChartHeader>
+          <S.BarSkeletonContainer>
             {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
-              <BarSkeletonCol key={i}>
-                <BarSkeletonDynamic heightPercent={h} />
-                <BarSkeletonLabel>
+              <S.BarSkeletonCol key={i}>
+                <S.BarSkeletonDynamic heightPercent={h} />
+                <S.BarSkeletonLabel>
                   {t("dashboard.charts.noneLabel")}
-                </BarSkeletonLabel>
-              </BarSkeletonCol>
+                </S.BarSkeletonLabel>
+              </S.BarSkeletonCol>
             ))}
-          </BarSkeletonContainer>
-        </FullWidthCard>
-      </ContentContainer>
-    </PageScrollContainer>
+          </S.BarSkeletonContainer>
+        </S.FullWidthCard>
+      </S.ContentContainer>
+    </S.PageScrollContainer>
   );
 };
 
