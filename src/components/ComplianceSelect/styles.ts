@@ -24,7 +24,6 @@ export const SelectionTitle = styled(Typography)({
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize48,
-  lineHeight: 1.15,
   color: theme.palette.textColors[50],
   margin: 0,
   [theme.breakpoints.down("md")]: {
@@ -70,10 +69,10 @@ export const SelectionCard = styled(Paper, {
     ? "2px solid transparent"
     : `1px solid ${theme.palette.strokeColors[400]}`,
   backgroundColor: selected
-    ? theme.palette.secondaryColors[900]
-    : theme.palette.neutralColors[900],
+    ? theme.palette.neutralColors[900]
+    : theme.palette.secondaryColors[900],
   backgroundImage: selected
-    ? `linear-gradient(${theme.palette.secondaryColors[900]}, ${theme.palette.secondaryColors[900]}), linear-gradient(90deg, ${theme.palette.primaryColors[700]} 0%, ${theme.palette.primaryColors[900]} 100%)`
+    ? `linear-gradient(${theme.palette.neutralColors[900]}, ${theme.palette.neutralColors[900]}), linear-gradient(90deg, ${theme.palette.primaryColors[700]} 0%, ${theme.palette.primaryColors[900]} 100%)`
     : "none",
   backgroundOrigin: "border-box",
   backgroundClip: selected ? "padding-box, border-box" : "border-box",
@@ -153,7 +152,6 @@ export const FrameworkTitle = styled(Typography)({
 export const FrameworkDescription = styled(Typography)({
   fontFamily: theme.typography.fontFamily,
   fontSize: theme.typography.fontSize16,
-  lineHeight: 1.6,
   fontWeight: theme.typography.fontWeight500,
   color: theme.palette.textColors[200],
   margin: 0,

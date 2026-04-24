@@ -126,7 +126,6 @@ export const DeidentifyStepIcon = styled(Box, {
       width: theme.spacing(8.5),
       height: theme.spacing(8.5),
       fontSize: theme.typography.fontSize14,
-      lineHeight: 1,
     },
   } as const;
 
@@ -178,7 +177,6 @@ export const StepperActionButton = styled(Button)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize20,
-  lineHeight: 1.4,
   textAlign: "right",
   textTransform: "none",
   "&:hover": {

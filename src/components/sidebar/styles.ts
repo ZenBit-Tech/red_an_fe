@@ -67,7 +67,6 @@ export const navItemText = (active: boolean) => ({
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight500,
   fontSize: theme.typography.fontSize16,
-  lineHeight: 1.5,
 });
 
 export const sidebarBottom = {
@@ -154,7 +153,6 @@ export const deidentifySubmenuLabel = (isActive: boolean) => ({
     ? theme.typography.fontWeight700
     : theme.typography.fontWeight500,
   fontSize: theme.typography.fontSize14,
-  lineHeight: 1.4,
   color: isActive
     ? theme.palette.primaryColors[200]
     : alpha(theme.palette.textColors[200], 0.6),
