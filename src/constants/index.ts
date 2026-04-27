@@ -5,7 +5,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 
 export const NAV_LINKS = [
   { to: "/about-us", label: "About Us" },
-  { to: "/subscription-plan", label: "Subscription plan" },
+  { to: "/subscription-plan", label: "Subscription Plan" },
   { to: "/contact-us", label: "Contact Us" },
 ];
 
@@ -101,3 +101,18 @@ export const ICONS: Record<string, typeof TwitterIcon> = {
   github: GitHubIcon,
   instagram: InstagramIcon,
 };
+export const APP_ROUTES = {
+  DASHBOARD: "/dashboard",
+  DEIDENTIFY: "/deidentify",
+  SIGN_IN: "/signin",
+} as const;
+
+export const STORAGE_KEYS = {
+  ACCESS_TOKEN: "accessToken",
+  USER: "user",
+} as const;
+
+export const API_ENDPOINTS = {
+  MAGIC_LINK: "/auth/magic-link",
+  MAGIC_LINK_CALLBACK: "/auth/magic-link/callback",
+} as const;

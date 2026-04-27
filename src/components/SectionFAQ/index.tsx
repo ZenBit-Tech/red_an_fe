@@ -6,7 +6,7 @@ import * as S from "./styles";
 export const SectionFAQ = () => {
   const { t } = useTranslation();
 
-  const faqItems = t("faq.items", { returnObjects: true }) as Array<{
+  const faqItems = t("contactUs:faq.items", { returnObjects: true }) as Array<{
     question: string;
     answer: string;
   }>;
@@ -14,14 +14,14 @@ export const SectionFAQ = () => {
   return (
     <S.FAQWrapper>
       <S.StyledContainer maxWidth="md">
-        <S.FAQTitle>{t("faq.title")}</S.FAQTitle>
+        <S.FAQTitle>{t("contactUs:faq.title")}</S.FAQTitle>
 
         {faqItems.map((item, index) => (
           <S.StyledAccordion key={index} disableGutters elevation={0}>
             <S.StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
               <S.QuestionText>{item.question}</S.QuestionText>
             </S.StyledAccordionSummary>
-            <AccordionDetails sx={{ px: 0, pb: 4 }}>
+            <AccordionDetails>
               <S.AnswerText>{item.answer}</S.AnswerText>
             </AccordionDetails>
           </S.StyledAccordion>

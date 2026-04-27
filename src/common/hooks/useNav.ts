@@ -2,12 +2,14 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export const useNav = () => {
-  const { pathname, state } = useLocation();
+  const { pathname, state, hash } = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (state?.scrollTo) {
-      document.getElementById(state.scrollTo)?.scrollIntoView();
+      document
+        .getElementById(state.scrollTo)
+        ?.scrollIntoView({ behavior: "smooth" });
     }
   }, [state]);
 
@@ -16,9 +18,10 @@ export const useNav = () => {
     if (to.startsWith("#")) {
       const id = to.slice(1);
       if (pathname !== "/") {
-        navigate("/", { state: { scrollTo: id } });
+        navigate("/" + to, { state: { scrollTo: id } });
       } else {
-        document.getElementById(id)?.scrollIntoView();
+        navigate(to);
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       }
     } else {
       navigate(to);
@@ -26,8 +29,8 @@ export const useNav = () => {
   };
 
   const isActive = (to: string) => {
-    if (to.startsWith("#")) return pathname === "/";
-    return pathname === to;
+    if (to.startsWith("#")) return hash === to;
+    return pathname === to && !hash;
   };
 
   return { handleClick, isActive };

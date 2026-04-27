@@ -86,6 +86,9 @@ export const FooterLink = styled(Link)(({ theme }) => ({
     opacity: 1,
     color: theme.palette.textColors[400],
   },
+  "&:active": {
+    color: theme.palette.primaryColors[700],
+  },
 
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize14,

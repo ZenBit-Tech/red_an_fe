@@ -8,7 +8,7 @@ import {
   type ClinicalInputTab,
 } from "@/components/ClinicalInput/constants";
 
-interface ClinicalInputState {
+export interface ClinicalInputState {
   activeTab: ClinicalInputTab;
   clinicalText: string;
   uploadedFilePath: string;
