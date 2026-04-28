@@ -10,9 +10,9 @@ import {
   DEIDENTIFY_SUBMENU_STEPS,
   NAV_ITEMS,
   type SidebarProps,
-} from "@/components/sidebar/constant";
-import { useLogout } from "@/components/sidebar/hooks/useLogout";
-import * as S from "@/components/sidebar/styles";
+} from "@/components/Sidebar/constant";
+import { useLogout } from "@/components/Sidebar/hooks/useLogout";
+import * as S from "@/components/Sidebar/styles";
 
 const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
   const { t } = useTranslation();
