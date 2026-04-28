@@ -16,6 +16,7 @@ import {
 } from "@/pages/Dashboard/constants";
 import { useDashboard } from "@/pages/Dashboard/hooks/useDashboard";
 import * as S from "@/pages/Dashboard/styles";
+import { useGetDashboardStatsQuery } from "@/store/dashboardApiSlice";
 
 const DashboardPage = () => {
   const { t } = useTranslation();
@@ -48,6 +49,12 @@ const DashboardPage = () => {
       icon: <FolderOpen />,
     },
   ];
+
+  const { data, isLoading /* error */ } = useGetDashboardStatsQuery();
+  console.log("Dashboard Data:", data);
+  if (isLoading) {
+    return <S.InfoBox>Loading...</S.InfoBox>;
+  }
 
   return (
     <S.PageScrollContainer>
