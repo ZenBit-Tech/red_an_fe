@@ -13,7 +13,7 @@ export interface RejectedFileMeta {
   sizeBytes: number;
 }
 
-interface ClinicalInputState {
+export interface ClinicalInputState {
   activeTab: ClinicalInputTab;
   clinicalText: string;
   uploadedFilePath: string;

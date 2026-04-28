@@ -1,0 +1,39 @@
+name: Deploy Frontend to Heroku
+
+on:
+  push:
+    branches:
+      - develop
+      - feature/heroku-final-deploy
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to Heroku Container Registry
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          echo ${{ secrets.HEROKU_API_KEY }} | docker login --username=_ --password-stdin registry.heroku.com
+
+      - name: Build and Push Docker Image
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+        run: |
+          docker build \
+            --build-arg VITE_API_URL=$VITE_API_URL \
+            -t registry.heroku.com/red-an-fe/web .
+          docker push registry.heroku.com/red-an-fe/web
+
+      - name: Release to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+
+          curl https://cli-assets.heroku.com/install.sh | sh
+          heroku container:release web -a red-an-fe

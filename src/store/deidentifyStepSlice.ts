@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import { DEIDENTIFY_STEP } from "@/pages/Deidentify/useDeidentify";
 
-interface DeidentifyStepState {
+export interface DeidentifyStepState {
   activeStep: number;
 }
 
