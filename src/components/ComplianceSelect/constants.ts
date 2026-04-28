@@ -11,6 +11,7 @@ export type ComplianceFramework =
 export interface ComplianceFrameworkOption {
   id: ComplianceFramework;
   labelKey: string;
+  categoryKey: string;
   descriptionKey: string;
   entityCount?: number;
 }
@@ -136,25 +137,31 @@ export const COMPLIANCE_FRAMEWORK_OPTIONS: ReadonlyArray<ComplianceFrameworkOpti
     {
       id: COMPLIANCE_FRAMEWORK.HIPAA,
       labelKey: "compliance.frameworks.hipaa.label",
+      categoryKey: "compliance.frameworks.hipaa.category",
       descriptionKey: "compliance.frameworks.hipaa.desc",
       entityCount: FRAMEWORK_ENTITY_COUNT[COMPLIANCE_FRAMEWORK.HIPAA],
     },
     {
       id: COMPLIANCE_FRAMEWORK.GDPR,
       labelKey: "compliance.frameworks.gdpr.label",
+      categoryKey: "compliance.frameworks.gdpr.category",
       descriptionKey: "compliance.frameworks.gdpr.desc",
       entityCount: FRAMEWORK_ENTITY_COUNT[COMPLIANCE_FRAMEWORK.GDPR],
     },
     {
       id: COMPLIANCE_FRAMEWORK.CCPA,
       labelKey: "compliance.frameworks.ccpa.label",
+      categoryKey: "compliance.frameworks.ccpa.category",
       descriptionKey: "compliance.frameworks.ccpa.desc",
       entityCount: FRAMEWORK_ENTITY_COUNT[COMPLIANCE_FRAMEWORK.CCPA],
     },
-    {
-      id: COMPLIANCE_FRAMEWORK.CUSTOM,
-      labelKey: "compliance.frameworks.custom.label",
-      descriptionKey: "compliance.frameworks.custom.desc",
-      entityCount: FRAMEWORK_ENTITY_COUNT[COMPLIANCE_FRAMEWORK.CUSTOM],
-    },
   ];
+export const handleSelectionCardKeyDown = (
+  event: React.KeyboardEvent<HTMLDivElement>,
+  onToggle: () => void,
+) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    onToggle();
+  }
+};

@@ -1,42 +1,36 @@
 import { useTranslation } from "react-i18next";
-import { Box, IconButton, Typography } from "@mui/material";
 import {
   AccountCircleOutlined,
   NotificationsOutlined,
   SettingsOutlined,
 } from "@mui/icons-material";
-import * as styles from "@/components/TopBar/styles";
-
-interface TopBarProps {
-  userEmail: string;
-}
+import type { TopBarProps } from "./constants";
+import * as S from "@/components/TopBar/styles";
 
 export const TopBar = ({ userEmail }: TopBarProps) => {
   const { t } = useTranslation();
 
   return (
-    <Box sx={styles.topBar}>
-      <Box sx={styles.topBarCenter}>
-        <Typography sx={styles.topBarCenterTitle}>
-          {t("appShell.topBar.title")}
-        </Typography>
-        <Typography sx={styles.topBarCenterSubtitle}>
+    <S.TopBarContainer>
+      <S.TopBarCenter>
+        <S.TopBarCenterTitle>{t("appShell.topBar.title")}</S.TopBarCenterTitle>
+        <S.TopBarCenterSubtitle>
           {t("appShell.topBar.subtitle")}
-        </Typography>
-      </Box>
-      <Box sx={styles.topBarActions}>
-        <IconButton sx={styles.iconButton}>
+        </S.TopBarCenterSubtitle>
+      </S.TopBarCenter>
+      <S.TopBarActions>
+        <S.StyledIconButton>
           <NotificationsOutlined />
-        </IconButton>
-        <IconButton sx={styles.iconButton}>
+        </S.StyledIconButton>
+        <S.StyledIconButton>
           <SettingsOutlined />
-        </IconButton>
-        <Typography sx={styles.avatarEmail}>{userEmail}</Typography>
-        <Box sx={styles.avatarButton}>
-          <AccountCircleOutlined sx={styles.circleOutline} />
-        </Box>
-      </Box>
-    </Box>
+        </S.StyledIconButton>
+        <S.AvatarEmail>{userEmail}</S.AvatarEmail>
+        <S.AvatarButton>
+          <AccountCircleOutlined />
+        </S.AvatarButton>
+      </S.TopBarActions>
+    </S.TopBarContainer>
   );
 };
 

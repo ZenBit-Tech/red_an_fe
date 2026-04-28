@@ -1,167 +1,97 @@
 import CheckIcon from "@mui/icons-material/Check";
 import { Box, Button } from "@mui/material";
-import { styled, type Theme } from "@mui/material/styles";
-
-const deidentifyPageStyles = {
-  minHeight: "100vh",
-  paddingY: 6,
-  paddingX: 3,
-  paddingYMobile: 2,
-  paddingXMobile: 1,
-  maxContentWidth: 1560,
-  sectionsGap: 3,
-  stepperContainerPaddingDesktop: 3,
-  stepperContainerPaddingMobile: 2,
-  stepperActionsGap: 1.5,
-  stepperActionsMarginTop: 1,
-  stepperPanelBorderRadius: 3,
-  stepperIconSizeDesktop: 40,
-  stepperIconSizeMobile: 34,
-  stepperTrackHeight: 2,
-  stepperLabelOffsetDesktop: 2,
-  stepperLabelOffsetMobile: 1.5,
-} as const;
-
-interface DeidentifyStepIconProps {
+import { alpha, styled } from "@mui/material/styles";
+import { theme } from "@/common/theme/theme";
+export interface DeidentifyStepIconProps {
   isActive: boolean;
   isCompleted: boolean;
 }
 
-interface DeidentifyStepLabelProps {
+export interface DeidentifyStepLabelProps {
   isActive: boolean;
   isCompleted: boolean;
-  isFirstStep: boolean;
 }
 
-interface DeidentifyStepperProgressProps {
+export interface DeidentifyStepperProgressProps {
   activeStep: number;
   stepCount: number;
 }
 
-const getStepperColors = (theme: Theme) => ({
-  panelBackground: theme.palette.backgroundColor,
-  panelBorder: theme.palette.strokeColors[400],
-  track: theme.palette.neutralColors[800],
-  trackFill: theme.palette.primaryColors[700],
-  stepBorder: theme.palette.backgroundColor,
-  completedBackground: theme.palette.primaryColors[700],
-  activeBackground: theme.palette.primaryColors[200],
-  activeText: theme.palette.primaryColors[900],
-  inactiveBackground: theme.palette.neutralColors[800],
-  inactiveLabel: theme.palette.textColors[200],
-  firstCompletedLabel: theme.palette.primaryColors[50],
-  activeLabel: theme.palette.primaryColors[200],
-});
-
-const DEIDENTIFY_STEPPER_SHADOW = {
-  COMPLETED:
-    "0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1)",
-  ACTIVE: "0px 0px 20px 0px rgba(176, 198, 255, 0.4)",
-} as const;
+export interface DeidentifyStepConnectorProps {
+  isCompleted: boolean;
+}
 
 const getProgressWidth = (activeStep: number, stepCount: number): string => {
   if (stepCount <= 1) {
     return "0px";
   }
-
   return `${(Math.max(activeStep, 0) / (stepCount - 1)) * 100}%`;
 };
 
-const getStepperTrackTop = (
-  paddingUnits: number,
-  iconSize: number,
-  trackHeight: number,
-): string =>
-  `calc(${paddingUnits * 4}px + ${iconSize / 2}px - ${trackHeight / 2}px)`;
-
 export const DeidentifyPageWrapper = styled(Box)(({ theme }) => ({
-  minHeight: deidentifyPageStyles.minHeight,
+  minHeight: "100vh",
   boxSizing: "border-box",
   backgroundColor: theme.palette.background.default,
-  padding: theme.spacing(
-    deidentifyPageStyles.paddingY,
-    deidentifyPageStyles.paddingX,
-  ),
+  padding: theme.spacing(6, 3),
   [theme.breakpoints.down("sm")]: {
-    padding: theme.spacing(
-      deidentifyPageStyles.paddingYMobile,
-      deidentifyPageStyles.paddingXMobile,
-    ),
+    padding: theme.spacing(2, 1),
   },
 }));
 
-export const DeidentifyPageContent = styled(Box)({
+export const DeidentifyPageContent = styled(Box)(({ theme }) => ({
   width: "100%",
-  maxWidth: deidentifyPageStyles.maxContentWidth,
+  maxWidth: theme.spacing(390),
   boxSizing: "border-box",
   margin: "0 auto",
-});
-
-export const DeidentifyPageSections = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(deidentifyPageStyles.sectionsGap),
+  position: "relative",
 }));
 
-export const DeidentifyStepperContainer = styled(Box)(({ theme }) => {
-  const stepperColors = getStepperColors(theme);
+export const DeidentifyPageSections = styled(Box)(({ theme }) => ({
+  position: "relative",
+  zIndex: 1,
+  display: "flex",
+  flexDirection: "column",
+  "& > :nth-of-type(2)": {
+    marginTop: theme.spacing(4),
+  },
+  "& > :nth-of-type(3)": {
+    marginTop: theme.spacing(12.5),
+  },
+}));
 
-  return {
-    width: "100%",
-    position: "relative",
-    padding: theme.spacing(deidentifyPageStyles.stepperContainerPaddingDesktop),
-    border: `1px solid ${stepperColors.panelBorder}`,
-    borderRadius: theme.spacing(deidentifyPageStyles.stepperPanelBorderRadius),
-    backgroundColor: stepperColors.panelBackground,
-    [theme.breakpoints.down("sm")]: {
-      padding: theme.spacing(
-        deidentifyPageStyles.stepperContainerPaddingMobile,
-      ),
-    },
-  };
-});
+export const DeidentifyStepperContainer = styled(Box)(({ theme }) => ({
+  width: "100%",
+  position: "relative",
+  padding: theme.spacing(3),
+  borderRadius: theme.spacing(3),
+  backgroundColor: "transparent",
+  [theme.breakpoints.down("sm")]: {
+    padding: theme.spacing(2),
+  },
+}));
 
-export const DeidentifyStepperProgressTrack = styled(Box)(({ theme }) => {
-  const stepperColors = getStepperColors(theme);
-
-  return {
-    position: "absolute",
-    top: getStepperTrackTop(
-      deidentifyPageStyles.stepperContainerPaddingDesktop,
-      deidentifyPageStyles.stepperIconSizeDesktop,
-      deidentifyPageStyles.stepperTrackHeight,
-    ),
-    left: `calc(${theme.spacing(deidentifyPageStyles.stepperContainerPaddingDesktop)} + ${deidentifyPageStyles.stepperIconSizeDesktop / 2}px)`,
-    right: `calc(${theme.spacing(deidentifyPageStyles.stepperContainerPaddingDesktop)} + ${deidentifyPageStyles.stepperIconSizeDesktop / 2}px)`,
-    height: `${deidentifyPageStyles.stepperTrackHeight}px`,
-    backgroundColor: stepperColors.track,
-    [theme.breakpoints.down("sm")]: {
-      top: getStepperTrackTop(
-        deidentifyPageStyles.stepperContainerPaddingMobile,
-        deidentifyPageStyles.stepperIconSizeMobile,
-        deidentifyPageStyles.stepperTrackHeight,
-      ),
-      left: `calc(${theme.spacing(deidentifyPageStyles.stepperContainerPaddingMobile)} + ${deidentifyPageStyles.stepperIconSizeMobile / 2}px)`,
-      right: `calc(${theme.spacing(deidentifyPageStyles.stepperContainerPaddingMobile)} + ${deidentifyPageStyles.stepperIconSizeMobile / 2}px)`,
-    },
-  };
-});
+export const DeidentifyStepperProgressTrack = styled(Box)(({ theme }) => ({
+  position: "absolute",
+  top: `calc(${theme.spacing(3)} + ${theme.spacing(10)} / 2 - ${theme.spacing(0.5)} / 2)`,
+  left: `calc(${theme.spacing(3)} + ${theme.spacing(10)} / 2)`,
+  right: `calc(${theme.spacing(3)} + ${theme.spacing(10)} / 2)`,
+  height: theme.spacing(0.5), // 2px
+  backgroundColor: theme.palette.neutralColors[800],
+  [theme.breakpoints.down("sm")]: {
+    top: `calc(${theme.spacing(2)} + ${theme.spacing(8.5)} / 2 - ${theme.spacing(0.5)} / 2)`,
+    left: `calc(${theme.spacing(2)} + ${theme.spacing(8.5)} / 2)`,
+    right: `calc(${theme.spacing(2)} + ${theme.spacing(8.5)} / 2)`,
+  },
+}));
 
 export const DeidentifyStepperProgress = styled(Box, {
   shouldForwardProp: (prop) => prop !== "activeStep" && prop !== "stepCount",
-})<DeidentifyStepperProgressProps>(({ theme, activeStep, stepCount }) => {
-  const stepperColors = getStepperColors(theme);
-
-  return {
-    height: "100%",
-    backgroundColor: stepperColors.trackFill,
-    width: getProgressWidth(activeStep, stepCount),
-    transition: "width 220ms ease",
-    [theme.breakpoints.down("sm")]: {
-      width: getProgressWidth(activeStep, stepCount),
-    },
-  };
-});
+})<DeidentifyStepperProgressProps>(({ theme, activeStep, stepCount }) => ({
+  height: "100%",
+  backgroundColor: theme.palette.primaryColors[700],
+  width: getProgressWidth(activeStep, stepCount),
+  transition: "width 220ms ease",
+}));
 
 export const DeidentifyStepperSteps = styled(Box)({
   position: "relative",
@@ -181,110 +111,165 @@ export const DeidentifyStepItem = styled(Box)({
 export const DeidentifyStepIcon = styled(Box, {
   shouldForwardProp: (prop) => prop !== "isActive" && prop !== "isCompleted",
 })<DeidentifyStepIconProps>(({ theme, isActive, isCompleted }) => {
-  const stepperColors = getStepperColors(theme);
-
   const baseStyle = {
-    width: `${deidentifyPageStyles.stepperIconSizeDesktop}px`,
-    height: `${deidentifyPageStyles.stepperIconSizeDesktop}px`,
+    width: theme.spacing(10),
+    height: theme.spacing(10),
     borderRadius: theme.spacing(3),
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     fontWeight: theme.typography.fontWeight700,
     fontFamily: theme.typography.fontFamily,
-    fontSize: `${theme.typography.fontSize16}px`,
-    lineHeight: "1.5",
-    border: `4px solid ${stepperColors.stepBorder}`,
+    fontSize: theme.typography.fontSize16,
     transition: "all 220ms ease",
     [theme.breakpoints.down("sm")]: {
-      width: `${deidentifyPageStyles.stepperIconSizeMobile}px`,
-      height: `${deidentifyPageStyles.stepperIconSizeMobile}px`,
-      fontSize: `${theme.typography.fontSize14}px`,
-      lineHeight: "1",
+      width: theme.spacing(8.5),
+      height: theme.spacing(8.5),
+      fontSize: theme.typography.fontSize14,
     },
   } as const;
 
   if (isCompleted) {
     return {
       ...baseStyle,
-      backgroundColor: stepperColors.completedBackground,
-      color: theme.palette.common.white,
-      boxShadow: DEIDENTIFY_STEPPER_SHADOW.COMPLETED,
+      backgroundColor: theme.palette.primaryColors[700],
+      color: theme.palette.textColors[50],
+      boxShadow: `0px 10px 15px -3px ${alpha(theme.palette.neutralColors[900], 0.1)}, 0px 4px 6px -4px ${alpha(theme.palette.neutralColors[900], 0.1)}`,
     };
   }
 
   if (isActive) {
     return {
       ...baseStyle,
-      backgroundColor: stepperColors.activeBackground,
-      color: stepperColors.activeText,
-      boxShadow: DEIDENTIFY_STEPPER_SHADOW.ACTIVE,
+      backgroundColor: theme.palette.primaryColors[200],
+      color: theme.palette.primaryColors[900],
+      boxShadow: `0px 0px 20px 0px ${alpha(theme.palette.primaryColors[200], 0.4)}`,
     };
   }
 
   return {
     ...baseStyle,
-    backgroundColor: stepperColors.inactiveBackground,
-    color: stepperColors.inactiveLabel,
-  };
-});
-
-export const StepperCompletedIcon = styled(CheckIcon)(({ theme }) => ({
-  fontSize: `${theme.typography.fontSize14}px`,
-}));
-
-export const DeidentifyStepLabel = styled(Box, {
-  shouldForwardProp: (prop) =>
-    prop !== "isActive" && prop !== "isCompleted" && prop !== "isFirstStep",
-})<DeidentifyStepLabelProps>(({
-  theme,
-  isActive,
-  isCompleted,
-  isFirstStep,
-}) => {
-  const stepperColors = getStepperColors(theme);
-  let color: string = stepperColors.inactiveLabel;
-  let fontWeight = theme.typography.fontWeight500;
-
-  if (isCompleted && isFirstStep) {
-    color = stepperColors.firstCompletedLabel;
-    fontWeight = theme.typography.fontWeight400;
-  } else if (isActive) {
-    color = stepperColors.activeLabel;
-    fontWeight = theme.typography.fontWeight700;
-  }
-
-  return {
-    marginTop: theme.spacing(deidentifyPageStyles.stepperLabelOffsetDesktop),
-    fontFamily: theme.typography.fontFamily,
-    fontSize: `${theme.typography.fontSize12}px`,
-    lineHeight: "1.333",
-    textTransform: "uppercase",
-    whiteSpace: "nowrap",
-    textAlign: "center",
-    color,
-    fontWeight,
-    [theme.breakpoints.down("sm")]: {
-      marginTop: theme.spacing(deidentifyPageStyles.stepperLabelOffsetMobile),
-      fontSize: `${theme.typography.fontSize10}px`,
-      lineHeight: "1.4",
-    },
+    backgroundColor: theme.palette.neutralColors[800],
+    color: theme.palette.textColors[200],
   };
 });
 
 export const StepperActionsContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "flex-end",
-  gap: theme.spacing(deidentifyPageStyles.stepperActionsGap),
-  marginTop: theme.spacing(deidentifyPageStyles.stepperActionsMarginTop),
+  alignItems: "center",
+  gap: theme.spacing(1.5),
+  marginTop: theme.spacing(20),
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column-reverse",
   },
 }));
 
 export const StepperActionButton = styled(Button)(({ theme }) => ({
-  minWidth: theme.spacing(18),
+  width: theme.spacing(48.75),
+  height: theme.spacing(14),
+  minWidth: 0,
+  padding: theme.spacing(3, 20),
+  borderRadius: theme.spacing(2),
+  backgroundImage: `linear-gradient(167deg, ${theme.palette.primaryColors[700]} 0%, ${theme.palette.primaryColors[900]} 100%)`,
+  backgroundColor: "transparent",
+  color: theme.palette.textColors[50],
+  fontFamily: theme.typography.fontFamily,
+  fontWeight: theme.typography.fontWeight700,
+  fontSize: theme.typography.fontSize20,
+  textAlign: "right",
+  textTransform: "none",
+  "&:hover": {
+    backgroundImage: `linear-gradient(167deg, ${theme.palette.primaryColors[700]} 0%, ${theme.palette.primaryColors[900]} 100%)`,
+    filter: "brightness(1.08)",
+  },
+  "&.Mui-disabled": {
+    backgroundImage: `linear-gradient(167deg, ${theme.palette.primaryColors[800]} 0%, ${theme.palette.neutralColors[900]} 100%)`,
+    color: alpha(theme.palette.textColors[50], 0.45),
+    filter: "brightness(0.55)",
+    cursor: "not-allowed",
+    pointerEvents: "auto",
+  },
   [theme.breakpoints.down("sm")]: {
     width: "100%",
   },
+}));
+
+export const StepperBackButton = styled(Button)(({ theme }) => ({
+  marginRight: "auto",
+  padding: theme.spacing(1.5, 1),
+  color: theme.palette.textColors[200],
+  backgroundImage: "none",
+  backgroundColor: "transparent",
+  fontFamily: theme.typography.fontFamily,
+  fontWeight: theme.typography.fontWeight700,
+  fontSize: theme.typography.fontSize16,
+  textAlign: "center",
+  textTransform: "none",
+  "&:hover": {
+    backgroundImage: "none",
+    backgroundColor: alpha(theme.palette.textColors[50], 0.04),
+  },
+  "&.Mui-disabled": {
+    color: alpha(theme.palette.textColors[200], 0.5),
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+  },
+}));
+
+export const DeidentifyStepConnector = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isCompleted",
+})<DeidentifyStepConnectorProps>(({ theme, isCompleted }) => ({
+  flex: 1,
+  alignSelf: "flex-start",
+  height: isCompleted ? theme.spacing(0.5) : theme.spacing(0.5),
+  backgroundColor: isCompleted
+    ? theme.palette.primaryColors[700]
+    : theme.palette.neutralColors[800],
+  marginTop: `calc(${theme.spacing(10)} / 2)`,
+  transition: "background-color 220ms ease, height 220ms ease",
+  [theme.breakpoints.down("sm")]: {
+    marginTop: `calc(${theme.spacing(8.5)} / 2)`,
+  },
+}));
+
+export const DeidentifyStepLabel = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isActive" && prop !== "isCompleted",
+})<DeidentifyStepLabelProps>(({ theme, isActive, isCompleted }) => ({
+  marginTop: theme.spacing(2),
+  fontFamily: theme.typography.fontFamily,
+  fontSize: theme.typography.fontSize12,
+  textTransform: "uppercase",
+  whiteSpace: "nowrap",
+  textAlign: "center",
+  color: isCompleted
+    ? theme.palette.primaryColors[200]
+    : isActive
+      ? theme.palette.primaryColors[50]
+      : theme.palette.textColors[200],
+  fontWeight:
+    isActive || isCompleted
+      ? theme.typography.fontWeight700
+      : theme.typography.fontWeight500,
+  [theme.breakpoints.down("sm")]: {
+    marginTop: theme.spacing(1.5),
+    fontSize: theme.typography.fontSize10,
+  },
+}));
+
+export const backgroundGlow = {
+  position: "absolute",
+  top: theme.spacing(-25),
+  left: theme.spacing(-12.5),
+  width: theme.spacing(175),
+  height: theme.spacing(75),
+  background: theme.palette.strokeColors[120],
+  filter: `blur(${theme.spacing(25)})`,
+  borderRadius: "50%",
+  pointerEvents: "none",
+  zIndex: 0,
+};
+export const StepperCompletedIcon = styled(CheckIcon)(({ theme }) => ({
+  fontSize: theme.typography.fontSize20,
 }));

@@ -1,101 +1,80 @@
-import { Grid } from "@mui/material";
-import CheckIcon from "@mui/icons-material/Check";
+import React from "react";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useComplianceSelection } from "@/components/ComplianceSelect/useComplianceSelection";
-import {
-  CardHeader,
-  FrameworkChip,
-  FrameworkDescription,
-  FrameworkEntityCount,
-  SelectionCard,
-  SelectionContainer,
-  SelectionListHeader,
-  SelectionListSubtitle,
-  SelectedIconWrapper,
-  SelectionSubtitle,
-  SelectionTitle,
-} from "@/components/ComplianceSelect/styles";
-
-const handleSelectionCardKeyDown = (
-  event: React.KeyboardEvent<HTMLDivElement>,
-  onToggle: () => void,
-) => {
-  if (event.key === "Enter" || event.key === " ") {
-    event.preventDefault();
-    onToggle();
-  }
-};
+import { handleSelectionCardKeyDown } from "@/components/ComplianceSelect/constants";
+import * as S from "./styles";
 
 export const ComplianceFrameworkSelection: React.FC = () => {
   const { t, frameworks, selectedFramework, handleSelect } =
     useComplianceSelection();
 
   return (
-    <SelectionContainer>
-      <SelectionTitle gutterBottom>
-        {t("compliance.selection.title")}
-      </SelectionTitle>
-      <SelectionSubtitle>
-        {t("compliance.selection.subtitle")}
-      </SelectionSubtitle>
+    <S.SelectionContainer>
+      <S.SelectionHeader>
+        <S.SelectionTitle>
+          {t("compliance.selection.title")}{" "}
+          <S.SelectionTitleHighlight>
+            {t("compliance.selection.titleHighlight")}
+          </S.SelectionTitleHighlight>
+        </S.SelectionTitle>
+        <S.SelectionSubtitle>
+          {t("compliance.selection.subtitle")}
+        </S.SelectionSubtitle>
+      </S.SelectionHeader>
 
-      <SelectionListHeader>
-        {t("compliance.selection.listHeader")}
-      </SelectionListHeader>
-      <SelectionListSubtitle>
-        {t("compliance.selection.listSubtitle")}
-      </SelectionListSubtitle>
-
-      <Grid
-        container
-        columnSpacing={{ xs: 0, sm: 2 }}
-        rowSpacing={{ xs: 1.5, sm: 2.5 }}
-        role="radiogroup"
-      >
+      <S.CardsWrapper role="radiogroup">
         {frameworks.map((framework) => {
           const isSelected = selectedFramework === framework.id;
           const selectFramework = () => handleSelect(framework.id);
+          const isDeveloper = framework.category
+            ?.toLowerCase()
+            .includes("developer");
 
           return (
-            <Grid key={framework.id} size={{ xs: 12, sm: 6 }}>
-              <SelectionCard
+            <S.SelectionCard
+              key={framework.id}
+              selected={isSelected}
+              elevation={0}
+              onClick={selectFramework}
+              onKeyDown={(event) =>
+                handleSelectionCardKeyDown(event, selectFramework)
+              }
+              role="radio"
+              aria-checked={isSelected}
+              tabIndex={0}
+            >
+              <S.FrameworkCategory
                 selected={isSelected}
-                elevation={0}
-                onClick={selectFramework}
-                onKeyDown={(event) =>
-                  handleSelectionCardKeyDown(event, selectFramework)
-                }
-                role="radio"
-                aria-checked={isSelected}
-                tabIndex={0}
+                isDeveloper={isDeveloper}
               >
-                <CardHeader>
-                  <FrameworkChip
-                    frameworkId={framework.id}
-                    label={framework.label}
-                    size="small"
-                  />
-                  {isSelected && (
-                    <SelectedIconWrapper>
-                      <CheckIcon fontSize="inherit" />
-                    </SelectedIconWrapper>
-                  )}
-                </CardHeader>
+                {framework.category}
+              </S.FrameworkCategory>
 
-                <FrameworkDescription>
-                  {framework.description}
-                </FrameworkDescription>
+              <S.FrameworkTitle>{framework.label}</S.FrameworkTitle>
 
-                {framework.entityCount !== undefined && (
-                  <FrameworkEntityCount>
-                    {framework.entityCount}{" "}
-                    {t("compliance.selection.entityTypes")}
-                  </FrameworkEntityCount>
+              <S.FrameworkDescription>
+                {framework.description}
+              </S.FrameworkDescription>
+
+              <S.CardFooter>
+                {isSelected ? (
+                  <S.CardFooterLabel selected>
+                    {t("compliance.selection.activeSelection")}
+                    <CheckCircleOutlineIcon />
+                    <S.SelectedLine />
+                  </S.CardFooterLabel>
+                ) : (
+                  <S.CardFooterLabel selected={false}>
+                    {t("compliance.selection.selectProtocol")}
+                    <ArrowForwardIcon />
+                  </S.CardFooterLabel>
                 )}
-              </SelectionCard>
-            </Grid>
+              </S.CardFooter>
+            </S.SelectionCard>
           );
         })}
-      </Grid>
-    </SelectionContainer>
+      </S.CardsWrapper>
+    </S.SelectionContainer>
   );
 };
