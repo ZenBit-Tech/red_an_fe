@@ -45,7 +45,6 @@ const DeidentifyPage = () => {
         <DeidentifySettings
           onAnalyze={handleAnalyzeWithSettings}
           initialValues={confirmedSettings}
-          submitButtonLabel={t("deidentify.stepper.actions.analyzeAndContinue")}
         />
       );
     }
@@ -94,6 +93,13 @@ const DeidentifyPage = () => {
           >
             {t("deidentify.stepper.actions.back")}
           </S.StepperBackButton>
+          <S.StepperActionButton
+            type="submit"
+            form="deidentify-settings-form"
+            endIcon={<ArrowForwardIcon />}
+          >
+            {t("deidentify.stepper.actions.analyzeAndContinue")}
+          </S.StepperActionButton>
         </S.StepperActionsContainer>
       );
     }

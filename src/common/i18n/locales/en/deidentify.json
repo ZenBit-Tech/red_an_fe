@@ -45,18 +45,23 @@
         "next": "Next Step",
         "back": "Previous Step",
         "continue": "Continue",
-        "analyzeAndContinue": "Analyze and Continue",
+        "analyzeAndContinue": "Analyze",
         "restart": "Start Over"
       }
+    },
+    "transformation": {
+      "title": "Transformation",
+      "subtitle": "Define the algorithmic parameters for sensitive data scrubbing and PII suppression across clinical documents.",
+      "frameworkLabel": "Framework:"
     },
     "settings": {
       "title": "De-Identification Settings",
       "subtitle": "Configure how to handle sensitive information",
       "method": "De-Identification Method",
-      "threshold": "Detection Threshold",
-      "thresholdHint": "Minimum confidence score to include a detection",
-      "preserveStructure": "Preserve Structure",
-      "preserveStructureHint": "Keep the original text formatting in the output",
+      "threshold": "Confidence Threshold",
+      "thresholdHint": "Set the minimum confidence threshold (starting from 50%) — only entities above this value will be de-identified.",
+      "preserveStructure": "Preserve Document Structure",
+      "preserveStructureHint": "Maintain formatting and length",
       "analyze": "Analyze"
     },
     "clinicalInput": {
