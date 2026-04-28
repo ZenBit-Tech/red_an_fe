@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
 import { analyzeText } from "@/common/api/deidentifyApi";
-import { useAppSelector } from "@/common/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/common/hooks/hooks";
+import { resetActiveStep, setActiveStep } from "@/store/deidentifyStepSlice";
 import {
   mapFindingToEntity,
   type Entity,
@@ -39,9 +40,8 @@ interface UseDeidentifyReturn {
 }
 
 export const useDeidentify = (): UseDeidentifyReturn => {
-  const [activeStep, setActiveStep] = useState<number>(
-    DEIDENTIFY_STEP.FRAMEWORK,
-  );
+  const dispatch = useAppDispatch();
+  const activeStep = useAppSelector((state) => state.deidentifyStep.activeStep);
   const [confirmedSettings, setConfirmedSettings] =
     useState<DeidentifySettingsFormData>(DEFAULT_DEIDENTIFY_SETTINGS);
   const [analysisRunId, setAnalysisRunId] = useState(0);
@@ -111,7 +111,7 @@ export const useDeidentify = (): UseDeidentifyReturn => {
       setEntities(mappedEntities);
       setAnalyzedInputText(clinicalText);
       setAnalysisRunId((prevRunId) => prevRunId + 1);
-      setActiveStep(DEIDENTIFY_STEP.RESULT);
+      dispatch(setActiveStep(DEIDENTIFY_STEP.RESULT));
     } catch (error: unknown) {
       if (error instanceof Error) {
         throw error;
@@ -122,13 +122,13 @@ export const useDeidentify = (): UseDeidentifyReturn => {
   };
 
   const handleStepBack = (): void => {
-    setActiveStep((prevStep) =>
-      Math.max(prevStep - 1, DEIDENTIFY_STEP.FRAMEWORK),
+    dispatch(
+      setActiveStep(Math.max(activeStep - 1, DEIDENTIFY_STEP.FRAMEWORK)),
     );
   };
 
   const handleFrameworkNext = (): void => {
-    setActiveStep(DEIDENTIFY_STEP.INPUT_DATA);
+    dispatch(setActiveStep(DEIDENTIFY_STEP.INPUT_DATA));
   };
 
   const handleInputNext = (): void => {
@@ -136,11 +136,11 @@ export const useDeidentify = (): UseDeidentifyReturn => {
       return;
     }
 
-    setActiveStep(DEIDENTIFY_STEP.SETTINGS);
+    dispatch(setActiveStep(DEIDENTIFY_STEP.SETTINGS));
   };
 
   const handleRestart = (): void => {
-    setActiveStep(DEIDENTIFY_STEP.FRAMEWORK);
+    dispatch(resetActiveStep());
     setAnalysisRunId(0);
     setAnalyzedInputText("");
     setJobId("");
