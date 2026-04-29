@@ -128,22 +128,24 @@
       "synthetic": "Replaces regulated values with realistic synthetic equivalents for safe analysis"
     },
     "analysisResults": {
-      "title": "Analysis Results",
-      "subtitle": "Review detected entities and de-identified output",
-      "input": {
-        "label": "Input",
-        "description": "Original text with detected entities highlighted"
-      },
+      "titlePart1": "Findings &",
+      "titleHighlight": "Results",
+      "subtitle1": "Final validation of the clinical de-identification process.",
+      "subtitle2": "All sensitive identifiers have been replaced with high-fidelity synthetic proxies.",
+      "panelTitle": "Original Clinical Text",
+      "restrictedBadge": "Restricted",
+      "anonymizedBadge": "Anonymized",
       "output": {
-        "label": "Output",
-        "description": "De-identified text",
         "actions": {
           "copy": "Copy",
           "copied": "Copied",
-          "download": "Download",
-          "formatTxt": "TXT",
-          "formatPdf": "PDF"
+          "download": "Download"
         }
+      },
+      "cta": {
+        "title": "Findings with decision factors",
+        "subtitle": "Use your de-identified data to create realistic synthetic data sets for testing and development",
+        "button": "Generate Synthetic Data"
       },
       "table": {
         "title": "Findings with decision factors",

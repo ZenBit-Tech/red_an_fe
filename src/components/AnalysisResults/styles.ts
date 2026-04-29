@@ -76,6 +76,55 @@ const getDecisionBackgroundColor = (
   return alpha(theme.palette.neutralColors[300], 0.14);
 };
 
+export const AnalysisResultsWrapper = styled(Box)(({ theme }) => ({
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(5),
+}));
+
+export const AnalysisPageTitleGroup = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(1.5),
+  minHeight: theme.spacing(43),
+  [theme.breakpoints.down("md")]: {
+    minHeight: "auto",
+  },
+}));
+
+export const AnalysisPageTitle = styled("h1")(({ theme }) => ({
+  fontFamily: theme.typography.fontFamily,
+  fontWeight: theme.typography.fontWeight700,
+  fontSize: theme.typography.fontSize48,
+  color: theme.palette.textColors[50],
+  margin: 0,
+  [theme.breakpoints.down("md")]: {
+    fontSize: theme.typography.fontSize26,
+  },
+  [theme.breakpoints.down("sm")]: {
+    fontSize: theme.typography.fontSize24,
+  },
+}));
+
+export const AnalysisPageTitleHighlight = styled("span")(({ theme }) => ({
+  backgroundImage: `linear-gradient(161deg, ${theme.palette.primaryColors[200]} 0%, ${theme.palette.primaryColors[700]} 100%)`,
+  WebkitBackgroundClip: "text",
+  backgroundClip: "text",
+  color: "transparent",
+}));
+
+export const AnalysisPageSubtitle = styled("p")(({ theme }) => ({
+  fontFamily: theme.typography.fontFamily,
+  fontSize: theme.typography.fontSize20,
+  fontWeight: theme.typography.fontWeight500,
+  color: theme.palette.textColors[200],
+  margin: 0,
+  [theme.breakpoints.down("sm")]: {
+    fontSize: theme.typography.fontSize14,
+  },
+}));
+
 export const AnalysisResultsContainer = styled(Box)(({ theme }) => ({
   width: "100%",
   maxWidth: "100%",
@@ -83,17 +132,8 @@ export const AnalysisResultsContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(analysisResultsStyles.containerGapDesktop),
-  padding: theme.spacing(analysisResultsStyles.containerPaddingDesktop),
-  border: `1px solid ${theme.palette.divider}`,
-  borderRadius: theme.spacing(analysisResultsStyles.containerBorderRadius),
-  backgroundColor: theme.palette.background.default,
-  boxShadow: "0 10px 30px rgba(15, 23, 42, 0.04)",
-  [theme.breakpoints.down("md")]: {
-    padding: theme.spacing(analysisResultsStyles.containerPaddingTablet),
-  },
   [theme.breakpoints.down("sm")]: {
     gap: theme.spacing(analysisResultsStyles.containerGapMobile),
-    padding: theme.spacing(analysisResultsStyles.containerPaddingMobile),
   },
 }));
 
@@ -149,37 +189,41 @@ export const ResultPanel = styled(Paper)(({ theme }) => ({
   },
 }));
 
-export const PanelHeader = styled(Box)(({ theme }) => ({
+export const PanelTitleRow = styled(Box)({
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "flex-start",
-  gap: theme.spacing(2),
-  [theme.breakpoints.down("sm")]: {
-    flexDirection: "column",
-    alignItems: "stretch",
-    gap: theme.spacing(1),
-  },
-}));
+  alignItems: "center",
+});
 
-export const PanelHeaderCopy = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(0.25),
-}));
-
-export const PanelLabel = styled(Box)(({ theme }) => ({
+export const PanelTitle = styled(Box)(({ theme }) => ({
   fontSize: `${theme.typography.fontSize16}px`,
-  fontWeight: theme.typography.fontWeight600,
-  color: theme.palette.text.primary,
+  fontWeight: theme.typography.fontWeight700,
+  color: theme.palette.textColors[50],
   [theme.breakpoints.down("md")]: {
     fontSize: `${theme.typography.fontSize14}px`,
   },
 }));
 
-export const PanelDescription = styled(Box)(({ theme }) => ({
+export const RestrictedBadge = styled(Box)(({ theme }) => ({
+  display: "inline-flex",
+  alignItems: "center",
+  padding: theme.spacing(0.5, 2),
+  borderRadius: theme.spacing(1),
+  backgroundColor: alpha(theme.palette.warning.main, 0.15),
+  color: theme.palette.warning.main,
   fontSize: `${theme.typography.fontSize12}px`,
-  fontWeight: theme.typography.fontWeight400,
-  color: theme.palette.text.secondary,
+  fontWeight: theme.typography.fontWeight600,
+}));
+
+export const AnonymizedBadge = styled(Box)(({ theme }) => ({
+  display: "inline-flex",
+  alignItems: "center",
+  padding: theme.spacing(0.5, 2),
+  borderRadius: theme.spacing(1),
+  backgroundColor: alpha(theme.palette.primaryColors[700], 0.2),
+  color: theme.palette.primaryColors[200],
+  fontSize: `${theme.typography.fontSize12}px`,
+  fontWeight: theme.typography.fontWeight600,
 }));
 
 export const PanelSurface = styled(Box)(({ theme }) => ({
@@ -407,18 +451,6 @@ export const NumericText = styled(Box)<MutedStateProps>(
 
 export const ScoreBadge = styled(Box)<MutedStateProps>(
   ({ inactive, theme }) => ({
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    minWidth: 36,
-    padding: theme.spacing(0.125, 0.5),
-    borderRadius: theme.spacing(analysisResultsStyles.badgeRadius / 8),
-    border: inactive
-      ? `1px solid ${theme.palette.neutralColors[600]}`
-      : `1px solid ${alpha(theme.palette.warning.main, 0.28)}`,
-    backgroundColor: inactive
-      ? theme.palette.neutralColors[800]
-      : alpha(theme.palette.warning.main, 0.08),
     color: inactive
       ? theme.palette.neutralColors[300]
       : theme.palette.warning.main,
@@ -427,6 +459,20 @@ export const ScoreBadge = styled(Box)<MutedStateProps>(
     fontVariantNumeric: "tabular-nums",
   }),
 );
+
+interface RecognizerChipProps {
+  chipColor: string;
+  inactive?: boolean;
+}
+
+export const RecognizerChip = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "chipColor" && prop !== "inactive",
+})<RecognizerChipProps>(({ chipColor, inactive, theme }) => ({
+  display: "inline",
+  color: inactive ? theme.palette.neutralColors[300] : chipColor,
+  fontSize: `${theme.typography.fontSize12}px`,
+  fontWeight: theme.typography.fontWeight600,
+}));
 
 export const HighlightedEntity = styled("span")(({ theme }) => ({
   display: "inline-flex",
@@ -539,5 +585,65 @@ export const ActionToggleButton = styled(Button, {
       ? alpha(theme.palette.primary.main, 0.18)
       : theme.palette.neutralColors[700],
     boxShadow: "none",
+  },
+}));
+
+export const ResultCtaSection = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: theme.spacing(6),
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+  },
+}));
+
+export const ResultCtaTextGroup = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(1.5),
+}));
+
+export const ResultCtaTitle = styled(Box)(({ theme }) => ({
+  fontFamily: theme.typography.fontFamily,
+  fontSize: `${theme.typography.fontSize20}px`,
+  fontWeight: theme.typography.fontWeight700,
+  backgroundImage: `linear-gradient(161deg, ${theme.palette.primaryColors[200]} 0%, ${theme.palette.primaryColors[700]} 100%)`,
+  WebkitBackgroundClip: "text",
+  backgroundClip: "text",
+  color: "transparent",
+  [theme.breakpoints.down("md")]: {
+    fontSize: `${theme.typography.fontSize16}px`,
+  },
+}));
+
+export const ResultCtaSubtitle = styled(Box)(({ theme }) => ({
+  fontFamily: theme.typography.fontFamily,
+  fontSize: `${theme.typography.fontSize14}px`,
+  fontWeight: theme.typography.fontWeight400,
+  color: theme.palette.textColors[200],
+  maxWidth: theme.spacing(150),
+}));
+
+export const ResultCtaButton = styled(Button)(({ theme }) => ({
+  flexShrink: 0,
+  height: theme.spacing(14),
+  minWidth: 0,
+  padding: theme.spacing(3, 8),
+  borderRadius: theme.spacing(2),
+  backgroundImage: `linear-gradient(167deg, ${theme.palette.primaryColors[700]} 0%, ${theme.palette.primaryColors[900]} 100%)`,
+  backgroundColor: "transparent",
+  color: theme.palette.textColors[50],
+  fontFamily: theme.typography.fontFamily,
+  fontWeight: theme.typography.fontWeight700,
+  fontSize: theme.typography.fontSize16,
+  textTransform: "none",
+  "&:hover": {
+    backgroundImage: `linear-gradient(167deg, ${theme.palette.primaryColors[700]} 0%, ${theme.palette.primaryColors[900]} 100%)`,
+    filter: "brightness(1.08)",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
   },
 }));
