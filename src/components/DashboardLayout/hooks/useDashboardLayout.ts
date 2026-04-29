@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { APP_ROUTES, STORAGE_KEYS } from "@/constants/index";
-import type { NavKey } from "@/components/sidebar/constant";
+import type { NavKey } from "@/components/Sidebar/constant";
 
 const NAV_KEY_TO_ROUTE: Record<NavKey, string> = {
   dashboard: APP_ROUTES.DASHBOARD,

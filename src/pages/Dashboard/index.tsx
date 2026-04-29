@@ -1,208 +1,217 @@
 import { useTranslation } from "react-i18next";
-import { Box, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import {
-  FolderOpen,
-  DescriptionOutlined,
   CheckCircleOutlined,
+  DescriptionOutlined,
   Fingerprint,
-  InfoOutlined,
+  FolderOpen,
   HourglassEmpty,
+  InfoOutlined,
 } from "@mui/icons-material";
-import * as styles from "@/pages/Dashboard/styles";
+import { APP_ROUTES } from "@/constants";
 import {
   DEFAULT_STATS,
   MOCK_CHART_SKELETONS,
   TIME_FILTERS,
 } from "@/pages/Dashboard/constants";
 import { useDashboard } from "@/pages/Dashboard/hooks/useDashboard";
+import * as S from "@/pages/Dashboard/styles";
 
 const DashboardPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { activeTime, setActiveTime } = useDashboard();
+
+  const handleStartDeidentify = (): void => {
+    navigate(APP_ROUTES.DEIDENTIFY);
+  };
 
   const STAT_CARDS = [
     {
       label: t("dashboard.stats.totalDocuments"),
       value: DEFAULT_STATS.TOTAL_DOCUMENTS,
-      icon: <DescriptionOutlined sx={styles.statIcon} />,
+      icon: <DescriptionOutlined />,
     },
     {
       label: t("dashboard.stats.entitiesDetected"),
       value: DEFAULT_STATS.ENTITIES_DETECTED,
-      icon: <CheckCircleOutlined sx={styles.statIcon} />,
+      icon: <CheckCircleOutlined />,
     },
     {
       label: t("dashboard.stats.avgCompleteness"),
       value: DEFAULT_STATS.AVG_COMPLETENESS,
-      icon: <Fingerprint sx={styles.statIcon} />,
+      icon: <Fingerprint />,
     },
     {
       label: t("dashboard.stats.successRate"),
       value: DEFAULT_STATS.SUCCESS_RATE,
-      icon: <FolderOpen sx={styles.statIcon} />,
+      icon: <FolderOpen />,
     },
   ];
 
   return (
-    <Box sx={styles.pageScroll}>
-      <Box sx={styles.contentContainer}>
-        <Box sx={styles.pageHeaderWrapper}>
-          <Box sx={styles.backgroundGlow} />
-          <Box sx={styles.pageHeaderRow1}>
-            <Box>
-              <Typography sx={styles.pageTitle}>
-                {t("dashboard.page.title")}
-              </Typography>
-              <Typography sx={styles.pageSubtitle}>
-                {t("dashboard.page.subtitle")}
-              </Typography>
-            </Box>
-            <Box sx={styles.headerActionsColumn}>
-              <Box sx={styles.infoBox}>
-                <Box sx={styles.infoBanner}>
-                  <InfoOutlined sx={styles.infoIcon} />
-                  <Typography sx={styles.infoBannerText}>
+    <S.PageScrollContainer>
+      <S.ContentContainer>
+        <S.PageHeaderWrapper>
+          <S.BackgroundGlow />
+          <S.PageHeaderRow1>
+            <div>
+              <S.PageTitle>{t("dashboard.page.title")}</S.PageTitle>
+              <S.PageSubtitle>{t("dashboard.page.subtitle")}</S.PageSubtitle>
+            </div>
+            <S.HeaderActionsColumn>
+              <S.InfoBox>
+                <S.InfoBanner>
+                  <InfoOutlined />
+                  <S.InfoBannerText>
                     {t("dashboard.page.infoBanner")}
-                  </Typography>
-                </Box>
-                <Button variant="contained" sx={styles.startButton}>
+                  </S.InfoBannerText>
+                </S.InfoBanner>
+                <S.StartButton
+                  variant="contained"
+                  disableRipple
+                  disableElevation
+                  onClick={handleStartDeidentify}
+                >
                   {t("dashboard.page.startButton")}
-                </Button>
-              </Box>
-              <Box sx={styles.timeFilterGroup}>
+                </S.StartButton>
+              </S.InfoBox>
+              <S.TimeFilterGroup>
                 {TIME_FILTERS.map((tf) => (
-                  <Box
+                  <S.TimeFilterPill
                     key={tf.key}
-                    sx={styles.timeFilterPill(activeTime === tf.key)}
+                    active={activeTime === tf.key}
                     onClick={() => setActiveTime(tf.key)}
                   >
-                    <Typography
-                      sx={styles.timeFilterText(activeTime === tf.key)}
-                    >
+                    <S.TimeFilterText active={activeTime === tf.key}>
                       {t(tf.labelKey)}
-                    </Typography>
-                  </Box>
+                    </S.TimeFilterText>
+                  </S.TimeFilterPill>
                 ))}
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-        <Box sx={styles.topSectionGrid}>
-          <Box sx={styles.statCardsColumn}>
+              </S.TimeFilterGroup>
+            </S.HeaderActionsColumn>
+          </S.PageHeaderRow1>
+        </S.PageHeaderWrapper>
+
+        <S.TopSectionGrid>
+          <S.StatCardsColumn>
             {STAT_CARDS.map((card) => (
-              <Box key={card.label} sx={styles.statCard}>
-                <Box sx={styles.statCardHeader}>
-                  <Typography sx={styles.statLabel}>{card.label}</Typography>
-                  <Box sx={styles.statIconBox}>{card.icon}</Box>
-                </Box>
-                <Typography sx={styles.statValue}>{card.value}</Typography>
-                <Box sx={styles.statFooter}>
-                  <HourglassEmpty sx={styles.statFooterIcon} />
-                  <Typography sx={styles.statFooterText}>
+              <S.StatCard key={card.label}>
+                <S.StatCardHeader>
+                  <S.StatLabel>{card.label}</S.StatLabel>
+                  <S.StatIconBox>{card.icon}</S.StatIconBox>
+                </S.StatCardHeader>
+                <S.StatValue>{card.value}</S.StatValue>
+                <S.StatFooter>
+                  <HourglassEmpty />
+                  <S.StatFooterText>
                     {t("dashboard.stats.awaitingData")}
-                  </Typography>
-                </Box>
-              </Box>
+                  </S.StatFooterText>
+                </S.StatFooter>
+              </S.StatCard>
             ))}
-          </Box>
-          <Box sx={styles.complianceCard}>
-            <Box sx={styles.chartHeader}>
-              <Typography sx={styles.chartTitle}>
+          </S.StatCardsColumn>
+          <S.ComplianceCard>
+            <S.ChartHeader>
+              <S.ChartTitle>
                 {t("dashboard.charts.complianceFramework")}
-              </Typography>
-              <Typography sx={styles.chartSubtitle}>
+              </S.ChartTitle>
+              <S.ChartSubtitle>
                 {t("dashboard.charts.complianceSubtitle")}
-              </Typography>
-            </Box>
-            <Box sx={styles.skeletonCenter}>
-              <Box sx={styles.donutSkeleton} />
-            </Box>
-          </Box>
-        </Box>
-        <Box sx={styles.fullWidthCard}>
-          <Box sx={styles.chartHeader}>
-            <Typography sx={styles.chartTitle}>
+              </S.ChartSubtitle>
+            </S.ChartHeader>
+            <S.SkeletonCenter>
+              <S.DonutSkeleton />
+            </S.SkeletonCenter>
+          </S.ComplianceCard>
+        </S.TopSectionGrid>
+
+        <S.FullWidthCard>
+          <S.ChartHeader>
+            <S.ChartTitle>
               {t("dashboard.charts.entityTypesDetected")}
-            </Typography>
-            <Typography sx={styles.chartSubtitle}>
+            </S.ChartTitle>
+            <S.ChartSubtitle>
               {t("dashboard.charts.entitySubtitle")}
-            </Typography>
-          </Box>
-          <Box sx={styles.barSkeletonContainer}>
+            </S.ChartSubtitle>
+          </S.ChartHeader>
+          <S.BarSkeletonContainer>
             {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
-              <Box key={i} sx={styles.barSkeletonCol}>
-                <Box sx={styles.barSkeletonDynamic(h)} />
-                <Typography sx={styles.barSkeletonLabel}>
+              <S.BarSkeletonCol key={i}>
+                <S.BarSkeletonDynamic heightPercent={h} />
+                <S.BarSkeletonLabel>
                   {t("dashboard.charts.noneLabel")}
-                </Typography>
-              </Box>
+                </S.BarSkeletonLabel>
+              </S.BarSkeletonCol>
             ))}
-          </Box>
-        </Box>
-        <Box sx={styles.twoColGrid}>
-          <Box sx={styles.halfWidthCard}>
-            <Box sx={styles.chartHeader}>
-              <Typography sx={styles.chartTitle}>
+          </S.BarSkeletonContainer>
+        </S.FullWidthCard>
+
+        <S.TwoColGrid>
+          <S.HalfWidthCard>
+            <S.ChartHeader>
+              <S.ChartTitle>
                 {t("dashboard.charts.processingHistory")}
-              </Typography>
-              <Typography sx={styles.chartSubtitle}>
+              </S.ChartTitle>
+              <S.ChartSubtitle>
                 {t("dashboard.charts.historySubtitle")}
-              </Typography>
-            </Box>
-            <Box sx={styles.barSkeletonContainer}>
+              </S.ChartSubtitle>
+            </S.ChartHeader>
+            <S.BarSkeletonContainer>
               {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
-                <Box key={i} sx={styles.barSkeletonCol}>
-                  <Box sx={styles.barSkeletonDynamic(h)} />
-                  <Typography sx={styles.barSkeletonLabel}>
+                <S.BarSkeletonCol key={i}>
+                  <S.BarSkeletonDynamic heightPercent={h} />
+                  <S.BarSkeletonLabel>
                     {t("dashboard.charts.noneLabel")}
-                  </Typography>
-                </Box>
+                  </S.BarSkeletonLabel>
+                </S.BarSkeletonCol>
               ))}
-            </Box>
-          </Box>
-          <Box sx={styles.halfWidthCard}>
-            <Box sx={styles.chartHeader}>
-              <Typography sx={styles.chartTitle}>
+            </S.BarSkeletonContainer>
+          </S.HalfWidthCard>
+          <S.HalfWidthCard>
+            <S.ChartHeader>
+              <S.ChartTitle>
                 {t("dashboard.charts.confidenceScore")}
-              </Typography>
-              <Typography sx={styles.chartSubtitle}>
+              </S.ChartTitle>
+              <S.ChartSubtitle>
                 {t("dashboard.charts.confidenceSubtitle")}
-              </Typography>
-            </Box>
-            <Box sx={styles.barSkeletonContainer}>
+              </S.ChartSubtitle>
+            </S.ChartHeader>
+            <S.BarSkeletonContainer>
               {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
-                <Box key={i} sx={styles.barSkeletonCol}>
-                  <Box sx={styles.barSkeletonDynamic(h)} />
-                  <Typography sx={styles.barSkeletonLabel}>
+                <S.BarSkeletonCol key={i}>
+                  <S.BarSkeletonDynamic heightPercent={h} />
+                  <S.BarSkeletonLabel>
                     {t("dashboard.charts.noneLabel")}
-                  </Typography>
-                </Box>
+                  </S.BarSkeletonLabel>
+                </S.BarSkeletonCol>
               ))}
-            </Box>
-          </Box>
-        </Box>
-        <Box sx={styles.fullWidthCard}>
-          <Box sx={styles.chartHeader}>
-            <Typography sx={styles.chartTitle}>
+            </S.BarSkeletonContainer>
+          </S.HalfWidthCard>
+        </S.TwoColGrid>
+
+        <S.FullWidthCard>
+          <S.ChartHeader>
+            <S.ChartTitle>
               {t("dashboard.charts.deIdentificationMethod")}
-            </Typography>
-            <Typography sx={styles.chartSubtitle}>
+            </S.ChartTitle>
+            <S.ChartSubtitle>
               {t("dashboard.charts.methodSubtitle")}
-            </Typography>
-          </Box>
-          <Box sx={styles.barSkeletonContainer}>
+            </S.ChartSubtitle>
+          </S.ChartHeader>
+          <S.BarSkeletonContainer>
             {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
-              <Box key={i} sx={styles.barSkeletonCol}>
-                <Box sx={styles.barSkeletonDynamic(h)} />
-                <Typography sx={styles.barSkeletonLabel}>
+              <S.BarSkeletonCol key={i}>
+                <S.BarSkeletonDynamic heightPercent={h} />
+                <S.BarSkeletonLabel>
                   {t("dashboard.charts.noneLabel")}
-                </Typography>
-              </Box>
+                </S.BarSkeletonLabel>
+              </S.BarSkeletonCol>
             ))}
-          </Box>
-        </Box>
-      </Box>
-    </Box>
+          </S.BarSkeletonContainer>
+        </S.FullWidthCard>
+      </S.ContentContainer>
+    </S.PageScrollContainer>
   );
 };
 

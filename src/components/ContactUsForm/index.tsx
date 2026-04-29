@@ -28,12 +28,18 @@ export const ContactUsForm = () => {
               {t("contactUs:contactUs.sidebar.emailLabel")}
             </S.ContactLabel>
 
-            <S.EmailLink href="mailto:info@clinicaldatastudio.com">
-              info@clinicaldatastudio.com
+            <S.EmailLink
+              component="a"
+              href={`mailto:${import.meta.env.VITE_INFO_EMAIL}`}
+            >
+              {import.meta.env.VITE_INFO_EMAIL}
             </S.EmailLink>
 
-            <S.EmailLink href="mailto:support@clinicaldatastudio.com">
-              support@clinicaldatastudio.com
+            <S.EmailLink
+              component="a"
+              href={`mailto:${import.meta.env.VITE_SUPPORT_EMAIL}`}
+            >
+              {import.meta.env.VITE_SUPPORT_EMAIL}
             </S.EmailLink>
           </S.ContactSidebar>
 

@@ -1,36 +1,19 @@
-import { Box } from "@mui/material";
+import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Box } from "@mui/material";
 
-import { ComplianceFrameworkSelection } from "@/components/ComplianceSelect/ComplianceFrameworkSelection";
-import { ClinicalTextInput } from "@/components/ClinicalInput";
-import { DeidentifySettings } from "@/components/Deidentify";
 import { AnalysisResults } from "@/components/AnalysisResults";
-import {
-  DeidentifyPageSections,
-  DeidentifyPageContent,
-  DeidentifyStepperContainer,
-  DeidentifyPageWrapper,
-  DeidentifyStepIcon,
-  DeidentifyStepItem,
-  DeidentifyStepLabel,
-  DeidentifyStepperProgress,
-  DeidentifyStepperProgressTrack,
-  DeidentifyStepperSteps,
-  StepperCompletedIcon,
-  StepperActionButton,
-  StepperActionsContainer,
-} from "@/pages/Deidentify/styles";
+import { ClinicalTextInput } from "@/components/ClinicalInput";
+import { ComplianceFrameworkSelection } from "@/components/ComplianceSelect/ComplianceFrameworkSelection";
+import DeidentifySettings from "@/components/Deidentify";
 import {
   DEIDENTIFY_STEP,
   useDeidentify,
 } from "@/pages/Deidentify/useDeidentify";
-
-const DEIDENTIFY_STEP_LABEL_KEYS = [
-  "deidentify.stepper.steps.framework",
-  "deidentify.stepper.steps.inputData",
-  "deidentify.stepper.steps.transformation",
-  "deidentify.stepper.steps.result",
-] as const;
+import { DEIDENTIFY_STEP_LABEL_KEYS } from "@/pages/Deidentify/constants";
+import * as S from "@/pages/Deidentify/styles";
 
 const DeidentifyPage = () => {
   const { t } = useTranslation();
@@ -90,54 +73,65 @@ const DeidentifyPage = () => {
   const renderStepActions = (): React.ReactNode => {
     if (activeStep === DEIDENTIFY_STEP.FRAMEWORK) {
       return (
-        <StepperActionsContainer>
-          <StepperActionButton
+        <S.StepperActionsContainer>
+          <S.StepperActionButton
             variant="contained"
             onClick={handleFrameworkNext}
+            endIcon={<ArrowForwardIcon />}
           >
             {t("deidentify.stepper.actions.next")}
-          </StepperActionButton>
-        </StepperActionsContainer>
+          </S.StepperActionButton>
+        </S.StepperActionsContainer>
       );
     }
 
     if (activeStep === DEIDENTIFY_STEP.SETTINGS) {
       return (
-        <StepperActionsContainer>
-          <StepperActionButton variant="outlined" onClick={handleStepBack}>
+        <S.StepperActionsContainer>
+          <S.StepperBackButton
+            onClick={handleStepBack}
+            startIcon={<ArrowBackIcon />}
+          >
             {t("deidentify.stepper.actions.back")}
-          </StepperActionButton>
-        </StepperActionsContainer>
+          </S.StepperBackButton>
+        </S.StepperActionsContainer>
       );
     }
 
     if (activeStep === DEIDENTIFY_STEP.INPUT_DATA) {
       return (
-        <StepperActionsContainer>
-          <StepperActionButton variant="outlined" onClick={handleStepBack}>
+        <S.StepperActionsContainer>
+          <S.StepperBackButton
+            onClick={handleStepBack}
+            startIcon={<ArrowBackIcon />}
+          >
             {t("deidentify.stepper.actions.back")}
-          </StepperActionButton>
-          <StepperActionButton
+          </S.StepperBackButton>
+          <S.StepperActionButton
             variant="contained"
             onClick={handleInputNext}
             disabled={!isClinicalTextProvided}
+            endIcon={<ArrowForwardIcon />}
           >
             {t("deidentify.stepper.actions.next")}
-          </StepperActionButton>
-        </StepperActionsContainer>
+          </S.StepperActionButton>
+        </S.StepperActionsContainer>
       );
     }
 
     if (activeStep === DEIDENTIFY_STEP.RESULT) {
       return (
-        <StepperActionsContainer>
-          <StepperActionButton variant="outlined" onClick={handleStepBack}>
+        <S.StepperActionsContainer>
+          <S.StepperBackButton
+            onClick={handleStepBack}
+            startIcon={<ArrowBackIcon />}
+          >
             {t("deidentify.stepper.actions.back")}
-          </StepperActionButton>
-          <StepperActionButton variant="contained" onClick={handleRestart}>
+          </S.StepperBackButton>
+          <S.StepperActionButton variant="contained" onClick={handleRestart}>
             {t("deidentify.stepper.actions.restart")}
-          </StepperActionButton>
-        </StepperActionsContainer>
+          </S.StepperActionButton>
+        </S.StepperActionsContainer>
       );
     }
 
@@ -145,47 +139,50 @@ const DeidentifyPage = () => {
   };
 
   const renderStepper = (): React.ReactNode => (
-    <DeidentifyStepperContainer>
-      <DeidentifyStepperProgressTrack>
-        <DeidentifyStepperProgress
-          activeStep={activeStep}
-          stepCount={DEIDENTIFY_STEP_LABEL_KEYS.length}
-        />
-      </DeidentifyStepperProgressTrack>
-      <DeidentifyStepperSteps>
+    <S.DeidentifyStepperContainer>
+      <S.DeidentifyStepperSteps>
         {DEIDENTIFY_STEP_LABEL_KEYS.map((labelKey, index) => {
           const isActive = index === activeStep;
           const isCompleted = isStepCompleted(index);
+          const isPreviousCompleted = index > 0 && isStepCompleted(index - 1);
 
           return (
-            <DeidentifyStepItem key={labelKey}>
-              <DeidentifyStepIcon isActive={isActive} isCompleted={isCompleted}>
-                {isCompleted ? <StepperCompletedIcon /> : index + 1}
-              </DeidentifyStepIcon>
-              <DeidentifyStepLabel
-                isActive={isActive}
-                isCompleted={isCompleted}
-                isFirstStep={index === DEIDENTIFY_STEP.FRAMEWORK}
-              >
-                {t(labelKey)}
-              </DeidentifyStepLabel>
-            </DeidentifyStepItem>
+            <Fragment key={labelKey}>
+              {index > 0 && (
+                <S.DeidentifyStepConnector isCompleted={isPreviousCompleted} />
+              )}
+              <S.DeidentifyStepItem>
+                <S.DeidentifyStepIcon
+                  isActive={isActive}
+                  isCompleted={isCompleted}
+                >
+                  {isCompleted ? <S.StepperCompletedIcon /> : index + 1}
+                </S.DeidentifyStepIcon>
+                <S.DeidentifyStepLabel
+                  isActive={isActive}
+                  isCompleted={isCompleted}
+                >
+                  {t(labelKey)}
+                </S.DeidentifyStepLabel>
+              </S.DeidentifyStepItem>
+            </Fragment>
           );
         })}
-      </DeidentifyStepperSteps>
-    </DeidentifyStepperContainer>
+      </S.DeidentifyStepperSteps>
+    </S.DeidentifyStepperContainer>
   );
 
   return (
-    <DeidentifyPageWrapper>
-      <DeidentifyPageContent>
-        <DeidentifyPageSections>
+    <S.DeidentifyPageWrapper>
+      <S.DeidentifyPageContent>
+        <S.DeidentifyPageSections>
+          <Box sx={S.backgroundGlow} />
           {renderStepper()}
           {renderCurrentStep()}
           {renderStepActions()}
-        </DeidentifyPageSections>
-      </DeidentifyPageContent>
-    </DeidentifyPageWrapper>
+        </S.DeidentifyPageSections>
+      </S.DeidentifyPageContent>
+    </S.DeidentifyPageWrapper>
   );
 };
 

@@ -1,23 +1,27 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import mammoth from "mammoth";
 import { useTranslation } from "react-i18next";
 
+import { useAppDispatch, useAppSelector } from "@/common/hooks/hooks";
 import {
   EMPTY_TEXT_SEGMENT,
   FILE_PATH_REDACTED_PREFIX,
+  MAX_CLINICAL_TEXT_CHARACTERS,
   MAX_UPLOAD_FILE_SIZE_BYTES,
+  MAX_UPLOAD_FILE_SIZE_MB,
   PDF_TEXT_JOIN_SEPARATOR,
   SUPPORTED_FILE_EXTENSIONS,
   type ClinicalInputTab,
 } from "@/components/ClinicalInput/constants";
 import {
   clearFileError,
+  clearUploadedFile,
   setActiveTab,
   setClinicalText,
-  setFileError,
   setFileResult,
+  setFileTooLarge,
+  type RejectedFileMeta,
 } from "@/store/clinicalInputSlice";
-import { useAppDispatch, useAppSelector } from "@/common/hooks/hooks";
 
 interface PdfJsModule {
   getDocument: (params: { data: Uint8Array }) => {
@@ -43,21 +47,20 @@ interface UseClinicalTextInputReturn {
   activeTab: ClinicalInputTab;
   clinicalText: string;
   filePathLabel: string;
+  uploadedFileName: string;
+  uploadedFileSizeBytes: number;
   fileError: string;
+  rejectedFile: RejectedFileMeta | null;
+  isCharLimitExceeded: boolean;
+  isProcessing: boolean;
+  uploadProgress: number;
   switchToTab: (tab: ClinicalInputTab) => void;
   handleClinicalTextChange: (nextValue: string) => void;
   handleFileSelected: (file: File, providedPath?: string) => Promise<void>;
+  clearUploadedFileState: () => void;
 }
 
-const FILE_ERROR_KEY = {
-  FILE_TOO_LARGE: "deidentify.clinicalInput.errors.fileTooLarge",
-  FILE_EMPTY: "deidentify.clinicalInput.errors.fileEmpty",
-  FILE_UNSUPPORTED: "deidentify.clinicalInput.errors.fileUnsupported",
-  FILE_READ_GENERIC: "deidentify.clinicalInput.errors.fileRead",
-  FILE_READ_TXT: "deidentify.clinicalInput.errors.fileReadTxt",
-  FILE_READ_WORD: "deidentify.clinicalInput.errors.fileReadWord",
-  FILE_READ_PDF: "deidentify.clinicalInput.errors.fileReadPdf",
-} as const;
+const FILE_TOO_LARGE_KEY = "deidentify.clinicalInput.errors.fileTooLarge";
 
 const supportedWordExtensions = [
   SUPPORTED_FILE_EXTENSIONS.DOC,
@@ -168,23 +171,7 @@ const extractClinicalText = async (file: File): Promise<string> => {
     return extractTextFromPdf(file);
   }
 
-  throw new Error(FILE_ERROR_KEY.FILE_UNSUPPORTED);
-};
-
-const getReadErrorKey = (fileName: string): string => {
-  if (isTxtFile(fileName)) {
-    return FILE_ERROR_KEY.FILE_READ_TXT;
-  }
-
-  if (isWordFile(fileName)) {
-    return FILE_ERROR_KEY.FILE_READ_WORD;
-  }
-
-  if (isPdfFile(fileName)) {
-    return FILE_ERROR_KEY.FILE_READ_PDF;
-  }
-
-  return FILE_ERROR_KEY.FILE_READ_GENERIC;
+  return EMPTY_TEXT_SEGMENT;
 };
 
 export const useClinicalTextInput = (): UseClinicalTextInputReturn => {
@@ -198,6 +185,15 @@ export const useClinicalTextInput = (): UseClinicalTextInputReturn => {
     (state) => state.clinicalInput.uploadedFilePath,
   );
   const fileError = useAppSelector((state) => state.clinicalInput.fileError);
+  const rejectedFile = useAppSelector(
+    (state) => state.clinicalInput.rejectedFile,
+  );
+  const uploadedFileSizeBytes = useAppSelector(
+    (state) => state.clinicalInput.uploadedFileSizeBytes,
+  );
+
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const filePathLabel = useMemo(() => {
     if (!uploadedFilePath) {
@@ -208,6 +204,17 @@ export const useClinicalTextInput = (): UseClinicalTextInputReturn => {
       path: uploadedFilePath,
     });
   }, [t, uploadedFilePath]);
+
+  const uploadedFileName = useMemo(() => {
+    if (!uploadedFilePath) {
+      return EMPTY_TEXT_SEGMENT;
+    }
+    const parts = uploadedFilePath.split(/[/\\]/);
+    return parts[parts.length - 1] || EMPTY_TEXT_SEGMENT;
+  }, [uploadedFilePath]);
+
+  const isCharLimitExceeded =
+    clinicalText.length > MAX_CLINICAL_TEXT_CHARACTERS;
 
   const switchToTab = (tab: ClinicalInputTab): void => {
     dispatch(setActiveTab(tab));
@@ -222,64 +229,75 @@ export const useClinicalTextInput = (): UseClinicalTextInputReturn => {
     file: File,
     providedPath?: string,
   ): Promise<void> => {
-    const normalizedFileName = file.name.toLowerCase();
-
-    if (
-      !isTxtFile(normalizedFileName) &&
-      !isWordFile(normalizedFileName) &&
-      !isPdfFile(normalizedFileName)
-    ) {
-      dispatch(setFileError(t(FILE_ERROR_KEY.FILE_UNSUPPORTED)));
-      return;
-    }
+    dispatch(clearUploadedFile());
+    setIsProcessing(true);
+    setUploadProgress(15); // Початковий прогрес
 
     if (file.size > MAX_UPLOAD_FILE_SIZE_BYTES) {
+      setIsProcessing(false);
+      setUploadProgress(0);
       dispatch(
-        setFileError(
-          t(FILE_ERROR_KEY.FILE_TOO_LARGE, {
-            maxMb: Math.floor(MAX_UPLOAD_FILE_SIZE_BYTES / (1024 * 1024)),
-          }),
-        ),
+        setFileTooLarge({
+          error: t(FILE_TOO_LARGE_KEY, { maxMb: MAX_UPLOAD_FILE_SIZE_MB }),
+          file: { name: file.name, sizeBytes: file.size },
+        }),
       );
       return;
     }
+
+    // Симуляція прогресу під час парсингу
+    const progressInterval = setInterval(() => {
+      setUploadProgress((prev) => (prev < 90 ? prev + 15 : prev));
+    }, 150);
 
     try {
       const parsedText = (await extractClinicalText(file)).trim();
 
       if (!parsedText) {
-        dispatch(setFileError(t(FILE_ERROR_KEY.FILE_EMPTY)));
         return;
       }
 
       const resolvedPath = resolveBestAvailablePath(file, providedPath);
 
+      setUploadProgress(100); // 100% перед завершенням
       dispatch(
         setFileResult({
           text: parsedText,
           path: resolvedPath,
+          sizeBytes: file.size,
         }),
       );
-    } catch (error: unknown) {
-      if (
-        error instanceof Error &&
-        error.message === FILE_ERROR_KEY.FILE_UNSUPPORTED
-      ) {
-        dispatch(setFileError(t(FILE_ERROR_KEY.FILE_UNSUPPORTED)));
-        return;
-      }
-
-      dispatch(setFileError(t(getReadErrorKey(normalizedFileName))));
+    } catch {
+      // Silently ignore read failures
+    } finally {
+      clearInterval(progressInterval);
+      // Невелика затримка, щоб юзер побачив 100%
+      setTimeout(() => {
+        setIsProcessing(false);
+      }, 400);
     }
+  };
+
+  const clearUploadedFileState = (): void => {
+    setIsProcessing(false);
+    setUploadProgress(0);
+    dispatch(clearUploadedFile());
   };
 
   return {
     activeTab,
     clinicalText,
     filePathLabel,
+    uploadedFileName,
+    uploadedFileSizeBytes,
     fileError,
+    rejectedFile,
+    isCharLimitExceeded,
+    isProcessing,
+    uploadProgress,
     switchToTab,
     handleClinicalTextChange,
     handleFileSelected,
+    clearUploadedFileState,
   };
 };

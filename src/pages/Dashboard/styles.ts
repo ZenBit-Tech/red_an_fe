@@ -1,37 +1,31 @@
-import { theme } from "@/common/theme/theme";
+import { Box, Button, Typography } from "@mui/material";
+import { alpha, styled } from "@mui/material/styles";
 
-export const colors = {
-  pageBg: theme.palette.secondaryColors[900],
-  surfaceLow: theme.palette.neutralColors[900],
-  surfaceMid: theme.palette.neutralColors[800],
-  surfaceHigh: theme.palette.neutralColors[700],
-  borderSubtle: theme.palette.strokeColors[150],
-  borderMid: theme.palette.strokeColors[400],
-  accent: theme.palette.primaryColors[200],
-  textPrimary: theme.palette.textColors[50],
-  textSecondary: theme.palette.textColors[200],
-  textLabel: theme.palette.primaryColors[50],
-};
+export const PageScrollContainer = styled(Box)(({ theme }) => ({
+  paddingTop: theme.spacing(11),
+  paddingBottom: theme.spacing(11),
+  paddingLeft: theme.spacing(4),
+  paddingRight: theme.spacing(4),
+  [theme.breakpoints.up("md")]: {
+    paddingLeft: theme.spacing(10),
+    paddingRight: theme.spacing(10),
+  },
+}));
 
-export const pageScroll = {
-  px: { xs: 4, md: theme.spacing(10) },
-  py: theme.spacing(11),
-};
-
-export const contentContainer = {
+export const ContentContainer = styled(Box)(({ theme }) => ({
   maxWidth: theme.spacing(251.75),
   width: "100%",
   margin: "0 auto",
   display: "flex",
   flexDirection: "column",
-};
+}));
 
-export const pageHeaderWrapper = {
+export const PageHeaderWrapper = styled(Box)(({ theme }) => ({
   position: "relative",
-  mb: theme.spacing(8),
-};
+  marginBottom: theme.spacing(8),
+}));
 
-export const backgroundGlow = {
+export const BackgroundGlow = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: theme.spacing(-25),
   left: theme.spacing(-12.5),
@@ -42,156 +36,162 @@ export const backgroundGlow = {
   borderRadius: "50%",
   pointerEvents: "none",
   zIndex: 0,
-};
+}));
 
-export const pageHeaderRow1 = {
+export const PageHeaderRow1 = styled(Box)(({ theme }) => ({
   position: "relative",
   zIndex: 1,
   display: "flex",
   alignItems: "flex-start",
   justifyContent: "space-between",
-  mb: theme.spacing(2),
-};
+  marginBottom: theme.spacing(2),
+}));
 
-export const pageHeaderRow2 = {
+export const PageHeaderRow2 = styled(Box)({
   position: "relative",
   zIndex: 1,
   display: "flex",
   justifyContent: "flex-end",
-};
+});
 
-export const headerActionsColumn = {
+export const HeaderActionsColumn = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-end",
   gap: theme.spacing(3),
-};
+}));
 
-export const pageTitle = {
+export const PageTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.primaryColors[50],
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize48,
-  lineHeight: 1.1,
   margin: 0,
-};
+}));
 
-export const pageSubtitle = {
+export const PageSubtitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.textColors[200],
   fontSize: theme.typography.fontSize20,
   fontWeight: theme.typography.fontWeight500,
-  lineHeight: 1.2,
   margin: 0,
-};
+}));
 
-export const startButton = {
+export const StartButton = styled(Button)(({ theme }) => ({
   width: theme.spacing(41.25),
+  whiteSpace: "nowrap",
   height: theme.spacing(10.5),
+  minWidth: 0,
+  boxShadow: "none",
   backgroundImage: "none",
-  bgcolor: theme.palette.primaryColors[200],
+  backgroundColor: theme.palette.primaryColors[200],
   color: theme.palette.backgroundColor,
   fontWeight: theme.typography.fontWeight700,
-  fontSize: {
-    xs: theme.typography.fontSize12,
-    md: theme.typography.fontSize12,
-  },
-  px: {
-    xs: theme.spacing(4),
-    md: theme.spacing(4),
-  },
-  py: {
-    xs: theme.spacing(3),
-    md: theme.spacing(3),
-  },
+  fontSize: `${theme.typography.fontSize12}px !important`,
+  padding: `${theme.spacing(3)} ${theme.spacing(4)} !important`,
   borderRadius: theme.spacing(2),
   textTransform: "none",
   "&:hover": {
-    bgcolor: theme.palette.textColors[50],
+    backgroundColor: theme.palette.textColors[50],
     backgroundImage: "none",
+    boxShadow: "none",
   },
-};
+  "&:active": {
+    boxShadow: "none",
+  },
+  "&:focus": {
+    boxShadow: "none",
+  },
+}));
 
-export const timeFilterGroup = {
+export const TimeFilterGroup = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(2),
-};
+}));
 
-export const timeFilterPill = (active: boolean) => ({
-  px: theme.spacing(3.25),
-  py: theme.spacing(2.5),
+export const TimeFilterPill = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "active",
+})<{ active: boolean }>(({ theme, active }) => ({
+  paddingInline: theme.spacing(3.25),
+  paddingBlock: theme.spacing(2.5),
   borderRadius: theme.spacing(2),
   cursor: "pointer",
-  bgcolor: theme.palette.neutralColors[800],
+  backgroundColor: theme.palette.neutralColors[800],
   border: active
-    ? `1px solid ${theme.palette.strokeColors[120]}`
-    : `1px solid ${theme.palette.strokeColors[400]}`,
-});
+    ? `${theme.spacing(0.25)} solid ${theme.palette.strokeColors[120]}`
+    : `${theme.spacing(0.25)} solid ${theme.palette.strokeColors[400]}`,
+}));
 
-export const timeFilterText = (active: boolean) => ({
-  color: active ? colors.textPrimary : colors.textSecondary,
+export const TimeFilterText = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== "active",
+})<{ active: boolean }>(({ theme, active }) => ({
+  color: active ? theme.palette.textColors[50] : theme.palette.textColors[200],
   fontSize: theme.typography.fontSize14,
   fontWeight: active
     ? theme.typography.fontWeight500
     : theme.typography.fontWeight400,
-});
+}));
 
-export const infoBanner = {
+export const InfoBanner = styled(Box)(({ theme }) => ({
   boxSizing: "border-box",
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(1),
   background: theme.palette.strokeColors[120],
   borderRadius: theme.spacing(2),
-  padding: theme.spacing(2, 3),
+  padding: theme.spacing(3, 3),
   width: theme.spacing(82),
   height: theme.spacing(10.5),
-};
+  "& svg": {
+    fontSize: theme.typography.fontSize20,
+    color: theme.palette.primaryColors[200],
+  },
+}));
 
-export const infoBannerText = {
+export const InfoBannerText = styled(Typography)(({ theme }) => ({
   color: theme.palette.primaryColors[200],
-  fontSize: theme.typography.fontSize12,
+  fontSize: theme.typography.fontSize14,
   fontFamily: theme.typography.fontFamily,
-};
+}));
 
-export const topSectionGrid = {
+export const TopSectionGrid = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(6),
-  mb: theme.spacing(6),
-};
+  marginBottom: theme.spacing(6),
+}));
 
-export const statCardsColumn = {
+export const StatCardsColumn = styled(Box)(({ theme }) => ({
   display: "grid",
   gridTemplateColumns: `repeat(2, ${theme.spacing(58.25)})`,
   gap: theme.spacing(6),
-};
+}));
 
-export const statCard = {
+export const StatCard = styled(Box)(({ theme }) => ({
   boxSizing: "border-box",
   width: theme.spacing(58.25),
   height: theme.spacing(43),
   padding: theme.spacing(6),
   borderRadius: theme.spacing(2),
-  bgcolor: colors.surfaceMid,
-  border: `1px solid ${theme.palette.strokeColors[400]}`,
+  backgroundColor: theme.palette.neutralColors[800],
+  border: `${theme.spacing(0.25)} solid ${theme.palette.strokeColors[400]}`,
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   gap: theme.spacing(3),
-};
+}));
 
-export const statCardHeader = {
+export const StatCardHeader = styled(Box)({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-};
+});
 
-export const statLabel = {
-  color: colors.textLabel,
+export const StatLabel = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primaryColors[50],
   fontSize: theme.typography.fontSize12,
   fontWeight: theme.typography.fontWeight500,
-  textTransform: "uppercase" as const,
-};
+  textTransform: "uppercase",
+}));
 
-export const statIconBox = {
+export const StatIconBox = styled(Box)(({ theme }) => ({
   boxSizing: "border-box",
   width: theme.spacing(10.5),
   height: theme.spacing(12),
@@ -203,106 +203,109 @@ export const statIconBox = {
   alignItems: "center",
   justifyContent: "center",
   color: theme.palette.primaryColors[200],
-};
+  "& svg": {
+    fontSize: theme.typography.fontSize24,
+  },
+}));
 
-export const statValue = {
+export const StatValue = styled(Typography)(({ theme }) => ({
   color: theme.palette.textColors[50],
   fontSize: theme.typography.fontSize32,
   fontWeight: theme.typography.fontWeight500,
-};
+}));
 
-export const statFooter = {
+export const StatFooter = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(1.5),
-  color: colors.textSecondary,
-};
+  color: theme.palette.textColors[200],
+  "& svg": {
+    fontSize: theme.typography.fontSize14,
+  },
+}));
 
-export const statFooterText = {
+export const StatFooterText = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize12,
   fontFamily: theme.typography.fontFamily,
-};
+}));
 
-export const chartCardBase = {
+export const ChartCardBase = styled(Box)(({ theme }) => ({
   boxSizing: "border-box",
   background: theme.palette.neutralColors[900],
-  border: `1px solid ${theme.palette.strokeColors[120]}`,
+  border: `${theme.spacing(0.25)} solid ${theme.palette.strokeColors[120]}`,
   boxShadow: `0 ${theme.spacing(4.5)} ${theme.spacing(6.5)} 0 ${theme.palette.strokeColors[150]}`,
   borderRadius: theme.spacing(2),
   padding: theme.spacing(6),
   display: "flex",
   flexDirection: "column",
-};
+}));
 
-export const complianceCard = {
-  ...chartCardBase,
+export const ComplianceCard = styled(ChartCardBase)(({ theme }) => ({
   width: theme.spacing(123.25),
   height: theme.spacing(92),
-};
+}));
 
-export const fullWidthCard = {
-  ...chartCardBase,
+export const FullWidthCard = styled(ChartCardBase)(({ theme }) => ({
   width: theme.spacing(251.75),
   height: theme.spacing(119.5),
-  mb: theme.spacing(6),
-};
+  marginBottom: theme.spacing(6),
+}));
 
-export const halfWidthCard = {
-  ...chartCardBase,
+export const HalfWidthCard = styled(ChartCardBase)(({ theme }) => ({
   width: theme.spacing(122),
   height: theme.spacing(112),
-};
+}));
 
-export const twoColGrid = {
+export const TwoColGrid = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(7.75),
-  mb: theme.spacing(6),
-};
+  marginBottom: theme.spacing(6),
+}));
 
-export const chartHeader = {
+export const ChartHeader = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(1),
-};
+}));
 
-export const chartTitle = {
+export const ChartTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.textColors[50],
   fontSize: theme.typography.fontSize18,
   fontWeight: theme.typography.fontWeight600,
   fontFamily: theme.typography.fontFamily,
-};
+}));
 
-export const chartSubtitle = {
-  color: colors.textSecondary,
+export const ChartSubtitle = styled(Typography)(({ theme }) => ({
+  color: theme.palette.textColors[200],
   fontSize: theme.typography.fontSize12,
   fontFamily: theme.typography.fontFamily,
-};
+}));
 
-export const skeletonCenter = {
+export const SkeletonCenter = styled(Box)(({ theme }) => ({
   flex: 1,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  mt: theme.spacing(2),
-};
+  marginTop: theme.spacing(2),
+}));
 
-export const donutSkeleton = {
+export const DonutSkeleton = styled(Box)(({ theme }) => ({
   width: theme.spacing(45),
   height: theme.spacing(45),
   borderRadius: "50%",
   border: `${theme.spacing(8.75)} solid ${theme.palette.strokeColors[120]}`,
-};
+}));
 
-export const barSkeletonContainer = {
+export const BarSkeletonContainer = styled(Box)(({ theme }) => ({
   flex: 1,
   display: "flex",
   alignItems: "flex-end",
   justifyContent: "space-between",
-  mt: theme.spacing(4),
-  px: theme.spacing(2),
-};
+  marginTop: theme.spacing(4),
+  paddingInline: theme.spacing(2),
+}));
 
-export const barSkeletonCol = {
+export const BarSkeletonCol = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -310,36 +313,29 @@ export const barSkeletonCol = {
   width: "8%",
   height: "100%",
   justifyContent: "flex-end",
-};
+}));
 
-export const barSkeleton = {
+export const BarSkeleton = styled(Box)(({ theme }) => ({
   width: "100%",
-  bgcolor: theme.palette.strokeColors[120],
+  backgroundColor: theme.palette.strokeColors[120],
   borderRadius: theme.spacing(1),
-};
+}));
 
-export const barSkeletonLabel = {
-  color: theme.palette.textColors[200],
-  opacity: 0.2,
+export const BarSkeletonDynamic = styled(BarSkeleton, {
+  shouldForwardProp: (prop) => prop !== "heightPercent",
+})<{ heightPercent: number }>(({ heightPercent }) => ({
+  height: `${heightPercent}%`,
+}));
+
+export const BarSkeletonLabel = styled(Typography)(({ theme }) => ({
+  color: alpha(theme.palette.textColors[200], 0.2),
   fontSize: theme.typography.fontSize10,
   fontFamily: theme.typography.fontFamily,
-};
+}));
 
-export const infoBox = {
+export const InfoBox = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(2),
   flexWrap: "wrap",
-};
-
-export const statIcon = { fontSize: theme.typography.fontSize24 };
-export const statFooterIcon = { fontSize: theme.typography.fontSize14 };
-export const infoIcon = {
-  fontSize: theme.typography.fontSize20,
-  color: colors.accent,
-};
-
-export const barSkeletonDynamic = (heightPercent: number) => ({
-  ...barSkeleton,
-  height: `${heightPercent}%`,
-});
+}));

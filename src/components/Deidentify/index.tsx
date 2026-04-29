@@ -1,28 +1,18 @@
 import React from "react";
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { Controller, useWatch } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Box, FormControlLabel, MenuItem, Slider, Switch } from "@mui/material";
-import {
-  AnalyzeButton,
-  ControlsContainer,
-  DeidentifyLabel,
-  DeidentifyMethodDescription,
-  DeidentifySettingsContainer,
-  DeidentifySettingsSection,
-  DeidentifySettingsSubtitle,
-  DeidentifySettingsTitle,
-  MethodSelect,
-} from "./styles";
-import { useDeidentifySettings } from "./useDeidentifySettings";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import { useDeidentifySettings } from "@/components/Deidentify/useDeidentifySettings";
 import {
   DEIDENTIFICATION_METHODS_OPTIONS,
   type DeidentificationMethod,
   THRESHOLD_MIN,
   THRESHOLD_MAX,
   THRESHOLD_STEP,
-} from "./constants";
-import type { DeidentifySettingsFormData } from "./constants";
+} from "@/components/Deidentify/constants";
+import type { DeidentifySettingsFormData } from "@/components/Deidentify/constants";
+import * as S from "@/components/Deidentify/styles";
 
 interface DeidentifySettingsProps {
   onAnalyze: (settings: DeidentifySettingsFormData) => Promise<void>;
@@ -40,9 +30,15 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
     onAnalyze,
     initialValues,
   });
+
   const selectedMethod = useWatch({
     control,
     name: "deidentificationMethod",
+  });
+
+  const thresholdValue = useWatch({
+    control,
+    name: "threshold",
   });
 
   const getMethodLabel = (method: DeidentificationMethod): string => {
@@ -55,23 +51,23 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
   );
 
   return (
-    <DeidentifySettingsContainer onSubmit={handleSubmit(onSubmit)}>
+    <S.DeidentifySettingsContainer onSubmit={handleSubmit(onSubmit)}>
       <Box>
-        <DeidentifySettingsTitle>
+        <S.DeidentifySettingsTitle>
           {t("deidentify.settings.title")}
-        </DeidentifySettingsTitle>
-        <DeidentifySettingsSubtitle>
+        </S.DeidentifySettingsTitle>
+        <S.DeidentifySettingsSubtitle>
           {t("deidentify.settings.subtitle")}
-        </DeidentifySettingsSubtitle>
+        </S.DeidentifySettingsSubtitle>
       </Box>
 
-      <DeidentifySettingsSection>
-        <DeidentifyLabel>{t("deidentify.settings.method")}</DeidentifyLabel>
+      <S.DeidentifySettingsSection>
+        <S.DeidentifyLabel>{t("deidentify.settings.method")}</S.DeidentifyLabel>
         <Controller
           name="deidentificationMethod"
           control={control}
           render={({ field }) => (
-            <MethodSelect
+            <S.MethodSelect
               {...field}
               fullWidth
               size="medium"
@@ -94,19 +90,19 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
                   {getMethodLabel(method)}
                 </MenuItem>
               ))}
-            </MethodSelect>
+            </S.MethodSelect>
           )}
         />
-        <DeidentifyMethodDescription>
+        <S.DeidentifyMethodDescription>
           {selectedMethodDescription}
-        </DeidentifyMethodDescription>
-      </DeidentifySettingsSection>
+        </S.DeidentifyMethodDescription>
+      </S.DeidentifySettingsSection>
 
-      <DeidentifySettingsSection>
-        <DeidentifyLabel>
+      <S.DeidentifySettingsSection>
+        <S.DeidentifyLabel>
           {t("deidentify.settings.threshold")} —{" "}
-          {Math.round(useWatch({ control, name: "threshold" }) * 100)}%
-        </DeidentifyLabel>
+          {Math.round(thresholdValue * 100)}%
+        </S.DeidentifyLabel>
         <Controller
           name="threshold"
           control={control}
@@ -122,12 +118,12 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
             />
           )}
         />
-        <DeidentifyMethodDescription>
+        <S.DeidentifyMethodDescription>
           {t("deidentify.settings.thresholdHint")}
-        </DeidentifyMethodDescription>
-      </DeidentifySettingsSection>
+        </S.DeidentifyMethodDescription>
+      </S.DeidentifySettingsSection>
 
-      <DeidentifySettingsSection>
+      <S.DeidentifySettingsSection>
         <Controller
           name="preserveStructure"
           control={control}
@@ -143,13 +139,13 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
             />
           )}
         />
-        <DeidentifyMethodDescription>
+        <S.DeidentifyMethodDescription>
           {t("deidentify.settings.preserveStructureHint")}
-        </DeidentifyMethodDescription>
-      </DeidentifySettingsSection>
+        </S.DeidentifyMethodDescription>
+      </S.DeidentifySettingsSection>
 
-      <ControlsContainer>
-        <AnalyzeButton
+      <S.ControlsContainer>
+        <S.AnalyzeButton
           type="submit"
           variant="contained"
           color="primary"
@@ -157,11 +153,10 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
           startIcon={<PlayCircleOutlineIcon />}
         >
           {submitButtonLabel ?? t("deidentify.settings.analyze")}
-        </AnalyzeButton>
-      </ControlsContainer>
-    </DeidentifySettingsContainer>
+        </S.AnalyzeButton>
+      </S.ControlsContainer>
+    </S.DeidentifySettingsContainer>
   );
 };
 
-export { DeidentifySettings };
 export default DeidentifySettings;

@@ -1,20 +1,21 @@
-import { theme } from "@/common/theme/theme";
+import { Box, CircularProgress, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
-export const container = {
+export const Container = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
   height: "100vh",
-  bgcolor: theme.palette.secondaryColors[900],
-};
+  backgroundColor: theme.palette.secondaryColors[900],
+}));
 
-export const spinner = {
+export const Spinner = styled(CircularProgress)(({ theme }) => ({
   color: theme.palette.primaryColors[200],
-  mb: theme.spacing(2),
-};
+  marginBottom: theme.spacing(2),
+}));
 
-export const text = {
+export const Text = styled(Typography)(({ theme }) => ({
   color: theme.palette.textColors[50],
   fontFamily: theme.typography.fontFamily,
-};
+}));

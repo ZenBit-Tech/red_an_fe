@@ -1,0 +1,21 @@
+{
+  "login": {
+    "title": "Sign in to Clinical Data Studio",
+    "subtitle": "Enter your email to receive a sign-in link",
+    "emailLabel": "EMAIL ADDRESS",
+    "emailPlaceholder": "you@company.com",
+    "sending": "Sending...",
+    "sendMagicLink": "Send Magic Link",
+    "back": "Back",
+    "checkInboxTitle": "Sign in to Clinical Data Studio",
+    "checkInboxDescription": "We sent a magic link to",
+    "didntReceive": "Didn't receive it? Check spam or",
+    "resendLink": "resend link",
+    "backToSignIn": "Back to sign in",
+    "errorSending": "Failed to send magic link. Please try again.",
+    "validation": {
+      "invalidEmail": "Invalid email format",
+      "requiredEmail": "Email is required"
+    }
+  }
+}

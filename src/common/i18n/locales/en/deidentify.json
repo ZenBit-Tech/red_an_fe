@@ -1,28 +1,35 @@
 {
   "compliance": {
     "selection": {
-      "title": "Select Compliance Framework",
-      "subtitle": "Choose which regulatory frameworks to comply with",
+      "title": "Select Compliance",
+      "titleHighlight": "Framework",
+      "subtitle": "Choose the regulatory standard for your de-identification workflow. The Precision Core engine will automatically calibrate its de-identification heuristics based on your selection.",
       "listHeader": "Compliance Framework",
       "listSubtitle": "Select one or more compliance frameworks to apply",
-      "entityTypes": "entity types"
+      "entityTypes": "entity types",
+      "activeSelection": "Active Selection",
+      "selectProtocol": "Select Protocol"
     },
     "frameworks": {
       "hipaa": {
         "label": "HIPAA",
-        "desc": "Health Insurance Portability and Accountability Act (US)"
+        "category": "Standard Medical",
+        "desc": "Health Insurance Portability and Accountability Act. Optimized for US-based clinical data and PHI protection."
       },
       "gdpr": {
-        "label": "GDPR",
-        "desc": "General Data Protection Regulation (EU)"
+        "label": "GDPR EU ",
+        "category": "Privacy Focus",
+        "desc": "General Data ProtectionRegulation. Rigorous de-identification for EuropeanUnion residency data with strict right-to-erasure support."
       },
       "ccpa": {
-        "label": "CCPA",
-        "desc": "California Consumer Privacy Act"
+        "label": "GDPR UK",
+        "category": "Developer Tooling",
+        "desc": "Integrated software development kit for programmatic compliance.Automated enforcement of EUdata sovereignty rules in custom app pipelines."
       },
       "custom": {
         "label": "Custom",
-        "desc": "Create your own compliance profile"
+        "category": "Custom Rules",
+        "desc": "Create your own compliance profile and configure detection rules for domain-specific workflows."
       }
     }
   },
@@ -35,8 +42,8 @@
         "result": "Result"
       },
       "actions": {
-        "next": "Next",
-        "back": "Back",
+        "next": "Next Step",
+        "back": "Previous Step",
         "continue": "Continue",
         "analyzeAndContinue": "Analyze and Continue",
         "restart": "Start Over"
@@ -53,27 +60,52 @@
       "analyze": "Analyze"
     },
     "clinicalInput": {
-      "title": "Input Clinical Text",
-      "subtitle": "Upload a document or paste your clinical text",
+      "title": "Input Clinical",
+      "titleHighlight": "Data",
+      "subtitle": "Please provide the raw clinical records or upload a document for de-identification processing.",
       "tabs": {
         "enterText": "Enter Text",
         "uploadDocument": "Upload Document"
       },
-      "textPlaceholder": "Paste or type clinical text here",
+      "textPlaceholder": "Paste or type your text here...",
+      "characterCount": "{{current}} / {{max}} characters",
+      "dataLimitAlert": {
+        "title": "Data limit alert",
+        "message": "The current dataset exceeds the",
+        "limit": "{{max}} character limit.",
+        "instruction": "Please reduce content"
+      },
       "browseButton": "Browse Files",
-      "uploadedFilePath": "Uploaded file: {{path}}",
+      "uploadedFilePath": "{{path}}",
       "dropzone": {
         "title": "Drop your file here, or browse",
-        "support": "Supports: .txt, .doc, .docx, .pdf"
+        "support": "Supports: .txt, .doc, .docx, .pdf",
+        "prompt": "Drag and drop your documents here, or click to upload",
+        "autoSaving": "Auto-saving enabled",
+        "filesCount": "Files count: {{count}}",
+        "wordCount": "Word count: {{count}}",
+        "fileTypes": {
+          "pdf": "PDF",
+          "text": "DOC"
+        }
+      },
+      "uploadCard": {
+        "processing": "Processing...",
+        "uploadedSuccessfully": "Uploaded Successfully",
+        "limitExceeded": "Limit Exceeded",
+        "removeFile": "Remove file",
+        "sizeBytes": "{{value}} B",
+        "sizeKilobytes": "{{value}} KB",
+        "sizeMegabytes": "{{value}} MB",
+        "fileSizeErrorBanner": "Maximum file size is {{maxMb}} MB. Please upload a smaller file."
       },
       "errors": {
-        "fileRead": "Failed to read the selected file. Please try another file.",
-        "fileTooLarge": "File is too large. Maximum allowed size is {{maxMb}} MB.",
-        "fileEmpty": "The file was loaded but contains no readable text.",
-        "fileUnsupported": "Unsupported file type. Allowed extensions: .txt, .doc, .docx, .pdf.",
-        "fileReadTxt": "Could not read the TXT file. Please verify the file encoding and try again.",
-        "fileReadWord": "Could not extract text from the Word document. For .doc files, please try saving as .docx and upload again.",
-        "fileReadPdf": "Could not extract text from the PDF file. Please check if the PDF contains selectable text."
+        "fileTooLarge": "File size exceeds limit ({{maxMb}}MB). Please upload a smaller file."
+      },
+      "uploadCardDetails": {
+        "processingStatus": "Processing Status:",
+        "limitLabel": "Limit: {{maxMb}}.0 MB",
+        "sizeMegabytes": "{{value}} MB"
       }
     },
     "methods": {
@@ -126,71 +158,6 @@
           "deselected": "Deselected"
         }
       }
-    }
-  },
-  "login": {
-    "title": "Sign in to Clinical Data Studio",
-    "subtitle": "Enter your email to receive a sign-in link",
-    "emailLabel": "Email address",
-    "emailPlaceholder": "you@company.com",
-    "emailRequired": "Email is required",
-    "emailInvalid": "Enter valid email",
-    "sendMagicLink": "Send Magic Link",
-    "back": "Back",
-    "checkInboxTitle": "Sign in to Clinical Data Studio",
-    "checkInboxDescription": "We sent a magic link to",
-    "didntReceive": "Didn't receive it? Check spam or",
-    "resendLink": "resend link",
-    "sending": "Sending..",
-    "backToSignIn": "Back"
-  },
-  "dashboard": {
-    "brand": {
-      "name": "Clinical Data Studio",
-      "tagline": "De-ID & Synthesis"
-    },
-    "topBar": {
-      "title": "Clinical Data De-Identification & Synthetic Data Studio",
-      "subtitle": "Enterprise-grade PII detection and anonymization"
-    },
-    "trial": {
-      "badge": "FREE PLAN",
-      "message": "You're using the free plan version. Upgrade to a professional plan for full access to all features.",
-      "upgradeButton": "Upgrade to Professional Plan"
-    },
-    "nav": {
-      "dashboard": "Dashboard",
-      "deIdentify": "De-Identify",
-      "syntheticData": "Synthetic Data",
-      "subscription": "My Subscription",
-      "support": "Support",
-      "logout": "Logout"
-    },
-    "timeFilter": {
-      "today": "Today",
-      "last7Days": "Last 7 days",
-      "twoWeeks": "2 Weeks",
-      "month": "Month"
-    },
-    "page": {
-      "title": "Dashboard",
-      "subtitle": "Monitor your de-identification metrics",
-      "infoBanner": "2 documents available for de-identification",
-      "startButton": "Start De-Identification"
-    },
-    "stats": {
-      "totalDocuments": "Total Documents",
-      "entitiesDetected": "Entities Detected",
-      "avgCompleteness": "Avg.Entities/Doc",
-      "successRate": "Success Rate"
-    },
-    "charts": {
-      "complianceFramework": "Compliance Framework Usage",
-      "entityTypesDetected": "Entity Types Detected",
-      "processingHistory": "Processing History",
-      "confidenceScore": "Confidence Score Distribution",
-      "deIdentificationMethod": "De-Identification Method Usage",
-      "placeholder": "Chart data will appear here"
     }
   }
 }
