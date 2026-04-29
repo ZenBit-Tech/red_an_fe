@@ -94,10 +94,13 @@ export const ContactLabel = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(1),
 }));
 
-export const EmailLink = styled(Typography)(({ theme }) => ({
+export const EmailLink = styled(Typography)<
+  { component?: React.ElementType } & React.ComponentProps<"a">
+>(({ theme }) => ({
   fontSize: theme.typography.fontSize14,
   fontWeight: theme.typography.fontWeight400,
   color: theme.palette.textColors[100],
+  fontFamily: theme.typography.fontFamily || "sans-serif",
   textDecoration: "none",
   marginBottom: theme.spacing(0.5),
   transition: "color 0.2s ease-in-out",

@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { AxiosError, AxiosResponse } from "axios";
 import { cleanEnv, str } from "envalid";
-// import { APP_ROUTES, STORAGE_KEYS } from "@/constants/index";
+import { APP_ROUTES, STORAGE_KEYS } from "@/constants/index";
 
 const env = cleanEnv(import.meta.env, {
   VITE_API_URL: str({ desc: "Base API URL" }),
@@ -24,33 +24,25 @@ const instance = axios.create({
   },
 });
 
-// instance.interceptors.response.use(
-//   (response) => response,
-//   (error) => {
-//     if (axios.isAxiosError(error) && error.response?.status === 401) {
-//       localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
-//       localStorage.removeItem(STORAGE_KEYS.USER);
-//       window.location.href = APP_ROUTES.SIGN_IN;
-//     }
-//     return Promise.reject(error);
-//   },
-// );
+instance.interceptors.request.use((config) => {
+  const token = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
-// instance.interceptors.request.use(
-//   (config) => {
-//     // УВАГА: Заміни "token" на той ключ, під яким ти зберігаєш токен у localStorage!
-//     // Наприклад: "accessToken", "jwt", тощо.
-//     const token = localStorage.getItem("accessToken");
-
-//     if (token && config.headers) {
-//       config.headers.Authorization = `Bearer ${token}`;
-//     }
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
+instance.interceptors.response.use(
+  (response) => response,
+  (error: AxiosError) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
+      localStorage.removeItem(STORAGE_KEYS.USER);
+      window.location.href = APP_ROUTES.SIGN_IN;
+    }
+    return Promise.reject(error);
+  },
+);
 
 export const apiClient = {
   async post<T, D = Record<string, unknown>>(
