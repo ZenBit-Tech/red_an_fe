@@ -9,6 +9,7 @@ import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/Dashboard";
 import VerifyPage from "@/pages/VerifyPage/VerifyPage";
 import { APP_ROUTES } from "@/constants/index";
+import SubscriptionPlan from "@/components/SubscriptionPlan";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: "/signin",
         element: <LoginPage />,
+      },
+      {
+        path: "/subscription-plan",
+        element: <SubscriptionPlan />,
       },
       {
         path: "*",
