@@ -73,9 +73,8 @@ declare module "@mui/material/styles" {
 
   interface ComplianceFrameworkChip {
     HIPAA: string;
-    GDPR: string;
-    CCPA: string;
-    CUSTOM: string;
+    GDPR_EU: string;
+    GDPR_UK: string;
   }
 
   interface ComplianceColors {
@@ -166,9 +165,8 @@ export const theme = createTheme({
     compliance: {
       frameworkChip: {
         HIPAA: primaryColors[600],
-        GDPR: "#7c3aed",
-        CCPA: "#065f46",
-        CUSTOM: neutralColors[500],
+        GDPR_EU: "#7c3aed",
+        GDPR_UK: "#065f46",
       },
     },
 

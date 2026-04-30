@@ -16,12 +16,12 @@
         "category": "Standard Medical",
         "desc": "Health Insurance Portability and Accountability Act. Optimized for US-based clinical data and PHI protection."
       },
-      "gdpr": {
+      "gdprEu": {
         "label": "GDPR EU ",
         "category": "Privacy Focus",
         "desc": "General Data ProtectionRegulation. Rigorous de-identification for EuropeanUnion residency data with strict right-to-erasure support."
       },
-      "ccpa": {
+      "gdprUk": {
         "label": "GDPR UK",
         "category": "Developer Tooling",
         "desc": "Integrated software development kit for programmatic compliance.Automated enforcement of EUdata sovereignty rules in custom app pipelines."
