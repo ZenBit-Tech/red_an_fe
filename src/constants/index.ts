@@ -92,7 +92,7 @@ export const SOCIAL_LINKS = [
 
 export const COMPANY_LINKS = [
   { label: "Contact Us", to: "/contact-us" },
-  { label: "Subscription plan", to: "/subscription-plan" },
+  { label: "Subscription Plan", to: "/subscription-plan" },
 ];
 
 export const ICONS: Record<string, typeof TwitterIcon> = {

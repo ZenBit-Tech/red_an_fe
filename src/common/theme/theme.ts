@@ -25,6 +25,7 @@ declare module "@mui/material/styles" {
     fontSize16: number;
     fontSize18: number;
     fontSize20: number;
+    fontSize22: number;
     fontSize24: number;
     fontSize26: number;
     fontSize30: number;
@@ -32,6 +33,7 @@ declare module "@mui/material/styles" {
     fontSize36: number;
     fontSize38: number;
     fontSize48: number;
+    fontSize60: number;
     fontSize64: number;
     fontSize72: number;
     fontWeight300: number;
@@ -50,6 +52,7 @@ declare module "@mui/material/styles" {
     fontSize16?: number;
     fontSize18?: number;
     fontSize20?: number;
+    fontSize22?: number;
     fontSize24?: number;
     fontSize26?: number;
     fontSize30?: number;
@@ -57,6 +60,7 @@ declare module "@mui/material/styles" {
     fontSize36?: number;
     fontSize38?: number;
     fontSize48?: number;
+    fontSize60?: number;
     fontSize64?: number;
     fontSize72?: number;
     fontWeight300?: number;
@@ -185,12 +189,14 @@ export const theme = createTheme({
     fontSize16: 16,
     fontSize18: 18,
     fontSize20: 20,
+    fontSize22: 22,
     fontSize24: 24,
     fontSize26: 26,
     fontSize32: 32,
     fontSize36: 36,
     fontSize38: 38,
     fontSize48: 48,
+    fontSize60: 60,
     fontSize64: 64,
     fontSize72: 72,
     fontWeight300: 300,
@@ -208,6 +214,10 @@ export const theme = createTheme({
         "html, body": { width: "100%", height: "100%" },
         "#root": { width: "100%", minHeight: "100vh" },
         backgroundColor: backgroundColor,
+        "ul, ol": {
+          margin: 0,
+          padding: 0,
+        },
       },
     },
     MuiContainer: {
