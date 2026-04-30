@@ -1,22 +1,17 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import {
-  CheckCircleOutlined,
-  DescriptionOutlined,
-  Fingerprint,
-  FolderOpen,
-  HourglassEmpty,
-  InfoOutlined,
-} from "@mui/icons-material";
+import { InfoOutlined } from "@mui/icons-material";
 import { APP_ROUTES } from "@/constants";
-import {
-  DEFAULT_STATS,
-  MOCK_CHART_SKELETONS,
-  TIME_FILTERS,
-} from "@/pages/Dashboard/constants";
+import { TIME_FILTERS } from "@/pages/Dashboard/constants";
 import { useDashboard } from "@/pages/Dashboard/hooks/useDashboard";
 import * as S from "@/pages/Dashboard/styles";
 import { useGetDashboardStatsQuery } from "@/store/dashboardApiSlice";
+import StatCards from "@/components/DashboardStatCards/index";
+import ComplianceChart from "@/components/DashboardCharts/ComplianceChart/ComplianceChart";
+import EntityTypesChart from "@/components/DashboardCharts/EntityTypesChart/EntityTypesChart";
+import ProcessingHistoryChart from "@/components/DashboardCharts/ProcessingHistoryChart/ProcessingHistoryChart";
+import ConfidenceChart from "@/components/DashboardCharts/ConfidenceChart/ConfidenceChart";
+import DeIdMethodsChart from "@/components/DashboardCharts/DeIdMethodsChart/DeIdMethodsChart";
 
 const DashboardPage = () => {
   const { t } = useTranslation();
@@ -27,30 +22,16 @@ const DashboardPage = () => {
     navigate(APP_ROUTES.DEIDENTIFY);
   };
 
-  const STAT_CARDS = [
+  const { data, isLoading } = useGetDashboardStatsQuery(
     {
-      label: t("dashboard.stats.totalDocuments"),
-      value: DEFAULT_STATS.TOTAL_DOCUMENTS,
-      icon: <DescriptionOutlined />,
+      period: activeTime,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     },
     {
-      label: t("dashboard.stats.entitiesDetected"),
-      value: DEFAULT_STATS.ENTITIES_DETECTED,
-      icon: <CheckCircleOutlined />,
+      refetchOnMountOrArgChange: true,
     },
-    {
-      label: t("dashboard.stats.avgCompleteness"),
-      value: DEFAULT_STATS.AVG_COMPLETENESS,
-      icon: <Fingerprint />,
-    },
-    {
-      label: t("dashboard.stats.successRate"),
-      value: DEFAULT_STATS.SUCCESS_RATE,
-      icon: <FolderOpen />,
-    },
-  ];
+  );
 
-  const { data, isLoading /* error */ } = useGetDashboardStatsQuery();
   console.log("Dashboard Data:", data);
   if (isLoading) {
     return <S.InfoBox>Loading...</S.InfoBox>;
@@ -102,21 +83,7 @@ const DashboardPage = () => {
 
         <S.TopSectionGrid>
           <S.StatCardsColumn>
-            {STAT_CARDS.map((card) => (
-              <S.StatCard key={card.label}>
-                <S.StatCardHeader>
-                  <S.StatLabel>{card.label}</S.StatLabel>
-                  <S.StatIconBox>{card.icon}</S.StatIconBox>
-                </S.StatCardHeader>
-                <S.StatValue>{card.value}</S.StatValue>
-                <S.StatFooter>
-                  <HourglassEmpty />
-                  <S.StatFooterText>
-                    {t("dashboard.stats.awaitingData")}
-                  </S.StatFooterText>
-                </S.StatFooter>
-              </S.StatCard>
-            ))}
+            <StatCards summary={data?.summary} />
           </S.StatCardsColumn>
           <S.ComplianceCard>
             <S.ChartHeader>
@@ -127,9 +94,7 @@ const DashboardPage = () => {
                 {t("dashboard.charts.complianceSubtitle")}
               </S.ChartSubtitle>
             </S.ChartHeader>
-            <S.SkeletonCenter>
-              <S.DonutSkeleton />
-            </S.SkeletonCenter>
+            <ComplianceChart data={data?.charts?.complianceFrameworkUsage} />
           </S.ComplianceCard>
         </S.TopSectionGrid>
 
@@ -142,16 +107,7 @@ const DashboardPage = () => {
               {t("dashboard.charts.entitySubtitle")}
             </S.ChartSubtitle>
           </S.ChartHeader>
-          <S.BarSkeletonContainer>
-            {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
-              <S.BarSkeletonCol key={i}>
-                <S.BarSkeletonDynamic heightPercent={h} />
-                <S.BarSkeletonLabel>
-                  {t("dashboard.charts.noneLabel")}
-                </S.BarSkeletonLabel>
-              </S.BarSkeletonCol>
-            ))}
-          </S.BarSkeletonContainer>
+          <EntityTypesChart chartData={data?.charts?.entityTypesDetected} />
         </S.FullWidthCard>
 
         <S.TwoColGrid>
@@ -164,16 +120,7 @@ const DashboardPage = () => {
                 {t("dashboard.charts.historySubtitle")}
               </S.ChartSubtitle>
             </S.ChartHeader>
-            <S.BarSkeletonContainer>
-              {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
-                <S.BarSkeletonCol key={i}>
-                  <S.BarSkeletonDynamic heightPercent={h} />
-                  <S.BarSkeletonLabel>
-                    {t("dashboard.charts.noneLabel")}
-                  </S.BarSkeletonLabel>
-                </S.BarSkeletonCol>
-              ))}
-            </S.BarSkeletonContainer>
+            <ProcessingHistoryChart data={data?.charts?.processingHistory} />
           </S.HalfWidthCard>
           <S.HalfWidthCard>
             <S.ChartHeader>
@@ -184,16 +131,7 @@ const DashboardPage = () => {
                 {t("dashboard.charts.confidenceSubtitle")}
               </S.ChartSubtitle>
             </S.ChartHeader>
-            <S.BarSkeletonContainer>
-              {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
-                <S.BarSkeletonCol key={i}>
-                  <S.BarSkeletonDynamic heightPercent={h} />
-                  <S.BarSkeletonLabel>
-                    {t("dashboard.charts.noneLabel")}
-                  </S.BarSkeletonLabel>
-                </S.BarSkeletonCol>
-              ))}
-            </S.BarSkeletonContainer>
+            <ConfidenceChart data={data?.charts?.confidenceScoreDistribution} />
           </S.HalfWidthCard>
         </S.TwoColGrid>
 
@@ -206,16 +144,7 @@ const DashboardPage = () => {
               {t("dashboard.charts.methodSubtitle")}
             </S.ChartSubtitle>
           </S.ChartHeader>
-          <S.BarSkeletonContainer>
-            {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((h, i) => (
-              <S.BarSkeletonCol key={i}>
-                <S.BarSkeletonDynamic heightPercent={h} />
-                <S.BarSkeletonLabel>
-                  {t("dashboard.charts.noneLabel")}
-                </S.BarSkeletonLabel>
-              </S.BarSkeletonCol>
-            ))}
-          </S.BarSkeletonContainer>
+          <DeIdMethodsChart data={data?.charts?.deIdentificationMethodUsage} />
         </S.FullWidthCard>
       </S.ContentContainer>
     </S.PageScrollContainer>

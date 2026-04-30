@@ -30,7 +30,7 @@ export const EmptyStatePlaceholder = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: theme.palette.neutralColors[900], // або твій колір фону
+  backgroundColor: theme.palette.neutralColors[900],
   borderRadius: theme.shape.borderRadius,
   border: `1px dashed ${theme.palette.strokeColors[500]}`,
   minHeight: 300,

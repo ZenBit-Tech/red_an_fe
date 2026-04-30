@@ -18,6 +18,27 @@ export interface ChartDataItem {
 export interface DashboardResponse {
   summary: DashboardSummary;
   chartData: ChartDataItem[];
+  charts: {
+    entityTypesDetected: Array<{ label: string; value: number }>;
+    complianceFrameworkUsage: Array<{
+      framework: string;
+      count: number;
+      percentage: number;
+    }>;
+    processingHistory: Array<{
+      date: string;
+      documents: number;
+      entities: number;
+    }>;
+    confidenceScoreDistribution: Array<{
+      bucket: string;
+      value: number;
+    }>;
+    deIdentificationMethodUsage: Array<{
+      method: string;
+      value: number;
+    }>;
+  };
 }
 
 export interface ProcessingHistoryItem {

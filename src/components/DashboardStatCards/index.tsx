@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { Box, Typography } from "@mui/material";
 import {
   DescriptionOutlined,
   CheckCircleOutlined,
@@ -7,7 +6,7 @@ import {
   FolderOpen,
   HourglassEmpty,
 } from "@mui/icons-material";
-import * as styles from "@/pages/Dashboard/styles";
+import * as S from "@/pages/Dashboard/styles";
 import { type DashboardSummary } from "@/types/dashboard";
 
 interface StatCardsProps {
@@ -20,44 +19,46 @@ const StatCards = ({ summary }: StatCardsProps) => {
   const cards = [
     {
       label: t("dashboard.stats.totalDocuments"),
-      value: summary?.totalDocuments || 0,
-      icon: <DescriptionOutlined sx={styles.statIcon} />,
+      value: summary?.totalDocuments ?? 0,
+      icon: <DescriptionOutlined />,
     },
     {
       label: t("dashboard.stats.entitiesDetected"),
-      value: summary?.entitiesDetected || 0,
-      icon: <CheckCircleOutlined sx={styles.statIcon} />,
+      value: summary?.entitiesDetected ?? 0,
+      icon: <CheckCircleOutlined />,
     },
     {
       label: t("dashboard.stats.avgCompleteness"),
-      value: summary?.avgEntitiesPerDoc,
-      icon: <Fingerprint sx={styles.statIcon} />,
+      value: summary?.avgEntitiesPerDoc ?? 0,
+      icon: <Fingerprint />,
     },
     {
       label: t("dashboard.stats.successRate"),
-      value: `${summary?.successRate}%`,
-      icon: <FolderOpen sx={styles.statIcon} />,
+      value: `${summary?.successRate ?? 0}%`,
+      icon: <FolderOpen />,
     },
   ];
 
   return (
-    <Box sx={styles.statCardsColumn}>
+    <S.StatCardsColumn>
       {cards.map((card) => (
-        <Box key={card.label} sx={styles.statCard}>
-          <Box sx={styles.statCardHeader}>
-            <Typography sx={styles.statLabel}>{card.label}</Typography>
-            <Box sx={styles.statIconBox}>{card.icon}</Box>
-          </Box>
-          <Typography sx={styles.statValue}>{card.value}</Typography>
-          <Box sx={styles.statFooter}>
-            <HourglassEmpty sx={styles.statFooterIcon} />
-            <Typography sx={styles.statFooterText}>
+        <S.StatCard key={card.label}>
+          <S.StatCardHeader>
+            <S.StatLabel>{card.label}</S.StatLabel>
+            <S.StatIconBox>{card.icon}</S.StatIconBox>
+          </S.StatCardHeader>
+
+          <S.StatValue>{card.value}</S.StatValue>
+
+          <S.StatFooter>
+            <HourglassEmpty sx={{ fontSize: "14px" }} />
+            <S.StatFooterText>
               {t("dashboard.stats.awaitingData")}
-            </Typography>
-          </Box>
-        </Box>
+            </S.StatFooterText>
+          </S.StatFooter>
+        </S.StatCard>
       ))}
-    </Box>
+    </S.StatCardsColumn>
   );
 };
 

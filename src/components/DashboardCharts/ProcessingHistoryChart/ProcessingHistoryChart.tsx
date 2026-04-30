@@ -12,12 +12,10 @@ const ProcessingHistoryChart = ({ data = [] }: ProcessingHistoryChartProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
 
-  // 1. Фільтруємо невалідні дані, щоб уникнути null в toLocaleString
   const safeData = data
     .filter((item) => item.date && !isNaN(new Date(item.date).getTime()))
     .map((item) => ({
       ...item,
-      // Перетворюємо рядок на об'єкт Date, щоб MUI Charts розумів його як час
       parsedDate: new Date(item.date),
     }));
 
@@ -33,7 +31,7 @@ const ProcessingHistoryChart = ({ data = [] }: ProcessingHistoryChartProps) => {
           xAxis={[
             {
               dataKey: "parsedDate",
-              scaleType: "time", // Використовуємо 'time' для дат
+              scaleType: "time",
               valueFormatter: (value) => formatDate(value),
             },
           ]}
@@ -51,7 +49,6 @@ const ProcessingHistoryChart = ({ data = [] }: ProcessingHistoryChartProps) => {
             },
           ]}
           height={300}
-          // Це вимкне дефолтне форматування тултіпа, яке може ламатися
           slotProps={{
             tooltip: {
               trigger: "axis",

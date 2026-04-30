@@ -1,11 +1,11 @@
-/* import { useTranslation } from "react-i18next"; */
 import { useTheme } from "@mui/material";
 import { BarChart } from "@mui/x-charts/BarChart";
 import * as S from "./styles";
 
 interface DeIdMethodItem {
-  method: string; // сюди прийдуть REPLACE, MASK з твого proxyType
-  count: number;
+  method: string;
+  value: number;
+  [key: string]: string | number;
 }
 
 interface DeIdMethodsChartProps {
@@ -28,14 +28,13 @@ const DeIdMethodsChart = ({ data = [] }: DeIdMethodsChartProps) => {
           ]}
           series={[
             {
-              dataKey: "count",
+              dataKey: "value",
 
               color: theme.palette.primaryColors[400],
             },
           ]}
           height={300}
           margin={{ left: 50, right: 20, top: 20, bottom: 40 }}
-          slotProps={{ legend: { hidden: true } }}
           sx={S.barChartStyles(theme)}
         />
       ) : (

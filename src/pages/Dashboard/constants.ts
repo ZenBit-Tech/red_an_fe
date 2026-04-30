@@ -1,13 +1,16 @@
-export type TimeFilter = "today" | "7days" | "2weeks" | "month";
+export type TimeFilter = "today" | "last_7_days" | "last_14_days" | "month";
+
 export const TIME_FILTERS: { key: TimeFilter; labelKey: string }[] = [
   { key: "today", labelKey: "dashboard.timeFilter.today" },
-  { key: "7days", labelKey: "dashboard.timeFilter.last7Days" },
-  { key: "2weeks", labelKey: "dashboard.timeFilter.twoWeeks" },
+  { key: "last_7_days", labelKey: "dashboard.timeFilter.last7Days" },
+  { key: "last_14_days", labelKey: "dashboard.timeFilter.twoWeeks" },
   { key: "month", labelKey: "dashboard.timeFilter.month" },
 ];
+
 export const DASHBOARD_DEFAULTS = {
-  TIME: "7days" as TimeFilter,
+  TIME: "last_7_days" as TimeFilter,
 } as const;
+
 export const DEFAULT_STATS = {
   TOTAL_DOCUMENTS: "0",
   ENTITIES_DETECTED: "0s",
