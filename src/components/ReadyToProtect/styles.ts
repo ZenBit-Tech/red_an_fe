@@ -29,17 +29,20 @@ export const Title = styled(Box)(({ theme }) => ({
   color: theme.palette.primaryColors[50],
   lineHeight: 1.25,
   maxWidth: 606,
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize40,
+  },
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize48,
   },
 }));
 
 export const Description = styled(Box)(({ theme }) => ({
-  fontSize: theme.typography.fontSize16,
+  fontSize: theme.typography.fontSize18,
   fontWeight: theme.typography.fontWeight500,
   color: theme.palette.textColors[200],
   maxWidth: 780,
-  [theme.breakpoints.up("md")]: {
+  [theme.breakpoints.up("sm")]: {
     fontSize: theme.typography.fontSize20,
   },
 }));
@@ -61,9 +64,9 @@ export const PrimaryButton = styled(Button)(({ theme }) => ({
   minWidth: 180,
   fontSize: theme.typography.fontSize16,
   fontWeight: theme.typography.fontWeight400,
-  color: theme.palette.primaryColors[50],
+  color: theme.palette.textColors[50],
 
-  [theme.breakpoints.up("md")]: {
+  [theme.breakpoints.up("sm")]: {
     minWidth: 206,
     fontSize: theme.typography.fontSize18,
   },
@@ -94,7 +97,7 @@ export const SecondaryButton = styled(Button)<ButtonLinkProps>(({ theme }) => ({
     color: theme.palette.neutralColors[100],
     opacity: 0.6,
   },
-  [theme.breakpoints.up("md")]: {
+  [theme.breakpoints.up("sm")]: {
     minWidth: 206,
     fontSize: theme.typography.fontSize18,
   },

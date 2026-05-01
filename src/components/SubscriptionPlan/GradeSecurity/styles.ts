@@ -32,6 +32,9 @@ export const GradeSecurityTitle = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize24,
   color: theme.palette.secondary.main,
 
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize28,
+  },
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize32,
   },
@@ -39,10 +42,10 @@ export const GradeSecurityTitle = styled(Typography)(({ theme }) => ({
 
 export const Description = styled(Typography)(({ theme }) => ({
   fontWeight: theme.typography.fontWeight400,
-  fontSize: theme.typography.fontSize14,
+  fontSize: theme.typography.fontSize16,
   color: theme.palette.neutralColors[200],
 
-  [theme.breakpoints.up("md")]: {
+  [theme.breakpoints.up("sm")]: {
     fontSize: theme.typography.fontSize18,
   },
 }));
@@ -90,6 +93,9 @@ export const MetricValue = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize24,
   color: theme.palette.secondary.main,
   wordBreak: "break-word",
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize28,
+  },
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize32,
   },
@@ -97,11 +103,7 @@ export const MetricValue = styled(Typography)(({ theme }) => ({
 
 export const MetricLabel = styled(Typography)(({ theme }) => ({
   fontWeight: theme.typography.fontWeight500,
-  fontSize: theme.typography.fontSize10,
+  fontSize: theme.typography.fontSize12,
   color: theme.palette.textColors[200],
   textTransform: "uppercase",
-
-  [theme.breakpoints.up("md")]: {
-    fontSize: theme.typography.fontSize12,
-  },
 }));

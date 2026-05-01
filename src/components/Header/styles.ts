@@ -13,10 +13,10 @@ export const HeaderContainer = styled(Container)(({ theme }) => ({
   flexWrap: "nowrap",
   padding: theme.spacing(3, 4),
 
-  [theme.breakpoints.up("md")]: {
+  [theme.breakpoints.up("sm")]: {
     padding: theme.spacing(3, 8),
   },
-  [theme.breakpoints.up("lg")]: {
+  [theme.breakpoints.up("md")]: {
     padding: theme.spacing(3, 20),
   },
 }));
@@ -25,13 +25,13 @@ export const LinkHeader = styled("a")(({ theme }) => ({
   textDecoration: "none",
   whiteSpace: "nowrap",
   fontSize: theme.typography.fontSize14,
-  fontWeight: 600,
+  fontWeight: theme.typography.fontWeight700,
   opacity: 0.75,
   transition: "opacity 0.2s ease-in-out, color 0.2s ease-in-out",
   color: theme.palette.textColors[200],
   padding: theme.spacing(1, 2),
 
-  [theme.breakpoints.up("lg")]: {
+  [theme.breakpoints.up("sm")]: {
     fontSize: theme.typography.fontSize16,
     padding: theme.spacing(2, 4),
   },

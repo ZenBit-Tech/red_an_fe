@@ -31,10 +31,12 @@ export const LeftTextBlock = styled(Box)(({ theme }) => ({
 }));
 
 export const Title = styled(Box)(({ theme }) => ({
-  fontSize: theme.typography.fontSize26,
+  fontSize: theme.typography.fontSize32,
   fontWeight: theme.typography.fontWeight700,
   color: theme.palette.textColors[50],
-  lineHeight: 1.25,
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize40,
+  },
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize48,
   },
@@ -45,9 +47,12 @@ export const TitleHighlight = styled("span")(({ theme }) => ({
 }));
 
 export const DescriptionMain = styled(Box)(({ theme }) => ({
-  fontSize: theme.typography.fontSize14,
+  fontSize: theme.typography.fontSize12,
   fontWeight: theme.typography.fontWeight400,
   color: theme.palette.textColors[200],
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize14,
+  },
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize18,
   },
@@ -98,10 +103,13 @@ export const FeatureTextWrapper = styled(Box)(({ theme }) => ({
 }));
 
 export const FeatureTitle = styled(Box)(({ theme }) => ({
-  fontSize: theme.typography.fontSize14,
+  fontSize: theme.typography.fontSize12,
   fontWeight: theme.typography.fontWeight700,
   marginBottom: theme.spacing(1),
   color: theme.palette.secondary.main,
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize14,
+  },
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize16,
   },
@@ -127,7 +135,6 @@ export const RightGrid = styled(Box)(({ theme }) => ({
 }));
 
 export const GridCard = styled(Box)(({ theme }) => ({
-  width: "100%",
   backgroundColor: theme.palette.neutralColors[800],
   borderRadius: theme.shape.borderRadius,
   padding: theme.spacing(8),
@@ -145,6 +152,10 @@ export const CardTitle = styled(Box)(({ theme }) => ({
   fontSize: theme.typography.fontSize16,
   fontWeight: theme.typography.fontWeight500,
   color: theme.palette.textColors[400],
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize18,
+  },
+
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize20,
   },

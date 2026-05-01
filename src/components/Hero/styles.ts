@@ -80,8 +80,8 @@ export const BadgeIconWrapper = styled(Box)(({ theme }) => ({
 }));
 
 export const BadgeText = styled(Typography)(({ theme }) => ({
-  fontSize: theme.typography.fontSize10,
-  fontWeight: theme.typography.fontWeight700,
+  fontSize: theme.typography.fontSize12,
+  fontWeight: theme.typography.fontWeight400,
   color: theme.palette.primaryColors[200],
   textTransform: "uppercase",
 }));
@@ -92,11 +92,14 @@ export const HeroTitle = styled(Box)(({ theme }) => ({
   alignItems: "center",
   paddingTop: theme.spacing(2),
   color: theme.palette.secondary.main,
-  fontSize: theme.typography.fontSize36,
+  fontSize: theme.typography.fontSize40,
   fontWeight: theme.typography.fontWeight700,
   fontFamily: theme.typography.secondFamily,
   lineHeight: 1.06,
 
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize60,
+  },
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize72,
   },
@@ -115,11 +118,11 @@ export const GradientText = styled("span")(({ theme }) => ({
 
 export const Description = styled(Typography)(({ theme }) => ({
   color: theme.palette.textColors[200],
-  fontSize: theme.typography.fontSize16,
+  fontSize: theme.typography.fontSize18,
   fontWeight: theme.typography.fontWeight500,
   maxWidth: 680,
   textAlign: "center",
-  [theme.breakpoints.up("md")]: {
+  [theme.breakpoints.up("sm")]: {
     fontSize: theme.typography.fontSize20,
   },
 }));
@@ -128,10 +131,10 @@ export const GetStartedButton = styled(Button)(({ theme }) => ({
   margin: `${theme.spacing(4)} auto 0`,
   padding: theme.spacing(3, 8),
   backgroundImage: "none",
-  fontSize: theme.typography.fontSize16,
+  fontSize: theme.typography.fontSize18,
   backgroundColor: theme.palette.primaryColors[700],
 
-  [theme.breakpoints.up("md")]: {
+  [theme.breakpoints.up("sm")]: {
     padding: theme.spacing(4, 10),
     fontSize: theme.typography.fontSize20,
     marginTop: "24px",

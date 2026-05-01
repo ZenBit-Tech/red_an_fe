@@ -19,7 +19,6 @@ type StrokeColorsType = typeof strokeColors;
 declare module "@mui/material/styles" {
   interface TypographyVariants {
     secondFamily: string;
-    fontSize10: number;
     fontSize12: number;
     fontSize14: number;
     fontSize16: number;
@@ -27,14 +26,13 @@ declare module "@mui/material/styles" {
     fontSize20: number;
     fontSize22: number;
     fontSize24: number;
-    fontSize26: number;
-    fontSize30: number;
+    fontSize28: number;
     fontSize32: number;
-    fontSize36: number;
     fontSize38: number;
+    fontSize40: number;
     fontSize48: number;
+    fontSize52: number;
     fontSize60: number;
-    fontSize64: number;
     fontSize72: number;
     fontWeight300: number;
     fontWeight400: number;
@@ -46,7 +44,6 @@ declare module "@mui/material/styles" {
 
   interface TypographyVariantsOptions {
     secondFamily?: string;
-    fontSize10?: number;
     fontSize12?: number;
     fontSize14?: number;
     fontSize16?: number;
@@ -54,14 +51,13 @@ declare module "@mui/material/styles" {
     fontSize20?: number;
     fontSize22?: number;
     fontSize24?: number;
-    fontSize26?: number;
-    fontSize30?: number;
+    fontSize28?: number;
     fontSize32?: number;
-    fontSize36?: number;
     fontSize38?: number;
+    fontSize40?: number;
     fontSize48?: number;
+    fontSize52?: number;
     fontSize60?: number;
-    fontSize64?: number;
     fontSize72?: number;
     fontWeight300?: number;
     fontWeight400?: number;
@@ -183,7 +179,6 @@ export const theme = createTheme({
   typography: {
     fontFamily: `"Manrope", sans-serif`,
     secondFamily: `"Roboto", sans-serif`,
-    fontSize10: 10,
     fontSize12: 12,
     fontSize14: 14,
     fontSize16: 16,
@@ -191,13 +186,13 @@ export const theme = createTheme({
     fontSize20: 20,
     fontSize22: 22,
     fontSize24: 24,
-    fontSize26: 26,
+    fontSize28: 28,
     fontSize32: 32,
-    fontSize36: 36,
     fontSize38: 38,
+    fontSize40: 40,
     fontSize48: 48,
+    fontSize52: 52,
     fontSize60: 60,
-    fontSize64: 64,
     fontSize72: 72,
     fontWeight300: 300,
     fontWeight400: 400,
