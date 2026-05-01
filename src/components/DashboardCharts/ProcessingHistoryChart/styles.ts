@@ -7,7 +7,6 @@ export const LineContainer = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(4),
 }));
 
-// Стилі для самого графіка (сітка, текст осей)
 export const lineChartStyles = (theme: Theme) => ({
   "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
     fill: theme.palette.text.secondary,

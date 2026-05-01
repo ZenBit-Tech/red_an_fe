@@ -1,29 +1,31 @@
 import { useTheme } from "@mui/material";
 import * as S from "./styles";
+import {
+  type ComplianceFramework,
+  type ComplianceFrameworkItem,
+} from "@/types/dashboard";
 
 interface ComplianceChartProps {
-  data?: Array<{
-    framework: S.ComplianceFramework;
-    count: number;
-    percentage: number;
-  }>;
+  data?: ComplianceFrameworkItem[];
 }
 
 const ComplianceChart = ({ data }: ComplianceChartProps) => {
   const theme = useTheme();
 
   const chartData =
-    data?.map((item, index) => ({
-      id: index,
-      value: item.count,
-      label: item.framework,
+    data?.map((item, index) => {
+      const framework = item.framework as ComplianceFramework;
 
-      color: S.getFrameworkColor(theme, item.framework),
-      framework: item.framework,
-    })) || [];
-
+      return {
+        id: index,
+        value: item.count,
+        label: framework,
+        color: S.getFrameworkColor(theme, framework),
+        framework: framework,
+      };
+    }) || [];
   const total = chartData.reduce((acc, curr) => acc + curr.value, 0);
-  const formatLabel = (label: string) => label.replace(/_/g, " ");
+  const formatLabel = (label: ComplianceFramework) => label.replace(/_/g, " ");
 
   return (
     <S.ChartContent>

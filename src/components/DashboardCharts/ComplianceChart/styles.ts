@@ -1,8 +1,7 @@
 import { styled, type Theme } from "@mui/material/styles";
 import { Box, Typography } from "@mui/material";
 import { PieChart } from "@mui/x-charts/PieChart";
-
-export type ComplianceFramework = "HIPAA" | "GDPR_UK" | "GDPR_EU";
+import { type ComplianceFramework } from "@/types/dashboard";
 
 interface ColorDotProps {
   framework: ComplianceFramework;
