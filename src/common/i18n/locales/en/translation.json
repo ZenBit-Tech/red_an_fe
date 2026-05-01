@@ -36,7 +36,7 @@
       },
       "framework": {
         "title": "Multi-Framework Compliance",
-        "description": "Ensure compliance with HIPAA, GDPR, CCPA, and custom regulatory requirements simultaneously."
+        "description": "Ensure compliance with HIPAA, GDPR EU, GDPR UK, and custom regulatory requirements simultaneously."
       },
       "anonymization": {
         "title": "Intelligent Anonymization",

@@ -64,6 +64,52 @@ describe("deidentifyApi", () => {
     );
   });
 
+  it("sends GDPR_EU framework for analyze request", async () => {
+    const request: AnalyzeRequest = {
+      text: "Patient Jane Doe",
+      framework: COMPLIANCE_FRAMEWORK.GDPR_EU,
+      threshold: 0.7,
+      preserveStructure: false,
+    };
+
+    postMock.mockResolvedValue({
+      data: {
+        jobId: "job-2",
+        findings: [],
+      } satisfies AnalyzeResponse,
+    });
+
+    await analyzeText(request);
+
+    expect(postMock).toHaveBeenCalledWith(
+      "/de-identification/analyze",
+      request,
+    );
+  });
+
+  it("sends GDPR_UK framework for analyze request", async () => {
+    const request: AnalyzeRequest = {
+      text: "Patient Jane Doe",
+      framework: COMPLIANCE_FRAMEWORK.GDPR_UK,
+      threshold: 0.7,
+      preserveStructure: false,
+    };
+
+    postMock.mockResolvedValue({
+      data: {
+        jobId: "job-3",
+        findings: [],
+      } satisfies AnalyzeResponse,
+    });
+
+    await analyzeText(request);
+
+    expect(postMock).toHaveBeenCalledWith(
+      "/de-identification/analyze",
+      request,
+    );
+  });
+
   it("sends preview request to preview endpoint", async () => {
     const request: PreviewRequest = {
       jobId: "job-1",
@@ -85,5 +131,49 @@ describe("deidentifyApi", () => {
       request,
     );
     expect(result).toEqual(responseData);
+  });
+
+  it("sends GDPR_EU framework for preview request", async () => {
+    const request: PreviewRequest = {
+      jobId: "job-4",
+      text: "Patient John Doe",
+      framework: COMPLIANCE_FRAMEWORK.GDPR_EU,
+      activeIds: ["finding-1"],
+    };
+
+    postMock.mockResolvedValue({
+      data: {
+        anonymizedText: "Patient [PERSON]",
+      } satisfies PreviewResponse,
+    });
+
+    await previewAnonymization(request);
+
+    expect(postMock).toHaveBeenCalledWith(
+      "/de-identification/preview",
+      request,
+    );
+  });
+
+  it("sends GDPR_UK framework for preview request", async () => {
+    const request: PreviewRequest = {
+      jobId: "job-5",
+      text: "Patient John Doe",
+      framework: COMPLIANCE_FRAMEWORK.GDPR_UK,
+      activeIds: ["finding-1"],
+    };
+
+    postMock.mockResolvedValue({
+      data: {
+        anonymizedText: "Patient [PERSON]",
+      } satisfies PreviewResponse,
+    });
+
+    await previewAnonymization(request);
+
+    expect(postMock).toHaveBeenCalledWith(
+      "/de-identification/preview",
+      request,
+    );
   });
 });
