@@ -242,9 +242,9 @@ export const DropDownMenuProps = {
   PaperProps: {
     sx: (theme: Theme) => ({
       backgroundColor: DROPDOWN_MENU_COLORS.background,
-      borderRadius: "4px",
+      borderRadius: theme.spacing(1),
       backgroundImage: "none",
-      marginTop: "4px",
+      marginTop: theme.spacing(1),
       border: `1px solid ${DROPDOWN_MENU_COLORS.border}`,
 
       "& .MuiList-root": {
@@ -256,7 +256,7 @@ export const DropDownMenuProps = {
 
       "& .MuiMenuItem-root": {
         color: DROPDOWN_MENU_COLORS.text,
-        borderRadius: "4px",
+        borderRadius: theme.spacing(1),
         padding: theme.spacing(2, 3),
         fontSize: {
           xs: `${theme.typography.fontSize12}px`,
