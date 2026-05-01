@@ -28,14 +28,6 @@ export const router = createBrowserRouter([
         element: <AboutUsPage />,
       },
       {
-        path: "/auth/verify",
-        element: <VerifyPage />,
-      },
-      {
-        path: "/signin",
-        element: <LoginPage />,
-      },
-      {
         path: "*",
         element: (
           <div style={{ padding: "100px", textAlign: "center" }}>
@@ -44,6 +36,14 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "/auth/verify",
+    element: <VerifyPage />,
+  },
+  {
+    path: "/signin",
+    element: <LoginPage />,
   },
   {
     element: <DashboardLayout />,

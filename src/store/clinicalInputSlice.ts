@@ -74,6 +74,7 @@ const clinicalInputSlice = createSlice({
       state.fileError = DEFAULT_FILE_ERROR;
       state.rejectedFile = null;
     },
+    resetClinicalInput: () => initialState,
   },
 });
 
@@ -84,6 +85,7 @@ export const {
   clearFileError,
   setFileResult,
   clearUploadedFile,
+  resetClinicalInput,
 } = clinicalInputSlice.actions;
 
 export const clinicalInputReducer = clinicalInputSlice.reducer;

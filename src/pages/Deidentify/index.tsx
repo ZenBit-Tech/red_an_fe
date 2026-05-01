@@ -32,7 +32,6 @@ const DeidentifyPage = () => {
     handleStepBack,
     handleFrameworkNext,
     handleInputNext,
-    handleRestart,
   } = useDeidentify();
 
   const renderCurrentStep = (): React.ReactNode => {
@@ -90,10 +89,12 @@ const DeidentifyPage = () => {
           <S.StepperBackButton
             onClick={handleStepBack}
             startIcon={<ArrowBackIcon />}
+            type="button"
           >
             {t("deidentify.stepper.actions.back")}
           </S.StepperBackButton>
           <S.StepperActionButton
+            key="btn-analyze-submit"
             type="submit"
             form="deidentify-settings-form"
             endIcon={<ArrowForwardIcon />}
@@ -110,6 +111,7 @@ const DeidentifyPage = () => {
           <S.StepperBackButton
             onClick={handleStepBack}
             startIcon={<ArrowBackIcon />}
+            type="button"
           >
             {t("deidentify.stepper.actions.back")}
           </S.StepperBackButton>
@@ -118,24 +120,10 @@ const DeidentifyPage = () => {
             onClick={handleInputNext}
             disabled={!isClinicalTextProvided}
             endIcon={<ArrowForwardIcon />}
+            type="button"
+            key="btn-input-next"
           >
             {t("deidentify.stepper.actions.next")}
-          </S.StepperActionButton>
-        </S.StepperActionsContainer>
-      );
-    }
-
-    if (activeStep === DEIDENTIFY_STEP.RESULT) {
-      return (
-        <S.StepperActionsContainer>
-          <S.StepperBackButton
-            onClick={handleStepBack}
-            startIcon={<ArrowBackIcon />}
-          >
-            {t("deidentify.stepper.actions.back")}
-          </S.StepperBackButton>
-          <S.StepperActionButton variant="contained" onClick={handleRestart}>
-            {t("deidentify.stepper.actions.restart")}
           </S.StepperActionButton>
         </S.StepperActionsContainer>
       );

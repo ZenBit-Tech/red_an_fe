@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { analyzeText } from "@/common/api/deidentifyApi";
 import { useAppDispatch, useAppSelector } from "@/common/hooks/hooks";
 import { resetActiveStep, setActiveStep } from "@/store/deidentifyStepSlice";
+import { resetClinicalInput } from "@/store/clinicalInputSlice";
 import {
   mapFindingToEntity,
   type Entity,
@@ -68,11 +69,20 @@ export const useDeidentify = (): UseDeidentifyReturn => {
     }
 
     if (stepIndex === DEIDENTIFY_STEP.SETTINGS) {
-      return isResultReady;
+      return activeStep > DEIDENTIFY_STEP.SETTINGS;
     }
 
     return false;
   };
+
+  useEffect(() => {
+    dispatch(resetActiveStep());
+    dispatch(resetClinicalInput());
+    return () => {
+      dispatch(resetActiveStep());
+      dispatch(resetClinicalInput());
+    };
+  }, [dispatch]);
 
   useEffect(() => {
     if (activeStep !== DEIDENTIFY_STEP.RESULT || !isResultReady) {

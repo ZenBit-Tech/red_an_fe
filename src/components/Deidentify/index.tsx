@@ -1,11 +1,13 @@
 import React from "react";
 import { Controller, useWatch } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { MenuItem, Switch } from "@mui/material";
-import InfoIcon from "@mui/icons-material/Info"; // Додали іконку
+import { MenuItem } from "@mui/material";
+import InfoIcon from "@mui/icons-material/Info";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import { useAppSelector } from "@/common/hooks/hooks";
 import { useDeidentifySettings } from "@/components/Deidentify/useDeidentifySettings";
+import { COMPLIANCE_FRAMEWORK_OPTIONS } from "@/components/ComplianceSelect/constants";
 import {
   DEIDENTIFICATION_METHODS_OPTIONS,
   type DeidentificationMethod,
@@ -60,7 +62,10 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
           <S.FrameworkBadgeLabel>
             {t("deidentify.transformation.frameworkLabel")}
           </S.FrameworkBadgeLabel>{" "}
-          {selectedFramework}
+          {t(
+            COMPLIANCE_FRAMEWORK_OPTIONS.find((o) => o.id === selectedFramework)
+              ?.labelKey ?? selectedFramework,
+          )}
         </S.FrameworkBadge>
       </S.DeidentifyPageHeader>
 
@@ -89,44 +94,8 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
                 {...field}
                 fullWidth
                 size="medium"
-                MenuProps={{
-                  PaperProps: {
-                    sx: (theme) => ({
-                      backgroundColor: "#060e20", // Фон самого списку
-                      borderRadius: "4px", // Радіус країв списку
-                      backgroundImage: "none", // На всякий випадок скидаємо дефолтний градієнт MUI
-                      marginTop: "4px", // Невеличкий відступ від інпута до списку
-                      border: "1px solid rgba(176, 198, 255, 0.08)", // Легка рамка, щоб список не зливався з фоном
-
-                      "& .MuiList-root": {
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "12px", // Ті самі 12 пікселів між елементами
-                        padding: "12px", // Відступ всередині списку, щоб елементи не прилипали до країв
-                      },
-
-                      "& .MuiMenuItem-root": {
-                        color: "#d9e2ff", // Робимо текст світлим, щоб було видно на темному
-                        borderRadius: "4px", // Злегка закруглюємо самі айтеми для красивого ховеру
-                        padding: "8px 12px", // Комфортні відступи для кліку
-                        fontSize: {
-                          xs: `${theme.typography.fontSize12}px`,
-                          sm: `${theme.typography.fontSize14}px`,
-                          md: `${theme.typography.fontSize14}px`,
-                        },
-                        "&:hover": {
-                          backgroundColor: "rgba(176, 198, 255, 0.08)", // Легкий підсвіт при наведенні
-                        },
-                        "&.Mui-selected": {
-                          backgroundColor: "rgba(59, 130, 239, 0.25);", // Колір обраного елемента
-                          "&:hover": {
-                            backgroundColor: " rgba(176, 198, 255, 0.1)",
-                          },
-                        },
-                      },
-                    }),
-                  },
-                }}
+                IconComponent={KeyboardArrowDownIcon}
+                MenuProps={S.DropDownMenuProps}
               >
                 {DEIDENTIFICATION_METHODS_OPTIONS.map((method) => (
                   <MenuItem key={method} value={method}>
@@ -151,15 +120,13 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
             name="preserveStructure"
             control={control}
             render={({ field: { value, onChange } }) => (
-              <Switch
+              <S.PreserveSwitch
                 checked={value}
                 onChange={(_, checked) => onChange(checked)}
               />
             )}
           />
         </S.PreserveStructureBox>
-
-        {/* НОВИЙ БЛОК: Threshold */}
         <S.ThresholdBox>
           <S.ThresholdLabelRow>
             <S.DeidentifyLabel>
@@ -174,7 +141,7 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
             name="threshold"
             control={control}
             render={({ field: { value, onChange } }) => (
-              <S.CustomSlider // <--- ОСЬ ТУТ ЗМІНИЛИ НА S.CustomSlider
+              <S.CustomSlider
                 value={value}
                 onChange={(_, newValue) => onChange(newValue)}
                 min={THRESHOLD_MIN}
@@ -186,7 +153,9 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
           />
 
           <S.ThresholdHintRow>
-            <InfoIcon sx={{ fontSize: 14 }} />
+            <InfoIcon
+              sx={(theme) => ({ fontSize: theme.typography.fontSize14 })}
+            />
             <S.DeidentifyMethodDescription>
               {t("deidentify.settings.thresholdHint")}
             </S.DeidentifyMethodDescription>

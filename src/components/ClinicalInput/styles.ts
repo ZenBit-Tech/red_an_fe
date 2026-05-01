@@ -8,6 +8,7 @@ import {
   FILE_CARD_STATE_TO_ICON_COLOR,
   FILE_CARD_STATE_TO_PROGRESS_COLOR,
   FILE_CARD_STATE_TO_STATUS_COLOR,
+  FOOTER_LABEL_COLOR,
 } from "@/components/ClinicalInput/constants";
 import type { FileUploadCardState } from "@/components/ClinicalInput/constants";
 
@@ -432,7 +433,7 @@ export const UploadFooterLabel = styled("span")(({ theme }) => ({
   fontWeight: theme.typography.fontWeight600,
   fontSize: theme.typography.fontSize12,
   textTransform: "uppercase",
-  color: theme.palette.textColors[200],
+  color: FOOTER_LABEL_COLOR,
 }));
 
 export const HiddenFileInput = styled("input")({

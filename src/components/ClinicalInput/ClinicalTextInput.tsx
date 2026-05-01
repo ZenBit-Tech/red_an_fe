@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
-
 import {
   CLINICAL_INPUT_TAB,
   FILE_INPUT_ACCEPT,
@@ -325,10 +324,14 @@ const ClinicalTextInput: React.FC = () => {
 
         <S.UploadFooter>
           <S.UploadFooterLabel>
-            {t("deidentify.clinicalInput.characterCount", {
-              current: clinicalText.length.toLocaleString(),
-              max: MAX_CLINICAL_TEXT_CHARACTERS.toLocaleString(),
-            })}
+            {activeTab === CLINICAL_INPUT_TAB.UPLOAD_DOCUMENT
+              ? t("deidentify.clinicalInput.fileSizeLimit", {
+                  maxMb: MAX_UPLOAD_FILE_SIZE_MB,
+                })
+              : t("deidentify.clinicalInput.characterCount", {
+                  current: clinicalText.length.toLocaleString(),
+                  max: MAX_CLINICAL_TEXT_CHARACTERS.toLocaleString(),
+                })}
           </S.UploadFooterLabel>
         </S.UploadFooter>
       </S.ClinicalInputPanel>

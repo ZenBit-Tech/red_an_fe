@@ -74,6 +74,7 @@
       },
       "textPlaceholder": "Paste or type your text here...",
       "characterCount": "{{current}} / {{max}} characters",
+      "fileSizeLimit": "FILE COUNT: {{maxMb}}MB",
       "dataLimitAlert": {
         "title": "Data limit alert",
         "message": "The current dataset exceeds the",
