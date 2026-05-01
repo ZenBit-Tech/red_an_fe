@@ -39,29 +39,6 @@ export const ENTITY_TYPE_COLORS: Partial<Record<EntityType, string>> = {
 
 export const DEFAULT_ENTITY_COLOR = "#E5E7EB";
 
-export const ENTITY_TYPE_CHIP_COLORS: Partial<Record<EntityType, string>> = {
-  PERSON: "#3b82ef",
-  DATE: "#3b82ef",
-  DATE_TIME: "#3b82ef",
-  TIME: "#3b82ef",
-  MEDICAL_RECORD: "#3b82ef",
-  MEDICAL_RECORD_NUMBER: "#3b82ef",
-  PHONE_NUMBER: "#06b6d4",
-  EMAIL_ADDRESS: "#06b6d4",
-  URL: "#06b6d4",
-  IP_ADDRESS: "#06b6d4",
-  AGE: "#10ac60",
-  ORGANIZATION: "#8b5cf6",
-  LOCATION: "#8b5cf6",
-  SSN: "#ef4444",
-  CREDIT_CARD: "#ef4444",
-  PASSPORT: "#ef4444",
-  NATIONAL_ID: "#f59e0b",
-  ID_NUMBER: "#f59e0b",
-} as const;
-
-export const DEFAULT_ENTITY_CHIP_COLOR = "#8a90a8";
-
 export interface Entity {
   id: string;
   type: EntityType;

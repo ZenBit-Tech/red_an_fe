@@ -82,7 +82,7 @@ export const FrameworkBadgeLabel = styled("span")(({ theme }) => ({
 
 export const DeidentifySettingsContainer = styled("form")(({ theme }) => ({
   width: "100%",
-  maxWidth: "965px",
+  maxWidth: theme.spacing(241, 25),
   margin: "0 auto",
   boxSizing: "border-box",
   display: "flex",
