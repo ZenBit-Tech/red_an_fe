@@ -19,6 +19,7 @@ export const secondaryColors = {
   300: "#8290b7",
   400: "#68769c",
   500: "#4f5e82",
+  550: "#434652",
   600: "#38466a",
   700: "#213051",
   800: "#091a3b",
@@ -49,6 +50,8 @@ export const textColors = {
 export const tertiaryColors = {
   400: "#10ac60",
   500: "#ef4444",
+  600: "#ff9800",
+  700: "#e65100",
 };
 
 export const strokeColors = {

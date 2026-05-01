@@ -139,16 +139,16 @@ export const COMPLIANCE_FRAMEWORK_OPTIONS: ReadonlyArray<ComplianceFrameworkOpti
     },
     {
       id: COMPLIANCE_FRAMEWORK.GDPR_EU,
-      labelKey: "compliance.frameworks.gdpr.label",
-      categoryKey: "compliance.frameworks.gdpr.category",
-      descriptionKey: "compliance.frameworks.gdpr.desc",
+      labelKey: "compliance.frameworks.gdprEu.label",
+      categoryKey: "compliance.frameworks.gdprEu.category",
+      descriptionKey: "compliance.frameworks.gdprEu.desc",
       entityCount: FRAMEWORK_ENTITY_COUNT[COMPLIANCE_FRAMEWORK.GDPR_EU],
     },
     {
       id: COMPLIANCE_FRAMEWORK.GDPR_UK,
-      labelKey: "compliance.frameworks.ccpa.label",
-      categoryKey: "compliance.frameworks.ccpa.category",
-      descriptionKey: "compliance.frameworks.ccpa.desc",
+      labelKey: "compliance.frameworks.gdprUk.label",
+      categoryKey: "compliance.frameworks.gdprUk.category",
+      descriptionKey: "compliance.frameworks.gdprUk.desc",
       entityCount: FRAMEWORK_ENTITY_COUNT[COMPLIANCE_FRAMEWORK.GDPR_UK],
     },
   ];

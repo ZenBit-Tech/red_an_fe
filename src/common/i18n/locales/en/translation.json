@@ -36,7 +36,7 @@
       },
       "framework": {
         "title": "Multi-Framework Compliance",
-        "description": "Ensure compliance with HIPAA, GDPR, CCPA, and custom regulatory requirements simultaneously."
+        "description": "Ensure compliance with HIPAA, GDPR EU, GDPR UK, and custom regulatory requirements simultaneously."
       },
       "anonymization": {
         "title": "Intelligent Anonymization",
@@ -163,6 +163,48 @@
     "bottom": {
       "support": "Support",
       "logout": "Logout"
+    }
+  },
+  "subscriptionPlan": {
+    "title": "Choose Your Plan",
+    "subtitle": "Scale your clinical data de-identification with precision. Automated workflows for researchers and healthcare providers.",
+    "plans": {
+      "free": {
+        "tier": "Explorer",
+        "name": "Free Plan",
+        "ctaLabel": "Start Free Plan",
+        "features": {
+          "documents": "2 documents/month"
+        }
+      },
+      "professional": {
+        "tier": "Recommended",
+        "name": "Professional Plan",
+        "ctaLabel": "Upgrade Now",
+        "billingNote": "Billed monthly\nFree 3 days",
+        "features": {
+          "priority": {
+            "title": "High-Priority Processing",
+            "subtitle": "Instant queue placement"
+          },
+          "scrubbing": {
+            "title": "Advanced PHI Scrubbing",
+            "subtitle": "18 Safe Harbor identifiers"
+          },
+          "unlimited": {
+            "title": "Unlimited De-identification",
+            "subtitle": "No caps on document processing"
+          },
+          "code": {
+            "title": "GDPR SDK Access",
+            "subtitle": "Full API and integration tools"
+          }
+        }
+      }
+    },
+    "gradeSecurity": {
+      "title": "Enterprise-grade security, baked into every plan.",
+      "description": "Our de-identification engine uses a multi-layered Obsidian Lens model to detect and redact Personal Health Information (PHI) with 99.9% accuracy."
     }
   }
 }
