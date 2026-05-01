@@ -82,7 +82,7 @@ export const FrameworkBadgeLabel = styled("span")(({ theme }) => ({
 
 export const DeidentifySettingsContainer = styled("form")(({ theme }) => ({
   width: "100%",
-  maxWidth: theme.spacing(241, 25),
+  maxWidth: theme.spacing(241.25),
   margin: "0 auto",
   boxSizing: "border-box",
   display: "flex",
@@ -158,7 +158,6 @@ export const PreserveStructureBox = styled(Box)(({ theme }) => ({
   border: `1px solid ${DROPDOWN_MENU_COLORS.border}`,
   borderRadius: theme.spacing(1),
   padding: theme.spacing(3, 4),
-  width: "100%",
   maxWidth: theme.spacing(229.25),
   height: theme.spacing(16.5),
   boxSizing: "border-box",
