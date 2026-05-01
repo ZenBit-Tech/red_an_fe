@@ -15,16 +15,20 @@ export interface ChartDataItem {
   count: number;
 }
 
+export type ComplianceFramework = "HIPAA" | "GDPR_UK" | "GDPR_EU";
+
+export interface ComplianceFrameworkItem {
+  framework: ComplianceFramework;
+  count: number;
+  percentage: number;
+}
+
 export interface DashboardResponse {
   summary: DashboardSummary;
   chartData: ChartDataItem[];
   charts: {
     entityTypesDetected: Array<{ label: string; value: number }>;
-    complianceFrameworkUsage: Array<{
-      framework: string;
-      count: number;
-      percentage: number;
-    }>;
+    complianceFrameworkUsage: ComplianceFrameworkItem[];
     processingHistory: Array<{
       date: string;
       documents: number;

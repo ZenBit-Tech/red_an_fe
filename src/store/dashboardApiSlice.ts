@@ -2,12 +2,12 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { apiClient } from "@/common/api/apiClient";
 import { type DashboardResponse } from "@/types/dashboard";
 
-interface QueryArgs {
+export interface QueryArgs {
   period: string;
   timezone: string;
 }
 
-interface InternalQueryArgs {
+export interface InternalQueryArgs {
   url: string;
   method: "GET" | "POST";
   params?: QueryArgs;

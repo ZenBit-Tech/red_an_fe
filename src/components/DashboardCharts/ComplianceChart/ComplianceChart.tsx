@@ -1,12 +1,9 @@
 import { useTheme } from "@mui/material";
 import * as S from "./styles";
+import { type ComplianceFrameworkItem } from "@/types/dashboard";
 
 interface ComplianceChartProps {
-  data?: Array<{
-    framework: S.ComplianceFramework;
-    count: number;
-    percentage: number;
-  }>;
+  data?: Array<ComplianceFrameworkItem>;
 }
 
 const ComplianceChart = ({ data }: ComplianceChartProps) => {
