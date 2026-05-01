@@ -32,7 +32,6 @@ const DashboardPage = () => {
     },
   );
 
-  console.log("Dashboard Data:", data);
   if (isLoading) {
     return <S.InfoBox>Loading...</S.InfoBox>;
   }
