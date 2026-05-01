@@ -1,49 +1,47 @@
 import { styled } from "@mui/material/styles";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import { BarChart } from "@mui/x-charts/BarChart";
 
-export const ChartWrapper = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.neutralColors[900],
-  borderRadius: theme.shape.borderRadius,
-  padding: theme.spacing(6),
-  border: `1px solid ${theme.palette.strokeColors[120]}`,
-  display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(6),
+export const BarContainer = styled(Box)({
   width: "100%",
-}));
-
-export const ChartHeader = styled(Box)({
-  display: "flex",
-  flexDirection: "column",
-});
-
-export const ChartTitle = styled(Typography)(({ theme }) => ({
-  fontSize: theme.typography.fontSize20,
-  fontWeight: theme.typography.fontWeight700,
-  color: theme.palette.textColors[50],
-  lineHeight: 1.2,
-}));
-
-export const ChartSubtitle = styled(Typography)(({ theme }) => ({
-  fontSize: theme.typography.fontSize14,
-  color: theme.palette.neutralColors[300],
-  marginTop: theme.spacing(1),
-}));
-
-export const BarContainer = styled(Box)(({ theme }) => ({
+  height: 450,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  width: "100%",
-  marginTop: theme.spacing(2),
+});
+
+export const StyledBarChart = styled(BarChart, {
+  shouldForwardProp: (prop) => prop !== "bottomAxis" && prop !== "leftAxis",
+})(({ theme }) => ({
+  "& .MuiChartsGrid-line": {
+    stroke: theme.palette.strokeColors[500],
+    strokeDasharray: "2 4",
+  },
+  "& .MuiChartsAxis-bottom .MuiChartsAxis-line": {
+    stroke: theme.palette.strokeColors[500],
+  },
+  "& .MuiChartsAxis-tick": {
+    stroke: theme.palette.strokeColors[500],
+  },
+  "& .MuiChartsAxis-left .MuiChartsAxis-line": {
+    display: "none",
+  },
+  // --- ДОДАЄМО СТИЛІ ДЛЯ ПІДПИСІВ ОСІ ТУТ ---
+  "& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel": {
+    fill: theme.palette.textColors[100] + " !important",
+    fontSize: "12px",
+    // Поворот тексту через CSS:
+    transform: "rotate(-45deg)",
+    transformOrigin: "left top",
+    dominantBaseline: "right",
+    translate: "0px 50px",
+  },
 }));
 
 export const EmptyStatePlaceholder = styled(Box)(({ theme }) => ({
-  height: "300px",
+  height: 300,
   width: "100%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  background: theme.palette.action.hover,
-  borderRadius: "8px",
+  background: theme.palette.neutralColors[800],
+  borderRadius: 8,
+  border: `1px dashed ${theme.palette.strokeColors[500]}`,
 }));

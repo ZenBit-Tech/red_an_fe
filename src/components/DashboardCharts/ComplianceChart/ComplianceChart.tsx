@@ -1,11 +1,9 @@
 import { useTheme } from "@mui/material";
-import { PieChart } from "@mui/x-charts/PieChart";
-
 import * as S from "./styles";
 
 interface ComplianceChartProps {
   data?: Array<{
-    framework: string;
+    framework: S.ComplianceFramework;
     count: number;
     percentage: number;
   }>;
@@ -20,19 +18,18 @@ const ComplianceChart = ({ data }: ComplianceChartProps) => {
       value: item.count,
       label: item.framework,
 
-      color:
-        theme.palette.compliance.frameworkChip[
-          item.framework as keyof typeof theme.palette.compliance.frameworkChip
-        ] || theme.palette.neutralColors[500],
+      color: S.getFrameworkColor(theme, item.framework),
+      framework: item.framework,
     })) || [];
 
   const total = chartData.reduce((acc, curr) => acc + curr.value, 0);
+  const formatLabel = (label: string) => label.replace(/_/g, " ");
 
   return (
     <S.ChartContent>
       <S.PieContainer>
         {chartData.length > 0 ? (
-          <PieChart
+          <S.StyledPieChart
             series={[
               {
                 data: chartData,
@@ -42,9 +39,6 @@ const ComplianceChart = ({ data }: ComplianceChartProps) => {
                 cornerRadius: 0,
               },
             ]}
-            sx={{
-              "& .MuiChartsLegend-root": { display: "none" },
-            }}
             width={180}
             height={180}
           />
@@ -57,10 +51,10 @@ const ComplianceChart = ({ data }: ComplianceChartProps) => {
         {chartData.map((item) => (
           <S.LegendItem key={item.id}>
             <S.LabelGroup>
-              <S.ColorDot bgcolor={item.color} />
-              <S.LabelText>{item.label}</S.LabelText>
+              <S.ColorDot framework={item.framework} />
+              <S.LabelText>{formatLabel(item.label)}</S.LabelText>
               <S.PercentageText>
-                {total > 0 ? ((item.value / total) * 100).toFixed(1) : 0}%
+                {total > 0 ? Math.round((item.value / total) * 100) : 0}%
               </S.PercentageText>
             </S.LabelGroup>
           </S.LegendItem>

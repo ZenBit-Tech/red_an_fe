@@ -39,11 +39,11 @@ export const useDashboardLayout = () => {
   const [userEmail] = useState<string>(() => resolveUserEmail());
 
   useEffect(() => {
-    const token = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
+    /* const token = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
 
     if (!token) {
       navigate(APP_ROUTES.SIGN_IN);
-    }
+    } */
   }, [navigate]);
 
   const activeNav = useMemo<NavKey>(
