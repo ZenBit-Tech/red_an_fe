@@ -1,8 +1,7 @@
 export const COMPLIANCE_FRAMEWORK = {
   HIPAA: "HIPAA",
-  GDPR: "GDPR",
-  CCPA: "CCPA",
-  CUSTOM: "CUSTOM",
+  GDPR_EU: "GDPR_EU",
+  GDPR_UK: "GDPR_UK",
 } as const;
 
 export type ComplianceFramework =
@@ -59,7 +58,7 @@ export const COMPLIANCE_FRAMEWORK_ENTITY_TYPES: Record<
   ComplianceFramework,
   ReadonlyArray<DetectableEntityType>
 > = {
-  [COMPLIANCE_FRAMEWORK.GDPR]: [
+  [COMPLIANCE_FRAMEWORK.GDPR_EU]: [
     DETECTABLE_ENTITY_TYPE.PERSON,
     DETECTABLE_ENTITY_TYPE.LOCATION,
     DETECTABLE_ENTITY_TYPE.ORGANIZATION,
@@ -105,7 +104,7 @@ export const COMPLIANCE_FRAMEWORK_ENTITY_TYPES: Record<
     DETECTABLE_ENTITY_TYPE.FREE_TEXT,
     DETECTABLE_ENTITY_TYPE.UNIQUE_IDENTIFIER,
   ],
-  [COMPLIANCE_FRAMEWORK.CCPA]: [
+  [COMPLIANCE_FRAMEWORK.GDPR_UK]: [
     DETECTABLE_ENTITY_TYPE.PERSON,
     DETECTABLE_ENTITY_TYPE.LOCATION,
     DETECTABLE_ENTITY_TYPE.EMAIL_ADDRESS,
@@ -118,18 +117,15 @@ export const COMPLIANCE_FRAMEWORK_ENTITY_TYPES: Record<
     DETECTABLE_ENTITY_TYPE.DEVICE_ID,
     DETECTABLE_ENTITY_TYPE.GEOPOINT,
   ],
-  [COMPLIANCE_FRAMEWORK.CUSTOM]: Object.values(DETECTABLE_ENTITY_TYPE),
 } as const;
 
 const FRAMEWORK_ENTITY_COUNT: Record<ComplianceFramework, number> = {
   [COMPLIANCE_FRAMEWORK.HIPAA]:
     COMPLIANCE_FRAMEWORK_ENTITY_TYPES[COMPLIANCE_FRAMEWORK.HIPAA].length,
-  [COMPLIANCE_FRAMEWORK.GDPR]:
-    COMPLIANCE_FRAMEWORK_ENTITY_TYPES[COMPLIANCE_FRAMEWORK.GDPR].length,
-  [COMPLIANCE_FRAMEWORK.CCPA]:
-    COMPLIANCE_FRAMEWORK_ENTITY_TYPES[COMPLIANCE_FRAMEWORK.CCPA].length,
-  [COMPLIANCE_FRAMEWORK.CUSTOM]:
-    COMPLIANCE_FRAMEWORK_ENTITY_TYPES[COMPLIANCE_FRAMEWORK.CUSTOM].length,
+  [COMPLIANCE_FRAMEWORK.GDPR_EU]:
+    COMPLIANCE_FRAMEWORK_ENTITY_TYPES[COMPLIANCE_FRAMEWORK.GDPR_EU].length,
+  [COMPLIANCE_FRAMEWORK.GDPR_UK]:
+    COMPLIANCE_FRAMEWORK_ENTITY_TYPES[COMPLIANCE_FRAMEWORK.GDPR_UK].length,
 };
 
 export const COMPLIANCE_FRAMEWORK_OPTIONS: ReadonlyArray<ComplianceFrameworkOption> =
@@ -142,18 +138,18 @@ export const COMPLIANCE_FRAMEWORK_OPTIONS: ReadonlyArray<ComplianceFrameworkOpti
       entityCount: FRAMEWORK_ENTITY_COUNT[COMPLIANCE_FRAMEWORK.HIPAA],
     },
     {
-      id: COMPLIANCE_FRAMEWORK.GDPR,
-      labelKey: "compliance.frameworks.gdpr.label",
-      categoryKey: "compliance.frameworks.gdpr.category",
-      descriptionKey: "compliance.frameworks.gdpr.desc",
-      entityCount: FRAMEWORK_ENTITY_COUNT[COMPLIANCE_FRAMEWORK.GDPR],
+      id: COMPLIANCE_FRAMEWORK.GDPR_EU,
+      labelKey: "compliance.frameworks.gdprEu.label",
+      categoryKey: "compliance.frameworks.gdprEu.category",
+      descriptionKey: "compliance.frameworks.gdprEu.desc",
+      entityCount: FRAMEWORK_ENTITY_COUNT[COMPLIANCE_FRAMEWORK.GDPR_EU],
     },
     {
-      id: COMPLIANCE_FRAMEWORK.CCPA,
-      labelKey: "compliance.frameworks.ccpa.label",
-      categoryKey: "compliance.frameworks.ccpa.category",
-      descriptionKey: "compliance.frameworks.ccpa.desc",
-      entityCount: FRAMEWORK_ENTITY_COUNT[COMPLIANCE_FRAMEWORK.CCPA],
+      id: COMPLIANCE_FRAMEWORK.GDPR_UK,
+      labelKey: "compliance.frameworks.gdprUk.label",
+      categoryKey: "compliance.frameworks.gdprUk.category",
+      descriptionKey: "compliance.frameworks.gdprUk.desc",
+      entityCount: FRAMEWORK_ENTITY_COUNT[COMPLIANCE_FRAMEWORK.GDPR_UK],
     },
   ];
 export const handleSelectionCardKeyDown = (
