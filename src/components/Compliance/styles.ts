@@ -182,14 +182,14 @@ export const BannerTextBlock = styled(Box)(({ theme }) => ({
 }));
 
 export const BannerTitle = styled(Box)(({ theme }) => ({
-  fontSize: theme.typography.fontSize18,
+  fontSize: theme.typography.fontSize24,
   fontWeight: theme.typography.fontWeight700,
   color: theme.palette.textColors[50],
   [theme.breakpoints.up("sm")]: {
-    fontSize: theme.typography.fontSize24,
+    fontSize: theme.typography.fontSize28,
   },
   [theme.breakpoints.up("md")]: {
-    fontSize: theme.typography.fontSize30,
+    fontSize: theme.typography.fontSize32,
   },
 }));
 
