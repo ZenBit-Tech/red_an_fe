@@ -56,11 +56,11 @@ export const ComplianceCard = styled(Box)(({ theme }) => ({
   gap: theme.spacing(5),
   textAlign: "center",
 
-  [theme.breakpoints.up("md")]: {
+  [theme.breakpoints.up("sm")]: {
     padding: theme.spacing(8, 40),
   },
 
-  [theme.breakpoints.up("lg")]: {
+  [theme.breakpoints.up("md")]: {
     padding: theme.spacing(8),
     textAlign: "start",
   },

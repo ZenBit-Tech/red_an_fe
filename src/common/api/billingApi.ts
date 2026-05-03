@@ -6,8 +6,6 @@ export const billingApi = createApi({
     baseUrl: `${import.meta.env.VITE_API_URL}/billing`,
     credentials: "include",
     prepareHeaders: (headers) => {
-      // Wherever you store the access token from /auth/magic-link/callback —
-      // adjust this to read from your auth slice instead of localStorage if applicable.
       const token = localStorage.getItem("accessToken");
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
@@ -26,7 +24,14 @@ export const billingApi = createApi({
         body,
       }),
     }),
+    getCheckoutSession: builder.query<
+      { status: "paid" | "unpaid" | "pending"; customerEmail: string | null },
+      string
+    >({
+      query: (sessionId) => `/checkout-session/${sessionId}`,
+    }),
   }),
 });
 
-export const { useCreateCheckoutSessionMutation } = billingApi;
+export const { useCreateCheckoutSessionMutation, useGetCheckoutSessionQuery } =
+  billingApi;

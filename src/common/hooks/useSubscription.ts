@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { useCreateCheckoutSessionMutation } from "@/common/api/billingApi";
 import type { SubscriptionPlan } from "@/constants/subscriptionPlans";
 
@@ -10,33 +10,22 @@ type UseSubscriptionReturn = {
 };
 
 export const useSubscription = (): UseSubscriptionReturn => {
-  const [createSession, { isLoading, error: rtkError }] =
-    useCreateCheckoutSessionMutation();
-  const [loadingPlanId, setLoadingPlanId] = useState<string | null>(null);
+  const [, { isLoading, error: rtkError }] = useCreateCheckoutSessionMutation();
 
-  const handleSelectPlan = useCallback(
-    async (plan: SubscriptionPlan) => {
-      if (isLoading) return;
+  const handleSelectPlan = useCallback(async (plan: SubscriptionPlan) => {
+    if (plan.id === "free") {
+      localStorage.setItem("pendingPlan", "free");
+      window.location.href = "/signin";
+      return;
+    }
 
-      if (!plan.stripePriceId) {
-        window.location.href = "/register";
-        return;
-      }
-
-      setLoadingPlanId(plan.id);
-
-      try {
-        const { url } = await createSession({
-          priceId: plan.stripePriceId,
-        }).unwrap();
-        if (!url) throw new Error("Missing Stripe checkout URL");
-        window.location.href = url;
-      } catch {
-        setLoadingPlanId(null);
-      }
-    },
-    [isLoading, createSession],
-  );
+    if (plan.id === "professional" && plan.stripePriceId) {
+      localStorage.setItem("pendingPlan", "professional");
+      localStorage.setItem("pendingPriceId", plan.stripePriceId);
+      window.location.href = "/signin";
+      return;
+    }
+  }, []);
 
   const error = rtkError
     ? "status" in rtkError
@@ -44,5 +33,5 @@ export const useSubscription = (): UseSubscriptionReturn => {
       : (rtkError.message ?? "Unknown error")
     : null;
 
-  return { handleSelectPlan, isLoading, loadingPlanId, error };
+  return { handleSelectPlan, isLoading, loadingPlanId: null, error };
 };

@@ -38,6 +38,24 @@ export const useVerify = () => {
           console.error("Failed to parse token payload", e);
         }
 
+        const pendingPlan = localStorage.getItem("pendingPlan");
+        const pendingPriceId = localStorage.getItem("pendingPriceId");
+        localStorage.removeItem("pendingPlan");
+        localStorage.removeItem("pendingPriceId");
+        if (pendingPlan === "professional" && pendingPriceId) {
+          try {
+            const checkoutResponse = await apiClient.post<{ url: string }>(
+              "/billing/create-checkout-session",
+              { priceId: pendingPriceId },
+            );
+            if (checkoutResponse.data.url) {
+              window.location.href = checkoutResponse.data.url;
+              return;
+            }
+          } catch (e) {
+            console.error("Failed to create Stripe session", e);
+          }
+        }
         navigate(APP_ROUTES.DASHBOARD);
       } catch (error) {
         console.error("Error verifying token", error);

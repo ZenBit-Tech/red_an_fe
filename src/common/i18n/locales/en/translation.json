@@ -180,7 +180,7 @@
       "professional": {
         "tier": "Recommended",
         "name": "Professional Plan",
-        "ctaLabel": "Upgrade Now",
+        "ctaLabel": "Get started",
         "billingNote": "Billed monthly\nFree 3 days",
         "features": {
           "priority": {
@@ -205,6 +205,18 @@
     "gradeSecurity": {
       "title": "Enterprise-grade security, baked into every plan.",
       "description": "Our de-identification engine uses a multi-layered Obsidian Lens model to detect and redact Personal Health Information (PHI) with 99.9% accuracy."
+    }
+  },
+  "subscription": {
+    "toast": {
+      "success": "Payment successful! Welcome to Professional plan 🎉",
+      "pending": "Payment is being processed, this may take a moment...",
+      "failed": "Payment was not completed. You can try again.",
+      "checkFailed": "Could not verify payment status. Please contact support."
+    },
+    "success": {
+      "title": "Thank you for subscribing!",
+      "message": "Redirecting you to your dashboard..."
     }
   }
 }
