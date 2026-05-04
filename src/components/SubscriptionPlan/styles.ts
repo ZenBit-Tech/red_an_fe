@@ -48,17 +48,20 @@ export const TitleBlock = styled(Box)(({ theme }) => ({
 export const Title = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.secondFamily,
   fontWeight: theme.typography.fontWeight700,
-  fontSize: theme.typography.fontSize32,
+  fontSize: theme.typography.fontSize38,
   color: theme.palette.secondary.main,
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize52,
+  },
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize60,
   },
 }));
 
 export const Subtitle = styled(Typography)(({ theme }) => ({
-  fontSize: theme.typography.fontSize14,
+  fontSize: theme.typography.fontSize16,
   color: theme.palette.textColors[200],
-  [theme.breakpoints.up("md")]: {
+  [theme.breakpoints.up("sm")]: {
     fontSize: theme.typography.fontSize18,
   },
 }));

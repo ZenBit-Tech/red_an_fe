@@ -84,10 +84,13 @@ export const TierChipPopular = styled(TierChip)(({ theme }) => ({
 
 export const PlanName = styled(Typography)(({ theme }) => ({
   fontWeight: theme.typography.fontWeight700,
-  fontSize: theme.typography.fontSize22,
+  fontSize: theme.typography.fontSize24,
   color: theme.palette.secondary.main,
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize28,
+  },
   [theme.breakpoints.up("md")]: {
-    fontSize: theme.typography.fontSize30,
+    fontSize: theme.typography.fontSize32,
   },
 }));
 
@@ -96,18 +99,21 @@ export const Price = styled(Typography)(({ theme }) => ({
   alignItems: "baseline",
   gap: theme.spacing(1),
   fontWeight: theme.typography.fontWeight800,
-  fontSize: theme.typography.fontSize26,
+  fontSize: theme.typography.fontSize32,
   color: theme.palette.secondary.main,
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize40,
+  },
   [theme.breakpoints.up("md")]: {
-    fontSize: theme.typography.fontSize36,
+    fontSize: theme.typography.fontSize48,
   },
 }));
 
 export const PricePeriod = styled("span")(({ theme }) => ({
   fontWeight: theme.typography.fontWeight500,
-  fontSize: theme.typography.fontSize12,
+  fontSize: theme.typography.fontSize14,
   color: theme.palette.textColors[200],
-  [theme.breakpoints.up("md")]: {
+  [theme.breakpoints.up("sm")]: {
     fontSize: theme.typography.fontSize16,
   },
 }));
@@ -175,7 +181,7 @@ export const ActionButton = styled(Button)(({ theme }) => ({
   backgroundImage: "none",
   backgroundColor: "transparent",
   color: theme.palette.secondary.main,
-  fontSize: theme.typography.fontSize12,
+  fontSize: theme.typography.fontSize14,
   border: `1px solid ${theme.palette.secondaryColors[550]}`,
   "&:hover": {
     backgroundImage: "none",
@@ -185,7 +191,7 @@ export const ActionButton = styled(Button)(({ theme }) => ({
     backgroundImage: "none",
     backgroundColor: theme.palette.neutralColors[900],
   },
-  [theme.breakpoints.up("md")]: {
+  [theme.breakpoints.up("sm")]: {
     padding: theme.spacing(4, 10),
     fontSize: theme.typography.fontSize16,
   },

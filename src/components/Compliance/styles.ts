@@ -16,10 +16,13 @@ export const TitleBlock = styled(Box)(({ theme }) => ({
 }));
 
 export const SectionTitle = styled(Box)(({ theme }) => ({
-  fontSize: theme.typography.fontSize32,
+  fontSize: theme.typography.fontSize28,
   fontWeight: theme.typography.fontWeight700,
   color: theme.palette.secondary.main,
   textAlign: "center",
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize40,
+  },
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize48,
   },
@@ -70,23 +73,27 @@ export const CardHeader = styled(Box)(({ theme }) => ({
 }));
 
 export const CardTitle = styled(Box)(({ theme }) => ({
-  fontSize: theme.typography.fontSize26,
+  fontSize: theme.typography.fontSize22,
   fontWeight: theme.typography.fontWeight700,
   color: theme.palette.secondary.main,
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize28,
+  },
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize32,
   },
 }));
 
-export const CardRegion = styled(Box)(({ theme }) => ({
-  fontSize: theme.typography.fontSize14,
+export const CardCountry = styled(Box)(({ theme }) => ({
+  fontSize: theme.typography.fontSize12,
   fontWeight: theme.typography.fontWeight400,
   color: theme.palette.primaryColors[200],
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize14,
+  },
 }));
 
 export const CardDivider = styled(Box)(({ theme }) => ({
-  width: "100%",
-  height: 0,
   borderTop: `1px dashed ${theme.palette.strokeColors[150]}`,
 }));
 
@@ -104,14 +111,14 @@ export const CardRow = styled(Box)(() => ({
 }));
 
 export const RowLabel = styled(Box)(({ theme }) => ({
-  fontSize: theme.typography.fontSize14,
+  fontSize: theme.typography.fontSize12,
   fontWeight: theme.typography.fontWeight400,
   color: theme.palette.textColors[200],
 }));
 
 export const RowValue = styled(Box)(({ theme }) => ({
-  fontSize: theme.typography.fontSize14,
-  fontWeight: theme.typography.fontWeight600,
+  fontSize: theme.typography.fontSize12,
+  fontWeight: theme.typography.fontWeight700,
   color: theme.palette.secondary.main,
 }));
 
@@ -135,8 +142,8 @@ export const FooterIconWrapper = styled(Box)(({ theme }) => ({
 }));
 
 export const FooterText = styled(Box)(({ theme }) => ({
-  fontSize: theme.typography.fontSize14,
-  fontWeight: theme.typography.fontWeight400,
+  fontSize: theme.typography.fontSize12,
+  fontWeight: theme.typography.fontWeight700,
   color: theme.palette.secondary.main,
 }));
 
@@ -175,11 +182,14 @@ export const BannerTextBlock = styled(Box)(({ theme }) => ({
 }));
 
 export const BannerTitle = styled(Box)(({ theme }) => ({
-  fontSize: theme.typography.fontSize20,
+  fontSize: theme.typography.fontSize24,
   fontWeight: theme.typography.fontWeight700,
   color: theme.palette.textColors[50],
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize28,
+  },
   [theme.breakpoints.up("md")]: {
-    fontSize: theme.typography.fontSize26,
+    fontSize: theme.typography.fontSize32,
   },
 }));
 
@@ -188,8 +198,11 @@ export const BannerDescription = styled(Box)(({ theme }) => ({
   fontWeight: theme.typography.fontWeight400,
   color: theme.palette.textColors[200],
   lineHeight: 1.6,
-  [theme.breakpoints.up("md")]: {
+  [theme.breakpoints.up("sm")]: {
     fontSize: theme.typography.fontSize16,
+  },
+  [theme.breakpoints.up("md")]: {
+    fontSize: theme.typography.fontSize18,
   },
 }));
 
@@ -206,7 +219,7 @@ export const BannerTexture = styled(Box)(({ theme }) => ({
   opacity: 0.6,
 
   display: "none",
-  [theme.breakpoints.up("lg")]: {
+  [theme.breakpoints.up("md")]: {
     display: "block",
   },
 }));
