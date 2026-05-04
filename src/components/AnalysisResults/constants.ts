@@ -38,7 +38,8 @@ export const ENTITY_TYPE_COLORS: Partial<Record<EntityType, string>> = {
 } as const;
 
 export const DEFAULT_ENTITY_COLOR = "#E5E7EB";
-
+export const DEFAULT_ENTITY_CHIP_COLOR = "#E5E7EB";
+export const ENTITY_TYPE_CHIP_COLORS = "#E5E7EB";
 export interface Entity {
   id: string;
   type: EntityType;
