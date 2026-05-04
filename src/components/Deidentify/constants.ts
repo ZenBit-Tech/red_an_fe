@@ -32,5 +32,12 @@ export const DEIDENTIFICATION_METHODS_OPTIONS = [
   DEIDENTIFICATION_METHOD.REPLACE,
   DEIDENTIFICATION_METHOD.MASK,
   DEIDENTIFICATION_METHOD.HASH,
-  DEIDENTIFICATION_METHOD.SYNTHETIC,
 ] as const;
+export const DROPDOWN_MENU_COLORS = {
+  background: "#060e20",
+  text: "#d9e2ff",
+  border: "rgba(176, 198, 255, 0.08)",
+  hoverBg: "rgba(176, 198, 255, 0.08)",
+  selectedBg: "rgba(59, 130, 239, 0.25)",
+  selectedHoverBg: "rgba(176, 198, 255, 0.1)",
+} as const;

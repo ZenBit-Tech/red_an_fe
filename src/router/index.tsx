@@ -29,14 +29,6 @@ export const router = createBrowserRouter([
         element: <AboutUsPage />,
       },
       {
-        path: "/auth/verify",
-        element: <VerifyPage />,
-      },
-      {
-        path: "/signin",
-        element: <LoginPage />,
-      },
-      {
         path: "/subscription-plan",
         element: <SubscriptionPlan />,
       },
@@ -49,6 +41,14 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "/auth/verify",
+    element: <VerifyPage />,
+  },
+  {
+    path: "/signin",
+    element: <LoginPage />,
   },
   {
     element: <DashboardLayout />,

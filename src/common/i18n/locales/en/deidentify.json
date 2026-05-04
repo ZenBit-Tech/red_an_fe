@@ -45,18 +45,23 @@
         "next": "Next Step",
         "back": "Previous Step",
         "continue": "Continue",
-        "analyzeAndContinue": "Analyze and Continue",
+        "analyzeAndContinue": "Analyze",
         "restart": "Start Over"
       }
+    },
+    "transformation": {
+      "title": "Transformation",
+      "subtitle": "Define the algorithmic parameters for sensitive data scrubbing and PII suppression across clinical documents.",
+      "frameworkLabel": "Framework:"
     },
     "settings": {
       "title": "De-Identification Settings",
       "subtitle": "Configure how to handle sensitive information",
       "method": "De-Identification Method",
-      "threshold": "Detection Threshold",
-      "thresholdHint": "Minimum confidence score to include a detection",
-      "preserveStructure": "Preserve Structure",
-      "preserveStructureHint": "Keep the original text formatting in the output",
+      "threshold": "Confidence Threshold",
+      "thresholdHint": "Set the minimum confidence threshold (starting from 50%) — only entities above this value will be de-identified.",
+      "preserveStructure": "Preserve Document Structure",
+      "preserveStructureHint": "Maintain formatting and length",
       "analyze": "Analyze"
     },
     "clinicalInput": {
@@ -69,6 +74,7 @@
       },
       "textPlaceholder": "Paste or type your text here...",
       "characterCount": "{{current}} / {{max}} characters",
+      "fileSizeLimit": "FILE COUNT: {{maxMb}}MB",
       "dataLimitAlert": {
         "title": "Data limit alert",
         "message": "The current dataset exceeds the",
@@ -123,22 +129,24 @@
       "synthetic": "Replaces regulated values with realistic synthetic equivalents for safe analysis"
     },
     "analysisResults": {
-      "title": "Analysis Results",
-      "subtitle": "Review detected entities and de-identified output",
-      "input": {
-        "label": "Input",
-        "description": "Original text with detected entities highlighted"
-      },
+      "titlePart1": "Findings &",
+      "titleHighlight": "Results",
+      "subtitle1": "Final validation of the clinical de-identification process.",
+      "subtitle2": "All sensitive identifiers have been replaced with high-fidelity synthetic proxies.",
+      "panelTitle": "Original Clinical Text",
+      "restrictedBadge": "Restricted",
+      "anonymizedBadge": "Anonymized",
       "output": {
-        "label": "Output",
-        "description": "De-identified text",
         "actions": {
           "copy": "Copy",
           "copied": "Copied",
-          "download": "Download",
-          "formatTxt": "TXT",
-          "formatPdf": "PDF"
+          "download": "Download"
         }
+      },
+      "cta": {
+        "title": "Findings with decision factors",
+        "subtitle": "Use your de-identified data to create realistic synthetic data sets for testing and development",
+        "button": "Generate Synthetic Data"
       },
       "table": {
         "title": "Findings with decision factors",

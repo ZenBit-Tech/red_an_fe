@@ -24,6 +24,8 @@ const instance = axios.create({
   },
 });
 
+let isRedirectingToLogin = false;
+
 instance.interceptors.request.use((config) => {
   const token = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
   if (token) {
@@ -35,7 +37,8 @@ instance.interceptors.request.use((config) => {
 instance.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
-    if (error.response?.status === 401) {
+    if (error.response?.status === 401 && !isRedirectingToLogin) {
+      isRedirectingToLogin = true;
       localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
       localStorage.removeItem(STORAGE_KEYS.USER);
       window.location.href = APP_ROUTES.SIGN_IN;
