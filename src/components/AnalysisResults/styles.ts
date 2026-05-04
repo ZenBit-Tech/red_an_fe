@@ -22,17 +22,9 @@ import {
 import { theme } from "@/common/theme/theme";
 
 const TABLE_COLORS = {
-  textPrimary: theme.palette.primaryColors[50],
-  textSecondary: theme.palette.textColors[200],
-  bgMain: theme.palette.neutralColors[900],
-  bgHeader: theme.palette.neutralColors[800],
   border: "rgba(178, 197, 255, 0.08)",
   badgeRestrictedBg: "rgba(230, 81, 0, 0.3)",
-  badgeRestrictedText: theme.palette.tertiaryColors[600],
-  actionBtnBg: theme.palette.primaryColors[200],
-  actionBtnText: theme.palette.neutralColors[700],
   highlightTokenBg: "rgba(13, 71, 161, 0.4)",
-  highlightTokenText: theme.palette.primaryColors[300],
   entityBg: "rgba(230, 81, 0, 0.2)",
   entityBadge: "#7A2848",
   resultButton: "linear-gradient(167deg, #0d47a1 0%, #002d6f 100%)",
@@ -70,7 +62,7 @@ export const AnalysisPageTitle = styled("h1")(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize48,
-  color: TABLE_COLORS.textPrimary,
+  color: theme.palette.primaryColors[50],
   margin: 0,
 }));
 
@@ -101,7 +93,7 @@ export const FrameworkBadge = styled(Box)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontSize: theme.typography.fontSize12,
   fontWeight: theme.typography.fontWeight700,
-  color: TABLE_COLORS.actionBtnBg,
+  color: theme.palette.primaryColors[200],
   whiteSpace: "nowrap",
   flexShrink: 0,
 }));
@@ -170,7 +162,7 @@ export const RestrictedBadge = styled(Box)(({ theme }) => ({
   borderRadius: theme.spacing(0.5),
   fontSize: `${theme.typography.fontSize14}px`,
   backgroundColor: TABLE_COLORS.badgeRestrictedBg,
-  color: TABLE_COLORS.badgeRestrictedText,
+  color: theme.palette.tertiaryColors[600],
 }));
 
 export const AnonymizedBadge = styled(Box)(({ theme }) => ({
@@ -285,14 +277,14 @@ export const StyledTableHeadContainer = styled(Box)(({ theme }) => ({
   border: `1px solid ${TABLE_COLORS.border}`,
   borderBottom: "none",
   borderRadius: `${theme.spacing(2)} ${theme.spacing(2)} 0 0`,
-  backgroundColor: TABLE_COLORS.bgHeader,
+  backgroundColor: theme.palette.tertiaryColors[600],
 }));
 
 export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
   borderRadius: `0 0 ${theme.spacing(2)} ${theme.spacing(2)}`,
   border: `1px solid ${TABLE_COLORS.border}`,
   borderTop: "none",
-  backgroundColor: TABLE_COLORS.bgMain,
+  backgroundColor: theme.palette.neutralColors[900],
   boxShadow: "none",
   overflowX: "hidden",
   overflowY: "auto",
@@ -347,10 +339,10 @@ export const StyledTable = styled(Table)(({ theme }) => ({
 }));
 
 export const StyledTableHead = styled(TableHead)(({ theme }) => ({
-  backgroundColor: TABLE_COLORS.bgHeader,
+  backgroundColor: theme.palette.neutralColors[800],
   "& .MuiTableCell-head": {
     fontWeight: theme.typography.fontWeight500,
-    color: TABLE_COLORS.textSecondary,
+    color: theme.palette.textColors[200],
     borderBottom: "none",
     fontSize: `${theme.typography.fontSize16}px !important`,
     whiteSpace: "nowrap",
@@ -358,7 +350,7 @@ export const StyledTableHead = styled(TableHead)(({ theme }) => ({
   "& .MuiTableCell-stickyHeader": {
     top: 0,
     zIndex: 2,
-    backgroundColor: TABLE_COLORS.bgHeader,
+    backgroundColor: theme.palette.neutralColors[800],
   },
   "& .MuiTableCell-head:nth-of-type(2)": {
     textAlign: "center",
@@ -373,7 +365,7 @@ export const StyledTableRow = styled(TableRow, {
       : theme.palette.neutralColors[700],
   },
   "& .MuiTableCell-root": {
-    color: TABLE_COLORS.textPrimary,
+    color: theme.palette.primaryColors[50],
   },
   "&:last-child td": {
     borderBottom: 0,
@@ -383,11 +375,11 @@ export const StyledTableRow = styled(TableRow, {
 export const StyledTableCell = styled(TableCell)(() => ({
   borderColor: TABLE_COLORS.border,
   wordBreak: "break-word",
-  color: TABLE_COLORS.textPrimary,
+  color: theme.palette.primaryColors[50],
 }));
 
 export const IndexText = styled(Box)<MutedStateProps>(({ theme }) => ({
-  color: TABLE_COLORS.textPrimary,
+  color: theme.palette.primaryColors[50],
   fontSize: `${theme.typography.fontSize16}px`,
   fontVariantNumeric: "tabular-nums",
 }));
@@ -396,7 +388,7 @@ export const NumericText = styled(Box)<MutedStateProps>(
   ({ inactive, theme }) => ({
     color: inactive
       ? theme.palette.neutralColors[400]
-      : TABLE_COLORS.textPrimary,
+      : theme.palette.primaryColors[50],
     fontSize: `${theme.typography.fontSize14}px`,
     fontVariantNumeric: "tabular-nums",
     whiteSpace: "nowrap",
@@ -446,7 +438,7 @@ export const OutputHighlightedToken = styled("span")(({ theme }) => ({
   marginRight: theme.spacing(0.5),
   borderRadius: theme.spacing(1),
   backgroundColor: TABLE_COLORS.highlightTokenBg,
-  color: TABLE_COLORS.highlightTokenText,
+  color: theme.palette.primaryColors[300],
   cursor: "default",
   boxShadow: "none",
 }));
@@ -487,9 +479,9 @@ export const ActionToggleButton = styled(Button, {
   padding: `${theme.spacing(1)} ${theme.spacing(3)} !important`,
   borderRadius: `${theme.spacing(1)} !important`,
   border: "1px solid transparent",
-  backgroundColor: `${TABLE_COLORS.actionBtnBg} !important` as string,
+  backgroundColor: `${theme.palette.primaryColors[200]} !important` as string,
   backgroundImage: "none !important" as string,
-  color: `${TABLE_COLORS.actionBtnText} !important`,
+  color: `${theme.palette.neutralColors[700]} !important`,
   fontFamily: `${theme.typography.fontFamily} !important`,
   fontSize: `${theme.typography.fontSize12}px !important`,
   fontWeight: `${theme.typography.fontWeight700} !important`,

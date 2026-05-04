@@ -21,12 +21,42 @@ export const ClinicalTextInputContainer = styled(Box)(({ theme }) => ({
 
 export const ClinicalInputHeader = styled(Box)(({ theme }) => ({
   display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  gap: theme.spacing(8),
+}));
+
+export const ClinicalInputTitleGroup = styled(Box)(({ theme }) => ({
+  display: "flex",
   flexDirection: "column",
   gap: theme.spacing(1.5),
   minHeight: theme.spacing(43),
   [theme.breakpoints.down("md")]: {
     minHeight: "auto",
   },
+}));
+
+export const FrameworkBadge = styled(Box)(({ theme }) => ({
+  width: "auto",
+  height: theme.spacing(9),
+  display: "inline-flex",
+  alignItems: "center",
+  gap: theme.spacing(1.5),
+  padding: theme.spacing(1.5, 3),
+  borderRadius: theme.spacing(2),
+  backgroundColor: alpha(theme.palette.primaryColors[900], 0.5),
+  fontFamily: theme.typography.fontFamily,
+  fontSize: theme.typography.fontSize12,
+  fontWeight: theme.typography.fontWeight700,
+  color: theme.palette.primaryColors[200],
+  whiteSpace: "nowrap",
+  flexShrink: 0,
+}));
+
+export const FrameworkBadgeLabel = styled("span")(({ theme }) => ({
+  color: theme.palette.textColors[200],
+  fontWeight: theme.typography.fontWeight400,
 }));
 
 export const ClinicalTextInputTitle = styled("h1")(({ theme }) => ({
