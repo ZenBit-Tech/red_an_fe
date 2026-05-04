@@ -10,65 +10,15 @@ import {
   COMPLIANCE_FRAMEWORK_OPTIONS,
 } from "@/components/ComplianceSelect/constants";
 import { useAppSelector } from "@/common/hooks/hooks";
-import {
-  AnalysisResultsWrapper,
-  AnalysisPageHeader,
-  AnalysisPageTitleGroup,
-  AnalysisPageTitle,
-  AnalysisPageTitleHighlight,
-  AnalysisPageSubtitle,
-  FrameworkBadge,
-  FrameworkBadgeLabel,
-  AnalysisResultsContainer,
-  PanelsContainer,
-  ResultPanel,
-  PanelTitleRow,
-  PanelTitle,
-  RestrictedBadge,
-  AnonymizedBadge,
-  PanelSurface,
-  TextContent,
-  OutputLoadingContainer,
-  HighlightedEntity,
-  OutputHighlightedToken,
-  PanelActions,
-  PanelActionButton,
-  TableSection,
-  TableContainerHeader,
-  TableContainerTitle,
-  StyledTableHeadContainer,
-  StyledTableContainer,
-  StyledTable,
-  StyledTableHead,
-  StyledTableRow,
-  StyledTableCell,
-  IndexText,
-  NumericText,
-  ScoreBadge,
-  DecisionFactorBadge,
-  ActionToggleButton,
-  RecognizerChip,
-  ResultCtaSection,
-  ResultCtaTextGroup,
-  ResultCtaTitle,
-  ResultCtaSubtitle,
-  ResultCtaButton,
-  TableBlock,
-} from "./styles";
+import * as S from "@/components/AnalysisResults/styles";
 import {
   DEFAULT_ENTITY_CHIP_COLOR,
   ENTITY_TYPE_CHIP_COLORS,
   OUTPUT_EXPORT,
-  type Entity,
+  type AnalysisResultsProps,
   type EntityType,
-} from "./constants";
-import { useAnalysisResults } from "./useAnalysisResults";
-
-interface AnalysisResultsProps {
-  inputText: string;
-  entities: Entity[];
-  jobId: string;
-}
+} from "@/components/AnalysisResults/constants";
+import { useAnalysisResults } from "@/components/AnalysisResults/useAnalysisResults";
 
 const AnalysisResults: React.FC<AnalysisResultsProps> = ({
   inputText,
@@ -152,9 +102,9 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
       }
 
       segments.push(
-        <OutputHighlightedToken key={`token-${match.index}`}>
+        <S.OutputHighlightedToken key={`token-${match.index}`}>
           {match[0]}
-        </OutputHighlightedToken>,
+        </S.OutputHighlightedToken>,
       );
 
       lastIdx = match.index + match[0].length;
@@ -185,12 +135,12 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
       }
 
       segments.push(
-        <HighlightedEntity
+        <S.HighlightedEntity
           key={`${entity.id}-${entity.startIdx}`}
           title={`${entity.type} (Score: ${entity.score})`}
         >
           {inputText.substring(entity.startIdx, entity.endIdx)}
-        </HighlightedEntity>,
+        </S.HighlightedEntity>,
       );
 
       lastIdx = entity.endIdx;
@@ -204,71 +154,68 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
   };
 
   return (
-    <AnalysisResultsWrapper>
-      <AnalysisPageHeader>
-        <AnalysisPageTitleGroup>
-          <AnalysisPageTitle>
+    <S.AnalysisResultsWrapper>
+      <S.AnalysisPageHeader>
+        <S.AnalysisPageTitleGroup>
+          <S.AnalysisPageTitle>
             {t("deidentify.analysisResults.titlePart1")}{" "}
-            <AnalysisPageTitleHighlight>
+            <S.AnalysisPageTitleHighlight>
               {t("deidentify.analysisResults.titleHighlight")}
-            </AnalysisPageTitleHighlight>
-          </AnalysisPageTitle>
-          <AnalysisPageSubtitle>
+            </S.AnalysisPageTitleHighlight>
+          </S.AnalysisPageTitle>
+          <S.AnalysisPageSubtitle>
             {t("deidentify.analysisResults.subtitle1")}
-          </AnalysisPageSubtitle>
-          <AnalysisPageSubtitle>
+          </S.AnalysisPageSubtitle>
+          <S.AnalysisPageSubtitle>
             {t("deidentify.analysisResults.subtitle2")}
-          </AnalysisPageSubtitle>
-        </AnalysisPageTitleGroup>
-        <FrameworkBadge>
-          <FrameworkBadgeLabel>
+          </S.AnalysisPageSubtitle>
+        </S.AnalysisPageTitleGroup>
+        <S.FrameworkBadge>
+          <S.FrameworkBadgeLabel>
             {t("deidentify.transformation.frameworkLabel")}
-          </FrameworkBadgeLabel>{" "}
+          </S.FrameworkBadgeLabel>{" "}
           {t(
             COMPLIANCE_FRAMEWORK_OPTIONS.find((o) => o.id === selectedFramework)
               ?.labelKey ?? selectedFramework,
           )}
-        </FrameworkBadge>
-      </AnalysisPageHeader>
+        </S.FrameworkBadge>
+      </S.AnalysisPageHeader>
 
-      <AnalysisResultsContainer>
-        <PanelsContainer>
-          {/* Input Panel */}
-          <ResultPanel>
-            <PanelTitleRow>
-              <PanelTitle>
+      <S.AnalysisResultsContainer>
+        <S.PanelsContainer>
+          <S.ResultPanel>
+            <S.PanelTitleRow>
+              <S.PanelTitle>
                 {t("deidentify.analysisResults.panelTitle")}
-              </PanelTitle>
-              <RestrictedBadge>
+              </S.PanelTitle>
+              <S.RestrictedBadge>
                 {t("deidentify.analysisResults.restrictedBadge")}
-              </RestrictedBadge>
-            </PanelTitleRow>
-            <PanelSurface>
-              <TextContent>{renderInputWithHighlights()}</TextContent>
-            </PanelSurface>
-          </ResultPanel>
-
-          {/* Output Panel */}
-          <ResultPanel>
-            <PanelTitleRow>
-              <PanelTitle>
+              </S.RestrictedBadge>
+            </S.PanelTitleRow>
+            <S.PanelSurface>
+              <S.TextContent>{renderInputWithHighlights()}</S.TextContent>
+            </S.PanelSurface>
+          </S.ResultPanel>
+          <S.ResultPanel>
+            <S.PanelTitleRow>
+              <S.PanelTitle>
                 {t("deidentify.analysisResults.panelTitle")}
-              </PanelTitle>
-              <AnonymizedBadge>
+              </S.PanelTitle>
+              <S.AnonymizedBadge>
                 {t("deidentify.analysisResults.anonymizedBadge")}
-              </AnonymizedBadge>
-            </PanelTitleRow>
-            <PanelSurface>
+              </S.AnonymizedBadge>
+            </S.PanelTitleRow>
+            <S.PanelSurface>
               {isPreviewLoading ? (
-                <OutputLoadingContainer>
+                <S.OutputLoadingContainer>
                   <CircularProgress size={24} />
-                </OutputLoadingContainer>
+                </S.OutputLoadingContainer>
               ) : (
-                <TextContent>{renderOutputWithHighlights()}</TextContent>
+                <S.TextContent>{renderOutputWithHighlights()}</S.TextContent>
               )}
-            </PanelSurface>
-            <PanelActions>
-              <PanelActionButton
+            </S.PanelSurface>
+            <S.PanelActions>
+              <S.PanelActionButton
                 size="small"
                 startIcon={<ContentCopyIcon />}
                 onClick={handleCopyOutput}
@@ -277,107 +224,102 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
                 {copiedOutput
                   ? t("deidentify.analysisResults.output.actions.copied")
                   : t("deidentify.analysisResults.output.actions.copy")}
-              </PanelActionButton>
-              <PanelActionButton
+              </S.PanelActionButton>
+              <S.PanelActionButton
                 size="small"
                 startIcon={<DownloadOutlinedIcon />}
                 onClick={handleDownloadOutput}
                 variant="outlined"
               >
                 {t("deidentify.analysisResults.output.actions.download")}
-              </PanelActionButton>
-            </PanelActions>
-          </ResultPanel>
-        </PanelsContainer>
-
-        {/* Entities Table */}
-        <TableSection>
-          <TableBlock>
+              </S.PanelActionButton>
+            </S.PanelActions>
+          </S.ResultPanel>
+        </S.PanelsContainer>
+        <S.TableSection>
+          <S.TableBlock>
             {" "}
-            {/* НОВА ОБГОРТКА: Тримає рамку і фон */}
-            <TableContainerHeader>
+            <S.TableContainerHeader>
               {" "}
-              {/* Заголовок тепер НАД скролом */}
-              <TableContainerTitle>
+              <S.TableContainerTitle>
                 {t("deidentify.analysisResults.table.title")}
-              </TableContainerTitle>
-            </TableContainerHeader>
-            <StyledTableHeadContainer>
-              <StyledTable size="small">
-                <StyledTableHead>
-                  <StyledTableRow active={false}>
-                    <StyledTableCell align="left">#</StyledTableCell>
-                    <StyledTableCell align="left">
+              </S.TableContainerTitle>
+            </S.TableContainerHeader>
+            <S.StyledTableHeadContainer>
+              <S.StyledTable size="small">
+                <S.StyledTableHead>
+                  <S.StyledTableRow active={false}>
+                    <S.StyledTableCell align="left">#</S.StyledTableCell>
+                    <S.StyledTableCell align="left">
                       {t("deidentify.analysisResults.table.columns.text")}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
+                    </S.StyledTableCell>
+                    <S.StyledTableCell align="center">
                       {t("deidentify.analysisResults.table.columns.start")}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
+                    </S.StyledTableCell>
+                    <S.StyledTableCell align="center">
                       {t("deidentify.analysisResults.table.columns.end")}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
+                    </S.StyledTableCell>
+                    <S.StyledTableCell align="center">
                       {t("deidentify.analysisResults.table.columns.score")}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
+                    </S.StyledTableCell>
+                    <S.StyledTableCell align="center">
                       {t("deidentify.analysisResults.table.columns.recognizer")}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
+                    </S.StyledTableCell>
+                    <S.StyledTableCell align="center">
                       {t(
                         "deidentify.analysisResults.table.columns.patternName",
                       )}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
+                    </S.StyledTableCell>
+                    <S.StyledTableCell align="center">
                       {t(
                         "deidentify.analysisResults.table.columns.decisionFactor",
                       )}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
+                    </S.StyledTableCell>
+                    <S.StyledTableCell align="center">
                       {t(
                         "deidentify.analysisResults.table.columns.originalScore",
                       )}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
+                    </S.StyledTableCell>
+                    <S.StyledTableCell align="center">
                       {t("deidentify.analysisResults.table.columns.action")}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                </StyledTableHead>
-              </StyledTable>
-            </StyledTableHeadContainer>
-            <StyledTableContainer>
-              <StyledTable size="small">
+                    </S.StyledTableCell>
+                  </S.StyledTableRow>
+                </S.StyledTableHead>
+              </S.StyledTable>
+            </S.StyledTableHeadContainer>
+            <S.StyledTableContainer>
+              <S.StyledTable size="small">
                 <TableBody>
                   {frameworkEntities.map((entity, index) => {
                     const isActive = selectedEntityIds.has(entity.id);
                     return (
-                      <StyledTableRow key={entity.id} active={isActive}>
-                        <StyledTableCell align="left">
+                      <S.StyledTableRow key={entity.id} active={isActive}>
+                        <S.StyledTableCell align="left">
                           {" "}
-                          {/* Вирівняно наліво */}
-                          <IndexText inactive={!isActive}>
+                          <S.IndexText inactive={!isActive}>
                             {index + 1}
-                          </IndexText>
-                        </StyledTableCell>
-                        <StyledTableCell align="left">
+                          </S.IndexText>
+                        </S.StyledTableCell>
+                        <S.StyledTableCell align="left">
                           {entity.value}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          <NumericText inactive={!isActive}>
+                        </S.StyledTableCell>
+                        <S.StyledTableCell align="center">
+                          <S.NumericText inactive={!isActive}>
                             {entity.startIdx}
-                          </NumericText>
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          <NumericText inactive={!isActive}>
+                          </S.NumericText>
+                        </S.StyledTableCell>
+                        <S.StyledTableCell align="center">
+                          <S.NumericText inactive={!isActive}>
                             {entity.endIdx}
-                          </NumericText>
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          <ScoreBadge inactive={!isActive}>
+                          </S.NumericText>
+                        </S.StyledTableCell>
+                        <S.StyledTableCell align="center">
+                          <S.ScoreBadge inactive={!isActive}>
                             {entity.score.toFixed(2)}
-                          </ScoreBadge>
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          <RecognizerChip
+                          </S.ScoreBadge>
+                        </S.StyledTableCell>
+                        <S.StyledTableCell align="center">
+                          <S.RecognizerChip
                             chipColor={
                               ENTITY_TYPE_CHIP_COLORS[
                                 entity.type as EntityType
@@ -386,26 +328,26 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
                             inactive={!isActive}
                           >
                             {entity.patternName}
-                          </RecognizerChip>
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
+                          </S.RecognizerChip>
+                        </S.StyledTableCell>
+                        <S.StyledTableCell align="center">
                           {entity.recognizer}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          <DecisionFactorBadge
+                        </S.StyledTableCell>
+                        <S.StyledTableCell align="center">
+                          <S.DecisionFactorBadge
                             level={entity.decisionFactor}
                             inactive={!isActive}
                           >
                             {entity.decisionFactor}
-                          </DecisionFactorBadge>
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          <NumericText inactive={!isActive}>
+                          </S.DecisionFactorBadge>
+                        </S.StyledTableCell>
+                        <S.StyledTableCell align="center">
+                          <S.NumericText inactive={!isActive}>
                             {entity.originalScore.toFixed(2)}
-                          </NumericText>
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          <ActionToggleButton
+                          </S.NumericText>
+                        </S.StyledTableCell>
+                        <S.StyledTableCell align="center">
+                          <S.ActionToggleButton
                             size="small"
                             active={isActive}
                             onClick={() => toggleEntitySelection(entity.id)}
@@ -417,32 +359,32 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
                               : t(
                                   "deidentify.analysisResults.table.actions.deselected",
                                 )}
-                          </ActionToggleButton>
-                        </StyledTableCell>
-                      </StyledTableRow>
+                          </S.ActionToggleButton>
+                        </S.StyledTableCell>
+                      </S.StyledTableRow>
                     );
                   })}
                 </TableBody>
-              </StyledTable>
-            </StyledTableContainer>
-          </TableBlock>
-        </TableSection>
-      </AnalysisResultsContainer>
+              </S.StyledTable>
+            </S.StyledTableContainer>
+          </S.TableBlock>
+        </S.TableSection>
+      </S.AnalysisResultsContainer>
 
-      <ResultCtaSection>
-        <ResultCtaTextGroup>
-          <ResultCtaTitle>
+      <S.ResultCtaSection>
+        <S.ResultCtaTextGroup>
+          <S.ResultCtaTitle>
             {t("deidentify.analysisResults.cta.title")}
-          </ResultCtaTitle>
-          <ResultCtaSubtitle>
+          </S.ResultCtaTitle>
+          <S.ResultCtaSubtitle>
             {t("deidentify.analysisResults.cta.subtitle")}
-          </ResultCtaSubtitle>
-        </ResultCtaTextGroup>
-        <ResultCtaButton endIcon={<ArrowForwardIcon />}>
+          </S.ResultCtaSubtitle>
+        </S.ResultCtaTextGroup>
+        <S.ResultCtaButton endIcon={<ArrowForwardIcon />}>
           {t("deidentify.analysisResults.cta.button")}
-        </ResultCtaButton>
-      </ResultCtaSection>
-    </AnalysisResultsWrapper>
+        </S.ResultCtaButton>
+      </S.ResultCtaSection>
+    </S.AnalysisResultsWrapper>
   );
 };
 
