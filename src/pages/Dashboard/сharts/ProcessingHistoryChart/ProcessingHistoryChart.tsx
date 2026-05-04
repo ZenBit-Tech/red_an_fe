@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material";
-import { LineChart } from "@mui/x-charts/LineChart";
-import * as S from "./styles";
+import BaseLineChart from "@/components/Charts/BaseLineChart/BaseLineChart";
 import { type ProcessingHistoryItem } from "@/types/dashboard";
+import * as S from "./styles";
 
 interface ProcessingHistoryChartProps {
   data?: ProcessingHistoryItem[];
@@ -26,7 +26,7 @@ const ProcessingHistoryChart = ({ data = [] }: ProcessingHistoryChartProps) => {
   return (
     <S.LineContainer>
       {safeData.length > 0 ? (
-        <LineChart
+        <BaseLineChart
           dataset={safeData}
           xAxis={[
             {
@@ -40,21 +40,25 @@ const ProcessingHistoryChart = ({ data = [] }: ProcessingHistoryChartProps) => {
               dataKey: "documents",
               label: t("dashboard.stats.documents"),
               color: theme.palette.primaryColors[500],
-              area: true,
+              curve: "linear",
+              showMark: true,
+              disableHighlight: true,
             },
             {
               dataKey: "entities",
               label: t("dashboard.stats.entities"),
-              color: theme.palette.secondaryColors[400],
+              color: theme.palette.secondaryColors[50],
+
+              disableHighlight: true,
             },
           ]}
           height={300}
           slotProps={{
-            tooltip: {
-              trigger: "axis",
+            tooltip: { trigger: "axis" },
+            legend: {
+              position: { vertical: "bottom", horizontal: "center" },
             },
           }}
-          sx={S.lineChartStyles(theme)}
         />
       ) : (
         <S.EmptyStatePlaceholder />

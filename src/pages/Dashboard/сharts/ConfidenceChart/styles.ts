@@ -1,4 +1,4 @@
-import { styled, type Theme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { Box } from "@mui/material";
 
 export const BarContainer = styled(Box)(({ theme }) => ({
@@ -6,19 +6,6 @@ export const BarContainer = styled(Box)(({ theme }) => ({
   height: 300,
   marginTop: theme.spacing(4),
 }));
-
-export const barChartStyles = (theme: Theme) => ({
-  "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
-    fill: theme.palette.text.secondary,
-  },
-  "& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel": {
-    fill: theme.palette.text.secondary,
-  },
-  "& .MuiChartsAxis-label": {
-    fill: theme.palette.text.primary,
-    fontSize: "12px",
-  },
-});
 
 export const EmptyStatePlaceholder = styled(Box)(({ theme }) => ({
   width: "100%",

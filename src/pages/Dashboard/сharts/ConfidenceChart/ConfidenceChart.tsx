@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material";
-import { BarChart } from "@mui/x-charts/BarChart";
+import BaseBarChart from "@/components/Charts/BaseBarChart/BaseBarChart";
 import * as S from "./styles";
 
 interface ConfidenceScoreItem {
   bucket: string;
   value: number;
-  [key: string]: string | number;
+  [key: string]: string | number | undefined;
 }
 
 interface ConfidenceChartProps {
@@ -20,7 +20,7 @@ const ConfidenceChart = ({ data = [] }: ConfidenceChartProps) => {
   return (
     <S.BarContainer>
       {data.length > 0 ? (
-        <BarChart
+        <BaseBarChart
           dataset={data}
           xAxis={[
             {
@@ -37,8 +37,12 @@ const ConfidenceChart = ({ data = [] }: ConfidenceChartProps) => {
             },
           ]}
           height={300}
-          margin={{ left: 60, right: 20, top: 20, bottom: 50 }}
-          sx={S.barChartStyles(theme)}
+          margin={{ left: 60, right: 20, top: 20, bottom: 60 }}
+          slotProps={{
+            legend: {
+              position: { vertical: "bottom", horizontal: "center" },
+            },
+          }}
         />
       ) : (
         <S.EmptyStatePlaceholder />

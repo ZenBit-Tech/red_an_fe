@@ -7,11 +7,11 @@ import { useDashboard } from "@/pages/Dashboard/hooks/useDashboard";
 import * as S from "@/pages/Dashboard/styles";
 import { useGetDashboardStatsQuery } from "@/store/dashboardApiSlice";
 import StatCards from "@/components/DashboardStatCards/index";
-import ComplianceChart from "@/components/DashboardCharts/ComplianceChart/ComplianceChart";
-import EntityTypesChart from "@/components/DashboardCharts/EntityTypesChart/EntityTypesChart";
-import ProcessingHistoryChart from "@/components/DashboardCharts/ProcessingHistoryChart/ProcessingHistoryChart";
-import ConfidenceChart from "@/components/DashboardCharts/ConfidenceChart/ConfidenceChart";
-import DeIdMethodsChart from "@/components/DashboardCharts/DeIdMethodsChart/DeIdMethodsChart";
+import ComplianceChart from "@/pages/Dashboard/сharts/ComplianceChart/ComplianceChart";
+import EntityTypesChart from "@/pages/Dashboard/сharts/EntityTypesChart/EntityTypesChart";
+import ProcessingHistoryChart from "@/pages/Dashboard/сharts/ProcessingHistoryChart/ProcessingHistoryChart";
+import ConfidenceChart from "@/pages/Dashboard/сharts/ConfidenceChart/ConfidenceChart";
+import DeIdMethodsChart from "@/pages/Dashboard/сharts/DeIdMethodsChart/DeIdMethodsChart";
 
 const DashboardPage = () => {
   const { t } = useTranslation();

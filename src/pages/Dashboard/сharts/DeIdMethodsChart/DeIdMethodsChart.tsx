@@ -1,11 +1,11 @@
 import { useTheme } from "@mui/material";
-import { BarChart } from "@mui/x-charts/BarChart";
+import BaseBarChart from "@/components/Charts/BaseBarChart/BaseBarChart";
 import * as S from "./styles";
 
 interface DeIdMethodItem {
   method: string;
   value: number;
-  [key: string]: string | number;
+  [key: string]: string | number | undefined;
 }
 
 interface DeIdMethodsChartProps {
@@ -18,24 +18,23 @@ const DeIdMethodsChart = ({ data = [] }: DeIdMethodsChartProps) => {
   return (
     <S.BarContainer>
       {data.length > 0 ? (
-        <BarChart
+        <BaseBarChart
           dataset={data}
           xAxis={[
             {
               scaleType: "band",
               dataKey: "method",
+              categoryGapRatio: 0.4,
             },
           ]}
           series={[
             {
               dataKey: "value",
-
               color: theme.palette.primaryColors[400],
             },
           ]}
           height={300}
-          margin={{ left: 50, right: 20, top: 20, bottom: 40 }}
-          sx={S.barChartStyles(theme)}
+          margin={{ left: 60, right: 20, top: 20, bottom: 60 }}
         />
       ) : (
         <S.EmptyStatePlaceholder />
