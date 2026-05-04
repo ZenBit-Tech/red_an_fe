@@ -8,6 +8,7 @@ import { AboutUsPage } from "@/pages/AboutUSPage";
 import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/Dashboard";
 import VerifyPage from "@/pages/VerifyPage/VerifyPage";
+import { NotFoundPage } from "@/pages/NotFoundPage";
 import { APP_ROUTES } from "@/constants/index";
 import SubscriptionPlan from "@/components/SubscriptionPlan";
 
@@ -34,11 +35,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: (
-          <div style={{ padding: "100px", textAlign: "center" }}>
-            Page not found (404)
-          </div>
-        ),
+        element: <NotFoundPage />,
       },
     ],
   },

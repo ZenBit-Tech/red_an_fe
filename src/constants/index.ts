@@ -102,6 +102,7 @@ export const ICONS: Record<string, typeof TwitterIcon> = {
   instagram: InstagramIcon,
 };
 export const APP_ROUTES = {
+  HOME: "/",
   DASHBOARD: "/dashboard",
   DEIDENTIFY: "/deidentify",
   SIGN_IN: "/signin",
