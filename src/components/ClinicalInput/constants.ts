@@ -109,3 +109,4 @@ export const FILE_BADGE_KIND_TO_COLOR: Record<FileBadgeKind, string> = {
   DOC: theme.palette.primaryColors[500],
   TXT: theme.palette.neutralColors[300],
 };
+export const FOOTER_LABEL_COLOR = "rgba(195, 198, 212, 0.6)";
