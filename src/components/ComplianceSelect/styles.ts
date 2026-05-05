@@ -24,12 +24,6 @@ export const SelectionTitle = styled("h1")(({ theme }) => ({
   fontSize: theme.typography.fontSize48,
   color: theme.palette.textColors[50],
   margin: 0,
-  [theme.breakpoints.down("md")]: {
-    fontSize: theme.typography.fontSize26,
-  },
-  [theme.breakpoints.down("sm")]: {
-    fontSize: theme.typography.fontSize24,
-  },
 }));
 
 export const SelectionTitleHighlight = styled("span")(({ theme }) => ({
@@ -133,7 +127,7 @@ export const FrameworkCategory = styled(Box, {
       ? theme.palette.error.main
       : theme.palette.primaryColors[200],
     fontFamily: theme.typography.fontFamily,
-    fontSize: theme.typography.fontSize10,
+    fontSize: theme.typography.fontSize12,
     fontWeight: theme.typography.fontWeight700,
     textTransform: "uppercase",
   }),

@@ -1,6 +1,6 @@
 import { type DetectableEntityType } from "@/components/ComplianceSelect/constants";
 import type { AnalyzeFinding } from "@/common/api/deidentifyApiTypes";
-
+import { type Theme } from "@mui/material/styles";
 export type EntityType = DetectableEntityType;
 
 export const ENTITY_TYPE_COLORS: Partial<Record<EntityType, string>> = {
@@ -38,7 +38,9 @@ export const ENTITY_TYPE_COLORS: Partial<Record<EntityType, string>> = {
 } as const;
 
 export const DEFAULT_ENTITY_COLOR = "#E5E7EB";
-
+export const DEFAULT_ENTITY_CHIP_COLOR = "#E5E7EB";
+export const ENTITY_TYPE_CHIP_COLORS: Partial<Record<EntityType, string>> =
+  ENTITY_TYPE_COLORS;
 export interface Entity {
   id: string;
   type: EntityType;
@@ -288,3 +290,43 @@ export const PDF_EXPORT = {
   PAGE_MARGIN: 40,
   LINE_HEIGHT: 16,
 } as const;
+export const getDecisionTextColor = (
+  theme: Theme,
+  level: "Low" | "Medium" | "High",
+  inactive: boolean | undefined,
+): string => {
+  if (inactive) {
+    return theme.palette.neutralColors[300];
+  }
+
+  if (level === "High") {
+    return theme.palette.success.main;
+  }
+
+  return theme.palette.text.primary;
+};
+export interface ActionToggleButtonProps {
+  active: boolean;
+}
+export interface DecisionFactorBadgeProps {
+  level: "Low" | "Medium" | "High";
+}
+export interface EntityBadgeProps {
+  badgeColor: string;
+}
+export interface RecognizerChipProps {
+  chipColor: string;
+  inactive?: boolean;
+}
+export interface MutedStateProps {
+  inactive?: boolean;
+}
+
+export interface StyledTableRowProps {
+  active: boolean;
+}
+export interface AnalysisResultsProps {
+  inputText: string;
+  entities: Entity[];
+  jobId: string;
+}
