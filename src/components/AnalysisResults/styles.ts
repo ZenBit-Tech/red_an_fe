@@ -135,7 +135,7 @@ export const ResultPanel = styled(Paper)(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(1.5),
   padding: theme.spacing(6),
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: theme.palette.neutralColors[900],
   border: `1px solid ${theme.palette.divider}`,
   borderRadius: theme.spacing(2),
   minHeight: theme.spacing(75),
@@ -246,7 +246,7 @@ export const DownloadFormatSelect = styled(Select)(({ theme }) => ({
 export const TableBlock = styled(Box)(({ theme }) => ({
   borderRadius: theme.spacing(2),
   border: `1px solid ${TABLE_COLORS.border}`,
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: theme.palette.neutralColors[900],
   overflow: "hidden",
   padding: theme.spacing(6),
 }));

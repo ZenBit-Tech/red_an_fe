@@ -214,7 +214,7 @@ export const CheckInboxContent = styled(Box)({
 export const MailIconWrapper = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(4),
   "& svg": {
-    fontSize: theme.typography.fontSize64,
+    fontSize: theme.typography.fontSize60,
     color: theme.palette.primaryColors[200],
   },
 }));

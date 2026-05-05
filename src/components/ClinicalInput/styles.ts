@@ -65,12 +65,6 @@ export const ClinicalTextInputTitle = styled("h1")(({ theme }) => ({
   fontSize: theme.typography.fontSize48,
   color: theme.palette.textColors[50],
   margin: 0,
-  [theme.breakpoints.down("md")]: {
-    fontSize: theme.typography.fontSize26,
-  },
-  [theme.breakpoints.down("sm")]: {
-    fontSize: theme.typography.fontSize24,
-  },
 }));
 
 export const ClinicalTextInputTitleHighlight = styled("span")(({ theme }) => ({
@@ -445,7 +439,7 @@ export const FileTypeSquareBadge = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight600,
-  fontSize: theme.typography.fontSize10,
+  fontSize: theme.typography.fontSize12,
   color: theme.palette.primaryColors[500],
 }));
 
@@ -592,7 +586,7 @@ export const FileTypeBadge = styled(Box, {
   border: `${theme.spacing(0.25)} solid ${alpha(FILE_CARD_STATE_TO_STATUS_COLOR[state], 0.32)}`,
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
-  fontSize: theme.typography.fontSize10,
+  fontSize: theme.typography.fontSize12,
   textTransform: "uppercase",
   color: FILE_CARD_STATE_TO_STATUS_COLOR[state],
   flexShrink: 0,

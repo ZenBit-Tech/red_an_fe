@@ -329,7 +329,7 @@ export const BarSkeletonDynamic = styled(BarSkeleton, {
 
 export const BarSkeletonLabel = styled(Typography)(({ theme }) => ({
   color: alpha(theme.palette.textColors[200], 0.2),
-  fontSize: theme.typography.fontSize10,
+  fontSize: theme.typography.fontSize12,
   fontFamily: theme.typography.fontFamily,
 }));
 

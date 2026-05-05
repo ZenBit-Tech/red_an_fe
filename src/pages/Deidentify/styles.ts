@@ -254,7 +254,7 @@ export const DeidentifyStepLabel = styled(Box, {
       : theme.typography.fontWeight500,
   [theme.breakpoints.down("sm")]: {
     marginTop: theme.spacing(1.5),
-    fontSize: theme.typography.fontSize10,
+    fontSize: theme.typography.fontSize12,
   },
 }));
 
