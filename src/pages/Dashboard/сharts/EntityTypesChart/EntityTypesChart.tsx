@@ -47,11 +47,8 @@ const EntityTypesChart = ({ chartData = [] }: EntityTypesChartProps) => {
           slotProps={{
             ...S.chartSlotsProps,
             tooltip: {
-              // Тут ми можемо змінити те, як відображається кожен рядок
               slotProps: {
-                root: {
-                  // Можна додати додаткові CSS класи або стилі
-                },
+                root: {},
               },
             },
           }}

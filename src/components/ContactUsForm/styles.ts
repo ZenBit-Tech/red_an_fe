@@ -20,7 +20,7 @@ export const CustomContainer = styled(Box)(({ theme }) => ({
 }));
 
 export const ContactTitle = styled(Typography)(({ theme }) => ({
-  fontSize: theme.typography.fontSize64,
+  fontSize: theme.typography.fontSize60,
   fontWeight: theme.typography.fontWeight600,
   fontFamily: theme.typography.secondFamily,
   color: theme.palette.text.primary,

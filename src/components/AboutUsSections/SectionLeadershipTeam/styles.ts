@@ -89,7 +89,7 @@ export const ContentOverlay = styled(Box)(({ theme }) => ({
 export const ItemTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.primaryColors[50],
   fontWeight: theme.typography.fontWeight400,
-  fontSize: theme.typography.fontSize26,
+  fontSize: theme.typography.fontSize24,
   fontFamily: theme.typography.secondFamily,
   marginBottom: theme.spacing(1),
 }));

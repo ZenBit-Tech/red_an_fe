@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@mui/material/styles";
 import { LocalStyledChart } from "./styles";
 import { type ProcessingHistoryItem } from "@/types/dashboard";
 import * as S from "./styles";
@@ -9,6 +10,7 @@ interface ProcessingHistoryChartProps {
 
 const ProcessingHistoryChart = ({ data = [] }: ProcessingHistoryChartProps) => {
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const safeData = data
     .filter((item) => item.date && !isNaN(new Date(item.date).getTime()))
@@ -55,14 +57,14 @@ const ProcessingHistoryChart = ({ data = [] }: ProcessingHistoryChartProps) => {
               label: t("dashboard.stats.documents"),
               dataKey: "documents",
               yAxisId: "left",
-              color: "#2563eb",
+              color: theme.palette.primary.main,
               curve: "linear",
             },
             {
               label: t("dashboard.stats.entities"),
               dataKey: "entities",
               yAxisId: "right",
-              color: "#eff0ff",
+              color: theme.palette.grey[200],
             },
           ]}
           height={300}

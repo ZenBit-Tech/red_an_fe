@@ -14,7 +14,6 @@ export const StyledLineChart = styled(LineChart)(({ theme }) => ({
   },
 
   "& .MuiChartsLegend-root": {
-    // сам елемент легенди (рядок)
     "& .MuiChartsLegend-series": {
       display: "flex",
       alignItems: "center",
@@ -28,13 +27,12 @@ export const StyledLineChart = styled(LineChart)(({ theme }) => ({
       height: 16,
     },
 
-    // текст
     "& .MuiChartsLegend-label": {
       fontFamily: theme.typography.fontFamily,
       fontWeight: theme.typography.fontWeight400,
       fontSize: theme.typography.fontSize14,
       lineHeight: "143%",
-      fill: theme.palette.primaryColors[50], // SVG текст
+      fill: theme.palette.primaryColors[50],
     },
   },
 }));

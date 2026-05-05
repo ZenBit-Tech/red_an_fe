@@ -91,7 +91,7 @@ export const LocalStyledChart = styled(BaseBarChart)(({ theme }) => ({
       fontFamily: theme.typography.fontFamily,
       fontWeight: theme.typography.fontWeight400,
       fontSize: theme.typography.fontSize12,
-      color: theme.palette.textColors[200], // Світло-сірий текст
+      color: theme.palette.textColors[200],
       marginRight: theme.spacing(2),
     },
   },

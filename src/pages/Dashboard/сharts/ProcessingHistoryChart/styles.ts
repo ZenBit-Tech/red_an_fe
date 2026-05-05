@@ -30,7 +30,7 @@ export const LocalStyledChart = styled(BaseLineChart)(({ theme }) => ({
     fontFamily: theme.typography.fontFamily,
     fontWeight: theme.typography.fontWeight700,
     fontSize: theme.typography.fontSize12,
-    lineHeight: "133%",
+
     color: theme.palette.textColors[400],
   },
   "& .MuiChartsTooltip-mark": {
