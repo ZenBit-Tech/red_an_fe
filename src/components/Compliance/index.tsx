@@ -20,9 +20,9 @@ export const Compliance = () => {
                 <S.CardTitle>
                   {t(`compliance.${card.titleKey}`, card.defaultTitle)}
                 </S.CardTitle>
-                <S.CardRegion>
+                <S.CardCountry>
                   {t(`compliance.${card.regionKey}`, card.defaultRegion)}
-                </S.CardRegion>
+                </S.CardCountry>
               </S.CardHeader>
 
               <S.CardDivider />

@@ -138,11 +138,14 @@ export const FooterLogo = styled(Link)(({ theme }) => ({
   flexShrink: 0,
   textDecoration: "none",
   fontWeight: theme.typography.fontWeight700,
-  fontSize: theme.typography.fontSize18,
+  fontSize: theme.typography.fontSize24,
   fontFamily: theme.typography.secondFamily,
   color: theme.palette.secondary.main,
 
+  [theme.breakpoints.up("sm")]: {
+    fontSize: theme.typography.fontSize28,
+  },
   [theme.breakpoints.up("md")]: {
-    fontSize: theme.typography.fontSize30,
+    fontSize: theme.typography.fontSize32,
   },
 }));
