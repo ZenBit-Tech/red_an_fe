@@ -246,7 +246,7 @@ export const ComplianceCard = styled(ChartCardBase)(({ theme }) => ({
 }));
 
 export const FullWidthCard = styled(ChartCardBase)(({ theme }) => ({
-  width: theme.spacing(251.75),
+  width: "100%",
   height: theme.spacing(119.5),
   marginBottom: theme.spacing(6),
 }));
