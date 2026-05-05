@@ -1,5 +1,8 @@
 import { styled } from "@mui/material/styles";
 import { Box, Button, Typography } from "@mui/material";
+
+import LazyImage from "@/components/LazyImage";
+
 import {
   NOT_FOUND_DECORATIVE_FONT_SIZE_PX,
   NOT_FOUND_DECORATIVE_FONT_SIZE_TABLET_PX,
@@ -22,7 +25,7 @@ export const PageWrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const BackgroundImage = styled("img")({
+export const BackgroundImage = styled(LazyImage)({
   position: "absolute",
   inset: 0,
   width: "100%",
@@ -33,7 +36,7 @@ export const BackgroundImage = styled("img")({
   zIndex: 0,
 });
 
-export const AstronautImage = styled("img")(({ theme }) => ({
+export const AstronautImage = styled(LazyImage)(({ theme }) => ({
   position: "absolute",
   left: "50%",
   top: "calc(50% - 98px)",

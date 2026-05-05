@@ -212,7 +212,7 @@ export const BannerTexture = styled(Box)(({ theme }) => ({
   right: 0,
   bottom: 0,
   width: "40%",
-  backgroundImage: `url("/compliance/banner-texture.png")`,
+  backgroundImage: `url("/compliance/banner-texture.webp")`,
   backgroundSize: "cover",
   backgroundPosition: "center left",
   pointerEvents: "none",

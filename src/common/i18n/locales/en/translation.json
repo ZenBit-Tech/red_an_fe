@@ -72,6 +72,38 @@
     "banner": {
       "title": "Custom Compliance Profiles",
       "description": "Tailor your anonymisation logic for specific research studies or regional health mandates. Define custom entities and regular expressions to catch niche medical identifiers."
+    },
+    "selection": {
+      "title": "Select Compliance",
+      "titleHighlight": "Framework",
+      "subtitle": "Choose the regulatory standard for your de-identification workflow. The Precision Core engine will automatically calibrate its de-identification heuristics based on your selection.",
+      "listHeader": "Compliance Framework",
+      "listSubtitle": "Select one or more compliance frameworks to apply",
+      "entityTypes": "entity types",
+      "activeSelection": "Active Selection",
+      "selectProtocol": "Select Protocol"
+    },
+    "frameworks": {
+      "hipaa": {
+        "label": "HIPAA",
+        "category": "Standard Medical",
+        "desc": "Health Insurance Portability and Accountability Act. Optimized for US-based clinical data and PHI protection."
+      },
+      "gdprEu": {
+        "label": "GDPR EU ",
+        "category": "Privacy Focus",
+        "desc": "General Data ProtectionRegulation. Rigorous de-identification for EuropeanUnion residency data with strict right-to-erasure support."
+      },
+      "gdprUk": {
+        "label": "GDPR UK",
+        "category": "Developer Tooling",
+        "desc": "Integrated software development kit for programmatic compliance.Automated enforcement of EUdata sovereignty rules in custom app pipelines."
+      },
+      "custom": {
+        "label": "Custom",
+        "category": "Custom Rules",
+        "desc": "Create your own compliance profile and configure detection rules for domain-specific workflows."
+      }
     }
   },
   "footer": {
@@ -212,40 +244,7 @@
       "description": "Our de-identification engine uses a multi-layered Obsidian Lens model to detect and redact Personal Health Information (PHI) with 99.9% accuracy."
     }
   },
-  "compliance": {
-    "selection": {
-      "title": "Select Compliance",
-      "titleHighlight": "Framework",
-      "subtitle": "Choose the regulatory standard for your de-identification workflow. The Precision Core engine will automatically calibrate its de-identification heuristics based on your selection.",
-      "listHeader": "Compliance Framework",
-      "listSubtitle": "Select one or more compliance frameworks to apply",
-      "entityTypes": "entity types",
-      "activeSelection": "Active Selection",
-      "selectProtocol": "Select Protocol"
-    },
-    "frameworks": {
-      "hipaa": {
-        "label": "HIPAA",
-        "category": "Standard Medical",
-        "desc": "Health Insurance Portability and Accountability Act. Optimized for US-based clinical data and PHI protection."
-      },
-      "gdprEu": {
-        "label": "GDPR EU ",
-        "category": "Privacy Focus",
-        "desc": "General Data ProtectionRegulation. Rigorous de-identification for EuropeanUnion residency data with strict right-to-erasure support."
-      },
-      "gdprUk": {
-        "label": "GDPR UK",
-        "category": "Developer Tooling",
-        "desc": "Integrated software development kit for programmatic compliance.Automated enforcement of EUdata sovereignty rules in custom app pipelines."
-      },
-      "custom": {
-        "label": "Custom",
-        "category": "Custom Rules",
-        "desc": "Create your own compliance profile and configure detection rules for domain-specific workflows."
-      }
-    }
-  },
+
   "deidentify": {
     "stepper": {
       "steps": {
