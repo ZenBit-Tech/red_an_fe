@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@mui/material";
-import BaseLineChart from "@/components/Charts/BaseLineChart/BaseLineChart";
+import { LocalStyledChart } from "./styles";
 import { type ProcessingHistoryItem } from "@/types/dashboard";
 import * as S from "./styles";
 
@@ -10,7 +9,6 @@ interface ProcessingHistoryChartProps {
 
 const ProcessingHistoryChart = ({ data = [] }: ProcessingHistoryChartProps) => {
   const { t } = useTranslation();
-  const theme = useTheme();
 
   const safeData = data
     .filter((item) => item.date && !isNaN(new Date(item.date).getTime()))
@@ -19,46 +17,55 @@ const ProcessingHistoryChart = ({ data = [] }: ProcessingHistoryChartProps) => {
       parsedDate: new Date(item.date),
     }));
 
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
-  };
-
   return (
     <S.LineContainer>
       {safeData.length > 0 ? (
-        <BaseLineChart
+        <LocalStyledChart
           dataset={safeData}
-          xAxis={[
-            {
-              dataKey: "parsedDate",
-              scaleType: "time",
-              valueFormatter: (value) => formatDate(value),
-            },
-          ]}
-          series={[
-            {
-              dataKey: "documents",
-              label: t("dashboard.stats.documents"),
-              color: theme.palette.primaryColors[500],
-              curve: "linear",
-              showMark: true,
-              disableHighlight: true,
-            },
-            {
-              dataKey: "entities",
-              label: t("dashboard.stats.entities"),
-              color: theme.palette.secondaryColors[50],
-
-              disableHighlight: true,
-            },
-          ]}
-          height={300}
+          grid={{ horizontal: true, vertical: true }}
           slotProps={{
-            tooltip: { trigger: "axis" },
             legend: {
               position: { vertical: "bottom", horizontal: "center" },
             },
           }}
+          xAxis={[
+            {
+              dataKey: "parsedDate",
+              scaleType: "band",
+              valueFormatter: (value: Date) =>
+                value instanceof Date
+                  ? value.toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "2-digit",
+                    })
+                  : value,
+            },
+          ]}
+          yAxis={[
+            {
+              id: "left",
+            },
+            {
+              id: "right",
+              position: "right",
+            },
+          ]}
+          series={[
+            {
+              label: t("dashboard.stats.documents"),
+              dataKey: "documents",
+              yAxisId: "left",
+              color: "#2563eb",
+              curve: "linear",
+            },
+            {
+              label: t("dashboard.stats.entities"),
+              dataKey: "entities",
+              yAxisId: "right",
+              color: "#eff0ff",
+            },
+          ]}
+          height={300}
         />
       ) : (
         <S.EmptyStatePlaceholder />

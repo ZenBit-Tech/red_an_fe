@@ -17,7 +17,9 @@
       "entitiesDetected": "ENTITIES DETECTED",
       "avgCompleteness": "AVG. ENTITIES/DOC",
       "successRate": "SUCCESS RATE",
-      "awaitingData": "Awaiting data stream..."
+      "awaitingData": "Awaiting data stream...",
+      "documents": "Documents",
+      "entities": "Entities"
     },
     "charts": {
       "complianceFramework": "Compliance Framework Usage",
