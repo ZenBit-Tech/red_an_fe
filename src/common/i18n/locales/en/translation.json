@@ -159,6 +159,12 @@
     "subtitle": "The page you're looking for doesn't exist or has been moved.",
     "cta": "Back to Home Page"
   },
+  "sessionExpired": {
+    "titleFirst": "Session",
+    "titleSecond": "Expired",
+    "subtitle": "Your session has expired. Please authorise again",
+    "cta": "Get Started"
+  },
   "verify": { "verifying": "Verifying magic link..." },
   "sidebar": {
     "header": {
