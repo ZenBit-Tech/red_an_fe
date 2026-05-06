@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
+import { useAppSelector } from "@/common/hooks/hooks";
+import { COMPLIANCE_FRAMEWORK_OPTIONS } from "@/components/ComplianceSelect/constants";
 import {
   CLINICAL_INPUT_TAB,
   FILE_INPUT_ACCEPT,
@@ -21,6 +23,9 @@ import * as S from "@/components/ClinicalInput/styles";
 const ClinicalTextInput: React.FC = () => {
   const { t } = useTranslation();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const selectedFramework = useAppSelector(
+    (state) => state.complianceFramework.selectedFramework,
+  );
   const {
     activeTab,
     clinicalText,
@@ -221,15 +226,26 @@ const ClinicalTextInput: React.FC = () => {
   return (
     <S.ClinicalTextInputContainer>
       <S.ClinicalInputHeader>
-        <S.ClinicalTextInputTitle>
-          {t("deidentify.clinicalInput.title")}{" "}
-          <S.ClinicalTextInputTitleHighlight>
-            {t("deidentify.clinicalInput.titleHighlight")}
-          </S.ClinicalTextInputTitleHighlight>
-        </S.ClinicalTextInputTitle>
-        <S.ClinicalTextInputSubtitle>
-          {t("deidentify.clinicalInput.subtitle")}
-        </S.ClinicalTextInputSubtitle>
+        <S.ClinicalInputTitleGroup>
+          <S.ClinicalTextInputTitle>
+            {t("deidentify.clinicalInput.title")}{" "}
+            <S.ClinicalTextInputTitleHighlight>
+              {t("deidentify.clinicalInput.titleHighlight")}
+            </S.ClinicalTextInputTitleHighlight>
+          </S.ClinicalTextInputTitle>
+          <S.ClinicalTextInputSubtitle>
+            {t("deidentify.clinicalInput.subtitle")}
+          </S.ClinicalTextInputSubtitle>
+        </S.ClinicalInputTitleGroup>
+        <S.FrameworkBadge>
+          <S.FrameworkBadgeLabel>
+            {t("deidentify.transformation.frameworkLabel")}
+          </S.FrameworkBadgeLabel>{" "}
+          {t(
+            COMPLIANCE_FRAMEWORK_OPTIONS.find((o) => o.id === selectedFramework)
+              ?.labelKey ?? selectedFramework,
+          )}
+        </S.FrameworkBadge>
       </S.ClinicalInputHeader>
 
       <S.ClinicalInputPanel>

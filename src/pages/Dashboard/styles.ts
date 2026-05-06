@@ -247,7 +247,9 @@ export const ComplianceCard = styled(ChartCardBase)(({ theme }) => ({
 
 export const FullWidthCard = styled(ChartCardBase)(({ theme }) => ({
   width: "100%",
-  height: theme.spacing(119.5),
+  display: "flex",
+  justifyContent: "center",
+  /* height: theme.spacing(119.5), */
   marginBottom: theme.spacing(6),
 }));
 
@@ -329,7 +331,7 @@ export const BarSkeletonDynamic = styled(BarSkeleton, {
 
 export const BarSkeletonLabel = styled(Typography)(({ theme }) => ({
   color: alpha(theme.palette.textColors[200], 0.2),
-  fontSize: theme.typography.fontSize10,
+  fontSize: theme.typography.fontSize12,
   fontFamily: theme.typography.fontFamily,
 }));
 

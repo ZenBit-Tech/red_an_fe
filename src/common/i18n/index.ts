@@ -1,7 +1,6 @@
 import { initReactI18next } from "react-i18next";
 import i18n from "i18next";
 import enTranslation from "./locales/en/translation.json";
-import enDeidentify from "./locales/en/deidentify.json";
 import enDashboard from "./locales/en/dashboard.json";
 import enLogin from "./locales/en/login.json";
 import aboutUsEn from "./locales/en/aboutUs.json";
@@ -12,12 +11,10 @@ void i18n.use(initReactI18next).init({
     en: {
       translation: {
         ...enTranslation,
-        ...enDeidentify,
         ...enDashboard,
         ...enLogin,
         compliance: {
           ...enTranslation.compliance,
-          ...enDeidentify.compliance,
         },
       },
       aboutUs: aboutUsEn,

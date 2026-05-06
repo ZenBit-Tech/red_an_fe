@@ -1,9 +1,17 @@
 import { useTranslation } from "react-i18next";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+
+import { APP_ROUTES } from "@/constants";
+
 import * as S from "./styles";
 
 export const ReadyToProtect = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleStartFreeTrial = (): void => {
+    navigate(APP_ROUTES.REGISTER);
+  };
 
   return (
     <S.ReadyToProtectSection id="solution">
@@ -13,7 +21,7 @@ export const ReadyToProtect = () => {
         <S.Description>{t("readyToProtect.description")}</S.Description>
 
         <S.ButtonsGroup>
-          <S.PrimaryButton>
+          <S.PrimaryButton onClick={handleStartFreeTrial}>
             {t("readyToProtect.primaryCta", "Start Free Trial")}
           </S.PrimaryButton>
 

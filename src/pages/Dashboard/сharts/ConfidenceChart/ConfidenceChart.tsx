@@ -1,6 +1,4 @@
-import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material";
-import BaseBarChart from "@/components/Charts/BaseBarChart/BaseBarChart";
 import * as S from "./styles";
 
 interface ConfidenceScoreItem {
@@ -14,33 +12,38 @@ interface ConfidenceChartProps {
 }
 
 const ConfidenceChart = ({ data = [] }: ConfidenceChartProps) => {
-  const { t } = useTranslation();
   const theme = useTheme();
 
   return (
     <S.BarContainer>
       {data.length > 0 ? (
-        <BaseBarChart
+        <S.LocalStyledChart
           dataset={data}
-          xAxis={[
+          layout="horizontal"
+          grid={{ vertical: true }}
+          yAxis={[
             {
               scaleType: "band",
               dataKey: "bucket",
-              label: t("dashboard.charts.confidenceRange"),
+              tickLabelStyle: {
+                fontSize: 12,
+                fill: theme.palette.textColors[100],
+              },
             },
           ]}
+          xAxis={[{}]}
           series={[
             {
               dataKey: "value",
-              label: t("dashboard.charts.entityCount"),
               color: theme.palette.primary.main,
             },
           ]}
           height={300}
-          margin={{ left: 60, right: 20, top: 20, bottom: 60 }}
           slotProps={{
-            legend: {
-              position: { vertical: "bottom", horizontal: "center" },
+            ...S.chartSlotsProps,
+            tooltip: {
+              ...S.chartSlotsProps?.tooltip,
+              disablePortal: true,
             },
           }}
         />

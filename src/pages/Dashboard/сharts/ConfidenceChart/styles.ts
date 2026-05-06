@@ -1,11 +1,95 @@
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/material";
+import { type BarChartProps } from "@mui/x-charts/BarChart";
+import BaseBarChart from "@/components/Charts/BaseBarChart/BaseBarChart";
 
 export const BarContainer = styled(Box)(({ theme }) => ({
   width: "100%",
   height: 300,
   marginTop: theme.spacing(4),
 }));
+
+export const LocalStyledChart = styled(BaseBarChart)(({ theme }) => ({
+  "& rect": {
+    cursor: "pointer",
+    transition: "all 0.2s ease-in-out",
+  },
+
+  "& rect:hover": {
+    filter: "drop-shadow(0px 4px 10px #0b3d8b)",
+  },
+
+  "& .MuiChartsTooltip-paper": {
+    boxShadow: "0 18px 26px 0 rgba(0, 0, 0, 0.5)",
+    background: "rgba(34, 42, 61, 0.85)",
+    border: `1px solid ${theme.palette.strokeColors[120]}`,
+    borderRadius: "2px !important",
+    backdropFilter: "blur(4px)",
+    minWidth: "114px",
+    padding: theme.spacing(1, 6, 1, 2),
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  "& .MuiChartsTooltip-table": {
+    borderSpacing: 0,
+  },
+  "& .MuiChartsTooltip-cell": {
+    padding: 0,
+    border: "none",
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeight700,
+    fontSize: theme.typography.fontSize12,
+    lineHeight: "133%",
+    color: theme.palette.textColors[400],
+  },
+  "& .MuiChartsTooltip-mark": {
+    overflow: "visible !important",
+    width: "auto !important",
+    height: "auto !important",
+    backgroundColor: "transparent !important",
+    boxShadow: "none !important",
+    "&:before": {
+      content: '"Count"',
+      fontFamily: theme.typography.fontFamily,
+      fontWeight: theme.typography.fontWeight400,
+      fontSize: theme.typography.fontSize12,
+      color: theme.palette.textColors[200],
+      marginRight: theme.spacing(2),
+    },
+  },
+  "& .MuiChartsTooltip-valueCell": {
+    marginLeft: "auto",
+    textAlign: "right",
+  },
+
+  "& .MuiChartsTooltip-row": {
+    display: "flex",
+    alignItems: "center",
+    gap: theme.spacing(2),
+  },
+  "& .MuiChartsTooltip-markCell": {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+}));
+
+export const chartSlotsProps: BarChartProps["slotProps"] = {
+  bar: {
+    rx: 2,
+    ry: 2,
+
+    style: {
+      transform: "translateX(2px)",
+      filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
+      transition: "all 0.2s ease-in-out",
+    },
+  },
+  tooltip: {
+    trigger: "item",
+  },
+};
 
 export const EmptyStatePlaceholder = styled(Box)(({ theme }) => ({
   width: "100%",

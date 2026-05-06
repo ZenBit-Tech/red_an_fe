@@ -1,12 +1,19 @@
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { Container } from "@mui/material";
+
+import { APP_ROUTES, BADGES } from "@/constants";
+
 import { HeroTitlePlain } from "./styles";
 import * as S from "./styles";
 
-import { BADGES } from "@/constants";
-
 const Hero = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleGetStarted = (): void => {
+    navigate(APP_ROUTES.SIGN_IN);
+  };
 
   return (
     <S.HeroSection id="hero">
@@ -39,7 +46,9 @@ const Hero = () => {
 
           <S.Description>{t("hero.description")}</S.Description>
 
-          <S.GetStartedButton>{t("hero.cta.getStarted")}</S.GetStartedButton>
+          <S.GetStartedButton onClick={handleGetStarted}>
+            {t("hero.cta.getStarted")}
+          </S.GetStartedButton>
         </S.HeroContent>
       </Container>
     </S.HeroSection>
