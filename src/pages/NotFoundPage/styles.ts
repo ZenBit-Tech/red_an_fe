@@ -3,27 +3,12 @@ import { Box, Button, Typography } from "@mui/material";
 
 import LazyImage from "@/components/LazyImage";
 
-import {
-  NOT_FOUND_DECORATIVE_FONT_SIZE_PX,
-  NOT_FOUND_DECORATIVE_FONT_SIZE_TABLET_PX,
-  NOT_FOUND_DECORATIVE_FONT_SIZE_MOBILE_PX,
-} from "./constants";
+export const BACKGROUND_IMAGE_URL = "/notFound/bg.webp";
+export const ASTRONAUT_IMAGE_URL = "/notFound/astronaut.webp";
 
-export const PageWrapper = styled(Box)(({ theme }) => ({
-  position: "relative",
-  flexGrow: 1,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  overflow: "hidden",
-  minHeight: 844,
-  [theme.breakpoints.down("md")]: {
-    minHeight: 600,
-  },
-  [theme.breakpoints.down("sm")]: {
-    minHeight: 500,
-  },
-}));
+const NOT_FOUND_DECORATIVE_FONT_SIZE_PX = 300;
+const NOT_FOUND_DECORATIVE_FONT_SIZE_TABLET_PX = 160;
+const NOT_FOUND_DECORATIVE_FONT_SIZE_MOBILE_PX = 110;
 
 export const BackgroundImage = styled(LazyImage)({
   position: "absolute",
@@ -53,6 +38,22 @@ export const AstronautImage = styled(LazyImage)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     width: 300,
     top: "calc(50% - 30px)",
+  },
+}));
+
+export const PageWrapper = styled(Box)(({ theme }) => ({
+  position: "relative",
+  flexGrow: 1,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  overflow: "hidden",
+  minHeight: 844,
+  [theme.breakpoints.down("md")]: {
+    minHeight: 600,
+  },
+  [theme.breakpoints.down("sm")]: {
+    minHeight: 500,
   },
 }));
 
