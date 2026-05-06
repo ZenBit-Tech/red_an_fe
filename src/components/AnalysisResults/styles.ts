@@ -171,6 +171,7 @@ export const AnonymizedBadge = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   padding: theme.spacing(0.5, 2),
   borderRadius: theme.spacing(0.5),
+  fontSize: `${theme.typography.fontSize14}px`,
   backgroundColor: alpha(theme.palette.primaryColors[700], 0.2),
   color: theme.palette.primaryColors[200],
 }));
@@ -277,7 +278,7 @@ export const StyledTableHeadContainer = styled(Box)(({ theme }) => ({
   border: `1px solid ${TABLE_COLORS.border}`,
   borderBottom: "none",
   borderRadius: `${theme.spacing(2)} ${theme.spacing(2)} 0 0`,
-  backgroundColor: theme.palette.tertiaryColors[600],
+  backgroundColor: theme.palette.neutralColors[800],
 }));
 
 export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
