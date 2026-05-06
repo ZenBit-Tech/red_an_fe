@@ -25,6 +25,7 @@ const DeidentifyPage = () => {
     entities,
     confirmedSettings,
     analysisResultsRef,
+    clinicalInputKey,
     isClinicalTextProvided,
     isResultReady,
     isStepCompleted,
@@ -32,6 +33,7 @@ const DeidentifyPage = () => {
     handleStepBack,
     handleFrameworkNext,
     handleInputNext,
+    handleRestart,
   } = useDeidentify();
 
   const renderCurrentStep = (): React.ReactNode => {
@@ -49,7 +51,7 @@ const DeidentifyPage = () => {
     }
 
     if (activeStep === DEIDENTIFY_STEP.INPUT_DATA) {
-      return <ClinicalTextInput />;
+      return <ClinicalTextInput key={clinicalInputKey} />;
     }
 
     if (activeStep === DEIDENTIFY_STEP.RESULT && isResultReady) {
@@ -60,6 +62,8 @@ const DeidentifyPage = () => {
             inputText={analyzedInputText}
             entities={entities}
             jobId={jobId}
+            onBack={handleStepBack}
+            onRestart={handleRestart}
           />
         </Box>
       );

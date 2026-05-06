@@ -255,7 +255,6 @@ export const TableSection = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(1),
-  marginBottom: theme.spacing(20),
 }));
 
 export const TableContainerHeader = styled(Box)(({ theme }) => ({
@@ -546,5 +545,49 @@ export const ResultCtaButton = styled(Button)(({ theme }) => ({
   "&:hover": {
     backgroundImage: `linear-gradient(167deg, ${theme.palette.primaryColors[700]} 0%, ${theme.palette.primaryColors[900]} 100%)`,
     filter: "brightness(1.08)",
+  },
+}));
+
+export const TableActionsRow = styled(Box)({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginTop: theme.spacing(5, 5),
+  marginBottom: theme.spacing(10),
+});
+
+export const TableBackButton = styled(Button)(({ theme }) => ({
+  fontFamily: theme.typography.fontFamily,
+  fontWeight: theme.typography.fontWeight500,
+  fontSize: `${theme.typography.fontSize16}px`,
+  color: theme.palette.textColors[200],
+  textTransform: "none",
+  background: "none",
+  padding: 0,
+  minWidth: 0,
+  "& .MuiButton-startIcon": {
+    marginRight: theme.spacing(2),
+  },
+  "&:hover": {
+    background: "none",
+    color: theme.palette.textColors[50],
+  },
+}));
+
+export const TableRestartButton = styled(Button)(({ theme }) => ({
+  fontFamily: theme.typography.fontFamily,
+  fontWeight: theme.typography.fontWeight700,
+  fontSize: `${theme.typography.fontSize16}px`,
+  color: theme.palette.textColors[200],
+  textTransform: "none",
+  background: "none",
+  padding: 0,
+  minWidth: 0,
+  "& .MuiButton-endIcon": {
+    marginLeft: theme.spacing(2),
+  },
+  "&:hover": {
+    background: "none",
+    color: theme.palette.textColors[50],
   },
 }));

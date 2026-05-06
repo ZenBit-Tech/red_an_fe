@@ -1,8 +1,7 @@
 import React from "react";
-import { Controller, useWatch } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { MenuItem } from "@mui/material";
-import InfoIcon from "@mui/icons-material/Info";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import { useAppSelector } from "@/common/hooks/hooks";
@@ -11,9 +10,6 @@ import { COMPLIANCE_FRAMEWORK_OPTIONS } from "@/components/ComplianceSelect/cons
 import {
   DEIDENTIFICATION_METHODS_OPTIONS,
   type DeidentificationMethod,
-  THRESHOLD_MIN,
-  THRESHOLD_MAX,
-  THRESHOLD_STEP,
 } from "@/components/Deidentify/constants";
 import type { DeidentifySettingsFormData } from "@/components/Deidentify/constants";
 import * as S from "@/components/Deidentify/styles";
@@ -36,11 +32,6 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
   const selectedFramework = useAppSelector(
     (state) => state.complianceFramework.selectedFramework,
   );
-
-  const thresholdValue = useWatch({
-    control,
-    name: "threshold",
-  });
 
   const getMethodLabel = (method: DeidentificationMethod): string => {
     const methodKey = `deidentify.methods.${method.toLowerCase()}`;
@@ -127,40 +118,6 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
             )}
           />
         </S.PreserveStructureBox>
-        <S.ThresholdBox>
-          <S.ThresholdLabelRow>
-            <S.DeidentifyLabel>
-              {t("deidentify.settings.threshold")}
-            </S.DeidentifyLabel>
-            <S.ThresholdValue>
-              {Math.round(thresholdValue * 100)}%
-            </S.ThresholdValue>
-          </S.ThresholdLabelRow>
-
-          <Controller
-            name="threshold"
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <S.CustomSlider
-                value={value}
-                onChange={(_, newValue) => onChange(newValue)}
-                min={THRESHOLD_MIN}
-                max={THRESHOLD_MAX}
-                step={THRESHOLD_STEP}
-                valueLabelDisplay="off"
-              />
-            )}
-          />
-
-          <S.ThresholdHintRow>
-            <InfoIcon
-              sx={(theme) => ({ fontSize: theme.typography.fontSize14 })}
-            />
-            <S.DeidentifyMethodDescription>
-              {t("deidentify.settings.thresholdHint")}
-            </S.DeidentifyMethodDescription>
-          </S.ThresholdHintRow>
-        </S.ThresholdBox>
       </S.DeidentifySettingsContainer>
     </S.DeidentifySettingsWrapper>
   );
