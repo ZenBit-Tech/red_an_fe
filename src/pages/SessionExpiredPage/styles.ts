@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { SESSION_EXPIRED_SVG_SIZE } from "./constants";
+
+const SESSION_EXPIRED_SVG_SIZE = 300;
 
 const PAGE_COLORS = {
   PAGE_TITLE: "linear-gradient(161deg, #b0c6ff 0%, #0d47a1 100%)",
