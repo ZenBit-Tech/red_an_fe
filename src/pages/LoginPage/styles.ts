@@ -5,7 +5,7 @@ export const Container = styled(Box)(({ theme }) => ({
   minHeight: "100vh",
   display: "flex",
   flexDirection: "column",
-  background: `url('/login/login-bg.png') center/cover no-repeat, ${theme.palette.secondaryColors[950]}`,
+  background: `url('/login/login-bg.webp') center/cover no-repeat, ${theme.palette.secondaryColors[950]}`,
   fontFamily: theme.typography.fontFamily,
   position: "relative",
   overflow: "hidden",
