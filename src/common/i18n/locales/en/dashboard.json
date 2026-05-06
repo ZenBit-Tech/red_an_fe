@@ -9,7 +9,8 @@
     "page": {
       "title": "Dashboard",
       "subtitle": "Monitor your de-identification metrics",
-      "infoBanner": "2 documents available for de-identification",
+      "infoBannerNonePay": "2 documents available for de-identification",
+      "infoBannerIsPay": "Unlimited",
       "startButton": "Start De-Identification"
     },
     "stats": {
