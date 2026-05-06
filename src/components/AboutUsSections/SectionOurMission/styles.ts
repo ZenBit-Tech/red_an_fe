@@ -29,7 +29,7 @@ export const CustomContainer = styled(Box)(({ theme }) => ({
 export const SectionTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.primary,
   marginBottom: theme.spacing(6),
-  fontSize: theme.typography.fontSize64,
+  fontSize: theme.typography.fontSize60,
   fontWeight: theme.typography.fontWeight700,
   fontFamily: theme.typography.secondFamily,
   [theme.breakpoints.down("sm")]: { fontSize: theme.typography.fontSize32 },

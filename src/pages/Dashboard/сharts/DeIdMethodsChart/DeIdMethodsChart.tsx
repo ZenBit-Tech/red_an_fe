@@ -1,5 +1,4 @@
 import { useTheme } from "@mui/material";
-import BaseBarChart from "@/components/Charts/BaseBarChart/BaseBarChart";
 import * as S from "./styles";
 
 interface DeIdMethodItem {
@@ -18,23 +17,34 @@ const DeIdMethodsChart = ({ data = [] }: DeIdMethodsChartProps) => {
   return (
     <S.BarContainer>
       {data.length > 0 ? (
-        <BaseBarChart
+        <S.LocalStyledChart
           dataset={data}
+          grid={{ horizontal: true, vertical: true }}
           xAxis={[
             {
               scaleType: "band",
               dataKey: "method",
               categoryGapRatio: 0.4,
+              tickLabelStyle: {
+                fill: theme.palette.textColors[100],
+                fontSize: 12,
+              },
             },
           ]}
           series={[
             {
               dataKey: "value",
+
               color: theme.palette.primaryColors[400],
             },
           ]}
-          height={300}
-          margin={{ left: 60, right: 20, top: 20, bottom: 60 }}
+          height={340}
+          slotProps={{
+            ...S.chartSlotsProps,
+            tooltip: {
+              disablePortal: true,
+            },
+          }}
         />
       ) : (
         <S.EmptyStatePlaceholder />

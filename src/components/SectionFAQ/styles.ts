@@ -23,7 +23,7 @@ export const StyledContainer = styled(Box)(({ theme }) => ({
 }));
 
 export const FAQTitle = styled(Typography)(({ theme }) => ({
-  fontSize: theme.typography.fontSize36,
+  fontSize: theme.typography.fontSize38,
   fontWeight: theme.typography.fontWeight700,
   fontFamily: theme.typography.secondFamily,
   textAlign: "center",
