@@ -4,7 +4,6 @@ import {
   CheckCircleOutlined,
   Fingerprint,
   FolderOpen,
-  HourglassEmpty,
 } from "@mui/icons-material";
 import * as S from "@/pages/Dashboard/styles";
 import { type DashboardSummary } from "@/types/dashboard";
@@ -47,15 +46,7 @@ const StatCards = ({ summary }: StatCardsProps) => {
             <S.StatLabel>{card.label}</S.StatLabel>
             <S.StatIconBox>{card.icon}</S.StatIconBox>
           </S.StatCardHeader>
-
           <S.StatValue>{card.value}</S.StatValue>
-
-          <S.StatFooter>
-            <HourglassEmpty sx={{ fontSize: "14px" }} />
-            <S.StatFooterText>
-              {t("dashboard.stats.awaitingData")}
-            </S.StatFooterText>
-          </S.StatFooter>
         </S.StatCard>
       ))}
     </S.StatCardsColumn>

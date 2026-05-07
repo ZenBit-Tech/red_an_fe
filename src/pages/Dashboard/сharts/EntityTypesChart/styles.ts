@@ -4,7 +4,7 @@ import BaseBarChart from "@/components/Charts/BaseBarChart/BaseBarChart";
 import { type BarChartProps } from "@mui/x-charts/BarChart";
 
 export const BarContainer = styled(Box)(({ theme }) => ({
-  height: "382px",
+  height: "100%",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -117,10 +117,11 @@ export const chartSlotsProps: BarChartProps["slotProps"] = {
 export const EmptyStatePlaceholder = styled(Box)(({ theme }) => ({
   width: "100%",
   height: "100%",
-  borderRadius: theme.shape.borderRadius,
-  border: `2px dashed ${theme.palette.strokeColors[500]}`,
-  backgroundColor: theme.palette.neutralColors[900],
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  backgroundColor: theme.palette.neutralColors[900],
+  borderRadius: theme.shape.borderRadius,
+  border: `1px dashed ${theme.palette.strokeColors[500]}`,
+  minHeight: 300,
 }));
