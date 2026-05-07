@@ -119,7 +119,7 @@ const DashboardPage = () => {
           {data?.charts?.entityTypesDetected &&
           data.charts.entityTypesDetected.length > 0 ? (
             <EntityTypesChart
-              chartData={data.charts.entityTypesDetected.slice(0, 18)}
+              chartData={data.charts.entityTypesDetected.slice(0, 14)}
             />
           ) : (
             <S.BarSkeletonContainer>
