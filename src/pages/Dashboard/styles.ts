@@ -253,7 +253,7 @@ export const FullWidthCard = styled(ChartCardBase)(({ theme }) => ({
   width: "100%",
   display: "flex",
   justifyContent: "center",
-
+  height: theme.spacing(120),
   marginBottom: theme.spacing(6),
 }));
 
