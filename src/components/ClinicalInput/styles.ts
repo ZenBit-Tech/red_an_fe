@@ -8,6 +8,7 @@ import {
   FILE_CARD_STATE_TO_ICON_COLOR,
   FILE_CARD_STATE_TO_PROGRESS_COLOR,
   FILE_CARD_STATE_TO_STATUS_COLOR,
+  FOOTER_LABEL_COLOR,
 } from "@/components/ClinicalInput/constants";
 import type { FileUploadCardState } from "@/components/ClinicalInput/constants";
 
@@ -20,6 +21,14 @@ export const ClinicalTextInputContainer = styled(Box)(({ theme }) => ({
 
 export const ClinicalInputHeader = styled(Box)(({ theme }) => ({
   display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  gap: theme.spacing(8),
+}));
+
+export const ClinicalInputTitleGroup = styled(Box)(({ theme }) => ({
+  display: "flex",
   flexDirection: "column",
   gap: theme.spacing(1.5),
   minHeight: theme.spacing(43),
@@ -28,18 +37,34 @@ export const ClinicalInputHeader = styled(Box)(({ theme }) => ({
   },
 }));
 
+export const FrameworkBadge = styled(Box)(({ theme }) => ({
+  width: "auto",
+  height: theme.spacing(9),
+  display: "inline-flex",
+  alignItems: "center",
+  gap: theme.spacing(1.5),
+  padding: theme.spacing(1.5, 3),
+  borderRadius: theme.spacing(2),
+  backgroundColor: alpha(theme.palette.primaryColors[900], 0.5),
+  fontFamily: theme.typography.fontFamily,
+  fontSize: theme.typography.fontSize12,
+  fontWeight: theme.typography.fontWeight700,
+  color: theme.palette.primaryColors[200],
+  whiteSpace: "nowrap",
+  flexShrink: 0,
+}));
+
+export const FrameworkBadgeLabel = styled("span")(({ theme }) => ({
+  color: theme.palette.textColors[200],
+  fontWeight: theme.typography.fontWeight400,
+}));
+
 export const ClinicalTextInputTitle = styled("h1")(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize48,
   color: theme.palette.textColors[50],
   margin: 0,
-  [theme.breakpoints.down("md")]: {
-    fontSize: theme.typography.fontSize26,
-  },
-  [theme.breakpoints.down("sm")]: {
-    fontSize: theme.typography.fontSize24,
-  },
 }));
 
 export const ClinicalTextInputTitleHighlight = styled("span")(({ theme }) => ({
@@ -414,7 +439,7 @@ export const FileTypeSquareBadge = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight600,
-  fontSize: theme.typography.fontSize10,
+  fontSize: theme.typography.fontSize12,
   color: theme.palette.primaryColors[500],
 }));
 
@@ -432,7 +457,7 @@ export const UploadFooterLabel = styled("span")(({ theme }) => ({
   fontWeight: theme.typography.fontWeight600,
   fontSize: theme.typography.fontSize12,
   textTransform: "uppercase",
-  color: theme.palette.textColors[200],
+  color: FOOTER_LABEL_COLOR,
 }));
 
 export const HiddenFileInput = styled("input")({
@@ -561,7 +586,7 @@ export const FileTypeBadge = styled(Box, {
   border: `${theme.spacing(0.25)} solid ${alpha(FILE_CARD_STATE_TO_STATUS_COLOR[state], 0.32)}`,
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
-  fontSize: theme.typography.fontSize10,
+  fontSize: theme.typography.fontSize12,
   textTransform: "uppercase",
   color: FILE_CARD_STATE_TO_STATUS_COLOR[state],
   flexShrink: 0,

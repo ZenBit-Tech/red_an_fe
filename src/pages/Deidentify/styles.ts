@@ -32,7 +32,7 @@ export const DeidentifyPageWrapper = styled(Box)(({ theme }) => ({
   minHeight: "100vh",
   boxSizing: "border-box",
   backgroundColor: theme.palette.background.default,
-  padding: theme.spacing(6, 3),
+  padding: theme.spacing(9, 10),
   [theme.breakpoints.down("sm")]: {
     padding: theme.spacing(2, 1),
   },

@@ -5,14 +5,10 @@ export const TopBarContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  paddingInline: theme.spacing(4),
-  paddingBlock: theme.spacing(3),
+  padding: theme.spacing(2, 6),
   backgroundColor: theme.palette.backgroundColor,
   borderBottom: `${theme.spacing(0.2)} solid ${theme.palette.neutralColors[900]}`,
   flexShrink: 0,
-  [theme.breakpoints.up("md")]: {
-    paddingInline: theme.spacing(23.25),
-  },
 }));
 
 export const TopBarCenter = styled(Box)({
