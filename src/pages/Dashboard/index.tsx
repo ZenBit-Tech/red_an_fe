@@ -94,7 +94,9 @@ const DashboardPage = () => {
                 {t("dashboard.charts.complianceSubtitle")}
               </S.ChartSubtitle>
             </S.ChartHeader>
-            {data?.charts?.complianceFrameworkUsage ? (
+            {data?.charts?.complianceFrameworkUsage?.some(
+              (item) => item.count > 0,
+            ) ? (
               <ComplianceChart data={data.charts.complianceFrameworkUsage} />
             ) : (
               <S.SkeletonCenter>
@@ -114,7 +116,8 @@ const DashboardPage = () => {
             </S.ChartSubtitle>
           </S.ChartHeader>
 
-          {data?.charts?.entityTypesDetected ? (
+          {data?.charts?.entityTypesDetected &&
+          data.charts.entityTypesDetected.length > 0 ? (
             <EntityTypesChart
               chartData={data.charts.entityTypesDetected.slice(0, 18)}
             />
@@ -139,7 +142,8 @@ const DashboardPage = () => {
                 {t("dashboard.charts.historySubtitle")}
               </S.ChartSubtitle>
             </S.ChartHeader>
-            {data?.charts?.processingHistory ? (
+            {data?.charts?.processingHistory &&
+            data.charts.processingHistory.some((item) => item.documents > 0) ? (
               <ProcessingHistoryChart data={data.charts.processingHistory} />
             ) : (
               <S.SkeletonCenter>
@@ -156,7 +160,10 @@ const DashboardPage = () => {
                 {t("dashboard.charts.confidenceSubtitle")}
               </S.ChartSubtitle>
             </S.ChartHeader>
-            {data?.charts?.confidenceScoreDistribution ? (
+            {data?.charts?.confidenceScoreDistribution &&
+            data.charts.confidenceScoreDistribution.some(
+              (item) => item.value > 0,
+            ) ? (
               <ConfidenceChart data={data.charts.confidenceScoreDistribution} />
             ) : (
               <S.BarSkeletonContainer>
@@ -180,7 +187,8 @@ const DashboardPage = () => {
             </S.ChartSubtitle>
           </S.ChartHeader>
 
-          {data?.charts?.deIdentificationMethodUsage ? (
+          {data?.charts?.deIdentificationMethodUsage &&
+          data.charts.deIdentificationMethodUsage.length > 0 ? (
             <DeIdMethodsChart data={data.charts.deIdentificationMethodUsage} />
           ) : (
             <S.BarSkeletonContainer>
