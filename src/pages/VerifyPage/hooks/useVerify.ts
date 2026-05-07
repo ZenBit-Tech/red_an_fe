@@ -24,11 +24,11 @@ export const useVerify = () => {
           `${API_ENDPOINTS.MAGIC_LINK_CALLBACK}?token=${token}`,
         );
 
-        const data = response.data;
-        localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, data.accessToken);
+        const accessToken = response.data.accessToken;
+        localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, accessToken);
 
         try {
-          const payloadBase64 = data.accessToken.split(".")[1];
+          const payloadBase64 = accessToken.split(".")[1];
           const decodedPayload = JSON.parse(atob(payloadBase64));
           localStorage.setItem(
             STORAGE_KEYS.USER,
@@ -40,25 +40,48 @@ export const useVerify = () => {
 
         const pendingPlan = localStorage.getItem("pendingPlan");
         const pendingPriceId = localStorage.getItem("pendingPriceId");
-        localStorage.removeItem("pendingPlan");
-        localStorage.removeItem("pendingPriceId");
+
+        console.log("[verify] pendingPlan:", pendingPlan);
+        console.log("[verify] pendingPriceId:", pendingPriceId);
+
         if (pendingPlan === "professional" && pendingPriceId) {
           try {
-            const checkoutResponse = await apiClient.post<{ url: string }>(
-              "/billing/create-checkout-session",
-              { priceId: pendingPriceId },
+            const stripeRes = await fetch(
+              `${import.meta.env.VITE_API_URL}/billing/create-checkout-session`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${accessToken}`,
+                },
+                body: JSON.stringify({ priceId: pendingPriceId }),
+              },
             );
-            if (checkoutResponse.data.url) {
-              window.location.href = checkoutResponse.data.url;
+
+            console.log("[verify] stripe response status:", stripeRes.status);
+
+            if (!stripeRes.ok) {
+              throw new Error(`Stripe API error: ${stripeRes.status}`);
+            }
+
+            const stripeData = await stripeRes.json();
+            console.log("[verify] stripe data:", stripeData);
+
+            if (stripeData.url) {
+              localStorage.removeItem("pendingPlan");
+              window.location.href = stripeData.url;
               return;
             }
           } catch (e) {
-            console.error("Failed to create Stripe session", e);
+            console.error("[verify] Failed to create Stripe session", e);
           }
         }
+
+        localStorage.removeItem("pendingPlan");
+        localStorage.removeItem("pendingPriceId");
         navigate(APP_ROUTES.DASHBOARD);
       } catch (error) {
-        console.error("Error verifying token", error);
+        console.error("[verify] Error verifying token", error);
         navigate(APP_ROUTES.SIGN_IN);
       }
     };

@@ -10,7 +10,6 @@ import DashboardPage from "@/pages/Dashboard";
 import VerifyPage from "@/pages/VerifyPage/VerifyPage";
 import { APP_ROUTES } from "@/constants/index";
 import SubscriptionPlan from "@/components/SubscriptionPlan";
-import SubscriptionSuccess from "@/pages/SubscriptionSuccess";
 
 export const router = createBrowserRouter([
   {
@@ -62,8 +61,6 @@ export const router = createBrowserRouter([
         path: APP_ROUTES.DEIDENTIFY,
         element: <DeidentifyPage />,
       },
-      { path: "/subscription/success", element: <SubscriptionSuccess /> },
-      // { path: '/subscription/cancel', element: <SubscriptionCancel /> },
     ],
   },
 ]);

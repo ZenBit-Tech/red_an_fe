@@ -16,6 +16,7 @@ import {
 } from "@/pages/Dashboard/constants";
 import { useDashboard } from "@/pages/Dashboard/hooks/useDashboard";
 import * as S from "@/pages/Dashboard/styles";
+import PaymentStatusModal from "@/components/PaymentStatusModal";
 
 const DashboardPage = () => {
   const { t } = useTranslation();
@@ -51,6 +52,7 @@ const DashboardPage = () => {
 
   return (
     <S.PageScrollContainer>
+      <PaymentStatusModal />
       <S.ContentContainer>
         <S.PageHeaderWrapper>
           <S.BackgroundGlow />
