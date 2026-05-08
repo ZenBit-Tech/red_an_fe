@@ -1,9 +1,11 @@
 {
   "contactUs": {
     "title": "Contact Us",
-    "description": "Have questions? We're here to help. Reach out to our team and we'll get back to you shortly.",
+    "description": "Get in touch with our specialist team for help with technical support, integration questions, or to see how our clinical data architecture can boost your research ",
     "sidebar": {
-      "emailLabel": "Email"
+      "emailLabel": "Email",
+      "emailInfo": "info@clinicaldatastudio.com",
+      "emailSupport": "support@clinicaldatastudio.com"
     },
     "form": {
       "title": "Send us a message",
@@ -16,8 +18,8 @@
         "firstName": "John",
         "lastName": "Doe",
         "phone": "+380...",
-        "email": "john.doe@example.com",
-        "message": "Tell us more about your needs..."
+        "email": "you@company.com",
+        "message": "Start typing your message..."
       },
       "submit": "Send Message",
       "validation": {
@@ -26,8 +28,10 @@
       }
     },
     "messages": {
-      "success": "Your message has been sent successfully!",
-      "error": "There was an error sending your message. Please try again."
+      "success": "Message sent successfully!",
+      "successSub": "Our team will reach out to you shortly.",
+      "error": "Message not sent!",
+      "errorSub": "Please try again later."
     }
   },
 

@@ -1,4 +1,4 @@
-import { styled } from "@mui/material/styles";
+import { type Theme, styled } from "@mui/material/styles";
 import { Box, Typography, Button, TextField } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
 
@@ -7,6 +7,20 @@ export const SectionForm = styled(Box)(({ theme }) => ({
   paddingTop: theme.spacing(27),
   paddingBottom: theme.spacing(29),
   backgroundColor: theme.palette.backgroundColor,
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    zIndex: 0,
+
+    width: "600px",
+    height: "300px",
+    left: "10%",
+    top: "10%",
+    backgroundColor: theme.palette.primaryColors[700],
+    opacity: 0.3,
+    filter: "blur(140px)",
+    pointerEvents: "none",
+  },
 }));
 
 export const CustomContainer = styled(Box)(({ theme }) => ({
@@ -31,12 +45,12 @@ export const ContactTitle = styled(Typography)(({ theme }) => ({
 }));
 
 export const ContactDescription = styled(Typography)(({ theme }) => ({
-  fontSize: theme.typography.fontSize16,
+  fontSize: theme.typography.fontSize20,
   fontWeight: theme.typography.fontWeight400,
   color: theme.palette.textColors[200],
   fontFamily: theme.typography.fontFamily,
 
-  maxWidth: "480px",
+  maxWidth: "752px",
   marginTop: theme.spacing(4),
   [theme.breakpoints.down("sm")]: {
     fontSize: theme.typography.fontSize14,
@@ -88,9 +102,9 @@ export const IconWrapper = styled(Box)(({ theme }) => ({
 
 export const ContactLabel = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize16,
-  fontWeight: theme.typography.fontWeight400,
+  fontWeight: theme.typography.fontWeight700,
   fontFamily: theme.typography.secondFamily,
-  color: theme.palette.textColors[50],
+  color: theme.palette.textColors[400],
   marginBottom: theme.spacing(1),
 }));
 
@@ -99,7 +113,7 @@ export const EmailLink = styled(Typography)<
 >(({ theme }) => ({
   fontSize: theme.typography.fontSize14,
   fontWeight: theme.typography.fontWeight400,
-  color: theme.palette.textColors[100],
+  color: theme.palette.textColors[200],
   fontFamily: theme.typography.fontFamily || "sans-serif",
   textDecoration: "none",
   marginBottom: theme.spacing(0.5),
@@ -156,7 +170,6 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
     fontWeight: theme.typography.fontWeight500,
     fontSize: theme.typography.fontSize12,
     textTransform: "uppercase",
-    letterSpacing: "0.05em",
     color: theme.palette.textColors[200],
 
     "&.Mui-focused": {
@@ -321,6 +334,14 @@ export const StyledPhoneInput = styled(MuiTelInput)(({ theme }) => ({
       fontFamily: theme.typography.fontFamily,
       fontSize: theme.typography.fontSize16,
       color: theme.palette.textColors[100],
+      "&::placeholder": {
+        color: theme.palette.textColors[300],
+        opacity: 1,
+      },
+      "&::-webkit-input-placeholder": {
+        color: theme.palette.textColors[300],
+        opacity: 1,
+      },
       "&:focus": {
         color: theme.palette.textColors[50],
       },
@@ -357,7 +378,109 @@ export const SubmitButton = styled(Button)(({ theme }) => ({
     boxShadow: `0px 4px 12px ${theme.palette.primaryColors[700]}4D`,
   },
 
+  "&:disabled": {
+    backgroundImage: `linear-gradient(161deg, ${theme.palette.primaryColors[200]}80 0%, ${theme.palette.primaryColors[700]}80 100%)`,
+    color: theme.palette.textColors[200],
+  },
+
   [theme.breakpoints.down("sm")]: {
     width: "100%",
   },
 }));
+
+export const modalStyles = (
+  theme: Theme,
+  status: "idle" | "loading" | "success" | "error",
+) => {
+  const isError = status === "error";
+  return {
+    backdrop: {
+      backgroundColor: "rgba(13, 17, 27, 0.8)",
+      backdropFilter: "blur(1px)",
+    },
+    container: {
+      position: "absolute" as const,
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: "100%",
+      maxWidth: 630,
+      backgroundColor: theme.palette.neutralColors[900],
+      borderRadius: theme.spacing(2),
+      padding: theme.spacing(9, 38),
+      display: "flex",
+      flexDirection: "column" as const,
+      alignItems: "center",
+
+      outline: "none",
+      border: isError
+        ? `1px solid ${theme.palette.tertiaryColors[600]}`
+        : `1px solid ${theme.palette.textColors[400]}`,
+    },
+    outerCircle: {
+      marginBottom: theme.spacing(4),
+      backgroundColor: "rgba(178, 197, 255, 0.2)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: "50%",
+      width: "80px",
+      height: "80px",
+    },
+    innerCircle: {
+      width: 40,
+      height: 40,
+      borderRadius: "50%",
+      backgroundColor: theme.palette.textColors[400],
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+
+    checkIcon: {
+      width: 24,
+      height: 24,
+      fill: "rgba(19, 27, 46, 0.8)",
+    },
+    title: {
+      fontFamily: theme.typography.fontFamily,
+      fontSize: theme.typography.fontSize20,
+      fontWeight: theme.typography.fontWeight700,
+      textAlign: "center" as const,
+      color: theme.palette.textColors[50],
+      marginBottom: theme.spacing(2),
+    },
+    subTitle: {
+      fontFamily: theme.typography.fontFamily,
+      fontSize: theme.typography.fontSize14,
+      fontWeight: theme.typography.fontWeight400,
+      color: theme.palette.textColors[200],
+      textAlign: "center" as const,
+      marginBottom: theme.spacing(11),
+    },
+    closeButton: {
+      border: `0.80px solid ${theme.palette.neutralColors[600]}4D`,
+      borderRadius: "8px",
+      padding: theme.spacing(3, 4),
+      width: "166px",
+      height: "48px",
+      background: theme.palette.neutralColors[600],
+      fontWeight: theme.typography.fontWeight500,
+      fontSize: theme.typography.fontSize16,
+      color: theme.palette.textColors[50],
+      cursor: "pointer",
+
+      "&:hover": {
+        backgroundImage: "none",
+
+        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
+      },
+
+      "&:active": {
+        transform: "scale(0.98)",
+        backgroundImage: "none",
+        backgroundColor: "black",
+      },
+    },
+  };
+};

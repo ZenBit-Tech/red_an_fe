@@ -1,14 +1,29 @@
 import { Controller } from "react-hook-form";
-
 import { Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import { CircularProgress } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { useContactForm } from "./hooks/useContactForm";
+import { SendStatusModal } from "./SendStatusModal";
+import { EMAIL_LINKS } from "../../constants";
+
 import * as S from "./styles";
 
 export const ContactUsForm = () => {
   const { t } = useTranslation();
-  const { register, handleSubmit, errors, control } = useContactForm();
+  const {
+    register,
+    handleSubmit,
+    errors,
+    control,
+    sendingStatus,
+    handleCloseModal,
+    messageLength,
+    MAX_CHARS,
+  } = useContactForm();
+
+  const theme = useTheme();
 
   return (
     <S.SectionForm>
@@ -30,16 +45,16 @@ export const ContactUsForm = () => {
 
             <S.EmailLink
               component="a"
-              href={`mailto:${import.meta.env.VITE_INFO_EMAIL}`}
+              href={`mailto:${t("contactUs:contactUs.sidebar.emailInfo")}`}
             >
-              {import.meta.env.VITE_INFO_EMAIL}
+              {EMAIL_LINKS.INFO}
             </S.EmailLink>
 
             <S.EmailLink
               component="a"
-              href={`mailto:${import.meta.env.VITE_SUPPORT_EMAIL}`}
+              href={`mailto:${t("contactUs:contactUs.sidebar.emailSupport")}`}
             >
-              {import.meta.env.VITE_SUPPORT_EMAIL}
+              {EMAIL_LINKS.SUPPORT}
             </S.EmailLink>
           </S.ContactSidebar>
 
@@ -69,9 +84,7 @@ export const ContactUsForm = () => {
                     "contactUs:contactUs.form.placeholder.lastName",
                   )}
                   {...register("lastName", {
-                    required: t(
-                      "ccontactUs:contactUs.form.validation.required",
-                    ),
+                    required: t("contactUs:contactUs.form.validation.required"),
                   })}
                   error={!!errors.lastName}
                   helperText={errors.lastName?.message}
@@ -97,6 +110,9 @@ export const ContactUsForm = () => {
                     })}
                     error={!!errors.email}
                     helperText={errors.email?.message}
+                    slotProps={{
+                      inputLabel: { shrink: true },
+                    }}
                   />
                 </Box>
 
@@ -125,7 +141,7 @@ export const ContactUsForm = () => {
                 <Box className="full-width">
                   <S.StyledTextField
                     fullWidth
-                    maxLength="1000"
+                    inputProps={{ maxLength: MAX_CHARS }}
                     label={t("contactUs:contactUs.form.message")}
                     placeholder={t(
                       "contactUs:contactUs.form.placeholder.message",
@@ -138,19 +154,56 @@ export const ContactUsForm = () => {
                       ),
                     })}
                     error={!!errors.message}
-                    helperText={errors.message?.message}
+                    helperText={
+                      <Box
+                        component="span"
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          width: "100%",
+                        }}
+                      >
+                        <span>{errors.message?.message}</span>
+                        <Box
+                          component="span"
+                          sx={{
+                            color:
+                              messageLength >= MAX_CHARS
+                                ? theme.palette.tertiaryColors[500]
+                                : "inherit",
+                            marginLeft: "auto",
+                          }}
+                        >
+                          {messageLength >= MAX_CHARS &&
+                            "Character limit reached "}
+                          {messageLength}/{MAX_CHARS}
+                        </Box>
+                      </Box>
+                    }
+                    slotProps={{
+                      inputLabel: { shrink: true },
+                    }}
                   />
                 </Box>
               </S.FormGrid>
               <Box className="full-width">
-                <S.SubmitButton variant="contained" type="submit">
-                  {t("contactUs:contactUs.form.submit")}
+                <S.SubmitButton
+                  variant="contained"
+                  type="submit"
+                  disabled={sendingStatus === "loading"}
+                >
+                  {sendingStatus === "loading" ? (
+                    <CircularProgress size={24} sx={{ color: "inherit" }} />
+                  ) : (
+                    t("contactUs:contactUs.form.submit")
+                  )}
                 </S.SubmitButton>
               </Box>
             </S.ContactForm>
           </S.ContactFormBox>
         </S.FormWrapper>
       </S.CustomContainer>
+      <SendStatusModal status={sendingStatus} onClose={handleCloseModal} />
     </S.SectionForm>
   );
 };
