@@ -138,7 +138,7 @@ export const InfoBanner = styled(Box)(({ theme }) => ({
   background: theme.palette.strokeColors[120],
   borderRadius: theme.spacing(2),
   padding: theme.spacing(3, 3),
-  width: theme.spacing(82),
+  width: "fit-content",
   height: theme.spacing(10.5),
   "& svg": {
     fontSize: theme.typography.fontSize20,
@@ -241,6 +241,10 @@ export const ChartCardBase = styled(Box)(({ theme }) => ({
 }));
 
 export const ComplianceCard = styled(ChartCardBase)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
   width: theme.spacing(123.25),
   height: theme.spacing(92),
 }));
@@ -249,7 +253,7 @@ export const FullWidthCard = styled(ChartCardBase)(({ theme }) => ({
   width: "100%",
   display: "flex",
   justifyContent: "center",
-  /* height: theme.spacing(119.5), */
+  height: theme.spacing(120),
   marginBottom: theme.spacing(6),
 }));
 
@@ -288,6 +292,7 @@ export const SkeletonCenter = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+
   marginTop: theme.spacing(2),
 }));
 
@@ -304,6 +309,7 @@ export const BarSkeletonContainer = styled(Box)(({ theme }) => ({
   alignItems: "flex-end",
   justifyContent: "space-between",
   marginTop: theme.spacing(4),
+  height: "100%",
   paddingInline: theme.spacing(2),
 }));
 
@@ -319,6 +325,7 @@ export const BarSkeletonCol = styled(Box)(({ theme }) => ({
 
 export const BarSkeleton = styled(Box)(({ theme }) => ({
   width: "100%",
+  height: "100%",
   backgroundColor: theme.palette.strokeColors[120],
   borderRadius: theme.spacing(1),
 }));
@@ -340,4 +347,36 @@ export const InfoBox = styled(Box)(({ theme }) => ({
   alignItems: "center",
   gap: theme.spacing(2),
   flexWrap: "wrap",
+}));
+
+export const EmptyStatePlaceholder = styled(Box)(({ theme }) => ({
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flex: 1,
+  flexDirection: "column",
+  backgroundColor: theme.palette.neutralColors[900],
+  borderRadius: theme.shape.borderRadius,
+  minHeight: 300,
+}));
+
+export const BubbleSkeletonContainer = styled(Box)(({ theme }) => ({
+  flex: 1,
+  width: "100%",
+  position: "relative",
+  marginTop: theme.spacing(4),
+}));
+
+export const SkeletonBubble = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "top" && prop !== "left",
+})<{ top: string; left: string }>(({ theme, top, left }) => ({
+  position: "absolute",
+  top,
+  left,
+  width: theme.spacing(2),
+  height: theme.spacing(2),
+  backgroundColor: theme.palette.strokeColors[120],
+  borderRadius: "50%",
 }));

@@ -13,6 +13,7 @@ import EntityTypesChart from "@/pages/Dashboard/сharts/EntityTypesChart/EntityT
 import ProcessingHistoryChart from "@/pages/Dashboard/сharts/ProcessingHistoryChart/ProcessingHistoryChart";
 import ConfidenceChart from "@/pages/Dashboard/сharts/ConfidenceChart/ConfidenceChart";
 import DeIdMethodsChart from "@/pages/Dashboard/сharts/DeIdMethodsChart/DeIdMethodsChart";
+import { MOCK_CHART_SKELETONS } from "@/pages/Dashboard/constants";
 
 const DashboardPage = () => {
   const { t } = useTranslation();
@@ -53,7 +54,7 @@ const DashboardPage = () => {
                 <S.InfoBanner>
                   <InfoOutlined />
                   <S.InfoBannerText>
-                    {t("dashboard.page.infoBanner")}
+                    {t("dashboard.page.infoBannerIsPay")}
                   </S.InfoBannerText>
                 </S.InfoBanner>
                 <S.StartButton
@@ -95,7 +96,15 @@ const DashboardPage = () => {
                 {t("dashboard.charts.complianceSubtitle")}
               </S.ChartSubtitle>
             </S.ChartHeader>
-            <ComplianceChart data={data?.charts?.complianceFrameworkUsage} />
+            {data?.charts?.complianceFrameworkUsage?.some(
+              (item) => item.count > 0,
+            ) ? (
+              <ComplianceChart data={data.charts.complianceFrameworkUsage} />
+            ) : (
+              <S.SkeletonCenter>
+                <S.DonutSkeleton />
+              </S.SkeletonCenter>
+            )}
           </S.ComplianceCard>
         </S.TopSectionGrid>
 
@@ -108,7 +117,21 @@ const DashboardPage = () => {
               {t("dashboard.charts.entitySubtitle")}
             </S.ChartSubtitle>
           </S.ChartHeader>
-          <EntityTypesChart chartData={data?.charts?.entityTypesDetected} />
+
+          {data?.charts?.entityTypesDetected &&
+          data.charts.entityTypesDetected.length > 0 ? (
+            <EntityTypesChart
+              chartData={data.charts.entityTypesDetected.slice(0, 14)}
+            />
+          ) : (
+            <S.BarSkeletonContainer>
+              {MOCK_CHART_SKELETONS.ENTITY_TYPES.map((height, index) => (
+                <S.BarSkeletonCol key={index}>
+                  <S.BarSkeletonDynamic heightPercent={height} />
+                </S.BarSkeletonCol>
+              ))}
+            </S.BarSkeletonContainer>
+          )}
         </S.FullWidthCard>
 
         <S.TwoColGrid>
@@ -121,7 +144,14 @@ const DashboardPage = () => {
                 {t("dashboard.charts.historySubtitle")}
               </S.ChartSubtitle>
             </S.ChartHeader>
-            <ProcessingHistoryChart data={data?.charts?.processingHistory} />
+            {data?.charts?.processingHistory &&
+            data.charts.processingHistory.some((item) => item.documents > 0) ? (
+              <ProcessingHistoryChart data={data.charts.processingHistory} />
+            ) : (
+              <S.SkeletonCenter>
+                <S.DonutSkeleton />
+              </S.SkeletonCenter>
+            )}
           </S.HalfWidthCard>
           <S.HalfWidthCard>
             <S.ChartHeader>
@@ -132,7 +162,20 @@ const DashboardPage = () => {
                 {t("dashboard.charts.confidenceSubtitle")}
               </S.ChartSubtitle>
             </S.ChartHeader>
-            <ConfidenceChart data={data?.charts?.confidenceScoreDistribution} />
+            {data?.charts?.confidenceScoreDistribution &&
+            data.charts.confidenceScoreDistribution.some(
+              (item) => item.value > 0,
+            ) ? (
+              <ConfidenceChart data={data.charts.confidenceScoreDistribution} />
+            ) : (
+              <S.BarSkeletonContainer>
+                {MOCK_CHART_SKELETONS.CONFIDENCE_SCORE.map((height, index) => (
+                  <S.BarSkeletonCol key={index}>
+                    <S.BarSkeletonDynamic heightPercent={height} />
+                  </S.BarSkeletonCol>
+                ))}
+              </S.BarSkeletonContainer>
+            )}
           </S.HalfWidthCard>
         </S.TwoColGrid>
 
@@ -145,7 +188,19 @@ const DashboardPage = () => {
               {t("dashboard.charts.methodSubtitle")}
             </S.ChartSubtitle>
           </S.ChartHeader>
-          <DeIdMethodsChart data={data?.charts?.deIdentificationMethodUsage} />
+
+          {data?.charts?.deIdentificationMethodUsage &&
+          data.charts.deIdentificationMethodUsage.length > 0 ? (
+            <DeIdMethodsChart data={data.charts.deIdentificationMethodUsage} />
+          ) : (
+            <S.BarSkeletonContainer>
+              {MOCK_CHART_SKELETONS.METHODS.map((height, index) => (
+                <S.BarSkeletonCol key={index}>
+                  <S.BarSkeletonDynamic heightPercent={height} />
+                </S.BarSkeletonCol>
+              ))}
+            </S.BarSkeletonContainer>
+          )}
         </S.FullWidthCard>
       </S.ContentContainer>
     </S.PageScrollContainer>
