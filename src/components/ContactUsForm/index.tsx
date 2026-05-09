@@ -3,7 +3,6 @@ import { Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { CircularProgress } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import { useContactForm } from "./hooks/useContactForm";
 import { SendStatusModal } from "./SendStatusModal";
 import { EMAIL_LINKS } from "../../constants";
@@ -22,8 +21,6 @@ export const ContactUsForm = () => {
     messageLength,
     MAX_CHARS,
   } = useContactForm();
-
-  const theme = useTheme();
 
   return (
     <S.SectionForm>
@@ -155,33 +152,20 @@ export const ContactUsForm = () => {
                     })}
                     error={!!errors.message}
                     helperText={
-                      <Box
-                        component="span"
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          width: "100%",
-                        }}
-                      >
-                        <span>{errors.message?.message}</span>
-                        <Box
-                          component="span"
-                          sx={{
-                            color:
-                              messageLength >= MAX_CHARS
-                                ? theme.palette.tertiaryColors[500]
-                                : "inherit",
-                            marginLeft: "auto",
-                          }}
+                      <S.HelperTextContainer>
+                        <span>{errors.message?.message || ""}</span>
+                        <S.CharacterCounter
+                          isLimit={messageLength >= MAX_CHARS}
                         >
                           {messageLength >= MAX_CHARS &&
                             "Character limit reached "}
                           {messageLength}/{MAX_CHARS}
-                        </Box>
-                      </Box>
+                        </S.CharacterCounter>
+                      </S.HelperTextContainer>
                     }
                     slotProps={{
                       inputLabel: { shrink: true },
+                      formHelperText: { component: "div" },
                     }}
                   />
                 </Box>

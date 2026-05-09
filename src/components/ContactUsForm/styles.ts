@@ -254,9 +254,11 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
     fontSize: theme.typography.fontSize12,
     color: theme.palette.tertiaryColors[500],
     position: "absolute",
-    bottom: "-18px",
+    bottom: "-20px",
     left: 0,
     margin: 0,
+    width: "100%",
+    display: "flex",
   },
 }));
 
@@ -335,7 +337,7 @@ export const StyledPhoneInput = styled(MuiTelInput)(({ theme }) => ({
       fontSize: theme.typography.fontSize16,
       color: theme.palette.textColors[100],
       "&::placeholder": {
-        color: theme.palette.textColors[300],
+        color: theme.palette.textColors[200],
         opacity: 1,
       },
       "&::-webkit-input-placeholder": {
@@ -355,6 +357,28 @@ export const StyledPhoneInput = styled(MuiTelInput)(({ theme }) => ({
     margin: theme.spacing(1, 0, 0, 0),
   },
 }));
+
+export const HelperTextContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  width: "100%",
+  paddingRight: theme.spacing(1),
+}));
+
+export const CharacterCounter = styled("span")<{ isLimit: boolean }>(
+  ({ theme, isLimit }) => ({
+    marginLeft: "auto",
+    color: isLimit
+      ? theme.palette.tertiaryColors[500]
+      : theme.palette.textColors[200],
+    fontSize: theme.typography.fontSize12,
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeight400,
+    transition: "color 0.2s ease",
+  }),
+);
 
 export const SubmitButton = styled(Button)(({ theme }) => ({
   width: "368px",
