@@ -9,6 +9,7 @@ import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/Dashboard";
 import VerifyPage from "@/pages/VerifyPage/VerifyPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
+import { SessionExpiredPage } from "@/pages/SessionExpiredPage";
 import { APP_ROUTES } from "@/constants/index";
 import SubscriptionPlan from "@/components/SubscriptionPlan";
 
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: "/subscription-plan",
         element: <SubscriptionPlan />,
+      },
+      {
+        path: APP_ROUTES.SESSION_EXPIRED,
+        element: <SessionExpiredPage />,
       },
       {
         path: "*",

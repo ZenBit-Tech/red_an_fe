@@ -48,6 +48,7 @@ interface UseClinicalTextInputReturn {
   clinicalText: string;
   filePathLabel: string;
   uploadedFileName: string;
+  processingFileName: string;
   uploadedFileSizeBytes: number;
   fileError: string;
   rejectedFile: RejectedFileMeta | null;
@@ -194,6 +195,7 @@ export const useClinicalTextInput = (): UseClinicalTextInputReturn => {
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [processingFileName, setProcessingFileName] = useState("");
 
   const filePathLabel = useMemo(() => {
     if (!uploadedFilePath) {
@@ -231,6 +233,7 @@ export const useClinicalTextInput = (): UseClinicalTextInputReturn => {
   ): Promise<void> => {
     dispatch(clearUploadedFile());
     setIsProcessing(true);
+    setProcessingFileName(file.name);
     setUploadProgress(15); // Початковий прогрес
 
     if (file.size > MAX_UPLOAD_FILE_SIZE_BYTES) {
@@ -281,6 +284,7 @@ export const useClinicalTextInput = (): UseClinicalTextInputReturn => {
   const clearUploadedFileState = (): void => {
     setIsProcessing(false);
     setUploadProgress(0);
+    setProcessingFileName("");
     dispatch(clearUploadedFile());
   };
 
@@ -289,6 +293,7 @@ export const useClinicalTextInput = (): UseClinicalTextInputReturn => {
     clinicalText,
     filePathLabel,
     uploadedFileName,
+    processingFileName,
     uploadedFileSizeBytes,
     fileError,
     rejectedFile,

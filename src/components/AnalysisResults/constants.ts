@@ -329,4 +329,6 @@ export interface AnalysisResultsProps {
   inputText: string;
   entities: Entity[];
   jobId: string;
+  onBack: () => void;
+  onRestart: () => void;
 }

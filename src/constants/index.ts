@@ -107,6 +107,7 @@ export const APP_ROUTES = {
   DEIDENTIFY: "/deidentify",
   SIGN_IN: "/signin",
   REGISTER: "/register",
+  SESSION_EXPIRED: "/session-expired",
 } as const;
 
 export const STORAGE_KEYS = {
