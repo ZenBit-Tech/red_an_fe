@@ -205,6 +205,8 @@
   "subscriptionPlan": {
     "title": "Choose Your Plan",
     "subtitle": "Scale your clinical data de-identification with precision. Automated workflows for researchers and healthcare providers.",
+    "successMessage": "Thank you! Your payment was successfully processed. You can now access your dashboard and start de-identifying your clinical data.",
+    "unseccessMessage": "Payment failed. You can continue with the Free Plan or try your payment again. If you need assistance, please contact our support team.",
     "plans": {
       "free": {
         "tier": "Explorer",

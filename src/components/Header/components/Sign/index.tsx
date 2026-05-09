@@ -12,7 +12,6 @@ const Sign = () => {
 
   return (
     <SignButton
-      href={"/signin"}
       onClick={handleSignIn}
       endIcon={
         <svg width="14" height="14" fill="currentColor">

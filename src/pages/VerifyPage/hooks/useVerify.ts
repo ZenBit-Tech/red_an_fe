@@ -41,9 +41,6 @@ export const useVerify = () => {
         const pendingPlan = localStorage.getItem("pendingPlan");
         const pendingPriceId = localStorage.getItem("pendingPriceId");
 
-        console.log("[verify] pendingPlan:", pendingPlan);
-        console.log("[verify] pendingPriceId:", pendingPriceId);
-
         if (pendingPlan === "professional" && pendingPriceId) {
           try {
             const stripeRes = await fetch(
@@ -58,14 +55,11 @@ export const useVerify = () => {
               },
             );
 
-            console.log("[verify] stripe response status:", stripeRes.status);
-
             if (!stripeRes.ok) {
               throw new Error(`Stripe API error: ${stripeRes.status}`);
             }
 
             const stripeData = await stripeRes.json();
-            console.log("[verify] stripe data:", stripeData);
 
             if (stripeData.url) {
               localStorage.removeItem("pendingPlan");

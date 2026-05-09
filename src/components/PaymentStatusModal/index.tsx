@@ -3,8 +3,11 @@ import { CheckCircle, ErrorOutline } from "@mui/icons-material";
 import { useCreateCheckoutSessionMutation } from "@/common/api/billingApi";
 import { SUBSCRIPTION_PLANS } from "@/constants/subscriptionPlans";
 import * as S from "./styles";
+import { useTranslation } from "react-i18next";
 
 const PaymentStatusModal = () => {
+  const { t } = useTranslation();
+
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const [createSession, { isLoading }] = useCreateCheckoutSessionMutation();
@@ -29,8 +32,6 @@ const PaymentStatusModal = () => {
       const proPlan = SUBSCRIPTION_PLANS.find((p) => p.id === "professional");
       priceId = proPlan?.stripePriceId ?? null;
     }
-
-    console.log("[modal] Try again, priceId:", priceId);
 
     if (!priceId) {
       closeModal();
@@ -65,8 +66,8 @@ const PaymentStatusModal = () => {
 
         <S.Text>
           {isSuccess
-            ? "Thank you! Your payment was successfully processed"
-            : "You can continue with the Free Plan or try your payment again."}
+            ? t("subscriptionPlan.successMessage")
+            : t("subscriptionPlan.unseccessMessage")}
         </S.Text>
 
         {isSuccess ? (
