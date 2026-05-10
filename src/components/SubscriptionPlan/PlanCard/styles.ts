@@ -13,7 +13,7 @@ export const Card = styled(Box)(({ theme }) => ({
   border: `1px solid ${theme.palette.strokeColors[500]}`,
   [theme.breakpoints.up("md")]: {
     flex: "1 1 0",
-    maxWidth: 448,
+    maxWidth: 532,
     alignSelf: "flex-start",
     padding: theme.spacing(10),
   },

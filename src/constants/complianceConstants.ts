@@ -1,5 +1,3 @@
-// Add this to your @/constants file alongside CARDS_DATA and FEATURES
-
 export interface ComplianceRow {
   id: string;
   labelKey: string;

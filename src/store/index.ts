@@ -1,11 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "./rootReducer";
+import { billingApi } from "@/common/api/billingApi";
 import { dashboardApiSlice } from "./dashboardApiSlice";
 
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(dashboardApiSlice.middleware),
+    getDefaultMiddleware().concat(
+      billingApi.middleware,
+      dashboardApiSlice.middleware,
+    ),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -75,7 +75,7 @@ export const DeidentifyStepperProgressTrack = styled(Box)(({ theme }) => ({
   top: `calc(${theme.spacing(3)} + ${theme.spacing(10)} / 2 - ${theme.spacing(0.5)} / 2)`,
   left: `calc(${theme.spacing(3)} + ${theme.spacing(10)} / 2)`,
   right: `calc(${theme.spacing(3)} + ${theme.spacing(10)} / 2)`,
-  height: theme.spacing(0.5), // 2px
+  height: theme.spacing(0.5),
   backgroundColor: theme.palette.neutralColors[800],
   [theme.breakpoints.down("sm")]: {
     top: `calc(${theme.spacing(2)} + ${theme.spacing(8.5)} / 2 - ${theme.spacing(0.5)} / 2)`,

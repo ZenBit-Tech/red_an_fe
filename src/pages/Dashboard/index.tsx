@@ -5,6 +5,7 @@ import { APP_ROUTES } from "@/constants";
 import { TIME_FILTERS } from "@/pages/Dashboard/constants";
 import { useDashboard } from "@/pages/Dashboard/hooks/useDashboard";
 import * as S from "@/pages/Dashboard/styles";
+import PaymentStatusModal from "@/components/PaymentStatusModal";
 import { useGetDashboardStatsQuery } from "@/store/dashboardApiSlice";
 import StatCards from "@/components/DashboardStatCards/index";
 import ComplianceChart from "@/pages/Dashboard/сharts/ComplianceChart/ComplianceChart";
@@ -39,6 +40,7 @@ const DashboardPage = () => {
 
   return (
     <S.PageScrollContainer>
+      <PaymentStatusModal />
       <S.ContentContainer>
         <S.PageHeaderWrapper>
           <S.BackgroundGlow />

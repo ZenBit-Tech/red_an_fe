@@ -24,11 +24,11 @@ export const useVerify = () => {
           `${API_ENDPOINTS.MAGIC_LINK_CALLBACK}?token=${token}`,
         );
 
-        const data = response.data;
-        localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, data.accessToken);
+        const accessToken = response.data.accessToken;
+        localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, accessToken);
 
         try {
-          const payloadBase64 = data.accessToken.split(".")[1];
+          const payloadBase64 = accessToken.split(".")[1];
           const decodedPayload = JSON.parse(atob(payloadBase64));
           localStorage.setItem(
             STORAGE_KEYS.USER,
@@ -38,9 +38,44 @@ export const useVerify = () => {
           console.error("Failed to parse token payload", e);
         }
 
+        const pendingPlan = localStorage.getItem("pendingPlan");
+        const pendingPriceId = localStorage.getItem("pendingPriceId");
+
+        if (pendingPlan === "professional" && pendingPriceId) {
+          try {
+            const stripeRes = await fetch(
+              `${import.meta.env.VITE_API_URL}/billing/create-checkout-session`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${accessToken}`,
+                },
+                body: JSON.stringify({ priceId: pendingPriceId }),
+              },
+            );
+
+            if (!stripeRes.ok) {
+              throw new Error(`Stripe API error: ${stripeRes.status}`);
+            }
+
+            const stripeData = await stripeRes.json();
+
+            if (stripeData.url) {
+              localStorage.removeItem("pendingPlan");
+              window.location.href = stripeData.url;
+              return;
+            }
+          } catch (e) {
+            console.error("[verify] Failed to create Stripe session", e);
+          }
+        }
+
+        localStorage.removeItem("pendingPlan");
+        localStorage.removeItem("pendingPriceId");
         navigate(APP_ROUTES.DASHBOARD);
       } catch (error) {
-        console.error("Error verifying token", error);
+        console.error("[verify] Error verifying token", error);
         navigate(APP_ROUTES.SIGN_IN);
       }
     };

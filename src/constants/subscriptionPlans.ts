@@ -36,7 +36,7 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
     price: 5,
     period: "month",
     isPopular: true,
-    stripePriceId: "price_xxx_professional_monthly",
+    stripePriceId: "price_1TJX2rJYsXYgdDVrgYY88YrD",
     features: [
       { icon: "priority", i18nKey: "priority" },
       { icon: "scrubbing", i18nKey: "scrubbing" },

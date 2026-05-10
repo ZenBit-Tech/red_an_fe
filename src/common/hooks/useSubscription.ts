@@ -1,5 +1,6 @@
-import { useState, useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useCreateCheckoutSessionMutation } from "@/common/api/billingApi";
+import { STORAGE_KEYS } from "@/constants/index";
 import type { SubscriptionPlan } from "@/constants/subscriptionPlans";
 
 type UseSubscriptionReturn = {
@@ -16,26 +17,44 @@ export const useSubscription = (): UseSubscriptionReturn => {
 
   const handleSelectPlan = useCallback(
     async (plan: SubscriptionPlan) => {
-      if (isLoading) return;
+      const isAuth = !!localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
 
-      if (!plan.stripePriceId) {
-        window.location.href = "/register";
+      if (plan.id === "free") {
+        if (isAuth) {
+          window.location.href = "/dashboard";
+          return;
+        }
+        localStorage.setItem("pendingPlan", "free");
+        window.location.href = "/signin";
         return;
       }
 
-      setLoadingPlanId(plan.id);
+      if (plan.id === "professional" && plan.stripePriceId) {
+        localStorage.setItem("pendingPriceId", plan.stripePriceId);
 
-      try {
-        const { url } = await createSession({
-          priceId: plan.stripePriceId,
-        }).unwrap();
-        if (!url) throw new Error("Missing Stripe checkout URL");
-        window.location.href = url;
-      } catch {
-        setLoadingPlanId(null);
+        if (isAuth) {
+          setLoadingPlanId(plan.id);
+          try {
+            const { url } = await createSession({
+              priceId: plan.stripePriceId,
+            }).unwrap();
+            if (url) {
+              window.location.href = url;
+              return;
+            }
+          } catch (e) {
+            console.error("Stripe session error", e);
+            setLoadingPlanId(null);
+          }
+          return;
+        }
+
+        localStorage.setItem("pendingPlan", "professional");
+        window.location.href = "/signin";
+        return;
       }
     },
-    [isLoading, createSession],
+    [createSession],
   );
 
   const error = rtkError
