@@ -41,7 +41,7 @@ instance.interceptors.response.use(
       isRedirectingToLogin = true;
       localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
       localStorage.removeItem(STORAGE_KEYS.USER);
-      window.location.href = APP_ROUTES.SIGN_IN;
+      window.location.href = APP_ROUTES.SESSION_EXPIRED;
     }
     return Promise.reject(error);
   },

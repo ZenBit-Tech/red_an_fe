@@ -42,7 +42,7 @@ export const useDashboardLayout = () => {
     const token = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
 
     if (!token) {
-      navigate(APP_ROUTES.SIGN_IN);
+      navigate(APP_ROUTES.SESSION_EXPIRED);
     }
   }, [navigate]);
 

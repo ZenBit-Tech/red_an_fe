@@ -107,6 +107,7 @@ export const APP_ROUTES = {
   DEIDENTIFY: "/deidentify",
   SIGN_IN: "/signin",
   REGISTER: "/register",
+  SESSION_EXPIRED: "/session-expired",
 } as const;
 
 export const STORAGE_KEYS = {
@@ -117,4 +118,9 @@ export const STORAGE_KEYS = {
 export const API_ENDPOINTS = {
   MAGIC_LINK: "/auth/magic-link",
   MAGIC_LINK_CALLBACK: "/auth/magic-link/callback",
+} as const;
+
+export const EMAIL_LINKS = {
+  INFO: "info@clinicaldatastudio.com",
+  SUPPORT: "support@clinicaldatastudio.com",
 } as const;

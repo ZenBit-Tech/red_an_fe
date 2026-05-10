@@ -1,8 +1,10 @@
 import React, { useMemo, useState } from "react";
 import { CircularProgress, TableBody } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import RefreshIcon from "@mui/icons-material/Refresh";
 import { useTranslation } from "react-i18next";
 import {
   COMPLIANCE_FRAMEWORK_ENTITY_TYPES,
@@ -24,6 +26,8 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
   inputText,
   entities,
   jobId,
+  onBack,
+  onRestart,
 }) => {
   const { t } = useTranslation();
   const [copiedOutput, setCopiedOutput] = useState<boolean>(false);
@@ -369,6 +373,22 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
             </S.StyledTableContainer>
           </S.TableBlock>
         </S.TableSection>
+        <S.TableActionsRow>
+          <S.TableBackButton
+            startIcon={<ArrowBackIcon />}
+            onClick={onBack}
+            disableRipple
+          >
+            {t("deidentify.stepper.actions.back")}
+          </S.TableBackButton>
+          <S.TableRestartButton
+            endIcon={<RefreshIcon />}
+            onClick={onRestart}
+            disableRipple
+          >
+            {t("deidentify.stepper.actions.restart")}
+          </S.TableRestartButton>
+        </S.TableActionsRow>
       </S.AnalysisResultsContainer>
 
       <S.ResultCtaSection>

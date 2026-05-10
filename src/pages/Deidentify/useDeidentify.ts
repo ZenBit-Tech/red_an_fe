@@ -28,6 +28,7 @@ interface UseDeidentifyReturn {
   entities: Entity[];
   confirmedSettings: DeidentifySettingsFormData;
   analysisResultsRef: React.RefObject<HTMLDivElement | null>;
+  clinicalInputKey: number;
   isClinicalTextProvided: boolean;
   isResultReady: boolean;
   isStepCompleted: (stepIndex: number) => boolean;
@@ -49,6 +50,7 @@ export const useDeidentify = (): UseDeidentifyReturn => {
   const [analyzedInputText, setAnalyzedInputText] = useState("");
   const [jobId, setJobId] = useState<string>("");
   const [entities, setEntities] = useState<Entity[]>([]);
+  const [clinicalInputKey, setClinicalInputKey] = useState(0);
   const analysisResultsRef = useRef<HTMLDivElement | null>(null);
   const clinicalText = useAppSelector(
     (state) => state.clinicalInput.clinicalText,
@@ -151,10 +153,12 @@ export const useDeidentify = (): UseDeidentifyReturn => {
 
   const handleRestart = (): void => {
     dispatch(resetActiveStep());
+    dispatch(resetClinicalInput());
     setAnalysisRunId(0);
     setAnalyzedInputText("");
     setJobId("");
     setEntities([]);
+    setClinicalInputKey((k) => k + 1);
   };
 
   return {
@@ -165,6 +169,7 @@ export const useDeidentify = (): UseDeidentifyReturn => {
     entities,
     confirmedSettings,
     analysisResultsRef,
+    clinicalInputKey,
     isClinicalTextProvided,
     isResultReady,
     isStepCompleted,

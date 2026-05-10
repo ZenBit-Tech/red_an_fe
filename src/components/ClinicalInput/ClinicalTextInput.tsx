@@ -31,6 +31,7 @@ const ClinicalTextInput: React.FC = () => {
     clinicalText,
     filePathLabel,
     uploadedFileName,
+    processingFileName,
     uploadedFileSizeBytes,
     fileError,
     rejectedFile,
@@ -173,7 +174,7 @@ const ClinicalTextInput: React.FC = () => {
       : PROGRESS_COMPLETE;
     const displayFileName = uploadedFileName || filePathLabel || "";
     const sizeBytes = uploadedFileSizeBytes ?? 0;
-    const badgeKind = getFileBadgeKind(displayFileName);
+    const badgeKind = getFileBadgeKind(processingFileName || displayFileName);
 
     return (
       <S.UploadPanelBody>
