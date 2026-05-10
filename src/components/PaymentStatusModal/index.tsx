@@ -57,8 +57,8 @@ const PaymentStatusModal = () => {
 
   return (
     <S.Overlay>
-      <S.ModalBox variant={isSuccess ? "success" : "error"}>
-        <S.IconCircle variant={isSuccess ? "success" : "error"}>
+      <S.ModalBox status={isSuccess ? "success" : "error"}>
+        <S.IconCircle status={isSuccess ? "success" : "error"}>
           {isSuccess ? <CheckCircle /> : <ErrorOutline />}
         </S.IconCircle>
 
@@ -71,10 +71,12 @@ const PaymentStatusModal = () => {
         </S.Text>
 
         {isSuccess ? (
-          <S.ContinueButton onClick={handleContinue}>Continue</S.ContinueButton>
+          <S.ContinueButton status="success" onClick={handleContinue}>
+            Continue
+          </S.ContinueButton>
         ) : (
           <S.ButtonsRow>
-            <S.ContinueButton onClick={handleContinue}>
+            <S.ContinueButton status="error" onClick={handleContinue}>
               Continue
             </S.ContinueButton>
             <S.TryAgainButton onClick={handleTryAgain} disabled={isLoading}>
