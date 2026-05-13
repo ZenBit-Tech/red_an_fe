@@ -365,6 +365,7 @@
       "subtitle1": "Final validation of the clinical de-identification process.",
       "subtitle2": "All sensitive identifiers have been replaced with high-fidelity synthetic proxies.",
       "panelTitle": "Original Clinical Text",
+      "deidentifiedPanelTitle": "De-identified Text",
       "restrictedBadge": "Restricted",
       "anonymizedBadge": "Anonymized",
       "output": {
