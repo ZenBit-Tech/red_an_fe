@@ -4,11 +4,31 @@ import { Typography } from "@mui/material";
 
 export const SectionWrapper = styled(Box)(({ theme }) => ({
   width: "100%",
-  paddingTop: theme.spacing(16),
-  paddingBottom: theme.spacing(38),
+  padding: theme.spacing(30, 0, 15),
+
   display: "flex",
   flexDirection: "column",
   backgroundColor: theme.palette.backgroundColor,
+
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    zIndex: 0,
+
+    width: "700px",
+    height: "540px",
+    left: "15%",
+    top: "10%",
+    backgroundColor: theme.palette.primaryColors[700],
+    opacity: 0.3,
+    filter: "blur(150px)",
+    pointerEvents: "none",
+  },
+
+  [theme.breakpoints.down("lg")]: {
+    flexDirection: "column",
+    padding: theme.spacing(0, 4),
+  },
 }));
 
 export const CustomContainer = styled(Box)(({ theme }) => ({
@@ -26,32 +46,40 @@ export const CustomContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const SectionTitle = styled(Typography)(({ theme }) => ({
+export const SectionTitleFirstString = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.primary,
-  marginBottom: theme.spacing(6),
+
   fontSize: theme.typography.fontSize60,
   fontWeight: theme.typography.fontWeight700,
   fontFamily: theme.typography.secondFamily,
   [theme.breakpoints.down("sm")]: { fontSize: theme.typography.fontSize32 },
 }));
 
+export const SectionTitleSecondString = styled(SectionTitleFirstString)(
+  ({ theme }) => ({
+    background: `linear-gradient(110deg, ${theme.palette.primaryColors[200]} 0%, ${theme.palette.primaryColors[700]} 100%)`,
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    backgroundClip: "text",
+    color: "transparent",
+  }),
+);
+
 export const SectionContentText = styled(Typography)(({ theme }) => ({
-  color: theme.palette.textColors[400],
-  maxWidth: "80%",
-  fontSize: theme.typography.fontSize18,
-  marginBottom: theme.spacing(6),
+  color: theme.palette.textColors[200],
+  textAlign: "justify",
+  fontSize: theme.typography.fontSize20,
+  marginTop: theme.spacing(7),
   fontFamily: theme.typography.fontFamily,
 }));
 
 export const ItemsList = styled("ul")(({ theme }) => ({
   display: "grid",
   gridTemplateColumns: "repeat(2, 1fr)",
-
+  zIndex: 1,
   gap: theme.spacing(6),
   listStyle: "none",
-  padding: 0,
-  paddingRight: theme.spacing(12),
-  margin: 0,
+  paddingLeft: theme.spacing(15),
 
   [theme.breakpoints.down("md")]: {
     gridTemplateColumns: "1fr",
@@ -62,7 +90,7 @@ export const MissionItem = styled("li")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   width: "252px",
-  height: "209px",
+  height: "208px",
   padding: theme.spacing(8),
   borderRadius: theme.spacing(6),
   border: `1px solid ${theme.palette.strokeColors[150]}`,

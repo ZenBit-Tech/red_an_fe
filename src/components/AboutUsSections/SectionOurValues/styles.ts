@@ -13,7 +13,7 @@ export const SectionWrapper = styled(Box)(({ theme }) => ({
 export const CustomContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  padding: theme.spacing(0, 28),
+  padding: theme.spacing(0, 20),
   maxWidth: "1440px",
   width: "100%",
   margin: "0 auto",
