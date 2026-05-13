@@ -105,6 +105,7 @@ export const APP_ROUTES = {
   HOME: "/",
   DASHBOARD: "/dashboard",
   DEIDENTIFY: "/deidentify",
+  SYNTHETIC_DATA: "/synthetic-data",
   SIGN_IN: "/signin",
   REGISTER: "/register",
   SESSION_EXPIRED: "/session-expired",

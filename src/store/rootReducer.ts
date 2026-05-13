@@ -3,6 +3,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { clinicalInputReducer } from "@/store/clinicalInputSlice";
 import { complianceFrameworkReducer } from "@/store/complianceFrameworkSlice";
 import { deidentifyStepReducer } from "@/store/deidentifyStepSlice";
+import { lastDeidentifiedResultReducer } from "@/store/lastDeidentifiedResultSlice";
 import { billingApi } from "@/common/api/billingApi";
 import { dashboardApiSlice } from "./dashboardApiSlice";
 
@@ -13,6 +14,7 @@ export const rootReducer = combineReducers({
   clinicalInput: clinicalInputReducer,
   complianceFramework: complianceFrameworkReducer,
   deidentifyStep: deidentifyStepReducer,
+  lastDeidentifiedResult: lastDeidentifiedResultReducer,
   [billingApi.reducerPath]: billingApi.reducer,
   [dashboardApiSlice.reducerPath]: dashboardApiSlice.reducer,
 });

@@ -398,5 +398,49 @@
         }
       }
     }
+  },
+  "syntheticGenerator": {
+    "page": {
+      "title": "Synthetic Data Generator",
+      "subtitle": "Generate synthetic datasets from previously de-identified documents."
+    },
+    "settings": {
+      "title": "Generation Settings",
+      "description": "Configure the synthetic data parameters",
+      "count": "Number of records",
+      "outputFormat": "Output format",
+      "formats": {
+        "txt": "TXT",
+        "pdf": "PDF"
+      }
+    },
+    "actions": {
+      "generate": "Generate Synthetic Data",
+      "regenerate": "Regenerate",
+      "download": "Download"
+    },
+    "previousData": {
+      "title": "Previously De-Identified Data",
+      "emptyState": "No de-identified document available yet. Complete the de-identification flow first."
+    },
+    "errors": {
+      "noDeidentifiedData": "Missing source data. Please de-identify a document first.",
+      "invalidCount": "Please set a valid number of records."
+    },
+    "table": {
+      "title": "Generated Data",
+      "columns": {
+        "index": "#",
+        "person": "Person",
+        "dateTime": "Date & Time",
+        "age": "Age",
+        "phone": "Phone",
+        "email": "Email",
+        "mrn": "MRN",
+        "location": "Location",
+        "identifier": "Identifier",
+        "dynamic": "{{type}}"
+      }
+    }
   }
 }
