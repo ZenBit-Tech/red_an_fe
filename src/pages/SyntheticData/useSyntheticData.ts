@@ -1,32 +1,34 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { useAppSelector } from "@/common/hooks/hooks";
+import { useGenerateSyntheticZipMutation } from "@/common/api/syntheticApi";
 import {
   SYNTHETIC_COUNT_LIMITS,
   SYNTHETIC_OUTPUT_FORMAT,
-  buildSyntheticRows,
-  getSyntheticColumnDefinitions,
-  type GenerateSyntheticRequest,
   type SyntheticOutputFormat,
 } from "@/pages/SyntheticData/constants";
+import type { GenerateSyntheticRequest } from "@/common/api/deidentifyApiTypes";
 
 interface UseSyntheticDataReturn {
   recordsCount: number;
   outputFormat: SyntheticOutputFormat;
   isAccordionOpen: boolean;
-  isGeneratedVisible: boolean;
+  isGenerating: boolean;
+  isGenerated: boolean;
   generateErrorKey: string;
-  generatedRows: Array<Record<string, string | number>>;
-  columns: ReturnType<typeof getSyntheticColumnDefinitions>;
+  successMessageKey: string;
   outputText: string;
   hasSourceData: boolean;
   handleRecordsCountChange: (value: number) => void;
   handleOutputFormatChange: (value: SyntheticOutputFormat) => void;
   toggleAccordion: () => void;
-  handleGenerate: () => void;
+  handleGenerate: () => Promise<void>;
 }
 
 export const useSyntheticData = (): UseSyntheticDataReturn => {
+  const [generateSyntheticZip, { isLoading: isGenerating }] =
+    useGenerateSyntheticZipMutation();
+
   const [recordsCount, setRecordsCount] = useState<number>(
     SYNTHETIC_COUNT_LIMITS.DEFAULT,
   );
@@ -34,21 +36,15 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
     SYNTHETIC_OUTPUT_FORMAT.TXT,
   );
   const [isAccordionOpen, setIsAccordionOpen] = useState<boolean>(false);
-  const [isGeneratedVisible, setIsGeneratedVisible] = useState<boolean>(false);
+  const [isGenerated, setIsGenerated] = useState<boolean>(false);
   const [generateErrorKey, setGenerateErrorKey] = useState<string>("");
-  const [generatedRows, setGeneratedRows] = useState<
-    Array<Record<string, string | number>>
-  >([]);
+  const [successMessageKey, setSuccessMessageKey] = useState<string>("");
 
-  const { originalInputText, anonymizedOutputText, jobId, activeEntityTypes } =
-    useAppSelector((state) => state.lastDeidentifiedResult);
+  const { originalInputText, anonymizedOutputText, jobId } = useAppSelector(
+    (state) => state.lastDeidentifiedResult,
+  );
 
   const hasSourceData = Boolean(originalInputText.trim() && jobId.trim());
-
-  const columns = useMemo(
-    () => getSyntheticColumnDefinitions(activeEntityTypes),
-    [activeEntityTypes],
-  );
 
   const handleRecordsCountChange = (value: number): void => {
     if (Number.isNaN(value)) {
@@ -65,19 +61,34 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
 
   const handleOutputFormatChange = (value: SyntheticOutputFormat): void => {
     setOutputFormat(value);
+    setSuccessMessageKey("");
   };
 
   const toggleAccordion = (): void => {
     setIsAccordionOpen((previous) => !previous);
   };
 
-  const handleGenerate = (): void => {
+  const downloadZipFile = (blob: Blob, fileName: string): void => {
+    const objectUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = objectUrl;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(objectUrl);
+  };
+
+  const handleGenerate = async (): Promise<void> => {
     if (!hasSourceData) {
       setGenerateErrorKey("syntheticGenerator.errors.noDeidentifiedData");
       return;
     }
 
-    if (recordsCount < SYNTHETIC_COUNT_LIMITS.MIN) {
+    if (
+      recordsCount < SYNTHETIC_COUNT_LIMITS.MIN ||
+      recordsCount > SYNTHETIC_COUNT_LIMITS.MAX
+    ) {
       setGenerateErrorKey("syntheticGenerator.errors.invalidCount");
       return;
     }
@@ -94,19 +105,31 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
       return;
     }
 
-    setGenerateErrorKey("");
-    setGeneratedRows(buildSyntheticRows(recordsCount, columns));
-    setIsGeneratedVisible(true);
+    try {
+      setGenerateErrorKey("");
+      setSuccessMessageKey("");
+
+      const response = await generateSyntheticZip(requestPayload).unwrap();
+      downloadZipFile(response.blob, response.fileName);
+
+      setIsGenerated(true);
+      setSuccessMessageKey("syntheticGenerator.success.downloadStarted");
+    } catch {
+      setGenerateErrorKey(
+        "syntheticGenerator.errors.syntheticGenerationFailed",
+      );
+      setIsGenerated(false);
+    }
   };
 
   return {
     recordsCount,
     outputFormat,
     isAccordionOpen,
-    isGeneratedVisible,
+    isGenerating,
+    isGenerated,
     generateErrorKey,
-    generatedRows,
-    columns,
+    successMessageKey,
     outputText: anonymizedOutputText || originalInputText,
     hasSourceData,
     handleRecordsCountChange,

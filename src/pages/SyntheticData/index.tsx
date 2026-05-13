@@ -1,11 +1,10 @@
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import RefreshIcon from "@mui/icons-material/Refresh";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import { useTranslation } from "react-i18next";
 
 import { DeidentifiedOutputPanel } from "@/components/DeidentifiedOutputPanel";
 import {
+  SYNTHETIC_COUNT_LIMITS,
   SYNTHETIC_OUTPUT_FORMAT,
   type SyntheticOutputFormat,
 } from "@/pages/SyntheticData/constants";
@@ -18,10 +17,10 @@ const SyntheticDataPage = () => {
     recordsCount,
     outputFormat,
     isAccordionOpen,
-    isGeneratedVisible,
+    isGenerating,
+    isGenerated,
     generateErrorKey,
-    generatedRows,
-    columns,
+    successMessageKey,
     outputText,
     hasSourceData,
     handleRecordsCountChange,
@@ -62,7 +61,10 @@ const SyntheticDataPage = () => {
                 onChange={(event) =>
                   handleRecordsCountChange(Number(event.target.value))
                 }
-                inputProps={{ min: 1, max: 100 }}
+                inputProps={{
+                  min: SYNTHETIC_COUNT_LIMITS.MIN,
+                  max: SYNTHETIC_COUNT_LIMITS.MAX,
+                }}
               />
             </div>
             <div>
@@ -94,8 +96,21 @@ const SyntheticDataPage = () => {
             </S.ErrorAlert>
           )}
 
-          <S.GenerateButton onClick={handleGenerate}>
-            {t("syntheticGenerator.actions.generate")}
+          {!!successMessageKey && isGenerated && (
+            <S.ErrorAlert severity="success">
+              {t(successMessageKey)}
+            </S.ErrorAlert>
+          )}
+
+          <S.GenerateButton
+            onClick={() => {
+              void handleGenerate();
+            }}
+            disabled={!hasSourceData || isGenerating}
+          >
+            {isGenerating
+              ? t("syntheticGenerator.actions.generating")
+              : t("syntheticGenerator.actions.generate")}
           </S.GenerateButton>
         </S.SettingsCard>
 
@@ -118,53 +133,6 @@ const SyntheticDataPage = () => {
             </S.CollapsibleBody>
           )}
         </S.CollapsibleCard>
-
-        {isGeneratedVisible && (
-          <S.TableCard>
-            <S.TableHeader>
-              <S.TableTitle>{t("syntheticGenerator.table.title")}</S.TableTitle>
-              <S.TableHeaderActions>
-                <S.HeaderActionButton
-                  startIcon={<RefreshIcon />}
-                  onClick={handleGenerate}
-                >
-                  {t("syntheticGenerator.actions.regenerate")}
-                </S.HeaderActionButton>
-                <S.HeaderActionButton startIcon={<DownloadOutlinedIcon />}>
-                  {t("syntheticGenerator.actions.download")}
-                </S.HeaderActionButton>
-              </S.TableHeaderActions>
-            </S.TableHeader>
-
-            <S.GeneratedTableContainer>
-              <S.GeneratedTable stickyHeader>
-                <S.GeneratedTableHead>
-                  <S.GeneratedRow>
-                    {columns.map((column) => (
-                      <S.GeneratedHeaderCell key={column.key}>
-                        {column.labelKey ===
-                        "syntheticGenerator.table.columns.dynamic"
-                          ? t(column.labelKey, { type: column.key })
-                          : t(column.labelKey)}
-                      </S.GeneratedHeaderCell>
-                    ))}
-                  </S.GeneratedRow>
-                </S.GeneratedTableHead>
-                <S.GeneratedBody>
-                  {generatedRows.map((row, rowIndex) => (
-                    <S.GeneratedRow key={`row-${rowIndex}`}>
-                      {columns.map((column) => (
-                        <S.GeneratedCell key={`${column.key}-${rowIndex}`}>
-                          {String(row[column.key] ?? "-")}
-                        </S.GeneratedCell>
-                      ))}
-                    </S.GeneratedRow>
-                  ))}
-                </S.GeneratedBody>
-              </S.GeneratedTable>
-            </S.GeneratedTableContainer>
-          </S.TableCard>
-        )}
       </S.SyntheticPageContent>
     </S.SyntheticPageWrapper>
   );

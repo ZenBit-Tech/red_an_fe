@@ -12,13 +12,6 @@ export const SYNTHETIC_OUTPUT_FORMAT = {
 export type SyntheticOutputFormat =
   (typeof SYNTHETIC_OUTPUT_FORMAT)[keyof typeof SYNTHETIC_OUTPUT_FORMAT];
 
-export interface GenerateSyntheticRequest {
-  jobId: string;
-  text: string;
-  count: number;
-  outputFormat: SyntheticOutputFormat;
-}
-
 export interface SyntheticColumnDefinition {
   key: string;
   labelKey: string;
@@ -27,7 +20,7 @@ export interface SyntheticColumnDefinition {
 
 export const SYNTHETIC_COUNT_LIMITS = {
   MIN: 1,
-  MAX: 100,
+  MAX: 20,
   DEFAULT: 5,
   TABLE_PREVIEW_MAX_ROWS: 20,
 } as const;

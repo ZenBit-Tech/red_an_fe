@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { TableBody } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -22,7 +22,11 @@ import { DeidentifiedOutputPanel } from "@/components/DeidentifiedOutputPanel";
 import { useAppDispatch, useAppSelector } from "@/common/hooks/hooks";
 import { APP_ROUTES } from "@/constants";
 import { useAnalysisResults } from "@/components/AnalysisResults/useAnalysisResults";
+import { usePersistEntityStatusesMutation } from "@/common/api/syntheticApi";
 import { setLastDeidentifiedResult } from "@/store/lastDeidentifiedResultSlice";
+
+const ENTITY_STATUS_PERSIST_DEBOUNCE_MS = 1000;
+const VISIBILITY_STATE_HIDDEN = "hidden";
 
 const AnalysisResults: React.FC<AnalysisResultsProps> = ({
   inputText,
@@ -34,6 +38,13 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [persistEntityStatuses, { isLoading: isPersistingStatuses }] =
+    usePersistEntityStatusesMutation();
+  const [lastPersistedActiveEntityIds, setLastPersistedActiveEntityIds] =
+    useState<string[]>([]);
+  const [hasPersistedStatuses, setHasPersistedStatuses] =
+    useState<boolean>(false);
+  const [persistErrorKey, setPersistErrorKey] = useState<string>("");
   const selectedFramework = useAppSelector(
     (state) => state.complianceFramework.selectedFramework,
   );
@@ -63,6 +74,137 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
     jobId,
     framework: selectedFramework,
   });
+
+  const currentActiveEntityIds = useMemo(
+    () => Array.from(selectedEntityIds).sort(),
+    [selectedEntityIds],
+  );
+
+  const isSelectionDirty = useMemo(() => {
+    if (!hasPersistedStatuses) {
+      return true;
+    }
+
+    if (currentActiveEntityIds.length !== lastPersistedActiveEntityIds.length) {
+      return true;
+    }
+
+    return currentActiveEntityIds.some(
+      (id, index) => id !== lastPersistedActiveEntityIds[index],
+    );
+  }, [
+    currentActiveEntityIds,
+    hasPersistedStatuses,
+    lastPersistedActiveEntityIds,
+  ]);
+
+  const persistSelectedEntitiesStatuses = useCallback(
+    async (activeEntityIds: string[]): Promise<boolean> => {
+      if (!jobId.trim()) {
+        setPersistErrorKey("deidentify.analysisResults.cta.persistFailed");
+        return false;
+      }
+
+      try {
+        await persistEntityStatuses({
+          jobId,
+          activeEntityIds,
+        }).unwrap();
+
+        setLastPersistedActiveEntityIds([...activeEntityIds]);
+        setHasPersistedStatuses(true);
+        setPersistErrorKey("");
+        return true;
+      } catch {
+        setPersistErrorKey("deidentify.analysisResults.cta.persistFailed");
+        return false;
+      }
+    },
+    [jobId, persistEntityStatuses],
+  );
+
+  useEffect(() => {
+    if (!jobId.trim() || !isSelectionDirty) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      void persistSelectedEntitiesStatuses(currentActiveEntityIds);
+    }, ENTITY_STATUS_PERSIST_DEBOUNCE_MS);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [
+    currentActiveEntityIds,
+    isSelectionDirty,
+    jobId,
+    persistSelectedEntitiesStatuses,
+  ]);
+
+  useEffect(() => {
+    const persistIfNeeded = (): void => {
+      if (!jobId.trim() || !isSelectionDirty || isPersistingStatuses) {
+        return;
+      }
+
+      void persistSelectedEntitiesStatuses(currentActiveEntityIds);
+    };
+
+    const handleBeforeUnload = (): void => {
+      persistIfNeeded();
+    };
+
+    const handleVisibilityChange = (): void => {
+      if (document.visibilityState === VISIBILITY_STATE_HIDDEN) {
+        persistIfNeeded();
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [
+    currentActiveEntityIds,
+    isPersistingStatuses,
+    isSelectionDirty,
+    jobId,
+    persistSelectedEntitiesStatuses,
+  ]);
+
+  const handleNavigateToSynthetic = useCallback(async (): Promise<void> => {
+    const hasSourceData = Boolean(
+      lastDeidentifiedResult.jobId?.trim() &&
+      lastDeidentifiedResult.originalInputText?.trim(),
+    );
+
+    if (!hasSourceData) {
+      return;
+    }
+
+    if (isSelectionDirty) {
+      const isPersisted = await persistSelectedEntitiesStatuses(
+        currentActiveEntityIds,
+      );
+
+      if (!isPersisted) {
+        return;
+      }
+    }
+
+    navigate(APP_ROUTES.SYNTHETIC_DATA);
+  }, [
+    currentActiveEntityIds,
+    isSelectionDirty,
+    lastDeidentifiedResult.jobId,
+    lastDeidentifiedResult.originalInputText,
+    navigate,
+    persistSelectedEntitiesStatuses,
+  ]);
 
   useEffect(() => {
     dispatch(
@@ -335,16 +477,29 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
           <S.ResultCtaSubtitle>
             {t("deidentify.analysisResults.cta.subtitle")}
           </S.ResultCtaSubtitle>
+          {isPersistingStatuses && (
+            <S.ResultCtaSubtitle>
+              {t("deidentify.analysisResults.cta.persisting")}
+            </S.ResultCtaSubtitle>
+          )}
+          {!!persistErrorKey && (
+            <S.ResultCtaSubtitle>{t(persistErrorKey)}</S.ResultCtaSubtitle>
+          )}
         </S.ResultCtaTextGroup>
         <S.ResultCtaButton
           endIcon={<ArrowForwardIcon />}
-          onClick={() => navigate(APP_ROUTES.SYNTHETIC_DATA)}
+          onClick={() => {
+            void handleNavigateToSynthetic();
+          }}
           disabled={
             !lastDeidentifiedResult.jobId?.trim() ||
-            !lastDeidentifiedResult.originalInputText?.trim()
+            !lastDeidentifiedResult.originalInputText?.trim() ||
+            isPersistingStatuses
           }
         >
-          {t("deidentify.analysisResults.cta.button")}
+          {isPersistingStatuses
+            ? t("deidentify.analysisResults.cta.persistingButton")
+            : t("deidentify.analysisResults.cta.button")}
         </S.ResultCtaButton>
       </S.ResultCtaSection>
     </S.AnalysisResultsWrapper>

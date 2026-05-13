@@ -377,7 +377,10 @@
       "cta": {
         "title": "Findings with decision factors",
         "subtitle": "Use your de-identified data to create realistic synthetic data sets for testing and development",
-        "button": "Generate Synthetic Data"
+        "button": "Generate Synthetic Data",
+        "persisting": "Saving selected entities...",
+        "persistingButton": "Saving...",
+        "persistFailed": "Failed to save entity selection. Please try again."
       },
       "table": {
         "title": "Findings with decision factors",
@@ -416,6 +419,7 @@
     },
     "actions": {
       "generate": "Generate Synthetic Data",
+      "generating": "Generating...",
       "regenerate": "Regenerate",
       "download": "Download"
     },
@@ -425,7 +429,11 @@
     },
     "errors": {
       "noDeidentifiedData": "Missing source data. Please de-identify a document first.",
-      "invalidCount": "Please set a valid number of records."
+      "invalidCount": "Please set a valid number of records (1-20).",
+      "syntheticGenerationFailed": "Synthetic generation failed. Please try again."
+    },
+    "success": {
+      "downloadStarted": "Synthetic ZIP generation completed. Download started."
     },
     "table": {
       "title": "Generated Data",
