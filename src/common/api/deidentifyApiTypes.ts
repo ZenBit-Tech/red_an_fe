@@ -22,15 +22,37 @@ export interface AnalyzeResponse {
   findings: AnalyzeFinding[];
 }
 
+export type PreviewValidationMode = "strict" | "warn_only";
+
+export interface PreviewLeak {
+  type: string;
+  match: string;
+  index: number;
+}
+
+export interface PreviewLeakSummaryItem {
+  type: string;
+  count: number;
+}
+
+export interface PreviewPostValidation {
+  valid: boolean;
+  mode: PreviewValidationMode;
+  leaks: PreviewLeak[];
+  summary: PreviewLeakSummaryItem[];
+}
+
 export interface PreviewRequest {
   jobId: string;
   text: string;
   framework: ComplianceFramework;
   activeIds: string[];
+  validationMode?: PreviewValidationMode;
 }
 
 export interface PreviewResponse {
   anonymizedText: string;
+  postValidation: PreviewPostValidation;
 }
 
 export interface GenerateSyntheticRequest {

@@ -373,6 +373,10 @@
           "copy": "Copy",
           "copied": "Copy",
           "download": "Download"
+        },
+        "phiLeakWarning": {
+          "title": "Preview contains unmasked PHI",
+          "description": "The following entity types are not anonymized in the current selection:"
         }
       },
       "cta": {

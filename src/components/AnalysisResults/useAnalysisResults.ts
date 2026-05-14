@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ComplianceFramework } from "@/components/ComplianceSelect/constants";
 import { previewAnonymization } from "@/common/api/deidentifyApi";
+import type { PreviewLeakSummaryItem } from "@/common/api/deidentifyApiTypes";
 import type { Entity } from "./constants";
 
 interface UseAnalysisResultsProps {
@@ -16,6 +17,8 @@ interface UseAnalysisResultsReturn {
   inputWithHighlights: Entity[];
   outputText: string;
   isPreviewLoading: boolean;
+  previewLeakSummary: PreviewLeakSummaryItem[];
+  triggerPreview: (activeIds: string[]) => Promise<void>;
   toggleEntitySelection: (entityId: string) => void;
   selectAllEntities: () => void;
   deselectAllEntities: () => void;
@@ -32,52 +35,71 @@ export const useAnalysisResults = ({
   );
   const [outputText, setOutputText] = useState<string>(inputText);
   const [isPreviewLoading, setIsPreviewLoading] = useState<boolean>(false);
+  const [previewLeakSummary, setPreviewLeakSummary] = useState<
+    PreviewLeakSummaryItem[]
+  >([]);
+  const latestRequestRef = useRef(0);
+  const selectedEntityIdsRef = useRef(selectedEntityIds);
 
   const visibleEntities = useMemo(
     () => entities.filter((entity) => selectedEntityIds.has(entity.id)),
     [entities, selectedEntityIds],
   );
 
-  const inputWithHighlights = useMemo(() => {
-    return visibleEntities.sort((a, b) => a.startIdx - b.startIdx);
-  }, [visibleEntities]);
+  const inputWithHighlights = useMemo(
+    () => [...visibleEntities].sort((a, b) => a.startIdx - b.startIdx),
+    [visibleEntities],
+  );
 
-  useEffect(() => {
-    if (selectedEntityIds.size === 0) {
-      setOutputText(inputText);
-      return;
-    }
+  const triggerPreview = useCallback(
+    async (activeIds: string[]): Promise<void> => {
+      if (activeIds.length === 0) {
+        setOutputText(inputText);
+        setPreviewLeakSummary([]);
+        return;
+      }
 
-    const fetchPreview = async (): Promise<void> => {
+      const requestId = ++latestRequestRef.current;
+      setIsPreviewLoading(true);
+
       try {
-        setIsPreviewLoading(true);
         const response = await previewAnonymization({
           jobId,
           text: inputText,
           framework,
-          activeIds: Array.from(selectedEntityIds),
+          activeIds,
+          validationMode: "warn_only",
         });
-        setOutputText(response.anonymizedText);
+        if (latestRequestRef.current === requestId) {
+          setOutputText(response.anonymizedText);
+          setPreviewLeakSummary(response.postValidation.summary);
+          setIsPreviewLoading(false);
+        }
       } catch {
-        setOutputText(inputText);
-      } finally {
-        setIsPreviewLoading(false);
+        if (latestRequestRef.current === requestId) {
+          setIsPreviewLoading(false);
+        }
       }
-    };
+    },
+    [inputText, jobId, framework],
+  );
 
-    void fetchPreview();
-  }, [selectedEntityIds, jobId, inputText, framework]);
+  useEffect(() => {
+    selectedEntityIdsRef.current = selectedEntityIds;
+  }, [selectedEntityIds]);
+
+  useEffect(() => {
+    void triggerPreview(Array.from(selectedEntityIdsRef.current));
+  }, [triggerPreview]);
 
   const toggleEntitySelection = (entityId: string): void => {
-    setSelectedEntityIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(entityId)) {
-        next.delete(entityId);
-      } else {
-        next.add(entityId);
-      }
-      return next;
-    });
+    const nextIds = new Set(selectedEntityIds);
+    if (nextIds.has(entityId)) {
+      nextIds.delete(entityId);
+    } else {
+      nextIds.add(entityId);
+    }
+    setSelectedEntityIds(nextIds);
   };
 
   const selectAllEntities = (): void => {
@@ -94,6 +116,8 @@ export const useAnalysisResults = ({
     inputWithHighlights,
     outputText,
     isPreviewLoading,
+    previewLeakSummary,
+    triggerPreview,
     toggleEntitySelection,
     selectAllEntities,
     deselectAllEntities,

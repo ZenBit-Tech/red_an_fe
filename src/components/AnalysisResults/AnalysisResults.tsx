@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { TableBody } from "@mui/material";
+import { Alert, TableBody } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import RefreshIcon from "@mui/icons-material/Refresh";
@@ -67,6 +67,8 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
     inputWithHighlights,
     outputText,
     isPreviewLoading,
+    previewLeakSummary,
+    triggerPreview,
     toggleEntitySelection,
   } = useAnalysisResults({
     entities: frameworkEntities,
@@ -175,6 +177,27 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
     jobId,
     persistSelectedEntitiesStatuses,
   ]);
+
+  const handleToggleEntity = useCallback(
+    async (entityId: string): Promise<void> => {
+      const nextIds = new Set(selectedEntityIds);
+      if (nextIds.has(entityId)) {
+        nextIds.delete(entityId);
+      } else {
+        nextIds.add(entityId);
+      }
+      const sortedNextIds = Array.from(nextIds).sort();
+      toggleEntitySelection(entityId);
+      await persistSelectedEntitiesStatuses(sortedNextIds);
+      void triggerPreview(sortedNextIds);
+    },
+    [
+      selectedEntityIds,
+      toggleEntitySelection,
+      persistSelectedEntitiesStatuses,
+      triggerPreview,
+    ],
+  );
 
   const handleNavigateToSynthetic = useCallback(async (): Promise<void> => {
     const hasSourceData = Boolean(
@@ -318,6 +341,14 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
             isLoading={isPreviewLoading}
           />
         </S.PanelsContainer>
+        {previewLeakSummary.length > 0 && (
+          <Alert severity="warning">
+            {t("deidentify.analysisResults.output.phiLeakWarning.description")}{" "}
+            {previewLeakSummary
+              .map((item) => `${item.type} (${item.count})`)
+              .join(", ")}
+          </Alert>
+        )}
         <S.TableSection>
           <S.TableBlock>
             {" "}
@@ -432,7 +463,7 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
                           <S.ActionToggleButton
                             size="small"
                             active={isActive}
-                            onClick={() => toggleEntitySelection(entity.id)}
+                            onClick={() => void handleToggleEntity(entity.id)}
                           >
                             {isActive
                               ? t(
