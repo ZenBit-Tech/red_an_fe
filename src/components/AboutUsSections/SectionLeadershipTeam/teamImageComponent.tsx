@@ -1,4 +1,5 @@
 import React from "react";
+import * as S from "./styles";
 
 interface TeamMemberImageProps {
   name: string;
@@ -28,18 +29,13 @@ export const TeamMemberImage: React.FC<TeamMemberImageProps> = ({
       {/* Tablet */}
       <source
         media="(min-width: 768px)"
-        srcSet={`${getImageUrl(360)} 1x, ${getImageUrl(720)} 2x`}
+        srcSet={`${getImageUrl(608)} 1x, ${getImageUrl(446)} 2x`}
       />
 
       {/* Mobile */}
       <source srcSet={`${getImageUrl(340)} 1x, ${getImageUrl(680)} 2x`} />
 
-      <img
-        src={getImageUrl(380)}
-        alt={name}
-        loading="lazy"
-        style={{ width: "100%", height: "auto", display: "block" }}
-      />
+      <S.TeamImage src={getImageUrl(380)} alt={name} loading="lazy" />
     </picture>
   );
 };
