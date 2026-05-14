@@ -113,11 +113,14 @@ export const APP_ROUTES = {
 export const STORAGE_KEYS = {
   ACCESS_TOKEN: "accessToken",
   USER: "user",
+  PENDING_PLAN: "pendingPlan",
+  PENDING_PRICE_ID: "pendingPriceId",
 } as const;
 
 export const API_ENDPOINTS = {
   MAGIC_LINK: "/auth/magic-link",
   MAGIC_LINK_CALLBACK: "/auth/magic-link/callback",
+  BILLING_CREATE_CHECKOUT_SESSION: "/billing/create-checkout-session",
 } as const;
 
 export const EMAIL_LINKS = {
