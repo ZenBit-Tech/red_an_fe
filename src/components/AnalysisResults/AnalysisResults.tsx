@@ -303,7 +303,7 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
           <S.ResultPanel>
             <S.PanelTitleRow>
               <S.PanelTitle>
-                {t("deidentify.analysisResults.panelTitle")}
+                {t("deidentify.analysisResults.deidentifiedPanelTitle")}
               </S.PanelTitle>
               <S.RestrictedBadge>
                 {t("deidentify.analysisResults.restrictedBadge")}
