@@ -55,14 +55,37 @@ export interface PreviewResponse {
   postValidation: PreviewPostValidation;
 }
 
-export interface GenerateSyntheticRequest {
+export interface GenerateSyntheticTableRequest {
   jobId: string;
   text: string;
   count: number;
   outputFormat: "txt" | "pdf";
 }
 
-export interface GenerateSyntheticZipResponse {
+export interface SyntheticTableRow {
+  variantNumber: number;
+  entities: Record<string, string>;
+}
+
+export interface SyntheticTableSummary {
+  totalRows: number;
+  generatedAt: string;
+  framework: string;
+}
+
+export interface SyntheticTableResponse {
+  generationId: string;
+  columns: string[];
+  rows: SyntheticTableRow[];
+  summary: SyntheticTableSummary;
+}
+
+export interface RegenerateSyntheticTableRequest {
+  count: number;
+  outputFormat: "txt" | "pdf";
+}
+
+export interface SyntheticArchiveResponse {
   blob: Blob;
   fileName: string;
 }

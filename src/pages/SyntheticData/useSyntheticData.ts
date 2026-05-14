@@ -1,33 +1,55 @@
 import { useState } from "react";
 
 import { useAppSelector } from "@/common/hooks/hooks";
-import { useGenerateSyntheticZipMutation } from "@/common/api/syntheticApi";
+import {
+  useDownloadSyntheticArchiveMutation,
+  useGenerateSyntheticTableMutation,
+  useRegenerateSyntheticTableMutation,
+} from "@/common/api/syntheticApi";
+import type {
+  GenerateSyntheticTableRequest,
+  RegenerateSyntheticTableRequest,
+  SyntheticTableResponse,
+} from "@/common/api/deidentifyApiTypes";
 import {
   SYNTHETIC_COUNT_LIMITS,
   SYNTHETIC_OUTPUT_FORMAT,
   type SyntheticOutputFormat,
 } from "@/pages/SyntheticData/constants";
-import type { GenerateSyntheticRequest } from "@/common/api/deidentifyApiTypes";
+
+export interface SyntheticTableState {
+  generationId: string;
+  outputFormat: SyntheticOutputFormat;
+  columns: string[];
+  rows: SyntheticTableResponse["rows"];
+}
 
 interface UseSyntheticDataReturn {
   recordsCount: number;
   outputFormat: SyntheticOutputFormat;
   isAccordionOpen: boolean;
   isGenerating: boolean;
-  isGenerated: boolean;
+  isRegenerating: boolean;
+  isDownloading: boolean;
+  tableState: SyntheticTableState | null;
   generateErrorKey: string;
-  successMessageKey: string;
   outputText: string;
   hasSourceData: boolean;
   handleRecordsCountChange: (value: number) => void;
   handleOutputFormatChange: (value: SyntheticOutputFormat) => void;
   toggleAccordion: () => void;
   handleGenerate: () => Promise<void>;
+  handleRegenerate: () => Promise<void>;
+  handleDownload: () => Promise<void>;
 }
 
 export const useSyntheticData = (): UseSyntheticDataReturn => {
-  const [generateSyntheticZip, { isLoading: isGenerating }] =
-    useGenerateSyntheticZipMutation();
+  const [generateSyntheticTable, { isLoading: isGenerating }] =
+    useGenerateSyntheticTableMutation();
+  const [regenerateSyntheticTable, { isLoading: isRegenerating }] =
+    useRegenerateSyntheticTableMutation();
+  const [downloadSyntheticArchive, { isLoading: isDownloading }] =
+    useDownloadSyntheticArchiveMutation();
 
   const [recordsCount, setRecordsCount] = useState<number>(
     SYNTHETIC_COUNT_LIMITS.DEFAULT,
@@ -36,9 +58,10 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
     SYNTHETIC_OUTPUT_FORMAT.TXT,
   );
   const [isAccordionOpen, setIsAccordionOpen] = useState<boolean>(false);
-  const [isGenerated, setIsGenerated] = useState<boolean>(false);
+  const [tableState, setTableState] = useState<SyntheticTableState | null>(
+    null,
+  );
   const [generateErrorKey, setGenerateErrorKey] = useState<string>("");
-  const [successMessageKey, setSuccessMessageKey] = useState<string>("");
 
   const { originalInputText, anonymizedOutputText, jobId } = useAppSelector(
     (state) => state.lastDeidentifiedResult,
@@ -61,7 +84,6 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
 
   const handleOutputFormatChange = (value: SyntheticOutputFormat): void => {
     setOutputFormat(value);
-    setSuccessMessageKey("");
   };
 
   const toggleAccordion = (): void => {
@@ -79,6 +101,16 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
     URL.revokeObjectURL(objectUrl);
   };
 
+  const buildTableState = (
+    response: SyntheticTableResponse,
+    currentOutputFormat: SyntheticOutputFormat,
+  ): SyntheticTableState => ({
+    generationId: response.generationId,
+    outputFormat: currentOutputFormat,
+    columns: response.columns,
+    rows: response.rows,
+  });
+
   const handleGenerate = async (): Promise<void> => {
     if (!hasSourceData) {
       setGenerateErrorKey("syntheticGenerator.errors.noDeidentifiedData");
@@ -93,7 +125,7 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
       return;
     }
 
-    const requestPayload: GenerateSyntheticRequest = {
+    const requestPayload: GenerateSyntheticTableRequest = {
       jobId,
       text: originalInputText,
       count: recordsCount,
@@ -107,18 +139,62 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
 
     try {
       setGenerateErrorKey("");
-      setSuccessMessageKey("");
 
-      const response = await generateSyntheticZip(requestPayload).unwrap();
-      downloadZipFile(response.blob, response.fileName);
-
-      setIsGenerated(true);
-      setSuccessMessageKey("syntheticGenerator.success.downloadStarted");
+      const response = await generateSyntheticTable(requestPayload).unwrap();
+      setTableState(buildTableState(response, requestPayload.outputFormat));
     } catch {
       setGenerateErrorKey(
         "syntheticGenerator.errors.syntheticGenerationFailed",
       );
-      setIsGenerated(false);
+      setTableState(null);
+    }
+  };
+
+  const handleRegenerate = async (): Promise<void> => {
+    if (!tableState) {
+      setGenerateErrorKey("syntheticGenerator.errors.noDeidentifiedData");
+      return;
+    }
+
+    const requestPayload: RegenerateSyntheticTableRequest = {
+      count: recordsCount,
+      outputFormat,
+    };
+
+    try {
+      setGenerateErrorKey("");
+
+      const response = await regenerateSyntheticTable({
+        generationId: tableState.generationId,
+        request: requestPayload,
+      }).unwrap();
+
+      setTableState(buildTableState(response, requestPayload.outputFormat));
+    } catch {
+      setGenerateErrorKey(
+        "syntheticGenerator.errors.syntheticGenerationFailed",
+      );
+    }
+  };
+
+  const handleDownload = async (): Promise<void> => {
+    if (!tableState) {
+      setGenerateErrorKey("syntheticGenerator.errors.noDeidentifiedData");
+      return;
+    }
+
+    try {
+      setGenerateErrorKey("");
+
+      const response = await downloadSyntheticArchive(
+        tableState.generationId,
+      ).unwrap();
+
+      downloadZipFile(response.blob, response.fileName);
+    } catch {
+      setGenerateErrorKey(
+        "syntheticGenerator.errors.syntheticGenerationFailed",
+      );
     }
   };
 
@@ -127,14 +203,17 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
     outputFormat,
     isAccordionOpen,
     isGenerating,
-    isGenerated,
+    isRegenerating,
+    isDownloading,
+    tableState,
     generateErrorKey,
-    successMessageKey,
     outputText: anonymizedOutputText || originalInputText,
     hasSourceData,
     handleRecordsCountChange,
     handleOutputFormatChange,
     toggleAccordion,
     handleGenerate,
+    handleRegenerate,
+    handleDownload,
   };
 };

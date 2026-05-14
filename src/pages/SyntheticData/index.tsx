@@ -13,20 +13,48 @@ import * as S from "@/pages/SyntheticData/styles";
 
 const SyntheticDataPage = () => {
   const { t } = useTranslation();
+  const columnLabelKeys: Record<string, string> = {
+    PERSON: "syntheticGenerator.table.columns.person",
+    DATE_TIME: "syntheticGenerator.table.columns.dateTime",
+    PHONE: "syntheticGenerator.table.columns.phone",
+    EMAIL: "syntheticGenerator.table.columns.email",
+    MRN: "syntheticGenerator.table.columns.mrn",
+    LOCATION: "syntheticGenerator.table.columns.location",
+    IDENTIFIER: "syntheticGenerator.table.columns.identifier",
+  };
+
+  const getColumnLabel = (columnKey: string): string => {
+    const suffixMatch = columnKey.match(/^(.*?)(?:_(\d+))?$/);
+    const baseKey = suffixMatch?.[1] ?? columnKey;
+    const suffix = suffixMatch?.[2];
+    const translationKey =
+      columnLabelKeys[baseKey] ?? "syntheticGenerator.table.columns.dynamic";
+
+    const label =
+      translationKey === "syntheticGenerator.table.columns.dynamic"
+        ? t(translationKey, { type: baseKey })
+        : t(translationKey);
+
+    return suffix ? `${label} ${suffix}` : label;
+  };
+
   const {
     recordsCount,
     outputFormat,
     isAccordionOpen,
     isGenerating,
-    isGenerated,
+    isRegenerating,
+    isDownloading,
+    tableState,
     generateErrorKey,
-    successMessageKey,
     outputText,
     hasSourceData,
     handleRecordsCountChange,
     handleOutputFormatChange,
     toggleAccordion,
     handleGenerate,
+    handleRegenerate,
+    handleDownload,
   } = useSyntheticData();
 
   return (
@@ -96,12 +124,6 @@ const SyntheticDataPage = () => {
             </S.ErrorAlert>
           )}
 
-          {!!successMessageKey && isGenerated && (
-            <S.ErrorAlert severity="success">
-              {t(successMessageKey)}
-            </S.ErrorAlert>
-          )}
-
           <S.GenerateButton
             onClick={() => {
               void handleGenerate();
@@ -113,6 +135,66 @@ const SyntheticDataPage = () => {
               : t("syntheticGenerator.actions.generate")}
           </S.GenerateButton>
         </S.SettingsCard>
+
+        {tableState && (
+          <S.TableCard>
+            <S.TableHeader>
+              <S.TableTitle>{t("syntheticGenerator.table.title")}</S.TableTitle>
+              <S.TableHeaderActions>
+                <S.HeaderActionButton
+                  onClick={() => {
+                    void handleRegenerate();
+                  }}
+                  disabled={isRegenerating || isGenerating || isDownloading}
+                >
+                  {t("syntheticGenerator.actions.regenerate")}
+                </S.HeaderActionButton>
+                <S.HeaderActionButton
+                  onClick={() => {
+                    void handleDownload();
+                  }}
+                  disabled={isDownloading || isGenerating || isRegenerating}
+                >
+                  {t("syntheticGenerator.actions.download")}
+                </S.HeaderActionButton>
+              </S.TableHeaderActions>
+            </S.TableHeader>
+
+            <S.GeneratedTableContainer>
+              <S.GeneratedTable stickyHeader>
+                <S.GeneratedTableHead>
+                  <S.GeneratedRow>
+                    <S.GeneratedHeaderCell align="left">
+                      {t("syntheticGenerator.table.columns.index")}
+                    </S.GeneratedHeaderCell>
+                    {tableState.columns.map((columnKey) => (
+                      <S.GeneratedHeaderCell key={columnKey} align="left">
+                        {getColumnLabel(columnKey)}
+                      </S.GeneratedHeaderCell>
+                    ))}
+                  </S.GeneratedRow>
+                </S.GeneratedTableHead>
+                <S.GeneratedBody>
+                  {tableState.rows.map((row) => (
+                    <S.GeneratedRow key={row.variantNumber}>
+                      <S.GeneratedCell align="left">
+                        {row.variantNumber}
+                      </S.GeneratedCell>
+                      {tableState.columns.map((columnKey) => (
+                        <S.GeneratedCell
+                          key={`${row.variantNumber}-${columnKey}`}
+                          align="left"
+                        >
+                          {row.entities[columnKey] ?? "-"}
+                        </S.GeneratedCell>
+                      ))}
+                    </S.GeneratedRow>
+                  ))}
+                </S.GeneratedBody>
+              </S.GeneratedTable>
+            </S.GeneratedTableContainer>
+          </S.TableCard>
+        )}
 
         <S.CollapsibleCard>
           <S.CollapsibleHeader onClick={toggleAccordion}>
