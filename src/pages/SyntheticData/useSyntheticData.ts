@@ -26,7 +26,6 @@ export interface SyntheticTableState {
 
 interface UseSyntheticDataReturn {
   recordsCount: number;
-  outputFormat: SyntheticOutputFormat;
   isAccordionOpen: boolean;
   isGenerating: boolean;
   isRegenerating: boolean;
@@ -36,7 +35,6 @@ interface UseSyntheticDataReturn {
   outputText: string;
   hasSourceData: boolean;
   handleRecordsCountChange: (value: number) => void;
-  handleOutputFormatChange: (value: SyntheticOutputFormat) => void;
   toggleAccordion: () => void;
   handleGenerate: () => Promise<void>;
   handleRegenerate: () => Promise<void>;
@@ -53,9 +51,6 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
 
   const [recordsCount, setRecordsCount] = useState<number>(
     SYNTHETIC_COUNT_LIMITS.DEFAULT,
-  );
-  const [outputFormat, setOutputFormat] = useState<SyntheticOutputFormat>(
-    SYNTHETIC_OUTPUT_FORMAT.TXT,
   );
   const [isAccordionOpen, setIsAccordionOpen] = useState<boolean>(false);
   const [tableState, setTableState] = useState<SyntheticTableState | null>(
@@ -80,10 +75,6 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
     );
 
     setRecordsCount(boundedValue);
-  };
-
-  const handleOutputFormatChange = (value: SyntheticOutputFormat): void => {
-    setOutputFormat(value);
   };
 
   const toggleAccordion = (): void => {
@@ -129,7 +120,7 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
       jobId,
       text: originalInputText,
       count: recordsCount,
-      outputFormat,
+      outputFormat: SYNTHETIC_OUTPUT_FORMAT.PDF,
     };
 
     if (!requestPayload.jobId || !requestPayload.text) {
@@ -158,7 +149,7 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
 
     const requestPayload: RegenerateSyntheticTableRequest = {
       count: recordsCount,
-      outputFormat,
+      outputFormat: SYNTHETIC_OUTPUT_FORMAT.PDF,
     };
 
     try {
@@ -200,7 +191,6 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
 
   return {
     recordsCount,
-    outputFormat,
     isAccordionOpen,
     isGenerating,
     isRegenerating,
@@ -210,7 +200,6 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
     outputText: anonymizedOutputText || originalInputText,
     hasSourceData,
     handleRecordsCountChange,
-    handleOutputFormatChange,
     toggleAccordion,
     handleGenerate,
     handleRegenerate,

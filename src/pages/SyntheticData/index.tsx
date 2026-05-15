@@ -1,15 +1,45 @@
+import type { ReactNode } from "react";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTranslation } from "react-i18next";
 
-import { DeidentifiedOutputPanel } from "@/components/DeidentifiedOutputPanel";
-import {
-  SYNTHETIC_COUNT_LIMITS,
-  SYNTHETIC_OUTPUT_FORMAT,
-  type SyntheticOutputFormat,
-} from "@/pages/SyntheticData/constants";
+import { SYNTHETIC_COUNT_LIMITS } from "@/pages/SyntheticData/constants";
 import { useSyntheticData } from "@/pages/SyntheticData/useSyntheticData";
 import * as S from "@/pages/SyntheticData/styles";
+
+const REPLACEMENT_TOKEN_PATTERN = /\[[^\]]+\]/g;
+
+const renderOutputWithHighlights = (outputText: string): ReactNode => {
+  if (!outputText) {
+    return outputText;
+  }
+
+  const segments: ReactNode[] = [];
+  let lastMatchEnd = 0;
+  let matchResult: RegExpExecArray | null;
+
+  REPLACEMENT_TOKEN_PATTERN.lastIndex = 0;
+
+  while ((matchResult = REPLACEMENT_TOKEN_PATTERN.exec(outputText)) !== null) {
+    if (lastMatchEnd < matchResult.index) {
+      segments.push(outputText.slice(lastMatchEnd, matchResult.index));
+    }
+
+    segments.push(
+      <S.PreviewToken key={`synthetic-preview-token-${matchResult.index}`}>
+        {matchResult[0]}
+      </S.PreviewToken>,
+    );
+
+    lastMatchEnd = matchResult.index + matchResult[0].length;
+  }
+
+  if (lastMatchEnd < outputText.length) {
+    segments.push(outputText.slice(lastMatchEnd));
+  }
+
+  return segments;
+};
 
 const SyntheticDataPage = () => {
   const { t } = useTranslation();
@@ -40,7 +70,6 @@ const SyntheticDataPage = () => {
 
   const {
     recordsCount,
-    outputFormat,
     isAccordionOpen,
     isGenerating,
     isRegenerating,
@@ -50,12 +79,15 @@ const SyntheticDataPage = () => {
     outputText,
     hasSourceData,
     handleRecordsCountChange,
-    handleOutputFormatChange,
     toggleAccordion,
     handleGenerate,
     handleRegenerate,
     handleDownload,
   } = useSyntheticData();
+
+  const formattedCharacterCount = new Intl.NumberFormat().format(
+    outputText.length,
+  );
 
   return (
     <S.SyntheticPageWrapper>
@@ -78,45 +110,61 @@ const SyntheticDataPage = () => {
           </S.SettingsHeader>
 
           <S.SettingsRow>
-            <div>
-              <S.InputLabel>
-                {t("syntheticGenerator.settings.count")}
-              </S.InputLabel>
-              <S.NumberField
-                fullWidth
-                type="number"
-                value={recordsCount}
-                onChange={(event) =>
-                  handleRecordsCountChange(Number(event.target.value))
-                }
-                inputProps={{
-                  min: SYNTHETIC_COUNT_LIMITS.MIN,
-                  max: SYNTHETIC_COUNT_LIMITS.MAX,
-                }}
-              />
-            </div>
-            <div>
-              <S.InputLabel>
-                {t("syntheticGenerator.settings.outputFormat")}
-              </S.InputLabel>
-              <S.FormatSelect
-                fullWidth
-                value={outputFormat}
-                onChange={(event) =>
-                  handleOutputFormatChange(
-                    event.target.value as SyntheticOutputFormat,
-                  )
-                }
-              >
-                <S.OutputFormatOption value={SYNTHETIC_OUTPUT_FORMAT.TXT}>
-                  {t("syntheticGenerator.settings.formats.txt")}
-                </S.OutputFormatOption>
-                <S.OutputFormatOption value={SYNTHETIC_OUTPUT_FORMAT.PDF}>
-                  {t("syntheticGenerator.settings.formats.pdf")}
-                </S.OutputFormatOption>
-              </S.FormatSelect>
-            </div>
+            <S.InputLabel>
+              {t("syntheticGenerator.settings.count")}
+            </S.InputLabel>
+            <S.NumberField
+              type="number"
+              value={recordsCount}
+              onChange={(event) =>
+                handleRecordsCountChange(Number(event.target.value))
+              }
+              inputProps={{
+                min: SYNTHETIC_COUNT_LIMITS.MIN,
+                max: SYNTHETIC_COUNT_LIMITS.MAX,
+              }}
+            />
           </S.SettingsRow>
+
+          <S.SourceDataSection>
+            <S.SourceDataTitle>
+              {t("syntheticGenerator.sourceData.title")}
+            </S.SourceDataTitle>
+            <S.SourceDataDescription>
+              {t("syntheticGenerator.sourceData.description")}
+            </S.SourceDataDescription>
+
+            <S.CollapsibleCard>
+              <S.CollapsibleHeader onClick={toggleAccordion}>
+                <S.CollapsibleTitle>
+                  {t("syntheticGenerator.previousData.title")}
+                </S.CollapsibleTitle>
+                {isAccordionOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </S.CollapsibleHeader>
+              {isAccordionOpen && (
+                <S.CollapsibleBody>
+                  {hasSourceData ? (
+                    <>
+                      <S.PreviewSurface>
+                        <S.PreviewText>
+                          {renderOutputWithHighlights(outputText)}
+                        </S.PreviewText>
+                      </S.PreviewSurface>
+                      <S.CharacterCount>
+                        {t("syntheticGenerator.previousData.characterCount", {
+                          count: formattedCharacterCount,
+                        })}
+                      </S.CharacterCount>
+                    </>
+                  ) : (
+                    <S.EmptyState>
+                      {t("syntheticGenerator.previousData.emptyState")}
+                    </S.EmptyState>
+                  )}
+                </S.CollapsibleBody>
+              )}
+            </S.CollapsibleCard>
+          </S.SourceDataSection>
 
           {!!generateErrorKey && (
             <S.ErrorAlert severity="warning">
@@ -195,26 +243,6 @@ const SyntheticDataPage = () => {
             </S.GeneratedTableContainer>
           </S.TableCard>
         )}
-
-        <S.CollapsibleCard>
-          <S.CollapsibleHeader onClick={toggleAccordion}>
-            <S.CollapsibleTitle>
-              {t("syntheticGenerator.previousData.title")}
-            </S.CollapsibleTitle>
-            {isAccordionOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-          </S.CollapsibleHeader>
-          {isAccordionOpen && (
-            <S.CollapsibleBody>
-              {hasSourceData ? (
-                <DeidentifiedOutputPanel outputText={outputText} />
-              ) : (
-                <S.EmptyState>
-                  {t("syntheticGenerator.previousData.emptyState")}
-                </S.EmptyState>
-              )}
-            </S.CollapsibleBody>
-          )}
-        </S.CollapsibleCard>
       </S.SyntheticPageContent>
     </S.SyntheticPageWrapper>
   );

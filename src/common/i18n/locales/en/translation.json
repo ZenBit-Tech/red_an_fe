@@ -422,6 +422,10 @@
         "pdf": "PDF"
       }
     },
+    "sourceData": {
+      "title": "Used De-Identifications Data",
+      "description": "Generate Synthetic data based on patterns from previously de-identified text"
+    },
     "actions": {
       "generate": "Generate Synthetic Data",
       "generating": "Generating...",
@@ -430,6 +434,7 @@
     },
     "previousData": {
       "title": "Previously De-Identified Data",
+      "characterCount": "{{count}} characters",
       "emptyState": "No de-identified document available yet. Complete the de-identification flow first."
     },
     "errors": {
