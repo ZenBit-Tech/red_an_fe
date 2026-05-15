@@ -1,4 +1,5 @@
-import type { ReactNode } from "react";
+import type { ReactNode, UIEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTranslation } from "react-i18next";
@@ -8,6 +9,42 @@ import { useSyntheticData } from "@/pages/SyntheticData/useSyntheticData";
 import * as S from "@/pages/SyntheticData/styles";
 
 const REPLACEMENT_TOKEN_PATTERN = /\[[^\]]+\]/g;
+const COLUMN_KEY_PATTERN = /^(.*?)(?:_(\d+))?$/;
+
+const GENERATED_TABLE_COLUMN_WIDTHS = {
+  INDEX: 56,
+  DEFAULT: 160,
+  PERSON: 170,
+  DATE_TIME: 132,
+  LOCATION: 220,
+  PHONE: 168,
+  EMAIL: 220,
+  MRN: 180,
+  IDENTIFIER: 196,
+  OCCUPATION: 200,
+} as const;
+
+const getBaseColumnKey = (columnKey: string): string => {
+  const suffixMatch = columnKey.match(COLUMN_KEY_PATTERN);
+
+  return suffixMatch?.[1] ?? columnKey;
+};
+
+const getGeneratedColumnWidth = (columnKey: string): number => {
+  const baseColumnKey = getBaseColumnKey(columnKey);
+  const widthByKey: Record<string, number> = {
+    PERSON: GENERATED_TABLE_COLUMN_WIDTHS.PERSON,
+    DATE_TIME: GENERATED_TABLE_COLUMN_WIDTHS.DATE_TIME,
+    LOCATION: GENERATED_TABLE_COLUMN_WIDTHS.LOCATION,
+    PHONE: GENERATED_TABLE_COLUMN_WIDTHS.PHONE,
+    EMAIL: GENERATED_TABLE_COLUMN_WIDTHS.EMAIL,
+    MRN: GENERATED_TABLE_COLUMN_WIDTHS.MRN,
+    IDENTIFIER: GENERATED_TABLE_COLUMN_WIDTHS.IDENTIFIER,
+    OCCUPATION: GENERATED_TABLE_COLUMN_WIDTHS.OCCUPATION,
+  };
+
+  return widthByKey[baseColumnKey] ?? GENERATED_TABLE_COLUMN_WIDTHS.DEFAULT;
+};
 
 const renderOutputWithHighlights = (outputText: string): ReactNode => {
   if (!outputText) {
@@ -54,8 +91,8 @@ const SyntheticDataPage = () => {
   };
 
   const getColumnLabel = (columnKey: string): string => {
-    const suffixMatch = columnKey.match(/^(.*?)(?:_(\d+))?$/);
-    const baseKey = suffixMatch?.[1] ?? columnKey;
+    const suffixMatch = columnKey.match(COLUMN_KEY_PATTERN);
+    const baseKey = getBaseColumnKey(columnKey);
     const suffix = suffixMatch?.[2];
     const translationKey =
       columnLabelKeys[baseKey] ?? "syntheticGenerator.table.columns.dynamic";
@@ -89,11 +126,85 @@ const SyntheticDataPage = () => {
     outputText.length,
   );
 
+  const generatedTableHeadRef = useRef<HTMLDivElement | null>(null);
+  const generatedTableBodyRef = useRef<HTMLDivElement | null>(null);
+  const [generatedBodyScrollbarWidth, setGeneratedBodyScrollbarWidth] =
+    useState<number>(0);
+
+  const columnWidthValues: number[] = [
+    GENERATED_TABLE_COLUMN_WIDTHS.INDEX,
+    ...(tableState?.columns.map(getGeneratedColumnWidth) ?? []),
+  ];
+  const generatedTableWidth = columnWidthValues.reduce(
+    (totalWidth, columnWidth) => totalWidth + columnWidth,
+    0,
+  );
+
+  const columnWidths: string[] = columnWidthValues.map(
+    (columnWidth) => `${columnWidth}px`,
+  );
+
+  const renderTableColGroup = (): ReactNode => (
+    <colgroup>
+      {columnWidths.map((width, index) => (
+        <col key={`synthetic-generated-col-${index}`} style={{ width }} />
+      ))}
+    </colgroup>
+  );
+
+  const handleGeneratedTableHorizontalScroll = (
+    event: UIEvent<HTMLDivElement>,
+  ): void => {
+    if (!generatedTableHeadRef.current) {
+      return;
+    }
+
+    generatedTableHeadRef.current.scrollLeft = event.currentTarget.scrollLeft;
+  };
+
+  useEffect(() => {
+    const bodyElement = generatedTableBodyRef.current;
+
+    if (!bodyElement) {
+      return;
+    }
+
+    const updateScrollbarWidth = (): void => {
+      const scrollbarWidth = bodyElement.offsetWidth - bodyElement.clientWidth;
+      setGeneratedBodyScrollbarWidth(scrollbarWidth);
+    };
+
+    updateScrollbarWidth();
+
+    const resizeObserver = new ResizeObserver(() => {
+      updateScrollbarWidth();
+    });
+
+    resizeObserver.observe(bodyElement);
+
+    const tableElement = bodyElement.querySelector("table");
+    if (tableElement) {
+      resizeObserver.observe(tableElement);
+    }
+
+    window.addEventListener("resize", updateScrollbarWidth);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateScrollbarWidth);
+    };
+  }, [tableState]);
+
   return (
     <S.SyntheticPageWrapper>
       <S.SyntheticPageContent>
         <S.HeaderGroup>
-          <S.PageTitle>{t("syntheticGenerator.page.title")}</S.PageTitle>
+          <S.PageTitle>
+            {t("syntheticGenerator.page.title")}{" "}
+            <S.PageTitleHighlight>
+              {t("syntheticGenerator.page.titleHighlight")}
+            </S.PageTitleHighlight>
+          </S.PageTitle>
           <S.PageSubtitle>
             {t("syntheticGenerator.page.subtitle")}
           </S.PageSubtitle>
@@ -134,7 +245,7 @@ const SyntheticDataPage = () => {
               {t("syntheticGenerator.sourceData.description")}
             </S.SourceDataDescription>
 
-            <S.CollapsibleCard>
+            <S.CollapsibleCard isOpen={isAccordionOpen}>
               <S.CollapsibleHeader onClick={toggleAccordion}>
                 <S.CollapsibleTitle>
                   {t("syntheticGenerator.previousData.title")}
@@ -194,6 +305,7 @@ const SyntheticDataPage = () => {
                     void handleRegenerate();
                   }}
                   disabled={isRegenerating || isGenerating || isDownloading}
+                  startIcon={<S.RegenerateActionIcon />}
                 >
                   {t("syntheticGenerator.actions.regenerate")}
                 </S.HeaderActionButton>
@@ -202,6 +314,7 @@ const SyntheticDataPage = () => {
                     void handleDownload();
                   }}
                   disabled={isDownloading || isGenerating || isRegenerating}
+                  startIcon={<S.DownloadActionIcon />}
                 >
                   {t("syntheticGenerator.actions.download")}
                 </S.HeaderActionButton>
@@ -209,37 +322,52 @@ const SyntheticDataPage = () => {
             </S.TableHeader>
 
             <S.GeneratedTableContainer>
-              <S.GeneratedTable stickyHeader>
-                <S.GeneratedTableHead>
-                  <S.GeneratedRow>
-                    <S.GeneratedHeaderCell align="left">
-                      {t("syntheticGenerator.table.columns.index")}
-                    </S.GeneratedHeaderCell>
-                    {tableState.columns.map((columnKey) => (
-                      <S.GeneratedHeaderCell key={columnKey} align="left">
-                        {getColumnLabel(columnKey)}
+              <S.GeneratedTableHeadContainer
+                ref={generatedTableHeadRef}
+                style={{ paddingRight: `${generatedBodyScrollbarWidth}px` }}
+              >
+                <S.GeneratedTable tableWidth={generatedTableWidth}>
+                  {renderTableColGroup()}
+                  <S.GeneratedTableHead>
+                    <S.GeneratedRow>
+                      <S.GeneratedHeaderCell align="center">
+                        {t("syntheticGenerator.table.columns.index")}
                       </S.GeneratedHeaderCell>
-                    ))}
-                  </S.GeneratedRow>
-                </S.GeneratedTableHead>
-                <S.GeneratedBody>
-                  {tableState.rows.map((row) => (
-                    <S.GeneratedRow key={row.variantNumber}>
-                      <S.GeneratedCell align="left">
-                        {row.variantNumber}
-                      </S.GeneratedCell>
                       {tableState.columns.map((columnKey) => (
-                        <S.GeneratedCell
-                          key={`${row.variantNumber}-${columnKey}`}
-                          align="left"
-                        >
-                          {row.entities[columnKey] ?? "-"}
-                        </S.GeneratedCell>
+                        <S.GeneratedHeaderCell key={columnKey} align="center">
+                          {getColumnLabel(columnKey)}
+                        </S.GeneratedHeaderCell>
                       ))}
                     </S.GeneratedRow>
-                  ))}
-                </S.GeneratedBody>
-              </S.GeneratedTable>
+                  </S.GeneratedTableHead>
+                </S.GeneratedTable>
+              </S.GeneratedTableHeadContainer>
+
+              <S.GeneratedTableBodyContainer
+                ref={generatedTableBodyRef}
+                onScroll={handleGeneratedTableHorizontalScroll}
+              >
+                <S.GeneratedTable tableWidth={generatedTableWidth}>
+                  {renderTableColGroup()}
+                  <S.GeneratedBody>
+                    {tableState.rows.map((row) => (
+                      <S.GeneratedRow key={row.variantNumber}>
+                        <S.GeneratedCell align="center">
+                          {row.variantNumber}
+                        </S.GeneratedCell>
+                        {tableState.columns.map((columnKey) => (
+                          <S.GeneratedCell
+                            key={`${row.variantNumber}-${columnKey}`}
+                            align="center"
+                          >
+                            {row.entities[columnKey] ?? "-"}
+                          </S.GeneratedCell>
+                        ))}
+                      </S.GeneratedRow>
+                    ))}
+                  </S.GeneratedBody>
+                </S.GeneratedTable>
+              </S.GeneratedTableBodyContainer>
             </S.GeneratedTableContainer>
           </S.TableCard>
         )}

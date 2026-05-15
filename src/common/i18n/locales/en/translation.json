@@ -409,7 +409,8 @@
   },
   "syntheticGenerator": {
     "page": {
-      "title": "Synthetic Data Generator",
+      "title": "Synthetic Data",
+      "titleHighlight": "Generator",
       "subtitle": "Generate synthetic datasets from previously de-identified documents."
     },
     "settings": {
@@ -448,7 +449,7 @@
     "table": {
       "title": "Generated Data",
       "columns": {
-        "index": "#",
+        "index": "№",
         "person": "Person",
         "dateTime": "Date & Time",
         "age": "Age",
