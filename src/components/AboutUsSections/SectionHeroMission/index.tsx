@@ -2,18 +2,24 @@ import { Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import * as S from "./styles";
 
-export const SectionOurMission = () => {
+export const SectionHeroMission = () => {
   const { t } = useTranslation("aboutUs");
   return (
     <S.SectionWrapper>
       <S.CustomContainer>
         <Box>
-          <S.SectionTitle>{t("ourMission.title")}</S.SectionTitle>
+          <S.SectionTitleFirstString>
+            {t("heroMission.titleFirstString")}{" "}
+          </S.SectionTitleFirstString>
+          <S.SectionTitleSecondString>
+            {t("heroMission.titleSecondString")}
+          </S.SectionTitleSecondString>
+
           <S.SectionContentText>
-            {t("ourMission.firstContentParagraph")}
+            {t("heroMission.firstContentParagraph")}
           </S.SectionContentText>
           <S.SectionContentText>
-            {t("ourMission.secondContentParagraph")}
+            {t("heroMission.secondContentParagraph")}
           </S.SectionContentText>
         </Box>
 
@@ -28,7 +34,7 @@ export const SectionOurMission = () => {
             </S.IconWrapper>
             <S.ItemTitle>100%</S.ItemTitle>
             <S.ItemDescription>
-              {t("ourMission.itemOneDescription")}
+              {t("heroMission.itemOneDescription")}
             </S.ItemDescription>
           </S.MissionItem>
 
@@ -42,7 +48,7 @@ export const SectionOurMission = () => {
             </S.IconWrapper>
             <S.ItemTitle>500+</S.ItemTitle>
             <S.ItemDescription>
-              {t("ourMission.itemTwoDescription")}
+              {t("heroMission.itemTwoDescription")}
             </S.ItemDescription>
           </S.MissionItem>
 
@@ -56,7 +62,7 @@ export const SectionOurMission = () => {
             </S.IconWrapper>
             <S.ItemTitle>10M+</S.ItemTitle>
             <S.ItemDescription>
-              {t("ourMission.itemThreeDescription")}
+              {t("heroMission.itemThreeDescription")}
             </S.ItemDescription>
           </S.MissionItem>
 
@@ -70,7 +76,7 @@ export const SectionOurMission = () => {
             </S.IconWrapper>
             <S.ItemTitle>99.9%</S.ItemTitle>
             <S.ItemDescription>
-              {t("ourMission.itemFourDescription")}
+              {t("heroMission.itemFourDescription")}
             </S.ItemDescription>
           </S.MissionItem>
         </S.ItemsList>
