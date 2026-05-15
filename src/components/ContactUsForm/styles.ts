@@ -4,14 +4,13 @@ import { MuiTelInput } from "mui-tel-input";
 
 export const SectionForm = styled(Box)(({ theme }) => ({
   width: "100%",
-  paddingTop: theme.spacing(27),
-  paddingBottom: theme.spacing(29),
+  padding: theme.spacing(30, 0, 20),
   backgroundColor: theme.palette.backgroundColor,
+
   "&::before": {
     content: '""',
     position: "absolute",
     zIndex: 0,
-
     width: "600px",
     height: "300px",
     left: "10%",
@@ -21,6 +20,14 @@ export const SectionForm = styled(Box)(({ theme }) => ({
     filter: "blur(140px)",
     pointerEvents: "none",
   },
+  [theme.breakpoints.down("lg")]: {
+    padding: theme.spacing(8, 0, 0),
+    "&::before": {
+      left: "0%",
+      top: "0%",
+      width: "100%",
+    },
+  },
 }));
 
 export const CustomContainer = styled(Box)(({ theme }) => ({
@@ -29,7 +36,12 @@ export const CustomContainer = styled(Box)(({ theme }) => ({
   margin: "0 auto",
   padding: theme.spacing(0, 20),
   [theme.breakpoints.down("lg")]: {
+    padding: theme.spacing(0, 10),
+    maxWidth: "768px",
+  },
+  [theme.breakpoints.down("md")]: {
     padding: theme.spacing(0, 4),
+    maxWidth: "375px",
   },
 }));
 
@@ -40,7 +52,7 @@ export const ContactTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.primary,
 
   [theme.breakpoints.down("md")]: {
-    fontSize: theme.typography.fontSize38,
+    fontSize: theme.typography.fontSize48,
   },
 }));
 
@@ -49,13 +61,14 @@ export const ContactDescription = styled(Typography)(({ theme }) => ({
   fontWeight: theme.typography.fontWeight400,
   color: theme.palette.textColors[200],
   fontFamily: theme.typography.fontFamily,
-
   maxWidth: "752px",
   marginTop: theme.spacing(4),
-  [theme.breakpoints.down("sm")]: {
-    fontSize: theme.typography.fontSize14,
-    textAlign: "center",
+  [theme.breakpoints.down("lg")]: {
+    maxWidth: "660px",
+    fontSize: theme.typography.fontSize16,
   },
+
+  [theme.breakpoints.down("md")]: { maxWidth: "320px" },
 }));
 
 export const FormWrapper = styled(Box)(({ theme }) => ({
@@ -64,9 +77,14 @@ export const FormWrapper = styled(Box)(({ theme }) => ({
   gap: theme.spacing(6),
   width: "100%",
   alignItems: "flex-start",
-  marginTop: theme.spacing(8),
-  [theme.breakpoints.down("md")]: {
+  marginTop: theme.spacing(13),
+  padding: theme.spacing(0, 24),
+  [theme.breakpoints.down("lg")]: {
+    padding: theme.spacing(0),
     flexDirection: "column",
+  },
+  [theme.breakpoints.down("md")]: {
+    marginTop: theme.spacing(6),
   },
 }));
 
@@ -79,6 +97,11 @@ export const ContactSidebar = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.neutralColors[900],
   borderRadius: "8px",
   border: `1px solid ${theme.palette.strokeColors[500]}`,
+  [theme.breakpoints.down("md")]: {
+    padding: theme.spacing(4),
+    width: "100%",
+    height: "152px",
+  },
 }));
 
 export const IconWrapper = styled(Box)(({ theme }) => ({
@@ -128,7 +151,15 @@ export const ContactFormBox = styled(Box)(({ theme }) => ({
   textAlign: "center",
   backgroundColor: theme.palette.neutralColors[900],
   borderRadius: "8px",
+  boxShadow: "0 18px 26px 0 rgba(0, 0, 0, 0.5)",
   flexGrow: 1,
+  [theme.breakpoints.down("lg")]: {
+    paddingBottom: theme.spacing(20),
+    width: "100%",
+  },
+  [theme.breakpoints.down("md")]: {
+    padding: theme.spacing(6),
+  },
 }));
 
 export const ContactFormTitle = styled(Typography)(({ theme }) => ({
@@ -138,12 +169,25 @@ export const ContactFormTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.textColors[50],
   marginBottom: theme.spacing(8),
   textAlign: "left",
+  [theme.breakpoints.down("lg")]: {
+    marginBottom: theme.spacing(6),
+  },
+  [theme.breakpoints.down("md")]: {
+    fontSize: theme.typography.fontSize24,
+  },
 }));
 
 export const ContactForm = styled("form")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
+
   padding: theme.spacing(0, 16),
+  [theme.breakpoints.down("lg")]: {
+    padding: theme.spacing(0, 8),
+  },
+  [theme.breakpoints.down("md")]: {
+    padding: theme.spacing(0),
+  },
 }));
 
 export const FormGrid = styled(Box)(({ theme }) => ({
@@ -155,6 +199,12 @@ export const FormGrid = styled(Box)(({ theme }) => ({
 
   "& .full-width": {
     gridColumn: "span 2",
+  },
+  [theme.breakpoints.down("md")]: {
+    gridTemplateColumns: "1fr",
+    "& .full-width": {
+      gridColumn: "span 1",
+    },
   },
 }));
 
@@ -384,17 +434,15 @@ export const SubmitButton = styled(Button)(({ theme }) => ({
   width: "368px",
   height: "60px",
   padding: theme.spacing(5, 10),
-  borderRadius: "8px",
-  backgroundImage: `linear-gradient(161deg, ${theme.palette.primaryColors[200]} 0%, ${theme.palette.primaryColors[700]} 100%)`,
-
+  borderRadius: theme.spacing(2),
+  background: theme.palette.primaryColors[200],
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
-  fontSize: theme.typography.fontSize14,
-  color: theme.palette.textColors[50],
+  fontSize: theme.typography.fontSize16,
+  color: theme.palette.neutralColors[700],
   marginTop: theme.spacing(12),
-
   textAlign: "center",
-
+  border: `1px solid ${theme.palette.strokeColors[150]}`,
   textTransform: "none",
 
   "&:hover": {
@@ -407,8 +455,13 @@ export const SubmitButton = styled(Button)(({ theme }) => ({
     color: theme.palette.textColors[200],
   },
 
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("lg")]: {
+    marginTop: theme.spacing(17),
+  },
+
+  [theme.breakpoints.down("md")]: {
     width: "100%",
+    marginTop: theme.spacing(12),
   },
 }));
 
