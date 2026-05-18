@@ -38,32 +38,22 @@ export const useVerify = () => {
           console.error("Failed to parse token payload", e);
         }
 
-        const pendingPlan = localStorage.getItem("pendingPlan");
-        const pendingPriceId = localStorage.getItem("pendingPriceId");
+        const pendingPlan = localStorage.getItem(STORAGE_KEYS.PENDING_PLAN);
+        const pendingPriceId = localStorage.getItem(
+          STORAGE_KEYS.PENDING_PRICE_ID,
+        );
+
+        localStorage.removeItem(STORAGE_KEYS.PENDING_PLAN);
+        localStorage.removeItem(STORAGE_KEYS.PENDING_PRICE_ID);
 
         if (pendingPlan === "professional" && pendingPriceId) {
           try {
-            const stripeRes = await fetch(
-              `${import.meta.env.VITE_API_URL}/billing/create-checkout-session`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${accessToken}`,
-                },
-                body: JSON.stringify({ priceId: pendingPriceId }),
-              },
+            const stripeRes = await apiClient.post<{ url: string }>(
+              API_ENDPOINTS.BILLING_CREATE_CHECKOUT_SESSION,
+              { priceId: pendingPriceId },
             );
-
-            if (!stripeRes.ok) {
-              throw new Error(`Stripe API error: ${stripeRes.status}`);
-            }
-
-            const stripeData = await stripeRes.json();
-
-            if (stripeData.url) {
-              localStorage.removeItem("pendingPlan");
-              window.location.href = stripeData.url;
+            if (stripeRes.data.url) {
+              window.location.href = stripeRes.data.url;
               return;
             }
           } catch (e) {
@@ -71,8 +61,6 @@ export const useVerify = () => {
           }
         }
 
-        localStorage.removeItem("pendingPlan");
-        localStorage.removeItem("pendingPriceId");
         navigate(APP_ROUTES.DASHBOARD);
       } catch (error) {
         console.error("[verify] Error verifying token", error);

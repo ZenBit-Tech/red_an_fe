@@ -373,12 +373,19 @@
           "copy": "Copy",
           "copied": "Copy",
           "download": "Download"
+        },
+        "phiLeakWarning": {
+          "title": "Preview contains unmasked PHI",
+          "description": "The following entity types are not anonymized in the current selection:"
         }
       },
       "cta": {
         "title": "Findings with decision factors",
         "subtitle": "Use your de-identified data to create realistic synthetic data sets for testing and development",
-        "button": "Generate Synthetic Data"
+        "button": "Generate Synthetic Data",
+        "persisting": "Saving selected entities...",
+        "persistingButton": "Saving...",
+        "persistFailed": "Failed to save entity selection. Please try again."
       },
       "table": {
         "title": "Findings with decision factors",
@@ -397,6 +404,61 @@
           "selected": "Selected",
           "deselected": "Deselected"
         }
+      }
+    }
+  },
+  "syntheticGenerator": {
+    "page": {
+      "title": "Synthetic Data",
+      "titleHighlight": "Generator",
+      "subtitle": "Generate synthetic datasets from previously de-identified documents."
+    },
+    "settings": {
+      "title": "Generation Settings",
+      "description": "Configure the synthetic data parameters",
+      "count": "Number of records",
+      "outputFormat": "Output format",
+      "formats": {
+        "txt": "TXT",
+        "pdf": "PDF"
+      }
+    },
+    "sourceData": {
+      "title": "Used De-Identifications Data",
+      "description": "Generate Synthetic data based on patterns from previously de-identified text"
+    },
+    "actions": {
+      "generate": "Generate Synthetic Data",
+      "generating": "Generating...",
+      "regenerate": "Regenerate",
+      "download": "Download"
+    },
+    "previousData": {
+      "title": "Previously De-Identified Data",
+      "characterCount": "{{count}} characters",
+      "emptyState": "No de-identified document available yet. Complete the de-identification flow first."
+    },
+    "errors": {
+      "noDeidentifiedData": "Missing source data. Please de-identify a document first.",
+      "invalidCount": "Please set a valid number of records (1-20).",
+      "syntheticGenerationFailed": "Synthetic generation failed. Please try again."
+    },
+    "success": {
+      "downloadStarted": "Synthetic ZIP generation completed. Download started."
+    },
+    "table": {
+      "title": "Generated Data",
+      "columns": {
+        "index": "№",
+        "person": "Person",
+        "dateTime": "Date & Time",
+        "age": "Age",
+        "phone": "Phone",
+        "email": "Email",
+        "mrn": "MRN",
+        "location": "Location",
+        "identifier": "Identifier",
+        "dynamic": "{{type}}"
       }
     }
   }

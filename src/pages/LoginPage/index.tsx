@@ -65,7 +65,7 @@ const LoginPage = () => {
                 <S.StyledDivider />
                 <S.LinkButton onClick={handleBack}>
                   <ArrowBack />
-                  {t("login.back")}
+                  {t("login.home")}
                 </S.LinkButton>
               </S.BoxHandleBack>
             </S.CardInner>
@@ -95,7 +95,7 @@ const LoginPage = () => {
                 <S.StyledDivider />
                 <S.LinkButton onClick={handleBackToSignIn}>
                   <ArrowBack />
-                  {t("login.back")}
+                  {t("login.backToSignIn")}
                 </S.LinkButton>
               </S.BackToSignInWrapper>
             </S.CheckInboxCardInner>

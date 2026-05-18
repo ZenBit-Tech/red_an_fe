@@ -67,6 +67,36 @@ export const apiClient = {
     }
   },
 
+  async getBlob(endpoint: string): Promise<AxiosResponse<Blob>> {
+    try {
+      return await instance.get(endpoint, { responseType: "blob" });
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  },
+
+  async patch<T, D = Record<string, unknown>>(
+    endpoint: string,
+    data: D,
+  ): Promise<AxiosResponse<T>> {
+    try {
+      return await instance.patch<T>(endpoint, data);
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  },
+
+  async postBlob<D = Record<string, unknown>>(
+    endpoint: string,
+    data: D,
+  ): Promise<AxiosResponse<Blob>> {
+    try {
+      return await instance.post(endpoint, data, { responseType: "blob" });
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  },
+
   handleError(error: unknown): Error {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError<{ message?: string }>;
