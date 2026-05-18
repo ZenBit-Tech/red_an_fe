@@ -95,7 +95,7 @@ const LoginPage = () => {
                 <S.StyledDivider />
                 <S.LinkButton onClick={handleBackToSignIn}>
                   <ArrowBack />
-                  {t("login.back")}
+                  {t("login.home")}
                 </S.LinkButton>
               </S.BackToSignInWrapper>
             </S.CheckInboxCardInner>

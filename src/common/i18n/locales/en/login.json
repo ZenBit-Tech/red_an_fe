@@ -6,7 +6,7 @@
     "emailPlaceholder": "you@company.com",
     "sending": "Sending...",
     "sendMagicLink": "Send Magic Link",
-    "back": "Home",
+    "home": "Home",
     "checkInboxTitle": "Sign in to Clinical Data Studio",
     "checkInboxDescription": "We sent a magic link to",
     "didntReceive": "Didn't receive it? Check spam or",
