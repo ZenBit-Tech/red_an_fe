@@ -13,6 +13,7 @@ const ROUTE_TO_NAV_KEY: Record<string, NavKey> = {
   [APP_ROUTES.DASHBOARD]: "dashboard",
   [APP_ROUTES.DEIDENTIFY]: "deidentify",
   [APP_ROUTES.SYNTHETIC_DATA]: "deidentify",
+  [APP_ROUTES.SUBSCRIPTION]: "subscription",
 };
 
 const DEFAULT_NAV_KEY: NavKey = "dashboard";
@@ -39,11 +40,11 @@ export const useDashboardLayout = () => {
   const [userEmail] = useState<string>(() => resolveUserEmail());
 
   useEffect(() => {
-    const token = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
+    /* const token = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
 
     if (!token) {
       navigate(APP_ROUTES.SESSION_EXPIRED);
-    }
+    } */
   }, [navigate]);
 
   const activeNav = useMemo<NavKey>(

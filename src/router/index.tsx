@@ -11,6 +11,7 @@ import DashboardPage from "@/pages/Dashboard";
 import VerifyPage from "@/pages/VerifyPage/VerifyPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { SessionExpiredPage } from "@/pages/SessionExpiredPage";
+import { SubscriptionManagementPage } from "@/pages/SubscriptionManagementPage";
 import { APP_ROUTES } from "@/constants/index";
 import SubscriptionPlan from "@/components/SubscriptionPlan";
 
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
       {
         path: APP_ROUTES.SYNTHETIC_DATA,
         element: <SyntheticDataPage />,
+      },
+      {
+        path: APP_ROUTES.SUBSCRIPTION,
+        element: <SubscriptionManagementPage />,
       },
     ],
   },

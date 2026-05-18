@@ -109,6 +109,7 @@ export const APP_ROUTES = {
   SIGN_IN: "/signin",
   REGISTER: "/register",
   SESSION_EXPIRED: "/session-expired",
+  SUBSCRIPTION: "/dashboard/subscription",
   SUBSCRIPTION_PLAN: "/subscription-plan",
 } as const;
 
