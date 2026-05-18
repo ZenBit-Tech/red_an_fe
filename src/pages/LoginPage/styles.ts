@@ -48,6 +48,9 @@ export const CardContainer = styled(Box)(({ theme }) => ({
     height: theme.spacing(0.375),
     background: `linear-gradient(90deg, transparent 0%, ${theme.palette.primaryColors[200]} 50%, transparent 100%)`,
   },
+  [theme.breakpoints.down("md")]: {
+    width: theme.spacing(85.75),
+  },
 }));
 
 export const CardInner = styled(Box)(({ theme }) => ({
@@ -59,6 +62,10 @@ export const CardInner = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   height: "100%",
   boxSizing: "border-box",
+  [theme.breakpoints.down("md")]: {
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
+  },
 }));
 
 export const Title = styled("h1")(({ theme }) => ({
@@ -69,6 +76,16 @@ export const Title = styled("h1")(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontSize: theme.typography.fontSize24,
   lineHeight: 1.25,
+  [theme.breakpoints.down("md")]: {
+    textAlign: "center",
+  },
+}));
+
+export const TitleBreak = styled("span")(({ theme }) => ({
+  display: "none",
+  [theme.breakpoints.down("md")]: {
+    display: "block",
+  },
 }));
 
 export const CheckInboxTitle = styled("h3")(({ theme }) => ({
@@ -89,6 +106,13 @@ export const Subtitle = styled("p")(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontSize: theme.typography.fontSize14,
   lineHeight: 1.6,
+  [theme.breakpoints.down("lg")]: {
+    marginBottom: "19px",
+  },
+  [theme.breakpoints.down("md")]: {
+    textAlign: "center",
+    marginBottom: "16px",
+  },
 }));
 
 export const LabelStyles = styled("label")(({ theme }) => ({
@@ -143,6 +167,9 @@ export const SubmitButton = styled(Button)(({ theme }) => ({
   paddingBottom: theme.spacing(3.5),
   marginTop: theme.spacing(6),
   marginBottom: theme.spacing(8),
+  [theme.breakpoints.down("md")]: {
+    marginTop: theme.spacing(8.5),
+  },
   borderRadius: theme.spacing(2.5),
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
@@ -197,12 +224,18 @@ export const RequiredAsterisk = styled("span")(({ theme }) => ({
   marginLeft: theme.spacing(0.5),
 }));
 
-export const CheckInboxCardInner = styled(CardInner)({
+export const CheckInboxCardInner = styled(CardInner)(({ theme }) => ({
   textAlign: "center",
   display: "flex",
   flexDirection: "column",
   height: "100%",
-});
+  paddingTop: theme.spacing(23.75),
+  [theme.breakpoints.down("sm")]: {
+    paddingTop: theme.spacing(19.25),
+    paddingLeft: theme.spacing(5),
+    paddingRight: theme.spacing(5),
+  },
+}));
 
 export const CheckInboxContent = styled(Box)({
   flexGrow: 1,

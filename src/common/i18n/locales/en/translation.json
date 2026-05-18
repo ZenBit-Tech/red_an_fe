@@ -195,6 +195,8 @@
     "titleFirst": "Session",
     "titleSecond": "Expired",
     "subtitle": "Your session has expired. Please authorise again",
+    "subtitleLine1": "Your session has expired.",
+    "subtitleLine2": "Please authorise again",
     "cta": "Get Started"
   },
   "verify": { "verifying": "Verifying magic link..." },

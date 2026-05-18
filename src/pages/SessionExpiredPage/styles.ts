@@ -2,6 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 const SESSION_EXPIRED_SVG_SIZE = 300;
+const SESSION_EXPIRED_SVG_SIZE_MOBILE = 200;
 
 const PAGE_COLORS = {
   PAGE_TITLE: "linear-gradient(161deg, #b0c6ff 0%, #0d47a1 100%)",
@@ -32,14 +33,18 @@ export const BgBlur = styled("img")({
   zIndex: 0,
 });
 
-export const SvgImage = styled("img")({
+export const SvgImage = styled("img")(({ theme }) => ({
   position: "relative",
   width: SESSION_EXPIRED_SVG_SIZE,
   height: SESSION_EXPIRED_SVG_SIZE,
   zIndex: 1,
   flexShrink: 0,
   pointerEvents: "none",
-});
+  [theme.breakpoints.down("md")]: {
+    width: SESSION_EXPIRED_SVG_SIZE_MOBILE,
+    height: SESSION_EXPIRED_SVG_SIZE_MOBILE,
+  },
+}));
 
 export const ContentBox = styled(Box)(({ theme }) => ({
   position: "relative",
@@ -61,6 +66,12 @@ export const PageTitle = styled(Typography)(({ theme }) => ({
   WebkitTextFillColor: "transparent",
   color: "transparent",
   whiteSpace: "nowrap",
+  [theme.breakpoints.down("lg")]: {
+    fontSize: theme.typography.fontSize48,
+  },
+  [theme.breakpoints.down("md")]: {
+    fontSize: theme.typography.fontSize32,
+  },
 }));
 
 export const PageSubtitle = styled(Typography)(({ theme }) => ({
@@ -68,6 +79,11 @@ export const PageSubtitle = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize24,
   color: theme.palette.secondaryColors[50],
   marginBottom: theme.spacing(9),
+  textAlign: "center",
+  [theme.breakpoints.down("md")]: {
+    fontSize: theme.typography.fontSize20,
+    marginBottom: theme.spacing(0),
+  },
 }));
 
 export const GetStartedButton = styled(Button)(({ theme }) => ({
