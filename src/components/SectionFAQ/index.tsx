@@ -1,4 +1,3 @@
-import { AccordionDetails } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTranslation } from "react-i18next";
 import * as S from "./styles";
@@ -21,9 +20,9 @@ export const SectionFAQ = () => {
             <S.StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
               <S.QuestionText>{item.question}</S.QuestionText>
             </S.StyledAccordionSummary>
-            <AccordionDetails>
+            <S.StyledAccordionDetails>
               <S.AnswerText>{item.answer}</S.AnswerText>
-            </AccordionDetails>
+            </S.StyledAccordionDetails>
           </S.StyledAccordion>
         ))}
       </S.StyledContainer>

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useCreateCheckoutSessionMutation } from "@/common/api/billingApi";
-import { STORAGE_KEYS } from "@/constants/index";
+import { STORAGE_KEYS, APP_ROUTES } from "@/constants/index";
 import type { SubscriptionPlan } from "@/constants/subscriptionPlans";
 
 type UseSubscriptionReturn = {
@@ -21,11 +21,11 @@ export const useSubscription = (): UseSubscriptionReturn => {
 
       if (plan.id === "free") {
         if (isAuth) {
-          window.location.href = "/dashboard";
+          window.location.href = APP_ROUTES.DASHBOARD;
           return;
         }
-        localStorage.setItem("pendingPlan", "free");
-        window.location.href = "/signin";
+        localStorage.setItem(STORAGE_KEYS.PENDING_PLAN, plan.id);
+        window.location.href = APP_ROUTES.SIGN_IN;
         return;
       }
 
@@ -49,8 +49,9 @@ export const useSubscription = (): UseSubscriptionReturn => {
           return;
         }
 
-        localStorage.setItem("pendingPlan", "professional");
-        window.location.href = "/signin";
+        localStorage.setItem(STORAGE_KEYS.PENDING_PLAN, plan.id);
+        localStorage.setItem(STORAGE_KEYS.PENDING_PRICE_ID, plan.stripePriceId);
+        window.location.href = APP_ROUTES.SIGN_IN;
         return;
       }
     },
