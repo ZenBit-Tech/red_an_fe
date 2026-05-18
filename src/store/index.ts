@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "./rootReducer";
 import { billingApi } from "@/common/api/billingApi";
+import { syntheticApi } from "@/common/api/syntheticApi";
 import { dashboardApiSlice } from "./dashboardApiSlice";
 
 export const store = configureStore({
@@ -8,6 +9,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       billingApi.middleware,
+      syntheticApi.middleware,
       dashboardApiSlice.middleware,
     ),
 });

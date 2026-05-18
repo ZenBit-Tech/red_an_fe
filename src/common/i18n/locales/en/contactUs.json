@@ -40,19 +40,19 @@
     "items": [
       {
         "question": "How does the platform handle the different requirements of GDPR versus HIPAA?",
-        "answer": "The platform features dedicated Compliance Frameworks that apply risk-based anonymization for GDPR/FADP or prescriptive de-identification for HIPAA. Users can toggle between GDPR’s pseudonymization with strict key controls or HIPAA’s Safe Harbor route, which automatically redacts all 18 specified identifiers."
+        "answer": "The platform follows both GDPR and HIPAA rules, applying the right data protection standards depending on the location."
       },
       {
         "question": "What transformation methods are applied to sensitive geographic and date entities?",
-        "answer": "For GDPR, we use generalization techniques like converting exact coordinates to country centroids or binning dates into quarterly windows to reduce re-identification risk. Under HIPAA Safe Harbor, the platform strictly truncates geographic subdivisions to the state level and strips dates down to the year to ensure full compliance."
+        "answer": "Data is transformed using de-identification techniques to prevent identification."
       },
       {
         "question": "Will the synthetic data remain useful for clinical research?",
-        "answer": "Yes, our engine preserves the complex correlations and clinical signatures of the source data to ensure high utility for AI training and statistical analysis."
+        "answer": "Yes, the synthetic data preserves key patterns, making it useful for clinical research"
       },
       {
         "question": "How is the trade-off between data privacy and research utility managed?",
-        "answer": "We offer a choice between irreversible anonymization for external sharing and tokenization (pseudonymization) for internal cases where re-linking is necessary. By using Expert Determination and differential privacy, we provide documented residual risk assessments while preserving the complex clinical signatures needed for high-fidelity analysis."
+        "answer": "The platform balances privacy and utility by optimizing data transformations to preserve key insights while protecting sensitive information."
       }
     ]
   },

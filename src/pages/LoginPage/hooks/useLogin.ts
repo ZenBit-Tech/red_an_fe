@@ -68,7 +68,7 @@ export const useLogin = () => {
 
   const handleResend = () => onSubmit({ email: submittedEmail });
   const handleBackToSignIn = () => setStep(LOGIN_STEPS.FORM);
-  const handleBack = () => navigate(-1);
+  const handleBack = () => navigate(APP_ROUTES.HOME);
   const handleCloseToast = () => setToastErrorKey(null);
 
   return {

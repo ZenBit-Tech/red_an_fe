@@ -542,9 +542,13 @@ export const ResultCtaButton = styled(Button)(({ theme }) => ({
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize20,
   textTransform: "none",
-  "&:hover": {
+  "&:hover:not(:disabled)": {
     backgroundImage: `linear-gradient(167deg, ${theme.palette.primaryColors[700]} 0%, ${theme.palette.primaryColors[900]} 100%)`,
     filter: "brightness(1.08)",
+  },
+  "&:disabled": {
+    opacity: 0.5,
+    cursor: "not-allowed",
   },
 }));
 

@@ -141,7 +141,7 @@ const buttonLinkStyles = (theme: Theme) => ({
 
 export const theme = createTheme({
   breakpoints: {
-    values: { xs: 0, sm: 375, md: 787, lg: 1440, xl: 1920 },
+    values: { xs: 0, sm: 375, md: 768, lg: 1440, xl: 1920 },
   },
   palette: {
     primary: { main: primaryColors[500] },

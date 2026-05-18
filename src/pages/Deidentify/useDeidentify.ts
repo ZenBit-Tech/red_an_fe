@@ -5,6 +5,10 @@ import { useAppDispatch, useAppSelector } from "@/common/hooks/hooks";
 import { resetActiveStep, setActiveStep } from "@/store/deidentifyStepSlice";
 import { resetClinicalInput } from "@/store/clinicalInputSlice";
 import {
+  clearLastDeidentifiedResult,
+  setLastDeidentifiedResult,
+} from "@/store/lastDeidentifiedResultSlice";
+import {
   mapFindingToEntity,
   type Entity,
 } from "@/components/AnalysisResults/constants";
@@ -123,6 +127,19 @@ export const useDeidentify = (): UseDeidentifyReturn => {
       setEntities(mappedEntities);
       setAnalyzedInputText(clinicalText);
       setAnalysisRunId((prevRunId) => prevRunId + 1);
+      dispatch(
+        setLastDeidentifiedResult({
+          originalInputText: clinicalText,
+          anonymizedOutputText: "",
+          jobId: response.jobId,
+          activeEntityIds: mappedEntities.map((entity) => entity.id),
+          activeEntityTypes: Array.from(
+            new Set(mappedEntities.map((entity) => entity.type)),
+          ),
+          framework: selectedFramework,
+          updatedAt: new Date().toISOString(),
+        }),
+      );
       dispatch(setActiveStep(DEIDENTIFY_STEP.RESULT));
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -154,6 +171,7 @@ export const useDeidentify = (): UseDeidentifyReturn => {
   const handleRestart = (): void => {
     dispatch(resetActiveStep());
     dispatch(resetClinicalInput());
+    dispatch(clearLastDeidentifiedResult());
     setAnalysisRunId(0);
     setAnalyzedInputText("");
     setJobId("");
