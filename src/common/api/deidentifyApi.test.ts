@@ -21,6 +21,13 @@ vi.mock("./apiClient", () => ({
 import { analyzeText, previewAnonymization } from "./deidentifyApi";
 
 describe("deidentifyApi", () => {
+  const defaultPostValidation: PreviewResponse["postValidation"] = {
+    valid: true,
+    mode: "strict",
+    leaks: [],
+    summary: [],
+  };
+
   beforeEach(() => {
     postMock.mockReset();
   });
@@ -120,6 +127,7 @@ describe("deidentifyApi", () => {
 
     const responseData: PreviewResponse = {
       anonymizedText: "Patient [PERSON]",
+      postValidation: defaultPostValidation,
     };
 
     postMock.mockResolvedValue({ data: responseData });
@@ -144,6 +152,7 @@ describe("deidentifyApi", () => {
     postMock.mockResolvedValue({
       data: {
         anonymizedText: "Patient [PERSON]",
+        postValidation: defaultPostValidation,
       } satisfies PreviewResponse,
     });
 
@@ -166,6 +175,7 @@ describe("deidentifyApi", () => {
     postMock.mockResolvedValue({
       data: {
         anonymizedText: "Patient [PERSON]",
+        postValidation: defaultPostValidation,
       } satisfies PreviewResponse,
     });
 

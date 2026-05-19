@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "@/components/Layout";
 import DashboardLayout from "@/components/DashboardLayout";
 import DeidentifyPage from "@/pages/Deidentify";
+import SyntheticDataPage from "@/pages/SyntheticData";
 import { ContactUsPage } from "@/pages/ContactUsPage";
 import HomePage from "@/pages/HomePage";
 import { AboutUsPage } from "@/pages/AboutUSPage";
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
       {
         path: APP_ROUTES.DEIDENTIFY,
         element: <DeidentifyPage />,
+      },
+      {
+        path: APP_ROUTES.SYNTHETIC_DATA,
+        element: <SyntheticDataPage />,
       },
     ],
   },

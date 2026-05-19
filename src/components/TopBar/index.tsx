@@ -1,9 +1,5 @@
 import { useTranslation } from "react-i18next";
-import {
-  AccountCircleOutlined,
-  NotificationsOutlined,
-  SettingsOutlined,
-} from "@mui/icons-material";
+import { AccountCircleOutlined } from "@mui/icons-material";
 import type { TopBarProps } from "./constants";
 import * as S from "@/components/TopBar/styles";
 
@@ -19,12 +15,6 @@ export const TopBar = ({ userEmail }: TopBarProps) => {
         </S.TopBarCenterSubtitle>
       </S.TopBarCenter>
       <S.TopBarActions>
-        <S.StyledIconButton>
-          <NotificationsOutlined />
-        </S.StyledIconButton>
-        <S.StyledIconButton>
-          <SettingsOutlined />
-        </S.StyledIconButton>
         <S.AvatarEmail>{userEmail}</S.AvatarEmail>
         <S.AvatarButton>
           <AccountCircleOutlined />
