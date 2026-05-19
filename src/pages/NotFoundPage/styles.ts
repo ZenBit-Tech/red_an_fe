@@ -11,32 +11,25 @@ export const ASTRONAUT_MOBILE_IMAGE_URL = "/notFound/astronaut_mob.webp";
 const NOT_FOUND_DECORATIVE_FONT_SIZE_PX = 300;
 const NOT_FOUND_DECORATIVE_FONT_SIZE_TABLET_PX = 224;
 const NOT_FOUND_DECORATIVE_FONT_SIZE_MOBILE_PX = 140;
-const NOT_FOUND_PAGE_MIN_HEIGHT_DESKTOP_PX = 844;
-const NOT_FOUND_PAGE_MIN_HEIGHT_TABLET_PX = 952;
-const NOT_FOUND_PAGE_MIN_HEIGHT_MOBILE_PX = 902;
-const NOT_FOUND_ASTRONAUT_WIDTH_DESKTOP_PX = 856;
-const NOT_FOUND_ASTRONAUT_WIDTH_TABLET_PX = 688;
-const NOT_FOUND_ASTRONAUT_WIDTH_MOBILE_PX = 343;
-const NOT_FOUND_CONTENT_WIDTH_DESKTOP_PX = 440;
-const NOT_FOUND_CONTENT_WIDTH_TABLET_PX = 444;
-const NOT_FOUND_CONTENT_WIDTH_MOBILE_PX = 343;
-const NOT_FOUND_BUTTON_MIN_WIDTH_PX = 216;
-const NOT_FOUND_TEXT_OFFSET_FROM_NUMBERS_PX = 42;
-const TABLET_MEDIA_QUERY =
-  "@media (min-width: 768px) and (max-width: 1023.95px)";
+
 const NOT_FOUND_TABLET_NUMBERS_TOP_PX = 175;
-const NOT_FOUND_TABLET_ASTRONAUT_TOP_PX = 0;
+const NOT_FOUND_MOBILE_NUMBERS_TOP_PX = 318;
+
+const NOT_FOUND_TEXT_OFFSET_FROM_NUMBERS_PX = 42;
+
 const NOT_FOUND_TABLET_CONTENT_TOP_PX =
   NOT_FOUND_TABLET_NUMBERS_TOP_PX +
   NOT_FOUND_DECORATIVE_FONT_SIZE_TABLET_PX +
   NOT_FOUND_TEXT_OFFSET_FROM_NUMBERS_PX;
-const NOT_FOUND_MOBILE_NUMBERS_TOP_PX = 318;
-const NOT_FOUND_MOBILE_ASTRONAUT_TOP_PX = 0;
+
 const NOT_FOUND_MOBILE_CONTENT_TOP_PX =
   NOT_FOUND_MOBILE_NUMBERS_TOP_PX +
   NOT_FOUND_DECORATIVE_FONT_SIZE_MOBILE_PX +
   NOT_FOUND_TEXT_OFFSET_FROM_NUMBERS_PX +
   16;
+
+const TABLET_MEDIA_QUERY =
+  "@media (min-width: 768px) and (max-width: 1023.95px)";
 
 export const BackgroundImage = styled(LazyImage)({
   position: "absolute",
@@ -56,12 +49,12 @@ export const PageWrapper = styled(Box)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   overflow: "hidden",
-  minHeight: NOT_FOUND_PAGE_MIN_HEIGHT_DESKTOP_PX,
+  minHeight: 844,
   [TABLET_MEDIA_QUERY]: {
-    minHeight: NOT_FOUND_PAGE_MIN_HEIGHT_TABLET_PX,
+    minHeight: 952,
   },
   [theme.breakpoints.down("md")]: {
-    minHeight: NOT_FOUND_PAGE_MIN_HEIGHT_MOBILE_PX,
+    minHeight: 902,
   },
 }));
 
@@ -126,7 +119,7 @@ export const AstronautImage = styled(LazyImage)(({ theme }) => ({
   left: "50%",
   top: "calc(50% - 98px)",
   transform: "translate(-50%, -50%)",
-  width: NOT_FOUND_ASTRONAUT_WIDTH_DESKTOP_PX,
+  width: 856,
   maxWidth: "100%",
   height: "auto",
   pointerEvents: "none",
@@ -142,9 +135,9 @@ export const AstronautImage = styled(LazyImage)(({ theme }) => ({
 export const AstronautImageTablet = styled(LazyImage)({
   position: "absolute",
   left: "50%",
-  top: NOT_FOUND_TABLET_ASTRONAUT_TOP_PX,
+  top: 0,
   transform: "translateX(-50%)",
-  width: NOT_FOUND_ASTRONAUT_WIDTH_TABLET_PX,
+  width: 688,
   maxWidth: "100%",
   height: "auto",
   pointerEvents: "none",
@@ -160,7 +153,7 @@ export const AstronautImageMobile = styled(LazyImage)(({ theme }) => ({
   left: "50%",
   top: 0,
   transform: "translateX(-50%)",
-  width: NOT_FOUND_ASTRONAUT_WIDTH_MOBILE_PX,
+  width: 343,
   maxWidth: "100%",
   height: "auto",
   pointerEvents: "none",
@@ -168,7 +161,7 @@ export const AstronautImageMobile = styled(LazyImage)(({ theme }) => ({
   display: "none",
   [theme.breakpoints.down("md")]: {
     display: "block",
-    top: NOT_FOUND_MOBILE_ASTRONAUT_TOP_PX,
+    top: 0,
   },
 }));
 
@@ -183,19 +176,19 @@ export const ContentBox = styled(Box)(({ theme }) => ({
   gap: theme.spacing(6),
   zIndex: 3,
   width: "max-content",
-  maxWidth: NOT_FOUND_CONTENT_WIDTH_DESKTOP_PX,
+  maxWidth: 440,
   textAlign: "center",
   overflow: "visible",
   [TABLET_MEDIA_QUERY]: {
     top: NOT_FOUND_TABLET_CONTENT_TOP_PX,
     transform: "translate(-50%, 0)",
     gap: theme.spacing(6),
-    maxWidth: NOT_FOUND_CONTENT_WIDTH_TABLET_PX,
+    maxWidth: 444,
   },
   [theme.breakpoints.down("md")]: {
     top: NOT_FOUND_MOBILE_CONTENT_TOP_PX,
     transform: "translate(-50%, 0)",
-    maxWidth: NOT_FOUND_CONTENT_WIDTH_MOBILE_PX,
+    maxWidth: 343,
   },
 }));
 
@@ -236,7 +229,7 @@ export const PageSubtitle = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     fontSize: theme.typography.fontSize20,
     lineHeight: `${theme.spacing(8)}`,
-    maxWidth: NOT_FOUND_CONTENT_WIDTH_MOBILE_PX,
+    maxWidth: 343,
   },
 }));
 
@@ -247,7 +240,7 @@ export const BackHomeButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.primaryColors[700],
   backgroundImage: "none",
   color: theme.palette.textColors[50],
-  minWidth: NOT_FOUND_BUTTON_MIN_WIDTH_PX,
+  minWidth: 216,
   padding: theme.spacing(3, 5),
   borderRadius: theme.spacing(2),
   height: theme.spacing(17),
@@ -258,7 +251,7 @@ export const BackHomeButton = styled(Button)(({ theme }) => ({
     marginLeft: 0,
   },
   [theme.breakpoints.down("md")]: {
-    width: NOT_FOUND_BUTTON_MIN_WIDTH_PX,
+    width: 216,
   },
   "&:hover": {
     backgroundImage: "none",
