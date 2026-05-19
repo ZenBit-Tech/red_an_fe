@@ -108,6 +108,7 @@ export const APP_ROUTES = {
   SIGN_IN: "/signin",
   REGISTER: "/register",
   SESSION_EXPIRED: "/session-expired",
+  SUBSCRIPTION_PLAN: "/subscription-plan",
 } as const;
 
 export const STORAGE_KEYS = {

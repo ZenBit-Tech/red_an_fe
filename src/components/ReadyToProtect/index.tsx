@@ -10,7 +10,8 @@ export const ReadyToProtect = () => {
   const navigate = useNavigate();
 
   const handleStartFreeTrial = (): void => {
-    navigate(APP_ROUTES.REGISTER);
+    navigate(APP_ROUTES.SUBSCRIPTION_PLAN);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
