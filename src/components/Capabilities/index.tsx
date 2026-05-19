@@ -25,11 +25,11 @@ export const Capabilities = () => {
           <S.FeaturesList>
             {FEATURES.map((feature) => (
               <S.FeatureItemBox key={feature.id}>
-                <S.IconWrapper>
+                <S.FeatureIconWrapper>
                   <svg>
                     <use href={`/capabilities/icons.svg${feature.iconId}`} />
                   </svg>
-                </S.IconWrapper>
+                </S.FeatureIconWrapper>
                 <S.FeatureTextWrapper>
                   <S.FeatureTitle>
                     {t(
@@ -49,11 +49,11 @@ export const Capabilities = () => {
         <S.RightGrid>
           {CARDS_DATA.map((card) => (
             <S.GridCard key={card.id}>
-              <S.IconWrapper>
+              <S.CardIconWrapper>
                 <svg>
                   <use href={`/capabilities/icons.svg${card.iconId}`} />
                 </svg>
-              </S.IconWrapper>
+              </S.CardIconWrapper>
               <S.CardTitle>
                 {t(`capabilities.${card.titleKey}`, card.defaultTitle)}
               </S.CardTitle>

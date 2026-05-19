@@ -12,5 +12,15 @@
         <symbol id="vector" viewBox="0 0 32 32">
             <path d="M15.238 0l-2.686 2.686 10.629 10.648h-23.181v3.81h23.181l-10.629 10.648 2.686 2.686 15.238-15.238-15.238-15.238z"></path>
         </symbol>
+
+        <symbol id="close" viewBox="0 0 44 44">
+<path d="M6.847 7.301l17.999 17.999"></path>
+<path d="M6.545 25.271l17.999-17.999"></path>
+</symbol>
+<symbol id="burger" viewBox="0 0 44 44">
+<path d="M0 9h42M0 21h42M0 33h42"></path>
+</symbol>
+
+
     </defs>
 </svg>

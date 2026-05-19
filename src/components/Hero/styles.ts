@@ -4,30 +4,44 @@ import { Typography, Button, Box } from "@mui/material";
 export const HeroSection = styled("section")(({ theme }) => ({
   position: "relative",
   overflow: "hidden",
-  boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.25)",
+  boxShadow: `0 ${theme.spacing(1)} ${theme.spacing(1)} 0 rgba(0, 0, 0, 0.25)`,
   backgroundColor: theme.palette.backgroundColor,
-}));
+  minHeight: 484,
+  padding: theme.spacing(8, 4),
+  display: "flex",
+  alignItems: "center",
+  [theme.breakpoints.up("md")]: {
+    minHeight: 584,
+    padding: theme.spacing(15, 10),
+  },
 
-export const HeroGlow = styled("div")({
-  width: 717,
-  height: 635,
-  position: "absolute",
-  top: "35%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  background: "rgba(13, 71, 161, 0.8)",
-  opacity: 0.2,
-  filter: "blur(120px)",
-  borderRadius: 7,
-  zIndex: 0,
-  pointerEvents: "none",
-});
+  [theme.breakpoints.up("lg")]: {
+    minHeight: 737,
+    padding: theme.spacing(20, 10),
+  },
+
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundImage: 'url("/hero/hero-graphic.webp")',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    opacity: 0.2,
+    zIndex: 0,
+    pointerEvents: "none",
+  },
+}));
 
 export const HeroContent = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  gap: theme.spacing(4),
+  gap: theme.spacing(6),
   margin: "0 auto",
   position: "relative",
   zIndex: 1,
@@ -43,10 +57,10 @@ export const HeroText = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   flexDirection: "column",
-  gap: theme.spacing(6),
+  gap: theme.spacing(4),
   textAlign: "center",
   [theme.breakpoints.up("md")]: {
-    gap: theme.spacing(8),
+    gap: theme.spacing(6),
   },
 }));
 
@@ -54,18 +68,25 @@ export const BadgesList = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  gap: theme.spacing(4),
+  gap: theme.spacing(2),
   flexWrap: "wrap",
+  [theme.breakpoints.up("md")]: {
+    gap: theme.spacing(4),
+  },
 }));
 
 export const ComplianceBadge = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  gap: theme.spacing(2),
-  padding: theme.spacing(2, 4),
+  gap: theme.spacing(1.5),
+  padding: theme.spacing(1.5),
   borderRadius: theme.spacing(3),
   backgroundColor: theme.palette.neutralColors[800],
   border: `1px solid ${theme.palette.strokeColors[150]}`,
+  [theme.breakpoints.up("md")]: {
+    padding: theme.spacing(2, 4),
+    gap: theme.spacing(2),
+  },
 }));
 
 export const BadgeIconWrapper = styled(Box)(({ theme }) => ({
@@ -92,16 +113,21 @@ export const HeroTitle = styled(Box)(({ theme }) => ({
   alignItems: "center",
   paddingTop: theme.spacing(2),
   color: theme.palette.secondary.main,
-  fontSize: theme.typography.fontSize40,
   fontWeight: theme.typography.fontWeight700,
   fontFamily: theme.typography.secondFamily,
-  lineHeight: 1.06,
+  gap: theme.spacing(2),
+  fontSize: theme.typography.fontSize48,
+  lineHeight: "40px",
 
-  [theme.breakpoints.up("sm")]: {
-    fontSize: theme.typography.fontSize60,
-  },
   [theme.breakpoints.up("md")]: {
+    gap: 0,
+    fontSize: theme.typography.fontSize60,
+    lineHeight: "76px",
+  },
+
+  [theme.breakpoints.up("lg")]: {
     fontSize: theme.typography.fontSize72,
+    lineHeight: "92px",
   },
 }));
 
@@ -118,10 +144,11 @@ export const GradientText = styled("span")(({ theme }) => ({
 
 export const Description = styled(Typography)(({ theme }) => ({
   color: theme.palette.textColors[200],
-  fontSize: theme.typography.fontSize18,
+  fontSize: theme.typography.fontSize16,
   fontWeight: theme.typography.fontWeight500,
   maxWidth: 680,
   textAlign: "center",
+
   [theme.breakpoints.up("sm")]: {
     fontSize: theme.typography.fontSize20,
   },
@@ -129,14 +156,17 @@ export const Description = styled(Typography)(({ theme }) => ({
 
 export const GetStartedButton = styled(Button)(({ theme }) => ({
   margin: `${theme.spacing(4)} auto 0`,
-  padding: theme.spacing(3, 8),
+  padding: theme.spacing(3, 5),
   backgroundImage: "none",
-  fontSize: theme.typography.fontSize18,
+  fontSize: theme.typography.fontSize16,
   backgroundColor: theme.palette.primaryColors[700],
 
-  [theme.breakpoints.up("sm")]: {
-    padding: theme.spacing(4, 10),
+  [theme.breakpoints.up("md")]: {
+    padding: theme.spacing(3, 20),
     fontSize: theme.typography.fontSize20,
-    marginTop: "24px",
+  },
+
+  [theme.breakpoints.up("lg")]: {
+    padding: theme.spacing(4, 10),
   },
 }));

@@ -17,7 +17,6 @@ const Hero = () => {
 
   return (
     <S.HeroSection id="hero">
-      <S.HeroGlow />
       <Container sx={{ paddingBottom: 0 }}>
         <S.HeroContent>
           <S.HeroText>
