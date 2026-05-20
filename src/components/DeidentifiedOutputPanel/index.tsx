@@ -85,7 +85,7 @@ export const DeidentifiedOutputPanel: React.FC<
     <S.ResultPanel>
       <S.PanelTitleRow>
         <S.PanelTitle>
-          {t("deidentify.analysisResults.panelTitle")}
+          {t("deidentify.analysisResults.deidentifiedPanelTitle")}
         </S.PanelTitle>
         <S.AnonymizedBadge>
           {t("deidentify.analysisResults.anonymizedBadge")}

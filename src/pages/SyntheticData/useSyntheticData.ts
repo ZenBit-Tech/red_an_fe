@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { useAppSelector } from "@/common/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/common/hooks/hooks";
+import { resetActiveStep, setActiveStep } from "@/store/deidentifyStepSlice";
 import {
   useDownloadSyntheticArchiveMutation,
   useGenerateSyntheticTableMutation,
@@ -42,7 +43,18 @@ interface UseSyntheticDataReturn {
   handleDownload: () => Promise<void>;
 }
 
+const SYNTHETIC_STEP_INDEX = 4;
+
 export const useSyntheticData = (): UseSyntheticDataReturn => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setActiveStep(SYNTHETIC_STEP_INDEX));
+    return () => {
+      dispatch(resetActiveStep());
+    };
+  }, [dispatch]);
+
   const [generateSyntheticTable, { isLoading: isGenerating }] =
     useGenerateSyntheticTableMutation();
   const [regenerateSyntheticTable, { isLoading: isRegenerating }] =
