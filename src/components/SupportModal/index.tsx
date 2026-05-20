@@ -75,7 +75,6 @@ export const SupportModal: React.FC<SupportModalProps> = ({
       ) : (
         <form onSubmit={handleSubmit} noValidate>
           <S.FormBody>
-            {/* Full Name */}
             <S.FieldWrapper>
               <S.FieldLabel>{t("supportModal.fullName")}</S.FieldLabel>
               <S.StyledInputBase
@@ -89,8 +88,6 @@ export const SupportModal: React.FC<SupportModalProps> = ({
                 <S.FieldError>{errors.fullName.message}</S.FieldError>
               )}
             </S.FieldWrapper>
-
-            {/* Email */}
             <S.FieldWrapper>
               <S.FieldLabel>{t("supportModal.email")}</S.FieldLabel>
               <S.StyledInputBase
@@ -156,8 +153,6 @@ export const SupportModal: React.FC<SupportModalProps> = ({
                 <S.FieldError>{errors.issueCategory.message}</S.FieldError>
               )}
             </S.FieldWrapper>
-
-            {/* Message */}
             <S.FieldWrapper>
               <S.FieldLabel>{t("supportModal.message")}</S.FieldLabel>
               <S.TextAreaWrapper>
