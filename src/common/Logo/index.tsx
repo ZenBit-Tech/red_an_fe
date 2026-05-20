@@ -1,14 +1,15 @@
 import { useTranslation } from "react-i18next";
 import { useNav } from "@/common/hooks/useNav";
-import { LogoWrapper } from "./styles";
+import * as S from "./styles";
 
 export const Logo = () => {
   const { t } = useTranslation();
   const { handleClick } = useNav();
 
   return (
-    <LogoWrapper to="/" onClick={(e) => handleClick(e, "/")}>
-      {t("hero.badge.title")}
-    </LogoWrapper>
+    <S.LogoWrapper to="/" onClick={(e) => handleClick(e, "/")}>
+      <S.FullText>{t("hero.badge.title")}</S.FullText>
+      <S.ShortText>CDS</S.ShortText>
+    </S.LogoWrapper>
   );
 };
