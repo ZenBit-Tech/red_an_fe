@@ -32,6 +32,7 @@ export const NAV_ITEMS: NavItem[] = [
 export interface SidebarProps {
   activeNav: NavKey;
   setActiveNav: (key: NavKey) => void;
+  onSupportClick: () => void;
 }
 export const DEIDENTIFY_SUBMENU_STEPS = [
   { stepIndex: 0, labelKey: "dashboard.deidentifySubmenu.framework" },

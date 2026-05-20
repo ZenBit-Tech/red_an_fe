@@ -464,5 +464,34 @@
         "dynamic": "{{type}}"
       }
     }
+  },
+  "supportModal": {
+    "title": "Contact support",
+    "fullName": "FULL NAME",
+    "fullNamePlaceholder": "John Snow",
+    "email": "EMAIL",
+    "emailPlaceholder": "johnsnow@gmail.com",
+    "issueCategory": "ISSUE CATEGORY",
+    "issueCategoryPlaceholder": "Select a category...",
+    "message": "MESSAGE",
+    "messagePlaceholder": "Describe your issue in detail...",
+    "sendRequest": "Send Request",
+    "thankYouTitle": "Thank you for your request",
+    "thankYouSubtitle": "Our team will reach out to you shortly.",
+    "validation": {
+      "required": "This field is required",
+      "invalidEmail": "Invalid email format",
+      "messageRequired": "Message can't be empty",
+      "categoryRequired": "Please select a category"
+    },
+    "categories": {
+      "anonymizationQuality": "Anonymization Quality",
+      "paymentSubscription": "Payment & Subscription",
+      "syntheticDataRequest": "Synthetic Data Request",
+      "securityLegal": "Security & Legal",
+      "technicalIssue": "Technical Issue",
+      "proposals": "Proposals",
+      "other": "Other"
+    }
   }
 }
