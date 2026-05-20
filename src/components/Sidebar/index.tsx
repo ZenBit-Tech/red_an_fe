@@ -14,7 +14,7 @@ import {
 import { useLogout } from "@/components/Sidebar/hooks/useLogout";
 import * as S from "@/components/Sidebar/styles";
 
-const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
+const Sidebar = ({ activeNav, setActiveNav, onSupportClick }: SidebarProps) => {
   const { t } = useTranslation();
   const { handleLogout, handleActionKeyDown } = useLogout();
   const activeDeidentifyStep = useAppSelector(
@@ -91,7 +91,13 @@ const Sidebar = ({ activeNav, setActiveNav }: SidebarProps) => {
         </S.SidebarNav>
       </div>
       <S.SidebarBottom>
-        <S.NavItem active={false} role="button" tabIndex={0}>
+        <S.NavItem
+          active={false}
+          onClick={onSupportClick}
+          onKeyDown={(e) => handleActionKeyDown(e, onSupportClick)}
+          role="button"
+          tabIndex={0}
+        >
           <S.NavIconWrapper active={false} small>
             <HelpOutlineOutlined />
           </S.NavIconWrapper>

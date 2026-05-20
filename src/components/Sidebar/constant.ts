@@ -2,10 +2,9 @@ import React from "react";
 import {
   GridViewOutlined,
   ArticleOutlined,
-  InsertChartOutlined,
   PaymentsOutlined,
 } from "@mui/icons-material";
-export type NavKey = "dashboard" | "deidentify" | "synthetic" | "subscription";
+export type NavKey = "dashboard" | "deidentify" | "subscription";
 
 export interface NavItem {
   key: NavKey;
@@ -25,11 +24,6 @@ export const NAV_ITEMS: NavItem[] = [
     icon: ArticleOutlined,
   },
   {
-    key: "synthetic",
-    labelKey: "appShell.nav.syntheticData",
-    icon: InsertChartOutlined,
-  },
-  {
     key: "subscription",
     labelKey: "appShell.nav.subscription",
     icon: PaymentsOutlined,
@@ -38,10 +32,15 @@ export const NAV_ITEMS: NavItem[] = [
 export interface SidebarProps {
   activeNav: NavKey;
   setActiveNav: (key: NavKey) => void;
+  onSupportClick: () => void;
 }
 export const DEIDENTIFY_SUBMENU_STEPS = [
   { stepIndex: 0, labelKey: "dashboard.deidentifySubmenu.framework" },
   { stepIndex: 1, labelKey: "dashboard.deidentifySubmenu.inputData" },
   { stepIndex: 2, labelKey: "dashboard.deidentifySubmenu.settings" },
   { stepIndex: 3, labelKey: "dashboard.deidentifySubmenu.findings" },
+  {
+    stepIndex: 4,
+    labelKey: "dashboard.deidentifySubmenu.syntheticDataGenerator",
+  },
 ] as const;
