@@ -13,7 +13,7 @@
     "checkInboxDescription": "We sent a magic link to",
     "didntReceive": "Didn't receive it? Check spam or",
     "resendLink": "resend link",
-    "backToSignIn": "Back to sign in",
+    "backToSignIn": "Back",
     "errorSending": "Failed to send magic link. Please try again.",
     "validation": {
       "invalidEmail": "Invalid email format",

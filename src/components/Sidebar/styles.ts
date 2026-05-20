@@ -6,7 +6,7 @@ export const SidebarContainer = styled(Box)(({ theme }) => ({
   width: theme.spacing(77.5),
   height: theme.spacing(232),
   paddingTop: theme.spacing(6),
-  paddingRight: theme.spacing(6),
+  paddingRight: theme.spacing(3.5),
   paddingBottom: theme.spacing(6),
   paddingLeft: theme.spacing(10),
   flexShrink: 0,
@@ -20,7 +20,6 @@ export const SidebarContainer = styled(Box)(({ theme }) => ({
 export const SidebarHeader = styled(Box)(({ theme }) => ({
   paddingBottom: theme.spacing(6),
   marginBottom: theme.spacing(6),
-  borderBottom: `${theme.spacing(0.25)} solid ${theme.palette.strokeColors[150]}`,
 }));
 
 export const TopBarTitle = styled(Typography)(({ theme }) => ({
