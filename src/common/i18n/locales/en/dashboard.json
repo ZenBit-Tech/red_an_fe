@@ -39,7 +39,8 @@
       "framework": "Select Compliance Framework",
       "inputData": "Input Clinical Data ",
       "settings": "De-Identification Settings",
-      "findings": "Findings"
+      "findings": "Findings",
+      "syntheticDataGenerator": "Synthetic Data Generator"
     }
   }
 }

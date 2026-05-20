@@ -30,6 +30,7 @@ export const TopBarActions = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(2),
+  marginLeft: "auto",
 }));
 
 export const StyledIconButton = styled(IconButton)(({ theme }) => ({

@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
-
+const MAX_WIDTH_FOR_SIDEBAR = 1440;
 export const LayoutWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
@@ -13,6 +13,9 @@ export const BodyWrapper = styled(Box)({
   display: "flex",
   flex: 1,
   overflow: "hidden",
+  width: "100%",
+  maxWidth: MAX_WIDTH_FOR_SIDEBAR,
+  marginInline: "auto",
 });
 
 export const RightContent = styled(Box)({

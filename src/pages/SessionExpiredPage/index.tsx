@@ -26,7 +26,11 @@ export const SessionExpiredPage = () => {
           {t("sessionExpired.titleFirst")} {t("sessionExpired.titleSecond")}
         </S.PageTitle>
 
-        <S.PageSubtitle>{t("sessionExpired.subtitle")}</S.PageSubtitle>
+        <S.PageSubtitle>
+          {t("sessionExpired.subtitleLine1")}
+          <br />
+          {t("sessionExpired.subtitleLine2")}
+        </S.PageSubtitle>
 
         <S.GetStartedButton
           variant="contained"

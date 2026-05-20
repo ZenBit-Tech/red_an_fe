@@ -30,7 +30,10 @@ const LoginPage = () => {
         <S.CardContainer>
           {step === LOGIN_STEPS.FORM ? (
             <S.CardInner>
-              <S.Title>{t("login.title")}</S.Title>
+              <S.Title>
+                {t("login.titleLine1")} <S.TitleBreak />
+                {t("login.titleLine2")}
+              </S.Title>
               <S.Subtitle>{t("login.subtitle")}</S.Subtitle>
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <S.LabelStyles>
