@@ -4,6 +4,7 @@ import { Box, Button, Container, Drawer } from "@mui/material";
 export const HeaderWrapper = styled("header")(({ theme }) => ({
   backgroundColor: theme.palette.primaryColors[950],
   backgroundImage: `linear-gradient(180deg, ${theme.palette.neutralColors[900]} 0%, rgba(19, 27, 46, 0) 100%)`,
+  boxShadow: "0px 25px 50px -12px rgba(0, 0, 0, 0.5)",
 
   position: "relative",
   zIndex: 10,
