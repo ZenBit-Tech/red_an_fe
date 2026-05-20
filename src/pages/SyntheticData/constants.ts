@@ -19,10 +19,10 @@ export interface SyntheticColumnDefinition {
 }
 
 export const SYNTHETIC_COUNT_LIMITS = {
-  MIN: 1,
-  MAX: 20,
-  DEFAULT: 5,
-  TABLE_PREVIEW_MAX_ROWS: 20,
+  MIN: 0,
+  MAX: 500,
+  DEFAULT: 100,
+  TABLE_PREVIEW_MAX_ROWS: 500,
 } as const;
 
 export const BASE_COLUMN_DEFINITION: SyntheticColumnDefinition = {
