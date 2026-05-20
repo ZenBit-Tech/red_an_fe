@@ -36,7 +36,7 @@ interface UseSyntheticDataReturn {
   generateErrorKey: string;
   outputText: string;
   hasSourceData: boolean;
-  handleRecordsCountChange: (value: number) => void;
+  handleRecordsCountChange: (value: number | string) => void;
   toggleAccordion: () => void;
   handleGenerate: () => Promise<void>;
   handleRegenerate: () => Promise<void>;
@@ -50,6 +50,7 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
 
   useEffect(() => {
     dispatch(setActiveStep(SYNTHETIC_STEP_INDEX));
+
     return () => {
       dispatch(resetActiveStep());
     };
@@ -79,21 +80,35 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
 
   const hasSourceData = Boolean(originalInputText.trim() && jobId.trim());
 
-  const handleRecordsCountChange = useCallback((value: number): void => {
-    if (Number.isNaN(value)) {
-      setIsCountAboveMax(false);
-      return;
-    }
+  const handleRecordsCountChange = useCallback(
+    (value: number | string): void => {
+      const normalizedValue =
+        typeof value === "string" ? value.replace(/\D/g, "") : String(value);
 
-    setIsCountAboveMax(value > SYNTHETIC_COUNT_LIMITS.MAX);
+      if (normalizedValue === "") {
+        setRecordsCount(0);
+        setIsCountAboveMax(false);
+        return;
+      }
 
-    const boundedValue = Math.min(
-      Math.max(value, SYNTHETIC_COUNT_LIMITS.MIN),
-      SYNTHETIC_COUNT_LIMITS.MAX,
-    );
+      const numValue = Number(normalizedValue);
 
-    setRecordsCount(boundedValue);
-  }, []);
+      if (Number.isNaN(numValue)) {
+        setIsCountAboveMax(false);
+        return;
+      }
+
+      setIsCountAboveMax(numValue > SYNTHETIC_COUNT_LIMITS.MAX);
+
+      const boundedValue = Math.min(
+        Math.max(numValue, SYNTHETIC_COUNT_LIMITS.MIN),
+        SYNTHETIC_COUNT_LIMITS.MAX,
+      );
+
+      setRecordsCount(boundedValue);
+    },
+    [],
+  );
 
   useEffect(() => {
     recordsCountRef.current = recordsCount;

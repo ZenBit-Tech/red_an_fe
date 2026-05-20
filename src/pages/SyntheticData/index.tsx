@@ -99,13 +99,18 @@ const SyntheticDataPage = () => {
               {t("syntheticGenerator.settings.count")}
             </S.InputLabel>
             <S.NumberField
-              type="number"
-              value={recordsCount}
-              onChange={(event) =>
-                handleRecordsCountChange(Number(event.target.value))
-              }
+              type="text"
+              value={recordsCount || ""}
+              onChange={(event) => handleRecordsCountChange(event.target.value)}
+              onBlur={(event) => {
+                if (!event.target.value) {
+                  handleRecordsCountChange(SYNTHETIC_COUNT_LIMITS.MIN);
+                }
+              }}
               slotProps={{
                 htmlInput: {
+                  inputMode: "numeric",
+                  pattern: "[0-9]*",
                   min: SYNTHETIC_COUNT_LIMITS.MIN,
                   max: SYNTHETIC_COUNT_LIMITS.MAX,
                 },
