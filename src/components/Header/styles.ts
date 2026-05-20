@@ -152,7 +152,6 @@ export const MobileLinkHeader = styled("a")(({ theme }) => ({
 }));
 
 export const BurgerMenuSignButton = styled(Box)({
-  marginTop: "auto",
   "& button": {
     width: "100%",
     justifyContent: "center",
