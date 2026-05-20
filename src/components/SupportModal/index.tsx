@@ -38,6 +38,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({
     handleFileChange,
     handleRemoveFile,
     handleClose,
+    handleExited,
   } = useSupportModal(onClose);
 
   const { ref: messageRef, ...messageRest } = register("message", {
@@ -50,6 +51,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({
       onClose={handleClose}
       disablePortal={false}
       isSuccess={isSuccess}
+      TransitionProps={{ onExited: handleExited }}
     >
       {!isSuccess && (
         <S.ModalHeader>

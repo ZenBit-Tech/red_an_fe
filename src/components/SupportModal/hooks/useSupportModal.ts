@@ -21,6 +21,7 @@ interface UseSupportModalReturn {
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleRemoveFile: () => void;
   handleClose: () => void;
+  handleExited: () => void;
 }
 
 export const useSupportModal = (onClose: () => void): UseSupportModalReturn => {
@@ -99,13 +100,18 @@ export const useSupportModal = (onClose: () => void): UseSupportModalReturn => {
     setAttachment(null);
   }, []);
 
+  // Only closes the dialog; state reset happens in handleExited after animation
   const handleClose = useCallback(() => {
+    onClose();
+  }, [onClose]);
+
+  // Called by Dialog's TransitionProps.onExited — runs after close animation finishes
+  const handleExited = useCallback(() => {
     reset();
     setIsSuccess(false);
     setAttachment(null);
     setIsDropdownOpen(false);
-    onClose();
-  }, [reset, onClose]);
+  }, [reset]);
 
   const onSubmit = useCallback(() => {
     setIsSuccess(true);
@@ -132,5 +138,6 @@ export const useSupportModal = (onClose: () => void): UseSupportModalReturn => {
     handleFileChange,
     handleRemoveFile,
     handleClose,
+    handleExited,
   };
 };
