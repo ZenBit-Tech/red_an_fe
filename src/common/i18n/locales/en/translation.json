@@ -419,6 +419,7 @@
       "title": "Generation Settings",
       "description": "Configure the synthetic data parameters",
       "count": "Number of records",
+      "maxExceeded": "Maximum allowed value is {{max}}",
       "outputFormat": "Output format",
       "formats": {
         "txt": "TXT",

@@ -1,5 +1,5 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { CheckCircle, ErrorOutline } from "@mui/icons-material";
+import { CheckCircle, PriorityHigh } from "@mui/icons-material";
 import { useCreateCheckoutSessionMutation } from "@/common/api/billingApi";
 import { SUBSCRIPTION_PLANS } from "@/constants/subscriptionPlans";
 import * as S from "./styles";
@@ -59,7 +59,7 @@ const PaymentStatusModal = () => {
     <S.Overlay>
       <S.ModalBox status={isSuccess ? "success" : "error"}>
         <S.IconCircle status={isSuccess ? "success" : "error"}>
-          {isSuccess ? <CheckCircle /> : <ErrorOutline />}
+          {isSuccess ? <CheckCircle /> : <PriorityHigh />}
         </S.IconCircle>
 
         <S.Title>{isSuccess ? "Payment Successful" : "Payment Failed"}</S.Title>

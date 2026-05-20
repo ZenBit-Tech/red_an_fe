@@ -5,7 +5,12 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { APP_ROUTES } from "@/constants/index";
 
 import * as S from "./styles";
-import { BACKGROUND_IMAGE_URL, ASTRONAUT_IMAGE_URL } from "./styles";
+import {
+  BACKGROUND_IMAGE_URL,
+  ASTRONAUT_IMAGE_URL,
+  ASTRONAUT_TABLET_IMAGE_URL,
+  ASTRONAUT_MOBILE_IMAGE_URL,
+} from "./styles";
 
 export const NotFoundPage = () => {
   const { t } = useTranslation();
@@ -17,12 +22,18 @@ export const NotFoundPage = () => {
 
   return (
     <S.PageWrapper>
-      <S.BackgroundImage src={BACKGROUND_IMAGE_URL} alt="" />
-
+      <S.BackgroundImage src={BACKGROUND_IMAGE_URL} alt="background image" />
       <S.DecorativeNumberLeft aria-hidden="true">4</S.DecorativeNumberLeft>
       <S.DecorativeNumberRight aria-hidden="true">4</S.DecorativeNumberRight>
-
-      <S.AstronautImage src={ASTRONAUT_IMAGE_URL} alt="" />
+      <S.AstronautImage src={ASTRONAUT_IMAGE_URL} alt="astronaut image" />
+      <S.AstronautImageTablet
+        src={ASTRONAUT_TABLET_IMAGE_URL}
+        alt="astronaut image"
+      />
+      <S.AstronautImageMobile
+        src={ASTRONAUT_MOBILE_IMAGE_URL}
+        alt="astronaut image"
+      />
 
       <S.ContentBox>
         <S.PageTitle>{t("notFound.title")}</S.PageTitle>

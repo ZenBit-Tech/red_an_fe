@@ -6,7 +6,7 @@ export const Compliance = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="compliance">
+    <S.ComplianceSection id="compliance">
       <S.ContentWrapper>
         <S.TitleBlock>
           <S.SectionTitle>{t("compliance.title")}</S.SectionTitle>
@@ -65,6 +65,6 @@ export const Compliance = () => {
           <S.BannerTexture aria-hidden />
         </S.CustomProfilesBanner>
       </S.ContentWrapper>
-    </section>
+    </S.ComplianceSection>
   );
 };

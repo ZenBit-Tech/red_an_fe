@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useAppSelector } from "@/common/hooks/hooks";
 import {
@@ -26,6 +26,7 @@ export interface SyntheticTableState {
 
 interface UseSyntheticDataReturn {
   recordsCount: number;
+  isCountAboveMax: boolean;
   isAccordionOpen: boolean;
   isGenerating: boolean;
   isRegenerating: boolean;
@@ -52,6 +53,8 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
   const [recordsCount, setRecordsCount] = useState<number>(
     SYNTHETIC_COUNT_LIMITS.DEFAULT,
   );
+  const [isCountAboveMax, setIsCountAboveMax] = useState<boolean>(false);
+  const recordsCountRef = useRef<number>(SYNTHETIC_COUNT_LIMITS.DEFAULT);
   const [isAccordionOpen, setIsAccordionOpen] = useState<boolean>(false);
   const [tableState, setTableState] = useState<SyntheticTableState | null>(
     null,
@@ -64,10 +67,13 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
 
   const hasSourceData = Boolean(originalInputText.trim() && jobId.trim());
 
-  const handleRecordsCountChange = (value: number): void => {
+  const handleRecordsCountChange = useCallback((value: number): void => {
     if (Number.isNaN(value)) {
+      setIsCountAboveMax(false);
       return;
     }
+
+    setIsCountAboveMax(value > SYNTHETIC_COUNT_LIMITS.MAX);
 
     const boundedValue = Math.min(
       Math.max(value, SYNTHETIC_COUNT_LIMITS.MIN),
@@ -75,11 +81,15 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
     );
 
     setRecordsCount(boundedValue);
-  };
+  }, []);
 
-  const toggleAccordion = (): void => {
+  useEffect(() => {
+    recordsCountRef.current = recordsCount;
+  }, [recordsCount]);
+
+  const toggleAccordion = useCallback((): void => {
     setIsAccordionOpen((previous) => !previous);
-  };
+  }, []);
 
   const downloadZipFile = (blob: Blob, fileName: string): void => {
     const objectUrl = URL.createObjectURL(blob);
@@ -102,15 +112,17 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
     rows: response.rows,
   });
 
-  const handleGenerate = async (): Promise<void> => {
+  const handleGenerate = useCallback(async (): Promise<void> => {
+    const currentRecordsCount = recordsCountRef.current;
+
     if (!hasSourceData) {
       setGenerateErrorKey("syntheticGenerator.errors.noDeidentifiedData");
       return;
     }
 
     if (
-      recordsCount < SYNTHETIC_COUNT_LIMITS.MIN ||
-      recordsCount > SYNTHETIC_COUNT_LIMITS.MAX
+      currentRecordsCount < SYNTHETIC_COUNT_LIMITS.MIN ||
+      currentRecordsCount > SYNTHETIC_COUNT_LIMITS.MAX
     ) {
       setGenerateErrorKey("syntheticGenerator.errors.invalidCount");
       return;
@@ -119,7 +131,7 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
     const requestPayload: GenerateSyntheticTableRequest = {
       jobId,
       text: originalInputText,
-      count: recordsCount,
+      count: currentRecordsCount,
       outputFormat: SYNTHETIC_OUTPUT_FORMAT.PDF,
     };
 
@@ -139,16 +151,18 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
       );
       setTableState(null);
     }
-  };
+  }, [generateSyntheticTable, hasSourceData, jobId, originalInputText]);
 
-  const handleRegenerate = async (): Promise<void> => {
+  const handleRegenerate = useCallback(async (): Promise<void> => {
+    const currentRecordsCount = recordsCountRef.current;
+
     if (!tableState) {
       setGenerateErrorKey("syntheticGenerator.errors.noDeidentifiedData");
       return;
     }
 
     const requestPayload: RegenerateSyntheticTableRequest = {
-      count: recordsCount,
+      count: currentRecordsCount,
       outputFormat: SYNTHETIC_OUTPUT_FORMAT.PDF,
     };
 
@@ -166,9 +180,9 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
         "syntheticGenerator.errors.syntheticGenerationFailed",
       );
     }
-  };
+  }, [regenerateSyntheticTable, tableState]);
 
-  const handleDownload = async (): Promise<void> => {
+  const handleDownload = useCallback(async (): Promise<void> => {
     if (!tableState) {
       setGenerateErrorKey("syntheticGenerator.errors.noDeidentifiedData");
       return;
@@ -187,10 +201,11 @@ export const useSyntheticData = (): UseSyntheticDataReturn => {
         "syntheticGenerator.errors.syntheticGenerationFailed",
       );
     }
-  };
+  }, [downloadSyntheticArchive, tableState]);
 
   return {
     recordsCount,
+    isCountAboveMax,
     isAccordionOpen,
     isGenerating,
     isRegenerating,
