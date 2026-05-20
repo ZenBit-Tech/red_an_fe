@@ -32,7 +32,7 @@ export const StyledDialog = styled(Dialog, {
       top: 0,
       left: 0,
       right: 0,
-      height: 1,
+      height: 3,
       background: COLORS.DIALOG_BACKGROUND,
       pointerEvents: "none",
       zIndex: 10,
@@ -71,7 +71,7 @@ export const CloseButton = styled(IconButton)(({ theme }) => ({
 export const FormBody = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  gap: theme.spacing(12),
+  gap: theme.spacing(7),
 }));
 
 export const FieldWrapper = styled(Box)(({ theme }) => ({

@@ -111,6 +111,12 @@ export const useSupportModal = (onClose: () => void): UseSupportModalReturn => {
     setIsSuccess(true);
   }, []);
 
+  useEffect(() => {
+    if (!isSuccess) return;
+    const timer = setTimeout(handleClose, 5000);
+    return () => clearTimeout(timer);
+  }, [isSuccess, handleClose]);
+
   return {
     register,
     handleSubmit: rhfHandleSubmit(onSubmit),
