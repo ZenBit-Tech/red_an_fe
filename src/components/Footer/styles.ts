@@ -17,7 +17,7 @@ export const FooterContainer = styled(Container)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     paddingBlock: 0,
     minHeight: 100,
     gap: 102,

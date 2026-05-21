@@ -87,7 +87,7 @@ export const ButtonsGroup = styled(Box)(({ theme }) => ({
 
   gap: theme.spacing(4),
 
-  [theme.breakpoints.up(500)]: {
+  [theme.breakpoints.up("md")]: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
@@ -105,8 +105,9 @@ export const PrimaryButton = styled(Button)(({ theme }) => ({
   fontWeight: theme.typography.fontWeight400,
   color: theme.palette.textColors[50],
   height: 52,
+  width: "100%",
 
-  [theme.breakpoints.up(500)]: {
+  [theme.breakpoints.up("md")]: {
     width: 208,
     height: 68,
   },
@@ -120,6 +121,7 @@ export const SecondaryButton = styled(Button)<ButtonLinkProps>(({ theme }) => ({
   color: theme.palette.primaryColors[50],
   border: `1px solid ${theme.palette.strokeColors[150]}`,
   height: 52,
+  width: "100%",
 
   "&:hover": {
     backgroundImage: "none",
@@ -140,7 +142,7 @@ export const SecondaryButton = styled(Button)<ButtonLinkProps>(({ theme }) => ({
     opacity: 0.6,
   },
 
-  [theme.breakpoints.up(500)]: {
+  [theme.breakpoints.up("md")]: {
     width: 206,
     height: 68,
   },
