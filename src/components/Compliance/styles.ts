@@ -207,16 +207,16 @@ export const BannerTextBlock = styled(Box)(({ theme }) => ({
   gap: theme.spacing(4),
   position: "relative",
   zIndex: 1,
-  flexDiraction: "column",
   padding: theme.spacing(6),
 
   [theme.breakpoints.up("md")]: {
-    flex: "0 0 60%",
+    flex: "0 0 65%",
     flexShrink: 0,
     padding: theme.spacing(10),
-    maxWidth: 508,
+    maxWidth: 580,
   },
   [theme.breakpoints.up("lg")]: {
+    flex: "0 0 60%",
     padding: theme.spacing(20),
     gap: theme.spacing(6),
     maxWidth: 713,
@@ -230,6 +230,7 @@ export const BannerTitle = styled(Box)(({ theme }) => ({
 
   [theme.breakpoints.up("md")]: {
     fontSize: theme.typography.fontSize24,
+    whiteSpace: "nowrap",
   },
   [theme.breakpoints.up("lg")]: {
     fontSize: theme.typography.fontSize32,
@@ -269,6 +270,9 @@ export const BannerTexture = styled(Box)(({ theme }) => ({
     bottom: 0,
     left: "auto",
     height: "100%",
+    width: "35%",
+  },
+  [theme.breakpoints.up("lg")]: {
     width: "45%",
   },
 }));

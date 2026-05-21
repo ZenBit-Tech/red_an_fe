@@ -70,7 +70,7 @@
       }
     },
     "banner": {
-      "title": "Custom Compliance Profiles",
+      "title": "Create Custom Compliance Profiles",
       "description": "Tailor your anonymisation logic for specific research studies or regional health mandates. Define custom entities and regular expressions to catch niche medical identifiers."
     },
     "selection": {

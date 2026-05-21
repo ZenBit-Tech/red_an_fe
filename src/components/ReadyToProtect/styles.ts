@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box, Button, Container, type ButtonProps } from "@mui/material";
+import { Box, Button, type ButtonProps } from "@mui/material";
 type ButtonLinkProps = ButtonProps & {
   to?: string;
   component?: React.ElementType;
@@ -21,7 +21,7 @@ export const ReadyToProtectSection = styled("section")(({ theme }) => ({
   },
 }));
 
-export const ContentWrapper = styled(Container)(({ theme }) => ({
+export const ContentWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
