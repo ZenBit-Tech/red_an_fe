@@ -69,7 +69,7 @@ export const SectionTitleFirstString = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.primary,
 
   fontSize: theme.typography.fontSize60,
-  fontWeight: theme.typography.fontWeight700,
+  fontWeight: theme.typography.fontWeight600,
   fontFamily: theme.typography.secondFamily,
   [theme.breakpoints.down("md")]: { fontSize: theme.typography.fontSize48 },
 }));
@@ -102,7 +102,7 @@ export const ItemsList = styled("ul")(({ theme }) => ({
   zIndex: 1,
   gap: theme.spacing(6),
   listStyle: "none",
-  paddingLeft: theme.spacing(15),
+  paddingLeft: theme.spacing(12),
 
   [theme.breakpoints.down("lg")]: {
     marginTop: theme.spacing(6),

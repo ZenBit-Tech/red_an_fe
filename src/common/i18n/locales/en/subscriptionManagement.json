@@ -1,0 +1,49 @@
+{
+  "page": {
+    "title": "My Subscription",
+    "descriptionFirstString": "Manage and review your current plan.",
+    "descriptionSecondString": "Scale your de-identification capabilities as your data needs grow."
+  },
+  "plans": {
+    "currentPlan": "Current Plan",
+    "avialablePlan": "Avialable Plan",
+    "freePlan": "Free Plan",
+    "professionalPlan": "Professional Plan",
+    "active": "Active",
+    "recommended": "Recommended",
+    "month": "month",
+    "docsPerDay": "2 documents/day",
+    "dailyProcLimit": "Daily processing limit",
+    "usedToday": "Used today",
+    "docCount": "/2 documents",
+    "conditions": {
+      "priority": {
+        "title": "High-Priority Processing",
+        "desc": "Instant queue placement"
+      },
+      "advanced": {
+        "title": "Advanced PHI Scrubbing",
+        "desc": "No caps on document processing"
+      },
+      "unlimited": {
+        "title": "Unlimited De-identification",
+        "desc": "No caps on document processing"
+      },
+      "gift": {
+        "title": "Free first 3 days",
+        "desc": "Billing commences on the 3rd day of use"
+      }
+    },
+    "upgradeButton": "Upgrade to Professional Plan"
+  },
+  "paymentHistory": {
+    "title": "Payment History",
+    "columns": {
+      "invoice": "INVOICE NUMBER",
+      "date": "DATE",
+      "amount": "AMOUNT",
+      "status": "STATUS",
+      "action": "ACTION"
+    }
+  }
+}

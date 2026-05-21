@@ -31,6 +31,7 @@
     "@mui/material": "^7.3.9",
     "@mui/x-charts": "^9.0.4",
     "@reduxjs/toolkit": "^2.11.2",
+    "aos": "^2.3.4",
     "axios": "^1.14.0",
     "envalid": "^8.1.1",
     "i18next": "^26.0.3",
@@ -55,6 +56,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
+    "@types/aos": "^3.0.8",
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
