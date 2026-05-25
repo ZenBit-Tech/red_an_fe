@@ -70,7 +70,7 @@ export const router = createBrowserRouter([
         element: <SyntheticDataPage />,
       },
       {
-        path: APP_ROUTES.SUBSCRIPTION,
+        path: APP_ROUTES.SUBSCRIPTION_MANAGEMENT,
         element: <SubscriptionManagementPage />,
       },
     ],

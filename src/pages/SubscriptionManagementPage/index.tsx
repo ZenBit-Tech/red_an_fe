@@ -1,10 +1,13 @@
 import { useTranslation } from "react-i18next";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, CircularProgress } from "@mui/material";
+import { useGetSubscriptionQuery } from "@/common/api/billingApi";
 import { PaymentHistoryTable } from "./PaymentHistoty";
 import * as S from "./styles";
 
 export const SubscriptionManagementPage = () => {
   const { t } = useTranslation("subscriptionManagement");
+
+  const { data: subscription, isLoading } = useGetSubscriptionQuery();
 
   const sliderValue = 1;
 
@@ -27,12 +30,21 @@ export const SubscriptionManagementPage = () => {
     },
   ];
 
+  const isPaid =
+    subscription?.status === "active" || subscription?.status === "trialing";
+
   return (
     <S.PageWrapper>
       <S.PageHeader>
         <S.PageTitle data-aos="fade-left">{t("page.title")}</S.PageTitle>
         <S.ActivePlanLabel>
-          {t("plans.freePlan")}: {t("plans.active")}
+          {isLoading ? (
+            <CircularProgress size={16} color="inherit" />
+          ) : isPaid ? (
+            `${t("plans.professionalPlan")}: ${t("plans.active")}`
+          ) : (
+            `${t("plans.freePlan")}: ${t("plans.active")}`
+          )}
         </S.ActivePlanLabel>
       </S.PageHeader>
       <S.PageDescription>

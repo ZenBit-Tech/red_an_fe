@@ -2,6 +2,28 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { cleanEnv, str } from "envalid";
 import { APP_ROUTES, STORAGE_KEYS } from "@/constants/index";
 
+export type SubscriptionStatus =
+  | "active"
+  | "trialing"
+  | "past_due"
+  | "canceled"
+  | "incomplete"
+  | "incomplete_expired"
+  | "unpaid";
+
+export interface SubscriptionResponse {
+  id: string;
+  userId: string;
+  stripeSubscriptionId: string | null;
+  stripeCustomerId: string;
+  stripePriceId: string;
+  status: SubscriptionStatus;
+  currentPeriodEnd: string | null;
+  cancelAtPeriodEnd: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 const env = cleanEnv(import.meta.env, {
   VITE_API_URL: str({ desc: "Base API URL" }),
 });
@@ -63,6 +85,9 @@ export const billingApi = createApi({
   },
 
   endpoints: (builder) => ({
+    getSubscription: builder.query<SubscriptionResponse, void>({
+      query: () => "/subscription",
+    }),
     createCheckoutSession: builder.mutation<
       { url: string },
       { targetPlan: typeof BILLING_PLAN_TIER.PROFESSIONAL }
@@ -86,7 +111,7 @@ export const billingApi = createApi({
 });
 
 export const {
+  useGetSubscriptionQuery,
   useCreateCheckoutSessionMutation,
-  useCreateCustomerPortalSessionMutation,
-  useGetBillingStatusQuery,
+  useGetCheckoutSessionQuery,
 } = billingApi;
