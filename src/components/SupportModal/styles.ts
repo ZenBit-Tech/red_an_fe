@@ -242,6 +242,9 @@ export const PaperclipButton = styled(IconButton)(({ theme }) => ({
     color: theme.palette.primaryColors[200],
     backgroundColor: theme.palette.strokeColors[120],
   },
+  "& svg": {
+    transform: "rotate(45deg)",
+  },
 }));
 
 export const AttachmentChip = styled(Box)(({ theme }) => ({

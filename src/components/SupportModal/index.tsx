@@ -89,26 +89,6 @@ export const SupportModal: React.FC<SupportModalProps> = ({
               )}
             </S.FieldWrapper>
             <S.FieldWrapper>
-              <S.FieldLabel>{t("supportModal.email")}</S.FieldLabel>
-              <S.StyledInputBase
-                type="email"
-                placeholder={t("supportModal.emailPlaceholder")}
-                data-error={!!errors.email}
-                {...register("email", {
-                  required: t("supportModal.validation.required"),
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: t("supportModal.validation.invalidEmail"),
-                  },
-                })}
-              />
-              {errors.email && (
-                <S.FieldError>{errors.email.message}</S.FieldError>
-              )}
-            </S.FieldWrapper>
-
-            {/* Issue Category */}
-            <S.FieldWrapper>
               <S.FieldLabel>{t("supportModal.issueCategory")}</S.FieldLabel>
               <input
                 type="hidden"

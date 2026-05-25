@@ -8,7 +8,7 @@
       "dashboard": "Dashboard",
       "deIdentify": "De-Identify",
       "syntheticData": "Synthetic Data",
-      "subscription": "Subscription"
+      "subscription": "My Subscription"
     },
     "topBar": {
       "title": "Clinical Data De-Identification & Synthetic Data Studio",
@@ -464,6 +464,11 @@
         "dynamic": "{{type}}"
       }
     }
+  },
+  "trialBanner": {
+    "badge": "FREE PLAN",
+    "message": "You're using the free plan version. Upgrade to a professional plan for full access to all features.",
+    "upgradeButton": "Upgrade to Professional Plan"
   },
   "supportModal": {
     "title": "Contact support",
