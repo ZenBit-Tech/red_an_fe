@@ -160,10 +160,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
                 >
-                  <AttachFileIcon
-                    fontSize="small"
-                    sx={{ transform: "rotate(45deg)" }}
-                  />
+                  <AttachFileIcon fontSize="small" />
                 </S.PaperclipButton>
               </S.TextAreaWrapper>
               {errors.message && (
