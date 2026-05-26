@@ -6,7 +6,8 @@
   },
   "plans": {
     "currentPlan": "Current Plan",
-    "avialablePlan": "Avialable Plan",
+    "availablePlan": "Available Plan",
+    "informationAboutMyPlan": "Information about my plan",
     "freePlan": "Free Plan",
     "professionalPlan": "Professional Plan",
     "active": "Active",
@@ -34,7 +35,8 @@
         "desc": "Billing commences on the 3rd day of use"
       }
     },
-    "upgradeButton": "Upgrade to Professional Plan"
+    "upgradeButton": "Upgrade to Professional Plan",
+    "redirecting": "Redirecting..."
   },
   "paymentHistory": {
     "title": "Payment History",
@@ -45,5 +47,12 @@
       "status": "STATUS",
       "action": "ACTION"
     }
+  },
+  "infoPlanCard": {
+    "status": "Status",
+    "active": "Active",
+    "trial": "Trial period",
+    "firstPay": "First payment",
+    "CancelSubscription": "Cancel Subscription"
   }
 }

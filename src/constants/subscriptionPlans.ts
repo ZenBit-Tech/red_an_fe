@@ -35,6 +35,7 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
     price: 5,
     period: "month",
     isPopular: true,
+    stripePriceId: import.meta.env.VITE_STRIPE_PRO_PRICE_ID,
     features: [
       { icon: "priority", i18nKey: "priority" },
       { icon: "scrubbing", i18nKey: "scrubbing" },

@@ -24,6 +24,17 @@ export interface SubscriptionResponse {
   updatedAt: string;
 }
 
+export interface PaymentHistoryItem {
+  id: string;
+  userId: string;
+  stripeInvoiceId: string;
+  invoiceNumber: string | null;
+  amount: number;
+  status: "pending" | "paid" | "failed";
+  createdAt: string;
+  updatedAt: string;
+}
+
 const env = cleanEnv(import.meta.env, {
   VITE_API_URL: str({ desc: "Base API URL" }),
 });
@@ -73,6 +84,7 @@ export type BillingStatusResponse = {
 
 export const billingApi = createApi({
   reducerPath: "billingApi",
+  tagTypes: ["Subscription"],
   baseQuery: async (args, api, extraOptions) => {
     const result = await rawBaseQuery(args, api, extraOptions);
     if (result.error?.status === 401 && !isRedirectingToLogin) {
@@ -85,8 +97,15 @@ export const billingApi = createApi({
   },
 
   endpoints: (builder) => ({
+    getCheckoutSession: builder.query<
+      { status: "paid" | "unpaid" | "pending"; customerEmail: string | null },
+      string
+    >({
+      query: (sessionId) => `/checkout-session/${sessionId}`,
+    }),
     getSubscription: builder.query<SubscriptionResponse, void>({
       query: () => "/subscription",
+      providesTags: ["Subscription"],
     }),
     createCheckoutSession: builder.mutation<
       { url: string },
@@ -98,6 +117,18 @@ export const billingApi = createApi({
         body,
       }),
     }),
+
+    cancelSubscription: builder.mutation<
+      { success: boolean; cancelAtPeriodEnd: boolean },
+      void
+    >({
+      query: () => ({
+        url: "/cancel-subscription",
+        method: "POST",
+      }),
+      invalidatesTags: ["Subscription"],
+    }),
+
     createCustomerPortalSession: builder.mutation<{ url: string }, void>({
       query: () => ({
         url: "/customer-portal",
@@ -107,11 +138,17 @@ export const billingApi = createApi({
     getBillingStatus: builder.query<BillingStatusResponse, void>({
       query: () => "/status",
     }),
+
+    getPaymentHistory: builder.query<PaymentHistoryItem[], void>({
+      query: () => "/history",
+    }),
   }),
 });
 
 export const {
   useGetSubscriptionQuery,
   useCreateCheckoutSessionMutation,
+  useCancelSubscriptionMutation,
   useGetCheckoutSessionQuery,
+  useGetPaymentHistoryQuery,
 } = billingApi;

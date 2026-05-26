@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { TableBody } from "@mui/material";
-import * as S from "./styles"; // Імпортуємо стилі з твого файлу стилів
+import * as S from "./styles";
 
 export const PaymentHistoryTable = () => {
   const { t } = useTranslation("subscriptionManagement");

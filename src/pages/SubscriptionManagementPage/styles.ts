@@ -1,6 +1,14 @@
 import { Box, Typography, Slider, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
+type ProfPlanBoxProps = {
+  isCurrent: boolean;
+};
+
+type ProfPlanStateProps = {
+  isCurrent: boolean;
+};
+
 export const PageWrapper = styled(Box)(({ theme }) => ({
   minHeight: "100vh",
   display: "flex",
@@ -57,7 +65,7 @@ export const CurrentPlanContainer = styled(Box)(({ theme }) => ({
   width: theme.spacing(129),
 }));
 
-export const CurrentPlanTitle = styled(Typography)(({ theme }) => ({
+export const FreePlanTitle = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight500,
   fontSize: theme.typography.fontSize32,
@@ -65,7 +73,7 @@ export const CurrentPlanTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.primaryColors[400],
 }));
 
-export const CurrentPlanBox = styled(Box)(({ theme }) => ({
+export const FreePlanBox = styled(Box)(({ theme }) => ({
   width: "100%",
   border: `1px solid ${theme.palette.primaryColors[400]}`,
   borderRadius: theme.shape.borderRadius,
@@ -74,7 +82,7 @@ export const CurrentPlanBox = styled(Box)(({ theme }) => ({
   boxShadow: "0 4px 24px 0 rgba(0, 0, 0, 0.4)",
 }));
 
-export const CurrentPlanState = styled(Typography)(({ theme }) => ({
+export const FreePlanState = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight400,
   fontSize: theme.typography.fontSize14,
@@ -102,14 +110,14 @@ export const PlanPriseBox = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(4),
 }));
 
-export const CurrentPlanPrise = styled(Typography)(({ theme }) => ({
+export const FreePlanPrise = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize38,
   color: theme.palette.primaryColors[50],
 }));
 
-export const CurrentPlanPeriod = styled(Typography)(({ theme }) => ({
+export const FreePlanPeriod = styled(Typography)(({ theme }) => ({
   display: "flex",
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight400,
@@ -119,7 +127,7 @@ export const CurrentPlanPeriod = styled(Typography)(({ theme }) => ({
   marginLeft: theme.spacing(0.5),
 }));
 
-export const CurrrentPlanConditions = styled(Box)(({ theme }) => ({
+export const FreePlanConditions = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   flexDirection: "row",
@@ -183,31 +191,45 @@ export const CustomSlider = styled(Slider)(({ theme }) => ({
   },
 }));
 
-export const AvialablePlanContainer = styled(CurrentPlanContainer)(() => ({}));
+export const ProfPlanContainer = styled(CurrentPlanContainer)(() => ({}));
 
-export const AvialablePlanTitle = styled(CurrentPlanTitle)(({ theme }) => ({
+export const ProfPlanTitle = styled(FreePlanTitle)(({ theme }) => ({
   color: theme.palette.primaryColors[50],
 }));
 
-export const AvialablePlanBox = styled(CurrentPlanBox)(({ theme }) => ({
-  border: `2px solid ${theme.palette.primaryColors[200]}`,
+export const ProfPlanBox = styled(FreePlanBox, {
+  shouldForwardProp: (prop) => prop !== "isCurrent",
+})<ProfPlanBoxProps>(({ theme, isCurrent }) => ({
+  border: `2px solid ${
+    isCurrent
+      ? theme.palette.primaryColors[400]
+      : theme.palette.primaryColors[200]
+  }`,
 }));
 
-export const AvialablePlanState = styled(CurrentPlanState)(({ theme }) => ({
-  background: theme.palette.primaryColors[200],
-  color: theme.palette.primaryColors[700],
+export const ProfPlanState = styled(FreePlanState, {
+  shouldForwardProp: (prop) => prop !== "isCurrent",
+})<ProfPlanStateProps>(({ theme, isCurrent }) => ({
   width: theme.spacing(31),
+
+  background: isCurrent
+    ? theme.palette.primaryColors[400]
+    : theme.palette.primaryColors[200],
+
+  color: isCurrent
+    ? theme.palette.textColors[50]
+    : theme.palette.primaryColors[700],
 }));
 
-export const AvialablePlanPrise = styled(CurrentPlanPrise)(({ theme }) => ({
+export const ProfPlanPrise = styled(FreePlanPrise)(({ theme }) => ({
   color: theme.palette.primaryColors[200],
 }));
 
-export const AvialablePlanPeriod = styled(CurrentPlanPeriod)(({ theme }) => ({
+export const ProfPlanPeriod = styled(FreePlanPeriod)(({ theme }) => ({
   color: theme.palette.textColors[200],
 }));
 
-export const AvialablePlanConditionsList = styled("ul")(({ theme }) => ({
+export const ProfPlanConditionsList = styled("ul")(({ theme }) => ({
   width: "100%",
   listStyle: "none",
   padding: 0,
@@ -281,4 +303,43 @@ export const UpgradeButton = styled(Button)(({ theme }) => ({
 
 export const PaymentHistoryContainer = styled(Box)(() => ({}));
 
-export const PaymentHistoryTitle = styled(AvialablePlanTitle)(() => ({}));
+export const PaymentHistoryTitle = styled(ProfPlanTitle)(() => ({}));
+
+export const InfoPlanBox = styled(Box)(({ theme }) => ({
+  borderRadius: theme.spacing(4),
+  padding: theme.spacing(11),
+  width: "100%",
+  height: "auto",
+  boxShadow: "0 4px 24px 0 rgba(0, 0, 0, 0.4)",
+  background: theme.palette.neutralColors[900],
+}));
+
+export const InfoPlanCardString = styled(Box)(({ theme }) => ({
+  borderBottom: "1px solid rgba(67, 70, 82, 0.5)",
+  padding: theme.spacing(0, 1, 2),
+  marginBottom: theme.spacing(6),
+  fontFamily: theme.typography.fontFamily,
+  fontWeight: theme.typography.fontWeight500,
+  fontSize: theme.typography.fontSize16,
+  color: theme.palette.textColors[200],
+}));
+
+export const CancelButton = styled(UpgradeButton)(({ theme }) => ({
+  display: "flex",
+  width: "366px",
+
+  padding: theme.spacing(5, 10),
+  borderRadius: theme.spacing(2),
+  background: "inherit",
+
+  color: theme.palette.primaryColors[50],
+  margin: "0 auto",
+  textAlign: "center",
+  border: `1px solid #434652`,
+  textTransform: "none",
+
+  "&:hover": {
+    backgroundImage: `linear-gradient(167deg, ${theme.palette.primaryColors[500]} 28.37%, ${theme.palette.primaryColors[900]} 100%)`,
+    boxShadow: `0px 4px 12px ${theme.palette.primaryColors[700]}4D`,
+  },
+}));
