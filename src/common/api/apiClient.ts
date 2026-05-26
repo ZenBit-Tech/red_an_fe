@@ -17,6 +17,18 @@ export const ApiError = {
 
 export type ApiErrorType = (typeof ApiError)[keyof typeof ApiError];
 
+export class ApiClientError extends Error {
+  public readonly status?: number;
+  public readonly code?: string;
+
+  public constructor(message: string, status?: number, code?: string) {
+    super(message);
+    this.name = "ApiClientError";
+    this.status = status;
+    this.code = code;
+  }
+}
+
 const instance = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -101,16 +113,26 @@ export const apiClient = {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError<{ message?: string }>;
       if (axiosError.code === ApiError.Network) {
-        return new Error(ApiError.Network);
+        return new ApiClientError(
+          ApiError.Network,
+          undefined,
+          ApiError.Network,
+        );
       }
 
       if (axiosError.response) {
         const serverMessage = axiosError.response.data?.message;
         const status = axiosError.response.status;
-        return new Error(serverMessage || `${ApiError.Server}_${status}`);
+        return new ApiClientError(
+          serverMessage || `${ApiError.Server}_${status}`,
+          status,
+          ApiError.Server,
+        );
       }
     }
 
-    return error instanceof Error ? error : new Error(ApiError.Unknown);
+    return error instanceof Error
+      ? error
+      : new ApiClientError(ApiError.Unknown, undefined, ApiError.Unknown);
   },
 };

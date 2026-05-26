@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
+import { ApiClientError } from "@/common/api/apiClient";
 import { analyzeText } from "@/common/api/deidentifyApi";
 import { useAppDispatch, useAppSelector } from "@/common/hooks/hooks";
 import { resetActiveStep, setActiveStep } from "@/store/deidentifyStepSlice";
@@ -35,6 +36,7 @@ interface UseDeidentifyReturn {
   clinicalInputKey: number;
   isClinicalTextProvided: boolean;
   isResultReady: boolean;
+  isFreeLimitReached: boolean;
   isStepCompleted: (stepIndex: number) => boolean;
   handleAnalyzeWithSettings: (
     settings: DeidentifySettingsFormData,
@@ -43,7 +45,21 @@ interface UseDeidentifyReturn {
   handleFrameworkNext: () => void;
   handleInputNext: () => void;
   handleRestart: () => void;
+  clearFreeLimitError: () => void;
 }
+
+const FREE_LIMIT_ERROR_SUBSTRINGS = ["free", "limit", "2", "day"];
+
+const isFreeLimitExceededError = (error: unknown): boolean => {
+  if (!(error instanceof ApiClientError) || error.status !== 403) {
+    return false;
+  }
+
+  const normalizedMessage = error.message.toLowerCase();
+  return FREE_LIMIT_ERROR_SUBSTRINGS.some((fragment) =>
+    normalizedMessage.includes(fragment),
+  );
+};
 
 export const useDeidentify = (): UseDeidentifyReturn => {
   const dispatch = useAppDispatch();
@@ -55,6 +71,7 @@ export const useDeidentify = (): UseDeidentifyReturn => {
   const [jobId, setJobId] = useState<string>("");
   const [entities, setEntities] = useState<Entity[]>([]);
   const [clinicalInputKey, setClinicalInputKey] = useState(0);
+  const [isFreeLimitReached, setIsFreeLimitReached] = useState(false);
   const analysisResultsRef = useRef<HTMLDivElement | null>(null);
   const clinicalText = useAppSelector(
     (state) => state.clinicalInput.clinicalText,
@@ -119,6 +136,8 @@ export const useDeidentify = (): UseDeidentifyReturn => {
         preserveStructure: settings.preserveStructure,
       });
 
+      setIsFreeLimitReached(false);
+
       const mappedEntities = response.findings.map((finding) =>
         mapFindingToEntity(finding, clinicalText),
       );
@@ -142,6 +161,11 @@ export const useDeidentify = (): UseDeidentifyReturn => {
       );
       dispatch(setActiveStep(DEIDENTIFY_STEP.RESULT));
     } catch (error: unknown) {
+      if (isFreeLimitExceededError(error)) {
+        setIsFreeLimitReached(true);
+        return;
+      }
+
       if (error instanceof Error) {
         throw error;
       }
@@ -177,6 +201,11 @@ export const useDeidentify = (): UseDeidentifyReturn => {
     setJobId("");
     setEntities([]);
     setClinicalInputKey((k) => k + 1);
+    setIsFreeLimitReached(false);
+  };
+
+  const clearFreeLimitError = (): void => {
+    setIsFreeLimitReached(false);
   };
 
   return {
@@ -190,11 +219,13 @@ export const useDeidentify = (): UseDeidentifyReturn => {
     clinicalInputKey,
     isClinicalTextProvided,
     isResultReady,
+    isFreeLimitReached,
     isStepCompleted,
     handleAnalyzeWithSettings,
     handleStepBack,
     handleFrameworkNext,
     handleInputNext,
     handleRestart,
+    clearFreeLimitError,
   };
 };

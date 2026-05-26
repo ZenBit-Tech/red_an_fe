@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box } from "@mui/material";
@@ -13,10 +14,12 @@ import {
   useDeidentify,
 } from "@/pages/Deidentify/useDeidentify";
 import { DEIDENTIFY_STEP_LABEL_KEYS } from "@/pages/Deidentify/constants";
+import { APP_ROUTES } from "@/constants";
 import * as S from "@/pages/Deidentify/styles";
 
 const DeidentifyPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const {
     activeStep,
     analysisRunId,
@@ -28,12 +31,14 @@ const DeidentifyPage = () => {
     clinicalInputKey,
     isClinicalTextProvided,
     isResultReady,
+    isFreeLimitReached,
     isStepCompleted,
     handleAnalyzeWithSettings,
     handleStepBack,
     handleFrameworkNext,
     handleInputNext,
     handleRestart,
+    clearFreeLimitError,
   } = useDeidentify();
 
   const renderCurrentStep = (): React.ReactNode => {
@@ -176,6 +181,25 @@ const DeidentifyPage = () => {
         <S.DeidentifyPageSections>
           <Box sx={S.backgroundGlow} />
           {renderStepper()}
+          {isFreeLimitReached && (
+            <S.FreeLimitAlert
+              severity="warning"
+              action={
+                <S.FreeLimitAlertButton
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    clearFreeLimitError();
+                    navigate(APP_ROUTES.SUBSCRIPTION_PLAN);
+                  }}
+                >
+                  {t("deidentify.errors.freeLimitCta")}
+                </S.FreeLimitAlertButton>
+              }
+            >
+              {t("deidentify.errors.freeLimitReached")}
+            </S.FreeLimitAlert>
+          )}
           {renderCurrentStep()}
           {renderStepActions()}
         </S.DeidentifyPageSections>
