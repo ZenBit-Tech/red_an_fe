@@ -1,6 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { InfoOutlined } from "@mui/icons-material";
+import {
+  BILLING_PLAN_TIER,
+  useGetBillingStatusQuery,
+} from "@/common/api/billingApi";
 import { APP_ROUTES } from "@/constants";
 import { TIME_FILTERS } from "@/pages/Dashboard/constants";
 import { useDashboard } from "@/pages/Dashboard/hooks/useDashboard";
@@ -34,6 +38,19 @@ const DashboardPage = () => {
     },
   );
 
+  const { data: billingStatus } = useGetBillingStatusQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  const dashboardPlanBannerText =
+    billingStatus?.planTier === BILLING_PLAN_TIER.FREE
+      ? t("dashboard.page.infoBannerFreeUsage", {
+          used: billingStatus.usedToday,
+          remaining: billingStatus.remainingToday ?? 0,
+          limit: billingStatus.dailyLimit ?? 0,
+        })
+      : t("dashboard.page.infoBannerProfessional");
+
   if (isLoading) {
     return <S.InfoBox>Loading...</S.InfoBox>;
   }
@@ -53,9 +70,7 @@ const DashboardPage = () => {
               <S.InfoBox>
                 <S.InfoBanner>
                   <InfoOutlined />
-                  <S.InfoBannerText>
-                    {t("dashboard.page.infoBannerIsPay")}
-                  </S.InfoBannerText>
+                  <S.InfoBannerText>{dashboardPlanBannerText}</S.InfoBannerText>
                 </S.InfoBanner>
                 <S.StartButton
                   variant="contained"

@@ -1,8 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 
 import { ApiClientError } from "@/common/api/apiClient";
+import {
+  BILLING_PLAN_TIER,
+  type BillingStatusResponse,
+} from "@/common/api/billingApi";
+import { apiClient } from "@/common/api/apiClient";
 import { analyzeText } from "@/common/api/deidentifyApi";
 import { useAppDispatch, useAppSelector } from "@/common/hooks/hooks";
+import { API_ENDPOINTS } from "@/constants";
 import { resetActiveStep, setActiveStep } from "@/store/deidentifyStepSlice";
 import { resetClinicalInput } from "@/store/clinicalInputSlice";
 import {
@@ -37,6 +43,8 @@ interface UseDeidentifyReturn {
   isClinicalTextProvided: boolean;
   isResultReady: boolean;
   isFreeLimitReached: boolean;
+  freeLimitUsedToday: number;
+  freeLimitDailyCap: number;
   isStepCompleted: (stepIndex: number) => boolean;
   handleAnalyzeWithSettings: (
     settings: DeidentifySettingsFormData,
@@ -48,7 +56,33 @@ interface UseDeidentifyReturn {
   clearFreeLimitError: () => void;
 }
 
-const FREE_LIMIT_ERROR_SUBSTRINGS = ["free", "limit", "2", "day"];
+const FREE_LIMIT_MESSAGE_REQUIRED_SUBSTRINGS = ["free", "limit"];
+const FREE_LIMIT_VALUES_PATTERN = /(\d+)\s*(?:of|\/)\s*(\d+)/i;
+const DEFAULT_FREE_DAILY_LIMIT = 2;
+
+type FreeLimitInfo = {
+  usedToday: number;
+  dailyLimit: number;
+};
+
+const parseFreeLimitInfoFromMessage = (
+  message: string,
+): FreeLimitInfo | null => {
+  const matched = message.match(FREE_LIMIT_VALUES_PATTERN);
+
+  if (!matched) {
+    return null;
+  }
+
+  const usedToday = Number(matched[1]);
+  const dailyLimit = Number(matched[2]);
+
+  if (!Number.isFinite(usedToday) || !Number.isFinite(dailyLimit)) {
+    return null;
+  }
+
+  return { usedToday, dailyLimit };
+};
 
 const isFreeLimitExceededError = (error: unknown): boolean => {
   if (!(error instanceof ApiClientError) || error.status !== 403) {
@@ -56,10 +90,33 @@ const isFreeLimitExceededError = (error: unknown): boolean => {
   }
 
   const normalizedMessage = error.message.toLowerCase();
-  return FREE_LIMIT_ERROR_SUBSTRINGS.some((fragment) =>
+  return FREE_LIMIT_MESSAGE_REQUIRED_SUBSTRINGS.every((fragment) =>
     normalizedMessage.includes(fragment),
   );
 };
+
+const getFreeLimitInfoFromBillingStatus =
+  async (): Promise<FreeLimitInfo | null> => {
+    try {
+      const response = await apiClient.get<BillingStatusResponse>(
+        API_ENDPOINTS.BILLING_STATUS,
+      );
+
+      if (
+        response.data.planTier !== BILLING_PLAN_TIER.FREE ||
+        response.data.dailyLimit === null
+      ) {
+        return null;
+      }
+
+      return {
+        usedToday: response.data.usedToday,
+        dailyLimit: response.data.dailyLimit,
+      };
+    } catch {
+      return null;
+    }
+  };
 
 export const useDeidentify = (): UseDeidentifyReturn => {
   const dispatch = useAppDispatch();
@@ -71,7 +128,9 @@ export const useDeidentify = (): UseDeidentifyReturn => {
   const [jobId, setJobId] = useState<string>("");
   const [entities, setEntities] = useState<Entity[]>([]);
   const [clinicalInputKey, setClinicalInputKey] = useState(0);
-  const [isFreeLimitReached, setIsFreeLimitReached] = useState(false);
+  const [freeLimitInfo, setFreeLimitInfo] = useState<FreeLimitInfo | null>(
+    null,
+  );
   const analysisResultsRef = useRef<HTMLDivElement | null>(null);
   const clinicalText = useAppSelector(
     (state) => state.clinicalInput.clinicalText,
@@ -81,6 +140,7 @@ export const useDeidentify = (): UseDeidentifyReturn => {
   );
   const isClinicalTextProvided = clinicalText.trim().length > 0;
   const isResultReady = analysisRunId > 0;
+  const isFreeLimitReached = freeLimitInfo !== null;
 
   const isStepCompleted = (stepIndex: number): boolean => {
     if (stepIndex === DEIDENTIFY_STEP.FRAMEWORK) {
@@ -136,7 +196,7 @@ export const useDeidentify = (): UseDeidentifyReturn => {
         preserveStructure: settings.preserveStructure,
       });
 
-      setIsFreeLimitReached(false);
+      setFreeLimitInfo(null);
 
       const mappedEntities = response.findings.map((finding) =>
         mapFindingToEntity(finding, clinicalText),
@@ -162,7 +222,19 @@ export const useDeidentify = (): UseDeidentifyReturn => {
       dispatch(setActiveStep(DEIDENTIFY_STEP.RESULT));
     } catch (error: unknown) {
       if (isFreeLimitExceededError(error)) {
-        setIsFreeLimitReached(true);
+        const messageInfo =
+          error instanceof Error
+            ? parseFreeLimitInfoFromMessage(error.message)
+            : null;
+        const billingInfo = await getFreeLimitInfoFromBillingStatus();
+
+        setFreeLimitInfo(
+          billingInfo ??
+            messageInfo ?? {
+              usedToday: DEFAULT_FREE_DAILY_LIMIT,
+              dailyLimit: DEFAULT_FREE_DAILY_LIMIT,
+            },
+        );
         return;
       }
 
@@ -201,11 +273,11 @@ export const useDeidentify = (): UseDeidentifyReturn => {
     setJobId("");
     setEntities([]);
     setClinicalInputKey((k) => k + 1);
-    setIsFreeLimitReached(false);
+    setFreeLimitInfo(null);
   };
 
   const clearFreeLimitError = (): void => {
-    setIsFreeLimitReached(false);
+    setFreeLimitInfo(null);
   };
 
   return {
@@ -220,6 +292,8 @@ export const useDeidentify = (): UseDeidentifyReturn => {
     isClinicalTextProvided,
     isResultReady,
     isFreeLimitReached,
+    freeLimitUsedToday: freeLimitInfo?.usedToday ?? DEFAULT_FREE_DAILY_LIMIT,
+    freeLimitDailyCap: freeLimitInfo?.dailyLimit ?? DEFAULT_FREE_DAILY_LIMIT,
     isStepCompleted,
     handleAnalyzeWithSettings,
     handleStepBack,

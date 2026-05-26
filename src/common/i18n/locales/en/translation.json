@@ -367,6 +367,15 @@
       "freeLimitReached": "Daily limit reached for the Free plan (2 documents per day). Upgrade to Professional to continue.",
       "freeLimitCta": "Upgrade to Professional"
     },
+    "freeLimitModal": {
+      "title": "Daily limit reached",
+      "messagePrefix": "You've used your",
+      "messageHighlight": "{{used}} of {{limit}} free",
+      "messageSuffix": "documents for today.",
+      "messageLine2": "Upgrade your subscription to continue without waiting.",
+      "upgradeButton": "Upgrade Subscription",
+      "closeButton": "Close Notification"
+    },
     "methods": {
       "redact": "Redact - Remove entirely ([REDACTED])",
       "replace": "Replace - Generic placeholder",

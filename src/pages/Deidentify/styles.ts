@@ -1,5 +1,5 @@
 import CheckIcon from "@mui/icons-material/Check";
-import { Alert, Box, Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
 import { theme } from "@/common/theme/theme";
 export interface DeidentifyStepIconProps {
@@ -57,16 +57,6 @@ export const DeidentifyPageSections = styled(Box)(({ theme }) => ({
   "& > :nth-of-type(3)": {
     marginTop: theme.spacing(12.5),
   },
-}));
-
-export const FreeLimitAlert = styled(Alert)(({ theme }) => ({
-  marginTop: theme.spacing(6),
-  borderRadius: theme.spacing(2),
-}));
-
-export const FreeLimitAlertButton = styled(Button)(({ theme }) => ({
-  textTransform: "none",
-  fontWeight: theme.typography.fontWeight600,
 }));
 
 export const DeidentifyStepperContainer = styled(Box)(({ theme }) => ({

@@ -9,6 +9,7 @@ import { AnalysisResults } from "@/components/AnalysisResults";
 import { ClinicalTextInput } from "@/components/ClinicalInput";
 import { ComplianceFrameworkSelection } from "@/components/ComplianceSelect/ComplianceFrameworkSelection";
 import DeidentifySettings from "@/components/Deidentify";
+import FreeLimitReachedModal from "@/components/FreeLimitReachedModal";
 import {
   DEIDENTIFY_STEP,
   useDeidentify,
@@ -32,6 +33,8 @@ const DeidentifyPage = () => {
     isClinicalTextProvided,
     isResultReady,
     isFreeLimitReached,
+    freeLimitUsedToday,
+    freeLimitDailyCap,
     isStepCompleted,
     handleAnalyzeWithSettings,
     handleStepBack,
@@ -181,25 +184,16 @@ const DeidentifyPage = () => {
         <S.DeidentifyPageSections>
           <Box sx={S.backgroundGlow} />
           {renderStepper()}
-          {isFreeLimitReached && (
-            <S.FreeLimitAlert
-              severity="warning"
-              action={
-                <S.FreeLimitAlertButton
-                  color="inherit"
-                  size="small"
-                  onClick={() => {
-                    clearFreeLimitError();
-                    navigate(APP_ROUTES.SUBSCRIPTION_PLAN);
-                  }}
-                >
-                  {t("deidentify.errors.freeLimitCta")}
-                </S.FreeLimitAlertButton>
-              }
-            >
-              {t("deidentify.errors.freeLimitReached")}
-            </S.FreeLimitAlert>
-          )}
+          <FreeLimitReachedModal
+            open={isFreeLimitReached}
+            used={freeLimitUsedToday}
+            limit={freeLimitDailyCap}
+            onUpgrade={() => {
+              clearFreeLimitError();
+              navigate(APP_ROUTES.SUBSCRIPTION_PLAN);
+            }}
+            onClose={clearFreeLimitError}
+          />
           {renderCurrentStep()}
           {renderStepActions()}
         </S.DeidentifyPageSections>
