@@ -6,9 +6,19 @@ type PlanCardProps = {
   plan: SubscriptionPlan;
   isLoading: boolean;
   onSelect: () => void;
+  actionLabel?: string;
+  actionDisabled?: boolean;
+  statusNote?: string;
 };
 
-const PlanCard = ({ plan, isLoading, onSelect }: PlanCardProps) => {
+const PlanCard = ({
+  plan,
+  isLoading,
+  onSelect,
+  actionLabel,
+  actionDisabled = false,
+  statusNote,
+}: PlanCardProps) => {
   const { t } = useTranslation();
   const base = `subscriptionPlan.plans.${plan.i18nKey}`;
 
@@ -18,7 +28,8 @@ const PlanCard = ({ plan, isLoading, onSelect }: PlanCardProps) => {
   const HeaderRight = plan.isPopular ? S.HeaderRightPopular : S.HeaderRight;
   const FeaturesList = plan.isPopular ? S.FeaturesListPopular : S.FeaturesList;
 
-  const billingNote = t(`${base}.billingNote`, { defaultValue: "" });
+  const fallbackBillingNote = t(`${base}.billingNote`, { defaultValue: "" });
+  const billingNote = statusNote ?? fallbackBillingNote;
 
   const headerLeft = (
     <S.HeaderLeft>
@@ -77,8 +88,10 @@ const PlanCard = ({ plan, isLoading, onSelect }: PlanCardProps) => {
         ))}
       </FeaturesList>
 
-      <Action onClick={onSelect} disabled={isLoading}>
-        {isLoading ? "Redirecting…" : t(`${base}.ctaLabel`)}
+      <Action onClick={onSelect} disabled={isLoading || actionDisabled}>
+        {isLoading
+          ? t("subscriptionPlan.actions.redirecting")
+          : (actionLabel ?? t(`${base}.ctaLabel`))}
       </Action>
     </Card>
   );

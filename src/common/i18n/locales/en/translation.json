@@ -215,13 +215,29 @@
     "subtitle": "Scale your clinical data de-identification with precision. Automated workflows for researchers and healthcare providers.",
     "successMessage": "Thank you! Your payment was successfully processed",
     "unseccessMessage": "You can continue with the Free Plan or try your payment again.",
+    "actions": {
+      "redirecting": "Redirecting...",
+      "currentPlan": "Current Plan",
+      "goToDashboard": "Go to Dashboard",
+      "upgrade": "Upgrade to Professional",
+      "upgradeUnavailable": "Upgrade unavailable",
+      "manageSubscription": "Manage subscription",
+      "manageUnavailable": "Manage unavailable"
+    },
+    "status": {
+      "loading": "Loading subscription status...",
+      "refreshing": "Refreshing subscription status...",
+      "error": "Could not load subscription status. You can still choose a plan.",
+      "freeUsage": "Used today: {{used}} / {{limit}} • Remaining: {{remaining}}",
+      "currentPeriodEnd": "Current period ends: {{date}}"
+    },
     "plans": {
       "free": {
         "tier": "Explorer",
         "name": "Free Plan",
         "ctaLabel": "Start Free Plan",
         "features": {
-          "documents": "2 documents/month"
+          "documents": "2 documents/day"
         }
       },
       "professional": {
