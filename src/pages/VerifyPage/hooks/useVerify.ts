@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { BILLING_PLAN_TIER } from "@/common/api/billingApi";
 import { apiClient } from "@/common/api/apiClient";
 import { APP_ROUTES, STORAGE_KEYS, API_ENDPOINTS } from "@/constants/index";
 
@@ -39,18 +40,14 @@ export const useVerify = () => {
         }
 
         const pendingPlan = localStorage.getItem(STORAGE_KEYS.PENDING_PLAN);
-        const pendingPriceId = localStorage.getItem(
-          STORAGE_KEYS.PENDING_PRICE_ID,
-        );
 
         localStorage.removeItem(STORAGE_KEYS.PENDING_PLAN);
-        localStorage.removeItem(STORAGE_KEYS.PENDING_PRICE_ID);
 
-        if (pendingPlan === "professional" && pendingPriceId) {
+        if (pendingPlan === "professional") {
           try {
             const stripeRes = await apiClient.post<{ url: string }>(
               API_ENDPOINTS.BILLING_CREATE_CHECKOUT_SESSION,
-              { priceId: pendingPriceId },
+              { targetPlan: BILLING_PLAN_TIER.PROFESSIONAL },
             );
             if (stripeRes.data.url) {
               window.location.href = stripeRes.data.url;

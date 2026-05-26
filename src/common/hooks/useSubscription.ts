@@ -1,5 +1,8 @@
 import { useCallback, useState } from "react";
-import { useCreateCheckoutSessionMutation } from "@/common/api/billingApi";
+import {
+  BILLING_PLAN_TIER,
+  useCreateCheckoutSessionMutation,
+} from "@/common/api/billingApi";
 import { STORAGE_KEYS, APP_ROUTES } from "@/constants/index";
 import type { SubscriptionPlan } from "@/constants/subscriptionPlans";
 
@@ -29,14 +32,14 @@ export const useSubscription = (): UseSubscriptionReturn => {
         return;
       }
 
-      if (plan.id === "professional" && plan.stripePriceId) {
-        localStorage.setItem("pendingPriceId", plan.stripePriceId);
+      if (plan.id === "professional") {
+        localStorage.setItem(STORAGE_KEYS.PENDING_PLAN, plan.id);
 
         if (isAuth) {
           setLoadingPlanId(plan.id);
           try {
             const { url } = await createSession({
-              priceId: plan.stripePriceId,
+              targetPlan: BILLING_PLAN_TIER.PROFESSIONAL,
             }).unwrap();
             if (url) {
               window.location.href = url;
@@ -49,8 +52,6 @@ export const useSubscription = (): UseSubscriptionReturn => {
           return;
         }
 
-        localStorage.setItem(STORAGE_KEYS.PENDING_PLAN, plan.id);
-        localStorage.setItem(STORAGE_KEYS.PENDING_PRICE_ID, plan.stripePriceId);
         window.location.href = APP_ROUTES.SIGN_IN;
         return;
       }
