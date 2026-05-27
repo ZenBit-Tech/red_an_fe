@@ -19,6 +19,36 @@ const rawBaseQuery = fetchBaseQuery({
 
 let isRedirectingToLogin = false;
 
+export const BILLING_PLAN_TIER = {
+  FREE: "FREE",
+  PROFESSIONAL: "PROFESSIONAL",
+} as const;
+
+export const BILLING_PLAN_STATUS = {
+  ACTIVE: "ACTIVE",
+  INACTIVE: "INACTIVE",
+  PAST_DUE: "PAST_DUE",
+  CANCELED: "CANCELED",
+} as const;
+
+export type BillingPlanTier =
+  (typeof BILLING_PLAN_TIER)[keyof typeof BILLING_PLAN_TIER];
+
+export type BillingPlanStatus =
+  (typeof BILLING_PLAN_STATUS)[keyof typeof BILLING_PLAN_STATUS];
+
+export type BillingStatusResponse = {
+  planTier: BillingPlanTier;
+  planStatus: BillingPlanStatus;
+  dailyLimit: number | null;
+  usedToday: number;
+  remainingToday: number | null;
+  currentPeriodEnd: string | null;
+  hasActiveSubscription: boolean;
+  canUpgrade: boolean;
+  canManageSubscription: boolean;
+};
+
 export const billingApi = createApi({
   reducerPath: "billingApi",
   baseQuery: async (args, api, extraOptions) => {
@@ -35,7 +65,7 @@ export const billingApi = createApi({
   endpoints: (builder) => ({
     createCheckoutSession: builder.mutation<
       { url: string },
-      { priceId: string }
+      { targetPlan: typeof BILLING_PLAN_TIER.PROFESSIONAL }
     >({
       query: (body) => ({
         url: "/create-checkout-session",
@@ -43,14 +73,20 @@ export const billingApi = createApi({
         body,
       }),
     }),
-    getCheckoutSession: builder.query<
-      { status: "paid" | "unpaid" | "pending"; customerEmail: string | null },
-      string
-    >({
-      query: (sessionId) => `/checkout-session/${sessionId}`,
+    createCustomerPortalSession: builder.mutation<{ url: string }, void>({
+      query: () => ({
+        url: "/customer-portal",
+        method: "POST",
+      }),
+    }),
+    getBillingStatus: builder.query<BillingStatusResponse, void>({
+      query: () => "/status",
     }),
   }),
 });
 
-export const { useCreateCheckoutSessionMutation, useGetCheckoutSessionQuery } =
-  billingApi;
+export const {
+  useCreateCheckoutSessionMutation,
+  useCreateCustomerPortalSessionMutation,
+  useGetBillingStatusQuery,
+} = billingApi;

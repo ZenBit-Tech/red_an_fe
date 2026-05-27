@@ -18,7 +18,6 @@ export type SubscriptionPlan = {
   price: number;
   period: "month" | "year";
   features: { icon: keyof typeof ICON_MAP; i18nKey: string }[];
-  stripePriceId?: string;
   isPopular?: boolean;
 };
 
@@ -36,7 +35,6 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
     price: 5,
     period: "month",
     isPopular: true,
-    stripePriceId: "price_1TJX2rJYsXYgdDVrgYY88YrD",
     features: [
       { icon: "priority", i18nKey: "priority" },
       { icon: "scrubbing", i18nKey: "scrubbing" },

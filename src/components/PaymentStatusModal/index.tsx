@@ -1,7 +1,10 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { CheckCircle, PriorityHigh } from "@mui/icons-material";
-import { useCreateCheckoutSessionMutation } from "@/common/api/billingApi";
-import { SUBSCRIPTION_PLANS } from "@/constants/subscriptionPlans";
+import {
+  BILLING_PLAN_TIER,
+  useCreateCheckoutSessionMutation,
+} from "@/common/api/billingApi";
+import { STORAGE_KEYS } from "@/constants";
 import * as S from "./styles";
 import { useTranslation } from "react-i18next";
 
@@ -9,7 +12,6 @@ const PaymentStatusModal = () => {
   const { t } = useTranslation();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
   const [createSession, { isLoading }] = useCreateCheckoutSessionMutation();
 
   const payment = searchParams.get("payment");
@@ -21,28 +23,17 @@ const PaymentStatusModal = () => {
   };
 
   const handleContinue = () => {
-    localStorage.removeItem("pendingPlan");
-    localStorage.removeItem("pendingPriceId");
+    localStorage.removeItem(STORAGE_KEYS.PENDING_PLAN);
     closeModal();
   };
 
   const handleTryAgain = async () => {
-    let priceId = localStorage.getItem("pendingPriceId");
-    if (!priceId) {
-      const proPlan = SUBSCRIPTION_PLANS.find((p) => p.id === "professional");
-      priceId = proPlan?.stripePriceId ?? null;
-    }
-
-    if (!priceId) {
-      closeModal();
-      navigate("/#subscription-plan");
-      return;
-    }
-
     try {
-      const { url } = await createSession({ priceId }).unwrap();
+      const { url } = await createSession({
+        targetPlan: BILLING_PLAN_TIER.PROFESSIONAL,
+      }).unwrap();
       if (url) {
-        localStorage.setItem("pendingPriceId", priceId);
+        localStorage.setItem(STORAGE_KEYS.PENDING_PLAN, "professional");
         window.location.href = url;
       } else {
         closeModal();

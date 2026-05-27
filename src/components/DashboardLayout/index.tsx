@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import {
+  BILLING_PLAN_TIER,
+  useGetBillingStatusQuery,
+} from "@/common/api/billingApi";
 import Sidebar from "@/components/Sidebar/index";
 import TopBar from "@/components/TopBar/index";
 import TrialBanner from "@/components/TrialBanner/index";
@@ -11,11 +15,19 @@ export const DashboardLayout = () => {
   const { activeNav, setActiveNav, userEmail } = useDashboardLayout();
   const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
   const [isBannerVisible, setIsBannerVisible] = useState(true);
+  const { data: billingStatus, isLoading: isBillingStatusLoading } =
+    useGetBillingStatusQuery();
+
+  const shouldShowTrialBanner =
+    !isBillingStatusLoading &&
+    isBannerVisible &&
+    billingStatus?.planTier === BILLING_PLAN_TIER.FREE &&
+    billingStatus.canUpgrade;
 
   return (
     <S.LayoutWrapper>
       <S.BodyWrapper>
-        {isBannerVisible && (
+        {shouldShowTrialBanner && (
           <TrialBanner onDismiss={() => setIsBannerVisible(false)} />
         )}
         <S.ContentRow>

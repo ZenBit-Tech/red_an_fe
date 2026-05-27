@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box } from "@mui/material";
@@ -8,15 +9,18 @@ import { AnalysisResults } from "@/components/AnalysisResults";
 import { ClinicalTextInput } from "@/components/ClinicalInput";
 import { ComplianceFrameworkSelection } from "@/components/ComplianceSelect/ComplianceFrameworkSelection";
 import DeidentifySettings from "@/components/Deidentify";
+import FreeLimitReachedModal from "@/components/FreeLimitReachedModal";
 import {
   DEIDENTIFY_STEP,
   useDeidentify,
 } from "@/pages/Deidentify/useDeidentify";
 import { DEIDENTIFY_STEP_LABEL_KEYS } from "@/pages/Deidentify/constants";
+import { APP_ROUTES } from "@/constants";
 import * as S from "@/pages/Deidentify/styles";
 
 const DeidentifyPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const {
     activeStep,
     analysisRunId,
@@ -28,12 +32,16 @@ const DeidentifyPage = () => {
     clinicalInputKey,
     isClinicalTextProvided,
     isResultReady,
+    isFreeLimitReached,
+    freeLimitUsedToday,
+    freeLimitDailyCap,
     isStepCompleted,
     handleAnalyzeWithSettings,
     handleStepBack,
     handleFrameworkNext,
     handleInputNext,
     handleRestart,
+    clearFreeLimitError,
   } = useDeidentify();
 
   const renderCurrentStep = (): React.ReactNode => {
@@ -176,6 +184,16 @@ const DeidentifyPage = () => {
         <S.DeidentifyPageSections>
           <Box sx={S.backgroundGlow} />
           {renderStepper()}
+          <FreeLimitReachedModal
+            open={isFreeLimitReached}
+            used={freeLimitUsedToday}
+            limit={freeLimitDailyCap}
+            onUpgrade={() => {
+              clearFreeLimitError();
+              navigate(APP_ROUTES.SUBSCRIPTION_PLAN);
+            }}
+            onClose={clearFreeLimitError}
+          />
           {renderCurrentStep()}
           {renderStepActions()}
         </S.DeidentifyPageSections>
