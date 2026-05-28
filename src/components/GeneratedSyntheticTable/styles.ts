@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   CircularProgress,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -34,13 +35,70 @@ export const TableCard = styled(Box)(({ theme }) => ({
   borderRadius: theme.spacing(2),
   border: `1px solid ${alpha(theme.palette.strokeColors[400], 0.8)}`,
   backgroundColor: theme.palette.neutralColors[900],
-  padding: theme.spacing(4),
+  padding: theme.spacing(6),
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(4),
   [theme.breakpoints.down("sm")]: {
     padding: theme.spacing(3),
   },
+}));
+
+export const TableHeaderSection = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(4),
+}));
+
+export const DownloadInfoBanner = styled(Box)(({ theme }) => ({
+  width: "100%",
+  borderRadius: theme.spacing(2),
+  border: `1px solid ${theme.palette.primaryColors[200]}`,
+  backgroundColor: alpha(theme.palette.primaryColors[200], 0.06),
+  padding: theme.spacing(4.25),
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(1),
+}));
+
+export const DownloadInfoHeader = styled(Stack)(({ theme }) => ({
+  flexDirection: "row",
+  alignItems: "center",
+  gap: theme.spacing(2),
+}));
+
+export const DownloadInfoIcon = styled("span")(({ theme }) => ({
+  width: theme.spacing(4),
+  height: theme.spacing(4),
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: theme.palette.primaryColors[100],
+  lineHeight: 0,
+}));
+
+export const DownloadInfoSvg = styled("svg")(() => ({
+  width: "100%",
+  height: "100%",
+  display: "block",
+  maxWidth: "none",
+  fill: "currentColor",
+}));
+
+export const DownloadInfoTitle = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primaryColors[100],
+  fontSize: theme.typography.fontSize14,
+  fontWeight: theme.typography.fontWeight700,
+  lineHeight: theme.spacing(5),
+  letterSpacing: 0,
+}));
+
+export const DownloadInfoDescription = styled(Typography)(({ theme }) => ({
+  color: theme.palette.textColors[200],
+  fontSize: theme.typography.fontSize14,
+  fontWeight: theme.typography.fontWeight400,
+  lineHeight: theme.spacing(5),
+  letterSpacing: 0,
 }));
 
 export const TableHeader = styled(Box)(({ theme }) => ({
@@ -115,7 +173,10 @@ export const HeaderActionButtonSpinner = styled(CircularProgress)(
 );
 
 export const HeaderActionButton = styled(Button)(({ theme }) => ({
-  minHeight: theme.spacing(12),
+  width: theme.spacing(36.5),
+  height: theme.spacing(10),
+  minWidth: theme.spacing(36.5),
+  minHeight: theme.spacing(10),
   padding: theme.spacing(3, 4),
   gap: theme.spacing(2),
   borderRadius: theme.spacing(2),
@@ -235,7 +296,6 @@ export const GeneratedHeaderCell = styled(TableCell)(({ theme }) => ({
 export const GeneratedRow = styled(TableRow)(({ theme }) => ({
   "& .MuiTableCell-root": {
     borderColor: alpha(theme.palette.strokeColors[400], 0.8),
-    color: theme.palette.textColors[200],
     boxSizing: "border-box",
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -244,7 +304,11 @@ export const GeneratedRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const GeneratedCell = styled(TableCell)(({ theme }) => ({
+  color: theme.palette.textColors[200],
   fontSize: theme.typography.fontSize14,
+  fontWeight: theme.typography.fontWeight400,
+  lineHeight: theme.spacing(5.5),
+  letterSpacing: 0,
   minWidth: 0,
   whiteSpace: "nowrap",
   padding: theme.spacing(2),
