@@ -23,9 +23,10 @@ export const ContentRow = styled(Box)({
   display: "flex",
   flex: 1,
   overflow: "hidden",
+  position: "relative",
 });
 
-export const RightContent = styled(Box)({
+export const RightContent = styled(Box)(({ theme }) => ({
   flex: 1,
   display: "flex",
   flexDirection: "column",
@@ -34,7 +35,10 @@ export const RightContent = styled(Box)({
   overflowX: "hidden",
   scrollbarWidth: "none",
   "&::-webkit-scrollbar": { display: "none" },
-});
+  [theme.breakpoints.down("lg")]: {
+    paddingLeft: theme.spacing(21.25),
+  },
+}));
 
 export const StickyHeader = styled(Box)({
   position: "sticky",

@@ -41,23 +41,24 @@ const DeidentifySettings: React.FC<DeidentifySettingsProps> = ({
   return (
     <S.DeidentifySettingsWrapper>
       <S.DeidentifyPageHeader>
-        <S.DeidentifyPageTitleGroup>
+        <S.DeidentifyPageTitleRow>
           <S.DeidentifyPageTitle>
             {t("deidentify.transformation.title")}
           </S.DeidentifyPageTitle>
-          <S.DeidentifyPageSubtitle>
-            {t("deidentify.transformation.subtitle")}
-          </S.DeidentifyPageSubtitle>
-        </S.DeidentifyPageTitleGroup>
-        <S.FrameworkBadge>
-          <S.FrameworkBadgeLabel>
-            {t("deidentify.transformation.frameworkLabel")}
-          </S.FrameworkBadgeLabel>{" "}
-          {t(
-            COMPLIANCE_FRAMEWORK_OPTIONS.find((o) => o.id === selectedFramework)
-              ?.labelKey ?? selectedFramework,
-          )}
-        </S.FrameworkBadge>
+          <S.FrameworkBadge>
+            <S.FrameworkBadgeLabel>
+              {t("deidentify.transformation.frameworkLabel")}
+            </S.FrameworkBadgeLabel>{" "}
+            {t(
+              COMPLIANCE_FRAMEWORK_OPTIONS.find(
+                (o) => o.id === selectedFramework,
+              )?.labelKey ?? selectedFramework,
+            )}
+          </S.FrameworkBadge>
+        </S.DeidentifyPageTitleRow>
+        <S.DeidentifyPageSubtitle>
+          {t("deidentify.transformation.subtitle")}
+        </S.DeidentifyPageSubtitle>
       </S.DeidentifyPageHeader>
 
       <S.DeidentifySettingsContainer
