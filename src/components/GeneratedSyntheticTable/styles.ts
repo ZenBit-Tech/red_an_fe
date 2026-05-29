@@ -43,7 +43,7 @@ export const TableCard = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(4),
   [TABLET_MEDIA_QUERY]: {
-    padding: theme.spacing(6.25),
+    padding: theme.spacing(6),
     gap: theme.spacing(4),
   },
   [theme.breakpoints.down("sm")]: {
@@ -259,7 +259,7 @@ export const GeneratedTableHeadContainer = styled(Box)(({ theme }) => ({
 
 export const GeneratedTableBodyContainer = styled(TableContainer)(
   ({ theme }) => ({
-    maxHeight: theme.spacing(100),
+    maxHeight: theme.spacing(75),
     overflowY: "auto",
     overflowX: "auto",
     scrollbarGutter: "stable",
@@ -291,7 +291,7 @@ export const GeneratedTableBodyContainer = styled(TableContainer)(
       display: "none",
     },
     [TABLET_MEDIA_QUERY]: {
-      maxHeight: theme.spacing(88),
+      maxHeight: theme.spacing(75),
     },
   }),
 );

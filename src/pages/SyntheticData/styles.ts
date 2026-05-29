@@ -36,7 +36,7 @@ export const SyntheticPageContent = styled(Box)(({ theme }) => ({
   margin: "0 auto",
   display: "flex",
   flexDirection: "column",
-  gap: theme.spacing(5),
+  gap: theme.spacing(10),
   [TABLET_MEDIA_QUERY]: {
     maxWidth: theme.spacing(172),
     gap: theme.spacing(8),
@@ -99,10 +99,11 @@ export const SettingsCard = styled(Box)(({ theme }) => ({
   padding: theme.spacing(6),
   display: "flex",
   flexDirection: "column",
-  gap: theme.spacing(8),
+  gap: theme.spacing(10),
   [TABLET_MEDIA_QUERY]: {
     borderRadius: theme.spacing(2),
     padding: theme.spacing(6, 6, 10),
+    gap: theme.spacing(8),
   },
 }));
 
@@ -169,8 +170,11 @@ export const NumberField = styled(TextField)(({ theme }) => ({
   },
   "& .MuiInputBase-input": {
     textAlign: "center",
+    fontFamily: theme.typography.fontFamily,
     fontSize: theme.typography.fontSize16,
-    fontWeight: theme.typography.fontWeight500,
+    fontWeight: theme.typography.fontWeight400,
+    lineHeight: theme.spacing(6),
+    color: theme.palette.primaryColors[50],
     padding: 0,
     MozAppearance: "textfield",
     "&::-webkit-outer-spin-button": {
@@ -200,7 +204,7 @@ export const NumberField = styled(TextField)(({ theme }) => ({
 export const SourceDataSection = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  gap: theme.spacing(2),
+  gap: theme.spacing(4),
   marginTop: theme.spacing(2),
   [TABLET_MEDIA_QUERY]: {
     gap: theme.spacing(4),
@@ -299,13 +303,9 @@ export const CollapsibleHeader = styled(Button)(({ theme }) => ({
 }));
 
 export const CollapsibleTitle = styled(Typography)(({ theme }) => ({
-  fontSize: theme.typography.fontSize20,
-  fontWeight: theme.typography.fontWeight400,
+  fontSize: theme.typography.fontSize18,
+  fontWeight: theme.typography.fontWeight700,
   lineHeight: theme.spacing(7),
-  [TABLET_MEDIA_QUERY]: {
-    fontSize: theme.typography.fontSize18,
-    fontWeight: theme.typography.fontWeight700,
-  },
 }));
 
 export const CollapsibleBody = styled(Box)(({ theme }) => ({
@@ -363,12 +363,15 @@ export const PreviewToken = styled("span")(({ theme }) => ({
 
 export const CharacterCount = styled(Typography)(({ theme }) => ({
   marginTop: theme.spacing(4),
-  color: alpha(theme.palette.textColors[200], 0.8),
+  color: alpha(theme.palette.textColors[200], 0.6),
   fontSize: theme.typography.fontSize12,
-  lineHeight: theme.spacing(2),
+  fontWeight: theme.typography.fontWeight500,
+  lineHeight: theme.spacing(4),
+  letterSpacing: "0.05em",
+  textTransform: "uppercase",
   textAlign: "right",
   [TABLET_MEDIA_QUERY]: {
-    lineHeight: theme.spacing(5),
+    lineHeight: theme.spacing(4),
   },
 }));
 
