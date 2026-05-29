@@ -442,7 +442,7 @@
     "page": {
       "title": "Synthetic Data",
       "titleHighlight": "Generator",
-      "subtitle": "Generate synthetic datasets from previously de-identified documents."
+      "subtitle": "Generate realistic but completely fake clinical data for testing and development"
     },
     "settings": {
       "title": "Generation Settings",

@@ -83,7 +83,7 @@ export const PageSubtitle = styled(Typography)(({ theme }) => ({
   maxWidth: theme.spacing(181.75),
   lineHeight: theme.spacing(8),
   [TABLET_MEDIA_QUERY]: {
-    maxWidth: theme.spacing(152),
+    maxWidth: theme.spacing(117.5),
   },
   [theme.breakpoints.down("sm")]: {
     fontSize: theme.typography.fontSize16,
