@@ -31,6 +31,9 @@ interface HeaderActionButtonLabelProps {
   isHidden?: boolean;
 }
 
+const TABLET_MEDIA_QUERY =
+  "@media (min-width: 768px) and (max-width: 1023.95px)";
+
 export const TableCard = styled(Box)(({ theme }) => ({
   borderRadius: theme.spacing(2),
   border: `1px solid ${alpha(theme.palette.strokeColors[400], 0.8)}`,
@@ -39,6 +42,10 @@ export const TableCard = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(4),
+  [TABLET_MEDIA_QUERY]: {
+    padding: theme.spacing(6.25),
+    gap: theme.spacing(4),
+  },
   [theme.breakpoints.down("sm")]: {
     padding: theme.spacing(3),
   },
@@ -59,6 +66,9 @@ export const DownloadInfoBanner = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(1),
+  [TABLET_MEDIA_QUERY]: {
+    padding: theme.spacing(4),
+  },
 }));
 
 export const DownloadInfoHeader = styled(Stack)(({ theme }) => ({
@@ -106,6 +116,10 @@ export const TableHeader = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
   alignItems: "center",
   gap: theme.spacing(2),
+  [TABLET_MEDIA_QUERY]: {
+    alignItems: "center",
+    gap: theme.spacing(2),
+  },
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
     alignItems: "stretch",
@@ -116,11 +130,17 @@ export const TableTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.primaryColors[50],
   fontSize: theme.typography.fontSize20,
   fontWeight: theme.typography.fontWeight700,
+  [TABLET_MEDIA_QUERY]: {
+    lineHeight: theme.spacing(7),
+  },
 }));
 
 export const TableHeaderActions = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(2),
+  [TABLET_MEDIA_QUERY]: {
+    gap: theme.spacing(4),
+  },
   [theme.breakpoints.down("sm")]: {
     width: "100%",
     justifyContent: "stretch",
@@ -190,6 +210,13 @@ export const HeaderActionButton = styled(Button)(({ theme }) => ({
   color: theme.palette.primaryColors[50],
   whiteSpace: "nowrap",
   boxShadow: "none",
+  [TABLET_MEDIA_QUERY]: {
+    width: "auto",
+    minWidth: 0,
+    padding: theme.spacing(2.5, 3),
+    fontSize: theme.typography.fontSize16,
+    lineHeight: theme.spacing(6),
+  },
   "& .MuiButton-startIcon": {
     margin: 0,
   },
@@ -236,23 +263,24 @@ export const GeneratedTableBodyContainer = styled(TableContainer)(
     overflowY: "auto",
     overflowX: "auto",
     scrollbarGutter: "stable",
-    scrollbarWidth: "auto",
+    scrollbarWidth: "thin",
     scrollbarColor: `${theme.palette.neutralColors[600]} ${theme.palette.neutralColors[800]}`,
     "&::-webkit-scrollbar": {
       width: theme.spacing(3),
       height: theme.spacing(3),
     },
     "&::-webkit-scrollbar-track": {
-      backgroundColor: theme.palette.neutralColors[800],
+      backgroundColor: alpha(theme.palette.neutralColors[800], 0.9),
       borderRadius: theme.spacing(999),
     },
     "&::-webkit-scrollbar-thumb": {
-      backgroundColor: theme.palette.neutralColors[600],
+      backgroundColor: alpha(theme.palette.neutralColors[500], 0.9),
       borderRadius: theme.spacing(999),
-      border: `${theme.spacing(0.25)} solid ${theme.palette.neutralColors[800]}`,
+      border: `${theme.spacing(0.5)} solid ${alpha(theme.palette.neutralColors[800], 0.95)}`,
+      minHeight: theme.spacing(8),
     },
     "&::-webkit-scrollbar-thumb:hover": {
-      backgroundColor: theme.palette.neutralColors[500],
+      backgroundColor: alpha(theme.palette.neutralColors[400], 0.95),
     },
     "&::-webkit-scrollbar-corner": {
       backgroundColor: theme.palette.neutralColors[800],
@@ -261,6 +289,9 @@ export const GeneratedTableBodyContainer = styled(TableContainer)(
       width: 0,
       height: 0,
       display: "none",
+    },
+    [TABLET_MEDIA_QUERY]: {
+      maxHeight: theme.spacing(88),
     },
   }),
 );
@@ -311,8 +342,11 @@ export const GeneratedCell = styled(TableCell)(({ theme }) => ({
   letterSpacing: 0,
   minWidth: 0,
   whiteSpace: "nowrap",
-  padding: theme.spacing(2),
+  padding: `${theme.spacing(2)} ${theme.spacing(3)}`,
   textAlign: "center",
+  [TABLET_MEDIA_QUERY]: {
+    lineHeight: theme.spacing(5.5),
+  },
 }));
 
 export const GeneratedBody = styled(TableBody)(() => ({}));

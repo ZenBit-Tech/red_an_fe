@@ -12,10 +12,16 @@ interface CollapsibleCardProps {
   isOpen: boolean;
 }
 
+const TABLET_MEDIA_QUERY =
+  "@media (min-width: 768px) and (max-width: 1023.95px)";
+
 export const SyntheticPageWrapper = styled(Box)(({ theme }) => ({
   minHeight: "100vh",
   boxSizing: "border-box",
   padding: theme.spacing(9, 10),
+  [TABLET_MEDIA_QUERY]: {
+    padding: theme.spacing(10),
+  },
   [theme.breakpoints.down("md")]: {
     padding: theme.spacing(4),
   },
@@ -31,21 +37,32 @@ export const SyntheticPageContent = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(5),
+  [TABLET_MEDIA_QUERY]: {
+    maxWidth: theme.spacing(172),
+    gap: theme.spacing(8),
+  },
 }));
 
 export const HeaderGroup = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  gap: theme.spacing(2),
+  gap: theme.spacing(4),
   width: "100%",
+  [TABLET_MEDIA_QUERY]: {
+    gap: theme.spacing(2),
+  },
 }));
 
 export const PageTitle = styled(Typography)(({ theme }) => ({
+  fontFamily: theme.typography.secondFamily,
   color: theme.palette.primaryColors[50],
   fontSize: theme.typography.fontSize48,
   fontWeight: theme.typography.fontWeight700,
-  lineHeight: 1,
+  lineHeight: theme.spacing(15),
   whiteSpace: "nowrap",
+  [TABLET_MEDIA_QUERY]: {
+    fontSize: theme.typography.fontSize48,
+  },
   [theme.breakpoints.down("sm")]: {
     fontSize: theme.typography.fontSize38,
     whiteSpace: "normal",
@@ -62,10 +79,15 @@ export const PageTitleHighlight = styled("span")(({ theme }) => ({
 export const PageSubtitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.textColors[200],
   fontSize: theme.typography.fontSize20,
-  fontWeight: theme.typography.fontWeight500,
+  fontWeight: theme.typography.fontWeight400,
   maxWidth: theme.spacing(181.75),
+  lineHeight: theme.spacing(8),
+  [TABLET_MEDIA_QUERY]: {
+    maxWidth: theme.spacing(152),
+  },
   [theme.breakpoints.down("sm")]: {
     fontSize: theme.typography.fontSize16,
+    lineHeight: theme.spacing(6),
     maxWidth: "100%",
   },
 }));
@@ -78,6 +100,10 @@ export const SettingsCard = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(8),
+  [TABLET_MEDIA_QUERY]: {
+    borderRadius: theme.spacing(2),
+    padding: theme.spacing(6, 6, 10),
+  },
 }));
 
 export const SettingsHeader = styled(Box)(() => ({
@@ -89,7 +115,7 @@ export const SettingsHeader = styled(Box)(() => ({
 export const SettingsTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.primaryColors[100],
   fontSize: theme.typography.fontSize24,
-  fontWeight: theme.typography.fontWeight700,
+  fontWeight: theme.typography.fontWeight400,
 }));
 
 export const SettingsDescription = styled(Typography)(({ theme }) => ({
@@ -101,8 +127,11 @@ export const SettingsRow = styled(Box)(({ theme }) => ({
   display: "flex",
   width: "100%",
   alignItems: "center",
-  gap: theme.spacing(2),
+  gap: theme.spacing(4),
   minHeight: theme.spacing(12.5),
+  [TABLET_MEDIA_QUERY]: {
+    minHeight: theme.spacing(14),
+  },
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
     alignItems: "flex-start",
@@ -113,9 +142,13 @@ export const InputLabel = styled(Typography)(({ theme }) => ({
   width: theme.spacing(42.75),
   color: theme.palette.primaryColors[50],
   fontSize: theme.typography.fontSize16,
-  fontWeight: theme.typography.fontWeight500,
+  fontWeight: theme.typography.fontWeight400,
   lineHeight: theme.spacing(7),
   margin: 0,
+  [TABLET_MEDIA_QUERY]: {
+    width: theme.spacing(47.5),
+    fontSize: theme.typography.fontSize20,
+  },
 }));
 
 export const InputWarningLabel = styled(InputLabel)(() => ({
@@ -124,6 +157,9 @@ export const InputWarningLabel = styled(InputLabel)(() => ({
 
 export const NumberField = styled(TextField)(({ theme }) => ({
   width: theme.spacing(30),
+  [TABLET_MEDIA_QUERY]: {
+    width: theme.spacing(30),
+  },
   "& .MuiInputBase-root": {
     height: theme.spacing(12.5),
     backgroundColor: theme.palette.backgroundColor,
@@ -166,17 +202,25 @@ export const SourceDataSection = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(2),
   marginTop: theme.spacing(2),
+  [TABLET_MEDIA_QUERY]: {
+    gap: theme.spacing(4),
+  },
 }));
 
 export const SourceDataTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.primaryColors[100],
   fontSize: theme.typography.fontSize24,
-  fontWeight: theme.typography.fontWeight500,
+  fontWeight: theme.typography.fontWeight400,
+  [TABLET_MEDIA_QUERY]: {
+    fontSize: theme.typography.fontSize20,
+    lineHeight: theme.spacing(7),
+  },
 }));
 
 export const SourceDataDescription = styled(Typography)(({ theme }) => ({
   color: theme.palette.textColors[200],
   fontSize: theme.typography.fontSize14,
+  lineHeight: theme.spacing(6),
 }));
 
 export const GenerateButton = styled(Button)(({ theme }) => ({
@@ -192,6 +236,9 @@ export const GenerateButton = styled(Button)(({ theme }) => ({
   color: theme.palette.textColors[50],
   backgroundImage: `linear-gradient(141deg, ${theme.palette.primaryColors[700]} 0%, ${theme.palette.primaryColors[900]} 100%)`,
   marginTop: theme.spacing(2),
+  [TABLET_MEDIA_QUERY]: {
+    width: theme.spacing(62.5),
+  },
   "&.Mui-disabled .MuiCircularProgress-root": {
     color: theme.palette.primaryColors[50],
     opacity: 1,
@@ -255,6 +302,10 @@ export const CollapsibleTitle = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize20,
   fontWeight: theme.typography.fontWeight400,
   lineHeight: theme.spacing(7),
+  [TABLET_MEDIA_QUERY]: {
+    fontSize: theme.typography.fontSize18,
+    fontWeight: theme.typography.fontWeight700,
+  },
 }));
 
 export const CollapsibleBody = styled(Box)(({ theme }) => ({
@@ -269,21 +320,27 @@ export const PreviewSurface = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.backgroundColor,
   border: `1px solid ${alpha(theme.palette.strokeColors[400], 0.7)}`,
   padding: theme.spacing(4),
-  scrollbarWidth: "auto",
-  scrollbarColor: `${alpha(theme.palette.neutralColors[400], 0.8)} transparent`,
+  [TABLET_MEDIA_QUERY]: {
+    minHeight: theme.spacing(90),
+    maxHeight: theme.spacing(90),
+  },
+  scrollbarWidth: "thin",
+  scrollbarColor: `${alpha(theme.palette.neutralColors[500], 0.85)} ${alpha(theme.palette.neutralColors[900], 0.35)}`,
   "&::-webkit-scrollbar": {
     width: theme.spacing(3),
   },
   "&::-webkit-scrollbar-track": {
-    backgroundColor: "transparent",
+    backgroundColor: alpha(theme.palette.neutralColors[900], 0.35),
+    borderRadius: theme.spacing(999),
   },
   "&::-webkit-scrollbar-thumb": {
-    backgroundColor: alpha(theme.palette.neutralColors[400], 0.8),
-    borderRadius: theme.spacing(1.5),
-    border: `2px solid ${alpha(theme.palette.neutralColors[900], 0.5)}`,
+    backgroundColor: alpha(theme.palette.neutralColors[500], 0.85),
+    borderRadius: theme.spacing(999),
+    border: `${theme.spacing(0.5)} solid ${alpha(theme.palette.neutralColors[900], 0.65)}`,
+    minHeight: theme.spacing(8),
   },
   "&::-webkit-scrollbar-thumb:hover": {
-    backgroundColor: alpha(theme.palette.neutralColors[300], 0.9),
+    backgroundColor: alpha(theme.palette.neutralColors[400], 0.95),
   },
 }));
 
@@ -310,6 +367,9 @@ export const CharacterCount = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize12,
   lineHeight: theme.spacing(2),
   textAlign: "right",
+  [TABLET_MEDIA_QUERY]: {
+    lineHeight: theme.spacing(5),
+  },
 }));
 
 export const EmptyState = styled(Box)(({ theme }) => ({
