@@ -45,6 +45,9 @@ export const PageHeaderRow1 = styled(Box)(({ theme }) => ({
   alignItems: "flex-start",
   justifyContent: "space-between",
   marginBottom: theme.spacing(2),
+  [theme.breakpoints.down("lg")]: {
+    flexDirection: "column",
+  },
 }));
 
 export const PageHeaderRow2 = styled(Box)({
@@ -59,6 +62,11 @@ export const HeaderActionsColumn = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   alignItems: "flex-end",
   gap: theme.spacing(3),
+  [theme.breakpoints.down("lg")]: {
+    marginTop: theme.spacing(8),
+    width: "100%",
+    gap: theme.spacing(6),
+  },
 }));
 
 export const PageTitle = styled(Typography)(({ theme }) => ({
@@ -105,6 +113,9 @@ export const StartButton = styled(Button)(({ theme }) => ({
 export const TimeFilterGroup = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(2),
+  [theme.breakpoints.down("lg")]: {
+    gap: theme.spacing(4),
+  },
 }));
 
 export const TimeFilterPill = styled(Box, {
@@ -114,6 +125,10 @@ export const TimeFilterPill = styled(Box, {
   paddingBlock: theme.spacing(2.5),
   borderRadius: theme.spacing(2),
   cursor: "pointer",
+  [theme.breakpoints.down("lg")]: {
+    paddingInline: theme.spacing(3),
+    paddingBlock: theme.spacing(2),
+  },
   backgroundColor: theme.palette.neutralColors[800],
   border: active
     ? `${theme.spacing(0.25)} solid ${theme.palette.strokeColors[120]}`
@@ -156,12 +171,19 @@ export const TopSectionGrid = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(6),
   marginBottom: theme.spacing(6),
+  [theme.breakpoints.down("lg")]: {
+    flexDirection: "column",
+  },
 }));
 
 export const StatCardsColumn = styled(Box)(({ theme }) => ({
   display: "grid",
   gridTemplateColumns: `repeat(2, ${theme.spacing(58.25)})`,
   gap: theme.spacing(6),
+  [theme.breakpoints.down("lg")]: {
+    margin: "0 auto",
+    gridTemplateColumns: `repeat(2, ${theme.spacing(72)})`,
+  },
 }));
 
 export const StatCard = styled(Box)(({ theme }) => ({
@@ -176,6 +198,13 @@ export const StatCard = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "center",
   gap: theme.spacing(3),
+  [theme.breakpoints.down("lg")]: {
+    width: "100%",
+    height: theme.spacing(35),
+    paddingLeft: theme.spacing(13),
+    paddingRight: theme.spacing(13),
+    gap: theme.spacing(0),
+  },
 }));
 
 export const StatCardHeader = styled(Box)({
@@ -212,6 +241,10 @@ export const StatValue = styled(Typography)(({ theme }) => ({
   color: theme.palette.textColors[50],
   fontSize: theme.typography.fontSize32,
   fontWeight: theme.typography.fontWeight500,
+  [theme.breakpoints.down("lg")]: {
+    fontSize: theme.typography.fontSize48,
+    fontWeight: theme.typography.fontWeight700,
+  },
 }));
 
 export const StatFooter = styled(Box)(({ theme }) => ({
@@ -247,6 +280,9 @@ export const ComplianceCard = styled(ChartCardBase)(({ theme }) => ({
   justifyContent: "center",
   width: theme.spacing(123.25),
   height: theme.spacing(92),
+  [theme.breakpoints.down("lg")]: {
+    width: "100%",
+  },
 }));
 
 export const FullWidthCard = styled(ChartCardBase)(({ theme }) => ({
@@ -260,12 +296,18 @@ export const FullWidthCard = styled(ChartCardBase)(({ theme }) => ({
 export const HalfWidthCard = styled(ChartCardBase)(({ theme }) => ({
   width: theme.spacing(122),
   height: theme.spacing(112),
+  [theme.breakpoints.down("lg")]: {
+    width: "100%",
+  },
 }));
 
 export const TwoColGrid = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(7.75),
   marginBottom: theme.spacing(6),
+  [theme.breakpoints.down("lg")]: {
+    flexDirection: "column",
+  },
 }));
 
 export const ChartHeader = styled(Box)(({ theme }) => ({

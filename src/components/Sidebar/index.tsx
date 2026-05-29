@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Check as CheckIcon,
   HelpOutlineOutlined,
+  KeyboardDoubleArrowLeft,
+  KeyboardDoubleArrowRight,
   LogoutOutlined,
 } from "@mui/icons-material";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 import { useAppSelector } from "@/common/hooks/hooks";
 import {
@@ -21,14 +25,32 @@ const Sidebar = ({ activeNav, setActiveNav, onSupportClick }: SidebarProps) => {
     (state) => state.deidentifyStep.activeStep,
   );
 
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.down("lg"));
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  const effectiveCollapsed = isTablet && isCollapsed;
+
   return (
-    <S.SidebarContainer>
+    <S.SidebarContainer isCollapsed={effectiveCollapsed}>
       <div>
-        <S.SidebarHeader>
-          <div>
-            <S.TopBarTitle>{t("sidebar.header.title")}</S.TopBarTitle>
-            <S.TopBarSubtitle>{t("sidebar.header.subtitle")}</S.TopBarSubtitle>
-          </div>
+        <S.SidebarHeader isCollapsed={effectiveCollapsed}>
+          {!effectiveCollapsed && (
+            <div>
+              <S.TopBarTitle>{t("sidebar.header.title")}</S.TopBarTitle>
+              <S.TopBarSubtitle>
+                {t("sidebar.header.subtitle")}
+              </S.TopBarSubtitle>
+            </div>
+          )}
+          {isTablet && (
+            <S.CollapseToggleButton onClick={() => setIsCollapsed((v) => !v)}>
+              {effectiveCollapsed ? (
+                <KeyboardDoubleArrowRight />
+              ) : (
+                <KeyboardDoubleArrowLeft />
+              )}
+            </S.CollapseToggleButton>
+          )}
         </S.SidebarHeader>
         <S.SidebarNav>
           {NAV_ITEMS.map((item) => {
@@ -41,6 +63,7 @@ const Sidebar = ({ activeNav, setActiveNav, onSupportClick }: SidebarProps) => {
               <div key={item.key}>
                 <S.NavItem
                   active={isActive}
+                  isCollapsed={effectiveCollapsed}
                   onClick={handleNavSelect}
                   onKeyDown={(e) => handleActionKeyDown(e, handleNavSelect)}
                   role="button"
@@ -50,12 +73,14 @@ const Sidebar = ({ activeNav, setActiveNav, onSupportClick }: SidebarProps) => {
                   <S.NavIconWrapper active={isActive}>
                     <IconComponent />
                   </S.NavIconWrapper>
-                  <S.NavItemText active={isActive}>
-                    {t(item.labelKey)}
-                  </S.NavItemText>
+                  {!effectiveCollapsed && (
+                    <S.NavItemText active={isActive}>
+                      {t(item.labelKey)}
+                    </S.NavItemText>
+                  )}
                 </S.NavItem>
                 {showDeidentifySubmenu && (
-                  <S.DeidentifySubmenu>
+                  <S.DeidentifySubmenu isCollapsed={effectiveCollapsed}>
                     {DEIDENTIFY_SUBMENU_STEPS.map((step, index) => {
                       const isStepActive =
                         step.stepIndex === activeDeidentifyStep;
@@ -75,11 +100,13 @@ const Sidebar = ({ activeNav, setActiveNav, onSupportClick }: SidebarProps) => {
                             </S.DeidentifySubmenuStepDot>
                             <S.DeidentifySubmenuConnector visible={!isLast} />
                           </S.DeidentifySubmenuIconWrap>
-                          <S.DeidentifySubmenuLabel
-                            active={isStepActive || isStepCompleted}
-                          >
-                            {t(step.labelKey)}
-                          </S.DeidentifySubmenuLabel>
+                          {!effectiveCollapsed && (
+                            <S.DeidentifySubmenuLabel
+                              active={isStepActive || isStepCompleted}
+                            >
+                              {t(step.labelKey)}
+                            </S.DeidentifySubmenuLabel>
+                          )}
                         </S.DeidentifySubmenuItem>
                       );
                     })}
@@ -93,6 +120,7 @@ const Sidebar = ({ activeNav, setActiveNav, onSupportClick }: SidebarProps) => {
       <S.SidebarBottom>
         <S.NavItem
           active={false}
+          isCollapsed={effectiveCollapsed}
           onClick={onSupportClick}
           onKeyDown={(e) => handleActionKeyDown(e, onSupportClick)}
           role="button"
@@ -101,12 +129,15 @@ const Sidebar = ({ activeNav, setActiveNav, onSupportClick }: SidebarProps) => {
           <S.NavIconWrapper active={false} small>
             <HelpOutlineOutlined />
           </S.NavIconWrapper>
-          <S.NavItemText active={false}>
-            {t("sidebar.bottom.support")}
-          </S.NavItemText>
+          {!effectiveCollapsed && (
+            <S.NavItemText active={false}>
+              {t("sidebar.bottom.support")}
+            </S.NavItemText>
+          )}
         </S.NavItem>
         <S.NavItem
           active={false}
+          isCollapsed={effectiveCollapsed}
           onClick={handleLogout}
           onKeyDown={(e) => handleActionKeyDown(e, handleLogout)}
           role="button"
@@ -115,7 +146,11 @@ const Sidebar = ({ activeNav, setActiveNav, onSupportClick }: SidebarProps) => {
           <S.NavIconWrapper active={false} small>
             <LogoutOutlined />
           </S.NavIconWrapper>
-          <S.LogoutButtonText>{t("sidebar.bottom.logout")}</S.LogoutButtonText>
+          {!effectiveCollapsed && (
+            <S.LogoutButtonText>
+              {t("sidebar.bottom.logout")}
+            </S.LogoutButtonText>
+          )}
         </S.NavItem>
       </S.SidebarBottom>
     </S.SidebarContainer>

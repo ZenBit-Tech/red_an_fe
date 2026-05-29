@@ -1,25 +1,56 @@
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 
-export const SidebarContainer = styled(Box)(({ theme }) => ({
+export const SidebarContainer = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isCollapsed",
+})<{ isCollapsed: boolean }>(({ theme, isCollapsed }) => ({
   boxSizing: "border-box",
-  width: theme.spacing(77.5),
-  height: theme.spacing(232),
+  width: isCollapsed ? theme.spacing(21.25) : theme.spacing(77.5),
+  height: "100%",
   paddingTop: theme.spacing(6),
-  paddingRight: theme.spacing(3.5),
+  paddingRight: theme.spacing(4),
   paddingBottom: theme.spacing(6),
-  paddingLeft: theme.spacing(10),
+  paddingLeft: isCollapsed ? theme.spacing(4) : theme.spacing(10),
   flexShrink: 0,
   backgroundColor: theme.palette.secondaryColors[900],
   borderRight: `${theme.spacing(0.25)} solid ${theme.palette.strokeColors[150]}`,
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-between",
+  transition: "width 0.25s ease, padding 0.25s ease",
+  overflowX: "hidden",
+  overflowY: "auto",
+  scrollbarWidth: "none",
+  "&::-webkit-scrollbar": { display: "none" },
+  [theme.breakpoints.down("lg")]: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: 200,
+  },
 }));
 
-export const SidebarHeader = styled(Box)(({ theme }) => ({
+export const SidebarHeader = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isCollapsed",
+})<{ isCollapsed?: boolean }>(({ theme, isCollapsed }) => ({
   paddingBottom: theme.spacing(6),
   marginBottom: theme.spacing(6),
+  display: "flex",
+  alignItems: "center",
+  justifyContent: isCollapsed ? "center" : "space-between",
+  [theme.breakpoints.down("lg")]: {
+    paddingBottom: theme.spacing(13.5),
+    marginBottom: theme.spacing(13.5),
+  },
+}));
+
+export const CollapseToggleButton = styled(IconButton)(({ theme }) => ({
+  color: theme.palette.textColors[200],
+  padding: theme.spacing(1),
+  flexShrink: 0,
+  "&:hover": {
+    color: theme.palette.textColors[400],
+    backgroundColor: "transparent",
+  },
 }));
 
 export const TopBarTitle = styled(Typography)(({ theme }) => ({
@@ -42,24 +73,27 @@ export const SidebarNav = styled(Box)(({ theme }) => ({
 }));
 
 export const NavItem = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "active",
-})<{ active: boolean }>(({ theme, active }) => ({
-  display: "flex",
-  alignItems: "center",
-  gap: theme.spacing(3),
-  paddingTop: theme.spacing(3),
-  paddingBottom: theme.spacing(3),
-  paddingLeft: theme.spacing(4),
-  paddingRight: theme.spacing(4),
-  borderRadius: theme.spacing(2.5),
-  cursor: "pointer",
-  backgroundColor: active ? theme.palette.primaryColors[700] : "transparent",
-  "&:hover": {
-    backgroundColor: active
-      ? theme.palette.primaryColors[700]
-      : theme.palette.strokeColors[120],
-  },
-}));
+  shouldForwardProp: (prop) => prop !== "active" && prop !== "isCollapsed",
+})<{ active: boolean; isCollapsed?: boolean }>(
+  ({ theme, active, isCollapsed }) => ({
+    display: "flex",
+    alignItems: "center",
+    gap: isCollapsed ? 0 : theme.spacing(3),
+    justifyContent: isCollapsed ? "center" : undefined,
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+    paddingLeft: isCollapsed ? theme.spacing(2) : theme.spacing(4),
+    paddingRight: isCollapsed ? theme.spacing(2) : theme.spacing(4),
+    borderRadius: theme.spacing(2.5),
+    cursor: "pointer",
+    backgroundColor: active ? theme.palette.primaryColors[700] : "transparent",
+    "&:hover": {
+      backgroundColor: active
+        ? theme.palette.primaryColors[700]
+        : theme.palette.strokeColors[120],
+    },
+  }),
+);
 
 export const NavIconWrapper = styled(Box, {
   shouldForwardProp: (prop) => prop !== "active" && prop !== "small",
@@ -82,12 +116,15 @@ export const NavItemText = styled(Typography, {
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight500,
   fontSize: theme.typography.fontSize16,
+  whiteSpace: "nowrap",
 }));
 
 export const SidebarBottom = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(4),
+  marginTop: "auto",
+  paddingTop: theme.spacing(6),
 }));
 
 export const LogoutButtonText = styled(Typography)(({ theme }) => ({
@@ -95,14 +132,18 @@ export const LogoutButtonText = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   fontWeight: theme.typography.fontWeight500,
   fontSize: theme.typography.fontSize16,
+  whiteSpace: "nowrap",
 }));
 
-export const DeidentifySubmenu = styled(Box)(({ theme }) => ({
+export const DeidentifySubmenu = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isCollapsed",
+})<{ isCollapsed?: boolean }>(({ theme, isCollapsed }) => ({
   display: "flex",
   flexDirection: "column",
   marginTop: theme.spacing(2),
-  marginLeft: theme.spacing(4),
+  marginLeft: isCollapsed ? 0 : theme.spacing(4),
   paddingLeft: 0,
+  alignItems: isCollapsed ? "center" : undefined,
 }));
 
 export const DeidentifySubmenuItem = styled(Box)(({ theme }) => ({
@@ -182,4 +223,5 @@ export const DeidentifySubmenuLabel = styled(Typography, {
     ? theme.palette.primaryColors[200]
     : alpha(theme.palette.textColors[200], 0.6),
   transition: "color 200ms ease",
+  whiteSpace: "nowrap",
 }));
