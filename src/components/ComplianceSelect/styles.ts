@@ -101,10 +101,9 @@ export const SelectionCard = styled(Paper, {
   "&:focus-visible": {
     borderColor: selected ? "transparent" : theme.palette.primaryColors[200],
   },
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("lg")]: {
     width: "100%",
-    height: "auto",
-    minHeight: theme.spacing(84.25),
+    height: theme.spacing(69.75),
   },
 }));
 
@@ -152,6 +151,9 @@ export const FrameworkDescription = styled("p")(({ theme }) => ({
   color: theme.palette.textColors[200],
   margin: 0,
   flexGrow: 1,
+  [theme.breakpoints.down("lg")]: {
+    whiteSpace: "pre-line",
+  },
 }));
 
 export const CardDivider = styled(Box)(({ theme }) => ({
@@ -208,4 +210,8 @@ export const SelectedLine = styled(Box)(({ theme }) => ({
   borderRadius: theme.spacing(0.5),
   backgroundColor: theme.palette.primaryColors[700],
   marginLeft: theme.spacing(2),
+  [theme.breakpoints.down("lg")]: {
+    flex: "none",
+    width: theme.spacing(24),
+  },
 }));

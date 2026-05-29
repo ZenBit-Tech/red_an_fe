@@ -21,10 +21,16 @@ export const ClinicalTextInputContainer = styled(Box)(({ theme }) => ({
 
 export const ClinicalInputHeader = styled(Box)(({ theme }) => ({
   display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(1.5),
+}));
+
+export const ClinicalInputTitleRow = styled(Box)(({ theme }) => ({
+  display: "flex",
   flexDirection: "row",
   justifyContent: "space-between",
-  alignItems: "flex-start",
-  gap: theme.spacing(8),
+  alignItems: "center",
+  gap: theme.spacing(4),
 }));
 
 export const ClinicalInputTitleGroup = styled(Box)(({ theme }) => ({

@@ -57,6 +57,11 @@ export const DeidentifyPageSections = styled(Box)(({ theme }) => ({
   "& > :nth-of-type(3)": {
     marginTop: theme.spacing(12.5),
   },
+  [theme.breakpoints.down("lg")]: {
+    "& > :nth-of-type(3)": {
+      marginTop: theme.spacing(4),
+    },
+  },
 }));
 
 export const DeidentifyStepperContainer = styled(Box)(({ theme }) => ({

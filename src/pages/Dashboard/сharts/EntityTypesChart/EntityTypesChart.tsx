@@ -1,4 +1,5 @@
 import { useTheme } from "@mui/material/styles";
+import { useMediaQuery } from "@mui/material";
 
 import { type DeIdStatsChartItemDto } from "@/types/dashboard";
 import * as S from "./styles";
@@ -9,11 +10,12 @@ interface EntityTypesChartProps {
 
 const EntityTypesChart = ({ chartData = [] }: EntityTypesChartProps) => {
   const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.down("lg"));
 
   const gradientStart = theme.palette.primaryColors?.[200];
   const gradientEnd = theme.palette.primaryColors?.[700];
 
-  const BAR_WIDTH = 44;
+  const BAR_WIDTH = isTablet ? 30 : 44;
   const GAP = 16;
 
   const chartWidth = chartData.length * (BAR_WIDTH + GAP);

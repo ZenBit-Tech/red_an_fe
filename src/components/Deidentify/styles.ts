@@ -19,9 +19,19 @@ export const DeidentifySettingsWrapper = styled(Box)(({ theme }) => ({
 
 export const DeidentifyPageHeader = styled(Box)(({ theme }) => ({
   display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(3),
+  [theme.breakpoints.down("lg")]: {
+    gap: 0,
+  },
+}));
+
+export const DeidentifyPageTitleRow = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
   justifyContent: "space-between",
-  alignItems: "flex-start",
-  gap: theme.spacing(8),
+  alignItems: "center",
+  gap: theme.spacing(4),
 }));
 
 export const DeidentifyPageTitleGroup = styled(Box)(({ theme }) => ({
@@ -37,6 +47,9 @@ export const DeidentifyPageTitle = styled("h1")(({ theme }) => ({
   color: theme.palette.textColors[50],
   margin: 0,
   marginBottom: theme.spacing(4),
+  [theme.breakpoints.down("lg")]: {
+    marginBottom: 0,
+  },
 }));
 
 export const DeidentifyPageTitleHighlight = styled("span")(({ theme }) => ({

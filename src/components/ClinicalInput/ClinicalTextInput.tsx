@@ -227,26 +227,27 @@ const ClinicalTextInput: React.FC = () => {
   return (
     <S.ClinicalTextInputContainer>
       <S.ClinicalInputHeader>
-        <S.ClinicalInputTitleGroup>
+        <S.ClinicalInputTitleRow>
           <S.ClinicalTextInputTitle>
             {t("deidentify.clinicalInput.title")}{" "}
             <S.ClinicalTextInputTitleHighlight>
               {t("deidentify.clinicalInput.titleHighlight")}
             </S.ClinicalTextInputTitleHighlight>
           </S.ClinicalTextInputTitle>
-          <S.ClinicalTextInputSubtitle>
-            {t("deidentify.clinicalInput.subtitle")}
-          </S.ClinicalTextInputSubtitle>
-        </S.ClinicalInputTitleGroup>
-        <S.FrameworkBadge>
-          <S.FrameworkBadgeLabel>
-            {t("deidentify.transformation.frameworkLabel")}
-          </S.FrameworkBadgeLabel>{" "}
-          {t(
-            COMPLIANCE_FRAMEWORK_OPTIONS.find((o) => o.id === selectedFramework)
-              ?.labelKey ?? selectedFramework,
-          )}
-        </S.FrameworkBadge>
+          <S.FrameworkBadge>
+            <S.FrameworkBadgeLabel>
+              {t("deidentify.transformation.frameworkLabel")}
+            </S.FrameworkBadgeLabel>{" "}
+            {t(
+              COMPLIANCE_FRAMEWORK_OPTIONS.find(
+                (o) => o.id === selectedFramework,
+              )?.labelKey ?? selectedFramework,
+            )}
+          </S.FrameworkBadge>
+        </S.ClinicalInputTitleRow>
+        <S.ClinicalTextInputSubtitle>
+          {t("deidentify.clinicalInput.subtitle")}
+        </S.ClinicalTextInputSubtitle>
       </S.ClinicalInputHeader>
 
       <S.ClinicalInputPanel>

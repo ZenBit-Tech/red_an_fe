@@ -87,7 +87,7 @@
       "hipaa": {
         "label": "HIPAA",
         "category": "Standard Medical",
-        "desc": "Health Insurance Portability and Accountability Act. Optimized for US-based clinical data and PHI protection."
+        "desc": "Health Insurance Portability and Accountability Act.\nOptimized for US-based clinical data and PHI protection."
       },
       "gdprEu": {
         "label": "GDPR EU ",
@@ -97,7 +97,7 @@
       "gdprUk": {
         "label": "GDPR UK",
         "category": "Developer Tooling",
-        "desc": "Integrated software development kit for programmatic compliance.Automated enforcement of EUdata sovereignty rules in custom app pipelines."
+        "desc": "Integrated software development kit for programmatic compliance.\nAutomated enforcement of EU data sovereignty rules in custom app pipelines."
       },
       "custom": {
         "label": "Custom",
