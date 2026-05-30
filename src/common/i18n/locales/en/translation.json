@@ -442,7 +442,7 @@
     "page": {
       "title": "Synthetic Data",
       "titleHighlight": "Generator",
-      "subtitle": "Generate synthetic datasets from previously de-identified documents."
+      "subtitle": "Generate realistic but completely fake clinical data for testing and development"
     },
     "settings": {
       "title": "Generation Settings",
@@ -463,7 +463,7 @@
       "generate": "Generate Synthetic Data",
       "generating": "Generating...",
       "regenerate": "Regenerate",
-      "download": "Download"
+      "download": "Download ZIP"
     },
     "previousData": {
       "title": "Previously De-Identified Data",
@@ -492,6 +492,10 @@
         "identifier": "Identifier",
         "dynamic": "{{type}}"
       }
+    },
+    "popup": {
+      "title": "Your synthetic data and documents are ready.",
+      "description": "Download the ZIP archive containing a list of your medical files with all sensitive data replaced by synthetic patterns."
     }
   },
   "trialBanner": {

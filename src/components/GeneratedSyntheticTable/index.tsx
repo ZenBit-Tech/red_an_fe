@@ -13,6 +13,8 @@ import { useTranslation } from "react-i18next";
 import type { SyntheticTableResponse } from "@/common/api/deidentifyApiTypes";
 import * as S from "@/components/GeneratedSyntheticTable/styles";
 
+const synthDataReadyIconHref = "/synthData/icons.svg#icon-synthdataready";
+
 const COLUMN_KEY_PATTERN = /^(.*?)(?:_(\d+))?$/;
 
 const GENERATED_TABLE_COLUMN_WIDTHS = {
@@ -245,51 +247,73 @@ export const GeneratedSyntheticTable = ({
 
   return (
     <S.TableCard>
-      <S.TableHeader>
-        <S.TableTitle>{t("syntheticGenerator.table.title")}</S.TableTitle>
-        <S.TableHeaderActions>
-          <S.HeaderActionButton
-            onClick={() => {
-              void onRegenerate();
-            }}
-            disabled={isRegenerating || isGenerating || isDownloading}
-            startIcon={<S.RegenerateActionIcon isHidden={isRegenerating} />}
-          >
-            <S.HeaderActionButtonContent>
-              <S.HeaderActionButtonLabel isHidden={isRegenerating}>
-                {t("syntheticGenerator.actions.regenerate")}
-              </S.HeaderActionButtonLabel>
-              {isRegenerating && (
-                <S.HeaderActionButtonSpinner
-                  size={24}
-                  thickness={5}
-                  disableShrink
-                />
-              )}
-            </S.HeaderActionButtonContent>
-          </S.HeaderActionButton>
-          <S.HeaderActionButton
-            onClick={() => {
-              void onDownload();
-            }}
-            disabled={isDownloading || isGenerating || isRegenerating}
-            startIcon={<S.DownloadActionIcon isHidden={isDownloading} />}
-          >
-            <S.HeaderActionButtonContent>
-              <S.HeaderActionButtonLabel isHidden={isDownloading}>
-                {t("syntheticGenerator.actions.download")}
-              </S.HeaderActionButtonLabel>
-              {isDownloading && (
-                <S.HeaderActionButtonSpinner
-                  size={24}
-                  thickness={5}
-                  disableShrink
-                />
-              )}
-            </S.HeaderActionButtonContent>
-          </S.HeaderActionButton>
-        </S.TableHeaderActions>
-      </S.TableHeader>
+      <S.TableHeaderSection>
+        <S.DownloadInfoBanner>
+          <S.DownloadInfoHeader>
+            <S.DownloadInfoIcon>
+              <S.DownloadInfoSvg
+                viewBox="0 0 32 32"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <use href={synthDataReadyIconHref} />
+              </S.DownloadInfoSvg>
+            </S.DownloadInfoIcon>
+            <S.DownloadInfoTitle>
+              {t("syntheticGenerator.popup.title")}
+            </S.DownloadInfoTitle>
+          </S.DownloadInfoHeader>
+          <S.DownloadInfoDescription>
+            {t("syntheticGenerator.popup.description")}
+          </S.DownloadInfoDescription>
+        </S.DownloadInfoBanner>
+
+        <S.TableHeader>
+          <S.TableTitle>{t("syntheticGenerator.table.title")}</S.TableTitle>
+          <S.TableHeaderActions>
+            <S.HeaderActionButton
+              onClick={() => {
+                void onRegenerate();
+              }}
+              disabled={isRegenerating || isGenerating || isDownloading}
+              startIcon={<S.RegenerateActionIcon isHidden={isRegenerating} />}
+            >
+              <S.HeaderActionButtonContent>
+                <S.HeaderActionButtonLabel isHidden={isRegenerating}>
+                  {t("syntheticGenerator.actions.regenerate")}
+                </S.HeaderActionButtonLabel>
+                {isRegenerating && (
+                  <S.HeaderActionButtonSpinner
+                    size={24}
+                    thickness={5}
+                    disableShrink
+                  />
+                )}
+              </S.HeaderActionButtonContent>
+            </S.HeaderActionButton>
+            <S.HeaderActionButton
+              onClick={() => {
+                void onDownload();
+              }}
+              disabled={isDownloading || isGenerating || isRegenerating}
+              startIcon={<S.DownloadActionIcon isHidden={isDownloading} />}
+            >
+              <S.HeaderActionButtonContent>
+                <S.HeaderActionButtonLabel isHidden={isDownloading}>
+                  {t("syntheticGenerator.actions.download")}
+                </S.HeaderActionButtonLabel>
+                {isDownloading && (
+                  <S.HeaderActionButtonSpinner
+                    size={24}
+                    thickness={5}
+                    disableShrink
+                  />
+                )}
+              </S.HeaderActionButtonContent>
+            </S.HeaderActionButton>
+          </S.TableHeaderActions>
+        </S.TableHeader>
+      </S.TableHeaderSection>
 
       <GeneratedTableGrid
         tableState={tableState}
