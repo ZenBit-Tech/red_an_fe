@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 const MAX_WIDTH_FOR_SIDEBAR = 1440;
+const MAX_WIDTH_FOR_SIDEBAR_TABLET = 768;
 export const LayoutWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
@@ -9,7 +10,7 @@ export const LayoutWrapper = styled(Box)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
 }));
 
-export const BodyWrapper = styled(Box)({
+export const BodyWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   flex: 1,
@@ -17,7 +18,10 @@ export const BodyWrapper = styled(Box)({
   width: "100%",
   maxWidth: MAX_WIDTH_FOR_SIDEBAR,
   marginInline: "auto",
-});
+  [theme.breakpoints.down("lg")]: {
+    maxWidth: MAX_WIDTH_FOR_SIDEBAR_TABLET,
+  },
+}));
 
 export const ContentRow = styled(Box)({
   display: "flex",
@@ -34,6 +38,7 @@ export const RightContent = styled(Box)(({ theme }) => ({
   overflowY: "auto",
   overflowX: "hidden",
   scrollbarWidth: "none",
+  WebkitOverflowScrolling: "touch",
   "&::-webkit-scrollbar": { display: "none" },
   [theme.breakpoints.down("lg")]: {
     paddingLeft: theme.spacing(21.25),

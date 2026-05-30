@@ -165,6 +165,9 @@ export const StepperActionsContainer = styled(Box)(({ theme }) => ({
   alignItems: "center",
   gap: theme.spacing(1.5),
   marginTop: theme.spacing(20),
+  [theme.breakpoints.down("lg")]: {
+    marginTop: theme.spacing(10),
+  },
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column-reverse",
   },

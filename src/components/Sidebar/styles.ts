@@ -6,7 +6,7 @@ export const SidebarContainer = styled(Box, {
 })<{ isCollapsed: boolean }>(({ theme, isCollapsed }) => ({
   boxSizing: "border-box",
   width: isCollapsed ? theme.spacing(21.25) : theme.spacing(77.5),
-  height: "100%",
+  height: "100vh",
   paddingTop: theme.spacing(6),
   paddingRight: theme.spacing(4),
   paddingBottom: theme.spacing(6),
@@ -47,15 +47,20 @@ export const CollapseToggleButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.textColors[200],
   padding: theme.spacing(1),
   flexShrink: 0,
+  borderRadius: theme.spacing(1),
   "&:hover": {
-    color: theme.palette.textColors[400],
-    backgroundColor: "transparent",
+    backgroundColor: theme.palette.strokeColors[120],
+    borderRadius: theme.spacing(1),
+  },
+  "&:active": {
+    backgroundColor: "#B0C6FF14",
+    borderRadius: theme.spacing(1),
   },
 }));
 
 export const TopBarTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.primaryColors[50],
-  fontSize: theme.typography.fontSize18,
+  fontSize: theme.typography.fontSize16,
   fontFamily: theme.typography.fontFamily,
 }));
 
@@ -106,6 +111,16 @@ export const NavIconWrapper = styled(Box, {
     color: active
       ? theme.palette.primaryColors[200]
       : theme.palette.neutralColors[300],
+  },
+}));
+
+export const LogoutIconWrapper = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  "& svg": {
+    fontSize: theme.spacing(4.5),
+    color: theme.palette.textColors[400],
   },
 }));
 
