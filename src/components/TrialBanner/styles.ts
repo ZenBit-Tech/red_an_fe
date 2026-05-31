@@ -11,9 +11,12 @@ export const BannerWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: theme.spacing(1.5, 10),
+  padding: theme.spacing(2, 10),
   backgroundColor: theme.palette.primaryColors[500],
   gap: theme.spacing(4),
+  [theme.breakpoints.down("lg")]: {
+    padding: theme.spacing(2, 4),
+  },
 }));
 
 export const BannerLeft = styled(Box)(({ theme }) => ({

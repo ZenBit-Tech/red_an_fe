@@ -496,7 +496,7 @@
   },
   "trialBanner": {
     "badge": "FREE PLAN",
-    "message": "You're using the free plan version. Upgrade to a professional plan for full access to all features.",
+    "message": "You're using the free plan. Upgrade your plan for full access to all features.",
     "upgradeButton": "Upgrade to Professional Plan"
   },
   "supportModal": {

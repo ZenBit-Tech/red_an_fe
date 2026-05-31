@@ -49,6 +49,19 @@ export const AnalysisPageHeader = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
   alignItems: "flex-start",
   gap: theme.spacing(4),
+  [theme.breakpoints.down("lg")]: {
+    flexDirection: "column",
+    gap: 0,
+  },
+}));
+
+export const AnalysisPageTitleRow = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: theme.spacing(4),
+  width: "100%",
 }));
 
 export const AnalysisPageTitleGroup = styled(Box)(({ theme }) => ({
@@ -336,6 +349,27 @@ export const StyledTable = styled(Table)(({ theme }) => ({
   "& .MuiTableCell-root:nth-of-type(8)": { width: "6%" },
   "& .MuiTableCell-root:nth-of-type(9)": { width: "5%" },
   "& .MuiTableCell-root:last-of-type": { width: "8%" },
+  [theme.breakpoints.down("lg")]: {
+    tableLayout: "auto",
+    minWidth: theme.spacing(220),
+    "& .MuiTableCell-root:first-of-type": {
+      position: "sticky",
+      left: 0,
+      zIndex: 3,
+      backgroundColor: theme.palette.neutralColors[900],
+      minWidth: theme.spacing(12),
+      width: "auto",
+    },
+    "& .MuiTableCell-root:nth-of-type(2)": {
+      position: "sticky",
+      left: theme.spacing(12),
+      zIndex: 3,
+      backgroundColor: theme.palette.neutralColors[900],
+      minWidth: theme.spacing(30),
+      width: "auto",
+      whiteSpace: "normal",
+    },
+  },
 }));
 
 export const StyledTableHead = styled(TableHead)(({ theme }) => ({
@@ -354,6 +388,16 @@ export const StyledTableHead = styled(TableHead)(({ theme }) => ({
   },
   "& .MuiTableCell-head:nth-of-type(2)": {
     textAlign: "center",
+  },
+  [theme.breakpoints.down("lg")]: {
+    "& .MuiTableCell-root:first-of-type": {
+      backgroundColor: theme.palette.neutralColors[800],
+      zIndex: 4,
+    },
+    "& .MuiTableCell-root:nth-of-type(2)": {
+      backgroundColor: theme.palette.neutralColors[800],
+      zIndex: 4,
+    },
   },
 }));
 export const StyledTableRow = styled(TableRow, {
@@ -506,6 +550,11 @@ export const ResultCtaSection = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
   alignItems: "center",
   gap: theme.spacing(6),
+  [theme.breakpoints.down("lg")]: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: theme.spacing(6),
+  },
 }));
 
 export const ResultCtaTextGroup = styled(Box)(({ theme }) => ({
@@ -549,6 +598,9 @@ export const ResultCtaButton = styled(Button)(({ theme }) => ({
   "&:disabled": {
     opacity: 0.5,
     cursor: "not-allowed",
+  },
+  [theme.breakpoints.down("lg")]: {
+    alignSelf: "flex-end",
   },
 }));
 
@@ -595,3 +647,153 @@ export const TableRestartButton = styled(Button)(({ theme }) => ({
     color: theme.palette.textColors[50],
   },
 }));
+
+export const TabBadge = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "active" && prop !== "variant",
+})<{ active: boolean; variant: "restricted" | "anonymized" }>(
+  ({ active, variant }) => ({
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "2px 8px",
+    borderRadius: "2px",
+    fontSize: "14px",
+    fontWeight: 400,
+    opacity: active ? 1 : 0.4,
+    backgroundColor:
+      variant === "restricted"
+        ? "rgba(230, 81, 0, 0.2)"
+        : "rgba(13, 71, 161, 0.2)",
+    color: variant === "restricted" ? "#FF9800" : "#B0C6FF",
+  }),
+);
+
+export const TabletPanelCard = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isOutputTab",
+})<{ isOutputTab: boolean }>(({ theme, isOutputTab }) => ({
+  display: "flex",
+  flexDirection: "column",
+  padding: isOutputTab
+    ? theme.spacing(4.25, 4.25, 4, 4.25)
+    : theme.spacing(4.25, 4.25, 20.25, 4.25),
+  height: theme.spacing(128.25),
+  borderRadius: theme.spacing(2),
+  border: `1px solid ${theme.palette.divider}`,
+  backgroundColor: theme.palette.neutralColors[900],
+  boxSizing: "border-box",
+}));
+
+export const TabHeaderRow = styled(Box)(({ theme }) => ({
+  display: "flex",
+  gap: theme.spacing(6),
+  borderBottom: `1px solid ${theme.palette.strokeColors[150]}`,
+  flexShrink: 0,
+}));
+
+export const TabTrigger = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "active" && prop !== "variant",
+})<{ active: boolean; variant: "restricted" | "anonymized" }>(
+  ({ theme, active, variant }) => ({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: theme.spacing(1.5),
+    paddingBottom: theme.spacing(2),
+    marginBottom: "-1px",
+    cursor: "pointer",
+    userSelect: "none",
+    width: theme.spacing(68),
+    borderBottom: `2px solid ${
+      active
+        ? variant === "restricted"
+          ? theme.palette.tertiaryColors[600]
+          : theme.palette.primaryColors[200]
+        : "transparent"
+    }`,
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeight700,
+    fontSize: `${theme.typography.fontSize20}px`,
+    color: active
+      ? theme.palette.primaryColors[50]
+      : theme.palette.textColors[200],
+  }),
+);
+
+export const TabPanelContent = styled(Box)(({ theme }) => ({
+  flex: 1,
+  overflowY: "auto",
+  paddingTop: theme.spacing(6),
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(6),
+  scrollbarWidth: "none",
+  "&::-webkit-scrollbar": { display: "none" },
+}));
+
+export const TabPanelContentOutput = styled(Box)(({ theme }) => ({
+  flex: 1,
+  overflowY: "auto",
+  paddingTop: theme.spacing(6),
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(6),
+  scrollbarWidth: "none",
+  "&::-webkit-scrollbar": { display: "none" },
+}));
+
+export const TabletTableWrapper = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "atRightEnd",
+})<{ atRightEnd: boolean }>(({ theme, atRightEnd }) => ({
+  overflowX: "auto",
+  overflowY: "auto",
+  maxHeight: theme.spacing(95),
+  borderRadius: theme.spacing(2),
+  border: `1px solid ${TABLE_COLORS.border}`,
+  "&::-webkit-scrollbar": {
+    width: atRightEnd ? theme.spacing(2.5) : 0,
+    height: 0,
+  },
+  "&::-webkit-scrollbar-track": {
+    backgroundColor: "transparent",
+  },
+  "&::-webkit-scrollbar-track:vertical": {
+    marginBottom: theme.spacing(1),
+  },
+  "&::-webkit-scrollbar-thumb": {
+    backgroundColor: theme.palette.strokeColors[400],
+    borderRadius: theme.spacing(2),
+    border: "2px solid transparent",
+    backgroundClip: "content-box",
+  },
+  "&::-webkit-scrollbar-thumb:hover": {
+    backgroundColor: alpha(theme.palette.primaryColors[200], 0.45),
+  },
+  "&::-webkit-scrollbar-corner": {
+    backgroundColor: "transparent",
+  },
+}));
+
+export const TabletHScrollTrack = styled(Box)(({ theme }) => ({
+  overflowX: "scroll",
+  overflowY: "hidden",
+  marginTop: theme.spacing(1),
+  "&::-webkit-scrollbar": {
+    height: theme.spacing(2.5),
+  },
+  "&::-webkit-scrollbar-track": {
+    backgroundColor: "transparent",
+  },
+  "&::-webkit-scrollbar-thumb": {
+    backgroundColor: theme.palette.strokeColors[400],
+    borderRadius: theme.spacing(2),
+    border: "2px solid transparent",
+    backgroundClip: "content-box",
+  },
+  "&::-webkit-scrollbar-thumb:hover": {
+    backgroundColor: alpha(theme.palette.primaryColors[200], 0.45),
+  },
+}));
+
+export const TabletHScrollInner = styled(Box)({
+  height: 1,
+});
