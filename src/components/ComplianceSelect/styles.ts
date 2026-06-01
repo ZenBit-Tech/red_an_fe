@@ -6,6 +6,9 @@ export const SelectionContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(5),
+  [theme.breakpoints.down("lg")]: {
+    gap: theme.spacing(8),
+  },
 }));
 
 export const SelectionHeader = styled(Box)(({ theme }) => ({
@@ -13,8 +16,9 @@ export const SelectionHeader = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(1.5),
   minHeight: theme.spacing(43),
-  [theme.breakpoints.down("md")]: {
+  [theme.breakpoints.down("lg")]: {
     minHeight: "auto",
+    gap: theme.spacing(2),
   },
 }));
 

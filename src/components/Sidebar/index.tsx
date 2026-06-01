@@ -143,9 +143,9 @@ const Sidebar = ({ activeNav, setActiveNav, onSupportClick }: SidebarProps) => {
           role="button"
           tabIndex={0}
         >
-          <S.NavIconWrapper active={false} small>
+          <S.LogoutIconWrapper>
             <LogoutOutlined />
-          </S.NavIconWrapper>
+          </S.LogoutIconWrapper>
           {!effectiveCollapsed && (
             <S.LogoutButtonText>
               {t("sidebar.bottom.logout")}
