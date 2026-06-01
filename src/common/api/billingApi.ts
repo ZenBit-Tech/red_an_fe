@@ -2,6 +2,39 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { cleanEnv, str } from "envalid";
 import { APP_ROUTES, STORAGE_KEYS } from "@/constants/index";
 
+export type SubscriptionStatus =
+  | "active"
+  | "trialing"
+  | "past_due"
+  | "canceled"
+  | "incomplete"
+  | "incomplete_expired"
+  | "unpaid";
+
+export interface SubscriptionResponse {
+  id: string;
+  userId: string;
+  stripeSubscriptionId: string | null;
+  stripeCustomerId: string;
+  stripePriceId: string;
+  status: SubscriptionStatus;
+  currentPeriodEnd: string | null;
+  cancelAtPeriodEnd: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PaymentHistoryItem {
+  id: string;
+  userId: string;
+  stripeInvoiceId: string;
+  invoiceNumber: string | null;
+  amount: number;
+  status: "pending" | "paid" | "failed" | "canceled";
+  createdAt: string;
+  updatedAt: string;
+}
+
 const env = cleanEnv(import.meta.env, {
   VITE_API_URL: str({ desc: "Base API URL" }),
 });
@@ -51,6 +84,7 @@ export type BillingStatusResponse = {
 
 export const billingApi = createApi({
   reducerPath: "billingApi",
+  tagTypes: ["Subscription"],
   baseQuery: async (args, api, extraOptions) => {
     const result = await rawBaseQuery(args, api, extraOptions);
     if (result.error?.status === 401 && !isRedirectingToLogin) {
@@ -63,6 +97,16 @@ export const billingApi = createApi({
   },
 
   endpoints: (builder) => ({
+    getCheckoutSession: builder.query<
+      { status: "paid" | "unpaid" | "pending"; customerEmail: string | null },
+      string
+    >({
+      query: (sessionId) => `/checkout-session/${sessionId}`,
+    }),
+    getSubscription: builder.query<SubscriptionResponse, void>({
+      query: () => "/subscription",
+      providesTags: ["Subscription"],
+    }),
     createCheckoutSession: builder.mutation<
       { url: string },
       { targetPlan: typeof BILLING_PLAN_TIER.PROFESSIONAL }
@@ -73,6 +117,19 @@ export const billingApi = createApi({
         body,
       }),
     }),
+
+    cancelSubscription: builder.mutation<
+      { success: boolean; cancelAtPeriodEnd: boolean },
+      void
+    >({
+      query: () => ({
+        url: "cancel-subscription",
+        method: "POST",
+        body: {},
+      }),
+      invalidatesTags: ["Subscription"],
+    }),
+
     createCustomerPortalSession: builder.mutation<{ url: string }, void>({
       query: () => ({
         url: "/customer-portal",
@@ -82,11 +139,27 @@ export const billingApi = createApi({
     getBillingStatus: builder.query<BillingStatusResponse, void>({
       query: () => "/status",
     }),
+
+    getPaymentHistory: builder.query<PaymentHistoryItem[], void>({
+      query: () => "/history",
+    }),
+
+    getInvoiceUrl: builder.mutation<{ url: string }, string>({
+      query: (invoiceId) => ({
+        url: `history/${invoiceId}/download`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
 export const {
+  useGetSubscriptionQuery,
   useCreateCheckoutSessionMutation,
-  useCreateCustomerPortalSessionMutation,
+  useCancelSubscriptionMutation,
+  useGetCheckoutSessionQuery,
+  useGetPaymentHistoryQuery,
   useGetBillingStatusQuery,
+  useCreateCustomerPortalSessionMutation,
+  useGetInvoiceUrlMutation,
 } = billingApi;

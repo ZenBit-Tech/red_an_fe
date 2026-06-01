@@ -1,0 +1,72 @@
+{
+  "page": {
+    "title": "My Subscription",
+    "descriptionFirstString": "Manage and review your current plan.",
+    "descriptionSecondString": "Scale your de-identification capabilities as your data needs grow."
+  },
+  "plans": {
+    "currentPlan": "Current Plan",
+    "availablePlan": "Available Plan",
+    "informationAboutMyPlan": "Information about my plan",
+    "freePlan": "Free Plan",
+    "professionalPlan": "Professional Plan",
+    "active": "Active",
+    "recommended": "Recommended",
+    "month": "month",
+    "docsPerDay": "2 documents/day",
+    "dailyProcLimit": "Daily processing limit",
+    "usedToday": "Used today",
+    "docCount": "/2 documents",
+    "conditions": {
+      "priority": {
+        "title": "High-Priority Processing",
+        "desc": "Instant queue placement"
+      },
+      "advanced": {
+        "title": "Advanced PHI Scrubbing",
+        "desc": "18 Safe Harbor identifiers"
+      },
+      "unlimited": {
+        "title": "Unlimited De-identification",
+        "desc": "No caps on document processing"
+      },
+      "gift": {
+        "title": "Free first 3 days",
+        "desc": "Billing commences on the 3rd day of use"
+      }
+    },
+    "upgradeButton": "Upgrade to Professional Plan",
+    "redirecting": "Redirecting..."
+  },
+  "paymentHistory": {
+    "title": "Payment History",
+    "columns": {
+      "invoice": "INVOICE NUMBER",
+      "date": "DATE",
+      "amount": "AMOUNT",
+      "status": "STATUS",
+      "action": "ACTION"
+    },
+    "statuses": {
+      "paid": "Success",
+      "pending": "Pending",
+      "canceled": "Canceled",
+      "subscriptionCanceled": "Subscription canceled"
+    }
+  },
+  "infoPlanCard": {
+    "status": "Status",
+    "active": "Active",
+    "trial": "Trial period",
+    "firstPay": "First payment",
+    "CancelSubscription": "Cancel Subscription",
+    "accessUntil": "Access until",
+    "nextPayment": "Next payment date",
+    "SubscribeAgain": "Subscribe again"
+  },
+  "cancelInfoModal": {
+    "title": "Subscription canceled",
+    "description": "Your Professional plan has been canceled. After this period ends, you’ll be on the Free plan",
+    "button": "Close"
+  }
+}

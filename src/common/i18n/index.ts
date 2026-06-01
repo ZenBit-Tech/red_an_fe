@@ -5,6 +5,7 @@ import enDashboard from "./locales/en/dashboard.json";
 import enLogin from "./locales/en/login.json";
 import aboutUsEn from "./locales/en/aboutUs.json";
 import contactUsEn from "./locales/en/contactUs.json";
+import subscriptionManagementEN from "./locales/en/subscriptionManagement.json";
 
 void i18n.use(initReactI18next).init({
   resources: {
@@ -19,6 +20,7 @@ void i18n.use(initReactI18next).init({
       },
       aboutUs: aboutUsEn,
       contactUs: contactUsEn,
+      subscriptionManagement: subscriptionManagementEN,
     },
   },
   lng: "en",

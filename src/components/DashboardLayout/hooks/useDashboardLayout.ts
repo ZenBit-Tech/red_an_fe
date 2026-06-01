@@ -6,13 +6,14 @@ import type { NavKey } from "@/components/Sidebar/constant";
 const NAV_KEY_TO_ROUTE: Record<NavKey, string> = {
   dashboard: APP_ROUTES.DASHBOARD,
   deidentify: APP_ROUTES.DEIDENTIFY,
-  subscription: APP_ROUTES.SUBSCRIPTION_PLAN,
+  subscription: APP_ROUTES.SUBSCRIPTION_MANAGEMENT,
 };
 
 const ROUTE_TO_NAV_KEY: Record<string, NavKey> = {
   [APP_ROUTES.DASHBOARD]: "dashboard",
   [APP_ROUTES.DEIDENTIFY]: "deidentify",
   [APP_ROUTES.SYNTHETIC_DATA]: "deidentify",
+  [APP_ROUTES.SUBSCRIPTION_MANAGEMENT]: "subscription",
 };
 
 const DEFAULT_NAV_KEY: NavKey = "dashboard";
