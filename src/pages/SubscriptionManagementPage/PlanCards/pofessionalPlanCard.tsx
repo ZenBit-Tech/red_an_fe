@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useCreateCheckoutSessionMutation } from "@/common/api/billingApi";
+
 import * as S from "../styles";
 
 type ProfessionalPlanCardProps = {
@@ -14,7 +15,7 @@ export const ProfessionalPlanCard = ({ mode }: ProfessionalPlanCardProps) => {
   const handleUpgrade = async () => {
     try {
       const result = await createCheckoutSession({
-        priceId: import.meta.env.VITE_STRIPE_PRO_PRICE_ID,
+        targetPlan: "PROFESSIONAL",
       }).unwrap();
 
       window.location.href = result.url;
@@ -22,7 +23,6 @@ export const ProfessionalPlanCard = ({ mode }: ProfessionalPlanCardProps) => {
       console.error(error);
     }
   };
-
   const planConditions = [
     {
       id: "priority",

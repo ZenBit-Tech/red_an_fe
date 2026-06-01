@@ -30,7 +30,7 @@ export interface PaymentHistoryItem {
   stripeInvoiceId: string;
   invoiceNumber: string | null;
   amount: number;
-  status: "pending" | "paid" | "failed";
+  status: "pending" | "paid" | "failed" | "canceled";
   createdAt: string;
   updatedAt: string;
 }
@@ -123,8 +123,9 @@ export const billingApi = createApi({
       void
     >({
       query: () => ({
-        url: "/cancel-subscription",
+        url: "cancel-subscription",
         method: "POST",
+        body: {},
       }),
       invalidatesTags: ["Subscription"],
     }),
@@ -142,6 +143,13 @@ export const billingApi = createApi({
     getPaymentHistory: builder.query<PaymentHistoryItem[], void>({
       query: () => "/history",
     }),
+
+    getInvoiceUrl: builder.mutation<{ url: string }, string>({
+      query: (invoiceId) => ({
+        url: `history/${invoiceId}/download`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -151,4 +159,7 @@ export const {
   useCancelSubscriptionMutation,
   useGetCheckoutSessionQuery,
   useGetPaymentHistoryQuery,
+  useGetBillingStatusQuery,
+  useCreateCustomerPortalSessionMutation,
+  useGetInvoiceUrlMutation,
 } = billingApi;

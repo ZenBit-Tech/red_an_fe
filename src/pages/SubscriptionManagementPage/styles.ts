@@ -1,5 +1,5 @@
 import { Box, Typography, Slider, Button } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { styled, type Theme } from "@mui/material/styles";
 
 type ProfPlanBoxProps = {
   isCurrent: boolean;
@@ -315,6 +315,8 @@ export const InfoPlanBox = styled(Box)(({ theme }) => ({
 }));
 
 export const InfoPlanCardString = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
   borderBottom: "1px solid rgba(67, 70, 82, 0.5)",
   padding: theme.spacing(0, 1, 2),
   marginBottom: theme.spacing(6),
@@ -343,3 +345,100 @@ export const CancelButton = styled(UpgradeButton)(({ theme }) => ({
     boxShadow: `0px 4px 12px ${theme.palette.primaryColors[700]}4D`,
   },
 }));
+
+export const modalStyles = (
+  theme: Theme,
+  status: "idle" | "loading" | "success" | "error",
+) => {
+  const isError = status === "error";
+  return {
+    backdrop: {
+      backgroundColor: "rgba(13, 17, 27, 0.8)",
+      backdropFilter: "blur(1px)",
+    },
+    container: {
+      position: "absolute" as const,
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: "100%",
+      maxWidth: 630,
+      backgroundColor: theme.palette.neutralColors[900],
+      borderRadius: theme.spacing(2),
+      padding: theme.spacing(9, 38),
+      display: "flex",
+      flexDirection: "column" as const,
+      alignItems: "center",
+
+      outline: "none",
+      border: isError
+        ? `1px solid ${theme.palette.tertiaryColors[600]}`
+        : `1px solid ${theme.palette.textColors[400]}`,
+    },
+    outerCircle: {
+      marginBottom: theme.spacing(4),
+      backgroundColor: "rgba(178, 197, 255, 0.2)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: "50%",
+      width: "80px",
+      height: "80px",
+    },
+    innerCircle: {
+      width: 40,
+      height: 40,
+      borderRadius: "50%",
+      backgroundColor: theme.palette.textColors[400],
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+
+    checkIcon: {
+      width: 24,
+      height: 24,
+      fill: "rgba(19, 27, 46, 0.8)",
+    },
+    title: {
+      fontFamily: theme.typography.fontFamily,
+      fontSize: theme.typography.fontSize20,
+      fontWeight: theme.typography.fontWeight700,
+      textAlign: "center" as const,
+      color: theme.palette.textColors[50],
+      marginBottom: theme.spacing(2),
+    },
+    subTitle: {
+      fontFamily: theme.typography.fontFamily,
+      fontSize: theme.typography.fontSize14,
+      fontWeight: theme.typography.fontWeight400,
+      color: theme.palette.textColors[200],
+      textAlign: "center" as const,
+      marginBottom: theme.spacing(11),
+    },
+    closeButton: {
+      border: `0.80px solid ${theme.palette.neutralColors[600]}4D`,
+      borderRadius: "8px",
+      padding: theme.spacing(3, 4),
+      width: "166px",
+      height: "48px",
+      background: theme.palette.neutralColors[600],
+      fontWeight: theme.typography.fontWeight500,
+      fontSize: theme.typography.fontSize16,
+      color: theme.palette.textColors[50],
+      cursor: "pointer",
+
+      "&:hover": {
+        backgroundImage: "none",
+
+        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
+      },
+
+      "&:active": {
+        transform: "scale(0.98)",
+        backgroundImage: "none",
+        backgroundColor: "black",
+      },
+    },
+  };
+};

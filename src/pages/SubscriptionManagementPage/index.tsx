@@ -7,18 +7,19 @@ import { FreePlanCard } from "./PlanCards/freePlanCard";
 import { InfoPlanCard } from "./PlanCards/infoAboutPlanCard";
 import * as S from "./styles";
 
-/* type ProfessionalPlanCardProps = {
-  mode: "current" | "available";
-}; */
-
 export const SubscriptionManagementPage = () => {
   const { t } = useTranslation("subscriptionManagement");
 
   const { data: subscription, isLoading } = useGetSubscriptionQuery();
-  console.log(subscription);
 
-  const isPaid =
+  const isPaidOrTrial =
     subscription?.status === "active" || subscription?.status === "trialing";
+
+  const isJustCanceled = subscription?.status === "canceled";
+
+  const hasProfessionalAccess = isPaidOrTrial || isJustCanceled;
+
+  const showInfoCard = hasProfessionalAccess;
 
   return (
     <S.PageWrapper>
@@ -27,13 +28,14 @@ export const SubscriptionManagementPage = () => {
         <S.ActivePlanLabel>
           {isLoading ? (
             <CircularProgress size={16} color="inherit" />
-          ) : isPaid ? (
+          ) : hasProfessionalAccess ? (
             `${t("plans.professionalPlan")}: ${t("plans.active")}`
           ) : (
             `${t("plans.freePlan")}: ${t("plans.active")}`
           )}
         </S.ActivePlanLabel>
       </S.PageHeader>
+
       <S.PageDescription>
         <Box>{t("page.descriptionFirstString")}</Box>
         {t("page.descriptionSecondString")}
@@ -42,30 +44,34 @@ export const SubscriptionManagementPage = () => {
       <S.PlansWrapper>
         <S.CurrentPlanContainer>
           <S.FreePlanTitle>{t("plans.currentPlan")}</S.FreePlanTitle>
-          {isPaid ? <ProfessionalPlanCard mode="current" /> : <FreePlanCard />}
+          {hasProfessionalAccess ? (
+            <ProfessionalPlanCard mode="current" />
+          ) : (
+            <FreePlanCard />
+          )}
         </S.CurrentPlanContainer>
+
         <S.ProfPlanContainer>
           <S.ProfPlanTitle>
-            {t(isPaid ? "plans.informationAboutMyPlan" : "plans.availablePlan")}
+            {t(
+              showInfoCard
+                ? "plans.informationAboutMyPlan"
+                : "plans.availablePlan",
+            )}
           </S.ProfPlanTitle>
-          {isPaid ? (
+          {showInfoCard ? (
             <InfoPlanCard />
           ) : (
             <ProfessionalPlanCard mode="available" />
           )}
         </S.ProfPlanContainer>
       </S.PlansWrapper>
+
       <S.PaymentHistoryContainer>
-        {isPaid ? (
-          <>
-            <S.PaymentHistoryTitle>
-              {t("paymentHistory.title")}
-            </S.PaymentHistoryTitle>
-            <PaymentHistoryTable />
-          </>
-        ) : (
-          <p>No payment history</p>
-        )}
+        <S.PaymentHistoryTitle>
+          {t("paymentHistory.title")}
+        </S.PaymentHistoryTitle>
+        <PaymentHistoryTable />
       </S.PaymentHistoryContainer>
     </S.PageWrapper>
   );

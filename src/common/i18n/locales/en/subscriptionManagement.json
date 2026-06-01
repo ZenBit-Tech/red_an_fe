@@ -46,6 +46,12 @@
       "amount": "AMOUNT",
       "status": "STATUS",
       "action": "ACTION"
+    },
+    "statuses": {
+      "paid": "Success",
+      "pending": "Pending",
+      "canceled": "Canceled",
+      "subscriptionCanceled": "Subscription canceled"
     }
   },
   "infoPlanCard": {
@@ -53,6 +59,14 @@
     "active": "Active",
     "trial": "Trial period",
     "firstPay": "First payment",
-    "CancelSubscription": "Cancel Subscription"
+    "CancelSubscription": "Cancel Subscription",
+    "accessUntil": "Access until",
+    "nextPayment": "Next payment date",
+    "SubscribeAgain": "Subscribe again"
+  },
+  "cancelInfoModal": {
+    "title": "Subscription canceled",
+    "description": "Your Professional plan has been canceled. After this period ends, you’ll be on the Free plan",
+    "button": "Close"
   }
 }

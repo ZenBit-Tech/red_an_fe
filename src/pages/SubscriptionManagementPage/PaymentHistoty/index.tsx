@@ -1,33 +1,62 @@
 import { useTranslation } from "react-i18next";
 import { TableBody } from "@mui/material";
+import DownloadIcon from "@mui/icons-material/Download";
+import {
+  useGetPaymentHistoryQuery,
+  useGetInvoiceUrlMutation,
+  useGetSubscriptionQuery,
+} from "@/common/api/billingApi";
 import * as S from "./styles";
 
 export const PaymentHistoryTable = () => {
   const { t } = useTranslation("subscriptionManagement");
 
-  const paymentHistory = [
-    {
-      id: "inv-001",
-      invoice: "#INV-1234",
-      date: "May 10, 2026",
-      amount: "$49.00",
-      status: "Paid",
-    },
-    {
-      id: "inv-002",
-      invoice: "#INV-5678",
-      date: "Apr 10, 2026",
-      amount: "$49.00",
-      status: "Paid",
-    },
-    {
-      id: "inv-003",
-      invoice: "#INV-9012",
-      date: "Mar 10, 2026",
-      amount: "$49.00",
-      status: "Paid",
-    },
-  ];
+  const { data: paymentHistory = [], isLoading: isHistoryLoading } =
+    useGetPaymentHistoryQuery();
+  const { data: subscription, isLoading: isSubscriptionLoading } =
+    useGetSubscriptionQuery();
+  const [getInvoiceUrl, { isLoading: isDownloading }] =
+    useGetInvoiceUrlMutation();
+
+  const formatDate = (dateString: string) => {
+    try {
+      return new Date(dateString).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
+    } catch {
+      return dateString;
+    }
+  };
+
+  const formatAmount = (amountInCents: number) => {
+    return `$${(amountInCents / 100).toFixed(2)}`;
+  };
+
+  const handleDownload = async (invoiceId: string) => {
+    try {
+      const response = await getInvoiceUrl(invoiceId).unwrap();
+      if (response?.url) {
+        window.open(response.url, "_blank");
+      }
+    } catch (err) {
+      console.error("Error fetching invoice PDF link:", err);
+    }
+  };
+
+  if (isHistoryLoading || isSubscriptionLoading) {
+    return <div>{t("paymentHistory.loading") || "Loading..."}</div>;
+  }
+
+  if (paymentHistory.length === 0) {
+    return null;
+  }
+
+  const isSubscriptionDeadOrDying =
+    subscription?.status === "canceled" ||
+    subscription?.status === "unpaid" ||
+    subscription?.cancelAtPeriodEnd === true;
 
   return (
     <S.HistoryTableContainer>
@@ -53,22 +82,44 @@ export const PaymentHistoryTable = () => {
         </S.HistoryTableHead>
 
         <TableBody>
-          {paymentHistory.map((row) => (
-            <S.HistoryTableRow key={row.id}>
-              <S.HistoryTdCell>{row.invoice}</S.HistoryTdCell>
-              <S.HistoryTdCell>{row.date}</S.HistoryTdCell>
-              <S.HistoryTdCell>{row.amount}</S.HistoryTdCell>
-              <S.HistoryTdCell>{row.status}</S.HistoryTdCell>
+          {paymentHistory.map((row) => {
+            const formattedStatusKey = row.status.replace(" ", "_");
+            const showCanceledStatus =
+              row.status === "paid" && isSubscriptionDeadOrDying;
+            const translationKey = showCanceledStatus
+              ? "subscriptionCanceled"
+              : formattedStatusKey;
 
-              <S.HistoryTdCell align="right">
-                <S.ActionButton size="small">
-                  <svg width="20" height="20">
-                    <use href="/subscription/icons.svg#download" />
-                  </svg>
-                </S.ActionButton>
-              </S.HistoryTdCell>
-            </S.HistoryTableRow>
-          ))}
+            return (
+              <S.HistoryTableRow key={row.id}>
+                <S.HistoryTdCell>{row.invoiceNumber || "-"}</S.HistoryTdCell>
+                <S.HistoryTdCell>{formatDate(row.createdAt)}</S.HistoryTdCell>
+                <S.HistoryTdCell>{formatAmount(row.amount)}</S.HistoryTdCell>
+                <S.HistoryTdCell>
+                  <S.StatusBadge
+                    status={
+                      showCanceledStatus
+                        ? "subscription_canceled"
+                        : formattedStatusKey
+                    }
+                  >
+                    {t(`paymentHistory.statuses.${translationKey}`) ||
+                      row.status}
+                  </S.StatusBadge>
+                </S.HistoryTdCell>
+
+                <S.HistoryTdCell align="right">
+                  <S.ActionButton
+                    size="small"
+                    onClick={() => handleDownload(row.id)}
+                    disabled={isDownloading}
+                  >
+                    <DownloadIcon fontSize="small" />
+                  </S.ActionButton>
+                </S.HistoryTdCell>
+              </S.HistoryTableRow>
+            );
+          })}
         </TableBody>
       </S.HistoryTable>
     </S.HistoryTableContainer>
