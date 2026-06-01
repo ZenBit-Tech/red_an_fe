@@ -13,6 +13,8 @@ import {
   useTheme,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
@@ -130,6 +132,13 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
 
   const handleExtScroll = () => {
     if (extScrollRef.current && tableWrapperRef.current)
+      tableWrapperRef.current.scrollLeft = extScrollRef.current.scrollLeft;
+  };
+
+  const scrollHorizontal = (amount: number) => {
+    if (!extScrollRef.current) return;
+    extScrollRef.current.scrollLeft += amount;
+    if (tableWrapperRef.current)
       tableWrapperRef.current.scrollLeft = extScrollRef.current.scrollLeft;
   };
 
@@ -648,12 +657,20 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
                     </TableBody>
                   </S.StyledTable>
                 </S.TabletTableWrapper>
-                <S.TabletHScrollTrack
-                  ref={extScrollRef}
-                  onScroll={handleExtScroll}
-                >
-                  <S.TabletHScrollInner sx={{ width: tableScrollWidth }} />
-                </S.TabletHScrollTrack>
+                <S.TabletHScrollBox>
+                  <S.TabletHScrollArrow onClick={() => scrollHorizontal(-100)}>
+                    <ChevronLeftIcon fontSize="small" />
+                  </S.TabletHScrollArrow>
+                  <S.TabletHScrollTrack
+                    ref={extScrollRef}
+                    onScroll={handleExtScroll}
+                  >
+                    <S.TabletHScrollInner sx={{ width: tableScrollWidth }} />
+                  </S.TabletHScrollTrack>
+                  <S.TabletHScrollArrow onClick={() => scrollHorizontal(100)}>
+                    <ChevronRightIcon fontSize="small" />
+                  </S.TabletHScrollArrow>
+                </S.TabletHScrollBox>
               </>
             ) : (
               <>

@@ -750,6 +750,7 @@ export const TabletTableWrapper = styled(Box, {
   borderRadius: theme.spacing(2),
   border: `1px solid ${TABLE_COLORS.border}`,
   "&::-webkit-scrollbar": {
+    // ПОВЕРНУТО: з'являється тільки коли догортали до правого краю
     width: atRightEnd ? theme.spacing(2.5) : 0,
     height: 0,
   },
@@ -760,6 +761,7 @@ export const TabletTableWrapper = styled(Box, {
     marginBottom: theme.spacing(1),
   },
   "&::-webkit-scrollbar-thumb": {
+    // СТИЛІ ЯК НА ПК
     backgroundColor: theme.palette.strokeColors[400],
     borderRadius: theme.spacing(2),
     border: "2px solid transparent",
@@ -773,18 +775,41 @@ export const TabletTableWrapper = styled(Box, {
   },
 }));
 
+export const TabletHScrollBox = styled(Box)(({ theme }) => ({
+  border: `1px solid ${theme.palette.neutralColors[800]}`,
+  padding: theme.spacing(4),
+  borderRadius: theme.spacing(2),
+  display: "flex",
+  alignItems: "center",
+  gap: theme.spacing(2),
+}));
+
+export const TabletHScrollArrow = styled(Box)(({ theme }) => ({
+  flexShrink: 0,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: theme.spacing(6),
+  height: theme.spacing(6),
+  cursor: "pointer",
+  color: theme.palette.neutralColors[800],
+  userSelect: "none",
+  "&:hover": { color: theme.palette.neutralColors[600] },
+}));
+
 export const TabletHScrollTrack = styled(Box)(({ theme }) => ({
+  flex: 1,
   overflowX: "scroll",
   overflowY: "hidden",
-  marginTop: theme.spacing(1),
   "&::-webkit-scrollbar": {
     height: theme.spacing(2.5),
   },
   "&::-webkit-scrollbar-track": {
-    backgroundColor: "transparent",
+    backgroundColor: alpha(theme.palette.strokeColors[150], 0.05),
+    borderRadius: theme.spacing(2),
   },
   "&::-webkit-scrollbar-thumb": {
-    backgroundColor: theme.palette.strokeColors[400],
+    backgroundColor: theme.palette.neutralColors[600],
     borderRadius: theme.spacing(2),
     border: "2px solid transparent",
     backgroundClip: "content-box",
