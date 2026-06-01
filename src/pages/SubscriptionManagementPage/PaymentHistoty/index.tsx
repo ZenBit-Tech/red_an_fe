@@ -7,6 +7,7 @@ import {
   useGetSubscriptionQuery,
 } from "@/common/api/billingApi";
 import * as S from "./styles";
+import { PaymentHistoryTitle } from "../styles";
 
 export const PaymentHistoryTable = () => {
   const { t } = useTranslation("subscriptionManagement");
@@ -60,6 +61,7 @@ export const PaymentHistoryTable = () => {
 
   return (
     <S.HistoryTableContainer>
+      <PaymentHistoryTitle>{t("paymentHistory.title")}</PaymentHistoryTitle>
       <S.HistoryTable>
         <S.HistoryTableHead>
           <S.HistoryTableRow>

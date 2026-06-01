@@ -68,9 +68,6 @@ export const SubscriptionManagementPage = () => {
       </S.PlansWrapper>
 
       <S.PaymentHistoryContainer>
-        <S.PaymentHistoryTitle>
-          {t("paymentHistory.title")}
-        </S.PaymentHistoryTitle>
         <PaymentHistoryTable />
       </S.PaymentHistoryContainer>
     </S.PageWrapper>

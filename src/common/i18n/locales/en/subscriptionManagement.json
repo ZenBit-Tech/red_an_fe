@@ -24,7 +24,7 @@
       },
       "advanced": {
         "title": "Advanced PHI Scrubbing",
-        "desc": "No caps on document processing"
+        "desc": "18 Safe Harbor identifiers"
       },
       "unlimited": {
         "title": "Unlimited De-identification",
