@@ -17,6 +17,7 @@ import EntityTypesChart from "@/pages/Dashboard/сharts/EntityTypesChart/EntityT
 import ProcessingHistoryChart from "@/pages/Dashboard/сharts/ProcessingHistoryChart/ProcessingHistoryChart";
 import ConfidenceChart from "@/pages/Dashboard/сharts/ConfidenceChart/ConfidenceChart";
 import DeIdMethodsChart from "@/pages/Dashboard/сharts/DeIdMethodsChart/DeIdMethodsChart";
+import { useGetSubscriptionQuery } from "@/common/api/billingApi";
 import { MOCK_CHART_SKELETONS } from "@/pages/Dashboard/constants";
 
 const DashboardPage = () => {
@@ -38,18 +39,35 @@ const DashboardPage = () => {
     },
   );
 
+  const { data: subscription } = useGetSubscriptionQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+
   const { data: billingStatus } = useGetBillingStatusQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
 
-  const dashboardPlanBannerText =
-    billingStatus?.planTier === BILLING_PLAN_TIER.FREE
-      ? t("dashboard.page.infoBannerFreeUsage", {
-          used: billingStatus.usedToday,
-          remaining: billingStatus.remainingToday ?? 0,
-          limit: billingStatus.dailyLimit ?? 0,
-        })
-      : t("dashboard.page.infoBannerProfessional");
+  const getBannerText = (): string => {
+    if (!billingStatus) return "";
+
+    if (
+      subscription?.status === "trialing" ||
+      billingStatus.remainingToday === null
+    ) {
+      return t("dashboard.page.infoBannerUnlimited", "Unlimited");
+    }
+
+    if (billingStatus.planTier === BILLING_PLAN_TIER.FREE) {
+      return t("dashboard.page.infoBannerFreeUsage", {
+        used: billingStatus.usedToday,
+        remaining: billingStatus.remainingToday ?? 0,
+        limit: billingStatus.dailyLimit ?? 0,
+      });
+    }
+    return t("dashboard.page.infoBannerProfessional");
+  };
+
+  const dashboardPlanBannerText = getBannerText();
 
   if (isLoading) {
     return <S.InfoBox>Loading...</S.InfoBox>;

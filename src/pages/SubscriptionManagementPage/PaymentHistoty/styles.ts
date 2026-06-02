@@ -13,13 +13,16 @@ interface StatusBadgeProps {
   status: string;
 }
 
-export const HistoryTableContainer = styled(TableContainer)(({ theme }) => ({
+export const HistoryTableContainer = styled(TableContainer)(() => ({
   width: "100%",
-  borderRadius: theme.shape.borderRadius,
+
   overflowX: "auto",
 }));
 
 export const HistoryTable = styled(Table)(({ theme }) => ({
+  overflow: "hidden",
+  backgroundColor: theme.palette.neutralColors[900],
+  borderRadius: theme.shape.borderRadius,
   minWidth: 650,
   border: `1px solid #1e293b`,
   background: theme.palette.neutralColors[900],
