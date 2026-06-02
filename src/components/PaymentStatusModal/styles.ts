@@ -36,7 +36,7 @@ export const ModalBox = styled(Box, {
   }`,
 
   [theme.breakpoints.up("md")]: {
-    maxWidth: 398,
+    maxWidth: 440,
     padding: theme.spacing(6, 6, 8),
   },
   [theme.breakpoints.up("lg")]: {
@@ -75,6 +75,12 @@ export const IconCircle = styled(Box, {
       status === "success"
         ? theme.palette.tertiaryColors[400]
         : theme.palette.textColors[50],
+  },
+  [theme.breakpoints.down("lg")]: {
+    "& svg": {
+      width: 40,
+      height: 40,
+    },
   },
 }));
 

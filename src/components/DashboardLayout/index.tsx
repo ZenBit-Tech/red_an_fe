@@ -21,7 +21,8 @@ export const DashboardLayout = () => {
   const shouldShowTrialBanner =
     !isBillingStatusLoading &&
     isBannerVisible &&
-    billingStatus?.planTier === BILLING_PLAN_TIER.FREE &&
+    billingStatus !== undefined &&
+    billingStatus.planTier === BILLING_PLAN_TIER.FREE &&
     billingStatus.canUpgrade;
 
   return (

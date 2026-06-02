@@ -19,6 +19,11 @@ export const ModalDialog = styled(Dialog)(({ theme }) => ({
     alignItems: "center",
     gap: theme.spacing(4),
   },
+  [theme.breakpoints.down("lg")]: {
+    "& .MuiDialog-paper": {
+      maxWidth: theme.spacing(110),
+    },
+  },
 }));
 
 export const IconOuter = styled(Box)(({ theme }) => ({

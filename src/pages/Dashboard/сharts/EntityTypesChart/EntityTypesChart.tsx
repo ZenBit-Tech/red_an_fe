@@ -17,8 +17,9 @@ const EntityTypesChart = ({ chartData = [] }: EntityTypesChartProps) => {
 
   const BAR_WIDTH = isTablet ? 30 : 44;
   const GAP = 16;
+  const MIN_WIDTH = 400;
 
-  const chartWidth = chartData.length * (BAR_WIDTH + GAP);
+  const chartWidth = Math.max(chartData.length * (BAR_WIDTH + GAP), MIN_WIDTH);
 
   return (
     <S.BarContainer>

@@ -46,11 +46,9 @@ export const AnalysisResultsWrapper = styled(Box)(({ theme }) => ({
 
 export const AnalysisPageHeader = styled(Box)(({ theme }) => ({
   display: "flex",
-  justifyContent: "space-between",
-  alignItems: "flex-start",
+  flexDirection: "column",
   gap: theme.spacing(4),
   [theme.breakpoints.down("lg")]: {
-    flexDirection: "column",
     gap: 0,
   },
 }));
@@ -77,6 +75,7 @@ export const AnalysisPageTitle = styled("h1")(({ theme }) => ({
   fontSize: theme.typography.fontSize48,
   color: theme.palette.primaryColors[50],
   margin: 0,
+  whiteSpace: "nowrap",
 }));
 
 export const AnalysisPageTitleHighlight = styled("span")(({ theme }) => ({
@@ -383,7 +382,7 @@ export const StyledTableHead = styled(TableHead)(({ theme }) => ({
   },
   "& .MuiTableCell-stickyHeader": {
     top: 0,
-    zIndex: 2,
+    zIndex: 4,
     backgroundColor: theme.palette.neutralColors[800],
   },
   "& .MuiTableCell-head:nth-of-type(2)": {
@@ -392,11 +391,11 @@ export const StyledTableHead = styled(TableHead)(({ theme }) => ({
   [theme.breakpoints.down("lg")]: {
     "& .MuiTableCell-root:first-of-type": {
       backgroundColor: theme.palette.neutralColors[800],
-      zIndex: 4,
+      zIndex: 5,
     },
     "& .MuiTableCell-root:nth-of-type(2)": {
       backgroundColor: theme.palette.neutralColors[800],
-      zIndex: 4,
+      zIndex: 5,
     },
   },
 }));
@@ -732,14 +731,19 @@ export const TabPanelContent = styled(Box)(({ theme }) => ({
 
 export const TabPanelContentOutput = styled(Box)(({ theme }) => ({
   flex: 1,
-  overflowY: "auto",
+  overflow: "hidden",
   paddingTop: theme.spacing(6),
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(6),
+}));
+
+export const TabPanelTextScroller = styled(Box)({
+  flex: 1,
+  overflowY: "auto",
   scrollbarWidth: "none",
   "&::-webkit-scrollbar": { display: "none" },
-}));
+});
 
 export const TabletTableWrapper = styled(Box, {
   shouldForwardProp: (prop) => prop !== "atRightEnd",
@@ -750,7 +754,6 @@ export const TabletTableWrapper = styled(Box, {
   borderRadius: theme.spacing(2),
   border: `1px solid ${TABLE_COLORS.border}`,
   "&::-webkit-scrollbar": {
-    // ПОВЕРНУТО: з'являється тільки коли догортали до правого краю
     width: atRightEnd ? theme.spacing(2.5) : 0,
     height: 0,
   },
@@ -761,7 +764,6 @@ export const TabletTableWrapper = styled(Box, {
     marginBottom: theme.spacing(1),
   },
   "&::-webkit-scrollbar-thumb": {
-    // СТИЛІ ЯК НА ПК
     backgroundColor: theme.palette.strokeColors[400],
     borderRadius: theme.spacing(2),
     border: "2px solid transparent",

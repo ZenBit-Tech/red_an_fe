@@ -22,7 +22,9 @@ export const TrialBanner: React.FC<TrialBannerProps> = ({ onDismiss }) => {
         <S.BannerText>{t("trialBanner.message")}</S.BannerText>
       </S.BannerLeft>
       <S.BannerActions>
-        <S.UpgradeButton onClick={() => navigate(APP_ROUTES.SUBSCRIPTION_PLAN)}>
+        <S.UpgradeButton
+          onClick={() => navigate(APP_ROUTES.SUBSCRIPTION_MANAGEMENT)}
+        >
           {t("trialBanner.upgradeButton")}
         </S.UpgradeButton>
         <S.CloseButton size="small" onClick={onDismiss}>
