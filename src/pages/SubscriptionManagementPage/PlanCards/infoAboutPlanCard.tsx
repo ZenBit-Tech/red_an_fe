@@ -79,6 +79,21 @@ export const InfoPlanCard = () => {
 
   const isMutationLoading = modalStatus === "loading";
 
+  const getRemainingTrialDays = (endIsoString: string | null): number => {
+    if (!endIsoString) return 0;
+
+    const endDate = new Date(endIsoString);
+    const today = new Date();
+
+    endDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    const diffTime = endDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    return diffDays > 0 ? diffDays : 0;
+  };
+
   return (
     <>
       <S.InfoPlanBox>
@@ -109,8 +124,10 @@ export const InfoPlanCard = () => {
 
         {isTrialPeriod && (
           <S.InfoPlanCardString>
-            {t("infoPlanCard.trial")}:{" "}
-            <span>{formatDate(subscription.currentPeriodEnd)}</span>
+            {t("infoPlanCard.trialPeriod")}{" "}
+            {getRemainingTrialDays(subscription.currentPeriodEnd)}{" "}
+            {t("infoPlanCard.days")}:{" "}
+            <span>Ends {formatDate(subscription.currentPeriodEnd)}</span>
           </S.InfoPlanCardString>
         )}
         {isTrialPeriod && (

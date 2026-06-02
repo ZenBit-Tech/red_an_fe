@@ -319,7 +319,10 @@ export const UpgradeButton = styled(Button)(({ theme }) => ({
 
 export const PaymentHistoryContainer = styled(Box)(() => ({}));
 
-export const PaymentHistoryTitle = styled(ProfPlanTitle)(() => ({}));
+export const PaymentHistoryTitle = styled(ProfPlanTitle)(({ theme }) => ({
+  marginBottom: 0,
+  padding: theme.spacing(10, 0, 8),
+}));
 
 export const InfoPlanBox = styled(Box)(({ theme }) => ({
   borderRadius: theme.spacing(4),
