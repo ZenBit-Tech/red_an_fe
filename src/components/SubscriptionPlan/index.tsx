@@ -5,7 +5,7 @@ import {
   BILLING_PLAN_TIER,
   useCreateCheckoutSessionMutation,
   useCreateCustomerPortalSessionMutation,
-  useGetBillingStatusQuery,
+  useGetBillingStatusOptionalAuthQuery,
 } from "@/common/api/billingApi";
 import { SUBSCRIPTION_PLANS } from "@/constants/subscriptionPlans";
 import { APP_ROUTES, STORAGE_KEYS } from "@/constants/index";
@@ -25,24 +25,32 @@ const SubscriptionPlan = () => {
     useCreateCheckoutSessionMutation();
   const [createCustomerPortalSession, { isLoading: isPortalLoading }] =
     useCreateCustomerPortalSessionMutation();
+  const isAuthenticated = Boolean(
+    localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN),
+  );
   const {
     data: billingStatus,
     isLoading: isBillingStatusLoading,
     isFetching: isBillingStatusFetching,
     isError: isBillingStatusError,
     refetch,
-  } = useGetBillingStatusQuery(undefined, {
+  } = useGetBillingStatusOptionalAuthQuery(undefined, {
+    skip: !isAuthenticated,
     refetchOnMountOrArgChange: true,
   });
 
   const isBillingActionLoading = isCheckoutLoading || isPortalLoading;
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      return;
+    }
+
     const payment = searchParams.get("payment");
     if (payment === "success" || payment === "failed") {
       void refetch();
     }
-  }, [refetch, searchParams]);
+  }, [isAuthenticated, refetch, searchParams]);
 
   const handleSelectFreePlan = (): void => {
     const isAuth = Boolean(localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN));

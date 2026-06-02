@@ -52,6 +52,10 @@ const rawBaseQuery = fetchBaseQuery({
 
 let isRedirectingToLogin = false;
 
+type BillingQueryExtraOptions = {
+  requiresAuth?: boolean;
+};
+
 export const BILLING_PLAN_TIER = {
   FREE: "FREE",
   PROFESSIONAL: "PROFESSIONAL",
@@ -86,8 +90,10 @@ export const billingApi = createApi({
   reducerPath: "billingApi",
   tagTypes: ["Subscription"],
   baseQuery: async (args, api, extraOptions) => {
+    const extra = (extraOptions ?? {}) as BillingQueryExtraOptions;
+    const requiresAuth = extra.requiresAuth !== false;
     const result = await rawBaseQuery(args, api, extraOptions);
-    if (result.error?.status === 401 && !isRedirectingToLogin) {
+    if (requiresAuth && result.error?.status === 401 && !isRedirectingToLogin) {
       isRedirectingToLogin = true;
       localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
       localStorage.removeItem(STORAGE_KEYS.USER);
@@ -140,6 +146,13 @@ export const billingApi = createApi({
       query: () => "/status",
     }),
 
+    getBillingStatusOptionalAuth: builder.query<BillingStatusResponse, void>({
+      query: () => "/status",
+      extraOptions: {
+        requiresAuth: false,
+      },
+    }),
+
     getPaymentHistory: builder.query<PaymentHistoryItem[], void>({
       query: () => "/history",
     }),
@@ -160,6 +173,7 @@ export const {
   useGetCheckoutSessionQuery,
   useGetPaymentHistoryQuery,
   useGetBillingStatusQuery,
+  useGetBillingStatusOptionalAuthQuery,
   useCreateCustomerPortalSessionMutation,
   useGetInvoiceUrlMutation,
 } = billingApi;
