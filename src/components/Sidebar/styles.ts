@@ -6,7 +6,7 @@ export const SidebarContainer = styled(Box, {
 })<{ isCollapsed: boolean }>(({ theme, isCollapsed }) => ({
   boxSizing: "border-box",
   width: isCollapsed ? theme.spacing(21.25) : theme.spacing(77.5),
-  height: "100vh",
+  height: "100%",
   paddingTop: theme.spacing(6),
   paddingRight: theme.spacing(4),
   paddingBottom: theme.spacing(6),

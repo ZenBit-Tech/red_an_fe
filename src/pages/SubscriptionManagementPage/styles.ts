@@ -35,13 +35,16 @@ export const ActivePlanLabel = styled(Box)(({ theme }) => ({
   fontWeight: theme.typography.fontWeight700,
   fontSize: theme.typography.fontSize20,
   color: theme.palette.primaryColors[200],
-
   height: theme.spacing(15),
   borderRadius: theme.spacing(1),
   padding: theme.spacing(2, 3),
   background: theme.palette.strokeColors[120],
   alignItems: "center",
   justifyContent: "center",
+  [theme.breakpoints.down("lg")]: {
+    fontSize: theme.typography.fontSize12,
+    height: theme.spacing(8.25),
+  },
 }));
 
 export const PageDescription = styled(Box)(({ theme }) => ({
@@ -51,6 +54,9 @@ export const PageDescription = styled(Box)(({ theme }) => ({
   fontWeight: theme.typography.fontWeight500,
   fontSize: theme.typography.fontSize20,
   marginBottom: theme.spacing(10),
+  [theme.breakpoints.down("lg")]: {
+    marginBottom: theme.spacing(6),
+  },
 }));
 
 export const PlansWrapper = styled(Box)(({ theme }) => ({
@@ -59,10 +65,17 @@ export const PlansWrapper = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
   gap: theme.spacing(6),
   marginBottom: theme.spacing(10),
+  [theme.breakpoints.down("lg")]: {
+    flexDirection: "column",
+    alignItems: "center",
+  },
 }));
 
 export const CurrentPlanContainer = styled(Box)(({ theme }) => ({
   width: theme.spacing(129),
+  [theme.breakpoints.down("lg")]: {
+    width: theme.spacing(150.75),
+  },
 }));
 
 export const FreePlanTitle = styled(Typography)(({ theme }) => ({
@@ -71,6 +84,9 @@ export const FreePlanTitle = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.fontSize32,
   marginBottom: theme.spacing(8),
   color: theme.palette.primaryColors[400],
+  [theme.breakpoints.down("lg")]: {
+    marginBottom: theme.spacing(6),
+  },
 }));
 
 export const FreePlanBox = styled(Box)(({ theme }) => ({
@@ -326,6 +342,10 @@ export const InfoPlanCardString = styled(Box)(({ theme }) => ({
   color: theme.palette.textColors[200],
 }));
 
+export const StatusValue = styled("span")(({ theme }) => ({
+  color: theme.palette.primaryColors[200],
+}));
+
 export const CancelButton = styled(UpgradeButton)(({ theme }) => ({
   display: "flex",
   width: "366px",
@@ -374,6 +394,10 @@ export const modalStyles = (
       border: isError
         ? `1px solid ${theme.palette.tertiaryColors[600]}`
         : `1px solid ${theme.palette.textColors[400]}`,
+      [theme.breakpoints.down("lg")]: {
+        maxWidth: 440,
+        padding: theme.spacing(6, 16.25, 8, 16.25),
+      },
     },
     outerCircle: {
       marginBottom: theme.spacing(4),

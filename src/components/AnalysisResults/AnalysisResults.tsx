@@ -462,15 +462,17 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({
             )}
             {activeTab === 1 && (
               <S.TabPanelContentOutput>
-                {isPreviewLoading ? (
-                  <S.OutputLoadingContainer>
-                    <CircularProgress size={24} />
-                  </S.OutputLoadingContainer>
-                ) : (
-                  <S.TextContent>
-                    {renderOutputWithHighlights(outputText || inputText)}
-                  </S.TextContent>
-                )}
+                <S.TabPanelTextScroller>
+                  {isPreviewLoading ? (
+                    <S.OutputLoadingContainer>
+                      <CircularProgress size={24} />
+                    </S.OutputLoadingContainer>
+                  ) : (
+                    <S.TextContent>
+                      {renderOutputWithHighlights(outputText || inputText)}
+                    </S.TextContent>
+                  )}
+                </S.TabPanelTextScroller>
                 <S.PanelActions>
                   <S.PanelActionButton
                     size="small"

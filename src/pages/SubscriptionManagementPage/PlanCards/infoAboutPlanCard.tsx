@@ -83,7 +83,8 @@ export const InfoPlanCard = () => {
     <>
       <S.InfoPlanBox>
         <S.InfoPlanCardString>
-          {t("infoPlanCard.status")}: <span>{t("infoPlanCard.active")}</span>
+          {t("infoPlanCard.status")}:{" "}
+          <S.StatusValue>{t("infoPlanCard.active")}</S.StatusValue>
         </S.InfoPlanCardString>
 
         {isSubscribedButCanceled && (
