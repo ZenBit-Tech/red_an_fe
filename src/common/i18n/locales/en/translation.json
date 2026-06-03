@@ -218,7 +218,8 @@
     "actions": {
       "redirecting": "Redirecting...",
       "currentPlan": "Current Plan",
-      "goToDashboard": "Go to Dashboard",
+      "getStarted": "Get started",
+      "startFree": "Start Free Plan",
       "upgrade": "Upgrade to Professional",
       "upgradeUnavailable": "Upgrade unavailable",
       "manageSubscription": "Manage subscription",
@@ -258,16 +259,16 @@
             "title": "Unlimited De-identification",
             "subtitle": "No caps on document processing"
           },
-          "code": {
-            "title": "GDPR SDK Access",
-            "subtitle": "Full API and integration tools"
+          "gift": {
+            "title": "Free first 3 days",
+            "subtitle": "Billing commences on the 3rd day of use"
           }
         }
       }
     },
     "gradeSecurity": {
       "title": "Enterprise-grade security, baked into every plan.",
-      "description": "Our de-identification engine uses a multi-layered Obsidian Lens model to detect and redact Personal Health Information (PHI) with 99.9% accuracy."
+      "description": "Our de-identification engine uses a multi-layered to detect and redact Personal Health Information (PHI) with 99.9% accuracy."
     }
   },
   "subscription": {

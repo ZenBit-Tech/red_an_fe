@@ -17,6 +17,12 @@ export const GradeSecurity = styled(Box)(({ theme }) => ({
     margin: theme.spacing(0, 24),
     "& > *": { flex: 1 },
   },
+  [theme.breakpoints.down("lg")]: {
+    maxWidth: "688px",
+    margin: "0 auto",
+    padding: theme.spacing(15, 8),
+    flexDirection: "column",
+  },
 }));
 
 export const GradeSecurityContext = styled(Box)(({ theme }) => ({
@@ -42,12 +48,10 @@ export const GradeSecurityTitle = styled(Typography)(({ theme }) => ({
 
 export const Description = styled(Typography)(({ theme }) => ({
   fontWeight: theme.typography.fontWeight400,
-  fontSize: theme.typography.fontSize16,
+  fontSize: theme.typography.fontSize20,
   color: theme.palette.neutralColors[200],
 
-  [theme.breakpoints.up("sm")]: {
-    fontSize: theme.typography.fontSize18,
-  },
+  [theme.breakpoints.down("lg")]: {},
 }));
 
 export const MetricsBlock = styled(Box)(({ theme }) => ({
@@ -84,6 +88,10 @@ export const MetricCard = styled(Box)(({ theme }) => ({
   overflow: "hidden",
   [theme.breakpoints.up("md")]: {
     padding: theme.spacing(8),
+  },
+  [theme.breakpoints.down("lg")]: {
+    minWidth: "221px",
+    textAlign: "left",
   },
 }));
 

@@ -6,7 +6,7 @@ const GradeSecurity = () => {
   const { t } = useTranslation();
   return (
     <S.GradeSecurity>
-      <S.GradeSecurityContext>
+      <S.GradeSecurityContext data-aos="zoom-in-up">
         <S.GradeSecurityTitle>
           {t("subscriptionPlan.gradeSecurity.title")}
         </S.GradeSecurityTitle>

@@ -6,9 +6,9 @@ export const SectionOurValues = () => {
   return (
     <S.SectionWrapper>
       <S.CustomContainer>
-        <S.SectionTitle>Our Values</S.SectionTitle>
+        <S.SectionTitle data-aos="zoom-in-up">Our Values</S.SectionTitle>
 
-        <S.ValuesList>
+        <S.ValuesList data-aos="zoom-in-up">
           <S.ValuesListItem>
             <S.IconWrapper>
               {

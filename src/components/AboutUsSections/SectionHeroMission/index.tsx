@@ -7,7 +7,7 @@ export const SectionHeroMission = () => {
   return (
     <S.SectionWrapper>
       <S.CustomContainer>
-        <Box>
+        <Box data-aos="fade-left">
           <S.SectionTitleFirstString>
             {t("heroMission.titleFirstString")}{" "}
           </S.SectionTitleFirstString>
@@ -23,7 +23,7 @@ export const SectionHeroMission = () => {
           </S.SectionContentText>
         </Box>
 
-        <S.ItemsList>
+        <S.ItemsList data-aos="zoom-in-up">
           <S.MissionItem>
             <S.IconWrapper>
               {

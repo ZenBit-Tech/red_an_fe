@@ -153,7 +153,7 @@ const SubscriptionPlan = () => {
       }
 
       return {
-        label: t("subscriptionPlan.actions.goToDashboard"),
+        label: t("subscriptionPlan.actions.startFree"),
         disabled: false,
         onSelect: handleSelectFreePlan,
       };
@@ -184,7 +184,7 @@ const SubscriptionPlan = () => {
     }
 
     return {
-      label: t("subscriptionPlan.actions.upgrade"),
+      label: t("subscriptionPlan.actions.getStarted"),
       disabled: false,
       onSelect: handleUpgradeToProfessional,
     };
@@ -210,12 +210,12 @@ const SubscriptionPlan = () => {
     <Container>
       <S.SubscriptionContainer id="subscription-plan">
         <S.PlanWrapper>
-          <S.TitleBlock>
+          <S.TitleBlock data-aos="fade-left">
             <S.Title>{t("subscriptionPlan.title")}</S.Title>
             <S.Subtitle>{t("subscriptionPlan.subtitle")}</S.Subtitle>
             {!!statusMessage && <S.Subtitle>{statusMessage}</S.Subtitle>}
           </S.TitleBlock>
-          <S.PlansBlock>
+          <S.PlansBlock data-aos="zoom-in-up">
             {SUBSCRIPTION_PLANS.map((plan) => {
               const action = getPlanAction(plan.id);
               const statusNote =

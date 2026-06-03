@@ -8,14 +8,15 @@ export const Card = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(6),
   padding: theme.spacing(8),
+  alignSelf: "flex-start",
+  flex: "1 1 0",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: theme.palette.background.paper,
   border: `1px solid ${theme.palette.strokeColors[500]}`,
-  [theme.breakpoints.up("md")]: {
-    flex: "1 1 0",
-    maxWidth: 532,
-    alignSelf: "flex-start",
-    padding: theme.spacing(10),
+  [theme.breakpoints.down("lg")]: {
+    flexDirection: "column",
+    width: "100%",
+    flex: "none",
   },
 }));
 
@@ -179,6 +180,9 @@ export const FeatureSubtitle = styled(Typography)(({ theme }) => ({
 
 export const ActionButton = styled(Button)(({ theme }) => ({
   backgroundImage: "none",
+  display: "block",
+  margin: "0 auto",
+  width: theme.spacing(91),
   backgroundColor: "transparent",
   color: theme.palette.secondary.main,
   fontSize: theme.typography.fontSize14,

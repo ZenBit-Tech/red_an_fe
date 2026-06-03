@@ -4,6 +4,7 @@ export const ICON_MAP = {
   unlimited: "/subscription/icons.svg#unlimited",
   code: "/subscription/icons.svg#code",
   priority: "/subscription/icons.svg#priority",
+  icon_gift: "/subscription/icons.svg#icon-gift",
 };
 
 export type SubscriptionFeature = {
@@ -40,7 +41,7 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
       { icon: "priority", i18nKey: "priority" },
       { icon: "scrubbing", i18nKey: "scrubbing" },
       { icon: "unlimited", i18nKey: "unlimited" },
-      { icon: "code", i18nKey: "code" },
+      { icon: "icon_gift", i18nKey: "gift" },
     ],
   },
 ];
