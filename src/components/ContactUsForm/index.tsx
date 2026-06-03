@@ -25,12 +25,14 @@ export const ContactUsForm = () => {
   return (
     <S.SectionForm>
       <S.CustomContainer>
-        <S.ContactTitle>{t("contactUs:contactUs.title")}</S.ContactTitle>
-        <S.ContactDescription>
+        <S.ContactTitle data-aos="fade-left">
+          {t("contactUs:contactUs.title")}
+        </S.ContactTitle>
+        <S.ContactDescription data-aos="fade-left">
           {t("contactUs:contactUs.description")}
         </S.ContactDescription>
 
-        <S.FormWrapper>
+        <S.FormWrapper data-aos="zoom-in-up">
           <S.ContactSidebar>
             <S.IconWrapper>
               <MailOutlineIcon />

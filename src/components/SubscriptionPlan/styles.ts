@@ -10,6 +10,9 @@ export const SubscriptionContainer = styled(Box)(({ theme }) => ({
     paddingTop: theme.spacing(10),
     gap: theme.spacing(40),
   },
+  [theme.breakpoints.down("lg")]: {
+    gap: theme.spacing(15),
+  },
 }));
 
 export const PlanWrapper = styled(Box)(({ theme }) => ({
@@ -18,6 +21,10 @@ export const PlanWrapper = styled(Box)(({ theme }) => ({
   gap: theme.spacing(6),
   [theme.breakpoints.up("md")]: {
     gap: theme.spacing(16),
+  },
+  [theme.breakpoints.down("lg")]: {
+    maxWidth: "688px",
+    margin: "0 auto",
   },
 }));
 
@@ -68,10 +75,12 @@ export const Subtitle = styled(Typography)(({ theme }) => ({
 
 export const PlansBlock = styled(Box)(({ theme }) => ({
   display: "flex",
-  flexDirection: "column",
+  padding: theme.spacing(0, 24),
+  flexDirection: "row",
   gap: theme.spacing(6),
-  [theme.breakpoints.up("md")]: {
-    flexDirection: "row",
-    paddingLeft: theme.spacing(24),
+  [theme.breakpoints.down("lg")]: {
+    flexDirection: "column",
+    padding: theme.spacing(0, 19),
+    width: "100%",
   },
 }));

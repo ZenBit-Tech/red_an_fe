@@ -8,7 +8,9 @@ export const SectionLeadershipTeam = () => {
   return (
     <S.SectionWrapper>
       <S.CustomContainer>
-        <S.SectionTitle>{t("ourTeam.title")}</S.SectionTitle>
+        <S.SectionTitle data-aos="fade-left">
+          {t("ourTeam.title")}
+        </S.SectionTitle>
         <S.SectionDescription>
           {t("ourTeam.firstContentParagraph")}
         </S.SectionDescription>
@@ -29,7 +31,7 @@ export const SectionLeadershipTeam = () => {
             </S.TeamListItem>
           ))}
         </S.TeamList>
-        <S.TeamPromotionTextBox>
+        <S.TeamPromotionTextBox data-aos="zoom-in-up">
           <S.TeamPromotionText>
             {t("ourTeam.secondContentParagraph")}
           </S.TeamPromotionText>

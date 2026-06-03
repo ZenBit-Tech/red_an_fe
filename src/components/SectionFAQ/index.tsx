@@ -12,7 +12,7 @@ export const SectionFAQ = () => {
 
   return (
     <S.FAQWrapper>
-      <S.StyledContainer maxWidth="md">
+      <S.StyledContainer maxWidth="md" data-aos="zoom-in-up">
         <S.FAQTitle>{t("contactUs:faq.title")}</S.FAQTitle>
 
         {faqItems.map((item, index) => (
