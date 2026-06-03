@@ -84,6 +84,7 @@ export type BillingStatusResponse = {
   hasActiveSubscription: boolean;
   canUpgrade: boolean;
   canManageSubscription: boolean;
+  isTrialing: boolean;
 };
 
 export const billingApi = createApi({

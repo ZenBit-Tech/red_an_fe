@@ -124,9 +124,9 @@ export const InfoPlanCard = () => {
 
         {isTrialPeriod && (
           <S.InfoPlanCardString>
-            {t("infoPlanCard.trialPeriod")}{" "}
+            {t("infoPlanCard.trial")}:{" "}
             {getRemainingTrialDays(subscription.currentPeriodEnd)}{" "}
-            {t("infoPlanCard.days")}:{" "}
+            {t("infoPlanCard.days")}{" "}
             <span>Ends {formatDate(subscription.currentPeriodEnd)}</span>
           </S.InfoPlanCardString>
         )}

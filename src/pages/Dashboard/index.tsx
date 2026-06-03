@@ -39,7 +39,7 @@ const DashboardPage = () => {
     },
   );
 
-  const { data: subscription } = useGetSubscriptionQuery(undefined, {
+  useGetSubscriptionQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
 
@@ -50,20 +50,27 @@ const DashboardPage = () => {
   const getBannerText = (): string => {
     if (!billingStatus) return "";
 
-    if (
-      subscription?.status === "trialing" ||
-      billingStatus.remainingToday === null
-    ) {
+    if (billingStatus.isTrialing === true) {
       return t("dashboard.page.infoBannerUnlimited", "Unlimited");
     }
 
-    if (billingStatus.planTier === BILLING_PLAN_TIER.FREE) {
+    if (
+      billingStatus.hasActiveSubscription &&
+      billingStatus.planTier === BILLING_PLAN_TIER.FREE
+    ) {
       return t("dashboard.page.infoBannerFreeUsage", {
         used: billingStatus.usedToday,
         remaining: billingStatus.remainingToday ?? 0,
         limit: billingStatus.dailyLimit ?? 0,
       });
     }
+    if (
+      billingStatus.hasActiveSubscription ||
+      billingStatus.remainingToday === null
+    ) {
+      return t("dashboard.page.infoBannerUnlimited", "Unlimited");
+    }
+
     return t("dashboard.page.infoBannerProfessional");
   };
 

@@ -62,7 +62,8 @@
     "CancelSubscription": "Cancel Subscription",
     "accessUntil": "Access until",
     "nextPayment": "Next payment date",
-    "SubscribeAgain": "Subscribe again"
+    "SubscribeAgain": "Subscribe again",
+    "days": "days"
   },
   "cancelInfoModal": {
     "title": "Subscription canceled",
