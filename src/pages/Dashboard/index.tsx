@@ -1,10 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { InfoOutlined } from "@mui/icons-material";
-import {
-  BILLING_PLAN_TIER,
-  useGetBillingStatusQuery,
-} from "@/common/api/billingApi";
+import { useGetBillingStatusQuery } from "@/common/api/billingApi";
 import { APP_ROUTES } from "@/constants";
 import { TIME_FILTERS } from "@/pages/Dashboard/constants";
 import { useDashboard } from "@/pages/Dashboard/hooks/useDashboard";
@@ -50,25 +47,32 @@ const DashboardPage = () => {
   const getBannerText = (): string => {
     if (!billingStatus) return "";
 
-    if (billingStatus.isTrialing === true) {
+    const isGracePeriodActive =
+      billingStatus.planStatus === "CANCELED" &&
+      billingStatus.currentPeriodEnd &&
+      new Date(billingStatus.currentPeriodEnd) > new Date();
+
+    if (billingStatus.isTrialing) {
       return t("dashboard.page.infoBannerUnlimited", "Unlimited");
     }
 
     if (
-      billingStatus.hasActiveSubscription &&
-      billingStatus.planTier === BILLING_PLAN_TIER.FREE
+      (billingStatus.hasActiveSubscription &&
+        billingStatus.planTier !== "FREE") ||
+      isGracePeriodActive
+    ) {
+      return t("dashboard.page.infoBannerUnlimited", "Unlimited");
+    }
+
+    if (
+      billingStatus.planTier === "FREE" ||
+      !billingStatus.hasActiveSubscription
     ) {
       return t("dashboard.page.infoBannerFreeUsage", {
-        used: billingStatus.usedToday,
+        used: billingStatus.usedToday ?? 0,
         remaining: billingStatus.remainingToday ?? 0,
         limit: billingStatus.dailyLimit ?? 0,
       });
-    }
-    if (
-      billingStatus.hasActiveSubscription ||
-      billingStatus.remainingToday === null
-    ) {
-      return t("dashboard.page.infoBannerUnlimited", "Unlimited");
     }
 
     return t("dashboard.page.infoBannerProfessional");
