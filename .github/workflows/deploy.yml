@@ -26,8 +26,8 @@ jobs:
         run: |
           docker build \
             --build-arg VITE_API_URL=$VITE_API_URL \
-            -t registry.heroku.com/red-an-fe/web .
-          docker push registry.heroku.com/red-an-fe/web
+            -t registry.heroku.com/deiden-fe/web .
+          docker push registry.heroku.com/deiden-fe/web
 
       - name: Release to Heroku
         env:
@@ -35,4 +35,4 @@ jobs:
         run: |
 
           curl https://cli-assets.heroku.com/install.sh | sh
-          heroku container:release web -a red-an-fe
+          heroku container:release web -a deiden-fe
