@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - develop
-      - feature/heroku-final-deploy
 
 jobs:
   build-and-deploy:
@@ -23,7 +22,7 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
-          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_API_URL: https://api.deiden.com
         run: |
           docker build \
             --build-arg VITE_API_URL=$VITE_API_URL \
