@@ -6,7 +6,7 @@ import {
   type BillingStatusResponse,
 } from "@/common/api/billingApi";
 import { apiClient } from "@/common/api/apiClient";
-import { analyzeText } from "@/common/api/deidentifyApi";
+import { analyzeText, warmUpAnalyzer } from "@/common/api/deidentifyApi";
 import { useAppDispatch, useAppSelector } from "@/common/hooks/hooks";
 import { API_ENDPOINTS } from "@/constants";
 import { resetActiveStep, setActiveStep } from "@/store/deidentifyStepSlice";
@@ -166,6 +166,12 @@ export const useDeidentify = (): UseDeidentifyReturn => {
       dispatch(resetClinicalInput());
     };
   }, [dispatch]);
+
+  // Presidio sleeps on an Eco dyno and is slow to boot. Nudge it awake as soon
+  // as the page opens so it is ready by the time the user submits text.
+  useEffect(() => {
+    void warmUpAnalyzer();
+  }, []);
 
   useEffect(() => {
     if (activeStep !== DEIDENTIFY_STEP.RESULT || !isResultReady) {

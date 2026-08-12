@@ -9,6 +9,7 @@ import type {
 const DEIDENTIFICATION_ENDPOINTS = {
   ANALYZE: "/de-identification/analyze",
   PREVIEW: "/de-identification/preview",
+  WARMUP: "/de-identification/warmup",
 } as const;
 
 export const analyzeText = async (
@@ -44,5 +45,23 @@ export const previewAnonymization = async (
     }
 
     throw new Error("Failed to preview de-identification data");
+  }
+};
+
+/**
+ * Asks the backend to wake the Presidio analyzer.
+ *
+ * Presidio runs on an Eco dyno and sleeps after 30 minutes of inactivity; its
+ * cold start can outlast the 30s Heroku request limit. Calling this when the
+ * de-identification page opens gives it a head start while the user is still
+ * pasting text.
+ *
+ * Best-effort by design: a failed warm-up must never surface to the user.
+ */
+export const warmUpAnalyzer = async (): Promise<void> => {
+  try {
+    await apiClient.get(DEIDENTIFICATION_ENDPOINTS.WARMUP);
+  } catch {
+    // ignored on purpose
   }
 };
