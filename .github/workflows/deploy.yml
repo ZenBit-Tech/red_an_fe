@@ -36,3 +36,20 @@ jobs:
 
           curl https://cli-assets.heroku.com/install.sh | sh
           heroku container:release web -a deiden-fe
+
+      - name: Purge Cloudflare cache
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          # The edge caches www.deiden.com for hours so the dyno can fall asleep, which
+          # also means a fresh deploy stays invisible until the cache expires.
+          # Purging here keeps the long TTL without the stale-deploy side effect.
+          if [ -z "$CF_TOKEN" ]; then
+            echo "CLOUDFLARE_API_TOKEN is not set - skipping cache purge"
+            exit 0
+          fi
+          curl -sf -X POST "https://api.cloudflare.com/client/v4/zones/4e73769adc63c8c2c055cd8f960f6c60/purge_cache" \
+            -H "Authorization: Bearer $CF_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}' > /dev/null
+          echo "purged Cloudflare cache for www.deiden.com"
